@@ -4,9 +4,9 @@
 
 ## AI Agent
 
-- [HiveMind: OS-Inspired Scheduling for Concurrent LLM Agent Workloads](https://arxiv.org/pdf/2604.17111v1) | OpenAI | 2026-04-18 | 原文
-- [When Agents Look the Same: Quantifying Distillation-Induced Similarity in Tool-Use Behaviors](https://arxiv.org/pdf/2604.21255v1) | Anthropic | 2026-04-23 | 原文
-- [Spatial Atlas: Compute-Grounded Reasoning for Spatial-Aware Research Agent Benchmarks](https://arxiv.org/pdf/2604.12102v2) | OpenAI | 2026-04-13 | 原文
+- [HiveMind: OS-Inspired Scheduling for Concurrent LLM Agent Workloads](../papers/2604.17111v1/index.md) | OpenAI | 2026-04-18 | 中文精读
+- [When Agents Look the Same: Quantifying Distillation-Induced Similarity in Tool-Use Behaviors](../papers/2604.21255v1/index.md) | Anthropic | 2026-04-23 | 中文精读
+- [Spatial Atlas: Compute-Grounded Reasoning for Spatial-Aware Research Agent Benchmarks](../papers/2604.12102v2/index.md) | OpenAI | 2026-04-13 | 中文精读
 - [Reasoning-targeted Jailbreak Attacks on Large Reasoning Models via Semantic Triggers and Psychological Framing](https://arxiv.org/pdf/2604.15725v1) | OpenAI | 2026-04-17 | 原文
 - [Benchmarks for Trajectory Safety Evaluation and Diagnosis in OpenClaw and Codex: ATBench-Claw and ATBench-CodeX](https://arxiv.org/pdf/2604.14858v1) | OpenAI | 2026-04-16 | 原文
 - [Evaluating Multi-Hop Reasoning in RAG Systems: A Comparison of LLM-Based Retriever Evaluation Strategies](https://arxiv.org/pdf/2604.18234v1) | OpenAI | 2026-04-20 | 原文

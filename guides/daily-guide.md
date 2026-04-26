@@ -5,15 +5,15 @@
 
 ## AI Agent
 
-- **HiveMind: OS-Inspired Scheduling for Concurrent LLM Agent Workloads** | OpenAI | 2026-04-18 | 优先级 981 | 状态 `workbuddy_pending` | 待生成
+- **HiveMind: OS-Inspired Scheduling for Concurrent LLM Agent Workloads** | OpenAI | 2026-04-18 | 优先级 981 | 状态 `translated` | [中文笔记](../papers/2604.17111v1/index.md)
   - 来源：[OpenAI arXiv query](https://arxiv.org/abs/2604.17111v1)
   - 论文：[https://arxiv.org/pdf/2604.17111v1](https://arxiv.org/pdf/2604.17111v1)
   - 摘要：When multiple LLM coding agents share a rate-limited API endpoint, they exhibit resource contention patterns analogous to unscheduled OS processes competing for CPU, memory, and I/O. In a motivating incident, 3 of 11 parallel agents died...
-- **When Agents Look the Same: Quantifying Distillation-Induced Similarity in Tool-Use Behaviors** | Anthropic | 2026-04-23 | 优先级 976 | 状态 `workbuddy_pending` | 待生成
+- **When Agents Look the Same: Quantifying Distillation-Induced Similarity in Tool-Use Behaviors** | Anthropic | 2026-04-23 | 优先级 976 | 状态 `translated` | [中文笔记](../papers/2604.21255v1/index.md)
   - 来源：[Anthropic arXiv query](https://arxiv.org/abs/2604.21255v1)
   - 论文：[https://arxiv.org/pdf/2604.21255v1](https://arxiv.org/pdf/2604.21255v1)
   - 摘要：Model distillation is a primary driver behind the rapid progress of LLM agents, yet it often leads to behavioral homogenization. Many emerging agents share nearly identical reasoning steps and failure modes, suggesting they may be distil...
-- **Spatial Atlas: Compute-Grounded Reasoning for Spatial-Aware Research Agent Benchmarks** | OpenAI | 2026-04-13 | 优先级 976 | 状态 `workbuddy_pending` | 待生成
+- **Spatial Atlas: Compute-Grounded Reasoning for Spatial-Aware Research Agent Benchmarks** | OpenAI | 2026-04-13 | 优先级 976 | 状态 `translated` | [中文笔记](../papers/2604.12102v2/index.md)
   - 来源：[OpenAI arXiv query](https://arxiv.org/abs/2604.12102v2)
   - 论文：[https://arxiv.org/pdf/2604.12102v2](https://arxiv.org/pdf/2604.12102v2)
   - 摘要：We introduce compute-grounded reasoning (CGR), a design paradigm for spatial-aware research agents in which every answerable sub-problem is resolved by deterministic computation before a language model is asked to generate. Spatial Atlas...
