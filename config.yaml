@@ -1,0 +1,143 @@
+project_name: 论文自动研学知识库
+timezone: Asia/Shanghai
+discovery_days: 14
+daily_limit: 3
+raw_dir: papers/raw
+zh_dir: papers/zh
+database_path: papers.db
+log_dir: logs
+
+git:
+  auto_commit: true
+  auto_push: true
+  branch: main
+  remote_name: origin
+  commit_prefix: "auto: paper hub"
+
+site:
+  site_name: 论文自动研学知识库
+  site_url: ""
+  repo_name: ""
+  docs_dir: site/docs
+  mkdocs_file: site/mkdocs.yml
+
+translator:
+  backend: workbuddy
+  base_url: https://api.openai.com/v1
+  model: gpt-4.1-mini
+  api_key_env: OPENAI_API_KEY
+  timeout_seconds: 120
+  chunk_chars: 5000
+  max_images_per_paper: 12
+  system_prompt: |
+    你是一位严谨的 AI 论文研学助手。请基于给定论文片段生成结构化 Markdown，固定包含：
+    1. 中文翻译
+    2. 术语解释
+    3. 图表/公式说明
+    4. 关键 takeaway
+    如果内容存在不确定性，请显式标注“待复核”。
+
+workbuddy:
+  enabled: true
+  jobs_dir: .workbuddy/jobs
+  daily_brief_path: .workbuddy/daily-brief.md
+  task_prompt_path: .workbuddy/daily-task.md
+  memory_dir: .workbuddy/memory
+  skill_source_dir: .workbuddy/skills/paper-learning-hub
+  installed_skill_path: ~/.workbuddy/skills/paper-learning-hub
+  use_symlink_install: true
+
+themes:
+  - name: 深度学习时序预测
+    keywords:
+      - time series
+      - forecasting
+      - spatiotemporal
+      - temporal
+      - long-term forecasting
+      - trajectory prediction
+      - sequence modeling
+  - name: AI Agent
+    keywords:
+      - agent
+      - agents
+      - tool use
+      - planning
+      - reasoning
+      - multi-agent
+      - autonomous
+      - computer use
+
+organizations:
+  - name: OpenAI
+    priority: 95
+    aliases: ["openai"]
+    feeds:
+      - name: OpenAI arXiv query
+        url: "http://export.arxiv.org/api/query?search_query=all:%22OpenAI%22+AND+(cat:cs.AI+OR+cat:cs.LG+OR+cat:cs.CL)&start=0&max_results=15&sortBy=submittedDate&sortOrder=descending"
+  - name: Anthropic
+    priority: 93
+    aliases: ["anthropic"]
+    feeds:
+      - name: Anthropic arXiv query
+        url: "http://export.arxiv.org/api/query?search_query=all:%22Anthropic%22+AND+(cat:cs.AI+OR+cat:cs.LG+OR+cat:cs.CL)&start=0&max_results=15&sortBy=submittedDate&sortOrder=descending"
+  - name: Google DeepMind
+    priority: 94
+    aliases: ["google", "deepmind", "google deepmind"]
+    feeds:
+      - name: Google DeepMind arXiv query
+        url: "http://export.arxiv.org/api/query?search_query=all:%22DeepMind%22+AND+(cat:cs.AI+OR+cat:cs.LG+OR+cat:cs.CL)&start=0&max_results=15&sortBy=submittedDate&sortOrder=descending"
+  - name: Microsoft
+    priority: 90
+    aliases: ["microsoft"]
+    feeds:
+      - name: Microsoft arXiv query
+        url: "http://export.arxiv.org/api/query?search_query=all:%22Microsoft%22+AND+(cat:cs.AI+OR+cat:cs.LG+OR+cat:cs.CL)&start=0&max_results=15&sortBy=submittedDate&sortOrder=descending"
+  - name: Meta FAIR
+    priority: 89
+    aliases: ["meta", "fair"]
+    feeds:
+      - name: Meta FAIR arXiv query
+        url: "http://export.arxiv.org/api/query?search_query=all:%22Meta%22+AND+(cat:cs.AI+OR+cat:cs.LG+OR+cat:cs.CL)&start=0&max_results=15&sortBy=submittedDate&sortOrder=descending"
+  - name: DeepSeek
+    priority: 92
+    aliases: ["deepseek"]
+    feeds:
+      - name: DeepSeek arXiv query
+        url: "http://export.arxiv.org/api/query?search_query=all:%22DeepSeek%22+AND+(cat:cs.AI+OR+cat:cs.LG+OR+cat:cs.CL)&start=0&max_results=15&sortBy=submittedDate&sortOrder=descending"
+  - name: MiniMax
+    priority: 88
+    aliases: ["minimax"]
+    feeds:
+      - name: MiniMax arXiv query
+        url: "http://export.arxiv.org/api/query?search_query=all:%22MiniMax%22+AND+(cat:cs.AI+OR+cat:cs.LG+OR+cat:cs.CL)&start=0&max_results=15&sortBy=submittedDate&sortOrder=descending"
+  - name: 智谱
+    priority: 88
+    aliases: ["zhipu", "glm", "智谱"]
+    feeds:
+      - name: GLM arXiv query
+        url: "http://export.arxiv.org/api/query?search_query=all:%22GLM%22+AND+(cat:cs.AI+OR+cat:cs.LG+OR+cat:cs.CL)&start=0&max_results=15&sortBy=submittedDate&sortOrder=descending"
+  - name: 阿里通义
+    priority: 86
+    aliases: ["tongyi", "qwen", "alibaba"]
+    feeds:
+      - name: Qwen arXiv query
+        url: "http://export.arxiv.org/api/query?search_query=all:%22Qwen%22+AND+(cat:cs.AI+OR+cat:cs.LG+OR+cat:cs.CL)&start=0&max_results=15&sortBy=submittedDate&sortOrder=descending"
+  - name: 腾讯混元
+    priority: 85
+    aliases: ["hunyuan", "tencent"]
+    feeds:
+      - name: Hunyuan arXiv query
+        url: "http://export.arxiv.org/api/query?search_query=all:%22Hunyuan%22+AND+(cat:cs.AI+OR+cat:cs.LG+OR+cat:cs.CL)&start=0&max_results=15&sortBy=submittedDate&sortOrder=descending"
+  - name: 百度文心
+    priority: 84
+    aliases: ["ernie", "baidu"]
+    feeds:
+      - name: ERNIE arXiv query
+        url: "http://export.arxiv.org/api/query?search_query=all:%22ERNIE%22+AND+(cat:cs.AI+OR+cat:cs.LG+OR+cat:cs.CL)&start=0&max_results=15&sortBy=submittedDate&sortOrder=descending"
+  - name: 字节跳动
+    priority: 83
+    aliases: ["bytedance", "doubao", "seed"]
+    feeds:
+      - name: ByteDance arXiv query
+        url: "http://export.arxiv.org/api/query?search_query=all:%22ByteDance%22+AND+(cat:cs.AI+OR+cat:cs.LG+OR+cat:cs.CL)&start=0&max_results=15&sortBy=submittedDate&sortOrder=descending"

@@ -1,0 +1,138 @@
+# 今日新增
+
+- 更新时间：2026-04-26
+- 当日候选总数：32
+
+## AI Agent
+
+- **HiveMind: OS-Inspired Scheduling for Concurrent LLM Agent Workloads** | OpenAI | 2026-04-18 | 优先级 981 | 状态 `workbuddy_pending` | 待生成
+  - 来源：[OpenAI arXiv query](https://arxiv.org/abs/2604.17111v1)
+  - 论文：[https://arxiv.org/pdf/2604.17111v1](https://arxiv.org/pdf/2604.17111v1)
+  - 摘要：When multiple LLM coding agents share a rate-limited API endpoint, they exhibit resource contention patterns analogous to unscheduled OS processes competing for CPU, memory, and I/O. In a motivating incident, 3 of 11 parallel agents died...
+- **When Agents Look the Same: Quantifying Distillation-Induced Similarity in Tool-Use Behaviors** | Anthropic | 2026-04-23 | 优先级 976 | 状态 `workbuddy_pending` | 待生成
+  - 来源：[Anthropic arXiv query](https://arxiv.org/abs/2604.21255v1)
+  - 论文：[https://arxiv.org/pdf/2604.21255v1](https://arxiv.org/pdf/2604.21255v1)
+  - 摘要：Model distillation is a primary driver behind the rapid progress of LLM agents, yet it often leads to behavioral homogenization. Many emerging agents share nearly identical reasoning steps and failure modes, suggesting they may be distil...
+- **Spatial Atlas: Compute-Grounded Reasoning for Spatial-Aware Research Agent Benchmarks** | OpenAI | 2026-04-13 | 优先级 976 | 状态 `workbuddy_pending` | 待生成
+  - 来源：[OpenAI arXiv query](https://arxiv.org/abs/2604.12102v2)
+  - 论文：[https://arxiv.org/pdf/2604.12102v2](https://arxiv.org/pdf/2604.12102v2)
+  - 摘要：We introduce compute-grounded reasoning (CGR), a design paradigm for spatial-aware research agents in which every answerable sub-problem is resolved by deterministic computation before a language model is asked to generate. Spatial Atlas...
+- **Reasoning-targeted Jailbreak Attacks on Large Reasoning Models via Semantic Triggers and Psychological Framing** | OpenAI | 2026-04-17 | 优先级 975 | 状态 `queued` | 待生成
+  - 来源：[OpenAI arXiv query](https://arxiv.org/abs/2604.15725v1)
+  - 论文：[https://arxiv.org/pdf/2604.15725v1](https://arxiv.org/pdf/2604.15725v1)
+  - 摘要：Large Reasoning Models (LRMs) have demonstrated strong capabilities in generating step-by-step reasoning chains alongside final answers, enabling their deployment in high-stakes domains such as healthcare and education. While prior jailb...
+- **Benchmarks for Trajectory Safety Evaluation and Diagnosis in OpenClaw and Codex: ATBench-Claw and ATBench-CodeX** | OpenAI | 2026-04-16 | 优先级 964 | 状态 `queued` | 待生成
+  - 来源：[OpenAI arXiv query](https://arxiv.org/abs/2604.14858v1)
+  - 论文：[https://arxiv.org/pdf/2604.14858v1](https://arxiv.org/pdf/2604.14858v1)
+  - 摘要：As agent systems move into increasingly diverse execution settings, trajectory-level safety evaluation and diagnosis require benchmarks that evolve with them. ATBench is a diverse and realistic agent trajectory benchmark for safety evalu...
+- **Evaluating Multi-Hop Reasoning in RAG Systems: A Comparison of LLM-Based Retriever Evaluation Strategies** | OpenAI | 2026-04-20 | 优先级 963 | 状态 `queued` | 待生成
+  - 来源：[OpenAI arXiv query](https://arxiv.org/abs/2604.18234v1)
+  - 论文：[https://arxiv.org/pdf/2604.18234v1](https://arxiv.org/pdf/2604.18234v1)
+  - 摘要：Retrieval-augmented generation (RAG) enhances large language models (LLMs) with external knowledge to answer questions more accurately. However, research on evaluating RAG systems-particularly the retriever component-remains limited, as...
+- **Local-Splitter: A Measurement Study of Seven Tactics for Reducing Cloud LLM Token Usage on Coding-Agent Workloads** | OpenAI | 2026-04-14 | 优先级 957 | 状态 `queued` | 待生成
+  - 来源：[OpenAI arXiv query](https://arxiv.org/abs/2604.12301v1)
+  - 论文：[https://arxiv.org/pdf/2604.12301v1](https://arxiv.org/pdf/2604.12301v1)
+  - 摘要：We present a systematic measurement study of seven tactics for reducing cloud LLM token usage when a small local model can act as a triage layer in front of a frontier cloud model. The tactics are: (1) local routing, (2) prompt compressi...
+- **Narrative over Numbers: The Identifiable Victim Effect and its Amplification Under Alignment and Reasoning in Large Language Models** | OpenAI | 2026-04-13 | 优先级 956 | 状态 `queued` | 待生成
+  - 来源：[OpenAI arXiv query](https://arxiv.org/abs/2604.12076v1)
+  - 论文：[https://arxiv.org/pdf/2604.12076v1](https://arxiv.org/pdf/2604.12076v1)
+  - 摘要：The Identifiable Victim Effect (IVE) $-$ the tendency to allocate greater resources to a specific, narratively described victim than to a statistically characterized group facing equivalent hardship $-$ is one of the most robust findings...
+- **Cross-Session Threats in AI Agents: Benchmark, Evaluation, and Algorithms** | Anthropic | 2026-04-22 | 优先级 955 | 状态 `queued` | 待生成
+  - 来源：[Anthropic arXiv query](https://arxiv.org/abs/2604.21131v1)
+  - 论文：[https://arxiv.org/pdf/2604.21131v1](https://arxiv.org/pdf/2604.21131v1)
+  - 摘要：AI-agent guardrails are memoryless: each message is judged in isolation, so an adversary who spreads a single attack across dozens of sessions slips past every session-bound detector because only the aggregate carries the payload. We mak...
+- **Strategic Heterogeneous Multi-Agent Architecture for Cost-Effective Code Vulnerability Detection** | DeepSeek | 2026-04-23 | 优先级 951 | 状态 `queued` | 待生成
+  - 来源：[DeepSeek arXiv query](https://arxiv.org/abs/2604.21282v1)
+  - 论文：[https://arxiv.org/pdf/2604.21282v1](https://arxiv.org/pdf/2604.21282v1)
+  - 摘要：Automated code vulnerability detection is critical for software security, yet existing approaches face a fundamental trade-off between detection accuracy and computational cost. We propose a heterogeneous multi-agent architecture inspire...
+- **Skilldex: A Package Manager and Registry for Agent Skill Packages with Hierarchical Scope-Based Distribution** | Anthropic | 2026-04-18 | 优先级 951 | 状态 `queued` | 待生成
+  - 来源：[Anthropic arXiv query](https://arxiv.org/abs/2604.16911v1)
+  - 论文：[https://arxiv.org/pdf/2604.16911v1](https://arxiv.org/pdf/2604.16911v1)
+  - 摘要：Large Language Model (LLM) agents are increasingly extended at runtime via skill packages, structured natural-language instruction bundles loaded from a well-known directory. Community install tooling and registries exist, but two gaps p...
+- **Less Languages, Less Tokens: An Efficient Unified Logic Cross-lingual Chain-of-Thought Reasoning Framework** | DeepSeek | 2026-04-22 | 优先级 940 | 状态 `queued` | 待生成
+  - 来源：[DeepSeek arXiv query](https://arxiv.org/abs/2604.20090v1)
+  - 论文：[https://arxiv.org/pdf/2604.20090v1](https://arxiv.org/pdf/2604.20090v1)
+  - 摘要：Cross-lingual chain-of-thought (XCoT) with self-consistency markedly enhances multilingual reasoning, yet existing methods remain costly due to extensive sampling of full trajectories across languages. Moreover, multilingual LLM represen...
+- **Do LLMs Game Formalization? Evaluating Faithfulness in Logical Reasoning** | DeepSeek | 2026-04-21 | 优先级 939 | 状态 `queued` | 待生成
+  - 来源：[DeepSeek arXiv query](https://arxiv.org/abs/2604.19459v1)
+  - 论文：[https://arxiv.org/pdf/2604.19459v1](https://arxiv.org/pdf/2604.19459v1)
+  - 摘要：Formal verification guarantees proof validity but not formalization faithfulness. For natural-language logical reasoning, where models construct axiom systems from scratch without library constraints, this gap between valid proofs and fa...
+- **ReflectMT: Internalizing Reflection for Efficient and High-Quality Machine Translation** | DeepSeek | 2026-04-21 | 优先级 939 | 状态 `queued` | 待生成
+  - 来源：[DeepSeek arXiv query](https://arxiv.org/abs/2604.19144v1)
+  - 论文：[https://arxiv.org/pdf/2604.19144v1](https://arxiv.org/pdf/2604.19144v1)
+  - 摘要：Recent years have witnessed growing interest in applying Large Reasoning Models (LRMs) to Machine Translation (MT). Existing approaches predominantly adopt a "think-first-then-translate" paradigm. Although explicit reasoning trajectories...
+- **MathNet: a Global Multimodal Benchmark for Mathematical Reasoning and Retrieval** | DeepSeek | 2026-04-20 | 优先级 938 | 状态 `queued` | 待生成
+  - 来源：[DeepSeek arXiv query](https://arxiv.org/abs/2604.18584v1)
+  - 论文：[https://arxiv.org/pdf/2604.18584v1](https://arxiv.org/pdf/2604.18584v1)
+  - 摘要：Mathematical problem solving remains a challenging test of reasoning for large language and multimodal models, yet existing benchmarks are limited in size, language coverage, and task diversity. We introduce MathNet, a high-quality, larg...
+- **First, Do No Harm (With LLMs): Mitigating Racial Bias via Agentic Workflows** | DeepSeek | 2026-04-20 | 优先级 938 | 状态 `queued` | 待生成
+  - 来源：[DeepSeek arXiv query](https://arxiv.org/abs/2604.18038v1)
+  - 论文：[https://arxiv.org/pdf/2604.18038v1](https://arxiv.org/pdf/2604.18038v1)
+  - 摘要：Large language models (LLMs) are increasingly used in clinical settings, raising concerns about racial bias in both generated medical text and clinical reasoning. Existing studies have identified bias in medical LLMs, but many focus on s...
+- **Owner-Harm: A Missing Threat Model for AI Agent Safety** | Microsoft | 2026-04-20 | 优先级 928 | 状态 `queued` | 待生成
+  - 来源：[Microsoft arXiv query](https://arxiv.org/abs/2604.18658v1)
+  - 论文：[https://arxiv.org/pdf/2604.18658v1](https://arxiv.org/pdf/2604.18658v1)
+  - 摘要：Existing AI agent safety benchmarks focus on generic criminal harm (cybercrime, harassment, weapon synthesis), leaving a systematic blind spot for a distinct and commercially consequential threat category: agents harming their own deploy...
+- **Learning to Evolve: A Self-Improving Framework for Multi-Agent Systems via Textual Parameter Graph Optimization** | Meta FAIR | 2026-04-22 | 优先级 925 | 状态 `queued` | 待生成
+  - 来源：[Meta FAIR arXiv query](https://arxiv.org/abs/2604.20714v1)
+  - 论文：[https://arxiv.org/pdf/2604.20714v1](https://arxiv.org/pdf/2604.20714v1)
+  - 摘要：Designing and optimizing multi-agent systems (MAS) is a complex, labor-intensive process of "Agent Engineering." Existing automatic optimization methods, primarily focused on flat prompt tuning, lack the structural awareness to debug the...
+- **FairQE: Multi-Agent Framework for Mitigating Gender Bias in Translation Quality Estimation** | Meta FAIR | 2026-04-23 | 优先级 911 | 状态 `queued` | 待生成
+  - 来源：[Meta FAIR arXiv query](https://arxiv.org/abs/2604.21420v1)
+  - 论文：[https://arxiv.org/pdf/2604.21420v1](https://arxiv.org/pdf/2604.21420v1)
+  - 摘要：Quality Estimation (QE) aims to assess machine translation quality without reference translations, but recent studies have shown that existing QE models exhibit systematic gender bias. In particular, they tend to favor masculine realizat...
+- **Context Kubernetes: Declarative Orchestration of Enterprise Knowledge for Agentic AI Systems** | Microsoft | 2026-04-13 | 优先级 911 | 状态 `queued` | 待生成
+  - 来源：[Microsoft arXiv query](https://arxiv.org/abs/2604.11623v3)
+  - 论文：[https://arxiv.org/pdf/2604.11623v3](https://arxiv.org/pdf/2604.11623v3)
+  - 摘要：We introduce Context Kubernetes, an architecture for orchestrating enterprise knowledge in agentic AI systems, with a prototype implementation and eight experiments. The core observation is that delivering the right knowledge, to the rig...
+- **The Last Harness You'll Ever Build** | Meta FAIR | 2026-04-22 | 优先级 910 | 状态 `queued` | 待生成
+  - 来源：[Meta FAIR arXiv query](https://arxiv.org/abs/2604.21003v1)
+  - 论文：[https://arxiv.org/pdf/2604.21003v1](https://arxiv.org/pdf/2604.21003v1)
+  - 摘要：AI agents are increasingly deployed on complex, domain-specific workflows -- navigating enterprise web applications that require dozens of clicks and form fills, orchestrating multi-step research pipelines that span search, extraction, a...
+- **A Self-Evolving Framework for Efficient Terminal Agents via Observational Context Compression** | MiniMax | 2026-04-21 | 优先级 904 | 状态 `queued` | 待生成
+  - 来源：[MiniMax arXiv query](https://arxiv.org/abs/2604.19572v1)
+  - 论文：[https://arxiv.org/pdf/2604.19572v1](https://arxiv.org/pdf/2604.19572v1)
+  - 摘要：As model capabilities advance, research has increasingly shifted toward long-horizon, multi-turn terminal-centric agentic tasks, where raw environment feedback is often preserved in the interaction history to support future decisions. Ho...
+- **Nemobot Games: Crafting Strategic AI Gaming Agents for Interactive Learning with Large Language Models** | MiniMax | 2026-04-23 | 优先级 901 | 状态 `queued` | 待生成
+  - 来源：[MiniMax arXiv query](https://arxiv.org/abs/2604.21896v1)
+  - 论文：[https://arxiv.org/pdf/2604.21896v1](https://arxiv.org/pdf/2604.21896v1)
+  - 摘要：This paper introduces a new paradigm for AI game programming, leveraging large language models (LLMs) to extend and operationalize Claude Shannon's taxonomy of game-playing machines. Central to this paradigm is Nemobot, an interactive ag...
+- **Agentic Aggregation for Parallel Scaling of Long-Horizon Agentic Tasks** | 智谱 | 2026-04-13 | 优先级 901 | 状态 `queued` | 待生成
+  - 来源：[GLM arXiv query](https://arxiv.org/abs/2604.11753v1)
+  - 论文：[https://arxiv.org/pdf/2604.11753v1](https://arxiv.org/pdf/2604.11753v1)
+  - 摘要：We study parallel test-time scaling for long-horizon agentic tasks such as agentic search and deep research, where multiple rollouts are generated in parallel and aggregated into a final response. While such scaling has proven effective...
+- **M2-PALE: A Framework for Explaining Multi-Agent MCTS--Minimax Hybrids via Process Mining and LLMs** | MiniMax | 2026-04-16 | 优先级 899 | 状态 `queued` | 待生成
+  - 来源：[MiniMax arXiv query](https://arxiv.org/abs/2604.14687v1)
+  - 论文：[https://arxiv.org/pdf/2604.14687v1](https://arxiv.org/pdf/2604.14687v1)
+  - 摘要：Monte-Carlo Tree Search (MCTS) is a fundamental sampling-based search algorithm widely used for online planning in sequential decision-making domains. Despite its success in driving recent advances in artificial intelligence, understandi...
+- **SafetyALFRED: Evaluating Safety-Conscious Planning of Multimodal Large Language Models** | 阿里通义 | 2026-04-21 | 优先级 889 | 状态 `queued` | 待生成
+  - 来源：[Qwen arXiv query](https://arxiv.org/abs/2604.19638v1)
+  - 论文：[https://arxiv.org/pdf/2604.19638v1](https://arxiv.org/pdf/2604.19638v1)
+  - 摘要：Multimodal Large Language Models are increasingly adopted as autonomous agents in interactive environments, yet their ability to proactively address safety hazards remains insufficient. We introduce SafetyALFRED, built upon the embodied...
+- **ComPASS: Towards Personalized Agentic Social Support via Tool-Augmented Companionship** | 阿里通义 | 2026-04-20 | 优先级 883 | 状态 `queued` | 待生成
+  - 来源：[Qwen arXiv query](https://arxiv.org/abs/2604.18356v1)
+  - 论文：[https://arxiv.org/pdf/2604.18356v1](https://arxiv.org/pdf/2604.18356v1)
+  - 摘要：Developing compassionate interactive systems requires agents to not only understand user emotions but also provide diverse, substantive support. While recent works explore empathetic dialogue generation, they remain limited in response f...
+- **Training and Agentic Inference Strategies for LLM-based Manim Animation Generation** | 阿里通义 | 2026-04-20 | 优先级 878 | 状态 `queued` | 待生成
+  - 来源：[Qwen arXiv query](https://arxiv.org/abs/2604.18364v1)
+  - 论文：[https://arxiv.org/pdf/2604.18364v1](https://arxiv.org/pdf/2604.18364v1)
+  - 摘要：Generating programmatic animation using libraries such as Manim presents unique challenges for Large Language Models (LLMs), requiring spatial reasoning, temporal sequencing, and familiarity with domain-specific APIs that are underrepres...
+
+## 深度学习时序预测
+
+- **Inferring High-Level Events from Timestamped Data: Complexity and Medical Applications** | Meta FAIR | 2026-04-23 | 优先级 906 | 状态 `queued` | 待生成
+  - 来源：[Meta FAIR arXiv query](https://arxiv.org/abs/2604.21793v1)
+  - 论文：[https://arxiv.org/pdf/2604.21793v1](https://arxiv.org/pdf/2604.21793v1)
+  - 摘要：In this paper, we develop a novel logic-based approach to detecting high-level temporally extended events from timestamped data and background knowledge. Our framework employs logical rules to capture existence and termination conditions...
+- **Forecast Sports Outcomes under Efficient Market Hypothesis: Theoretical and Experimental Analysis of Odds-Only and Generalised Linear Models** | 智谱 | 2026-04-19 | 优先级 892 | 状态 `queued` | 待生成
+  - 来源：[GLM arXiv query](https://arxiv.org/abs/2604.17194v1)
+  - 论文：[https://arxiv.org/pdf/2604.17194v1](https://arxiv.org/pdf/2604.17194v1)
+  - 摘要：Converting betting odds into accurate outcome probabilities is a fundamental challenge in order to use betting odds as a benchmark for sports forecasting and market efficiency analysis. In this study, we propose two methods to overcome t...
+- **Minimax Optimality and Spectral Routing for Majority-Vote Ensembles under Markov Dependence** | MiniMax | 2026-04-15 | 优先级 888 | 状态 `queued` | 待生成
+  - 来源：[MiniMax arXiv query](https://arxiv.org/abs/2604.13414v1)
+  - 论文：[https://arxiv.org/pdf/2604.13414v1](https://arxiv.org/pdf/2604.13414v1)
+  - 摘要：Majority-vote ensembles achieve variance reduction by averaging over diverse, approximately independent base learners. When training data exhibits Markov dependence, as in time-series forecasting, reinforcement learning (RL) replay buffe...
+- **Revisiting Change VQA in Remote Sensing with Structured and Native Multimodal Qwen Models** | 阿里通义 | 2026-04-20 | 优先级 873 | 状态 `queued` | 待生成
+  - 来源：[Qwen arXiv query](https://arxiv.org/abs/2604.18429v1)
+  - 论文：[https://arxiv.org/pdf/2604.18429v1](https://arxiv.org/pdf/2604.18429v1)
+  - 摘要：Change visual question answering (Change VQA) addresses the problem of answering natural-language questions about semantic changes between bi-temporal remote sensing (RS) images. Although vision-language models (VLMs) have recently been...

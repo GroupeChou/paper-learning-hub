@@ -1,0 +1,39 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "paper-learning-hub"
+version = "0.1.0"
+description = "Local-first paper discovery, translation, note generation, and MkDocs publishing pipeline."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+  "beautifulsoup4>=4.12.3",
+  "feedparser>=6.0.11",
+  "mkdocs>=1.6.0",
+  "mkdocs-material>=9.5.27",
+  "PyMuPDF>=1.24.5",
+  "PyYAML>=6.0.2",
+  "pymdown-extensions>=10.8.1",
+  "requests>=2.32.3",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.3.1",
+]
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = [
+  "src",
+]
+testpaths = [
+  "tests",
+]

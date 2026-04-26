@@ -1,0 +1,7 @@
+{
+  "slug": "paper-learning-hub",
+  "version": "0.1.0",
+  "channel": "local-project",
+  "description": "Use WorkBuddy to run the daily paper discovery, deep translation, site build, and GitHub sync workflow for the paper-learning-hub project."
+}
+
