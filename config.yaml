@@ -16,8 +16,8 @@ git:
 
 site:
   site_name: 论文自动研学知识库
-  site_url: ""
-  repo_name: ""
+  site_url: "https://groupechou.github.io/paper-learning-hub/"
+  repo_name: "GroupeChou/paper-learning-hub"
   docs_dir: site/docs
   mkdocs_file: site/mkdocs.yml
 
