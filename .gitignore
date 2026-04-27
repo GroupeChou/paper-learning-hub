@@ -18,6 +18,26 @@ site/site_output/
 !.workbuddy/memory/MEMORY.md
 papers/raw/**
 !papers/raw/.gitkeep
+
+# 中文笔记目录中的图片/图表资产（永久不进 Git）
+papers/zh/*/assets/
+papers/zh/*/*.jpeg
+papers/zh/*/*.jpg
+papers/zh/*/*.png
+papers/zh/*/*.gif
+papers/zh/*/*.bmp
+
+# 大文件二进制（优先用 LFS，临时用 gitignore 兜底）
+*.pdf
+*.ipynb
+*.pth
+*.onnx
+*.pkl
+*.pickle
+*.h5
+*.ckpt
+*.bin
+*.msgpack
 site/.cache/
 src/*.egg-info/
 src/**/*.egg-info/
