@@ -182,7 +182,9 @@ class Pipeline:
             refreshed = self.db.get_papers(statuses=["downloaded", "discovered", "queued", "failed_translate"])
             self._translate_top(refreshed, result)
 
-        self.build_site()
-        result.site_built = True
-        result.git_message = sync_git(self.config, self.root)
+        # --prepare-workbuddy 模式只准备任务，不构建站点
+        if not prepare_workbuddy_only:
+            self.build_site()
+            result.site_built = True
+            result.git_message = sync_git(self.config, self.root)
         return result

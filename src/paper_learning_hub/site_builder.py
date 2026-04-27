@@ -117,6 +117,8 @@ def copy_translated_papers(config: AppConfig, papers: list[CandidatePaper]) -> N
             continue
         source_markdown = Path(paper.zh_path)
         source_dir = source_markdown.parent
+        if not source_dir.exists():
+            continue
         target_dir = config.site.docs_dir / "papers" / paper.paper_id
         if target_dir.exists():
             shutil.rmtree(target_dir)

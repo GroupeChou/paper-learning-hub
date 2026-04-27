@@ -128,9 +128,9 @@ flowchart TD
 
 ## 🔗 关联知识库
 
-- 顺丰预测智能体体系：17 场景、6 大能力、7 类 Skills → [专业知识库-顺丰预测数据分析.md](../../../../../.workbuddy/memory/专业知识库-顺丰预测数据分析.md)
-- OpenClaw Agent 框架设计 → [.profiles/logistics/L3-cognition/openclaw_framework_design.md](../../../../../.workbuddy/memory/.profiles/logistics/L3-cognition/openclaw_framework_design.md)
-- Skill 实时调用设计 → [.profiles/logistics/L3-cognition/OpenClaw-Skill实时调用设计方案.md](../../../../../.workbuddy/memory/.profiles/logistics/L3-cognition/OpenClaw-Skill实时调用设计方案.md)
+- 顺丰预测智能体体系：17 场景、6 大能力、7 类 Skills（本地文件）
+- OpenClaw Agent 框架设计（本地文件）
+- Skill 实时调用设计（本地文件）
 
 ---
 
