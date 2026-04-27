@@ -1,0 +1,2278 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://groupechou.github.io/paper-learning-hub/papers/2604.17111v1/">
+      
+      
+        <link rel="prev" href="../../tracks/agent/getting-started/">
+      
+      
+        <link rel="next" href="../2604.21255v1/">
+      
+      
+        
+          <link rel="alternate" href="/" hreflang="zh">
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>HiveMind: OS-Inspired Scheduling for Concurrent LLM Agent Workloads - 论文研学知识库</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+SC:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Noto Sans SC";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/paper.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="deep-purple">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#hivemind-os-inspired-scheduling-for-concurrent-llm-agent-workloads" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="论文研学知识库" class="md-header__button md-logo" aria-label="论文研学知识库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            论文研学知识库
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              HiveMind: OS-Inspired Scheduling for Concurrent LLM Agent Workloads
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="deep-purple"  aria-label="切换深色模式"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换深色模式" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="deep-purple"  aria-label="切换浅色模式"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换浅色模式" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+      <div class="md-header__option">
+  <div class="md-select">
+    
+    <button class="md-header__button md-icon" aria-label="选择当前语言">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.5 17.5 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2zm-2.62 7 1.62-4.33L19.12 17z"/></svg>
+    </button>
+    <div class="md-select__inner">
+      <ul class="md-select__list">
+        
+          <li class="md-select__item">
+            <a href="/" hreflang="zh" class="md-select__link">
+              中文
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="分享" aria-label="分享" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="论文研学知识库" class="md-nav__button md-logo" aria-label="论文研学知识库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    论文研学知识库
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_1" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../.." class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    📖 学习指南
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_1" id="__nav_1_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    📖 学习指南
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../about/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    关于本库
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../how-to-use/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    如何使用本知识库
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../roadmap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    阅读路线图
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../tracks/agent/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🧠 AI Agent 智能体
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🧠 AI Agent 智能体
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tracks/agent/getting-started/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    入门
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="./" class="md-nav__link md-nav__link--active">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    论文精读
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link md-nav__link--active" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    论文精读
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2604.21255v1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    When Agents Look the Same: Quantifying Distillation-Induced Similarity in Tool-Use Behaviors
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2604.12102v2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spatial Atlas: Compute-Grounded Reasoning for Spatial-Aware Research Agent Benchmarks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tracks/agent/queue/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    待读论文
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../tracks/forecasting/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    📈 时序预测
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    📈 时序预测
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tracks/forecasting/getting-started/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    入门
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tracks/forecasting/reading-list/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    论文精读
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tracks/forecasting/queue/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    待读论文
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    📚 经典必读
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    📚 经典必读
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/classics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    📚 经典必读
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🗂 论文总索引
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🗂 论文总索引
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    📅 每日更新日志
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    📅 每日更新日志
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/daily-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    今日新增
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        摘要
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#section-1-introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Section 1: Introduction
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Section 1: Introduction">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        中文翻译
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        术语解释
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#takeaway" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        关键 takeaway
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#section-2-background" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Section 2: Background
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Section 2: Background">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        中文翻译
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        术语解释
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        图表/公式说明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#takeaway_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        关键 takeaway
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#section-3-hivemind-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Section 3: HiveMind Architecture
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Section 3: HiveMind Architecture">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        中文翻译
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 五个调度原语
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.1 五个调度原语">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-admission-control" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        (1) 准入控制 (Admission Control)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-rate-limit-tracking" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        (2) 速率限制跟踪 (Rate-Limit Tracking)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-aimd-aimd-backpressure-circuit-breaking" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        (3) AIMD背压与熔断 (AIMD Backpressure + Circuit Breaking)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-token-token-budget-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        (4) Token预算管理 (Token Budget Management)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-priority-queuing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        (5) 优先级队列 (Priority Queuing)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        术语解释
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        图表/公式说明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#takeaway_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        关键 takeaway
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#section-4-implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Section 4: Implementation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Section 4: Implementation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        中文翻译
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        关键实现细节
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        术语解释
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#takeaway_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        关键 takeaway
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#section-5-evaluation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Section 5: Evaluation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Section 5: Evaluation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        中文翻译
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#51" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 主要结果
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        图表/公式说明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 消融研究
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#55" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.5 浪费计算的成本
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#takeaway_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        关键 takeaway
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#section-6-related-work" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Section 6: Related Work
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Section 6: Related Work">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        中文翻译
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#takeaway_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        关键 takeaway
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#section-7-tradeoffs-and-limitations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Section 7: Tradeoffs and Limitations
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Section 7: Tradeoffs and Limitations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 配置复杂性
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 调度开销
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3 局限性
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#section-8-conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Section 8: Conclusion
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Section 8: Conclusion">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        中文翻译
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        复核建议
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        与物流预测的关联
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_19" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        导航链
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="hivemind-os-inspired-scheduling-for-concurrent-llm-agent-workloads">HiveMind: OS-Inspired Scheduling for Concurrent LLM Agent Workloads<a class="headerlink" href="#hivemind-os-inspired-scheduling-for-concurrent-llm-agent-workloads" title="Permanent link">&para;</a></h1>
+<!-- 论文元数据卡片 -->
+<div class="paper-meta">
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">机构</span>
+    <span class="paper-meta-value org-OpenAI">OpenAI</span>
+  </div>
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">方向</span>
+    <span class="paper-meta-value">AI Agent 调度</span>
+  </div>
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">日期</span>
+    <span class="paper-meta-value">2026-04-18</span>
+  </div>
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">优先级</span>
+    <span class="paper-meta-value">⭐⭐⭐⭐⭐</span>
+  </div>
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">阅读难度</span>
+    <span class="paper-meta-value">中</span>
+  </div>
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">预计精读时间</span>
+    <span class="paper-meta-value">25 分钟</span>
+  </div>
+</div>
+
+<!-- 状态标签 -->
+<div class="admonition info">
+<p><span class="paper-tag paper-tag-translated">✅ 已完成精读</span> · AI Agent 路线第 1 篇精读</p>
+</div>
+<!-- 学习路线位置 -->
+<blockquote>
+<p><strong>📍 学习路线</strong>：🧠 AI Agent 路线 → 进阶核心 → 第 1 篇</p>
+</blockquote>
+<!-- 摘要 -->
+<div class="paper-abstract">
+当多个 LLM coding agent 共享一个限速 API 端点时，它们表现出类似于未调度 OS 进程竞争 CPU、内存和 I/O 的资源竞争模式。在一个启发性事件中，11 个并行 agent 中有 3 个因连接重置和 HTTP 502 错误而死亡——27% 的失败率——尽管 API 有足够的聚合容量来顺序服务所有 11 个。
+</div>
+
+<h2 id="_1">摘要<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>当多个LLM coding agent共享一个限速API端点时，它们表现出类似于未调度OS进程竞争CPU、内存和I/O的资源竞争模式。</p>
+<p>在一个启发性事件中，11个并行agent中有3个因连接重置和HTTP 502错误而死亡——27%的失败率——尽管API有足够的聚合容量来顺序服务所有11个。</p>
+<p>我们提出HiveMind，一个透明的HTTP代理，应用五个OS启发的调度原语——准入控制、速率限制跟踪、带有熔断的AIMD背压、Token预算管理和优先级队列——来消除无协调并行执行导致的故障模式。</p>
+<p>代理对现有agent代码零修改，通过自动检测的提供者配置文件支持Anthropic、OpenAI和本地模型API。</p>
+<p>我们在七个场景（5-50个并发agent）中的评估表明，无协调agent在竞争下失败率为72-100%，而HiveMind将失败率降至0-18%，消除了48-100%的浪费计算。</p>
+<p>消融研究表明，透明重试——而非准入控制——是单一最关键的原语，但原语组合使用最有效。 针对Ollama的真实世界验证确认HiveMind每个请求增加不到3ms的代理开销。</p>
+<hr />
+<h2 id="section-1-introduction">Section 1: Introduction<a class="headerlink" href="#section-1-introduction" title="Permanent link">&para;</a></h2>
+<h3 id="_2">中文翻译<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<p>大型语言模型与工具增强的出现已将软件工程从"人类编写代码"转变为"人类指导AI编写代码"[1-4]。AI coding agent现在可以自动化复杂的多步软件工程任务。</p>
+<p>然而，当前agent编排框架——LangChain [7]、CrewAI [8]、AutoGen [9]、Semantic Kernel [10]——将LLM API视为无限资源，提供组合机制（链、团队、多agent系统）但几乎不提供资源管理或公平性保证。</p>
+<p>就像未调度的OS进程会遭受颠簸、饥饿和死锁[5,6]一样，无协调的并发agent在面对API速率限制时会失败并浪费计算资源。</p>
+<h3 id="_3">术语解释<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Tool-augmented LLMs</strong>：工具增强的大型语言模型，指可以调用外部工具/API的LLM</li>
+<li><strong>Rate-limited API endpoint</strong>：限速API端点，对请求频率有限制的API接口</li>
+<li><strong>Uncoordinated parallel execution</strong>：无协调的并行执行，多个agent独立行动无统一调度</li>
+<li><strong>Thrashing</strong>：颠簸，OS中进程频繁交换导致性能急剧下降的现象</li>
+<li><strong>Starvation</strong>：饥饿，进程长期无法获得所需资源的现象</li>
+</ul>
+<h3 id="takeaway">关键 takeaway<a class="headerlink" href="#takeaway" title="Permanent link">&para;</a></h3>
+<ul>
+<li>核心问题：LLM API是有限资源，但现有agent框架没有资源管理机制</li>
+<li>启发事件：11个并行agent中3个失败（27%失败率），浪费约135K tokens</li>
+</ul>
+<hr />
+<h2 id="section-2-background">Section 2: Background<a class="headerlink" href="#section-2-background" title="Permanent link">&para;</a></h2>
+<h3 id="_4">中文翻译<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p>LLM API速率限制以不同方式强制执行：请求速率（RPM，每分钟请求数）、Token速率（TPM，每分钟Token数）和并发连接限制。</p>
+<p>当agent数量超过API容量时，会触发HTTP 429（太多请求）、HTTP 503（服务不可用）或连接重置等错误。</p>
+<h3 id="_5">术语解释<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>RPM (Requests Per Minute)</strong>：每分钟请求数，API速率限制的一种</li>
+<li><strong>TPM (Tokens Per Minute)</strong>：每分钟Token数，API速率限制的一种</li>
+<li><strong>HTTP 429</strong>：太多请求错误，API速率限制触发</li>
+<li><strong>HTTP 502</strong>：错误网关，服务器作为网关收到无效响应</li>
+<li><strong>ECONNRESET</strong>：连接重置错误，TCP连接被对端强制关闭</li>
+</ul>
+<h3 id="_6">图表/公式说明<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<p><strong>Table 1: 11个无协调并发agent的结果（2026年4月15日）</strong></p>
+<table>
+<thead>
+<tr>
+<th>Outcome</th>
+<th>Count</th>
+<th>%</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Completed successfully</td>
+<td>8</td>
+<td>73%</td>
+</tr>
+<tr>
+<td>Died (ECONNRESET)</td>
+<td>2</td>
+<td>18%</td>
+</tr>
+<tr>
+<td>Died (HTTP 502)</td>
+<td>1</td>
+<td>9%</td>
+</tr>
+<tr>
+<td>Tokens wasted (dead agents)</td>
+<td>~135K</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<p>这个表格是论文的motivation，展示了真实场景中的严重问题。</p>
+<h3 id="takeaway_1">关键 takeaway<a class="headerlink" href="#takeaway_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li>API有多种速率限制机制：RPM、TPM、并发连接</li>
+<li>无协调的agent会导致连接耗尽、级联失败</li>
+</ul>
+<hr />
+<h2 id="section-3-hivemind-architecture">Section 3: HiveMind Architecture<a class="headerlink" href="#section-3-hivemind-architecture" title="Permanent link">&para;</a></h2>
+<h3 id="_7">中文翻译<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<p>HiveMind是一个透明的HTTP代理，对现有agent代码零修改，通过五个OS启发的调度原语来管理并发LLM agent的资源访问。</p>
+<h3 id="31">3.1 五个调度原语<a class="headerlink" href="#31" title="Permanent link">&para;</a></h3>
+<h4 id="1-admission-control">(1) 准入控制 (Admission Control)<a class="headerlink" href="#1-admission-control" title="Permanent link">&para;</a></h4>
+<p>类似于OS的fork bomb保护，限制最大并发agent数量防止连接耗尽。</p>
+<p><strong>OS类比</strong>：<code>max user processes</code>限制</p>
+<h4 id="2-rate-limit-tracking">(2) 速率限制跟踪 (Rate-Limit Tracking)<a class="headerlink" href="#2-rate-limit-tracking" title="Permanent link">&para;</a></h4>
+<p>智能跟踪API响应的速率限制头部（X-RateLimit-Remaining、Retry-After），让系统提前知道何时接近限制。</p>
+<p><strong>OS类比</strong>：OS维护CPU/内存使用统计</p>
+<h4 id="3-aimd-aimd-backpressure-circuit-breaking">(3) AIMD背压与熔断 (AIMD Backpressure + Circuit Breaking)<a class="headerlink" href="#3-aimd-aimd-backpressure-circuit-breaking" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>AIMD (Additive Increase Multiplicative Decrease)</strong>：加法增加乘法减少，TCP拥塞控制算法</li>
+<li>当检测到错误率上升时，快速减少并发量</li>
+<li>熔断机制在故障时暂时阻止新请求</li>
+</ul>
+<p><strong>OS类比</strong>：TCP拥塞控制</p>
+<h4 id="4-token-token-budget-management">(4) Token预算管理 (Token Budget Management)<a class="headerlink" href="#4-token-token-budget-management" title="Permanent link">&para;</a></h4>
+<p>为每个agent分配Token预算，防止任何一个agent耗尽整个API配额。</p>
+<p><strong>OS类比</strong>：cgroups内存限制</p>
+<h4 id="5-priority-queuing">(5) 优先级队列 (Priority Queuing)<a class="headerlink" href="#5-priority-queuing" title="Permanent link">&para;</a></h4>
+<p>根据agent的"价值"或优先级决定调度顺序，重要工作优先处理。</p>
+<p><strong>OS类比</strong>：进程优先级调度（nice levels）</p>
+<h3 id="_8">术语解释<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Transparent HTTP proxy</strong>：透明HTTP代理，流量经过代理但agent无需感知</li>
+<li><strong>AIMD (Additive Increase Multiplicative Decrease)</strong>：经典TCP拥塞控制算法</li>
+<li><strong>Circuit breaker</strong>：熔断器，检测故障并快速失败防止级联扩散</li>
+<li><strong>Backpressure</strong>：背压，下游压力向上游传递的机制</li>
+</ul>
+<h3 id="_9">图表/公式说明<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<p><strong>Table 3: 现有框架的调度能力</strong></p>
+<table>
+<thead>
+<tr>
+<th>System</th>
+<th>Adm.</th>
+<th>Rate</th>
+<th>BP</th>
+<th>Bud.</th>
+<th>Pri.</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Claude Code</td>
+<td>–</td>
+<td>–</td>
+<td>–</td>
+<td>–</td>
+<td>–</td>
+</tr>
+<tr>
+<td>LangChain</td>
+<td>–</td>
+<td>–</td>
+<td>–</td>
+<td>–</td>
+<td>–</td>
+</tr>
+<tr>
+<td>CrewAI</td>
+<td>–</td>
+<td>–</td>
+<td>–</td>
+<td>–</td>
+<td>~</td>
+</tr>
+<tr>
+<td>AutoGen</td>
+<td>–</td>
+<td>–</td>
+<td>–</td>
+<td>–</td>
+<td>~</td>
+</tr>
+<tr>
+<td><strong>HiveMind</strong></td>
+<td><strong>✓</strong></td>
+<td><strong>✓</strong></td>
+<td><strong>✓</strong></td>
+<td><strong>✓</strong></td>
+<td><strong>✓</strong></td>
+</tr>
+</tbody>
+</table>
+<p>对比显示现有框架都缺乏资源调度能力，HiveMind是唯一完整的。</p>
+<h3 id="takeaway_2">关键 takeaway<a class="headerlink" href="#takeaway_2" title="Permanent link">&para;</a></h3>
+<ul>
+<li>五个原语各自解决不同问题，组合使用最有效</li>
+<li>透明代理设计使部署零成本，无需修改agent代码</li>
+</ul>
+<hr />
+<h2 id="section-4-implementation">Section 4: Implementation<a class="headerlink" href="#section-4-implementation" title="Permanent link">&para;</a></h2>
+<h3 id="_10">中文翻译<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
+<p>HiveMind支持多种LLM API提供商（Anthropic、OpenAI、Azure OpenAI、Google AI、Ollama、MLX），通过自动检测的提供者配置文件识别每个API的速率限制语义。</p>
+<h3 id="_11">关键实现细节<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
+<p><strong>3.5 Token预算强制</strong></p>
+<p>每个agent维护独立的Token计数器，追踪输入和输出token使用。当达到预算阈值时，请求被拒绝或降级处理。</p>
+<p><strong>3.6 可重试错误分类</strong></p>
+<p>将API错误分为：
+- 可重试（429、503、Timeout）
+- 不可重试（400、401、403、404）</p>
+<p>仅对可重试错误执行自动重试。</p>
+<p><strong>3.7 流式支持</strong></p>
+<p>透传SSE（Server-Sent Events）流而不缓冲，转发上游API到达的chunks。</p>
+<h3 id="_12">术语解释<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Provider profiles</strong>：提供者配置文件，定义各API的速率限制参数</li>
+<li><strong>SSE (Server-Sent Events)</strong>：服务器发送事件，一种服务器推送技术</li>
+<li><strong>Jitter</strong>：抖动，在重试延迟中加入随机性防止雷鸣羊群问题</li>
+</ul>
+<h3 id="takeaway_3">关键 takeaway<a class="headerlink" href="#takeaway_3" title="Permanent link">&para;</a></h3>
+<ul>
+<li>透明重试是最关键的原语（消融研究证明）</li>
+<li>集中式重试优于每个agent独立重试，避免"雷鸣羊群"问题</li>
+</ul>
+<hr />
+<h2 id="section-5-evaluation">Section 5: Evaluation<a class="headerlink" href="#section-5-evaluation" title="Permanent link">&para;</a></h2>
+<h3 id="_13">中文翻译<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
+<p>评估覆盖七个场景：micro-5/10/20/50（模拟）、replay-11（真实轨迹回放）、stress（压力测试）、latency-spike（延迟尖峰）。</p>
+<h3 id="51">5.1 主要结果<a class="headerlink" href="#51" title="Permanent link">&para;</a></h3>
+<p><strong>Table 5: 评估场景和结果</strong></p>
+<table>
+<thead>
+<tr>
+<th>Scenario</th>
+<th>Agents</th>
+<th>RPM</th>
+<th>Error Rate</th>
+<th>Direct Fail%</th>
+<th>HiveMind Fail%</th>
+<th>Δf</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>micro-5</td>
+<td>5</td>
+<td>50</td>
+<td>0%</td>
+<td>0%</td>
+<td>0%</td>
+<td>0</td>
+</tr>
+<tr>
+<td>micro-10</td>
+<td>10</td>
+<td>50</td>
+<td>0%</td>
+<td>100%</td>
+<td>10%</td>
+<td>-90</td>
+</tr>
+<tr>
+<td>micro-20</td>
+<td>20</td>
+<td>50</td>
+<td>0%</td>
+<td>100%</td>
+<td>10%</td>
+<td>-90</td>
+</tr>
+<tr>
+<td>micro-50</td>
+<td>50</td>
+<td>50</td>
+<td>0%</td>
+<td>100%</td>
+<td>0%</td>
+<td>-100</td>
+</tr>
+<tr>
+<td>replay-11</td>
+<td>11</td>
+<td>60</td>
+<td>8%+5%</td>
+<td>73%</td>
+<td>18%</td>
+<td>-55</td>
+</tr>
+<tr>
+<td>stress</td>
+<td>20</td>
+<td>20</td>
+<td>10%+5%</td>
+<td>100%</td>
+<td>10%</td>
+<td>-90</td>
+</tr>
+<tr>
+<td>lat.-spike</td>
+<td>10</td>
+<td>60</td>
+<td>0%</td>
+<td>100%</td>
+<td>0%</td>
+<td>-100</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_14">图表/公式说明<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
+<p><strong>Figure 3: 各场景失败率</strong></p>
+<ul>
+<li><strong>Direct模式</strong>（红色）：10+个agent时灾难性失败（73-100%失败率）</li>
+<li><strong>HiveMind模式</strong>（绿色）：将失败率降至0-18%</li>
+<li>5个agent时两种模式都成功（无竞争）</li>
+</ul>
+<p><strong>Figure 4: 扩展行为</strong></p>
+<ul>
+<li><strong>左图</strong>：成功完成的agent数量，Direct模式5个agent后急剧下降至0</li>
+<li><strong>右图</strong>：有效吞吐量（tasks/min），Direct模式在5+agent时完全崩溃</li>
+</ul>
+<h3 id="53">5.3 消融研究<a class="headerlink" href="#53" title="Permanent link">&para;</a></h3>
+<p><strong>Table 6: replay-11场景消融研究</strong></p>
+<table>
+<thead>
+<tr>
+<th>Configuration</th>
+<th>Alive</th>
+<th>Dead</th>
+<th>Fail%</th>
+<th>Finding</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Full HiveMind</td>
+<td>11</td>
+<td>0</td>
+<td>0.0%</td>
+<td>Baseline</td>
+</tr>
+<tr>
+<td>No admission</td>
+<td>11</td>
+<td>0</td>
+<td>0.0%</td>
+<td>Compensated</td>
+</tr>
+<tr>
+<td>No rate limit</td>
+<td>11</td>
+<td>0</td>
+<td>0.0%</td>
+<td>Compensated</td>
+</tr>
+<tr>
+<td>No backpressure</td>
+<td>10</td>
+<td>1</td>
+<td>9.1%</td>
+<td>Marginal</td>
+</tr>
+<tr>
+<td><strong>No retry</strong></td>
+<td><strong>4</strong></td>
+<td><strong>7</strong></td>
+<td><strong>63.6%</strong></td>
+<td><strong>Most critical</strong></td>
+</tr>
+<tr>
+<td>Adm. only</td>
+<td>2</td>
+<td>9</td>
+<td>81.8%</td>
+<td>Insufficient</td>
+</tr>
+</tbody>
+</table>
+<p><strong>关键发现</strong>：透明重试是最关键的原语，将失败率从63.6%降至接近0%。</p>
+<h3 id="55">5.5 浪费计算的成本<a class="headerlink" href="#55" title="Permanent link">&para;</a></h3>
+<p><strong>Table 8: 每日浪费Token成本（假设每天10次评估运行）</strong></p>
+<table>
+<thead>
+<tr>
+<th>Model</th>
+<th>Direct</th>
+<th>HiveMind</th>
+<th>Savings</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Claude Opus</td>
+<td>$2.40</td>
+<td>$0.12</td>
+<td>95%</td>
+</tr>
+<tr>
+<td>Claude Sonnet</td>
+<td>$0.36</td>
+<td>$0.02</td>
+<td>94%</td>
+</tr>
+</tbody>
+</table>
+<h3 id="takeaway_4">关键 takeaway<a class="headerlink" href="#takeaway_4" title="Permanent link">&para;</a></h3>
+<ul>
+<li>无协调agent在竞争下失败率72-100%，HiveMind降至0-18%</li>
+<li>透明重试是最关键的原语，但组合使用效果最佳</li>
+<li>HiveMind消除了48-100%的浪费计算，显著降低成本</li>
+</ul>
+<hr />
+<h2 id="section-6-related-work">Section 6: Related Work<a class="headerlink" href="#section-6-related-work" title="Permanent link">&para;</a></h2>
+<h3 id="_15">中文翻译<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h3>
+<p>相关工作涵盖LLM coding agent、agent编排框架和OS调度原理。</p>
+<p><strong>SWE-bench [12]</strong>：评估LLM解决真实GitHub问题的能力
+<strong>SWE-agent [13]</strong>：Agent-计算机接口实现自动化软件工程</p>
+<h3 id="takeaway_5">关键 takeaway<a class="headerlink" href="#takeaway_5" title="Permanent link">&para;</a></h3>
+<ul>
+<li>本文是第一篇系统研究LLM API资源调度问题的论文</li>
+</ul>
+<hr />
+<h2 id="section-7-tradeoffs-and-limitations">Section 7: Tradeoffs and Limitations<a class="headerlink" href="#section-7-tradeoffs-and-limitations" title="Permanent link">&para;</a></h2>
+<h3 id="71">7.1 配置复杂性<a class="headerlink" href="#71" title="Permanent link">&para;</a></h3>
+<p>HiveMind需要配置初始参数（Lmin、Lmax、Ltarget），默认值针对云API优化，对本地模型需要调整。</p>
+<h3 id="72">7.2 调度开销<a class="headerlink" href="#72" title="Permanent link">&para;</a></h3>
+<p>每个请求增加约3ms代理延迟，对于延迟不敏感的场景可接受。</p>
+<h3 id="73">7.3 局限性<a class="headerlink" href="#73" title="Permanent link">&para;</a></h3>
+<ul>
+<li>主要在模拟环境评估，真实生产环境可能有不同行为</li>
+<li>优先级队列需要预先定义agent优先级，自动优先级尚未实现</li>
+</ul>
+<hr />
+<h2 id="section-8-conclusion">Section 8: Conclusion<a class="headerlink" href="#section-8-conclusion" title="Permanent link">&para;</a></h2>
+<h3 id="_16">中文翻译<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h3>
+<p>HiveMind通过五个OS启发的调度原语（准入控制、速率限制跟踪、AIMD背压与熔断、Token预算管理、优先级队列）解决了多个LLM agent并行执行时的资源竞争问题。</p>
+<p>评估显示HiveMind将失败率从72-100%降至0-18%，消除48-100%的浪费计算，且对agent代码零修改。</p>
+<p>消融研究证明透明重试是最关键的原语，但原语组合使用效果最佳。</p>
+<hr />
+<h2 id="_17">复核建议<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h2>
+<ul>
+<li>当前文档基于论文前8页内容生成，第9-12页未完整覆盖</li>
+<li>建议抽样核对Table 7（真实世界验证结果）和Section 7.2（局限性）</li>
+<li>论文开源地址待补充</li>
+</ul>
+<hr />
+<h2 id="_18">与物流预测的关联<a class="headerlink" href="#_18" title="Permanent link">&para;</a></h2>
+<p>这篇论文对物流预测场景的启示：</p>
+<ol>
+<li><strong>多Agent调度问题</strong>：物流系统中多个预测/规划Agent同样面临资源竞争</li>
+<li><strong>透明代理架构</strong>：类似本文的HTTP代理，可为物流预测系统设计透明的数据代理层</li>
+<li><strong>OS调度原语的应用</strong>：背压、熔断、优先级队列等概念可直接迁移到物流调度场景</li>
+<li><strong>失败率与资源利用率</strong>：评估方法（失败率、浪费计算）对物流系统同样适用</li>
+</ol>
+<hr />
+<h2 id="_19">导航链<a class="headerlink" href="#_19" title="Permanent link">&para;</a></h2>
+<div class="paper-nav">
+
+<a href="../2604.21255v1/index.md" class="paper-nav-next">
+  <span class="paper-nav-label">下一篇</span>
+  <span class="paper-nav-title">🪞 When Agents Look the Same</span>
+</a>
+
+</div>
+
+<p><em><a href="../../tracks/agent/">← AI Agent 路线首页</a></em></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/GroupeChou/paper-learning-hub" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.expand", "navigation.indexes", "navigation.top", "navigation.tracking", "content.code.copy", "content.code.annotate", "content.tabs.link", "content.tooltips", "search.highlight", "search.share", "search.suggest"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mermaid@10/dist/mermaid.min.js"></script>
+      
+        <script src="../../javascripts/mermaid.js"></script>
+      
+    
+  </body>
+</html>

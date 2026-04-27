@@ -1,8 +1,37 @@
 # When Agents Look the Same: Quantifying Distillation-Induced Similarity in Tool-Use Behaviors
 
-- **机构**：Anthropic（作者来自中国科学技术大学、NJU、M-A-P）
-- **主题**：AI Agent
-- **发布日期**：2026-04-23
+<!-- 论文元数据卡片 -->
+<div class="paper-meta">
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">机构</span>
+    <span class="paper-meta-value org-Anthropic">Anthropic</span>
+  </div>
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">方向</span>
+    <span class="paper-meta-value">AI Agent 评测</span>
+  </div>
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">日期</span>
+    <span class="paper-meta-value">2026-04-23</span>
+  </div>
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">优先级</span>
+    <span class="paper-meta-value">⭐⭐⭐⭐</span>
+  </div>
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">阅读难度</span>
+    <span class="paper-meta-value">中</span>
+  </div>
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">预计精读时间</span>
+    <span class="paper-meta-value">25 分钟</span>
+  </div>
+</div>
+
+!!! info ""
+    <span class="paper-tag paper-tag-translated">✅ 已完成精读</span> · AI Agent 路线第 2 篇精读
+
+> **📍 学习路线**：🧠 AI Agent 路线 → 进阶核心 → 第 2 篇
 - **来源**：[Anthropic arXiv query](https://arxiv.org/abs/2604.21255v1)
 - **论文链接**：[https://arxiv.org/pdf/2604.21255v1](https://arxiv.org/pdf/2604.21255v1)
 - **状态**：已生成
