@@ -71,7 +71,12 @@ def build_paper_index(config: AppConfig, papers: list[CandidatePaper]) -> Path:
     lines = ["# 论文详情页", "", "这里汇总所有已经进入站点的论文页面。", ""]
     for paper in papers:
         if paper.zh_path:
-            lines.append(f"- [{paper.title}](../papers/{paper.paper_id}/index.md) | {paper.organization} | {paper.theme}")
+            # 判断是否为完整精读（非占位符）
+            zh_file = Path(paper.zh_path)
+            is_translated = zh_file.exists() and zh_file.stat().st_size > 500
+            tag = "`已精读`" if is_translated else "`待精读`"
+            icon = "✅ " if is_translated else ""
+            lines.append(f"- {icon}**[{paper.title}](../papers/{paper.paper_id}/index.md)** | {paper.organization} | {paper.theme} | {tag}")
     path = config.site.docs_dir / "papers" / "index.md"
     _write_text(path, "\n".join(lines))
     return path
@@ -158,11 +163,55 @@ extra_javascript:
 extra_css:
   - stylesheets/extra.css
 nav:
+  # ===== 总层（入口）=====
   - 首页: index.md
-  - 今日新增: guides/daily-guide.md
-  - 经典必读: guides/classics.md
-  - 专题索引: topics/index.md
-  - 论文详情页: papers/index.md
+  - 📖 学习总纲: roadmap.md
+  - 📅 今日更新: guides/daily-guide.md
+
+  # ===== 🤖 AI Agent 主线 =====
+  - 🤖 AI Agent 主线:
+    - agents/index.md
+    - 第一章 Agent 基础架构篇: agents/ch01-basics.md
+    - 第二章 规划与推理篇: agents/ch02-planning.md
+    - 第三章 工具使用与API篇: agents/ch03-tools.md
+    - 第四章 记忆与检索篇: agents/ch04-memory.md
+    - 第五章 多智能体协作篇: agents/ch05-multi-agent.md
+    - 第六章 具身智能篇: agents/ch06-embodied.md
+    - 第七章 Agent评估与安全篇: agents/ch07-safety.md
+    - 第八章 前沿探索篇: agents/ch08-frontier.md
+
+  # ===== 📈 时序预测主线 =====
+  - 📈 时序预测主线:
+    - time_series/index.md
+    - 第一章 基础理论篇: time_series/ch01-basics.md
+    - 第二章 经典方法篇: time_series/ch02-classics.md
+    - 第三章 Transformer革命篇: time_series/ch03-transformer.md
+    - 第四章 基础模型篇(Foundation Models): time_series/ch04-foundation.md
+    - 第五章 长序列预测篇: time_series/ch05-long-horizon.md
+    - 第六章 多变量时空篇: time_series/ch06-st-gnn.md
+    - 第七章 前沿探索篇: time_series/ch07-frontier.md
+
+  # ===== 交叉领域 =====
+  - 🔗 交叉融合:
+    - cross_domain/index.md
+    - 时序预测Agent: cross_domain/ts-agent.md
+    - Agent驱动分析: cross_domain/agent-analysis.md
+    - 自主决策系统: cross_domain/autonomous.md
+
+  # ===== 机构专题 =====
+  - 🏢 机构专题:
+    - organizations/index.md
+    - OpenAI 系列: organizations/openai.md
+    - Google DeepMind: organizations/deepmind.md
+    - Anthropic 系列: organizations/anthropic.md
+    - Meta 系列: organizations/meta.md
+    - Microsoft 系列: organizations/microsoft.md
+    - 国内大厂系列: organizations/domestic.md
+    - 学术机构: organizations/academic.md
+
+  # ===== 论文详情（动态生成）=====
+  - 论文详情:
+    - papers/index.md
 """
     _write_text(config.site.mkdocs_file, content)
     return config.site.mkdocs_file

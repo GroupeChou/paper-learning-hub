@@ -1,8 +1,37 @@
 # Spatial Atlas: Compute-Grounded Reasoning for Spatial-Aware Research Agent Benchmarks
 
-- **机构**：OpenAI（作者来自University of Minnesota）
-- **主题**：AI Agent
-- **发布日期**：2026-04-13
+<!-- 论文元数据卡片 -->
+<div class="paper-meta">
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">机构</span>
+    <span class="paper-meta-value org-OpenAI">OpenAI</span>
+  </div>
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">方向</span>
+    <span class="paper-meta-value">AI Agent 评测</span>
+  </div>
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">日期</span>
+    <span class="paper-meta-value">2026-04-13</span>
+  </div>
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">优先级</span>
+    <span class="paper-meta-value">⭐⭐⭐⭐</span>
+  </div>
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">阅读难度</span>
+    <span class="paper-meta-value">中</span>
+  </div>
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">预计精读时间</span>
+    <span class="paper-meta-value">30 分钟</span>
+  </div>
+</div>
+
+!!! info ""
+    <span class="paper-tag paper-tag-translated">✅ 已完成精读</span> · AI Agent 路线第 1 篇精读
+
+> **📍 学习路线**：🧠 AI Agent 路线 → 进阶核心 → 第 1 篇
 - **来源**：[OpenAI arXiv query](https://arxiv.org/abs/2604.12102v2)
 - **论文链接**：[https://arxiv.org/pdf/2604.12102v2](https://arxiv.org/pdf/2604.12102v2)
 - **状态**：已生成

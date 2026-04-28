@@ -40,12 +40,15 @@
 
 | 论文 | 机构 | 领域 | 核心价值 |
 |------|------|------|---------|
-| **[Spatial Atlas](papers/2604.12102v2/index.md)** | OpenAI | Agent 评测 | CGR范式：先算后想，减少LLM幻觉推理 |
-| **[Jailbreak Attacks on LRM](papers/2604.15725v1/index.md)** | OpenAI | Agent 安全 | 语义触发+心理框架攻击大推理模型 |
-| **[ATBench: Agent轨迹安全](papers/2604.14858v1/index.md)** | OpenAI | Agent 安全 | 多样化真实场景的Agent轨迹安全基准 |
-| **[When Agents Look the Same](papers/2604.21255v1/index.md)** | Anthropic | Agent 评测 | RPS+AGS双指标量化蒸馏诱导的行为同质化 |
+| ✅ **[Spatial Atlas](papers/2604.12102v2/index.md)** | OpenAI | Agent 评测 | CGR范式：先算后想，减少LLM幻觉推理 |
+| ✅ **[When Agents Look the Same](papers/2604.21255v1/index.md)** | Anthropic | Agent 评测 | RPS+AGS双指标量化蒸馏诱导的行为同质化 |
 
-### 待处理高优论文
+### 待处理论文
+
+| 论文 | 机构 | 领域 | 状态 |
+|------|------|------|------|
+| [Jailbreak Attacks on LRM](papers/2604.15725v1/index.md) | OpenAI | Agent 安全 | `待精读` |
+| [ATBench: Agent轨迹安全](papers/2604.14858v1/index.md) | OpenAI | Agent 安全 | `待精读` |
 
 | 论文 | 机构 | 优先级 | 状态 |
 |------|------|--------|------|

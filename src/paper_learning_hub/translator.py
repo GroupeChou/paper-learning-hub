@@ -71,19 +71,26 @@ class OpenAICompatibleTranslator(TranslatorBase):
 机构：{paper.organization}
 章节：{chunk_heading}
 
-请基于以下原文片段输出 Markdown，严格使用下面四个三级标题：
+## 任务要求
+请对以下原文片段进行**逐字逐句的中文全翻译和扩展解读**。
+
+### 核心要求
+1. **逐句翻译**：每一句话都翻译为中文，不遗漏任何句子
+2. **内容扩展**：在翻译基础上添加逻辑衔接说明、背景补充、作者意图分析
+3. **图片/表格完整保留**：遇到 Figure/Table 必须用 `![描述](assets/图片名)` 引用，并附详细中文图解
+4. **公式保留+解释**：LaTeX 公式原样保留，后附变量含义和直觉解释
+5. **输出量要求**：中文字数应 ≥ 原文字数的 1.5 倍
+
+### 输出格式（严格使用以下四个三级标题）
 ### 中文翻译
 ### 术语解释
 ### 图表/公式说明
 ### 关键 takeaway
 
-要求：
-1. 用中文输出，保留必要英文术语。
-2. 如果有无法确认的内容，请显式写“待复核”。
-3. 不要省略公式和关键术语。
-4. 结合解析备注处理图表与公式说明：{"；".join(parse_notes) if parse_notes else "无"}
+### 解析备注（辅助理解原文结构）
+{"；".join(parse_notes) if parse_notes else "无"}
 
-原文片段：
+## 原文片段（请逐句翻译，不要省略任何内容）
 {chunk_text}
 """.strip()
         response = requests.post(
@@ -133,12 +140,28 @@ def _paper_header(paper: CandidatePaper, parsed: ParsedDocument, assets_dir: Pat
 
     return f"""# {paper.title}
 
-- 机构：{paper.organization}
-- 主题：{paper.theme}
-- 发布日期：{paper.publish_date}
-- 来源：[{paper.source_name}]({paper.source_url})
-- 论文链接：[{paper.paper_url}]({paper.paper_url})
-- 状态：{'待复核' if parsed.notes else '已生成'}
+<!-- 论文元数据卡片 -->
+<div class="paper-meta">
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">机构</span>
+    <span class="paper-meta-value org-{paper.organization}">{paper.organization}</span>
+  </div>
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">方向</span>
+    <span class="paper-meta-value">{paper.theme}</span>
+  </div>
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">日期</span>
+    <span class="paper-meta-value">{paper.publish_date}</span>
+  </div>
+</div>
+
+!!! info ""
+    <span class="paper-tag paper-tag-translated">✅ 已完成精读</span>
+
+- **来源**：[{paper.source_name}]({paper.source_url})
+- **论文链接**：[{paper.paper_url}]({paper.paper_url})
+- **状态**：{'待复核' if parsed.notes else '已生成'}
 
 ## 摘要
 

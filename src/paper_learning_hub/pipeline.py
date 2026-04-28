@@ -6,7 +6,7 @@ from pathlib import Path
 from .config import load_config
 from .database import PaperDatabase
 from .discovery import discover_candidates
-from .downloader import download_paper
+from .downloader import download_paper, batch_download_papers
 from .git_ops import sync_git
 from .models import CandidatePaper, PipelineResult
 from .site_builder import build_site, run_mkdocs_build
@@ -54,18 +54,37 @@ class Pipeline:
 
     def _download_candidates(self, papers: list[CandidatePaper], result: PipelineResult) -> None:
         timestamp = now_iso(self.config.timezone)
-        for paper in papers:
-            if paper.raw_path:
-                continue
-            try:
-                raw_path = download_paper(paper, self.config.raw_dir)
-                self.db.set_status(paper.paper_id, "downloaded", timestamp, raw_path=str(raw_path))
+        # 过滤掉已有 PDF 的论文
+        to_download = [p for p in papers if not p.raw_path]
+        if not to_download:
+            logging.info("所有候选论文均已下载，跳过下载阶段")
+            return
+
+        logging.info("开始下载 %d 篇论文（已跳过 %d 篇已下载）", len(to_download), len(papers) - len(to_download))
+
+        # 使用增强版批量下载（内置限流 + 重试 + 流式写入）
+        download_results = batch_download_papers(
+            to_download,
+            self.config.raw_dir,
+            skip_existing=True,
+            on_progress=lambda idx, total, title, ok, err: logging.info(
+                "  [%d/%d] %s — %s", idx + 1, total, title, ("✅" if ok else f"❌ {err}")
+            ),
+        )
+
+        for paper in to_download:
+            path, error = download_results.get(paper.paper_id, (None, None))
+            if path and path.exists():
+                self.db.set_status(paper.paper_id, "downloaded", timestamp, raw_path=str(path))
                 result.downloaded += 1
-                logging.info("Downloaded %s", paper.title)
-            except Exception as exc:  # noqa: BLE001
+            else:
+                self.db.set_status(
+                    paper.paper_id, "failed_download", timestamp,
+                    failure_reason=error or "unknown error",
+                )
                 result.failed += 1
-                self.db.set_status(paper.paper_id, "failed_download", timestamp, failure_reason=str(exc))
-                logging.exception("Failed to download %s", paper.title)
+
+        logging.info("下载完成: %d 成功 / %d 失败", result.downloaded, result.failed)
 
     def _translate_top(self, papers: list[CandidatePaper], result: PipelineResult) -> None:
         timestamp = now_iso(self.config.timezone)
