@@ -5,7 +5,7 @@
 
 ## AI Agent
 
-- **HiveMind: OS-Inspired Scheduling for Concurrent LLM Agent Workloads** | OpenAI | 2026-04-18 | 优先级 980 | 状态 `translated` | [中文笔记](../papers/2604.17111v1/index.md)
+- **HiveMind: OS-Inspired Scheduling for Concurrent LLM Agent Workloads** | OpenAI | 2026-04-18 | 优先级 980 | 状态 `queued` | 待生成
   - 来源：[OpenAI arXiv query](https://arxiv.org/abs/2604.17111v1)
   - 论文：[https://arxiv.org/pdf/2604.17111v1](https://arxiv.org/pdf/2604.17111v1)
   - 摘要：When multiple LLM coding agents share a rate-limited API endpoint, they exhibit resource contention patterns analogous to unscheduled OS processes competing for CPU, memory, and I/O. In a motivating incident, 3 of 11 parallel agents died...

@@ -4,7 +4,7 @@
 
 ## AI Agent
 
-- [HiveMind: OS-Inspired Scheduling for Concurrent LLM Agent Workloads](../papers/2604.17111v1/index.md) | OpenAI | 2026-04-18 | 中文精读
+- [HiveMind: OS-Inspired Scheduling for Concurrent LLM Agent Workloads](https://arxiv.org/pdf/2604.17111v1) | OpenAI | 2026-04-18 | 原文
 - [When Agents Look the Same: Quantifying Distillation-Induced Similarity in Tool-Use Behaviors](../papers/2604.21255v1/index.md) | Anthropic | 2026-04-23 | 中文精读
 - [Spatial Atlas: Compute-Grounded Reasoning for Spatial-Aware Research Agent Benchmarks](../papers/2604.12102v2/index.md) | OpenAI | 2026-04-13 | 中文精读
 - [Reasoning-targeted Jailbreak Attacks on Large Reasoning Models via Semantic Triggers and Psychological Framing](../papers/2604.15725v1/index.md) | OpenAI | 2026-04-17 | 中文精读
