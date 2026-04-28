@@ -1,4 +1,4 @@
-site_name: 论文自动研学知识库
+site_name: 深度学习时序预测与智能体论文知识库
 site_url: https://groupechou.github.io/paper-learning-hub/
 repo_name: GroupeChou/paper-learning-hub
 theme:
@@ -9,6 +9,7 @@ theme:
     - navigation.expand
     - navigation.indexes
     - content.code.copy
+    - toc.integrate
 plugins:
   - search
 markdown_extensions:
@@ -25,9 +26,59 @@ extra_javascript:
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
 extra_css:
   - stylesheets/extra.css
+
 nav:
+  # ===== 总层（入口）=====
   - 首页: index.md
-  - 今日新增: guides/daily-guide.md
-  - 经典必读: guides/classics.md
-  - 专题索引: topics/index.md
-  - 论文详情页: papers/index.md
+  - 📖 学习总纲: roadmap.md
+  - 📅 今日更新: guides/daily-guide.md
+
+  # ===== 分层：两大主线 =====
+  - 🤖 AI Agent 主线:
+    - agents/index.md
+    - Agent 基础架构篇: agents/ch01-basics.md
+    - 规划与推理篇: agents/ch02-planning.md
+    - 工具使用与API篇: agents/ch03-tools.md
+    - 记忆与检索篇: agents/ch04-memory.md
+    - 多智能体协作篇: agents/ch05-multi-agent.md
+    - 具身智能篇: agents/ch06-embodied.md
+    - Agent评估与安全篇: agents/ch07-safety.md
+    - 前沿探索篇: agents/ch08-frontier.md
+
+  - 📈 时序预测主线:
+    - time_series/index.md
+    - 基础理论篇: time_series/ch01-basics.md
+    - 经典方法篇: time_series/ch02-classics.md
+    - Transformer革命篇: time_series/ch03-transformer.md
+    - 基础模型篇(Foundation Models): time_series/ch04-foundation.md
+    - 长序列预测篇: time_series/ch05-long-horizon.md
+    - 多变量时空篇: time_series/ch06-st-gnn.md
+    - 前沿探索篇: time_series/ch07-frontier.md
+
+  # ===== 交叉领域 =====
+  - 🔗 交叉融合:
+    - cross_domain/index.md
+    - 时序预测Agent: cross_domain/ts-agent.md
+    - Agent驱动分析: cross_domain/agent-analysis.md
+    - 自主决策系统: cross_domain/autonomous.md
+
+  # ===== 机构专题 =====
+  - 🏢 机构专题:
+    - organizations/index.md
+    - OpenAI 系列: organizations/openai.md
+    - Google DeepMind: organizations/deepmind.md
+    - Anthropic 系列: organizations/anthropic.md
+    - Meta 系列: organizations/meta.md
+    - Microsoft 系列: organizations/microsoft.md
+    - 国内大厂系列: organizations/domestic.md
+    - 学术机构: organizations/academic.md
+
+  # ===== 论文详情（所有已收录论文）=====
+  - 论文详情:
+    - papers/index.md
+    - Spatial Atlas: papers/2604.12102v2/index.md
+    - ATBench: papers/2604.14858v1/index.md
+    - Jailbreak Attacks: papers/2604.15725v1/index.md
+    - When Agents Look the Same: papers/2604.21255v1/index.md
+
+  - 关于: about.md

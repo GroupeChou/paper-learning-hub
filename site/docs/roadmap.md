@@ -1,106 +1,154 @@
----
-description: 阅读路线图 — 双路线完整路径与学习里程碑
+# 📖 学习总纲
+
+> **总入口** — 从这里规划你的完整学习路径，串联所有论文。
+
 ---
 
-# 🗺️ 阅读路线图
-
-## 双路线全景
+## 🗺️ 知识全景图
 
 ```mermaid
-flowchart TB
-    subgraph Agent路线["🧠 AI Agent 路线"]
-        A1["ReAct\n推理+行动基础"]
-        A2["Toolformer\n工具调用"]
-        A3["Generative Agents\n记忆/规划/反思"]
-        A4["HiveMind\nOS启发调度"]
-        A5["多Agent协作\n评测与安全"]
-        A6["Agent前沿进展\n蒸馏/同质化"]
+flowchart LR
+    subgraph 总["📖 学习总纲"]
+        R[本页]
     end
 
-    subgraph 预测路线["📈 时序预测路线"]
-        F1["Attention Is All You Need\nTransformer 基础"]
-        F2["Informer\n长序列预测"]
-        F3["Autoformer\n分解式建模"]
-        F4["PatchTST\n通道独立 Patch"]
-        F5["iTransformer\n反向 Transformer"]
-        F6["时空图/异构图\n前沿探索"]
+    subgraph agent["🤖 AI Agent 主线"]
+        A1[基础架构]
+        A2[规划推理]
+        A3[工具API]
+        A4[记忆检索]
+        A5[多Agent]
+        A6[具身智能]
+        A7[安全评测]
+        A8[前沿探索]
     end
 
-    A1 --> A2 --> A3 --> A4 --> A5 --> A6
-    F1 --> F2 --> F3 --> F4 --> F5 --> F6
+    subgraph ts["📈 时序预测主线"]
+        T1[基础理论]
+        T2[经典方法]
+        T3[Transformer革命]
+        T4[基础模型]
+        T5[长序列预测]
+        T6[多变量时空]
+        T7[前沿探索]
+    end
 
-    A6 --> F4
-    F5 --> A5
+    subgraph cross["🔗 交叉融合"]
+        C1[时序Agent]
+        C2[Agent分析]
+        C3[自主决策]
+    end
 
-    style Agent路线 fill:#ede7f6,stroke:#512da8
-    style 预测路线 fill:#e3f2fd,stroke:#1565c0
+    subgraph org["🏢 机构专题"]
+        O1[OpenAI/DeepMind]
+        O2[Anthropic/Meta]
+        O3[国内大厂]
+    end
+
+    R --> agent
+    R --> ts
+    R --> cross
+    R --> org
 ```
 
 ---
 
-## 里程碑
+## 🌱 阶段一：基础入门（0-3个月）
 
-### 🐣 入门阶段
-**目标**：理解 Agent 和时序预测的基础概念
+### AI Agent 方向 — 必读 5 篇
 
-- [x] ReAct / Attention Is All You Need（基础概念）
-- [x] Toolformer / Informer（核心机制）
-- [x] Generative Agents（架构全景）
+| 序号 | 论文 | 机构 | 核心主题 | 状态 | 入口 |
+|------|------|------|---------|------|------|
+| 1.1 | ReAct: 推理+行动协同 | Princeton / Google | CoT→ReAct 基础范式 | 📖 经典必读 | [agents/ch01-basics.md](agents/ch01-basics.md) |
+| 1.2 | Toolformer: 工具调用 | Meta | Agent调用外部API的原型 | 📖 经典必读 | [agents/ch03-tools.md](agents/ch03-tools.md) |
+| 1.3 | Generative Agents | Stanford / Google | 记忆/规划/反思三段式 | 📖 经典必读 | [agents/ch04-memory.md](agents/ch04-memory.md) |
+| 1.4 | Chain-of-Thought Prompting | Google / OpenAI | 思维链提示 | 📖 经典必读 | [agents/ch02-planning.md](agents/ch02-planning.md) |
+| 1.5 | Reflexion: 语言智能体 | MIT | 语言反馈强化学习 | 📖 经典必读 | [agents/ch01-basics.md](agents/ch01-basics.md) |
 
-**标志**：能用自己的话解释 CoT / Self-Attention 是什么
+### 时序预测方向 — 必读 5 篇
 
-### 🐥 进阶阶段
-**目标**：掌握主流模型的核心原理和适用场景
-
-- [ ] HiveMind（并发调度）
-- [ ] Autoformer（分解式）
-- [ ] PatchTST（高效长序列）
-
-**标志**：能判断一个新模型属于哪类，适合哪种数据
-
-### 🐔 实践阶段
-**目标**：将论文方法论落地到物流预测场景
-
-- [ ] 为顺丰某场景设计 Agent 调度方案
-- [ ] 用 PatchTST 验证某网点预测精度
-- [ ] 建立预测-规划 Agent A2A 联动方案
-
-**标志**：有可以直接上线的方案文档
-
-### 🦅 前沿阶段
-**目标**：跟踪最新进展，保持技术敏锐度
-
-- [ ] 每周精读 1-2 篇前沿论文
-- [ ] 将新方法论加入路线图
-- [ ] 在 [经典必读](guides/classics.md) 追加里程碑笔记
+| 序号 | 论文 | 机构 | 核心主题 | 状态 | 入口 |
+|------|------|------|---------|------|------|
+| 1.1 | Transformer (Attention Is All You Need) | Google | Attention机制基础 | 📖 经典必读 | [time_series/ch03-transformer.md](time_series/ch03-transformer.md) |
+| 1.2 | Informer | AAAI 2021 | 长时序高效Transformer | 🔄 待处理 | [time_series/ch03-transformer.md](time_series/ch03-transformer.md) |
+| 1.3 | Autoformer | NeurIPS 2021 | 自相关分解机制 | 🔄 待处理 | [time_series/ch03-transformer.md](time_series/ch03-transformer.md) |
+| 1.4 | PatchTST | ICLR 2022 | 分块时序Transformer | 🔄 待处理 | [time_series/ch05-long-horizon.md](time_series/ch05-long-horizon.md) |
+| 1.5 | iTransformer | NeurIPS 2024 | 反向Transformer(倒置) | 🔄 待处理 | [time_series/ch03-transformer.md](time_series/ch03-transformer.md) |
 
 ---
 
-## 学习顺序建议
+## 🚀 阶段二：进阶提升（3-6个月）
 
-### 如果你时间有限（先学这个）
+### AI Agent 进阶核心
 
-```
-AI Agent: HiveMind → ReAct 入门 → Agent 评测基础
-时序预测: Informer → Attention 基础 → PatchTST
-```
+| 专题方向 | 代表论文数 | 关键论文 |
+|---------|-----------|---------|
+| 规划与推理 | 3+ | Tree of Thoughts, Graph of Thoughts, Plan-and-Solve |
+| 工具使用与API | 3+ | Function Calling, Gorilla, ToolBench |
+| 记忆与检索 | 2+ | MemoryBank, RET-LLM, Generative Agents |
+| 多智能体协作 | 3+ | CAMEL, AutoGen, ChatDev, MetaGPT |
 
-### 如果你想系统建立知识体系
+详细见：[AI Agent 主线 → 进阶章节](agents/index.md)
 
-```
-AI Agent: 入门三篇 → HiveMind → Agent 调度 → Agent 安全 → 前沿
-时序预测: Attention/Informer → Autoformer → PatchTST/iTransformer → 时空图
-```
+### 时序预测进阶核心
+
+| 专题方向 | 代表论文数 | 关键论文 |
+|---------|-----------|---------|
+| 基础模型(Foundation Models) | 4+ | Time-LLM, Chronos, Moirai, TimesFM, Lag-Llama |
+| 长序列预测优化 | 3+ | LogTrans, Reformer, BigST |
+| 多变量时空建模 | 3+ | MTGNN, GTS, STGNN综述 |
+
+详细见：[时序预测主线 → 进阶章节](time_series/index.md)
 
 ---
 
-## 本周推荐学习计划
+## 🏆 阶段三：专家研究（6-12个月）
 
-| 天 | AI Agent | 时序预测 |
-|----|---------|---------|
-| Day 1 | ReAct 入门 | Attention Is All You Need |
-| Day 2 | HiveMind 精读 | Informer 精读 |
-| Day 3 | When Agents Look the Same | PatchTST 论文 |
-| Day 4 | Spatial Atlas | iTransformer 论文 |
-| Day 5 | 经典必读补充笔记 | 经典必读补充笔记 |
-| Day 6-7 | 本周论文回顾 + 路线更新 | 本周论文回顾 + 路线更新 |
+### 前沿研究方向
+
+| 方向 | 核心问题 | 相关论文 |
+|------|---------|---------|
+| 时序基础模型 | LLM如何做时序预测？ | Time-LLM, Chronos, TimesFM, Moirai |
+| 自主Agent | Agent如何自主决策？ | AutoGPT, Generative Agents, Voyager |
+| 交叉融合 | 时序×Agent的边界在哪？ | [交叉融合领域](cross_domain/index.md) |
+| Agent安全 | 如何保证Agent安全可控？ | SWE-agent, ATBench, Owner-Harm |
+
+详细见：[前沿探索篇](agents/ch08-frontier.md) · [前沿探索篇](time_series/ch07-frontier.md)
+
+---
+
+## 📊 当前进度总览
+
+### 按主线统计
+
+| 主线 | 已精读 | 待处理 | 完成率 |
+|------|--------|--------|--------|
+| 🤖 **AI Agent** | 4 篇 | 24 篇 | 14% |
+| 📈 **时序预测** | 0 篇 | 4 篇 | 0% |
+| 🔗 **交叉领域** | 0 篇 | 0 篇 | - |
+| **合计** | **4** | **28** | **12.5%** |
+
+### 按机构统计（已收录）
+
+| 机构 | 收录数 | 已精读 | 最新论文日期 |
+|------|--------|--------|-------------|
+| **OpenAI** | 7 | 3 | 2026-04-18 |
+| **DeepSeek** | 5 | 0 | 2026-04-23 |
+| **阿里通义** | 4 | 0 | 2026-04-21 |
+| **MiniMax** | 4 | 0 | 2026-04-23 |
+| **Meta FAIR** | 4 | 0 | 2026-04-23 |
+| **Microsoft** | 2 | 0 | 2026-04-20 |
+| **智谱 GLM** | 3 | 0 | 2026-04-24 |
+| **Anthropic** | 3 | 1 | 2026-04-22 |
+| **学术机构** | 1 | 0 | - |
+
+> 详细按机构浏览见 [机构专题](organizations/index.md)
+
+---
+
+## 🎯 推荐行动
+
+1. **新用户**：从 [AI Agent 基础架构篇](agents/ch01-basics.md) 或 [时序基础理论篇](time_series/ch01-basics.md) 开始
+2. **每日跟进**：查看 [今日更新](guides/daily-guide.md)，了解最新发现的论文
+3. **系统学习**：按照本总纲的阶段划分，逐章推进
+4. **深度阅读**：每篇论文都有中文精读笔记，点击进入详情页
