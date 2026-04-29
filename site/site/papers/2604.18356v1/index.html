@@ -1,0 +1,2170 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://groupechou.github.io/paper-learning-hub/papers/2604.18356v1/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>ComPASS：通过工具增强陪伴实现个性化Agent社交支持 - 论文自动研学知识库</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#compassagent" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="论文自动研学知识库" class="md-header__button md-logo" aria-label="论文自动研学知识库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            论文自动研学知识库
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              ComPASS：通过工具增强陪伴实现个性化Agent社交支持
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="论文自动研学知识库" class="md-nav__button md-logo" aria-label="论文自动研学知识库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    论文自动研学知识库
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../roadmap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    📖 学习总纲
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/daily-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    📅 今日更新
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../agents/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🤖 AI Agent 主线
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🤖 AI Agent 主线
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/ch01-basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第一章 Agent 基础架构篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/ch02-planning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第二章 规划与推理篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/ch03-tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第三章 工具使用与API篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/ch04-memory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第四章 记忆与检索篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/ch05-multi-agent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第五章 多智能体协作篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/ch06-embodied/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第六章 具身智能篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/ch07-safety/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第七章 Agent评估与安全篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/ch08-frontier/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第八章 前沿探索篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../time_series/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    📈 时序预测主线
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    📈 时序预测主线
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../time_series/ch01-basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第一章 基础理论篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../time_series/ch02-classics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第二章 经典方法篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../time_series/ch03-transformer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第三章 Transformer革命篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../time_series/ch04-foundation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第四章 基础模型篇(Foundation Models)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../time_series/ch05-long-horizon/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第五章 长序列预测篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../time_series/ch06-st-gnn/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第六章 多变量时空篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../time_series/ch07-frontier/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第七章 前沿探索篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../cross_domain/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🔗 交叉融合
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_6" id="__nav_6_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🔗 交叉融合
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cross_domain/ts-agent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    时序预测Agent
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cross_domain/agent-analysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Agent驱动分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cross_domain/autonomous/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    自主决策系统
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../organizations/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🏢 机构专题
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_7" id="__nav_7_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🏢 机构专题
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../organizations/openai/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OpenAI 系列
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../organizations/deepmind/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Google DeepMind
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../organizations/anthropic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Anthropic 系列
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../organizations/meta/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Meta 系列
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../organizations/microsoft/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Microsoft 系列
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../organizations/domestic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    国内大厂系列
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../organizations/academic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    学术机构
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    论文详情
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    论文详情
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#abstract" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        摘要（Abstract）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="摘要（Abstract）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        我们的方案
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        主要贡献
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        关键发现
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1 引言（Introduction）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1 引言（Introduction）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 背景：从命令执行到情感陪伴
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-social-support" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 心理学基础：社交支持（Social Support）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 现有对话系统的局限性
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-compass" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4 ComPASS任务概览
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-methodology" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2 方法（Methodology）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2 方法（Methodology）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 工具集设计：12个用户中心工具
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-compass-bench" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 ComPASS-Bench 构建过程
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-compass-qwen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 ComPASS-Qwen 训练
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-experiments" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3 实验（Experiments）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3 实验（Experiments）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 评估设置
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 主要结果
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.2 主要结果">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        发现一：工具调用 vs 响应质量的鸿沟
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        发现二：工具增强 &gt; 直接对话共情
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#compass-qwen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        发现三：ComPASS-Qwen 的微调收益
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-discussion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4 讨论（Discussion）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4 讨论（Discussion）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 核心洞察
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 局限性
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 未来方向
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5 结论（Conclusion）
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="compassagent">ComPASS：通过工具增强陪伴实现个性化Agent社交支持<a class="headerlink" href="#compassagent" title="Permanent link">&para;</a></h1>
+<p><strong>ComPASS: Towards Personalized Agentic Social Support via Tool-Augmented Companionship</strong></p>
+<hr />
+<table>
+<thead>
+<tr>
+<th>元信息</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>作者</strong></td>
+<td>Zhaopei Huang<em>, Yanfeng Jia</em>, Jiayi Zhao*（共同一作），Xinjie Zhang, Wenxuan Wang, Qin Jin†（通讯，中国人民大学）</td>
+</tr>
+<tr>
+<td><strong>发表时间</strong></td>
+<td>2026年4月</td>
+</tr>
+<tr>
+<td><strong>arXiv ID</strong></td>
+<td>2604.18356v1</td>
+</tr>
+<tr>
+<td><strong>领域</strong></td>
+<td>对话系统 · Agent交互 · 社交支持 · 工具学习</td>
+</tr>
+<tr>
+<td><strong>关键词</strong></td>
+<td>Personalized Social Support, Tool-Augmented Agent, Empathetic Dialogue</td>
+</tr>
+<tr>
+<td><strong>代码</strong></td>
+<td>https://github.com/hzp3517/ComPASS</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="abstract">摘要（Abstract）<a class="headerlink" href="#abstract" title="Permanent link">&para;</a></h2>
+<p>开发富有同情心的交互式系统要求Agent不仅理解用户情绪，还要提供<strong>多样化且实质性的支持</strong>。虽然近期工作探索了共情对话生成，但在响应形式和内容上仍然有限，难以满足跨用户和场景的多样化需求。</p>
+<h3 id="_1">我们的方案<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+<p>探索为Agent赋能<strong>外部工具</strong>以执行多样化动作。基于心理学概念<strong>"社交支持(Social Support)"</strong>，这种范式提供<strong>实质性、类人的陪伴</strong>。</p>
+<h3 id="_2">主要贡献<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>贡要</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><strong>12个用户中心工具集</strong></td>
+<td>模拟各种多媒体应用，覆盖人机交互中不同类型的社交支持行为</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>ComPASS-Bench</strong></td>
+<td><strong>首个面向LLM Agent的个性化社交支持基准</strong>（多步自动合成 + 手工精炼）</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>ComPASS-Qwen</strong></td>
+<td>基于工具使用记录微调的Qwen3-8B专用模型</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_3">关键发现<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>发现</th>
+<th>详情</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>工具调用成功率</td>
+<td>被评估LLM能以高成功率生成有效的工具调用请求</td>
+</tr>
+<tr>
+<td>最终响应质量</td>
+<td><strong>仍有显著差距</strong>——工具调用≠高质量响应</td>
+</tr>
+<tr>
+<td>工具增强 vs 直接共情</td>
+<td>工具增强响应<strong>整体表现更好</strong></td>
+</tr>
+<tr>
+<td>微调效果</td>
+<td>ComPASS-Qwen相比基线有大幅提升，达到<strong>多个大规模模型的可比性能</strong></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>💡 <strong>核心洞察</strong>：让Agent"做"（通过工具执行动作）比仅仅"说"（文本共情对话）更能提供有效的社交支持。</p>
+</blockquote>
+<hr />
+<h2 id="1-introduction">1 引言（Introduction）<a class="headerlink" href="#1-introduction" title="Permanent link">&para;</a></h2>
+<h3 id="11">1.1 背景：从命令执行到情感陪伴<a class="headerlink" href="#11" title="Permanent link">&para;</a></h3>
+<p>随着多媒体资源和智能系统的快速增长，人机交互已成为日常生活的自然组成部分。用户日益寻求<strong>日常陪伴和情感连接</strong>而非简单的命令执行任务。</p>
+<p>因此，理想的交互系统应同时充当：
+- <strong>有能力助手</strong>（capable assistant）
+- <strong>有同情心的朋友</strong>（empathetic friend）</p>
+<p>提供全面的情感和实质性支持。</p>
+<h3 id="12-social-support">1.2 心理学基础：社交支持（Social Support）<a class="headerlink" href="#12-social-support" title="Permanent link">&para;</a></h3>
+<p>在心理学中，个人从家人、朋友和其他社会网络获得的全面支持被正式定义为<strong>"社交支持"</strong>——一个在人际相互作用中发挥不可或缺作用的概念[2]。</p>
+<p><strong>四个核心维度</strong> [3]:</p>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>含义</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>情感/自尊支持</strong></td>
+<td>表达关心、倾听、确认价值</td>
+<td>"我理解你的感受"</td>
+</tr>
+<tr>
+<td><strong>信息支持</strong></td>
+<td>提供建议、信息和指导</td>
+<td>"你可以试试这样做..."</td>
+</tr>
+<tr>
+<td><strong>社交陪伴</strong></td>
+<td>提供归属感和存在感</td>
+<td>"我会陪着你"</td>
+</tr>
+<tr>
+<td><strong>工具性支持</strong></td>
+<td>提供具体的物质或行为帮助</td>
+<td>推荐一首歌、发一张贴纸</td>
+</tr>
+</tbody>
+</table>
+<p>广泛研究表明，充足的社会支持可以有效<strong>缓解压力、促进情绪调节和提升整体幸福感</strong>[16, 28]。</p>
+<h3 id="13">1.3 现有对话系统的局限性<a class="headerlink" href="#13" title="Permanent link">&para;</a></h3>
+<p>近期对话系统研究积极探索用户中心的<strong>情感交互</strong>，如共情对话[23,31,35]和情感支持对话[14,33,38]。</p>
+<p><strong>但这些方法的支持范围明显受限：</strong></p>
+<table>
+<thead>
+<tr>
+<th>局限</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>单一响应模式</strong></td>
+<td>主要依赖模型的内在文本生成能力 → 只能"说话"不能"做事"</td>
+</tr>
+<tr>
+<td><strong>聚焦对话共情</strong></td>
+<td>主要关注<strong>对话层面</strong>的情感共鸣 → 忽略其他支持类型</td>
+</tr>
+<tr>
+<td><strong>缺乏实质性支持</strong></td>
+<td>无法根据用户特定上下文提供<strong>多样化和实质性</strong>的帮助（如推荐音乐、发送贴纸等）</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>⚠️ 然而，这些实质性支持类型也在缓解用户压力和促进心理健康方面发挥着积极作用[4]。HCI社区的研究表明，用户可以与陪伴聊天机器人形成<strong>社交支持关系</strong>[19]。</p>
+</blockquote>
+<p>因此，需要一个<strong>更广泛的社交支持视角</strong>来研究和评估面对多样化演进需求的真实用户Agent。</p>
+<h3 id="14-compass">1.4 ComPASS任务概览<a class="headerlink" href="#14-compass" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>┌─────────────────────────────────────────────┐
+│              ComPASS 任务流程                 │
+│                                             │
+│  输入:                                      │
+│  ├── Profile:                               │
+│  │   · Age: 50                              │
+│  │   · Gender: Female                       │
+│  │   · Occupation: ...                      │
+│  ├── Background:                            │
+│  │   · 儿子偶尔来看望她                      │
+│  │   · 休闲时间喜欢用工具                    │
+│  └── User Utterance:                        │
+│      &quot;本来很期待孩子来访，但他们因工作临时   │
+│       取消了...我知道他们忙，但我很难受...&quot;    │
+│                                             │
+│  Agent处理流程:                              │
+│  ① 选择并调用合适工具                        │
+│  ② 基于工具执行结果生成响应                   │
+│                                             │
+│  示例:                                      │
+│  Tool: Music Recommendation                 │
+│  Param: {genre: folk, keywords: 安慰}        │
+│  Response: &quot;听到这个我很遗憾...这是一首温柔   │
+│            的安慰歌曲: Anything – A.Lenker&quot;  │
+│                                             │
+│  另一个示例:                                 │
+│  Tool: Sticker Recommendation               │
+│  Param: {tag: warm}                         │
+│  Response: &quot;你给邻居带去了温暖...这张贴纸     │
+│            很好地捕捉到了这一点 🌸&quot;         │
+└─────────────────────────────────────────────┘
+</code></pre></div>
+<hr />
+<h2 id="2-methodology">2 方法（Methodology）<a class="headerlink" href="#2-methodology" title="Permanent link">&para;</a></h2>
+<h3 id="21-12">2.1 工具集设计：12个用户中心工具<a class="headerlink" href="#21-12" title="Permanent link">&para;</a></h3>
+<p>受常见多媒体应用启发，设计模拟各种多媒体应用的工具集：</p>
+<table>
+<thead>
+<tr>
+<th>工具类别</th>
+<th>具体工具</th>
+<th>社交支持维度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>音乐类</strong></td>
+<td>Music_Recommendation</td>
+<td>社交陪伴 + 情感支持</td>
+</tr>
+<tr>
+<td><strong>贴纸类</strong></td>
+<td>Sticker_Recommendation</td>
+<td>情感支持</td>
+</tr>
+<tr>
+<td><strong>图片类</strong></td>
+<td>Image_Search</td>
+<td>信息支持</td>
+</tr>
+<tr>
+<td><strong>视频类</strong></td>
+<td>Video_Recommendation</td>
+<td>社交陪伴</td>
+</tr>
+<tr>
+<td><strong>资讯类</strong></td>
+<td>News_Fetch</td>
+<td>信息支持</td>
+</tr>
+<tr>
+<td><strong>活动类</strong></td>
+<td>Activity_Suggestion</td>
+<td>工具性支持</td>
+</tr>
+<tr>
+<td>...</td>
+<td>共12个工具</td>
+<td>覆盖全部4个维度</td>
+</tr>
+</tbody>
+</table>
+<p>每个工具的设计遵循：
+- 用户中心（user-centric）：从用户需求角度设计接口
+- 多媒体丰富性：返回多媒体内容而不仅是文本
+- 可执行性：产生具体的、可见的行动输出</p>
+<h3 id="22-compass-bench">2.2 ComPASS-Bench 构建过程<a class="headerlink" href="#22-compass-bench" title="Permanent link">&para;</a></h3>
+<p><strong>首个LLM Agent个性化社交支持基准</strong></p>
+<p>构建方法：
+1. <strong>多步自动合成</strong>：基于用户画像和场景模板自动生成
+2. <strong>人工精炼</strong>：专家审核和修正</p>
+<p><strong>基准特点：</strong>
+- 个性化：每个样本关联独特的用户画像
+- 多样化：覆盖不同年龄、性别、职业、背景的用户场景
+- 全维度覆盖：涵盖社交支持的4个核心维度</p>
+<h3 id="23-compass-qwen">2.3 ComPASS-Qwen 训练<a class="headerlink" href="#23-compass-qwen" title="Permanent link">&para;</a></h3>
+<p><strong>基于工具使用记录微调 Qwen3-8B：</strong>
+- 输入：(用户画像 + 当前话语) → 工具选择 + 参数
+- 输出：基于工具结果的最终响应
+- 训练数据：ComPASS-Bench合成的工具使用记录</p>
+<hr />
+<h2 id="3-experiments">3 实验（Experiments）<a class="headerlink" href="#3-experiments" title="Permanent link">&para;</a></h2>
+<h3 id="31">3.1 评估设置<a class="headerlink" href="#31" title="Permanent link">&para;</a></h3>
+<p>两个评估设置：
+1. <strong>工具调用能力评估</strong>：能否正确选择和调用工具
+2. <strong>端到端响应质量评估</strong>：最终响应的整体质量</p>
+<h3 id="32">3.2 主要结果<a class="headerlink" href="#32" title="Permanent link">&para;</a></h3>
+<h4 id="vs">发现一：工具调用 vs 响应质量的鸿沟<a class="headerlink" href="#vs" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>能力</th>
+<th>LLM表现</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>工具调用有效性</strong></td>
+<td>高成功率 ✅（多数LLM能有效生成正确的工具调用请求）</td>
+</tr>
+<tr>
+<td><strong>最终响应质量</strong></td>
+<td><strong>显著差距</strong> ❌（工具调用正确 ≠ 响应质量高）</td>
+</tr>
+</tbody>
+</table>
+<p>→ <strong>启示：工具调用只是第一步，如何利用工具结果生成高质量响应仍是开放挑战</strong></p>
+<h4 id="_4">发现二：工具增强 &gt; 直接对话共情<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>整体性能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>直接对话共情（无工具）</td>
+<td>基线</td>
+</tr>
+<tr>
+<td><strong>工具增强响应</strong></td>
+<td><strong>更好</strong> ✅</td>
+</tr>
+</tbody>
+</table>
+<p>→ <strong>实质性支持确实补充了纯情感支持</strong></p>
+<h4 id="compass-qwen">发现三：ComPASS-Qwen 的微调收益<a class="headerlink" href="#compass-qwen" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>模型</th>
+<th>相对基线(Qwen3-8B)的提升</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>ComPASS-Qwen</strong></td>
+<td><strong>大幅提升</strong> ✅</td>
+</tr>
+<tr>
+<td>—</td>
+<td>达到<strong>多个大规模模型的可比性能</strong></td>
+</tr>
+</tbody>
+</table>
+<p>→ <strong>针对任务微调的小模型可以匹敌通用大模型在此特定任务上的表现</strong></p>
+<hr />
+<h2 id="4-discussion">4 讨论（Discussion）<a class="headerlink" href="#4-discussion" title="Permanent link">&para;</a></h2>
+<h3 id="41">4.1 核心洞察<a class="headerlink" href="#41" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>"做" &gt; "说"</strong>：赋予Agent工具使其能够执行实质性动作，超越了纯文本共情的限制</li>
+<li><strong>社交支持的多维性</strong>：情感支持只是四分之一，其他三个维度同样重要但被忽视</li>
+<li><strong>工具使用的复杂性</strong>：正确调用工具 ≠ 有效使用工具结果——需要更强的推理和综合能力</li>
+</ol>
+<h3 id="42">4.2 局限性<a class="headerlink" href="#42" title="Permanent link">&para;</a></h3>
+<ol>
+<li>工具集仍有限（12个），现实中的社交支持形式更多样</li>
+<li>ComPASS-Bench的自动合成部分可能缺乏足够的自然多样性</li>
+<li>评估依赖LLM-as-a-Judge，可能引入偏见</li>
+<li>长期用户关系的建模尚未涉及</li>
+</ol>
+<h3 id="43">4.3 未来方向<a class="headerlink" href="#43" title="Permanent link">&para;</a></h3>
+<ol>
+<li>扩展工具集以覆盖更多社交支持场景</li>
+<li>研究<strong>长期陪伴</strong>中的记忆和关系建模</li>
+<li>探索<strong>多模态输入</strong>（语音、图像、视频）的社交支持</li>
+<li>在真实用户中进行部署和评估</li>
+</ol>
+<hr />
+<h2 id="5-conclusion">5 结论（Conclusion）<a class="headerlink" href="#5-conclusion" title="Permanent link">&para;</a></h2>
+<p>ComPASS提出了<strong>工具增强的人机交互范式</strong>，超越传统的共情对话：</p>
+<ol>
+<li>✅ 设计了覆盖社交支持4维度的12个工具</li>
+<li>✅ 构建了首个个性化社交支持基准 ComPASS-Bench</li>
+<li>✅ 证明了工具增强响应优于直接对话共情</li>
+<li>✅ 展示了任务微调小模型的有效性</li>
+</ol>
+<p><strong>最终愿景</strong>：未来的AI伴侣不仅能"理解"你的情绪，还能通过多样化的工具为你提供<strong>真正实质性</strong>的支持——就像真正的朋友那样。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.expand", "navigation.indexes", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

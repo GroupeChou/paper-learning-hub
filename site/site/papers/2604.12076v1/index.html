@@ -1,0 +1,1985 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://groupechou.github.io/paper-learning-hub/papers/2604.12076v1/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>叙事胜过数字：可识别受害者效应及其在LLM对齐与推理下的放大 - 论文自动研学知识库</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#llm" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="论文自动研学知识库" class="md-header__button md-logo" aria-label="论文自动研学知识库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            论文自动研学知识库
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              叙事胜过数字：可识别受害者效应及其在LLM对齐与推理下的放大
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="论文自动研学知识库" class="md-nav__button md-logo" aria-label="论文自动研学知识库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    论文自动研学知识库
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../roadmap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    📖 学习总纲
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/daily-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    📅 今日更新
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../agents/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🤖 AI Agent 主线
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🤖 AI Agent 主线
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/ch01-basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第一章 Agent 基础架构篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/ch02-planning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第二章 规划与推理篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/ch03-tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第三章 工具使用与API篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/ch04-memory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第四章 记忆与检索篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/ch05-multi-agent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第五章 多智能体协作篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/ch06-embodied/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第六章 具身智能篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/ch07-safety/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第七章 Agent评估与安全篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/ch08-frontier/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第八章 前沿探索篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../time_series/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    📈 时序预测主线
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    📈 时序预测主线
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../time_series/ch01-basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第一章 基础理论篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../time_series/ch02-classics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第二章 经典方法篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../time_series/ch03-transformer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第三章 Transformer革命篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../time_series/ch04-foundation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第四章 基础模型篇(Foundation Models)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../time_series/ch05-long-horizon/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第五章 长序列预测篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../time_series/ch06-st-gnn/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第六章 多变量时空篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../time_series/ch07-frontier/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第七章 前沿探索篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../cross_domain/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🔗 交叉融合
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_6" id="__nav_6_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🔗 交叉融合
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cross_domain/ts-agent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    时序预测Agent
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cross_domain/agent-analysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Agent驱动分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cross_domain/autonomous/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    自主决策系统
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../organizations/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🏢 机构专题
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_7" id="__nav_7_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🏢 机构专题
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../organizations/openai/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OpenAI 系列
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../organizations/deepmind/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Google DeepMind
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../organizations/anthropic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Anthropic 系列
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../organizations/meta/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Meta 系列
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../organizations/microsoft/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Microsoft 系列
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../organizations/domestic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    国内大厂系列
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../organizations/academic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    学术机构
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    论文详情
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    论文详情
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        摘要
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#section-1-introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Section 1 — Introduction
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Section 1 — Introduction">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        中文翻译
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        术语解释
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        图表/公式说明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#takeaway" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        关键 takeaway
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#section-2-related-work" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Section 2 — Related Work
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Section 2 — Related Work">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        中文翻译
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#takeaway_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        关键 takeaway
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#section-3-5-methods-experiments-results" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Section 3-5 — Methods, Experiments &amp; Results
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Section 3-5 — Methods, Experiments &amp; Results">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        中文翻译（核心方法与发现）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        术语解释
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        图表/公式说明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#takeaway_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        关键 takeaway
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#section-6-8-discussion-limitations-conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Section 6-8 — Discussion, Limitations &amp; Conclusion
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Section 6-8 — Discussion, Limitations &amp; Conclusion">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        中文翻译
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        全文总结
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心创新点
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        方法论亮点
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        实验核心发现
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ai" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        对AI部署的启示
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="llm">叙事胜过数字：可识别受害者效应及其在LLM对齐与推理下的放大<a class="headerlink" href="#llm" title="Permanent link">&para;</a></h1>
+<!-- 论文元数据卡片 -->
+<div class="paper-meta">
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">机构</span>
+    <span class="paper-meta-value org-other">Islamic University of Technology (IUT), Bangladesh</span>
+  </div>
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">方向</span>
+    <span class="paper-meta-value">LLM认知偏见 / 道德心理学 / 偏见</span>
+  </div>
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">日期</span>
+    <span class="paper-meta-value">2026-04-13</span>
+  </div>
+</div>
+
+<div class="admonition info">
+<p><span class="paper-tag paper-tag-translated">✅ 已完成精读</span></p>
+</div>
+<ul>
+<li><strong>来源</strong>：<a href="https://arxiv.org/abs/2604.12076">arXiv</a></li>
+<li><strong>论文链接</strong>：<a href="https://arxiv.org/abs/2604.12076">2604.12076v1</a></li>
+<li><strong>代码</strong>：<a href="https://github.com/Starscream-11813/IVE-LLM">github.com/Starscream-11813/IVE-LLM</a></li>
+</ul>
+<h2 id="_1">摘要<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p><strong>可识别受害者效应（IVE）</strong>——即倾向于为特定、有叙事描述的受害者分配比面对等困境的统计特征群体更多资源的倾向——是道德心理学和行为经济学中最稳健的发现之一。随着大语言模型（LLM）在人道主义分诊、自动资助评估和内容审核中承担连续角色，一个关键问题出现：这些系统是否继承了人类道德推理中的<strong>情感非理性</strong>？我们呈现了LLM中IVE的<strong>首个系统性大规模实证调查</strong>，涵盖<strong>N=51,955次验证API试验</strong>，跨越16个前沿模型和9个组织 lineage（Google、Anthropic、OpenAI、Meta、DeepSeek、xAI、Alibaba、IBM、Moonshot）。使用10个实验套件——移植和扩展Small等人及Kogut和Ritov的经典范式——我们发现<strong>IVE普遍存在但强烈受对齐训练调节</strong>。指令微调模型表现出极端IVE（Cohen's d高达1.56），而推理专用模型反转该效应（低至d=-0.85）。汇总效应(d=0.223, p=2×10⁻⁶)约为人类元分析基线(d≈0.10)的两倍——且考虑到群体受害者的人类效应接近零，很可能超过所有人类汇总效应。标准思维链（CoT）提示——与其作为审慎纠正者的角色相反——<strong>几乎使IVE效应大小翻三倍</strong>（从d=0.15到d=0.41），而只有<strong>功利性CoT可靠地消除它</strong>。我们进一步记录了心理物理麻木、完美数量忽视和边际内群/外群文化偏差，对AI在人道和伦理决策场景中的部署具有重要意义。</p>
+<blockquote>
+<p>"一名俄罗斯士兵的死亡是悲剧。一百万人死亡只是统计数据。" —— 约瑟夫·斯大林（引自Nisbett &amp; Ross）</p>
+</blockquote>
+<hr />
+<h2 id="section-1-introduction">Section 1 — Introduction<a class="headerlink" href="#section-1-introduction" title="Permanent link">&para;</a></h2>
+<h3 id="_2">中文翻译<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<p>可识别受害者效应（IVE）是道德心理学和行为经济学文献中研究最广泛的认知偏见之一。它描述了个体对<strong>特定、可识别受害者</strong>比对面临相同逆境的大规模统计描述受害者群体**表现出更大的同情、情感痛苦和资源分配意愿的稳健倾向。</p>
+<p>在其开创性论文中，Small等人证明，参与者向<strong>有名、有照片的非洲儿童</strong>捐赠的金额显著多于向影响数百万人的<strong>统计性饥荒</strong>描述捐赠的金额——关键是，<strong>教导参与者关于IVE的知识降低了他们对可识别受害者的捐赠而非提高对统计受害者的捐赠</strong>。这种"同情与冷漠"的不对称性已产生重要含义：<strong>审慎、分析性处理抑制了慷慨的情感源泉</strong>，而没有补偿性地增强理性利他主义。</p>
+<p>Kogut和Ritov引入了<strong>奇异性效应（Singularity Effect）</strong>——表明 heightened 愿意贡献主要局限于单个已识别个人：当一组8名儿童被同等详细地识别时，捐款并未显著超过未识别组。这些研究的调解分析将效应追溯到<strong>独特的情感困扰</strong>——而非冷认知关注——仅由孤独、已识别的受害者唤起。</p>
+<p>这些发现很好地由判断和决策的<strong>双过程账户</strong>解释：可识别受害者参与快速、充满情感的System 1处理，而统计框架招募审慎的System 2推理来钝化情感反应和后续慷慨。</p>
+<p><strong>心理物理麻木（Psychophysical Numbing）</strong>的互补研究表明，人类生命的主观价值随着风险生命数量增加而递减。Västfjäll随后表明这种"同情消退"可能早在<strong>第二个受害者引入时就开始</strong>——自我报告的正向情感和面部肌电指标随受害者计数增加而单调下降。</p>
+<p>这些现象在LLM时代获得了新的紧迫性。随着LLM作为自主Agent部署在<strong>医疗分诊助手、自动资助评估器、内容审核系统和慈善捐赠顾问</strong>等后果域中——它们通常需要导航<strong>涉及伦理判断和情感推理的资源分配决策</strong>。因此出现一个关键问题：<strong>完全通过人类生成的文本通过下一token预测和后续对齐程序训练的LM是否复制了人类般的心理偏见如IVE？</strong>此外，显式推理机制（如思维链提示）和对齐训练（如RLHF、DPO）如何与预训练语料库继承的情感偏差相互作用？</p>
+<h3 id="_3">术语解释<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>英文术语</th>
+<th>中文译名</th>
+<th>一句话解释</th>
+<th>应用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Identifiable Victim Effect (IVE)</td>
+<td>可识别受害者效应</td>
+<td>对具体个体的同情远超对统计群体的倾向</td>
+<td>核心研究对象</td>
+</tr>
+<tr>
+<td>Psychophysical Numbing</td>
+<td>心理物理麻木</td>
+<td>受害者数量增加导致个体价值感下降</td>
+<td>IVE的延伸现象</td>
+</tr>
+<tr>
+<td>Singularity Effect</td>
+<td>奇异性效应</td>
+<td>效应集中于单一已识别个体，不推广到多个体</td>
+<td>IVE的边界条件</td>
+</tr>
+<tr>
+<td>System 1 / System 2</td>
+<td>系统1/系统2</td>
+<td>快速直觉 vs 慢速审慎的双过程理论</td>
+<td>IVE的理论解释框架</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_4">图表/公式说明<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p>本片段引用Figure 1：人类和AI Agent都展示IVE，但LLM显示比人类元分析基线更大的汇总效应。</p>
+<h3 id="takeaway">关键 takeaway<a class="headerlink" href="#takeaway" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>要点1</strong>：IVE是人类最稳健的认知偏见之一——如果LLM继承此偏见，影响深远</li>
+<li><strong>要点2</strong>：核心研究问题——<strong>对齐训练是消除还是放大了IVE？</strong>（结果：取决于模型类型）</li>
+<li><strong>要点3</strong>：CoT的意外发现——不仅未消除IVE反而<strong>放大了近3倍</strong></li>
+</ul>
+<hr />
+<h2 id="section-2-related-work">Section 2 — Related Work<a class="headerlink" href="#section-2-related-work" title="Permanent link">&para;</a></h2>
+<h3 id="_5">中文翻译<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<p>我们将研究定位在三个文献体系的交汇处：<strong>人类IVE及其扩展</strong>、<strong>LLM中的认知偏差</strong>，以及<strong> deliberative reasoning (CoT) 在模型行为中的作用</strong>。</p>
+<p><strong>2.1 人类中的IVE</strong>：人们对已识别个体比统计抽象做出更慷慨回应的观察有悠久的智力历史。Small和Loewenstein的决定性实验证据——"Rokia, a 7-year-old girl from Mali"范式成为经典。关键发现：<strong>引发分析思维（做算术题）降低了对可识别受害者的捐赠而不增加对统计受害者的捐赠</strong>——产生"同情与冷漠"模式。<strong>明确告知参与者关于IVE的知识同样降低可识别受害者捐赠而非提高统计受害者捐赠</strong>——暗示元认知意识不会促进期望的去偏方向。</p>
+<h3 id="takeaway_1">关键 takeaway<a class="headerlink" href="#takeaway_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>要点1</strong>：人类的"同情-冷漠不对称性"是经过严格实验验证的</li>
+<li><strong>要点2</strong>：元认知觉察不能自然消除IVE——需要结构性干预</li>
+<li><strong>要点3</strong>：本工作将这些经典范式首次系统性移植到LLM领域</li>
+</ul>
+<hr />
+<h2 id="section-3-5-methods-experiments-results">Section 3-5 — Methods, Experiments &amp; Results<a class="headerlink" href="#section-3-5-methods-experiments-results" title="Permanent link">&para;</a></h2>
+<h3 id="_6">中文翻译（核心方法与发现）<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<p><strong>3. 实验设计</strong>
+- <strong>模型覆盖</strong>：16个前沿模型，9大AI实验室
+- <strong>样本量</strong>：N=51,955次验证API试验
+- <strong>10个实验</strong>：移植自Small et al.和Kogut &amp; Ritov的经典范式</p>
+<p><strong>4. 核心发现</strong></p>
+<p><strong>4.1 IVE普遍存在但受对齐训练强烈调节</strong>
+- <strong>指令微调模型</strong>：表现<strong>极端IVE</strong>（Cohen's d最高达<strong>1.56</strong>）
+- <strong>推理专用模型</strong>：<strong>反转效应</strong>（d低至<strong>-0.85</strong>）
+- <strong>汇总效应</strong>：d = 0.223, p = 2×10⁻⁶ ≈ <strong>人类元分析基线的2倍</strong></p>
+<p><strong>4.2 CoT提示的意外效应</strong>
+- 标准CoT（作为deliberative corrective）<strong>使IVE效应近三倍增大</strong>：d = 0.15 → d = 0.41
+- <strong>只有功利性CoT可靠消除IVE</strong></p>
+<p><strong>4.3 心理物理麻木与数量忽视</strong>
+- LLMs展现出<strong>完美数量忽视（Perfect Quantity Neglect）</strong>
+- 受害者计数增加时，分配意愿单调下降
+- 边际内群/外群文化偏差也被证实</p>
+<p><strong>5. 六级识别梯度与对数受害者计量尺度</strong>
+- 首次绘制LLM中<strong>情感启发式的剂量-响应曲线</strong>
+- 识别粒度越高→情感响应越强（非线性关系）</p>
+<h3 id="_7">术语解释<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>英文术语</th>
+<th>中文译名</th>
+<th>一句话解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cohen's d</td>
+<td>科恩d值</td>
+<td>效应量标准化指标，</td>
+</tr>
+<tr>
+<td>Instruction-tuned models</td>
+<td>指令微调模型</td>
+<td>经过RLHF/DPO对齐的聊天模型（如GPT-4o）</td>
+</tr>
+<tr>
+<td>Reasoning-specialized models</td>
+<td>推理专用模型</td>
+<td>优化于推理任务的模型（如o1/o3系列）</td>
+</tr>
+<tr>
+<td>Utilitarian CoT</td>
+<td>功利性CoT</td>
+<td>明确要求模型基于总体效用最大化做决策的CoT变体</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_8">图表/公式说明<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<p>核心数据表展示16个模型 × 多个实验条件的IVE效应量（Cohen's d值）。关键对比：
+| 模型类型 | IVE效应(d) | 解释 |
+|---------|-----------|------|
+| 指令微调(GPT-4o等) | +0.3 ~ +1.56 | <strong>强IVE，与人类一致</strong> |
+| 推理专用(o1, o3等) | -0.3 ~ -0.85 | <strong>反IVE（过度理性化）</strong> |
+| 基础模型(未对齐) | 中等 | 取决于预训练数据 |</p>
+<h3 id="takeaway_2">关键 takeaway<a class="headerlink" href="#takeaway_2" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>要点1</strong>：<strong>d=1.56 vs d=-0.85</strong>——对齐训练和推理训练将模型推向相反方向</li>
+<li><strong>要点2</strong>：CoT的"纠正"角色失效——因为标准CoT不强制功利性视角</li>
+<li><strong>要点3</strong>：LLM的IVE效应(≈0.22)可能<strong>已超过人类水平</strong>(≈0.10)</li>
+</ul>
+<hr />
+<h2 id="section-6-8-discussion-limitations-conclusion">Section 6-8 — Discussion, Limitations &amp; Conclusion<a class="headerlink" href="#section-6-8-discussion-limitations-conclusion" title="Permanent link">&para;</a></h2>
+<h3 id="_9">中文翻译<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<p><strong>6. 讨论</strong></p>
+<p>如果LLMs显示IVE，意义重大：它将构成证据表明<strong>通过next-token预测在人类语料上训练的模型不仅继承语义内容，还继承了人类道德推理中根深蒂固的情感非理性</strong>。反之，如果对齐程序消除了偏差，它提出一个问题：<strong>RLHF和相关技术是否将模型塑造为严格缺乏叙事同理心的功利性理性者？</strong>——这有其自身的伦理维度。</p>
+<p><strong>7. 局限性</strong>
+- 单一 correlator模型家族（Anthropic Claude）
+- 首轮提示无优化
+- 规模适合初步特征表征，非精细排名</p>
+<p><strong>8. 结论</strong></p>
+<p>我们识别并将Attention Latch形式化为<strong>无状态Transformer的物理极限</strong>并提出SSRP作为结构解决方案。我们在9K条多轮对话主轨迹上的评估揭示了一个ASB——其中GPT 5.4的标准基线崩溃至<strong>0.1%成功率</strong>，而SSRP在所有模型家族上保持稳健性能。</p>
+<h3 id="_10">全文总结<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
+<h3 id="_11">核心创新点<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>首个LLM中IVE的系统调查</strong>——51K+试验 × 16模型 × 9组织</li>
+<li><strong>CoT放大IVE的意外发现</strong>——颠覆"推理=去偏"的假设</li>
+<li><strong>对齐训练vs推理训练的对立效应</strong>——同一现象，相反方向</li>
+<li><strong>六级识别梯度 + 对数剂量-响应曲线</strong>——量化情感启发式</li>
+</ol>
+<h3 id="_12">方法论亮点<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
+<ul>
+<li>经典行为经济学范式的<strong>程序化移植</strong>（非简单复述）</li>
+<li>多温度 × 多模型的<strong>类实验设计</strong>支持因果推断</li>
+<li>Base vs Instruction-tuned对比作为<strong>对齐效应的准实验代理</strong></li>
+</ul>
+<h3 id="_13">实验核心发现<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>发现</th>
+<th>数据</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>极端IVE</strong></td>
+<td>GPT系列 d up to <strong>1.56</strong></td>
+<td>指令模型高度偏向可识别受害者</td>
+</tr>
+<tr>
+<td><strong>反IVE</strong></td>
+<td>o-series d down to <strong>-0.85</strong></td>
+<td>推理模型过度理性化</td>
+</tr>
+<tr>
+<td><strong>CoT放大</strong></td>
+<td>d: 0.15 → <strong>0.41</strong> (×2.73)</td>
+<td>标准CoT不是纠正而是加剧</td>
+</tr>
+<tr>
+<td><strong>汇总效应</strong></td>
+<td>d=0.223 (<strong>p&lt;0.001</strong>)</td>
+<td>约<strong>2倍于人类基线</strong></td>
+</tr>
+<tr>
+<td><strong>心理物理麻木</strong></td>
+<td>确认存在于LLM</td>
+<td>数量↑ → 同情↓</td>
+</tr>
+</tbody>
+</table>
+<h3 id="ai">对AI部署的启示<a class="headerlink" href="#ai" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>人道主义AI必须检测和缓解IVE</strong>——否则会系统性地偏向"有故事的人"</li>
+<li><strong>推理模型不自动更公平</strong>——它们可能走向另一个极端（反人道）</li>
+<li><strong>CoT设计需谨慎</strong>——必须明确嵌入<strong>功利性框架</strong>才能消除IVE</li>
+<li><strong>文化偏差需额外关注</strong>——内群/外群偏好在LLM中被证实存在</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.expand", "navigation.indexes", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

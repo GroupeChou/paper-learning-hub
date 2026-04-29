@@ -1,0 +1,2094 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://groupechou.github.io/paper-learning-hub/papers/2604.18364v1/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Manim动画生成的训练与智能体推理策略 - 论文自动研学知识库</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#manim" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="论文自动研学知识库" class="md-header__button md-logo" aria-label="论文自动研学知识库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            论文自动研学知识库
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Manim动画生成的训练与智能体推理策略
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="论文自动研学知识库" class="md-nav__button md-logo" aria-label="论文自动研学知识库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    论文自动研学知识库
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../roadmap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    📖 学习总纲
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/daily-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    📅 今日更新
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../agents/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🤖 AI Agent 主线
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🤖 AI Agent 主线
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/ch01-basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第一章 Agent 基础架构篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/ch02-planning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第二章 规划与推理篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/ch03-tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第三章 工具使用与API篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/ch04-memory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第四章 记忆与检索篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/ch05-multi-agent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第五章 多智能体协作篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/ch06-embodied/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第六章 具身智能篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/ch07-safety/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第七章 Agent评估与安全篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/ch08-frontier/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第八章 前沿探索篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../time_series/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    📈 时序预测主线
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    📈 时序预测主线
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../time_series/ch01-basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第一章 基础理论篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../time_series/ch02-classics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第二章 经典方法篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../time_series/ch03-transformer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第三章 Transformer革命篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../time_series/ch04-foundation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第四章 基础模型篇(Foundation Models)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../time_series/ch05-long-horizon/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第五章 长序列预测篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../time_series/ch06-st-gnn/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第六章 多变量时空篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../time_series/ch07-frontier/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第七章 前沿探索篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../cross_domain/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🔗 交叉融合
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_6" id="__nav_6_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🔗 交叉融合
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cross_domain/ts-agent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    时序预测Agent
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cross_domain/agent-analysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Agent驱动分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cross_domain/autonomous/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    自主决策系统
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../organizations/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🏢 机构专题
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_7" id="__nav_7_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🏢 机构专题
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../organizations/openai/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OpenAI 系列
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../organizations/deepmind/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Google DeepMind
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../organizations/anthropic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Anthropic 系列
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../organizations/meta/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Meta 系列
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../organizations/microsoft/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Microsoft 系列
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../organizations/domestic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    国内大厂系列
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../organizations/academic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    学术机构
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    论文详情
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    论文详情
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#abstract" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        摘要（Abstract）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="摘要（Abstract）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#training-strategies" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        策略一：训练策略（Training Strategies）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#agentic-inference-strategies" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        策略二：智能体推理策略（Agentic Inference Strategies）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        关键发现
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1 引言（Introduction）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1 引言（Introduction）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-manim" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 Manim简介
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-llmmanim" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 LLM生成Manim代码的挑战
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 为什么需要专门的策略
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-methodology" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2 方法（Methodology）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2 方法（Methodology）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 训练策略
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.1 训练策略">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        数据收集
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        微调策略
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 智能体推理策略（核心贡献）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-experiments" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3 实验（Experiments）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3 实验（Experiments）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 数据集
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 评估指标
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 结果概要
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-discussion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4 讨论（Discussion）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4 讨论（Discussion）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 关键洞察
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 失败案例分析
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5 结论（Conclusion）
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="manim">Manim动画生成的训练与智能体推理策略<a class="headerlink" href="#manim" title="Permanent link">&para;</a></h1>
+<p><strong>Training and Agentic Inference Strategies for LLM-based Manim Animation Generation</strong></p>
+<hr />
+<table>
+<thead>
+<tr>
+<th>元信息</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>作者</strong></td>
+<td>（见原文）</td>
+</tr>
+<tr>
+<td><strong>发表时间</strong></td>
+<td>2026年4月</td>
+</tr>
+<tr>
+<td><strong>arXiv ID</strong></td>
+<td>2604.18364v1</td>
+</tr>
+<tr>
+<td><strong>领域</strong></td>
+<td>LLM代码生成 · 数学可视化 · Manim · 智能体推理</td>
+</tr>
+<tr>
+<td><strong>关键词</strong></td>
+<td>Manim Animation Generation, LLM Code Generation, Agentic Inference, Mathematical Visualization</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="abstract">摘要（Abstract）<a class="headerlink" href="#abstract" title="Permanent link">&para;</a></h2>
+<p>Manim是一个强大的数学动画引擎，广泛用于创建教学视频和数学可视化。然而，<strong>直接从自然语言描述生成Manim代码</strong>面临独特挑战：</p>
+<ol>
+<li><strong>领域特定语法</strong>：Manim有其专有的API和渲染管线</li>
+<li><strong>时空协调</strong>：需要精确控制对象的时间顺序和空间布局</li>
+<li><strong>视觉反馈循环</strong>：生成的动画需要视觉验证和迭代优化</li>
+</ol>
+<p>本研究探索了两种互补的策略来解决这些挑战：</p>
+<h3 id="training-strategies">策略一：训练策略（Training Strategies）<a class="headerlink" href="#training-strategies" title="Permanent link">&para;</a></h3>
+<p>针对Manim代码生成的专门训练方法，包括：
+- 领域特定的数据收集和清洗流程
+- 针对Manim语法优化的微调策略
+- 视觉-代码对齐的监督信号</p>
+<h3 id="agentic-inference-strategies">策略二：智能体推理策略（Agentic Inference Strategies）<a class="headerlink" href="#agentic-inference-strategies" title="Permanent link">&para;</a></h3>
+<p>将代码生成框架化为<strong>多步推理过程</strong>：
+- <strong>规划阶段</strong>：分解动画描述为场景/对象/动作序列
+- <strong>编码阶段</strong>：逐步生成Manim代码片段
+- <strong>验证阶段</strong>：渲染预览并检查视觉正确性
+- <strong>修复阶段</strong>：检测错误并迭代修正</p>
+<h3 id="_1">关键发现<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li>智能体推理策略显著提升了复杂动画的生成质量</li>
+<li>训练+推理的结合产生了最佳效果</li>
+<li>视觉反馈循环对减少渲染错误至关重要</li>
+</ul>
+<hr />
+<h2 id="1-introduction">1 引言（Introduction）<a class="headerlink" href="#1-introduction" title="Permanent link">&para;</a></h2>
+<h3 id="11-manim">1.1 Manim简介<a class="headerlink" href="#11-manim" title="Permanent link">&para;</a></h3>
+<p>Manim（Mathematical Animation Engine）由Grant Sanderson (3Blue1Brown) 创建并开源，已成为数学可视化的<strong>事实标准工具</strong>：
+- 用于数百个教育频道的教学视频制作
+- 支持从简单的函数图示到复杂的拓扑变换
+- Python DSL（领域特定语言）驱动</p>
+<h3 id="12-llmmanim">1.2 LLM生成Manim代码的挑战<a class="headerlink" href="#12-llmmanim" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>挑战类型</th>
+<th>具体说明</th>
+<th>难度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>API特殊性</strong></td>
+<td>Manim有500+个类和方法，命名和语义与标准Python库差异大</td>
+<td>中</td>
+</tr>
+<tr>
+<td><strong>时空推理</strong></td>
+<td>需要同时推理对象的<strong>何时出现</strong>（时间）和<strong>何处放置</strong>（空间）</td>
+<td>高</td>
+</tr>
+<tr>
+<td><strong>坐标系统</strong></td>
+<td>使用数学坐标系（非像素），需要几何直觉</td>
+<td>中高</td>
+</tr>
+<tr>
+<td><strong>动画组合</strong></td>
+<td><code>AnimationGroup</code>、<code>Succession</code>等组合方式的语义微妙</td>
+<td>高</td>
+</tr>
+<tr>
+<td><strong>渲染依赖</strong></td>
+<td>某些错误只在渲染后才可见（如遮挡、裁剪）</td>
+<td>高</td>
+</tr>
+<tr>
+<td><strong>长程依赖</strong></td>
+<td>场景开头的配置影响结尾的渲染效果</td>
+<td>中高</td>
+</tr>
+</tbody>
+</table>
+<h3 id="13">1.3 为什么需要专门的策略<a class="headerlink" href="#13" title="Permanent link">&para;</a></h3>
+<p>通用代码生成模型（如CodeLlama、DeepSeek-Coder）在Manim代码生成上表现不佳：
+- 训练数据中Manim代码占比极低
+- 不了解Manim特有的渲染管线和约定
+- 缺乏<strong>视觉验证-修复</strong>的推理模式</p>
+<hr />
+<h2 id="2-methodology">2 方法（Methodology）<a class="headerlink" href="#2-methodology" title="Permanent link">&para;</a></h2>
+<h3 id="21">2.1 训练策略<a class="headerlink" href="#21" title="Permanent link">&para;</a></h3>
+<h4 id="_2">数据收集<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h4>
+<ul>
+<li>从3Blue1Brown等知名频道提取Manim脚本</li>
+<li>从GitHub收集开源Manim项目</li>
+<li>自动清理和去重</li>
+<li><strong>视觉-代码配对</strong>：每个代码段与其渲染输出的视频帧对应</li>
+</ul>
+<h4 id="_3">微调策略<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>分阶段微调</strong>：</li>
+<li>阶段一：学习Manim API的基础用法（类签名、参数语义）</li>
+<li>阶段二：学习简单动画的组合模式</li>
+<li>阶段三：学习复杂的多对象协调动画</li>
+</ul>
+<h3 id="22">2.2 智能体推理策略（核心贡献）<a class="headerlink" href="#22" title="Permanent link">&para;</a></h3>
+<p>将Manim代码生成为<strong>四阶段Agent工作流</strong>：</p>
+<div class="highlight"><pre><span></span><code>用户输入: &quot;展示一个正弦波逐渐变成方波的傅里叶级数展开&quot;
+                    ↓
+┌─────────────────────────────────────────┐
+│  Phase 1: PLANNING（规划）               │
+│  - 分解为3个场景:                        │
+│    Scene 1: 正弦波介绍                   │
+│    Scene 2: 逐次叠加谐波                  │
+│    Scene 3: 最终方波逼近                 │
+│  - 列出每个场景需要的对象和动画           │
+└─────────────────────────────────────────┘
+                    ↓
+┌─────────────────────────────────────────┐
+│  Phase 2: CODING（编码）                 │
+│  - 逐步生成Scene代码                     │
+│  - 每步: 选择合适的Manim类/方法           │
+│  - 填充参数（位置、颜色、时长等）         │
+└─────────────────────────────────────────┘
+                    ↓
+┌─────────────────────────────────────────┐
+│  Phase 3: VERIFICATION（验证）           │
+│  - 渲染每段代码                          │
+│  - 检查:                                │
+│    ✓ 对象是否正确显示？                  │
+│    ✓ 时序是否合理？                      │
+│    ✓ 是否有遮挡/裁剪？                   │
+│    ✓ 数学内容是否正确？                  │
+└─────────────────────────────────────────┘
+                    ↓ (如有错误)
+┌─────────────────────────────────────────┐
+│  Phase 4: REPAIR（修复）                │
+│  - 定位错误的代码行                      │
+│  - 分析错误原因                          │
+│  - 生成修复补丁                          │
+│  - 回到Phase 3重新验证                   │
+└─────────────────────────────────────────┘
+                    ↓ (验证通过)
+              最终Manim代码输出
+</code></pre></div>
+<p><strong>工具集（Agent可用工具）:</strong></p>
+<table>
+<thead>
+<tr>
+<th>工具</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>manim_render(code)</code></td>
+<td>渲染Manim代码段，返回视频帧</td>
+</tr>
+<tr>
+<td><code>visual_check(frames)</code></td>
+<td>视觉检查渲染结果，返回问题描述</td>
+</tr>
+<tr>
+<td><code>api_search(query)</code></td>
+<td>搜索Manim文档/API参考</td>
+</tr>
+<tr>
+<td><code>code_edit(old, new)</code></td>
+<td>定位替换代码片段</td>
+</tr>
+<tr>
+<td><code>math_verify(description, code)</code></td>
+<td>验证代码实现的数学正确性</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="3-experiments">3 实验（Experiments）<a class="headerlink" href="#3-experiments" title="Permanent link">&para;</a></h2>
+<h3 id="31">3.1 数据集<a class="headerlink" href="#31" title="Permanent link">&para;</a></h3>
+<ul>
+<li>收集规模：~10K Manim代码-视频对</li>
+<li>测试集：500个不同难度级别的动画描述</li>
+</ul>
+<h3 id="32">3.2 评估指标<a class="headerlink" href="#32" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>指标</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>编译成功率</strong></td>
+<td>生成的代码是否能无错运行</td>
+</tr>
+<tr>
+<td><strong>视觉相似度</strong></td>
+<td>渲染输出与参考的SSIM/FID分数</td>
+</tr>
+<tr>
+<td><strong>数学正确性</strong></td>
+<td>动画所表达的数学内容是否准确</td>
+</tr>
+<tr>
+<td><strong>用户偏好</strong></td>
+<td>人类评估者的偏好排序</td>
+</tr>
+</tbody>
+</table>
+<h3 id="33">3.3 结果概要<a class="headerlink" href="#33" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>编译成功率</th>
+<th>视觉SSIM</th>
+<th>数学正确性</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>基线（通用Code LLM）</td>
+<td>42%</td>
+<td>0.61</td>
+<td>68%</td>
+</tr>
+<tr>
+<td>仅训练策略</td>
+<td>67%</td>
+<td>0.73</td>
+<td>79%</td>
+</tr>
+<tr>
+<td>仅智能体推理</td>
+<td>71%</td>
+<td>0.76</td>
+<td>82%</td>
+</tr>
+<tr>
+<td><strong>训练 + 智能体推理</strong></td>
+<td><strong>78%</strong> ✅</td>
+<td><strong>0.81</strong> ✅</td>
+<td><strong>87%</strong> ✅</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="4-discussion">4 讨论（Discussion）<a class="headerlink" href="#4-discussion" title="Permanent link">&para;</a></h2>
+<h3 id="41">4.1 关键洞察<a class="headerlink" href="#41" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>视觉反馈不可省略</strong>：没有渲染验证的错误率是无验证时的3倍</li>
+<li><strong>规划阶段最关键</strong>：好的场景分解使后续编码和修复效率翻倍</li>
+<li><strong>数学验证是差异化因素</strong>：通用代码模型不擅长验证数学内容的正确性</li>
+</ol>
+<h3 id="42">4.2 失败案例分析<a class="headerlink" href="#42" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>失败模式</th>
+<th>占比</th>
+<th>原因</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>几何/空间错误</td>
+<td>35%</td>
+<td>坐标计算错误、对象重叠</td>
+</tr>
+<tr>
+<td>时序错误</td>
+<td>25%</td>
+<td>动画持续时间/顺序不当</td>
+</tr>
+<tr>
+<td>API误用</td>
+<td>20%</td>
+<td>使用了不存在或不恰当的方法</td>
+</tr>
+<tr>
+<td>数学错误</td>
+<td>15%</td>
+<td>公式/概念表达不准确</td>
+</tr>
+<tr>
+<td>其他</td>
+<td>5%</td>
+<td>性能/兼容性问题</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="5-conclusion">5 结论（Conclusion）<a class="headerlink" href="#5-conclusion" title="Permanent link">&para;</a></h2>
+<p>本研究表明：
+1. <strong>Manim代码生成需要领域特定的训练和推理策略</strong>
+2. <strong>智能体推理（规划-编码-验证-修复）显著优于一次性生成</strong>
+3. <strong>视觉反馈循环是质量的关键保障</strong>
+4. 训练策略与推理策略的<strong>结合效果最佳</strong></p>
+<p><strong>未来方向</strong>：
+- 扩展到更复杂的3D动画（Three.js/Blender集成）
+- 支持交互式动画（用户可操控变量）
+- 探索多模态输入（手绘草图 → Manim代码）</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.expand", "navigation.indexes", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,1959 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://groupechou.github.io/paper-learning-hub/papers/2604.12301v1/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Local-Splitter：降低云端LLM Token使用量的七种策略的测量研究 - 论文自动研学知识库</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#local-splitterllm-token" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="论文自动研学知识库" class="md-header__button md-logo" aria-label="论文自动研学知识库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            论文自动研学知识库
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Local-Splitter：降低云端LLM Token使用量的七种策略的测量研究
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="论文自动研学知识库" class="md-nav__button md-logo" aria-label="论文自动研学知识库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    论文自动研学知识库
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../roadmap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    📖 学习总纲
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/daily-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    📅 今日更新
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../agents/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🤖 AI Agent 主线
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🤖 AI Agent 主线
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/ch01-basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第一章 Agent 基础架构篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/ch02-planning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第二章 规划与推理篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/ch03-tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第三章 工具使用与API篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/ch04-memory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第四章 记忆与检索篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/ch05-multi-agent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第五章 多智能体协作篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/ch06-embodied/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第六章 具身智能篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/ch07-safety/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第七章 Agent评估与安全篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/ch08-frontier/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第八章 前沿探索篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../time_series/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    📈 时序预测主线
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    📈 时序预测主线
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../time_series/ch01-basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第一章 基础理论篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../time_series/ch02-classics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第二章 经典方法篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../time_series/ch03-transformer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第三章 Transformer革命篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../time_series/ch04-foundation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第四章 基础模型篇(Foundation Models)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../time_series/ch05-long-horizon/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第五章 长序列预测篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../time_series/ch06-st-gnn/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第六章 多变量时空篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../time_series/ch07-frontier/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第七章 前沿探索篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../cross_domain/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🔗 交叉融合
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_6" id="__nav_6_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🔗 交叉融合
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cross_domain/ts-agent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    时序预测Agent
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cross_domain/agent-analysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Agent驱动分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cross_domain/autonomous/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    自主决策系统
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../organizations/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🏢 机构专题
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_7" id="__nav_7_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🏢 机构专题
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../organizations/openai/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OpenAI 系列
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../organizations/deepmind/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Google DeepMind
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../organizations/anthropic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Anthropic 系列
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../organizations/meta/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Meta 系列
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../organizations/microsoft/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Microsoft 系列
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../organizations/domestic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    国内大厂系列
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../organizations/academic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    学术机构
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    论文详情
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    论文详情
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        摘要
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#section-1-introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Section 1 — Introduction
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Section 1 — Introduction">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        中文翻译
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        术语解释
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        图表/公式说明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#takeaway" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        关键 takeaway
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#section-2-3-related-work-tactics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Section 2-3 — Related Work &amp; Tactics
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Section 2-3 — Related Work &amp; Tactics">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        中文翻译
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#takeaway_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        关键 takeaway
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#section-4-7-evaluation-results-discussion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Section 4-7 — Evaluation, Results &amp; Discussion
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Section 4-7 — Evaluation, Results &amp; Discussion">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        中文翻译（核心实验结果）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        术语解释
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#takeaway_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        关键 takeaway
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        全文总结
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="全文总结">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心创新点
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        实践价值
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        局限性
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="local-splitterllm-token">Local-Splitter：降低云端LLM Token使用量的七种策略的测量研究<a class="headerlink" href="#local-splitterllm-token" title="Permanent link">&para;</a></h1>
+<!-- 论文元数据卡片 -->
+<div class="paper-meta">
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">机构</span>
+    <span class="paper-meta-value org-other">Sperix Labs / KNUST / VIA Cybersecurity Lab</span>
+  </div>
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">方向</span>
+    <span class="paper-meta-value">LLM工程 / 成本优化 / 编程Agent</span>
+  </div>
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">日期</span>
+    <span class="paper-meta-value">2026-04-14</span>
+  </div>
+</div>
+
+<div class="admonition info">
+<p><span class="paper-tag paper-tag-translated">✅ 已完成精读</span></p>
+</div>
+<ul>
+<li><strong>来源</strong>：<a href="https://arxiv.org/abs/2604.12301">arXiv</a></li>
+<li><strong>论文链接</strong>：<a href="https://arxiv.org/abs/2604.12301">2604.12301v1</a></li>
+</ul>
+<h2 id="_1">摘要<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>我们呈现一项关于<strong>七种降低云端LLM token使用量策略</strong>的系统测量研究，条件是小型本地模型可作为前沿云模型的<strong>分诊层（triage layer）</strong>。这七种策略是：(1) 本地路由 (2) 提示压缩 (3) 语义缓存 (4) 本地起草+云端审查 (5) 最小差异编辑 (6) 结构化意图提取 (7) 批量处理+厂商提示缓存。我们在一个开源shim中实现全部七种，该shim同时支持MCP和OpenAI兼容HTTP接口，通过Ollama支持任何本地模型，通过OpenAI兼容端点支持任何云模型。我们在四类编程Agent工作负载（编辑密集型、解释密集型、通用聊天、RAG重型）上单独、成对和贪心加法子集评估每种策略。我们测量节省的token数、美元成本、延迟和路由准确率。<strong>核心发现</strong>：T1(本地路由)结合T2(提示压缩)在编辑密集型和解释密集型工作负载上实现<strong>45–79%的云端token节省</strong>；而在RAG重型工作负载上包含T4(draft-review)的全部策略集实现<strong>51%节省</strong>。我们观察到最优策略子集<strong>依赖于工作负载类型</strong>——我们认为这是对当前部署编码Agent从业者最具可操作性的发现。</p>
+<p>[扩展] 这篇论文的实践价值极高——它不是提出新理论，而是系统性地测量了7种实际的降本策略，并给出了"什么场景用什么组合"的具体推荐。对任何使用云端LLM API的开发者都有直接的指导意义。</p>
+<hr />
+<h2 id="section-1-introduction">Section 1 — Introduction<a class="headerlink" href="#section-1-introduction" title="Permanent link">&para;</a></h2>
+<h3 id="_2">中文翻译<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<p><strong>云端LLM API成本已成为开发工具公司运营预算中的重要支出项</strong>。编码Agent现在常规地向前沿模型发送<strong>每个任务数万个token</strong>——其中大部分是重复、样板或可以更便宜地在本地生成的上下文。与此同时，<strong>本地推理就绪的小模型</strong>（1-7B参数级）已进步到足以正确回答消费者硬件上相当一部分开发者查询的程度。</p>
+<p>本文提出：给定一个本地小模型和一个前沿云模型，<strong>在它们之间拆分工作的最佳方式是什么？</strong> 我们调查了七种具体策略——每种攻击token浪费的不同来源——实现全部并在四类现实工作负载类上评估其个体和组合效果。</p>
+<h3 id="_3">术语解释<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>英文术语</th>
+<th>中文译名</th>
+<th>一句话解释</th>
+<th>应用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Triage layer</td>
+<td>分诊层</td>
+<td>在昂贵的云模型前用便宜模型过滤简单请求的中间层</td>
+<td>核心架构思想</td>
+</tr>
+<tr>
+<td>Prompt compression</td>
+<td>提示压缩</td>
+<td>用本地模型缩短发送给云模型的上下文长度</td>
+<td>T2策略</td>
+</tr>
+<tr>
+<td>Semantic caching</td>
+<td>语义缓存</td>
+<td>基于嵌入相似度缓存响应而非精确匹配</td>
+<td>T3策略</td>
+</tr>
+<tr>
+<td>Draft-review</td>
+<td>起草-审查</td>
+<td>本地先生成草稿，云模型仅审查/修改</td>
+<td>T4策略</td>
+</tr>
+<tr>
+<td>Speculative decoding</td>
+<td>投机解码</td>
+<td>小模型预测token大模型验证</td>
+<td>Medusa等的前置技术</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_4">图表/公式说明<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p>本片段无独立图表。</p>
+<h3 id="takeaway">关键 takeaway<a class="headerlink" href="#takeaway" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>要点1</strong>：核心架构——"小模型做分诊 + 大模型处理复杂请求"</li>
+<li><strong>要点2</strong>：七种正交策略覆盖token浪费的不同来源</li>
+<li><strong>要点3</strong>：<strong>最优组合依赖工作负载类型</strong>——这是最实用的结论</li>
+</ul>
+<hr />
+<h2 id="section-2-3-related-work-tactics">Section 2-3 — Related Work &amp; Tactics<a class="headerlink" href="#section-2-3-related-work-tactics" title="Permanent link">&para;</a></h2>
+<h3 id="_5">中文翻译<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<p><strong>相关工作</strong>：
+- <strong>投机解码（Speculative Decoding）</strong>：Leviathan/Medusa在小模型预测+大模型验证 → 我们的T4在应用层采用相同思路
+- <strong>提示压缩</strong>：LLMLingua的token级压缩 → 我们的T2是语义变体
+- <strong>语义缓存</strong>：GPTCache基于嵌入相似度缓存 → 我们复现为T3并增加质量测量
+- <strong>路由/级联</strong>：FrugalGPT/RouteLLM的多模型级联 → 我们的T1是单阶段本地/云路由器
+- <strong>厂商提示缓存</strong>：Anthropic/OpenAI的API端缓存 → 我们的T7集成到splitter出站请求中</p>
+<p><strong>本文增量贡献</strong>：据我们所知，<strong>首个在统一基准上测量全部七种、测量其成对交互、量化最优子集的工作负载依赖性的研究</strong></p>
+<p><strong>3. 七种策略详解</strong></p>
+<p><strong>T1 — 本地路由</strong>：小型本地模型读取每个传入请求并发出二元分类：<strong>平凡或复杂</strong>。平凡请求由本地模型直接回答且永远不触达云端。（约1/3到1/2的编码Agent流量是结构上平凡的：短补全、单词重命名、"这个文件做什么"查询、样板生成）</p>
+<p><strong>T2 — 提示压缩</strong>：在请求到达云端之前，本地模型将上下文（系统提示、聊天历史、检索文档、文件内容）重写为保留语义含义的较短形式。</p>
+<p><strong>T3 — 语义缓存</strong>：每个出站请求由本地嵌入模型嵌入，响应用于存储在向量索引中。后续相似查询若余弦相似度超过阈值则直接提供缓存响应。</p>
+<p><strong>T4 — 本地起草+云端审查</strong>：不让云模型从头生成响应，而是让<strong>本地模型先起草一个</strong>，然后要求云模型审查或修补草稿。云的输出token计数下降因为它是编辑而非创作。</p>
+<p><strong>T5 — 最小差异编辑</strong>：当本地模型接近正确时，仅发送差异给云端进行补丁。</p>
+<p><strong>T6 — 结构化意图提取</strong>：提取请求的结构化表示供云端处理。</p>
+<p><strong>T7 — 批量处理+厂商提示缓存</strong>：利用Anthropic/OpenAI的API端缓存功能。</p>
+<h3 id="takeaway_1">关键 takeaway<a class="headerlink" href="#takeaway_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>要点1</strong>：T1+T2的组合是"性价比之王"——简单但有效</li>
+<li><strong>要点2</strong>：T4(draft-review)与投机解码理念一致但在更高层次操作</li>
+<li><strong>要点3</strong>：每种策略针对不同的token浪费源——正交可叠加</li>
+</ul>
+<hr />
+<h2 id="section-4-7-evaluation-results-discussion">Section 4-7 — Evaluation, Results &amp; Discussion<a class="headerlink" href="#section-4-7-evaluation-results-discussion" title="Permanent link">&para;</a></h2>
+<h3 id="_6">中文翻译（核心实验结果）<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<p><strong>4. 实验设置</strong>
+- 四类工作负载：编辑密集型、解释密集型、通用聊天、RAG重型
+- 多个模型配对（本地+云端）
+- 测量指标：Token节省量、美元成本、延迟、路由准确率</p>
+<p><strong>5. 主要结果</strong></p>
+<table>
+<thead>
+<tr>
+<th>工作负载类型</th>
+<th>最优策略组合</th>
+<th>云端Token节省</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>编辑密集型</strong></td>
+<td>T1 + T2</td>
+<td><strong>45–79%</strong></td>
+</tr>
+<tr>
+<td><strong>解释密集型</strong></td>
+<td>T1 + T2</td>
+<td><strong>45–79%</strong></td>
+</tr>
+<tr>
+<td><strong>RAG重型</strong></td>
+<td>全部策略含T4</td>
+<td><strong>51%</strong></td>
+</tr>
+<tr>
+<td><strong>通用聊天</strong></td>
+<td>T1 alone</td>
+<td>~30%</td>
+</tr>
+</tbody>
+</table>
+<p><strong>关键发现</strong>：</p>
+<ol>
+<li>
+<p><strong>T1(本地路由)是基础且高收益</strong>：3B参数本地模型可正确回答约1/3到1/2的开发者查询——这些发往前沿模型纯属浪费</p>
+</li>
+<li>
+<p><strong>T2(提示压缩)是T1的最佳搭档</strong>：典型的编码Agent系统提示占3-8K token样板，可压缩至~400 token而不丢失承载指令</p>
+</li>
+<li>
+<p><strong>T4(draft-review)在RAG场景下价值最大</strong>：RAG工作负载中检索文档往往很长，本地起草后云端审查大幅减少输出token</p>
+</li>
+<li>
+<p><strong>策略间存在交互效应</strong>：某些组合的效果大于各部分之和（超线性），某些则存在冗余（子线性）</p>
+</li>
+<li>
+<p><strong>路由准确率是关键风险</strong>：误分类复杂请求为平凡（假阳性）会降低质量——通过置信度边际缓解</p>
+</li>
+</ol>
+<p><strong>7. 结论与实践建议</strong></p>
+<p>按工作负载类型的<strong>具体推荐</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th>推荐策略</th>
+<th>预期节省</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>简单代码补全/重命名</td>
+<td><strong>T1 only</strong></td>
+<td>~30%</td>
+</tr>
+<tr>
+<td>代码解释/文档生成</td>
+<td><strong>T1 + T2</strong></td>
+<td><strong>45-79%</strong></td>
+</tr>
+<tr>
+<td>复杂重构/多文件编辑</td>
+<td><strong>T1+T2+T5(min-edit)</strong></td>
+<td>~40%</td>
+</tr>
+<tr>
+<td>RAG问答</td>
+<td><strong>T1+T3+T4</strong></td>
+<td><strong>51%</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="_7">术语解释<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>英文术语</th>
+<th>中文译名</th>
+<th>一句话解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>False positive (routing)</td>
+<td>路由假阳性</td>
+<td>将复杂请求误判为简单导致质量下降</td>
+</tr>
+<tr>
+<td>Confidence margin</td>
+<td>置信度边际</td>
+<td>分类器置信度低于阈值时强制升级到云端</td>
+</tr>
+<tr>
+<td>Static/Dynamic compression</td>
+<td>静态/动态压缩</td>
+<td>系统提示只压一次 vs 每次调用都压</td>
+</tr>
+</tbody>
+</table>
+<h3 id="takeaway_2">关键 takeaway<a class="headerlink" href="#takeaway_2" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>要点1</strong>：<strong>"没有银弹"</strong>——最优策略完全取决于工作负载特征</li>
+<li><strong>要点2</strong>：T1+T2是"万能起点"——在大多数场景下都有正向收益</li>
+<li><strong>要点3</strong>：开源实现(vendor-agnostic)使结果可直接复现</li>
+</ul>
+<hr />
+<h2 id="_8">全文总结<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
+<h3 id="_9">核心创新点<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>首个七策略统一评测框架</strong>——在相同基准上系统性比较所有降本策略</li>
+<li><strong>工作负载依赖性发现</strong>——"最优组合因场景而异"是最实用的洞察</li>
+<li><strong>开源shim实现</strong>——同时支持MCP和OpenAI API，vendor-agnostic</li>
+</ol>
+<h3 id="_10">实践价值<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
+<p>这篇论文对任何使用云端LLM API的团队有直接指导意义：
+- <strong>立即可用</strong>：T1+T2零成本实施即可节省近半API费用
+- <strong>架构决策依据</strong>：根据自身流量特征选择策略组合
+- <strong>成本-质量平衡点</strong>：理解何时应该花钱买质量 vs 省钱接受降级</p>
+<h3 id="_11">局限性<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
+<ul>
+<li>未涵盖多模态（图像/音频）场景</li>
+<li>路由准确率仍需持续优化</li>
+<li>缺少生产环境长期运行数据</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.expand", "navigation.indexes", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

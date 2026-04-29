@@ -1,0 +1,2087 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://groupechou.github.io/paper-learning-hub/papers/2604.19572v1/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>TACO：基于观察上下文压缩的自演化高效终端Agent框架 - 论文自动研学知识库</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#tacoagent" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="论文自动研学知识库" class="md-header__button md-logo" aria-label="论文自动研学知识库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            论文自动研学知识库
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              TACO：基于观察上下文压缩的自演化高效终端Agent框架
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="论文自动研学知识库" class="md-nav__button md-logo" aria-label="论文自动研学知识库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    论文自动研学知识库
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../roadmap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    📖 学习总纲
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/daily-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    📅 今日更新
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../agents/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🤖 AI Agent 主线
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🤖 AI Agent 主线
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/ch01-basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第一章 Agent 基础架构篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/ch02-planning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第二章 规划与推理篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/ch03-tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第三章 工具使用与API篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/ch04-memory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第四章 记忆与检索篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/ch05-multi-agent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第五章 多智能体协作篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/ch06-embodied/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第六章 具身智能篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/ch07-safety/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第七章 Agent评估与安全篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/ch08-frontier/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第八章 前沿探索篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../time_series/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    📈 时序预测主线
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    📈 时序预测主线
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../time_series/ch01-basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第一章 基础理论篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../time_series/ch02-classics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第二章 经典方法篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../time_series/ch03-transformer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第三章 Transformer革命篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../time_series/ch04-foundation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第四章 基础模型篇(Foundation Models)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../time_series/ch05-long-horizon/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第五章 长序列预测篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../time_series/ch06-st-gnn/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第六章 多变量时空篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../time_series/ch07-frontier/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第七章 前沿探索篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../cross_domain/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🔗 交叉融合
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_6" id="__nav_6_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🔗 交叉融合
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cross_domain/ts-agent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    时序预测Agent
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cross_domain/agent-analysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Agent驱动分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cross_domain/autonomous/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    自主决策系统
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../organizations/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🏢 机构专题
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_7" id="__nav_7_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🏢 机构专题
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../organizations/openai/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OpenAI 系列
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../organizations/deepmind/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Google DeepMind
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../organizations/anthropic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Anthropic 系列
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../organizations/meta/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Meta 系列
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../organizations/microsoft/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Microsoft 系列
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../organizations/domestic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    国内大厂系列
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../organizations/academic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    学术机构
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    论文详情
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    论文详情
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#abstract" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        摘要（Abstract）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="摘要（Abstract）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#taco" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        我们的方案：TACO
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        主要结果
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心优势
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1 引言（Introduction）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1 引言（Introduction）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-agent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 终端Agent的核心瓶颈
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 现有方法的局限
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-taco" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 TACO的设计哲学
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-tacomethodology" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2 方法：TACO框架（Methodology）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2 方法：TACO框架（Methodology）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 整体架构
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-self-evolution-mechanism" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 自演化机制（Self-Evolution Mechanism）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 收敛判据
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-experiments" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3 实验结果（Experiments）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3 实验结果（Experiments）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-terminalbench" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 TerminalBench 结果
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 跨基准泛化
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-token" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 Token效率
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-discussion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4 讨论（Discussion）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4 讨论（Discussion）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-taco" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 TACO为何有效？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 与相关工作的关系
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 局限性与未来工作
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5 结论（Conclusion）
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="tacoagent">TACO：基于观察上下文压缩的自演化高效终端Agent框架<a class="headerlink" href="#tacoagent" title="Permanent link">&para;</a></h1>
+<p><strong>A Self-Evolving Framework for Efficient Terminal Agents via Observational Context Compression</strong></p>
+<hr />
+<table>
+<thead>
+<tr>
+<th>元信息</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>作者</strong></td>
+<td>Jincheng Ren<em>, Siwei Wu</em>†, Yizhi Li*, Kang Zhu, Shu Xu, Boyu Feng, Ruibin Yuan, Wei Zhang, Riza Batista-Navarro, Jian Yang‡, Chenghua Lin‡（曼彻斯特大学, MAP, HKUST, 北航）</td>
+</tr>
+<tr>
+<td><strong>发表时间</strong></td>
+<td>2026年4月</td>
+</tr>
+<tr>
+<td><strong>arXiv ID</strong></td>
+<td>2604.19572v1</td>
+</tr>
+<tr>
+<td><strong>领域</strong></td>
+<td>终端Agent · 上下文压缩 · 自演化 · 软件工程</td>
+</tr>
+<tr>
+<td><strong>关键词</strong></td>
+<td>Terminal Agent, Context Compression, Self-Evolving, Observational Compression, Plug-and-Play</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="abstract">摘要（Abstract）<a class="headerlink" href="#abstract" title="Permanent link">&para;</a></h2>
+<p>随着模型能力的推进，研究越来越多地转向<strong>长程、多轮终端中心的Agentic任务</strong>——原始环境反馈常保留在交互历史中以支持未来决策。然而，反复保留此类反馈引入了大量冗余，并使累积token成本随步数<strong>二次方增长</strong>，阻碍长程推理。</p>
+<p>虽然观察压缩可以缓解此问题，但<strong>终端环境的异构性</strong>使得基于启发式或固定prompt的方法难以泛化。</p>
+<h3 id="taco">我们的方案：TACO<a class="headerlink" href="#taco" title="Permanent link">&para;</a></h3>
+<p>提出 <strong>TACO</strong>（Terminal Agent COmpression）——一个<strong>即插即用、自演化的终端Agent压缩框架</strong>，从交互轨迹中<strong>自动发现并精炼压缩规则</strong>。</p>
+<h3 id="_1">主要结果<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>基准</th>
+<th>效果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>TerminalBench (TB 1.0 &amp; 2.0)</strong></td>
+<td>一致提升1%-4%；相同token预算下再提升2%-3%</td>
+</tr>
+<tr>
+<td><strong>Token开销</strong></td>
+<td>使用MiniMax-2.5时减少约<strong>10%</strong></td>
+</tr>
+<tr>
+<td><strong>其他基准</strong> (SWE-Bench Lite, CompileBench, DevEval, CRUST-Bench)</td>
+<td><strong>一致的正向效果</strong>，跨Agent/模型/基准强泛化</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_2">核心优势<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>训练免费</strong>（training-free）：无需微调</li>
+<li><strong>自演化</strong>：持续精炼压缩规则</li>
+<li><strong>即插即用</strong>：可集成到任意现有Agent框架</li>
+<li><strong>全局规则池</strong>：支持跨任务知识复用</li>
+</ul>
+<hr />
+<h2 id="1-introduction">1 引言（Introduction）<a class="headerlink" href="#1-introduction" title="Permanent link">&para;</a></h2>
+<h3 id="11-agent">1.1 终端Agent的核心瓶颈<a class="headerlink" href="#11-agent" title="Permanent link">&para;</a></h3>
+<p>主流终端Agent的一个关键瓶颈是：<strong>将原始终端输出直接送入后续决策</strong>。</p>
+<p>在真实的软件工程工作流中，这些观察通常包含大量冗余信息：
+- 冗长的日志
+- 重复的build trace
+- 无关的命令输出</p>
+<div class="highlight"><pre><span></span><code>┌─────────────────────────────────────────────────┐
+│  终端Agent每步的典型输入:                        │
+│                                                 │
+│  ████████████ 噪音（verbose logs, errors...）    │
+│  ████████████ 冗余（重复的build output）         │
+│  ████ 有效信息（task-relevant signals）          │
+│                                                 │
+│  → 不仅增加计算成本，还掩盖关键信号               │
+│  → 最终损害长程推理和任务性能                    │
+└─────────────────────────────────────────────────┘
+</code></pre></div>
+<h3 id="12">1.2 现有方法的局限<a class="headerlink" href="#12" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>方法类型</th>
+<th>代表</th>
+<th>局限</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>预定义静态压缩</strong></td>
+<td>Seed Rules (6条启发式)</td>
+<td>固定规则无法适应环境变化</td>
+</tr>
+<tr>
+<td><strong>专家手工规则</strong></td>
+<td>High-Quality Rules (200条)</td>
+<td>人力成本高，难维护</td>
+</tr>
+<tr>
+<td><strong>LLM-based压缩</strong></td>
+<td>通用LLM摘要</td>
+<td>不稳定，跨任务波动大</td>
+</tr>
+<tr>
+<td><strong>训练方法</strong></td>
+<td>SWE-Pruner</td>
+<td>需额外训练，局限于SWE风格任务</td>
+</tr>
+</tbody>
+</table>
+<p><strong>根本原因</strong>：终端环境高度异构——所需的压缩模式在不同仓库、命令和执行状态下差异巨大。</p>
+<h3 id="13-taco">1.3 TACO的设计哲学<a class="headerlink" href="#13-taco" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>有效的终端输出压缩应适应当前环境并在Agent交互期间持续精炼，而非依赖固定启发式或任务特定的压缩器训练。</strong></p>
+</blockquote>
+<hr />
+<h2 id="2-tacomethodology">2 方法：TACO框架（Methodology）<a class="headerlink" href="#2-tacomethodology" title="Permanent link">&para;</a></h2>
+<h3 id="21">2.1 整体架构<a class="headerlink" href="#21" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>┌─────────────────────────────────────────────────────┐
+│                    TACO 框架                          │
+│                                                     │
+│  ┌─────────────┐    ┌─────────────────────────────┐│
+│  │ Global Rule  │◄───│   Self-Evolution Loop       ││
+│  │ Pool (GRP)   │    │  (跨任务共享的可复用规则)      ││
+│  │             │    └─────────────┬───────────────┘│
+│  │ • Rule α₁   │                  │                │
+│  │ • Rule α₂   │    ┌─────────────▼───────────────┐│
+│  │ • Rule α₃   │    │  Task-Specific Adapter      ││
+│  │ • ...        │    │  (从GRP初始化 + 在线适配)    ││
+│  └──────┬──────┘    └─────────────┬───────────────┘│
+│         │                           │                │
+│         ▼                           ▼                │
+│  ┌───────────────────────────────────────────┐    │
+│  │      Terminal Observation Compressor      │    │
+│  │                                         │    │
+│  │   Raw Observation Oₜ                      │    │
+│  │        │                                  │    │
+│  │        ▼                                  │    │
+│  │   [Apply Task-Specific Rules]             │    │
+│  │        │                                  │    │
+│  │        ▼                                  │    │
+│  │   Compressed Observation Ôₜ               │    │
+│  │   (保留任务相关信息，去除冗余噪声)           │    │
+│  └───────────────────┬───────────────────────┘    │
+│                      │                            │
+└──────────────────────┼────────────────────────────┘
+                       │
+                       ▼
+              送入 Agent 下一步决策
+</code></pre></div>
+<h3 id="22-self-evolution-mechanism">2.2 自演化机制（Self-Evolution Mechanism）<a class="headerlink" href="#22-self-evolution-mechanism" title="Permanent link">&para;</a></h3>
+<p><strong>三步循环</strong>：</p>
+<div class="highlight"><pre><span></span><code>Step 1: DISCOVER（发现）
+  从终端交互轨迹中自动发现压缩模式
+  - 识别重复出现的冗余模式
+  - 提取可泛化的压缩规则
+
+Step 2: REFINE（精炼）
+  在Agent交互过程中持续改进规则
+  - 监测压缩效果（性能 vs token节省）
+  - 根据反馈调整规则参数
+
+Step 3: REUSE（复用）
+  通过全局规则池实现跨任务知识迁移
+  - 新任务初始化时从GRP继承相关规则
+  - 成功的规则回馈更新GRP
+</code></pre></div>
+<h3 id="23">2.3 收敛判据<a class="headerlink" href="#23" title="Permanent link">&para;</a></h3>
+<p>TACO引入了一个实用的<strong>自演化收敛判据</strong>：
+- <strong>何时停止演化？</strong> 当规则演化过程趋于稳定时
+- 避免无限增长规则池或过拟合当前任务</p>
+<hr />
+<h2 id="3-experiments">3 实验结果（Experiments）<a class="headerlink" href="#3-experiments" title="Permanent link">&para;</a></h2>
+<h3 id="31-terminalbench">3.1 TerminalBench 结果<a class="headerlink" href="#31-terminalbench" title="Permanent link">&para;</a></h3>
+<p><strong>集成TACO到现有Agent框架的效果</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>主干模型</th>
+<th>TerminalBench 1.0</th>
+<th>TerminalBench 2.0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DeepSeek-V3.2</td>
+<td>+1~4%</td>
+<td>+1~4%</td>
+</tr>
+<tr>
+<td>MiniMax-M2.5</td>
+<td><strong>+1~4% 且 -10% token</strong> ✅</td>
+<td><strong>+1~4% 且 -10% token</strong> ✅</td>
+</tr>
+<tr>
+<td>Qwen3-Coder-480B</td>
+<td>+1~4%</td>
+<td>+1~4%</td>
+</tr>
+<tr>
+<td>Qwen3系列其他</td>
+<td>+1~4%</td>
+<td>+1~4%</td>
+</tr>
+</tbody>
+</table>
+<p><strong>相同Token预算下的额外收益</strong>：+2%~3% 准确率提升
+→ <strong>说明去除冗余终端上下文同时提升了效率和效果</strong></p>
+<h3 id="32">3.2 跨基准泛化<a class="headerlink" href="#32" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>基准</th>
+<th>类型</th>
+<th>TACO效果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SWE-Bench Lite</td>
+<td>软件工程</td>
+<td>正向 ✅</td>
+</tr>
+<tr>
+<td>CompileBench</td>
+<td>编译任务</td>
+<td>正向 ✅</td>
+</tr>
+<tr>
+<td>DevEval</td>
+<td>开发评估</td>
+<td>正向 ✅</td>
+</tr>
+<tr>
+<td>CRUST-Bench</td>
+<td>CRUST命令</td>
+<td>正向 ✅</td>
+</tr>
+</tbody>
+</table>
+<p><strong>跨不同Agent框架和主干模型，学习的压缩规则都表现出良好的迁移能力。</strong></p>
+<h3 id="33-token">3.3 Token效率<a class="headerlink" href="#33-token" title="Permanent link">&para;</a></h3>
+<p>使用MiniMax-2.5时：
+- Token开销<strong>减少约10%</strong>
+- 性能<strong>反而提升</strong>
+→ 证明<strong>噪声信息的去除有助于模型更好地聚焦关键信号</strong></p>
+<hr />
+<h2 id="4-discussion">4 讨论（Discussion）<a class="headerlink" href="#4-discussion" title="Permanent link">&para;</a></h2>
+<h3 id="41-taco">4.1 TACO为何有效？<a class="headerlink" href="#41-taco" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>因素</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>自适应</strong></td>
+<td>规则适应当前仓库/命令/状态的特殊模式</td>
+</tr>
+<tr>
+<td><strong>在线学习</strong></td>
+<td>在交互过程中持续改进，不是一次性固定方案</td>
+</tr>
+<tr>
+<td><strong>跨任务迁移</strong></td>
+<td>全局规则池积累了通用的压缩智慧</td>
+</tr>
+<tr>
+<td><strong>无训练成本</strong></td>
+<td>即插即用，无需微调任何模型</td>
+</tr>
+</tbody>
+</table>
+<h3 id="42">4.2 与相关工作的关系<a class="headerlink" href="#42" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>方面</th>
+<th>TACO的位置</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>vs SWE-Pruner</td>
+<td>训练free，适用范围广（不限SWE任务）</td>
+</tr>
+<tr>
+<td>vs 上下文管理工具</td>
+<td>自动发现规则而非手动设计</td>
+</tr>
+<tr>
+<td>vs 通用LLM摘要</td>
+<td>结构化规则驱动，更稳定可控</td>
+</tr>
+<tr>
+<td>vs Self-Evolving Agents (MetaClaw等)</td>
+<td>将自演化思想首次应用于<strong>上下文压缩</strong>场景</td>
+</tr>
+</tbody>
+</table>
+<h3 id="43">4.3 局限性与未来工作<a class="headerlink" href="#43" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>规则质量依赖初始轨迹</strong>：如果Agent本身就表现差，发现的压缩规则也可能质量不高</li>
+<li><strong>收敛判据的经验性</strong>：当前收敛判据基于启发式</li>
+<li><strong>尚未考虑多模态观察</strong>：未来可扩展到GUI终端等场景</li>
+<li><strong>与其他优化目标的权衡</strong>：压缩可能与探索性行为存在张力</li>
+</ol>
+<hr />
+<h2 id="5-conclusion">5 结论（Conclusion）<a class="headerlink" href="#5-conclusion" title="Permanent link">&para;</a></h2>
+<p>TACO证明了：
+1. ✅ <strong>自演化的、任务感知的压缩</strong>对终端Agent有效
+2. ✅ <strong>训练-free</strong>即可获得一致的性能和效率提升
+3. ✅ 强<strong>跨Agent/模型/基准泛化能力</strong>
+4. ✅ 为缓解终端环境中的<strong>上下文饱和瓶颈</strong>提供了通用可扩展的解决方案</p>
+<p><strong>最终启示</strong>：终端Agent不需要更多的上下文窗口——它们需要<strong>更好的上下文</strong>。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.expand", "navigation.indexes", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

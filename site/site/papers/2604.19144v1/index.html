@@ -1,0 +1,3042 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://groupechou.github.io/paper-learning-hub/papers/2604.19144v1/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>ReflectMT: Internalizing Reflection for Efficient and High-Quality Machine Translation - 论文自动研学知识库</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#reflectmt-internalizing-reflection-for-efficient-and-high-quality-machine-translation" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="论文自动研学知识库" class="md-header__button md-logo" aria-label="论文自动研学知识库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            论文自动研学知识库
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              ReflectMT: Internalizing Reflection for Efficient and High-Quality Machine Translation
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="论文自动研学知识库" class="md-nav__button md-logo" aria-label="论文自动研学知识库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    论文自动研学知识库
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../roadmap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    📖 学习总纲
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/daily-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    📅 今日更新
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../agents/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🤖 AI Agent 主线
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🤖 AI Agent 主线
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/ch01-basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第一章 Agent 基础架构篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/ch02-planning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第二章 规划与推理篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/ch03-tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第三章 工具使用与API篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/ch04-memory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第四章 记忆与检索篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/ch05-multi-agent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第五章 多智能体协作篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/ch06-embodied/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第六章 具身智能篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/ch07-safety/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第七章 Agent评估与安全篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/ch08-frontier/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第八章 前沿探索篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../time_series/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    📈 时序预测主线
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    📈 时序预测主线
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../time_series/ch01-basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第一章 基础理论篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../time_series/ch02-classics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第二章 经典方法篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../time_series/ch03-transformer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第三章 Transformer革命篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../time_series/ch04-foundation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第四章 基础模型篇(Foundation Models)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../time_series/ch05-long-horizon/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第五章 长序列预测篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../time_series/ch06-st-gnn/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第六章 多变量时空篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../time_series/ch07-frontier/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第七章 前沿探索篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../cross_domain/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🔗 交叉融合
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_6" id="__nav_6_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🔗 交叉融合
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cross_domain/ts-agent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    时序预测Agent
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cross_domain/agent-analysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Agent驱动分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cross_domain/autonomous/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    自主决策系统
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../organizations/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🏢 机构专题
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_7" id="__nav_7_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🏢 机构专题
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../organizations/openai/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OpenAI 系列
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../organizations/deepmind/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Google DeepMind
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../organizations/anthropic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Anthropic 系列
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../organizations/meta/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Meta 系列
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../organizations/microsoft/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Microsoft 系列
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../organizations/domestic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    国内大厂系列
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../organizations/academic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    学术机构
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    论文详情
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    论文详情
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        摘要
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="摘要">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        中文翻译
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        术语解释
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        图表/公式说明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#takeaway" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        关键 Takeaway
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#section-1-introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Section 1 — Introduction（引言）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Section 1 — Introduction（引言）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        中文翻译
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        术语解释
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        图表/公式说明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#takeaway_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        关键 Takeaway
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#section-2-methodology" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Section 2 — Methodology（方法论）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Section 2 — Methodology（方法论）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        中文翻译
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#21-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 总览（Overview）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-data-construction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 数据构建（Data Construction）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-progressive-reflection-internalization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 渐进式反思内化（Progressive Reflection Internalization）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.3 渐进式反思内化（Progressive Reflection Internalization）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#231-reward-modeling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3.1 奖励建模（Reward Modeling）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#232-stage-1-reflection-capability-establishment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3.2 第一阶段：反思能力建立（Stage 1: Reflection Capability Establishment）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#233-stage-2-capability-internalization-and-transfer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3.3 第二阶段：能力内化和迁移（Stage 2: Capability Internalization and Transfer）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        术语解释
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        图表/公式说明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#takeaway_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        关键 Takeaway
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#section-3-experiments" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Section 3 — Experiments（实验）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Section 3 — Experiments（实验）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        中文翻译
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 实验设置
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-baselines" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 基线（Baselines）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-main-result" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 主要结果（Main Result）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.3 主要结果（Main Result）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#llm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        与通用 LLM 比较
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lrm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        与强 LRM 基线比较
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mt" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        与专用 MT 模型比较
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        与预思考模型比较
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4 反思内化分析
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#35-ablation-study" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.5 消融研究（Ablation Study）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        术语解释
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        图表/公式说明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#takeaway_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        关键 Takeaway
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#section-4-related-work-conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Section 4 — Related Work &amp; Conclusion（相关工作与结论）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Section 4 — Related Work &amp; Conclusion（相关工作与结论）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        中文翻译
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        相关工作
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        结论
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#limitations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        局限性（Limitations）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        术语解释
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_19" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        图表/公式说明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#takeaway_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        关键 Takeaway
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#appendix-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        附录补充（Appendix Summary）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="附录补充（Appendix Summary）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        中文翻译
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        附录 A：数据详情
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        附录 B：评估提示词
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        附录 C：实现细节
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#egpt-4o" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        附录 E：GPT-4o 评估
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        术语解释
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        图表/公式说明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#takeaway_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        关键 Takeaway
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        总评与思考
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="总评与思考">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        论文的核心洞察
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_25" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        方法设计的亮点
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_26" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        数据说服力
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_27" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        局限性与未来方向
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ul-xcot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        与 UL-XCoT（上一篇论文）的有趣对比
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="reflectmt-internalizing-reflection-for-efficient-and-high-quality-machine-translation">ReflectMT: Internalizing Reflection for Efficient and High-Quality Machine Translation<a class="headerlink" href="#reflectmt-internalizing-reflection-for-efficient-and-high-quality-machine-translation" title="Permanent link">&para;</a></h1>
+<p>（ReflectMT：将反思内化以实现高效高质量机器翻译）</p>
+<!-- 论文元数据卡片 -->
+<div class="paper-meta">
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">机构</span>
+    <span class="paper-meta-value org-deepseek">DeepSeek / 厦门大学 / 腾讯微信AI</span>
+  </div>
+  <div class="paper-meta-label">方向</span>
+    <span class="paper-meta-value">AI Agent / 机器翻译 / 推理模型</span>
+  </div>
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">日期</span>
+    <span class="paper-meta-value">2026-04-21</span>
+  </div>
+</div>
+
+<div class="admonition info">
+<p><span class="paper-tag paper-tag-translated">✅ 已完成精读</span></p>
+</div>
+<ul>
+<li><strong>来源</strong>：<a href="https://arxiv.org/abs/2604.19144v1">arXiv</a></li>
+<li><strong>论文链接</strong>：<a href="https://arxiv.org/pdf/2604.19144v1">PDF</a></li>
+</ul>
+<h2 id="_1">摘要<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<h3 id="_2">中文翻译<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<p>近年来，将大型推理模型（Large Reasoning Models, LRMs）应用于机器翻译（Machine Translation, MT）的兴趣日益增长。现有方法主要采用<strong>"先思考后翻译"（think-first-then-translate）</strong> 范式。尽管显式推理轨迹显著提升了翻译质量，但它们带来了<strong>难以承受的推理成本和延迟</strong>。</p>
+<p>为解决这些限制，我们提出了 <strong>ReflectMT</strong>，一种面向机器翻译的<strong>两阶段反思内化算法</strong>，采用<strong>"先翻译后思考"（translate-first-think-later）</strong> 范式。我们的方法通过强化学习培养模型的<strong>"翻译—反思—优化"（translate–reflect–refine）</strong> 能力：</p>
+<ul>
+<li><strong>第一阶段</strong>：培养模型的高质量反思和优化能力，从而增强其语义理解和任务特定知识</li>
+<li><strong>第二阶段</strong>：训练模型将反思过程中获得的知识<strong>内化（Internalize）</strong></li>
+</ul>
+<p>因此，在推理期间，ReflectMT 以<strong>直接翻译模式</strong>运行，在首次尝试时就产出高质量翻译，无需任何显式推理步骤。</p>
+<p>在 WMT24 等数据集上的实验表明，我们模型推理时的<strong>首遍翻译（First-pass Translation）</strong> 在自动指标和基于 GPT 的评估中均优于 DeepSeek-R1 等多步推理 LRM，在 GPT 翻译质量评估上提升 <strong>2.16 分</strong>的同时减少 Token 消耗 <strong>94.33%</strong>。</p>
+<h3 id="_3">术语解释<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>英文术语</th>
+<th>中文译名</th>
+<th>一句话解释</th>
+<th>应用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Large Reasoning Model (LRM)</td>
+<td>大型推理模型</td>
+<td>具备长链式思维推理能力的大语言模型</td>
+<td>数学、编程、逻辑等复杂任务</td>
+</tr>
+<tr>
+<td>think-first-then-translate</td>
+<td>先思考后翻译</td>
+<td>先进行显式CoT推理再生成翻译的范式</td>
+<td>现有LRM+MT方法的共同特征</td>
+</tr>
+<tr>
+<td>translate-first-think-later</td>
+<td>先翻译后思考后反思</td>
+<td>先生成初译再进行反思优化的范式</td>
+<td>ReflectMT的核心创新</td>
+</tr>
+<tr>
+<td>Reflection Internalization</td>
+<td>反思内化</td>
+<td>将显式反思过程转化为隐式直觉能力的关键机制</td>
+<td>从"新手"到"专家"的技能迁移</td>
+</tr>
+<tr>
+<td>First-pass Translation</td>
+<td>首遍/首次翻译</td>
+<td>模型第一次直接生成的翻译结果（不经反思）</td>
+<td>ReflectMT推理时的输出</td>
+</tr>
+<tr>
+<td>Multi-agent Collaboration</td>
+<td>多智能体协作</td>
+<td>通过多个专门化Agent协作生成训练数据的方法</td>
+<td>构建反思翻译数据集</td>
+</tr>
+<tr>
+<td>GRPO (Generalized Relative Policy Optimization)</td>
+<td>广义相对策略优化</td>
+<td>一种不需要价值模型的强化学习算法</td>
+<td>ReflectMT的训练核心算法</td>
+</tr>
+<tr>
+<td>Early Stopping Strategy</td>
+<td>早停策略</td>
+<td>检测到特定Token时立即终止生成的推理优化技术</td>
+<td>消除推理时计算开销</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_4">图表/公式说明<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p><strong>Figure 1 — ReflectMT 训练 vs 推理范式对比图</strong></p>
+<p><img alt="Figure 1: 训练与推理范式" src="assets/page-002-img-01.png" /></p>
+<p>此图直观展示了 ReflectMT 的核心理念——训练时做完整反思链，推理时只输出初译：
+- <strong>上半部分（Training）</strong>：展示一个完整示例——源句关于公司订阅模式的商业文本。模型依次输出：<code>&lt;answer&gt;</code> 初译（黑色）→ <code>&lt;reflection&gt;</code> 多维度反思分析 → <code>&lt;need_revision&gt;</code> 是否需要修改 → <code>&lt;final_answer&gt;</code> 最终译文（灰色）
+- <strong>下半部分（Inference）</strong>：仅保留 <code>&lt;answer&gt;</code> 部分作为输出，通过早停策略跳过后续所有反思步骤</p>
+<p><strong>设计意图</strong>：此图是论文最关键的可视化，清晰传达了"训练时学反思、推理时隐式执行"的核心思想。</p>
+<h3 id="takeaway">关键 Takeaway<a class="headerlink" href="#takeaway" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>核心矛盾（作者主张）</strong>：现有 LRM+MT 方法的翻译质量高但推理成本极高（长CoT导致大量冗余Token和延迟）</li>
+<li><strong>解决思路（作者主张）</strong>：将反思从"推理时动作"转变为"训练时学习目标"，实现从"显式反思"到"隐式能力"的转化</li>
+<li><strong>效率数据（客观事实）</strong>：GPT评分 +2.16 分，Token 减少 94.33%（相比执行完整反思的版本）</li>
+<li><strong>直觉类比（作者主张）</strong>：如同专业翻译员——新手需要反复修改，专家能一次性产出高质量译文</li>
+</ul>
+<hr />
+<h2 id="section-1-introduction">Section 1 — Introduction（引言）<a class="headerlink" href="#section-1-introduction" title="Permanent link">&para;</a></h2>
+<h3 id="_5">中文翻译<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<p>近年来，大型推理模型（Large Reasoning Models, LRMs），如 OpenAI-o1（OpenAI, 2024）和 DeepSeek-R1（Guo et al., 2025），在数学、编程和逻辑推理等复杂任务上展现出强大能力。这些模型通常利用<strong>长链式思维（Chain-of-Thought, CoT）</strong> 过程，通过推理、自验证和迭代优化来探索不同解题路径，然后生成最终答案。</p>
+<p>受这些进展启发，研究人员开始探索将长 CoT 引入机器翻译（Machine Translation, MT）。我们将这些方法归类为<strong>"预思考"（Pre-thinking）</strong> 范式，即模型在生成翻译之前执行显式推理。例如：
+- <strong>Marco-o1</strong>（Zhao et al., 2024）：初步验证了长 CoT 在俚语翻译中的有效性
+- <strong>DRT 模型</strong>（Wang et al., 2024a）：通过监督微调训练，展示了长 CoT 在文学翻译中的潜力
+- <strong>ExTrans</strong>（Wang et al., 2025b）：进一步提出<strong>样本增强型强化学习框架</strong>，实现了推理链和翻译质量的协同提升</p>
+<p>然而，虽然显式推理过程显著增强了模型处理困难翻译任务的能力，但<strong>"预思考"范式要求模型在推理阶段生成显式且冗长的思维链</strong>，导致大量计算开销和延迟，限制了其应用。</p>
+<blockquote>
+<p>[扩展] 作者在此处精准地指出了现有方法的痛点："预思考"范式的推理开销是结构性的——每次推理都必须走完完整的CoT流程，无论当前问题是否真的需要如此深度的思考。这类似于要求一位资深翻译员对每句话都写一份详细的翻译笔记，即使是"Hello"这样简单的句子。</p>
+</blockquote>
+<p>为解决上述限制，本文提出了一种新颖的<strong>机器翻译"后思考"（Post-thinking）算法</strong>——<strong>ReflectMT</strong>。与"先思考后翻译"范式不同，我们的核心动机是<strong>利用反思机制在训练阶段增强模型能力</strong>，使推理时能够直接生成高质量翻译而不产生额外计算成本。</p>
+<p>具体而言，我们在训练阶段采用<strong>"生成—反思—优化"（translate–reflect–refine）</strong> 工作流：
+1. 模型首先生成初始翻译
+2. 然后启动<strong>结构化反思过程</strong>对其进行批判性评估
+3. 最后生成优化后的翻译</p>
+<p>与一般任务中的自由形式反思不同，我们设计了针对 MT 特定需求的<strong>多维度结构化反思过程</strong>（涵盖错误识别、歧义分析等），并通过<strong>多智能体协作</strong>构建高质量的反思数据集。</p>
+<p>此外，为了实现反思能力的内化，我们提出了基于强化学习（Reinforcement Learning, RL）的<strong>两阶段渐进式训练策略</strong>。该策略镜像了人类翻译员的技能发展过程：新手依赖显式反思和修订，而积累的经验使这些过程可以被<strong>内化</strong>，从而能够直接生成高质量翻译。
+- <strong>第一阶段（反思能力建立）</strong>：引导模型通过精心设计的奖励函数学习完整的"翻译—反思—优化"流程
+- <strong>第二阶段（能力内化和迁移）</strong>：通过强化直接翻译的奖励信号，引导模型将习得的反思知识整合到初始翻译过程中</p>
+<p>这种训练范式实现了从<strong>"显式反思"到"隐式能力"</strong> 的转化，使模型能够在推理时直接输出高质量翻译。</p>
+<p>实验结果（包括 WMT24 等多数据集）表明，我们的方法在自动指标和基于 GPT 的评估中均优于代表性强基线模型（包括 DeepSeek-R1）。值得注意的是，<strong>在推理阶段不执行显式反思</strong>的设置下，我们的模型相比执行完整反思过程的版本在 GPT 评估上提升 <strong>2.16 分</strong>，同时 Token 消耗减少 <strong>94.33%</strong>，真正实现了翻译效率和质量的<strong>双重提升</strong>。</p>
+<p>本文的主要贡献总结如下：
+1. 将<strong>"后思考"反思机制</strong>引入神经机器翻译，设计了针对 MT 任务的多维度结构化反思过程，实现系统性的翻译评估和迭代改进
+2. 提出了基于 RL 的<strong>反思内化训练算法</strong>，通过两阶段训练策略将反思知识内化为模型的直接生成能力，显著提升翻译质量的同时消除推理时的额外计算开销
+3. 通过<strong>多智能体协作</strong>构建了高质量 MT 反思数据集，为学习完整推理链提供了坚实的数据基础；广泛的消融实验验证了所提框架的有效性</p>
+<h3 id="_6">术语解释<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>英文术语</th>
+<th>中文译名</th>
+<th>一句话解释</th>
+<th>应用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pre-thinking Paradigm</td>
+<td>预思考范式</td>
+<td>翻译前先生成推理链再翻译的模式</td>
+<td>现有LRM+MT方法的分类标签</td>
+</tr>
+<tr>
+<td>Post-thinking Paradigm</td>
+<td>后思考范式</td>
+<td>翻译后再反思修正的模式</td>
+<td>ReflectMT的创新定位</td>
+</tr>
+<tr>
+<td>Structured Reflection</td>
+<td>结构化反思</td>
+<td>按照预定义维度（准确性/流畅性/专业性等）进行的系统性反思</td>
+<td>区别于自由形式反思</td>
+</tr>
+<tr>
+<td>Multi-dimensional Assessment</td>
+<td>多维度评估</td>
+<td>从多个角度（语义准确性、文化适配性、流畅度等）评价翻译质量</td>
+<td>反思过程的核心内容</td>
+</tr>
+<tr>
+<td>Iterative Refinement Loop</td>
+<td>迭代优化循环</td>
+<td>翻译→反思→修改→再反思的循环过程</td>
+<td>数据构建的核心机制</td>
+</tr>
+<tr>
+<td>Progressive Training Strategy</td>
+<td>渐进式训练策略</td>
+<td>分阶段逐步提升能力的训练方式</td>
+<td>两阶段RL的设计哲学</td>
+</tr>
+<tr>
+<td>Explicit-to-Implicit Transformation</td>
+<td>显式-隐式转化</td>
+<td>将有意识的反思行为变为无意识的直觉反应的能力迁移</td>
+<td>ReflectMT的核心目标</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_7">图表/公式说明<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<p>本片段包含 Figure 1（已在摘要部分详述）和一个具体的多维度反思示例（Page 2），展示了 ReflectMT 对一条真实商业文本的完整反思过程：</p>
+<p><strong>示例源句</strong>：<em>"The company's pivot to a subscription-based model, while initially met with resistance from legacy customers, ultimately drove a 340% increase in customer lifetime value and reduced churn by half..."</em></p>
+<p><strong>反思过程</strong>：
+1. <strong>初译</strong>（基本正确但不够专业）
+2. <strong>反思分析</strong>（4个维度）：
+   - 准确性检查："pivot"→"转向"不够精确，建议"战略转型"；"老客户"→建议"原有客户"/"存量客户"
+   - 完整性：缺少对"subscription-based model"的专业定义；未强调"ultimately"的递进语气
+   - 专业性：整体可读但缺乏商务术语专业性；"短期痛苦"偏口语化，建议"短期阵痛"
+   - 问题严重程度：中等——不影响基本理解，但专业性和准确性有改进空间
+3. <strong>改进方向</strong>：使用更专业的商务术语；增强语气递进感；优化表达正式度
+4. <strong>最终译文</strong>（显著更专业）：<em>"该公司向订阅制模式的战略转型...充分证明了短期阵痛往往是实现长期可持续增长的必经之路。"</em></p>
+<p>这个示例极具教学价值，展示了结构化反思如何将一篇"合格"的翻译提升为"优秀"的翻译。</p>
+<h3 id="takeaway_1">关键 Takeaway<a class="headerlink" href="#takeaway_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>范式转换（作者主张）</strong>：从"pre-thinking"到"post-thinking"不仅是顺序调整，更是根本性的设计理念转变</li>
+<li><strong>类比人类学习（作者主张）</strong>：新手靠显式规则，专家靠直觉——ReflectMT 让模型完成这一转变</li>
+<li><strong>两阶段的分工明确（作者主张）</strong>：Stage 1 学会"怎么反思"，Stage 2 学会"把反思变成直觉"</li>
+<li><strong>实际效果惊人（客观事实）</strong>：94.33% 的 Token 减少意味着推理成本几乎降低一个数量级</li>
+</ul>
+<hr />
+<h2 id="section-2-methodology">Section 2 — Methodology（方法论）<a class="headerlink" href="#section-2-methodology" title="Permanent link">&para;</a></h2>
+<h3 id="_8">中文翻译<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<h3 id="21-overview">2.1 总览（Overview）<a class="headerlink" href="#21-overview" title="Permanent link">&para;</a></h3>
+<p>我们呈现<strong>反思内化框架（Reflection Internalization Framework）</strong>，它包含三个核心模块：
+1. <strong>通过多智能体协作构建具有完整反思链的训练数据</strong>（第 2.2 节）
+2. <strong>设计多维度奖励函数</strong>，联合优化格式合规性、翻译质量、反思质量和翻译改进（第 2.3.1 节）
+3. <strong>采用两阶段强化学习（RL）策略</strong>，先建立再内化反思能力（第 2.2.3 和 2.3.3 节）</p>
+<p>框架的最终目标是利用训练期间的显式反思步骤来建立认知能力，随后将其<strong>内化</strong>，使模型能在推理时的单次前向传播中生成高质量翻译而无需推理开销。</p>
+<p><img alt="Figure 2: 反思内化框架总览" src="assets/page-003-img-01.png" /></p>
+<p><strong>Figure 2 — 反思内化框架总览图</strong>：
+- <strong>(a) 数据构建（Data Construction）</strong>：左侧展示多智能体系统的迭代优化循环——Translator 生成初译 → Reflector 进行多维度反思打分（Translation Quality Analysis + Score）→ Translator 根据反馈修改 → 循环直到分数达标或达到最大迭代次数。图中展示了一个具体例子：源句 "Local fall-outs turning into shop thy neighbour" 经过 Round1（Score:30）→ RoundN（Score:92）的迭代。
+- <strong>(b) 强化学习策略（Reinforcement Learning Strategy）</strong>：右侧展示训练流水线——Qwen2.5-7b-instruct 经 Cold Start SFT → Stage 1 GRPO Train（反思优化能力建立）→ Stage 2 GRPO Train（反思内化）。注意最终产物 ReflectMT-SFT/Stage1/Stage2 都是同一个模型在不同训练阶段的状态。</p>
+<h3 id="22-data-construction">2.2 数据构建（Data Construction）<a class="headerlink" href="#22-data-construction" title="Permanent link">&para;</a></h3>
+<p>高质量的反思数据对于赋予模型显式推理能力至关重要。然而，现有机器翻译数据集通常仅包含平行语料，缺乏中间推理步骤。为解决此问题，我们设计了一个<strong>迭代式多智能体协作系统</strong>，通过 Translator 和 Reflector 之间的对话自动构建包含完整反思链的数据集。</p>
+<p>如图 2(a) 所示，对于每个预收集的句子 x，我们采用双智能体框架进行翻译。合成过程如下：</p>
+<p><strong>(1) 初始翻译（Initial Translation）</strong>：Translator 生成源句 x 的初始翻译 <span class="arithmatex">\(y_0 = \text{Translator}(x)\)</span>。</p>
+<p><strong>(2) 反思评估（Reflective Evaluation）</strong>：Reflector 对 <span class="arithmatex">\(y_0\)</span> 进行批判性评估，提供<strong>多维度评估</strong>：
+- 基于<strong>预定义标准</strong>（如语义准确性、文化适配性和流畅性）的质量分数 <span class="arithmatex">\(r_0 = \text{Reflector\_score}(x, y_0) \in [0, 100]\)</span>
+- 针对<strong>特定词汇和结构缺陷</strong>的结构化改进建议 <span class="arithmatex">\(f_0 = \text{Reflector\_suggest}(x, y_0, r_0)\)</span></p>
+<p><strong>(3) 迭代优化循环（Iterative Refinement Loop）</strong>：智能体通过<strong>反馈循环</strong>协作优化翻译。在第 k 次迭代（k≥1）：
+- Translator 生成更新的翻译：<span class="arithmatex">\(y_k = \text{Translator}(x, y_{k-1}, f_{k-1}, r_{k-1})\)</span>
+- Reflector 返回新的分数 <span class="arithmatex">\(r_k\)</span> 和更新后的建议 <span class="arithmatex">\(f_k\)</span></p>
+<p>当分数达到满意阈值（<span class="arithmatex">\(r_k \geq \theta\)</span>）或达到最大迭代限制（<span class="arithmatex">\(k \geq K_{max}\)</span>）时循环终止。序列 <span class="arithmatex">\(\{(y_k, r_k, f_k)\}_{k=0}^K\)</span> 形成<strong>完整的反思翻译链（Reflective Translation Chain）</strong>。</p>
+<blockquote>
+<p>[扩展] 这个数据构建过程的设计非常巧妙：(1) 使用两个专业化角色（Translator 专注翻译，Reflector 专注评估）而非单一模型自我对话，确保了反思的独立性和质量；(2) 迭代循环自然产生了不同质量的中间状态，为模型学习"如何从差变好"提供了丰富信号；(3) <span class="arithmatex">\(\theta=90\)</span> 的阈值确保了最终翻译的高质量，<span class="arithmatex">\(K_{max}=5\)</span> 防止了无限循环。</p>
+</blockquote>
+<h3 id="23-progressive-reflection-internalization">2.3 渐进式反思内化（Progressive Reflection Internalization）<a class="headerlink" href="#23-progressive-reflection-internalization" title="Permanent link">&para;</a></h3>
+<p>我们的训练范式受<strong>专业人类翻译员的认知发展</strong>启发：产生高质量首遍翻译的能力源于将长期积累的"审慎反思"经验<strong>内化为直觉能力</strong>。</p>
+<p>基于这一洞察，我们设计了<strong>两阶段渐进式强化学习（RL）策略</strong>：
+- <strong>第一阶段</strong>：训练模型掌握显式的"翻译—反思—优化"流程
+- <strong>第二阶段</strong>：将焦点转移到初始翻译，迫使模型将习得的反思知识<strong>内化</strong>到其首遍生成中</p>
+<h4 id="231-reward-modeling">2.3.1 奖励建模（Reward Modeling）<a class="headerlink" href="#231-reward-modeling" title="Permanent link">&para;</a></h4>
+<p>为实现 RL 算法，我们设计了<strong>四个奖励分量</strong>。给定源句 x，要求模型按照严格定义的结构模板生成输出：
+<div class="highlight"><pre><span></span><code>&lt;answer&gt;y_init&lt;/answer&gt;
+&lt;reflection&gt;f_refl&lt;/reflection&gt;
+&lt;need_revision&gt;v_rev&lt;/need_revision&gt;
+&lt;final_answer&gt;y_fin&lt;/final_answer&gt;
+</code></pre></div></p>
+<p>我们使用 <strong>DeepSeek-V3</strong> 作为 LLM-as-a-Judge（记为 <span class="arithmatex">\(J_{v3}(\cdot)\)</span>），在 0-100 分尺度上对文本评分。</p>
+<p><strong>格式奖励 (<span class="arithmatex">\(r_{form}\)</span>)</strong>：使用正则表达式验证输出是否严格按正确顺序包含所有必需的 XML 标签：
+$<span class="arithmatex">\(r_{form} = \begin{cases} 1 &amp; \text{if format is correct} \\ 0 &amp; \text{otherwise} \end{cases} \quad (1)\)</span>$</p>
+<p><strong>反思质量奖励 (<span class="arithmatex">\(r_{refl}\)</span>)</strong>：基于问题识别的准确性和建议的可操作性评估反思内容 <span class="arithmatex">\(f_{refl}\)</span>：
+$<span class="arithmatex">\(r_{refl} = \frac{J_{v3}(x, y_{init}, f_{refl})}{100} \quad (2)\)</span>$</p>
+<p><strong>翻译质量得分（<span class="arithmatex">\(s_{init}\)</span> 和 <span class="arithmatex">\(s_{fin}\)</span>）</strong>：分别评估初始和最终翻译的质量（语义准确性、流畅性等）：
+<span class="arithmatex">\(s_{init} = J_{v3}(x, y_{init})\)</span>, <span class="arithmatex">\(s_{fin} = J_{v3}(x, y_{fin})\)</span></p>
+<p>为实现从显式反思到隐式内化的平滑过渡，<strong>翻译质量奖励（<span class="arithmatex">\(r_{trans}\)</span>）</strong> 的公式根据训练阶段动态调整（详见第 2.3.2 和 2.3.3 节）。</p>
+<p><strong>反思改进奖励 (<span class="arithmatex">\(r_{imp}\)</span>)</strong>：为鼓励有意义的优化，定义分数差异 <span class="arithmatex">\(\Delta s = s_{fin} - s_{init}\)</span> 并设计<strong>分段奖励</strong>：
+$<span class="arithmatex">\(r_{imp} = \begin{cases} 1 &amp; \text{if } \Delta s \geq \eta \\ \mu \times \Delta s &amp; \text{if } 0 &lt; \Delta s &lt; \eta \\ 0 &amp; \text{if } \Delta s \leq 0 \end{cases} \quad (3)\)</span>$</p>
+<p>其中 <span class="arithmatex">\(\mu\)</span> 和 <span class="arithmatex">\(\eta\)</span> 是预定义超参数。</p>
+<p><strong>总奖励（R）</strong>：总奖励是上述各分量的加权和：
+$<span class="arithmatex">\(R = w_{form} r_{form} + w_{trans} r_{trans} + w_{refl} r_{refl} + w_{imp} r_{imp} \quad (4)\)</span>$</p>
+<p>其中 <span class="arithmatex">\(w_{form}, w_{trans}, w_{refl}, w_{imp}\)</span> 表示各分量的权重。</p>
+<h4 id="232-stage-1-reflection-capability-establishment">2.3.2 第一阶段：反思能力建立（Stage 1: Reflection Capability Establishment）<a class="headerlink" href="#232-stage-1-reflection-capability-establishment" title="Permanent link">&para;</a></h4>
+<p>在第一阶段，目标是让模型掌握<strong>完整的反思翻译任务</strong>。我们使用 <strong>Qwen2.5-7B-Instruct</strong> 作为基础模型，利用第 2.2 节构建的数据通过<strong>低秩适配（LoRA）</strong> 进行冷启动监督微调（SFT），使模型能够生成结构化输出格式。</p>
+<p>随后应用 <strong>GRPO（广义相对策略优化）</strong> 算法（Shao et al., 2024）。在此阶段，我们期望模型产出合理的初始翻译和高度优化的最终翻译。因此第一阶段的翻译质量奖励定义为初始和最终翻译得分的平均值：
+$<span class="arithmatex">\(r_{stage1}^{trans} = \frac{s_{init} + s_{fin}}{200} \quad (5)\)</span>$</p>
+<p>给定源句 x，GRPO 从策略 <span class="arithmatex">\(\pi\)</span> 中采样 n 个生成 <span class="arithmatex">\(\{g_1, \ldots, g_n\}\)</span>，用公式(4)计算每个 <span class="arithmatex">\(g_i\)</span> 的 Stage 1 总奖励 <span class="arithmatex">\(r_i\)</span>。GRPO 通过最大化以下目标来优化策略 <span class="arithmatex">\(\pi'\)</span>：
+$<span class="arithmatex">\(\frac{1}{n}\sum_{i=1}^n \left[ \min\left(\rho_i A_i, \text{clip}(\rho_i, 1-\epsilon, 1+\epsilon) A_i\right) - \beta D_{KL}\left(\frac{\pi'}{\pi_{ref}}\right) \right] \quad (6)\)</span>$</p>
+<p>其中 <span class="arithmatex">\(\rho_i = \frac{\pi'(g_i|x)}{\pi(g_i|x)}\)</span>，<span class="arithmatex">\(\pi_{ref}\)</span> 是冷启动 SFT 模型，<span class="arithmatex">\(\epsilon, \beta\)</span> 是超参数。优势 <span class="arithmatex">\(A_i\)</span> 通过归一化奖励计算：
+$<span class="arithmatex">\(A_i = \frac{r_i - \text{mean}(\{r_1, r_2, \ldots, r_n\})}{\text{std}(\{r_1, r_2, \ldots, r_n\})} \quad (7)\)</span>$</p>
+<h4 id="233-stage-2-capability-internalization-and-transfer">2.3.3 第二阶段：能力内化和迁移（Stage 2: Capability Internalization and Transfer）<a class="headerlink" href="#233-stage-2-capability-internalization-and-transfer" title="Permanent link">&para;</a></h4>
+<p>在第二阶段，我们将训练焦点转移到<strong>初始翻译的质量</strong>。为迫使模型将第一阶段获得的反思知识<strong>内化</strong>到其首轮生成中，我们对奖励机制引入两项关键修改：</p>
+<ol>
+<li>
+<p><strong>翻译质量奖励完全由初始翻译分数决定</strong>（忽略最终翻译）：
+$<span class="arithmatex">\(r_{stage2}^{trans} = \frac{s_{init}}{100} \quad (8)\)</span>$</p>
+</li>
+<li>
+<p><strong>大幅提高翻译权重 <span class="arithmatex">\(w_{trans}^{new}\)</span>，相应降低改进权重 <span class="arithmatex">\(w_{imp}^{new}\)</span></strong>：</p>
+</li>
+<li>Stage 1 权重：<span class="arithmatex">\(w_{form}=0.15, w_{trans}=0.45, w_{refl}=0.2, w_{imp}=0.2\)</span></li>
+<li>Stage 2 权重：<span class="arithmatex">\(w_{form}=0.15, w_{trans}=0.75, w_{refl}=0.05, w_{imp}=0.05\)</span></li>
+</ol>
+<p>然而，模型在训练期间仍需输出<strong>完整的结构化标签</strong>以维持 RL 稳定性并防止推理格式的灾难性遗忘。这种<strong>奖励重构</strong>迫使模型在首次尝试时就产生近乎完美的翻译（<span class="arithmatex">\(y_{init}\)</span>），从而减少对后续反思步骤的依赖。</p>
+<p><strong>推理阶段（Inference Phase）</strong>：得益于这种内化机制，我们在推理时采用<strong>早停策略（Early Stopping Strategy）</strong>——检测到 <code>&lt;/answer&gt;</code> token 时即终止生成。模型直接输出高质量的首遍翻译，完全绕过 <code>&lt;reflection&gt;</code> 和 <code>&lt;final_answer&gt;</code>。这有效消除了与显式长推理链相关的<strong>计算开销和延迟</strong>。</p>
+<h3 id="_9">术语解释<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>英文术语</th>
+<th>中文译名</th>
+<th>一句话解释</th>
+<th>应用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Dual-Agent Framework</td>
+<td>双智能体框架</td>
+<td>一个负责翻译另一个负责评估的两角色协作架构</td>
+<td>数据构建的核心设计</td>
+</tr>
+<tr>
+<td>Reflective Translation Chain</td>
+<td>反思翻译链</td>
+<td>从初译经多次反思修改到终译的完整序列</td>
+<td>训练数据的原子单位</td>
+</tr>
+<tr>
+<td>LoRA (Low-Rank Adaptation)</td>
+<td>低秩适配</td>
+<td>高效的参数微调方法，仅训练低秩分解矩阵</td>
+<td>冷启动SFT的实现方式</td>
+</tr>
+<tr>
+<td>Cold Start SFT</td>
+<td>冷启动监督微调</td>
+<td>用构造好的反思数据进行的首轮微调</td>
+<td>让模型学会基本格式和能力</td>
+</tr>
+<tr>
+<td>Piecewise Reward</td>
+<td>分段奖励</td>
+<td>根据改进幅度分段计算的奖励函数</td>
+<td>鼓励有意义的优化</td>
+</tr>
+<tr>
+<td>Format Compliance</td>
+<td>格式合规性</td>
+<td>输出是否符合预定XML模板的约束</td>
+<td>格式奖励的评估对象</td>
+</tr>
+<tr>
+<td>Reward Restructuring</td>
+<td>奖励重构</td>
+<td>改变各奖励分量权重的操作</td>
+<td>Stage 2 强制内化的手段</td>
+</tr>
+<tr>
+<td>Catastrophic Forgetting</td>
+<td>灾难性遗忘</td>
+<td>训练新任务时忘记旧有能力的现象</td>
+<td>Stage 2 需要避免的风险</td>
+</tr>
+<tr>
+<td>GRPO</td>
+<td>广义相对策略优化</td>
+<td>不需要价值模型的PPO变体</td>
+<td>两阶段训练的核心RL算法</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_10">图表/公式说明<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
+<p><strong>Figure 2 — 反思内化框架总览图</strong>（已在 2.1 节详述）。</p>
+<p><strong>核心公式汇总</strong>：
+- 公式 (1)：格式奖励（二值函数）
+- 公式 (2)：反思质量奖励（LLM评判归一化）
+- 公式 (3)：反思改进奖励（三段式分段函数）
+- 公式 (4)：总奖励（加权求和）
+- 公式 (5)：Stage 1 翻译质量奖励（初译+终译平均）
+- 公式 (6)：GRPO 优化目标（含 KL 散度正则项）
+- 公式 (7)：优势函数（归一化奖励）
+- 公式 (8)：Stage 2 翻译质量奖励（仅初译）</p>
+<p><strong>公式 (8) 是全文最关键的公式</strong>：它代表了整个方法的核心思想——不再关心"反思后改得多好"，而是强迫"第一次就做好"。这是从"学会反思"到"把反思内化为直觉"的关键转折点。</p>
+<h3 id="takeaway_2">关键 Takeaway<a class="headerlink" href="#takeaway_2" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>三模块协同（作者主张）</strong>：数据构建（多智能体）→ 奖励设计（四维联合）→ 两阶段 RL（先学后内化）</li>
+<li><strong>Stage 1 与 Stage 2 的本质区别（作者主张）</strong>：Stage 1 关心"整条链的质量"，Stage 2 只关心"第一步的质量"</li>
+<li><strong>权重变化的深层含义（作者主张）</strong>：<span class="arithmatex">\(w_{trans}\)</span> 从 0.45 升至 0.75，<span class="arithmatex">\(w_{imp}\)</span> 从 0.20 降至 0.05——这相当于告诉模型"别指望靠后期修补拿分，一上来就必须做对"</li>
+<li><strong>推理时的早停（作者主张）</strong>：检测到 <code>&lt;/answer&gt;</code> 即终止——因为模型已经学会了在生成初译时就"隐式地完成了反思"</li>
+</ul>
+<hr />
+<h2 id="section-3-experiments">Section 3 — Experiments（实验）<a class="headerlink" href="#section-3-experiments" title="Permanent link">&para;</a></h2>
+<h3 id="_11">中文翻译<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
+<h3 id="31">3.1 实验设置<a class="headerlink" href="#31" title="Permanent link">&para;</a></h3>
+<p><strong>数据（Data）</strong>：我们专门为英→中机器翻译构建了反思翻译数据集。每个样本包含源句、初始翻译、反思分析和最终翻译。此外，使用 WMT23、WMT24 和 FLORES-200 的官方测试集评估泛化能力。</p>
+<p><strong>指标（Metrics）</strong>：主要采用 <strong>GRF（GPT Reference-Free）</strong> 评估翻译结果——无需人工参考译文即可评估。额外报告 <strong>COMETKIWI-XL (CK)</strong> 和 <strong>MetricX-24 (MX24)</strong> 两个广泛使用的语义级评估指标。效率方面使用 <strong>Token 数量</strong>（统一计算为"每句平均输出Token数"）。</p>
+<p><strong>骨干模型（Backbones）</strong>：使用 <strong>Qwen2.5-7B</strong> 作为基础模型。</p>
+<h3 id="32-baselines">3.2 基线（Baselines）<a class="headerlink" href="#32-baselines" title="Permanent link">&para;</a></h3>
+<p>我们从三个类别选择基线模型：</p>
+<p><strong>通用 LLM</strong>：Llama3.1-8B、Qwen2.5-7B、Qwen2.5-14B、GPT-4o</p>
+<p><strong>推理模型（LRM）</strong>：Marco-o1-7B、QwQ-32B、<strong>DeepSeek-R1</strong>、Qwen3-8B</p>
+<p><strong>专用 MT 模型</strong>：DRT-7B、DeepTrans-7B、ExTrans-7B（均遵循"先思考后翻译"范式）</p>
+<p>为确保公平比较，我们还对所有基线进行了 <strong>w/ refl 设置</strong>下的评估——即在推理时应用相同的结构化反思提示。</p>
+<h3 id="33-main-result">3.3 主要结果（Main Result）<a class="headerlink" href="#33-main-result" title="Permanent link">&para;</a></h3>
+<p>我们的 ReflectMT 模型在推理时采用<strong>直接翻译模式</strong>（无反思机制）。实验结果表明 ReflectMT 在所有评估指标上均有实质性改进。</p>
+<h4 id="llm">与通用 LLM 比较<a class="headerlink" href="#llm" title="Permanent link">&para;</a></h4>
+<p>最优模型 <strong>ReflectMT-Stage2</strong> 在我们的数据集上取得 <strong>82.55</strong> 的 GRF 分数，相比基线 Qwen2.5-7B-Instruct（73.52）提升 <strong>12.3%</strong>。MetricX-24 和 CometKiwi 指标分别相对提升 26.0% 和 2.1%。值得注意的是，模型推理时平均消耗 <strong>30.73 tokens/样本</strong>，几乎与非反思通用 LLM（33.08 tokens/样本）相同，引入的开销可忽略不计。</p>
+<h4 id="lrm">与强 LRM 基线比较<a class="headerlink" href="#lrm" title="Permanent link">&para;</a></h4>
+<p>我们的模型在强 LRM 上表现出<strong>卓越性能</strong>：
+- 超越 QwQ-32B（79.50）<strong>3.05 个 GRF 分</strong>
+- 超越 <strong>DeepSeek-R1</strong>（78.00）<strong>4.55 个 GRF 分</strong></p>
+<p>在 "translate-reflect-refine" 模式下，显式反思普遍改善了它们的翻译质量（如 DeepSeek-R1 w/ refl 提升至 81.15），但需要生成长长的思维链，导致 <strong>Token 消耗大幅增加</strong>（如 DeepSeek-R1 消耗 541.88 tokens/样本，是我们模型的 <strong>17 倍</strong>）。</p>
+<p>相比之下，基于轻量的 Qwen2.5-7B 骨干，我们的模型将反思能力<strong>内化</strong>为直接生成高质量翻译的能力，在<strong>参数规模和计算效率</strong>两方面都具有显著优势。</p>
+<h4 id="mt">与专用 MT 模型比较<a class="headerlink" href="#mt" title="Permanent link">&para;</a></h4>
+<p>相比现有的推理专用翻译模型，我们的方法在所有数据集和评估指标上均取得<strong>最优性能</strong>。相对于 ExTrans-7B（78.95），提升 3.6 个 GRF 分。</p>
+<h4 id="_12">与预思考模型比较<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h4>
+<p>为验证后编辑反思相较于预思考的优势，我们在相同训练配置下训练了一个预思考基线。相比于自适应预思考模型（79.81），我们的方法提升 <strong>2.74 个 GRF 分</strong>，同时 Token 消耗减少 <strong>45%</strong>。这有力表明<strong>后思考反思范式在翻译质量和 Token 效率方面均优于预思考方法</strong>。</p>
+<p><strong>Table 1 — 英→中翻译实验结果表</strong>（精简版）：</p>
+<table>
+<thead>
+<tr>
+<th>模型</th>
+<th>WMT23 GRF</th>
+<th>WMT24 GRF</th>
+<th>FLORES GRF</th>
+<th>Token</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Qwen-7B-Instruct</td>
+<td>73.52</td>
+<td>76.43</td>
+<td>78.83</td>
+<td>69.51</td>
+</tr>
+<tr>
+<td>Llama3.1-8B</td>
+<td>62.19</td>
+<td>74.98</td>
+<td>79.29</td>
+<td>75.95</td>
+</tr>
+<tr>
+<td>Qwen3-8B</td>
+<td>79.54</td>
+<td>77.90</td>
+<td>81.18</td>
+<td>82.56</td>
+</tr>
+<tr>
+<td>Marco-o1-7B</td>
+<td>68.43</td>
+<td>75.80</td>
+<td>79.42</td>
+<td>82.72</td>
+</tr>
+<tr>
+<td><strong>DeepSeek-R1</strong></td>
+<td><strong>78.00</strong></td>
+<td><strong>76.50</strong></td>
+<td><strong>88.37</strong></td>
+<td><strong>90.23</strong></td>
+</tr>
+<tr>
+<td>DeepSeek-R1(w/ refl)</td>
+<td>81.15</td>
+<td>76.67</td>
+<td>81.04</td>
+<td>90.50</td>
+</tr>
+<tr>
+<td>DeepTrans-7B</td>
+<td>75.00</td>
+<td>72.62</td>
+<td>77.12</td>
+<td>82.36</td>
+</tr>
+<tr>
+<td>ExTrans-7B</td>
+<td>78.95</td>
+<td>77.63</td>
+<td>78.96</td>
+<td>86.64</td>
+</tr>
+<tr>
+<td>ReflectMT-SFT(Cold Start)</td>
+<td>76.35</td>
+<td>76.70</td>
+<td>80.35</td>
+<td>80.82</td>
+</tr>
+<tr>
+<td><strong>ReflectMT-Stage1</strong></td>
+<td>79.73</td>
+<td>77.45</td>
+<td>80.78</td>
+<td>89.32</td>
+</tr>
+<tr>
+<td><strong>ReflectMT-Stage2 (Ours)</strong></td>
+<td><strong>82.55</strong></td>
+<td><strong>78.05</strong></td>
+<td><strong>81.18</strong></td>
+<td><strong>91.42</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="34">3.4 反思内化分析<a class="headerlink" href="#34" title="Permanent link">&para;</a></h3>
+<p><img alt="Figure 3: 训练动态" src="assets/page-006-img-01.png" /></p>
+<p><strong>Figure 3 — 训练动态分析</strong>（含 4 个子图）：
+- <strong>(a) 修改次数</strong>：随训练步数增加，显式修改次数从 578（28.9%）单调下降至 14（0.7%）
+- <strong>(b) GRF 准确率</strong>：波动上升趋势，从 79.73% 升至 82.55%
+- <strong>(c) 初译-终译分数差（Divergence）</strong>：波动下降趋势，从 0.78 降至接近 0.00
+- <strong>(d) 按难度的修改分布</strong>：Easy 样本修改降至 0，Hard 样本修改从 295 降至 12（减少 96%）</p>
+<p><strong>训练动态分析</strong>：我们在 Stage 2 每 50 步评估一次模型（临时禁用早停以观察初译和终译）。关键发现：</p>
+<ol>
+<li><strong>修改频率骤降</strong>：模型学会了<strong>自我评估</strong>，仅在判断初译为次优时才触发优化。修改从 Step 0 的 578 次（28.9%）降至 Step 330 的仅 14 次（0.7%）</li>
+<li><strong>首遍-终译差距收敛</strong>：随着反思能力逐渐内化，模型最终在首遍就生成最优翻译，无需后续修改</li>
+<li><strong>难度敏感性</strong>：Easy 样本完全不需要修改（内化完成）；Hard 样本修改减少 96%（保留了反思改进能力以确保质量）</li>
+</ol>
+<p><strong>Table 2 — 不同训练阶段的初译与终译对比</strong>：展示了初始翻译和最终翻译之间的性能差距如何随训练缩小，证明反思能力的成功内化。</p>
+<h3 id="35-ablation-study">3.5 消融研究（Ablation Study）<a class="headerlink" href="#35-ablation-study" title="Permanent link">&para;</a></h3>
+<p><strong>Table 3 — 反思机制的消融实验</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>模型配置</th>
+<th>Initial GRF</th>
+<th>Final GRF</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Qwen-7B-Instruct (Baseline)</td>
+<td>73.52</td>
+<td>–</td>
+</tr>
+<tr>
+<td>ReflectMT-LoRA (w/o init &amp; refl)</td>
+<td>–</td>
+<td>75.86</td>
+</tr>
+<tr>
+<td>ReflectMT-LoRA (w/o refl)</td>
+<td>76.85</td>
+<td>76.49</td>
+</tr>
+<tr>
+<td><strong>ReflectMT-LoRA (full)</strong></td>
+<td><strong>76.35</strong></td>
+<td><strong>77.26</strong></td>
+</tr>
+<tr>
+<td>ReflectMT-RL (w/o init &amp; refl)</td>
+<td>–</td>
+<td>78.62</td>
+</tr>
+<tr>
+<td><strong>ReflectMT-RL (full)</strong></td>
+<td><strong>79.73</strong></td>
+<td><strong>80.51</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>关键发现</strong>：
+1. <strong>无反思的盲优化会损害性能</strong>：w/o refl 变体的终译 GRF（76.49）<strong>低于</strong>其初译（76.85），说明没有显式指导的盲目优化会降级性能
+2. <strong>完整模型持续改进</strong>：full 模型从 76.35 提升到 77.26，证明反思提供了准确的修改方向
+3. <strong>RL 后完整范式的优势</strong>：直接翻译（w/o init &amp; refl, 78.62）vs 完整 ReflectMT（80.51），1.89 分的差距确认了完整"翻译—反思—优化"范式的实质收益</p>
+<h3 id="_13">术语解释<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>英文术语</th>
+<th>中文译名</th>
+<th>一句话解释</th>
+<th>应用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GRF (GPT Reference-Free)</td>
+<td>GPT无参考评估</td>
+<td>无需参考译文、由GPT直接评分的翻译质量指标</td>
+<td>本文主要评估指标</td>
+</tr>
+<tr>
+<td>COMETKIWI-XL (CK)</td>
+<td>CometKiwi评估指标</td>
+<td>基于预训练模型的语义级翻译质量度量</td>
+<td>补充评估指标</td>
+</tr>
+<tr>
+<td>MetricX-24 (MX24)</td>
+<td>MetricX-24指标</td>
+<td>Google提交的WMT24语义级评测指标</td>
+<td>补充评估指标</td>
+</tr>
+<tr>
+<td>First-pass Translation Quality</td>
+<td>首遍翻译质量</td>
+<td>模型第一次直接生成的翻译的质量</td>
+<td>Stage 2 的核心优化目标</td>
+</tr>
+<tr>
+<td>Blind Refinement</td>
+<td>盲目优化</td>
+<td>缺乏反思分析的机械性修改过程</td>
+<td>w/o refl 变体的本质</td>
+</tr>
+<tr>
+<td>Adaptive Pre-thinking</td>
+<td>自适应预思考</td>
+<td>模型自行决定是否进行预推理的基线方法</td>
+<td>用于对比的预思考基线</td>
+</tr>
+<tr>
+<td>Divergence (Score Gap)</td>
+<td>分数差/分歧度</td>
+<td>初译和终译之间的质量差异</td>
+<td>内化成功的量化指标</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_14">图表/公式说明<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
+<p><strong>Table 1（主实验结果表）</strong>：论文最核心的结果表格，覆盖 18+ 个模型 × 4 个数据集 × 4 个指标。最关键的几行对比：
+- ReflectMT-Stage2 (Ours): GRF=<strong>82.55</strong>, Token=<strong>29.1</strong> ← 最佳质量+最低Token
+- DeepSeek-R1: GRF=78.00, Token=783.2 ← 质量差+Token极高
+- DeepSeek-R1(w/ refl): GRF=81.15, Token=982.33 ← 质量好但Token暴增（33.7倍于Ours）</p>
+<p><strong>Figure 3（训练动态四联图）</strong>：提供内化过程的可视化证据——(a)修改次数下降证明模型越来越少需要反思；(c)分数差收敛证明初译质量趋近终译质量；(d)按难度分解证明模型对不同难度样本采取差异化策略。</p>
+<p><strong>Table 2（初译vs终译对比）</strong>：展示 Stage 1→Stage 2 过程中初译质量不断提升、与终译差距不断缩小的动态过程。</p>
+<p><strong>Table 3（消融实验）</strong>：证明反思机制的必要性——去掉反思不仅无法提升终译质量（76.49 &lt; 76.85），还会导致比直接映射更差的结果。</p>
+<h3 id="takeaway_3">关键 Takeaway<a class="headerlink" href="#takeaway_3" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>质量-效率双重胜利（客观事实）</strong>：GRF 82.55（第1名）+ Token 29.1（接近非反射基线的 33.08）</li>
+<li><strong>vs DeepSeek-R1（客观事实）</strong>：GRF +4.55 分，<strong>Token 仅为其 1/33.7</strong>（29.1 vs 982.3）</li>
+<li><strong>内化证据充分（客观事实）</strong>：修改率从 28.9% 降至 0.7%，Hard 样本修改减少 96%</li>
+<li><strong>反思不可省（客观事实）</strong>：消融显示去掉反思导致终译质量低于初译（盲目优化有害）</li>
+<li><strong>后思考优于预思考（客观事实）</strong>：+2.74 GRF 分同时 -45% Token</li>
+</ul>
+<hr />
+<h2 id="section-4-related-work-conclusion">Section 4 — Related Work &amp; Conclusion（相关工作与结论）<a class="headerlink" href="#section-4-related-work-conclusion" title="Permanent link">&para;</a></h2>
+<h3 id="_15">中文翻译<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h3>
+<h3 id="_16">相关工作<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h3>
+<p><strong>深度推理模型在机器翻译中的应用</strong>：随着 LRM（OpenAI-o1、DeepSeek-R1）的出现，深度推理能力推动了长 CoT 推理的广泛研究。近期工作开始探索其在 MT 中的潜力：Marco-o1 和相关研究通过启发式示例展示了长 CoT 推理在翻译中的前景；DRT 模型处理文学翻译中的修辞手法；DeepTrans 利用 DeepSeek-V3 进行无参考评估的 RL 训练；ExTrans 进一步提出样本增强型 RL 奖励建模。</p>
+<p><strong>长 CoT 背后的反思与自我改进</strong>：长 CoT 底层的反思和自我改进能力已在 LLM 研究中得到广泛验证。Reflexion 框架（Shinn et al., 2023）将系统性自我反思嵌入 LLM 推理过程；自我反思技术被用于缓解幻觉问题（Ji et al., 2023）；自验证方法（Weng et al., 2023）引入多个验证点防止错误传播。近期工作进一步优化了反思效率和适应性：TasTe 框架（Wang et al., 2024b）通过指令微调改善翻译；IoRT 框架（Liu et al., 2025a）解决静态反思中的冗余和漂移；PR-CoT（Costa et al., 2026）启用多视角结构化反思。</p>
+<h3 id="_17">结论<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h3>
+<p>本文引入了一种新颖的机器翻译<strong>"翻译—反思—优化"范式</strong>。我们设计了多智能体协作系统来构建反思翻译数据集，并提出了将反思能力内化为模型直接响应的两阶段强化学习策略。广泛实验表明，我们的方法显著超越了包括 LRM 和专用翻译模型在内的强基线。</p>
+<p>关键是，<strong>我们的模型在推理时不执行显式反思步骤就能生成高质量翻译</strong>，避免了长 CoT 推理的计算开销，同时保持优越的翻译质量。消融研究验证了我们的反思机制在提供可解释的推理路径以进行系统性改进方面的有效性。</p>
+<h3 id="limitations">局限性（Limitations）<a class="headerlink" href="#limitations" title="Permanent link">&para;</a></h3>
+<ol>
+<li>本研究主要聚焦于<strong>英→中翻译任务</strong>，尚未在其他语言对上进行充分验证。不同语言对之间存在显著的语言学差异</li>
+<li>虽然我们的模型避免了推理时长 CoT 的计算开销，但<strong>训练阶段</strong>（包括多智能体协作的数据构建和两阶段 RL 训练）仍需大量计算资源，可能在资源受限环境中限制应用</li>
+</ol>
+<h3 id="_18">术语解释<a class="headerlink" href="#_18" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>英文术语</th>
+<th>中文译名</th>
+<th>一句话解释</th>
+<th>应用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MetaphorTrans Dataset</td>
+<td>MetaphorTrans数据集</td>
+<td>包含修辞手法的文学翻译平行数据集</td>
+<td>DRT/ExTrans的训练数据来源</td>
+</tr>
+<tr>
+<td>Exemplar-enhanced RL</td>
+<td>样本增强型强化学习</td>
+<td>结合示例生成和LLM评判的RL训练方式</td>
+<td>ExTrans的核心技术</td>
+</tr>
+<tr>
+<td>Reflexion Framework</td>
+<td>Reflexion框架</td>
+<td>将自我反思嵌入Agent推理循环的框架</td>
+<td>反思研究的奠基性工作</td>
+</tr>
+<tr>
+<td>Self-verification</td>
+<td>自我验证</td>
+<td>在CoT推理中插入检查点防止错误传播的技术</td>
+<td>反思的前置条件</td>
+</tr>
+<tr>
+<td>Static Reflection</td>
+<td>静态反思</td>
+<td>固定模式的反思过程</td>
+<td>IoRT试图解决的问题</td>
+</tr>
+<tr>
+<td>Dynamic Meta-instruction</td>
+<td>动态元指令</td>
+<td>根据上下文动态生成的反思指导</td>
+<td>IoRT的解决方案</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_19">图表/公式说明<a class="headerlink" href="#_19" title="Permanent link">&para;</a></h3>
+<p>本片段无新图表。</p>
+<h3 id="takeaway_4">关键 Takeaway<a class="headerlink" href="#takeaway_4" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>定位独特（作者主张）</strong>：不同于现有工作关注"如何让LRM更好地做翻译"，ReflectMT 关注"如何让普通模型学会LRM的翻译质量但不需要LRM的推理开销"</li>
+<li><strong>实际意义（推断）</strong>：对于部署场景极为重要——可以用 7B 模型达到超越 R1（671B）的效果，且推理速度快 30 倍以上</li>
+<li><strong>两个主要局限（作者承认）</strong>：(1) 仅验证英→中 (2) 训练成本高——这两个都是未来工作的明确方向</li>
+</ul>
+<hr />
+<h2 id="appendix-summary">附录补充（Appendix Summary）<a class="headerlink" href="#appendix-summary" title="Permanent link">&para;</a></h2>
+<h3 id="_20">中文翻译<a class="headerlink" href="#_20" title="Permanent link">&para;</a></h3>
+<h3 id="a">附录 A：数据详情<a class="headerlink" href="#a" title="Permanent link">&para;</a></h3>
+<p>数据集从 <strong>WMT19</strong>、<strong>SlangDIT</strong>（俚语翻译）和 <strong>MetaphorTrans</strong>（修辞翻译）随机采样构建。使用 DeepSeek-V3（671B）生成对应的翻译和反思。按最终 GRF 分数对样本进行难度分类并过滤。简单样本与困难样本比例约为 <strong>1:1</strong>。</p>
+<p><strong>数据规模统计（Table 4）</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>Split</th>
+<th>EN→ZH</th>
+<th>ZH→EN</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Train</td>
+<td>11,389</td>
+<td>8,000</td>
+</tr>
+<tr>
+<td>Test</td>
+<td>2,000</td>
+<td>2,000</td>
+</tr>
+<tr>
+<td>Val</td>
+<td>1,000</td>
+<td>1,000</td>
+</tr>
+</tbody>
+</table>
+<p><strong>数据质量控制</strong>：排除 (1) 格式无效样本 (2) 持续低分样本（<span class="arithmatex">\(r_K &lt; 40\)</span>）(3) 反思后性能退化样本（<span class="arithmatex">\(r_K &lt; r_0\)</span>）</p>
+<p><strong>数据格式示例</strong>（JSON）：包含 src（源句）、ref（参考译文）、final_translation（最终翻译）、total_rounds（总轮数）、final_score（最终分数）、best_round（最佳轮次）、history（每轮的 translation/reflection/score）。</p>
+<h3 id="b">附录 B：评估提示词<a class="headerlink" href="#b" title="Permanent link">&para;</a></h3>
+<p>GRF 评估提示词借用 Kocmi &amp; Federmann (2023)，要求在 0-100 连续尺度上评分——0 表示"无意义保留"，100 表示"完美保留含义，兼具忠实性、表现力和优雅性"。该提示从一般视角评估翻译，与人类评估高度相关。</p>
+<h3 id="c">附录 C：实现细节<a class="headerlink" href="#c" title="Permanent link">&para;</a></h3>
+<p><strong>Cold Start SFT</strong>：使用 LLaMA-Factory 框架，训练 3 epochs，学习率 <span class="arithmatex">\(1 \times 10^{-4}\)</span>，batch size 1 + 8步梯度累积，约 3 GPU 小时。</p>
+<p><strong>RL Training</strong>：使用 verl 库实现 GRPO，本地部署 DeepSeek-V3 作为奖励模型。全局 batch size 64，学习率 <span class="arithmatex">\(2 \times 10^{-7}\)</span>，rollouts 数 8，温度 0.7，KL 系数 <span class="arithmatex">\(5 \times 10^{-3}\)</span>，训练 2 epochs，约 <strong>770 GPU 小时</strong>。</p>
+<p><strong>超参数</strong>：<span class="arithmatex">\(\eta=5\)</span>, <span class="arithmatex">\(\mu=0.2\)</span>。Stage 1 权重：<span class="arithmatex">\(w_{form}=0.15, w_{trans}=0.45, w_{refl}=0.2, w_{imp}=0.2\)</span>；Stage 2 权重：<span class="arithmatex">\(w_{form}=0.15, w_{trans}=0.75, w_{refl}=0.05, w_{imp}=0.05\)</span>。</p>
+<p><strong>附录 D：自适应预思考基线</strong>：使用与本文方法一致的对齐训练数据，让 DeepSeek-V3 生成预思考数据进行 SFT 冷启动。数据包含 `` 内的推理过程。反思与非反思数据比例设为 2:3。</p>
+<h3 id="egpt-4o">附录 E：GPT-4o 评估<a class="headerlink" href="#egpt-4o" title="Permanent link">&para;</a></h3>
+<p>由于 GPT-4o API 成本较高，我们仅在自定义数据集上测试了 GPT-4o。如表 5 所示，ReflectMT 取得比 GPT-4o 更高的 GRF 分（82.55 vs 77.62），同时维持相近的 Token 消耗（30.73 vs 28.57）。</p>
+<h3 id="_21">术语解释<a class="headerlink" href="#_21" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>英文术语</th>
+<th>中文译名</th>
+<th>一句话解释</th>
+<th>应用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SlangDIT</td>
+<td>俚语翻译基准</td>
+<td>专门评估俚语/俗语翻译质量的数据集</td>
+<td>数据来源之一</td>
+</tr>
+<tr>
+<td>Rhetorical Device</td>
+<td>修辞手法</td>
+<td>文学作品中使用的比喻、借代等表达技巧</td>
+<td>MetaphorTrans的核心内容</td>
+</tr>
+<tr>
+<td>LLaMA-Factory</td>
+<td>LLaMA-Factory框架</td>
+<td>高效的大模型微调工具箱</td>
+<td>SFT训练的实现框架</td>
+</tr>
+<tr>
+<td>verl</td>
+<td>verl库</td>
+<td>VolcEngine推出的RL训练库</td>
+<td>GRPO实现的底层框架</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_22">图表/公式说明<a class="headerlink" href="#_22" title="Permanent link">&para;</a></h3>
+<p><strong>Table 4（数据统计）</strong>：训练集 11,389 条 EN→ZH + 8,000 条 ZH→EN，规模适中但质量经过严格筛选。</p>
+<p><strong>Table 5（GPT-4o 对比）</strong>：ReflectMT 在质量和效率上均超过 GPT-4o——这对于一个 7B 参数模型来说是非常强的结果。</p>
+<p><strong>附录 D 的预思考数据格式示例</strong>：展示了 <code>...</code> 格式的预思考数据，用于训练自适应预思考基线。</p>
+<h3 id="takeaway_5">关键 Takeaway<a class="headerlink" href="#takeaway_5" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>训练成本不低（客观事实）</strong>：RL 训练需要 770 GPU 小时——这是主要的使用门槛</li>
+<li><strong>数据质量是生命线（客观事实）</strong>：三层过滤（格式/分数/退化）确保训练数据的可靠性</li>
+<li><strong>GPT-4o 也能赢（客观事实）</strong>：7B 的 ReflectMT 在自定义数据集上超过 GPT-4o，证明了方法的有效性</li>
+</ul>
+<hr />
+<h2 id="_23">总评与思考<a class="headerlink" href="#_23" title="Permanent link">&para;</a></h2>
+<h3 id="_24">论文的核心洞察<a class="headerlink" href="#_24" title="Permanent link">&para;</a></h3>
+<p>这篇论文解决的是一个极其实际的部署问题：<strong>LRM 的推理成本太高，能否把推理能力"压缩"进普通模型？</strong> 答案是可以的——通过"训练时学反思，推理时隐式执行"的策略。</p>
+<h3 id="_25">方法设计的亮点<a class="headerlink" href="#_25" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>"后思考"范式的直觉合理性</strong>：人类翻译员也是先翻一遍再检查——ReflectMT 只是把这个过程搬到了训练阶段</li>
+<li><strong>两阶段 RL 的精妙设计</strong>：Stage 1 让模型"学会怎么反思"，Stage 2 通过奖励重构强迫它"把反思变成直觉"——权重变化（<span class="arithmatex">\(w_{trans}\)</span>: 0.45→0.75）是这个设计的点睛之笔</li>
+<li><strong>多智能体数据构建</strong>：Translator + Reflector 的分离保证了反思质量，避免了自我对话容易陷入的确认偏差</li>
+<li><strong>早停推理策略</strong>：检测到 <code>&lt;/answer&gt;</code> 就停止——极其简洁高效的工程实现</li>
+</ol>
+<h3 id="_26">数据说服力<a class="headerlink" href="#_26" title="Permanent link">&para;</a></h3>
+<ul>
+<li>修改率从 28.9% 降到 0.7%——内化效果肉眼可见</li>
+<li>Hard 样本修改减少 96%——模型学会了区分简单和困难</li>
+<li>Token 仅为 DeepSeek-R1 的 1/33.7——部署成本的数量级优势</li>
+<li>7B 模型超过 GPT-4o——小模型大智慧的典范</li>
+</ul>
+<h3 id="_27">局限性与未来方向<a class="headerlink" href="#_27" title="Permanent link">&para;</a></h3>
+<ol>
+<li>仅验证英→中——扩展到更多语言对是自然的下一步</li>
+<li>训练成本 770 GPU 小时——探索更高效的数据构建和训练方法是必要的</li>
+<li>未探索其他 NLP 任务（摘要、问答等）——"反思内化"范式可能有更广泛的适用性</li>
+</ol>
+<h3 id="ul-xcot">与 UL-XCoT（上一篇论文）的有趣对比<a class="headerlink" href="#ul-xcot" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>UL-XCoT（2604.20090）</th>
+<th>ReflectMT（2604.19144）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>核心思路</td>
+<td>减少推理时的冗余计算</td>
+<td>把推理能力内化掉</td>
+</tr>
+<tr>
+<td>方法论</td>
+<td>统一逻辑空间 + 动态剪枝</td>
+<td>两阶段 RL + 反思内化</td>
+</tr>
+<tr>
+<td>开销节省</td>
+<td>50%-65% Token</td>
+<td><strong>94.33% Token</strong></td>
+</tr>
+<tr>
+<td>推理时是否还有推理</td>
+<td>有（剪枝后的剩余路径）</td>
+<td><strong>无（纯直接生成）</strong></td>
+</tr>
+<tr>
+<td>适用范围</td>
+<td>多语言推理</td>
+<td>机器翻译</td>
+</tr>
+<tr>
+<td>白盒依赖</td>
+<td>需要（隐状态访问）</td>
+<td>不需要（纯训练时方法）</td>
+</tr>
+</tbody>
+</table>
+<p>两篇论文都来自类似的时间窗口（2026年4月），都关注"推理效率"，但走了不同的路：UL-XCoT 做"减法"（减少冗余），ReflectMT 做"转化"（显式→隐式）。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.expand", "navigation.indexes", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

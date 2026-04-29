@@ -2,206 +2,346 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://groupechou.github.io/paper-learning-hub/</loc>
-         <lastmod>2026-04-28</lastmod>
+         <lastmod>2026-04-29</lastmod>
     </url>
     <url>
          <loc>https://groupechou.github.io/paper-learning-hub/about/</loc>
-         <lastmod>2026-04-28</lastmod>
+         <lastmod>2026-04-29</lastmod>
     </url>
     <url>
          <loc>https://groupechou.github.io/paper-learning-hub/how-to-use/</loc>
-         <lastmod>2026-04-28</lastmod>
+         <lastmod>2026-04-29</lastmod>
     </url>
     <url>
          <loc>https://groupechou.github.io/paper-learning-hub/roadmap/</loc>
-         <lastmod>2026-04-28</lastmod>
+         <lastmod>2026-04-29</lastmod>
     </url>
     <url>
          <loc>https://groupechou.github.io/paper-learning-hub/agents/</loc>
-         <lastmod>2026-04-28</lastmod>
+         <lastmod>2026-04-29</lastmod>
     </url>
     <url>
          <loc>https://groupechou.github.io/paper-learning-hub/agents/ch01-basics/</loc>
-         <lastmod>2026-04-28</lastmod>
+         <lastmod>2026-04-29</lastmod>
     </url>
     <url>
          <loc>https://groupechou.github.io/paper-learning-hub/agents/ch02-planning/</loc>
-         <lastmod>2026-04-28</lastmod>
+         <lastmod>2026-04-29</lastmod>
     </url>
     <url>
          <loc>https://groupechou.github.io/paper-learning-hub/agents/ch03-tools/</loc>
-         <lastmod>2026-04-28</lastmod>
+         <lastmod>2026-04-29</lastmod>
     </url>
     <url>
          <loc>https://groupechou.github.io/paper-learning-hub/agents/ch04-memory/</loc>
-         <lastmod>2026-04-28</lastmod>
+         <lastmod>2026-04-29</lastmod>
     </url>
     <url>
          <loc>https://groupechou.github.io/paper-learning-hub/agents/ch05-multi-agent/</loc>
-         <lastmod>2026-04-28</lastmod>
+         <lastmod>2026-04-29</lastmod>
     </url>
     <url>
          <loc>https://groupechou.github.io/paper-learning-hub/agents/ch06-embodied/</loc>
-         <lastmod>2026-04-28</lastmod>
+         <lastmod>2026-04-29</lastmod>
     </url>
     <url>
          <loc>https://groupechou.github.io/paper-learning-hub/agents/ch07-safety/</loc>
-         <lastmod>2026-04-28</lastmod>
+         <lastmod>2026-04-29</lastmod>
     </url>
     <url>
          <loc>https://groupechou.github.io/paper-learning-hub/agents/ch08-frontier/</loc>
-         <lastmod>2026-04-28</lastmod>
+         <lastmod>2026-04-29</lastmod>
     </url>
     <url>
          <loc>https://groupechou.github.io/paper-learning-hub/cross_domain/</loc>
-         <lastmod>2026-04-28</lastmod>
+         <lastmod>2026-04-29</lastmod>
     </url>
     <url>
          <loc>https://groupechou.github.io/paper-learning-hub/cross_domain/agent-analysis/</loc>
-         <lastmod>2026-04-28</lastmod>
+         <lastmod>2026-04-29</lastmod>
     </url>
     <url>
          <loc>https://groupechou.github.io/paper-learning-hub/cross_domain/autonomous/</loc>
-         <lastmod>2026-04-28</lastmod>
+         <lastmod>2026-04-29</lastmod>
     </url>
     <url>
          <loc>https://groupechou.github.io/paper-learning-hub/cross_domain/ts-agent/</loc>
-         <lastmod>2026-04-28</lastmod>
+         <lastmod>2026-04-29</lastmod>
     </url>
     <url>
          <loc>https://groupechou.github.io/paper-learning-hub/guides/classics/</loc>
-         <lastmod>2026-04-28</lastmod>
+         <lastmod>2026-04-29</lastmod>
     </url>
     <url>
          <loc>https://groupechou.github.io/paper-learning-hub/guides/daily-guide/</loc>
-         <lastmod>2026-04-28</lastmod>
+         <lastmod>2026-04-29</lastmod>
     </url>
     <url>
          <loc>https://groupechou.github.io/paper-learning-hub/guides/daily/</loc>
-         <lastmod>2026-04-28</lastmod>
+         <lastmod>2026-04-29</lastmod>
     </url>
     <url>
          <loc>https://groupechou.github.io/paper-learning-hub/organizations/</loc>
-         <lastmod>2026-04-28</lastmod>
+         <lastmod>2026-04-29</lastmod>
     </url>
     <url>
          <loc>https://groupechou.github.io/paper-learning-hub/organizations/academic/</loc>
-         <lastmod>2026-04-28</lastmod>
+         <lastmod>2026-04-29</lastmod>
     </url>
     <url>
          <loc>https://groupechou.github.io/paper-learning-hub/organizations/anthropic/</loc>
-         <lastmod>2026-04-28</lastmod>
+         <lastmod>2026-04-29</lastmod>
     </url>
     <url>
          <loc>https://groupechou.github.io/paper-learning-hub/organizations/deepmind/</loc>
-         <lastmod>2026-04-28</lastmod>
+         <lastmod>2026-04-29</lastmod>
     </url>
     <url>
          <loc>https://groupechou.github.io/paper-learning-hub/organizations/domestic/</loc>
-         <lastmod>2026-04-28</lastmod>
+         <lastmod>2026-04-29</lastmod>
     </url>
     <url>
          <loc>https://groupechou.github.io/paper-learning-hub/organizations/meta/</loc>
-         <lastmod>2026-04-28</lastmod>
+         <lastmod>2026-04-29</lastmod>
     </url>
     <url>
          <loc>https://groupechou.github.io/paper-learning-hub/organizations/microsoft/</loc>
-         <lastmod>2026-04-28</lastmod>
+         <lastmod>2026-04-29</lastmod>
     </url>
     <url>
          <loc>https://groupechou.github.io/paper-learning-hub/organizations/openai/</loc>
-         <lastmod>2026-04-28</lastmod>
+         <lastmod>2026-04-29</lastmod>
     </url>
     <url>
          <loc>https://groupechou.github.io/paper-learning-hub/papers/</loc>
-         <lastmod>2026-04-28</lastmod>
+         <lastmod>2026-04-29</lastmod>
+    </url>
+    <url>
+         <loc>https://groupechou.github.io/paper-learning-hub/papers/2604.11623v3/</loc>
+         <lastmod>2026-04-29</lastmod>
+    </url>
+    <url>
+         <loc>https://groupechou.github.io/paper-learning-hub/papers/2604.11753v1/</loc>
+         <lastmod>2026-04-29</lastmod>
+    </url>
+    <url>
+         <loc>https://groupechou.github.io/paper-learning-hub/papers/2604.12076v1/</loc>
+         <lastmod>2026-04-29</lastmod>
     </url>
     <url>
          <loc>https://groupechou.github.io/paper-learning-hub/papers/2604.12102v2/</loc>
-         <lastmod>2026-04-28</lastmod>
+         <lastmod>2026-04-29</lastmod>
+    </url>
+    <url>
+         <loc>https://groupechou.github.io/paper-learning-hub/papers/2604.12301v1/</loc>
+         <lastmod>2026-04-29</lastmod>
+    </url>
+    <url>
+         <loc>https://groupechou.github.io/paper-learning-hub/papers/2604.13414v1/</loc>
+         <lastmod>2026-04-29</lastmod>
+    </url>
+    <url>
+         <loc>https://groupechou.github.io/paper-learning-hub/papers/2604.14687v1/</loc>
+         <lastmod>2026-04-29</lastmod>
     </url>
     <url>
          <loc>https://groupechou.github.io/paper-learning-hub/papers/2604.14858v1/</loc>
-         <lastmod>2026-04-28</lastmod>
+         <lastmod>2026-04-29</lastmod>
     </url>
     <url>
          <loc>https://groupechou.github.io/paper-learning-hub/papers/2604.15725v1/</loc>
-         <lastmod>2026-04-28</lastmod>
+         <lastmod>2026-04-29</lastmod>
+    </url>
+    <url>
+         <loc>https://groupechou.github.io/paper-learning-hub/papers/2604.16911v1/</loc>
+         <lastmod>2026-04-29</lastmod>
+    </url>
+    <url>
+         <loc>https://groupechou.github.io/paper-learning-hub/papers/2604.17111v1/</loc>
+         <lastmod>2026-04-29</lastmod>
+    </url>
+    <url>
+         <loc>https://groupechou.github.io/paper-learning-hub/papers/2604.17194v1/</loc>
+         <lastmod>2026-04-29</lastmod>
+    </url>
+    <url>
+         <loc>https://groupechou.github.io/paper-learning-hub/papers/2604.18038v1/</loc>
+         <lastmod>2026-04-29</lastmod>
+    </url>
+    <url>
+         <loc>https://groupechou.github.io/paper-learning-hub/papers/2604.18234v1/</loc>
+         <lastmod>2026-04-29</lastmod>
+    </url>
+    <url>
+         <loc>https://groupechou.github.io/paper-learning-hub/papers/2604.18356v1/</loc>
+         <lastmod>2026-04-29</lastmod>
+    </url>
+    <url>
+         <loc>https://groupechou.github.io/paper-learning-hub/papers/2604.18364v1/</loc>
+         <lastmod>2026-04-29</lastmod>
+    </url>
+    <url>
+         <loc>https://groupechou.github.io/paper-learning-hub/papers/2604.18429v1/</loc>
+         <lastmod>2026-04-29</lastmod>
+    </url>
+    <url>
+         <loc>https://groupechou.github.io/paper-learning-hub/papers/2604.18584v1/</loc>
+         <lastmod>2026-04-29</lastmod>
+    </url>
+    <url>
+         <loc>https://groupechou.github.io/paper-learning-hub/papers/2604.18658v1/</loc>
+         <lastmod>2026-04-29</lastmod>
+    </url>
+    <url>
+         <loc>https://groupechou.github.io/paper-learning-hub/papers/2604.19144v1/</loc>
+         <lastmod>2026-04-29</lastmod>
+    </url>
+    <url>
+         <loc>https://groupechou.github.io/paper-learning-hub/papers/2604.19459v1/</loc>
+         <lastmod>2026-04-29</lastmod>
+    </url>
+    <url>
+         <loc>https://groupechou.github.io/paper-learning-hub/papers/2604.19572v1/</loc>
+         <lastmod>2026-04-29</lastmod>
+    </url>
+    <url>
+         <loc>https://groupechou.github.io/paper-learning-hub/papers/2604.19638v1/</loc>
+         <lastmod>2026-04-29</lastmod>
+    </url>
+    <url>
+         <loc>https://groupechou.github.io/paper-learning-hub/papers/2604.20090v1/</loc>
+         <lastmod>2026-04-29</lastmod>
+    </url>
+    <url>
+         <loc>https://groupechou.github.io/paper-learning-hub/papers/2604.20714v1/</loc>
+         <lastmod>2026-04-29</lastmod>
+    </url>
+    <url>
+         <loc>https://groupechou.github.io/paper-learning-hub/papers/2604.21003v1/</loc>
+         <lastmod>2026-04-29</lastmod>
+    </url>
+    <url>
+         <loc>https://groupechou.github.io/paper-learning-hub/papers/2604.21131v1/</loc>
+         <lastmod>2026-04-29</lastmod>
     </url>
     <url>
          <loc>https://groupechou.github.io/paper-learning-hub/papers/2604.21255v1/</loc>
-         <lastmod>2026-04-28</lastmod>
+         <lastmod>2026-04-29</lastmod>
+    </url>
+    <url>
+         <loc>https://groupechou.github.io/paper-learning-hub/papers/2604.21282v1/</loc>
+         <lastmod>2026-04-29</lastmod>
+    </url>
+    <url>
+         <loc>https://groupechou.github.io/paper-learning-hub/papers/2604.21420v1/</loc>
+         <lastmod>2026-04-29</lastmod>
+    </url>
+    <url>
+         <loc>https://groupechou.github.io/paper-learning-hub/papers/2604.21793v1/</loc>
+         <lastmod>2026-04-29</lastmod>
+    </url>
+    <url>
+         <loc>https://groupechou.github.io/paper-learning-hub/papers/2604.21896v1/</loc>
+         <lastmod>2026-04-29</lastmod>
+    </url>
+    <url>
+         <loc>https://groupechou.github.io/paper-learning-hub/papers/2604.22577v1/</loc>
+         <lastmod>2026-04-29</lastmod>
+    </url>
+    <url>
+         <loc>https://groupechou.github.io/paper-learning-hub/papers/2604.22840v1/</loc>
+         <lastmod>2026-04-29</lastmod>
+    </url>
+    <url>
+         <loc>https://groupechou.github.io/paper-learning-hub/papers/2604.23449v1/</loc>
+         <lastmod>2026-04-29</lastmod>
+    </url>
+    <url>
+         <loc>https://groupechou.github.io/paper-learning-hub/papers/2604.23701v1/</loc>
+         <lastmod>2026-04-29</lastmod>
+    </url>
+    <url>
+         <loc>https://groupechou.github.io/paper-learning-hub/papers/2604.23972v1/</loc>
+         <lastmod>2026-04-29</lastmod>
+    </url>
+    <url>
+         <loc>https://groupechou.github.io/paper-learning-hub/papers/2604.24512v1/</loc>
+         <lastmod>2026-04-29</lastmod>
+    </url>
+    <url>
+         <loc>https://groupechou.github.io/paper-learning-hub/papers/2604.24715v1/</loc>
+         <lastmod>2026-04-29</lastmod>
     </url>
     <url>
          <loc>https://groupechou.github.io/paper-learning-hub/time_series/</loc>
-         <lastmod>2026-04-28</lastmod>
+         <lastmod>2026-04-29</lastmod>
     </url>
     <url>
          <loc>https://groupechou.github.io/paper-learning-hub/time_series/ch01-basics/</loc>
-         <lastmod>2026-04-28</lastmod>
+         <lastmod>2026-04-29</lastmod>
     </url>
     <url>
          <loc>https://groupechou.github.io/paper-learning-hub/time_series/ch02-classics/</loc>
-         <lastmod>2026-04-28</lastmod>
+         <lastmod>2026-04-29</lastmod>
     </url>
     <url>
          <loc>https://groupechou.github.io/paper-learning-hub/time_series/ch03-transformer/</loc>
-         <lastmod>2026-04-28</lastmod>
+         <lastmod>2026-04-29</lastmod>
     </url>
     <url>
          <loc>https://groupechou.github.io/paper-learning-hub/time_series/ch04-foundation/</loc>
-         <lastmod>2026-04-28</lastmod>
+         <lastmod>2026-04-29</lastmod>
     </url>
     <url>
          <loc>https://groupechou.github.io/paper-learning-hub/time_series/ch05-long-horizon/</loc>
-         <lastmod>2026-04-28</lastmod>
+         <lastmod>2026-04-29</lastmod>
     </url>
     <url>
          <loc>https://groupechou.github.io/paper-learning-hub/time_series/ch06-st-gnn/</loc>
-         <lastmod>2026-04-28</lastmod>
+         <lastmod>2026-04-29</lastmod>
     </url>
     <url>
          <loc>https://groupechou.github.io/paper-learning-hub/time_series/ch07-frontier/</loc>
-         <lastmod>2026-04-28</lastmod>
+         <lastmod>2026-04-29</lastmod>
     </url>
     <url>
          <loc>https://groupechou.github.io/paper-learning-hub/topics/</loc>
-         <lastmod>2026-04-28</lastmod>
+         <lastmod>2026-04-29</lastmod>
     </url>
     <url>
          <loc>https://groupechou.github.io/paper-learning-hub/tracks/agent/</loc>
-         <lastmod>2026-04-28</lastmod>
+         <lastmod>2026-04-29</lastmod>
     </url>
     <url>
          <loc>https://groupechou.github.io/paper-learning-hub/tracks/agent/getting-started/</loc>
-         <lastmod>2026-04-28</lastmod>
+         <lastmod>2026-04-29</lastmod>
     </url>
     <url>
          <loc>https://groupechou.github.io/paper-learning-hub/tracks/agent/papers/</loc>
-         <lastmod>2026-04-28</lastmod>
+         <lastmod>2026-04-29</lastmod>
     </url>
     <url>
          <loc>https://groupechou.github.io/paper-learning-hub/tracks/agent/queue/</loc>
-         <lastmod>2026-04-28</lastmod>
+         <lastmod>2026-04-29</lastmod>
     </url>
     <url>
          <loc>https://groupechou.github.io/paper-learning-hub/tracks/forecasting/</loc>
-         <lastmod>2026-04-28</lastmod>
+         <lastmod>2026-04-29</lastmod>
     </url>
     <url>
          <loc>https://groupechou.github.io/paper-learning-hub/tracks/forecasting/getting-started/</loc>
-         <lastmod>2026-04-28</lastmod>
+         <lastmod>2026-04-29</lastmod>
     </url>
     <url>
          <loc>https://groupechou.github.io/paper-learning-hub/tracks/forecasting/papers/</loc>
-         <lastmod>2026-04-28</lastmod>
+         <lastmod>2026-04-29</lastmod>
     </url>
     <url>
          <loc>https://groupechou.github.io/paper-learning-hub/tracks/forecasting/queue/</loc>
-         <lastmod>2026-04-28</lastmod>
+         <lastmod>2026-04-29</lastmod>
     </url>
     <url>
          <loc>https://groupechou.github.io/paper-learning-hub/tracks/forecasting/reading-list/</loc>
-         <lastmod>2026-04-28</lastmod>
+         <lastmod>2026-04-29</lastmod>
     </url>
 </urlset>

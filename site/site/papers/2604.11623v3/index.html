@@ -1,0 +1,2818 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://groupechou.github.io/paper-learning-hub/papers/2604.11623v3/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Context Kubernetes：面向智能体AI系统的企业知识声明式编排 - 论文自动研学知识库</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#context-kubernetesai" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="论文自动研学知识库" class="md-header__button md-logo" aria-label="论文自动研学知识库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            论文自动研学知识库
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Context Kubernetes：面向智能体AI系统的企业知识声明式编排
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="论文自动研学知识库" class="md-nav__button md-logo" aria-label="论文自动研学知识库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    论文自动研学知识库
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../roadmap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    📖 学习总纲
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/daily-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    📅 今日更新
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../agents/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🤖 AI Agent 主线
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🤖 AI Agent 主线
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/ch01-basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第一章 Agent 基础架构篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/ch02-planning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第二章 规划与推理篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/ch03-tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第三章 工具使用与API篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/ch04-memory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第四章 记忆与检索篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/ch05-multi-agent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第五章 多智能体协作篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/ch06-embodied/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第六章 具身智能篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/ch07-safety/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第七章 Agent评估与安全篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/ch08-frontier/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第八章 前沿探索篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../time_series/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    📈 时序预测主线
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    📈 时序预测主线
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../time_series/ch01-basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第一章 基础理论篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../time_series/ch02-classics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第二章 经典方法篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../time_series/ch03-transformer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第三章 Transformer革命篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../time_series/ch04-foundation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第四章 基础模型篇(Foundation Models)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../time_series/ch05-long-horizon/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第五章 长序列预测篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../time_series/ch06-st-gnn/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第六章 多变量时空篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../time_series/ch07-frontier/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第七章 前沿探索篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../cross_domain/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🔗 交叉融合
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_6" id="__nav_6_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🔗 交叉融合
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cross_domain/ts-agent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    时序预测Agent
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cross_domain/agent-analysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Agent驱动分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cross_domain/autonomous/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    自主决策系统
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../organizations/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🏢 机构专题
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_7" id="__nav_7_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🏢 机构专题
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../organizations/openai/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OpenAI 系列
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../organizations/deepmind/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Google DeepMind
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../organizations/anthropic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Anthropic 系列
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../organizations/meta/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Meta 系列
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../organizations/microsoft/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Microsoft 系列
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../organizations/domestic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    国内大厂系列
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../organizations/academic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    学术机构
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    论文详情
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    论文详情
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#abstract" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        摘要（Abstract）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="摘要（Abstract）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        主要贡献
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        关键实验发现
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        正确性验证
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1 引言（Introduction）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1 引言（Introduction）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-the-orchestration-emergence-thesis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 编排涌现论（The Orchestration Emergence Thesis）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-ai" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 AI智能体是新原语
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-background-and-motivation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2 背景与动机（Background and Motivation）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2 背景与动机（Background and Motivation）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 容器编排先例
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.1 容器编排先例">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        创新一：声明式期望状态管理
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reconciliation-loop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        创新二：协调循环（Reconciliation Loop）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-agentic2026-q1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 企业Agentic格局（截至2026 Q1）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⚠️ 关键问题：治理层普遍是最弱、最标准化程度最低、最厂商锁定的层
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-nist-ai-rmf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 上下文编排的七项需求（基于NIST AI RMF）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-context-kubernetes-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3 Context Kubernetes 架构（Architecture）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3 Context Kubernetes 架构（Architecture）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 七大设计原则
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 六大核心抽象
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.2 六大核心抽象">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31context-unit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        定义 3.1：上下文单元（Context Unit）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32context-domain" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        定义 3.2：上下文域（Context Domain）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33context-store" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        定义 3.3：上下文存储（Context Store）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34context-endpoint" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        定义 3.4：上下文端点（Context Endpoint）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#35cxri" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        定义 3.5：上下文运行时接口（CxRI）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#36context-operator" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        定义 3.6：上下文算子（Context Operator）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 系统架构总览
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-agent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4 三层Agent权限模型
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.4 三层Agent权限模型">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#37agent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        设计不变量 3.7：Agent权限子集
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三层批准模型
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#38strong-approval-isolation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        设计不变量 3.8：强批准隔离（Strong Approval Isolation）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-declarative-context-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4 声明式上下文管理（Declarative Context Management）
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-kubernetesstructural-analogy-to-kubernetes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5 与Kubernetes的结构类比（Structural Analogy to Kubernetes）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5 与Kubernetes的结构类比（Structural Analogy to Kubernetes）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        使上下文编排比容器编排更难的四大属性
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-prototype-implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6 原型实现（Prototype Implementation）
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-experimental-evaluation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7 实验评估（Experimental Evaluation）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7 实验评估（Experimental Evaluation）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 五项正确性实验
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 三项价值实验
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-related-work" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8 相关工作（Related Work）
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-limitations-and-open-problems" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9 局限性与开放问题（Limitations and Open Problems）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9 局限性与开放问题（Limitations and Open Problems）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        已知局限
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        开放问题
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10 结论（Conclusion）
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        附录：快速参考
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="附录：快速参考">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        架构速查卡
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        与现有方案的差异化优势
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="context-kubernetesai">Context Kubernetes：面向智能体AI系统的企业知识声明式编排<a class="headerlink" href="#context-kubernetesai" title="Permanent link">&para;</a></h1>
+<p><strong>Context Kubernetes: Declarative Orchestration of Enterprise Knowledge for Agentic AI Systems</strong></p>
+<hr />
+<table>
+<thead>
+<tr>
+<th>元信息</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>作者</strong></td>
+<td>Charafeddine Mouzouni（OPIT – Open Institute of Technology &amp; Cohorte AI, Paris）</td>
+</tr>
+<tr>
+<td><strong>发表时间</strong></td>
+<td>2026年4月</td>
+</tr>
+<tr>
+<td><strong>arXiv ID</strong></td>
+<td>2604.11623v3</td>
+</tr>
+<tr>
+<td><strong>领域</strong></td>
+<td>Agent基础设施 · 企业知识管理 · AI治理 · 编排架构</td>
+</tr>
+<tr>
+<td><strong>关键词</strong></td>
+<td>Context Orchestration, Agentic AI Infrastructure, Declarative Architecture, Enterprise Knowledge Management, Kubernetes</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="abstract">摘要（Abstract）<a class="headerlink" href="#abstract" title="Permanent link">&para;</a></h2>
+<p>每个计算时代都会产生一个主导原语和一个扩展危机。虚拟机需要VMware。容器需要Kubernetes。AI智能体需要一种尚不存在的东西：<strong>面向组织知识的编排层（orchestration layer）</strong>。</p>
+<p>我们介绍 <strong>Context Kubernetes</strong>——一个用于在智能体AI系统中编排企业知识的架构，包含原型实现和实验评估。</p>
+<p><strong>核心观察</strong>：在整个组织中，将正确的知识、以正确的权限、在正确的新鲜度、在正确的成本范围内传递给正确的Agent——这一问题的结构与Kubernetes十年前解决的容器编排问题<strong>结构类似</strong>。</p>
+<h3 id="_1">主要贡献<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>六大核心抽象</strong> + YAML声明式知识架构即代码清单 + 协调循环（Reconciliation Loop）</li>
+<li><strong>三层Agent权限模型</strong>：Agent权限始终是人类权限的严格子集</li>
+<li><strong>原型实现</strong>（92个自动化测试）+ 八项实验评估</li>
+</ol>
+<h3 id="_2">关键实验发现<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>实验类型</th>
+<th>核心结论</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>治理基线对比（200条查询）</strong></td>
+<td>从无治理RAG → ACL过滤检索 → RBAC感知路由 → 完整架构，每层贡献不同能力；仅三层模型能阻止全部5种攻击场景</td>
+</tr>
+<tr>
+<td><strong>新鲜度监控</strong></td>
+<td>无监控时静默提供过时/已删内容；有协调循环时过时检测 &lt; 1ms</td>
+</tr>
+<tr>
+<td><strong>攻击场景测试（5种）</strong></td>
+<td>平坦权限0/5；基础RBAC 4/5；<strong>三层模型5/5全部拦截</strong>——RBAC遗漏的恰好是三层模型专门设计的捕获目标</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_3">正确性验证<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<ul>
+<li>零未授权上下文交付</li>
+<li>零权限不变量违反</li>
+<li>架构层面强制执行带外审批隔离（<strong>无任何被调查的企业平台能做到</strong>）</li>
+<li>TLA+模型检验在<strong>460万个可达状态</strong>上验证安全属性，零违反</li>
+</ul>
+<blockquote>
+<p>💡 <strong>核心论点</strong>：Context Engineering将成为AI时代定义性的基础设施学科。</p>
+</blockquote>
+<hr />
+<h2 id="1-introduction">1 引言（Introduction）<a class="headerlink" href="#1-introduction" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p><em>"最深刻的技术是那些消失的技术。它们编织进日常生活的织物中，直到与之无法区分。"</em> —— Mark Weiser, 1991</p>
+</blockquote>
+<h3 id="11-the-orchestration-emergence-thesis">1.1 编排涌现论（The Orchestration Emergence Thesis）<a class="headerlink" href="#11-the-orchestration-emergence-thesis" title="Permanent link">&para;</a></h3>
+<p><strong>每代计算基础设施都遵循相同的弧线：</strong>
+1. 一个新原语出现（虚拟机 → 容器 → Serverless函数）
+2. 先驱者在单机上展示非凡效果
+3. 组织尝试大规模部署 → 同样的<strong>五个问题</strong>浮现：
+   - <strong>调度（Scheduling）</strong>：什么到达哪里，从哪个源，以什么顺序？
+   - <strong>权限（Permissions）</strong>：谁可以读写执行？
+   - <strong>健康监控（Health Monitoring）</strong>：状态是否当前、完整、正确？
+   - <strong>状态管理（State Management）</strong>：如何版本化、治理和迁移？
+   - <strong>可审计性（Auditability）</strong>：谁在何时通过哪个Agent做了什么？</p>
+<p>这些问题不是通过改进原语来解决的，而是通过在其之上构建<strong>编排层</strong>来解决的：
+- <strong>VMware</strong>编排了虚拟机
+- <strong>Kubernetes</strong>编排了容器
+- <strong>编排层本身成为持久的基础设施</strong>，而非原语</p>
+<h3 id="12-ai">1.2 AI智能体是新原语<a class="headerlink" href="#12-ai" title="Permanent link">&para;</a></h3>
+<p>配备本地Agent的知识工作者（Claude Code、Cursor、LangGraph应用），只需指向笔记本电脑上的一个组织良好的文件夹，就能用文件和对话替代其SaaS工具栈的大部分功能。</p>
+<p><strong>市场数据：</strong>
+- Gartner预测到2026年底，40%的企业应用将包含任务特定AI Agent [2025a]
+- 全球AI Agent市场在2026年初已超过90亿美元 [Grand View Research, 2025]</p>
+<p><strong>但扩展危机已经开始：</strong>
+- 2026年1月至3月间，应用软件行业市值蒸发近3000亿美元（CNBC, 2026）
+- 原因：企业认识到AI Agent使大多数SaaS接口变得可选
+- 从一台笔记本上的1个Agent → 跨组织2000个Agent → 立即暴露同样的五个问题</p>
+<p><strong>Gartner预测</strong>：到2027年，超过40%的Agentic AI项目因治理不足而被取消 [2025b]。技术已经成熟。<strong>编排层缺失</strong>。</p>
+<hr />
+<h2 id="2-background-and-motivation">2 背景与动机（Background and Motivation）<a class="headerlink" href="#2-background-and-motivation" title="Permanent link">&para;</a></h2>
+<h3 id="21">2.1 容器编排先例<a class="headerlink" href="#21" title="Permanent link">&para;</a></h3>
+<p>Docker (2013) 标准化了容器作为可移植计算单元。OCI定义了镜像规范，使容器与运行时无关。但<strong>在组织规模部署容器</strong>产生了编排危机：</p>
+<ul>
+<li>异构机器调度、服务发现、负载均衡、滚动更新、密钥管理、访问控制</li>
+</ul>
+<p><strong>Kubernetes通过两个创新解决此危机（可推广为通用设计模式）：</strong></p>
+<h4 id="_4">创新一：声明式期望状态管理<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h4>
+<p>操作员指定他们想要什么（"该服务3个副本，512MB内存，443端口可访问"），而非如何实现。规范编码为YAML清单，版本控制于git中，通过API应用到集群。</p>
+<h4 id="reconciliation-loop">创新二：协调循环（Reconciliation Loop）<a class="headerlink" href="#reconciliation-loop" title="Permanent link">&para;</a></h4>
+<p>持续控制环监控实际集群状态，将其与声明的期望状态比较，计算增量并采取纠正行动。系统在无人干预下收敛至声明状态。</p>
+<blockquote>
+<p>📌 <strong>这两个模式并非容器特有</strong>——它们是管理任何计算原语在组织规模下的通用解法。本文将其应用于<strong>组织知识</strong>。</p>
+</blockquote>
+<h3 id="22-agentic2026-q1">2.2 企业Agentic格局（截至2026 Q1）<a class="headerlink" href="#22-agentic2026-q1" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>平台</th>
+<th>架构</th>
+<th>锁定程度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Microsoft Copilot Studio</td>
+<td>Semantic Kernel + Power Platform治理 + M365集成</td>
+<td>高</td>
+</tr>
+<tr>
+<td>Salesforce Agentforce</td>
+<td>Atlas引擎 + "System 2"推理 + 协作Swarm</td>
+<td>高</td>
+</tr>
+<tr>
+<td>Google Vertex AI + Agentspace</td>
+<td>云原生 + Gemini模型 + A2A协议贡献者</td>
+<td>中高</td>
+</tr>
+<tr>
+<td>AWS Bedrock Agents</td>
+<td>100+基础模型 + ReAct循环 + 6种护栏类型</td>
+<td>中</td>
+</tr>
+<tr>
+<td>NVIDIA AI Agent Platform</td>
+<td>NIM微服务 + NeMo Guardrails + 基础设施层</td>
+<td>中</td>
+</tr>
+<tr>
+<td>LangGraph (LangChain)</td>
+<td>基于图的状态机 + 人在回路</td>
+<td>低</td>
+</tr>
+<tr>
+<td>CrewAI</td>
+<td>基于角色的Agent（任务+团队）</td>
+<td>低</td>
+</tr>
+<tr>
+<td>AutoGen (Microsoft)</td>
+<td>对话式多Agent + 事件驱动</td>
+<td>低</td>
+</tr>
+<tr>
+<td>OpenAI Agents SDK</td>
+<td>轻量多Agent + 移交原语</td>
+<td>低</td>
+</tr>
+</tbody>
+</table>
+<p><strong>关键观察</strong>：所有平台都实现了某种四层架构：(1) 推理引擎 → (2) 工具/动作层 → (3) 记忆/上下文层 → (4) <strong>治理层</strong></p>
+<p><strong>协议栈正在Linux Foundation的Agentic AI Foundation下收敛</strong>：
+- MCP（Anthropic, 2025）：Agent-to-Tool通信
+- A2A（Google, 2025）：Agent-to-Agent通信</p>
+<h3 id="_5">⚠️ 关键问题：治理层普遍是最弱、最标准化程度最低、最厂商锁定的层<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Copilot Studio的治理无法管辖LangGraph Agent</li>
+<li>Salesforce的Einstein Trust Layer无法审计Bedrock Agent</li>
+<li>开源框架提供编排但没有治理</li>
+<li><strong>治理差距不是一个缺失的功能——它是一个缺失的基础设施层</strong></li>
+</ul>
+<h3 id="23-nist-ai-rmf">2.3 上下文编排的七项需求（基于NIST AI RMF）<a class="headerlink" href="#23-nist-ai-rmf" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>需求</th>
+<th>NIST对应类别</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>R2.1</td>
+<td><strong>厂商中立性</strong>：必须兼容任意LLM、Agent框架、云提供商和数据源</td>
+<td>Govern 1.2</td>
+</tr>
+<tr>
+<td>R2.2</td>
+<td><strong>声明式管理</strong>：知识架构可表达为机器可读、版本控制的规范</td>
+<td>Govern 1.5</td>
+</tr>
+<tr>
+<td>R2.3</td>
+<td><strong>Agent权限分离</strong>：Agent权限必须正式与用户权限分离；Agent能力是用户能力的可配置严格子集</td>
+<td>Govern 1.7</td>
+</tr>
+<tr>
+<td>R2.4</td>
+<td><strong>上下文新鲜度</strong>：持续监控所有知识的新鲜度，超过TTL时采取纠正措施</td>
+<td>Measure 2.6</td>
+</tr>
+<tr>
+<td>R2.5</td>
+<td><strong>基于意图的访问</strong>：Agent按意图请求知识，非按位置</td>
+<td>Map 1.5</td>
+</tr>
+<tr>
+<td>R2.6</td>
+<td><strong>完整可审计性</strong>：每次知识访问、每个动作、每个审批都不可变记录（归因+时间戳+结果）</td>
+<td>Manage 4.2</td>
+</tr>
+<tr>
+<td>R2.7</td>
+<td><strong>组织智能</strong>：从聚合Agent活动中积累跨组织知识，不跨权限边界暴露个体数据</td>
+<td>Manage 4.1</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="3-context-kubernetes-architecture">3 Context Kubernetes 架构（Architecture）<a class="headerlink" href="#3-context-kubernetes-architecture" title="Permanent link">&para;</a></h2>
+<h3 id="31">3.1 七大设计原则<a class="headerlink" href="#31" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>原则</th>
+<th>对应需求</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>P1</td>
+<td><strong>声明式优于命令式</strong>：组织声明期望的知识架构，系统协调现实去匹配</td>
+<td>R2.2</td>
+</tr>
+<tr>
+<td>P2</td>
+<td><strong>基于意图的访问优于基于位置的访问</strong>：Agent按语义意图请求知识，系统解析为源/权限/排序</td>
+<td>R2.5</td>
+</tr>
+<tr>
+<td>P3</td>
+<td><strong>治理作为基础而非事后补充</strong>：权限、新鲜度监控、护栏、审计是结构组件，非可选模块</td>
+<td>R2.3/2.4/2.6</td>
+</tr>
+<tr>
+<td>P4</td>
+<td><strong>Agent权限严格为人类权限子集</strong>：架构不变量——不存在Agent超越用户范围的机制</td>
+<td>R2.3</td>
+</tr>
+<tr>
+<td>P5</td>
+<td><strong>编排层自身具备智能</strong>：路由层使用LLM辅助语义解析；Context Operators积累组织智能</td>
+<td>R2.5/2.7</td>
+</tr>
+<tr>
+<td>P6</td>
+<td><strong>厂商中立性</strong>：每个组件由接口定义，非实现</td>
+<td>R2.1</td>
+</tr>
+<tr>
+<td>P7</td>
+<td><strong>隐私设计</strong>：系统监控组织边界（知识请求/动作/审批），不监控个体</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<h3 id="32">3.2 六大核心抽象<a class="headerlink" href="#32" title="Permanent link">&para;</a></h3>
+<h4 id="31context-unit">定义 3.1：上下文单元（Context Unit）<a class="headerlink" href="#31context-unit" title="Permanent link">&para;</a></h4>
+<p>组织知识的<strong>最小可寻址元素</strong>。</p>
+<div class="arithmatex">\[u = (c, \tau, m, v, e, \pi)\]</div>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(c\)</span></td>
+<td>内容</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\tau \in\)</span> {unstructured, structured, hybrid}</td>
+<td>类型</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(m\)</span></td>
+<td>元数据集（作者、时间戳、域、敏感度、实体、来源）</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(v \in V\)</span></td>
+<td>版本标识符</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(e \in \mathbb{R}^d\)</span></td>
+<td>嵌入向量</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\pi \subseteq \mathbb{R}\)</span></td>
+<td>授权访问此单元的角色集合</td>
+</tr>
+</tbody>
+</table>
+<h4 id="32context-domain">定义 3.2：上下文域（Context Domain）<a class="headerlink" href="#32context-domain" title="Permanent link">&para;</a></h4>
+<p>组织知识的<strong>隔离边界</strong>。</p>
+<div class="arithmatex">\[D = (N, S, A, F, \rho, O, G)\]</div>
+<ul>
+<li>域内查询对域外不可见，除非通过目标域Operator显式中转</li>
+<li>类似Kubernetes中的Namespace隔离</li>
+</ul>
+<h4 id="33context-store">定义 3.3：上下文存储（Context Store）<a class="headerlink" href="#33context-store" title="Permanent link">&para;</a></h4>
+<p>持久化Context Unit的后端系统：<span class="arithmatex">\(s = (\sigma, \iota, \phi)\)</span>
+- Git仓库 / 关系数据库 / 外部系统连接器 / 文件系统
+- 仅通过 <strong>CxRI</strong>（Context Runtime Interface）访问</p>
+<h4 id="34context-endpoint">定义 3.4：上下文端点（Context Endpoint）<a class="headerlink" href="#34context-endpoint" title="Permanent link">&para;</a></h4>
+<p>稳定的、<strong>基于意图的</strong>知识访问接口：
+$<span class="arithmatex">\(\varepsilon(q, \omega, \alpha) \rightarrow \{u_1, ..., u_k\} \subseteq U\)</span>$
+- Agent<strong>从不</strong>指定知识在哪里——只说明需要什么
+- 约束条件：权限检查、新鲜度检查、Token预算限制</p>
+<h4 id="35cxri">定义 3.5：上下文运行时接口（CxRI）<a class="headerlink" href="#35cxri" title="Permanent link">&para;</a></h4>
+<p>编排层与存储之间的标准适配器（类比Kubernetes的CRI）。六项操作：</p>
+<div class="highlight"><pre><span></span><code>connect(φ) → Connection        -- 连接
+query(conn, q) → {u₁...uₙ}    -- 查询
+read(conn, path) → u           -- 读取
+write(conn, path, c) → Result  -- 写入
+subscribe(conn, path) → Stream  -- 订阅
+health(conn) → Status          -- 健康检查
+</code></pre></div>
+<h4 id="36context-operator">定义 3.6：上下文算子（Context Operator）<a class="headerlink" href="#36context-operator" title="Permanent link">&para;</a></h4>
+<p><strong>领域特定的自治控制器</strong>（类比Kubernetes Operators）：
+$<span class="arithmatex">\(O = (K, L, I, \Gamma)\)</span>$</p>
+<table>
+<thead>
+<tr>
+<th>组件</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(K\)</span></td>
+<td>知识库（向量索引 + 全文索引）</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(L\)</span></td>
+<td>推理引擎（LLM + 领域护栏）</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(I\)</span></td>
+<td><strong>组织智能模块</strong>：从聚合Agent活动提取跨组织模式</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\Gamma\)</span></td>
+<td>护栏集</td>
+</tr>
+</tbody>
+</table>
+<p><strong>组织智能模块I的约束：</strong>
+- 最小信号阈值 θ ≥ 3（防止过早模式识别）
+- 时间聚类窗口 Δtw
+- 权限标签化（聚合洞察对域成员可用；归因洞察需记录级授权）
+- 衰减机制（无支持信号则洞察退化）</p>
+<h3 id="33">3.3 系统架构总览<a class="headerlink" href="#33" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>┌─────────────────────────────────────────────────────────────┐
+│                        AGENTS                                │
+│   Local Agent(Claude Code) │ LangGraph App │ Custom Agent    │
+│                            │               │                  │
+│                     Context API (10 endpoints)                │
+│                   HTTPS + WSS + JWT                           │
+├─────────────────────────────────────────────────────────────┤
+│                    CONTEXT KUBERNETES                         │
+│  ┌───────────┐ ┌──────────┐ ┌──────────┐ ┌──────────────┐  │
+│  │  Context  │ │  Context │ │Permission│ │ Freshness     │  │
+│  │ Registry  │ │  Router  │ │ Engine   │ │ Manager      │  │
+│  │(etcd类比) │ │(调度+入口)│ │(三层权限) │ │(fresh/stale/ │  │
+│  └───────────┘ └──────────┘ └──────────┘ │expired/conf.)│  │
+│  ┌──────────────────┐ ┌──────────────┐ ┌──────────────┐  │
+│  │Trust Policy Engine│ │ Context      │ │ LLM Gateway  │  │
+│  │(护栏/DLP/审计日志)│ │ Operators    │ │(提示检查/计费)│  │
+│  └──────────────────┘ └──────────────┘ └──────────────┘  │
+│  ┌──────────────────────────────────────────────────────┐  │
+│  │              Reconciliation Loop                      │  │
+│  │         ⟨desired state ⟷Δ⟷ actual state⟩              │  │
+│  └──────────────────────────────────────────────────────┘  │
+│  ══════════════ Context Runtime Interface (CxRI) ═════════  │
+│                    — 6 ops per connector —                 │
+├─────────────────────────────────────────────────────────────┤
+│                    CONTEXT SOURCES                          │
+│  Git Repos │ Databases │ Email/Calendar │ SaaS APIs │ ERP  │
+└─────────────────────────────────────────────────────────────┘
+</code></pre></div>
+<h3 id="34-agent">3.4 三层Agent权限模型<a class="headerlink" href="#34-agent" title="Permanent link">&para;</a></h3>
+<h4 id="37agent">设计不变量 3.7：Agent权限子集<a class="headerlink" href="#37agent" title="Permanent link">&para;</a></h4>
+<p>对于拥有权限集 <span class="arithmatex">\(P_u\)</span> 的用户 <span class="arithmatex">\(u\)</span> 及代表 <span class="arithmatex">\(u\)</span> 行事的Agent <span class="arithmatex">\(a_u\)</span>：
+$<span class="arithmatex">\(P_{a_u} \subset P_u\)</span>$</p>
+<p><strong>包含关系是严格的</strong>：对于每个用户，存在至少一个用户可执行但Agent不可执行的操作。对于共享操作，所需的批准层级满足 <span class="arithmatex">\(T(o, a_u) \geq T(o, u)\)</span>。</p>
+<h4 id="_6">三层批准模型<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>层级</th>
+<th>Agent角色</th>
+<th>批准机制</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>T1: 自主</strong></td>
+<td>自由行动</td>
+<td>无</td>
+<td>读取上下文、起草文档</td>
+</tr>
+<tr>
+<td><strong>T2: 软批准</strong></td>
+<td>提议</td>
+<td>用户在Agent UI中确认</td>
+<td>发送内部消息</td>
+</tr>
+<tr>
+<td><strong>T3: 强批准</strong></td>
+<td>浮现任务</td>
+<td><strong>带外2FA/生物识别</strong></td>
+<td>签署合同、财务操作</td>
+</tr>
+<tr>
+<td><strong>排除</strong></td>
+<td>不能请求</td>
+<td>N/A（仅人工）</td>
+<td>终止员工</td>
+</tr>
+</tbody>
+</table>
+<h4 id="38strong-approval-isolation">设计不变量 3.8：强批准隔离（Strong Approval Isolation）<a class="headerlink" href="#38strong-approval-isolation" title="Permanent link">&para;</a></h4>
+<p>对于任何T3动作，批准通道C满足：
+1. C 在Agent的<strong>执行环境外部</strong>
+2. C 对Agent<strong>既不可读也不可写</strong>
+3. C 需要<strong>独立的认证因子</strong></p>
+<p><strong>平台审批隔离调查结果（表3）</strong>：调查了四大企业Agentic平台的安全架构，<strong>没有一个平台在架构层面强制执行全部三个条件</strong>。</p>
+<table>
+<thead>
+<tr>
+<th>平台</th>
+<th>HITL机制</th>
+<th>C1: 外部</th>
+<th>C2: 不可读写</th>
+<th>C3: 独立因子</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MS Copilot Studio</td>
+<td>Outlook邮件请求信息</td>
+<td>部分</td>
+<td>❌ 否</td>
+<td>❌ 否</td>
+</tr>
+<tr>
+<td>SF Agentforce</td>
+<td>Einstein Trust Layer</td>
+<td>❌ 否</td>
+<td>❌ 否</td>
+<td>❌ 否</td>
+</tr>
+<tr>
+<td>Google Agentspace</td>
+<td>Workspace通知</td>
+<td>部分</td>
+<td>❌ 否</td>
+<td>❌ 否</td>
+</tr>
+<tr>
+<td>AWS Bedrock</td>
+<td>SSO + Lambda触发</td>
+<td>❌ 否</td>
+<td>❌ 否</td>
+<td>❌ 否</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>🔴 <strong>关键发现</strong>：所有平台都提供"人在回路"机制，但<strong>没有一家</strong>在架构上强制执行强批准隔离的三项条件。</p>
+</blockquote>
+<hr />
+<h2 id="4-declarative-context-management">4 声明式上下文管理（Declarative Context Management）<a class="headerlink" href="#4-declarative-context-management" title="Permanent link">&para;</a></h2>
+<p>（略：YAML清单规范、协调循环详细设计）</p>
+<p><strong>核心思想</strong>：运维人员编写声明式YAML描述期望的知识拓扑（哪些域、哪些源、哪些权限规则、哪些新鲜度策略），系统通过协调循环持续将实际状态收敛至期望状态——完全类比Kubernetes的工作方式。</p>
+<hr />
+<h2 id="5-kubernetesstructural-analogy-to-kubernetes">5 与Kubernetes的结构类比（Structural Analogy to Kubernetes）<a class="headerlink" href="#5-kubernetesstructural-analogy-to-kubernetes" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Kubernetes概念</th>
+<th>Context Kubernetes对应</th>
+<th>映射紧密度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pod（最小调度单元）</td>
+<td><strong>Context Unit</strong>（最小知识单元）</td>
+<td>紧</td>
+</tr>
+<tr>
+<td>Namespace（隔离边界）</td>
+<td><strong>Context Domain</strong>（域隔离）</td>
+<td>紧</td>
+</tr>
+<tr>
+<td>Container Runtime Interface</td>
+<td><strong>CxRI</strong>（运行时接口）</td>
+<td>紧</td>
+</tr>
+<tr>
+<td>Operator（领域控制器）</td>
+<td><strong>Context Operator</strong></td>
+<td>紧</td>
+</tr>
+<tr>
+<td>etcd（元数据存储）</td>
+<td><strong>Context Registry</strong></td>
+<td>中</td>
+</tr>
+<tr>
+<td>kube-scheduler（调度器）</td>
+<td><strong>Context Router</strong></td>
+<td>松</td>
+</tr>
+<tr>
+<td>Service Account/RBAC</td>
+<td><strong>三层Agent权限模型</strong></td>
+<td>松（新增维度）</td>
+</tr>
+<tr>
+<td>Pod Disruption Budget</td>
+<td><strong>Freshness Policy</strong></td>
+<td>新增概念</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_7">使上下文编排比容器编排更难的四大属性<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>说明</th>
+<th>为何增加价值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>异质性（Heterogeneity）</strong></td>
+<td>知识类型远比容器类型多样（结构化/非结构化/混合/流式/实时）</td>
+<td>解决方案更具通用性</td>
+</tr>
+<tr>
+<td><strong>语义（Semantics）</strong></td>
+<td>知识具有内在含义，需要语义路由和理解</td>
+<td>需要LLM辅助推理</td>
+</tr>
+<tr>
+<td><strong>敏感性（Sensitivity）</strong></td>
+<td>数据敏感度差异巨大（公开 vs 绝密）</td>
+<td>需要细粒度权限控制</td>
+</tr>
+<tr>
+<td><strong>学习（Learning）</strong></td>
+<td>知识使用方式会随时间演变，系统需自适应</td>
+<td>需要组织智能模块</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="6-prototype-implementation">6 原型实现（Prototype Implementation）<a class="headerlink" href="#6-prototype-implementation" title="Permanent link">&para;</a></h2>
+<ul>
+<li>92个自动化测试（含对抗性不变量违规测试）</li>
+<li>核心组件：Context Router、Permission Engine、CxRI连接器、协调循环、审计日志、FastAPI HTTP服务</li>
+<li>代码开源</li>
+</ul>
+<hr />
+<h2 id="7-experimental-evaluation">7 实验评估（Experimental Evaluation）<a class="headerlink" href="#7-experimental-evaluation" title="Permanent link">&para;</a></h2>
+<h3 id="71">7.1 五项正确性实验<a class="headerlink" href="#71" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>实验</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>未授权上下文交付</td>
+<td><strong>零次</strong></td>
+</tr>
+<tr>
+<td>权限不变量违反</td>
+<td><strong>零次</strong></td>
+</tr>
+<tr>
+<td>过时检测延迟</td>
+<td><strong>&lt; 1ms</strong></td>
+</tr>
+<tr>
+<td>可接受延迟开销</td>
+<td>符合生产要求</td>
+</tr>
+<tr>
+<td>批准隔离架构执行</td>
+<td>通过（无平台能做到）</td>
+</tr>
+<tr>
+<td>TLA+模型检验</td>
+<td><strong>460万可达状态，零违反</strong> ✅</td>
+</tr>
+</tbody>
+</table>
+<h3 id="72">7.2 三项价值实验<a class="headerlink" href="#72" title="Permanent link">&para;</a></h3>
+<p><strong>实验一：治理基线对比（200条合成种子数据查询）</strong></p>
+<table>
+<thead>
+<tr>
+<th>治理层级</th>
+<th>能力</th>
+<th>攻击拦截数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>无治理RAG</td>
+<td>仅检索</td>
+<td>0/5</td>
+</tr>
+<tr>
+<td>ACL过滤检索</td>
+<td>基础权限过滤</td>
+<td>2/5</td>
+</tr>
+<tr>
+<td>RBAC感知路由</td>
+<td>角色感知路由</td>
+<td>4/5</td>
+</tr>
+<tr>
+<td><strong>完整架构（三层模型）</strong></td>
+<td>全部能力</td>
+<td><strong>5/5</strong> ✅</td>
+</tr>
+</tbody>
+</table>
+<p><strong>实验二：无新鲜度监控 vs 有协调循环</strong>
+- 无监控：静默提供过时和已删除内容
+- 有协调循环：<strong>&lt; 1ms</strong> 内检测到过时</p>
+<p><strong>实验三：五种真实攻击场景</strong></p>
+<table>
+<thead>
+<tr>
+<th>权限模型</th>
+<th>拦截攻击数</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>平坦权限（无分层）</td>
+<td><strong>0/5</strong></td>
+<td>完全无效</td>
+</tr>
+<tr>
+<td>基础RBAC</td>
+<td><strong>4/5</strong></td>
+<td>遗漏1种攻击</td>
+</tr>
+<tr>
+<td><strong>三层模型</strong></td>
+<td><strong>5/5</strong> ✅</td>
+<td>全部拦截；RBAC遗漏的恰好是其专门设计的目标</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="8-related-work">8 相关工作（Related Work）<a class="headerlink" href="#8-related-work" title="Permanent link">&para;</a></h2>
+<p>（略：涵盖企业AI平台、知识图谱、RAG治理、Agent安全等方向的相关工作综述）</p>
+<hr />
+<h2 id="9-limitations-and-open-problems">9 局限性与开放问题（Limitations and Open Problems）<a class="headerlink" href="#9-limitations-and-open-problems" title="Permanent link">&para;</a></h2>
+<h3 id="_8">已知局限<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<ol>
+<li>原型非生产级别</li>
+<li>尚无LLM辅助路由实现</li>
+<li>未在真实组织部署</li>
+<li>组织智能模块的治理含义需进一步研究</li>
+<li>Alloy形式化验证待完成</li>
+</ol>
+<h3 id="_9">开放问题<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>编排层自身的推理风险</strong>：如果编排层使用LLM进行语义解析，LLM本身的偏见/幻觉如何缓解？</li>
+<li><strong>跨域知识流转</strong>：如何在保证隔离的前提下允许受控的知识共享？</li>
+<li><strong>性能规模化</strong>：当Context Unit数量达到百万级时的性能优化策略</li>
+<li><strong>动态权限调整</strong>：如何根据Agent行为历史自动调整权限范围？</li>
+</ol>
+<hr />
+<h2 id="10-conclusion">10 结论（Conclusion）<a class="headerlink" href="#10-conclusion" title="Permanent link">&para;</a></h2>
+<p>Context Kubernetes提出了AI时代的<strong>编排层</strong>愿景：</p>
+<ol>
+<li><strong>VMware证明了虚拟机的编排价值 &gt; 虚拟机自身</strong></li>
+<li><strong>Kubernetes证明了容器的编排价值 &gt; 容器自身</strong></li>
+<li><strong>Context Engineering将成为AI Agent上下文的编排层，其价值将超越任何单一LLM、Agent框架或数据源</strong></li>
+</ol>
+<p>LLM将被替换。框架会演进。<strong>编排层持久存在。</strong></p>
+<blockquote>
+<p>📌 <strong>最终断言</strong>：Context Engineering will emerge as the defining infrastructure discipline of the AI era.</p>
+</blockquote>
+<hr />
+<h2 id="_10">附录：快速参考<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
+<h3 id="_11">架构速查卡<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>Context Kubernetes = 6大抽象 + 7大原则 + 3层权限 + 协调循环
+                    ↓
+         YAML声明式知识架构即代码
+                    ↓
+         TLA+验证的安全属性（460万状态零违反）
+                    ↓
+         解决Agent规模化的五大问题：
+         调度 | 权限 | 健康 | 状态 | 审计
+</code></pre></div>
+<h3 id="_12">与现有方案的差异化优势<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>现有方案</th>
+<th>Context Kubernetes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>治理深度</td>
+<td>事后附加</td>
+<td>架构内置（设计不变量）</td>
+</tr>
+<tr>
+<td>权限粒度</td>
+<td>用户级RBAC</td>
+<td>Agent三级权限（严格子集）</td>
+</tr>
+<tr>
+<td>强审批隔离</td>
+<td>❌ 无平台做到</td>
+<td>✅ 架构强制（C1+C2+C3）</td>
+</tr>
+<tr>
+<td>新鲜度保证</td>
+<td>手动/无</td>
+<td>自动协调循环 (&lt;1ms)</td>
+</tr>
+<tr>
+<td>厂商中立性</td>
+<td>各自锁定</td>
+<td>接口标准化（CxRI）</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.expand", "navigation.indexes", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,1855 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://groupechou.github.io/paper-learning-hub/papers/2604.21131v1/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>AI Agent中的跨会话威胁：基准、评估与算法 - 论文自动研学知识库</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#ai-agent" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="论文自动研学知识库" class="md-header__button md-logo" aria-label="论文自动研学知识库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            论文自动研学知识库
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              AI Agent中的跨会话威胁：基准、评估与算法
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="论文自动研学知识库" class="md-nav__button md-logo" aria-label="论文自动研学知识库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    论文自动研学知识库
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../roadmap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    📖 学习总纲
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/daily-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    📅 今日更新
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../agents/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🤖 AI Agent 主线
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🤖 AI Agent 主线
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/ch01-basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第一章 Agent 基础架构篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/ch02-planning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第二章 规划与推理篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/ch03-tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第三章 工具使用与API篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/ch04-memory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第四章 记忆与检索篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/ch05-multi-agent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第五章 多智能体协作篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/ch06-embodied/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第六章 具身智能篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/ch07-safety/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第七章 Agent评估与安全篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/ch08-frontier/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第八章 前沿探索篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../time_series/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    📈 时序预测主线
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    📈 时序预测主线
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../time_series/ch01-basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第一章 基础理论篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../time_series/ch02-classics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第二章 经典方法篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../time_series/ch03-transformer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第三章 Transformer革命篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../time_series/ch04-foundation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第四章 基础模型篇(Foundation Models)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../time_series/ch05-long-horizon/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第五章 长序列预测篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../time_series/ch06-st-gnn/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第六章 多变量时空篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../time_series/ch07-frontier/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第七章 前沿探索篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../cross_domain/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🔗 交叉融合
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_6" id="__nav_6_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🔗 交叉融合
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cross_domain/ts-agent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    时序预测Agent
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cross_domain/agent-analysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Agent驱动分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cross_domain/autonomous/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    自主决策系统
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../organizations/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🏢 机构专题
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_7" id="__nav_7_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🏢 机构专题
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../organizations/openai/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OpenAI 系列
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../organizations/deepmind/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Google DeepMind
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../organizations/anthropic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Anthropic 系列
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../organizations/meta/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Meta 系列
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../organizations/microsoft/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Microsoft 系列
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../organizations/domestic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    国内大厂系列
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../organizations/academic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    学术机构
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    论文详情
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    论文详情
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        摘要
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#section-1-introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Section 1 — Introduction
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Section 1 — Introduction">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        中文翻译
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        术语解释
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        图表/公式说明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#takeaway" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        关键 takeaway
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#section-2-6-methods-cstm-bench-results-discussion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Section 2-6 — Methods, CSTM-Bench, Results &amp; Discussion
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Section 2-6 — Methods, CSTM-Bench, Results &amp; Discussion">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        中文翻译（核心内容）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#takeaway_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        关键 takeaway
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        全文总结
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="全文总结">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心创新点
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#agent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        对Agent安全的启示
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        局限性
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="ai-agent">AI Agent中的跨会话威胁：基准、评估与算法<a class="headerlink" href="#ai-agent" title="Permanent link">&para;</a></h1>
+<!-- 论文元数据卡片 -->
+<div class="paper-meta">
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">机构</span>
+    <span class="paper-meta-value org-other">Intrinsic AI</span>
+  </div>
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">方向</span>
+    <span class="paper-meta-value">Agent安全 / 跨会话攻击 / 基准测试</span>
+  </div>
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">日期</span>
+    <span class="paper-meta-value">2026-04-22</span>
+  </div>
+</div>
+
+<div class="admonition info">
+<p><span class="paper-tag paper-tag-translated">✅ 已完成精读</span></p>
+</div>
+<ul>
+<li><strong>来源</strong>：<a href="https://arxiv.org/abs/2604.21131">arXiv</a></li>
+<li><strong>论文链接</strong>：<a href="https://arxiv.org/abs/2604.21131">2604.21131v1</a></li>
+<li><strong>数据集</strong>：<a href="https://huggingface.co/datasets/intrinsec-ai/cstm-bench">HuggingFace: intrinsec-ai/cstm-bench</a></li>
+</ul>
+<h2 id="_1">摘要<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p><strong>AI Agent护栏是无状态的（memoryless）的</strong>：每条消息被孤立判断，而将单一攻击分散到数十或数百个会话的 adversary 滑过了每个会话边界检测器——因为<strong>没有单条消息携带载荷，只有聚合后才携带</strong>。我们对跨会话威胁检测做出三项贡献：</p>
+<ol>
+<li>
+<p><strong>问题与数据集（CSTM-Bench）</strong>：引入<strong>跨会话威胁记忆基准</strong>——26种可执行攻击分类法，在两个正交轴上分类：kill-chain阶段和跨会话Operations本体论(accumulate/compose/launder/inject_on_reader)——每种绑定七个身份锚点之一，将ground-truth"违规"定义为清晰策略谓词。流量分为Attack、Benign-pristine和Benign-hard三类，使现实confounder上的误报与pristine-context幻觉分开报告。</p>
+</li>
+<li>
+<p><strong>测量LLM相关器的跨会话可行性</strong>：将跨会话检测形式化为入站消息流与下游correlator LLM之间的<strong>信息瓶颈</strong>，并实证表征纯LLM支持的相关器何时成功何时失败。固定correlator模型和上下文窗口后，会话绑定judge和Full-Log Correlator在从compositional-dilution分片移至cross-session-only分片时<strong>丢失约一半攻击召回率</strong>——累积token压力远在任何前沿上下文窗口内，因此退化是correlator在稀释下的属性而非截断产物。</p>
+</li>
+<li>
+<p><strong>算法方向与服务成本指标</strong>：<strong>有界内存Coreset Memory Reader</strong>（排序并保留最高信号跨会话片段）是架构响应。容量K=50的参考接收者是唯一在两个分片上都保持攻击召回的读者；Coreset门控相关性仅在实时成本上有用——其ranker越稳定越好：<strong>CSR_prefix（coreset缓冲区的有序前缀稳定性）</strong>作为一级指标——我们将其与检测质量融合为非补偿复合指标：<strong>CSTM = 0.7·F1(CSDA@action, precision) + 0.3·CSR_prefix</strong></p>
+</li>
+</ol>
+<blockquote>
+<p><strong>核心洞察</strong>："AI Agent上下文窗口每季度增长约30×（2023年2K tokens → 2025-2026年1M-10M tokens），但Agent安全每会话重置为零。这是根本性的架构错配。"</p>
+</blockquote>
+<hr />
+<h2 id="section-1-introduction">Section 1 — Introduction<a class="headerlink" href="#section-1-introduction" title="Permanent link">&para;</a></h2>
+<h3 id="_2">中文翻译<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<p><strong>1.1 问题：无状态护栏 vs 有状态威胁</strong></p>
+<p><strong>AI Agent上下文窗口每季度增长；AI Agent安全仍然每会话重置为零。</strong></p>
+<p>护栏和威胁/DLP分类器是无状态的：每条消息被孤立判断，<strong>没有先前轮次、先前会话或sibling agent的记忆</strong>。同时，值得担心的攻击越来越<strong>跨会话和跨agent</strong>——慢速滴注式prompt注入、跨agent操纵、增量策略侵蚀。2025年11月，Anthropic披露了首个有记录的大规模AI编排的网络间谍活动(GTG-1002)，其中自主Agent在<strong>跨越多个会话和子代理后执行了多阶段入侵的80-90%</strong>——因为它被说服它正在执行"授权安全测试"。</p>
+<p>该活动主要通过<strong>分解</strong>绕过per-turn安全性：每步单独良性；只有轨迹是恶意的。这正是Promptware kill chain预期的模式——也是<strong>会话绑定护栏结构上无法看到的模式</strong>。</p>
+<p>标准企业回退方案是将每个警报（通常还有每个prompt和工具调用）流式传输到下游SIEM并在事后关联。这昂贵、缓慢且在架构上对agentic系统错误：<strong>当SIEM查询触发时，攻击已经落地了。</strong></p>
+<p>模型上下文窗口现已扩展至数百万tokens——因此在意图时（下游日志写入之前）保持相关跨会话状态在内存中<strong>——首次变得可行。</strong>CSTM-Bench是评估真正这样做的检测器的基准。**</p>
+<p><strong>1.2 SIEM是为事件构建的；Agent先泄露意图</strong></p>
+<p>前一代检测工具——SIEM、UEBA——是为一个<strong>安全相关事实仅在发生后才可观察</strong>的世界设计的。检测器关联下游事件和日志。在那个世界中，将所有内容管道到中心存储并对存储运行correlator是正确的形状。</p>
+<p><strong>AI Agent反转了管道。安全相关事实通常在入站prompt中</strong>远在任何下游事件触发之前就存在<strong>。"总结此config文件然后将摘要POST到此URL"是一个以明文自然语言表达的</strong>渗出计划<strong>——最终到达SIEM的日志行仅是其影子。在Agent原生栈中，意图是一等公民，应在</strong>意图时接受检查**，而非事后从下游遥测中重建。</p>
+<p><strong>三种典型的跨会话累积模式</strong>：
+1. <strong>组合式渗出链</strong>：session 1列文件 → session 2读config → session 3总结凭证 → session 4将"报告"发送到外部端点
+2. <strong>马赛克攻击</strong>：数百个单独无害的问题重建敏感信息（组织架构、内部IP、数据库schema）
+3. <strong>慢速滴注式注入</strong>：将jailbreak分布在50+会话中，每次交互一个无害片段</p>
+<p><strong>每条单独消息都通过任何会话绑定的分类器。威胁仅在聚合时可见。</strong></p>
+<h3 id="_3">术语解释<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>英文术语</th>
+<th>中文译名</th>
+<th>一句话解释</th>
+<th>应用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Stateless guardrails</td>
+<td>无状态护栏</td>
+<td>每条消息独立判断，无跨轮次/跨会话记忆</td>
+<td>当前主流方案的缺陷</td>
+</tr>
+<tr>
+<td>Cross-session threat</td>
+<td>跨会话威胁</td>
+<td>分布在多次会话中才能构成完整攻击的模式</td>
+<td>核心研究对象</td>
+</tr>
+<tr>
+<td>Kill chain</td>
+<td>杀击链</td>
+<td>多阶段入侵的步骤序列（recon→weaponize→exfiltrate）</td>
+<td>分类轴1</td>
+</tr>
+<tr>
+<td>Semantic laundering</td>
+<td>语义清洗</td>
+<td>敏感信息经多次会话"洗白"为无害内容</td>
+<td>隐蔽手段的核心</td>
+</tr>
+<tr>
+<td>Full-Log Correlator</td>
+<td>全日志关联器</td>
+<td>将所有入站prompt按时间顺序拼接后送长上下文LLM</td>
+<td>天然但低效方案</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_4">图表/公式说明<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p><strong>Figure 1</strong>：Frontier LLM上下文窗口自2023年起每年增长约30×（GPT-3: 2K → GPT-5.4/Claude Opus 4.6/Gemini 3.1 Pro: 1M-10M tokens）</p>
+<p><strong>核心指标公式</strong>：
+$<span class="arithmatex">\(\text{CSTM} = 0.7 \cdot F1(\text{CSDA@action, precision}) + 0.3 \cdot \text{CSR}_{\text{prefix}}\)</span>$
+- CSDA = Cross-Session Detection Accuracy（跨会话检测准确率）
+- CSR_prefix = Coreset Reader有序前缀稳定性（服务成本指标）</p>
+<h3 id="takeaway">关键 takeaway<a class="headerlink" href="#takeaway" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>要点1</strong>：<strong>"状态性安全 vs 无状态攻击"的根本矛盾</strong>——这是论文要解决的核心gap</li>
+<li><strong>要点2</strong>：Anthropic GTG-1002案例证明跨会话攻击已是现实威胁非理论假设</li>
+<li><strong>要点3</strong>：SIEM范式对Agent完全不适用——需要在<strong>意图时刻</strong>而非<strong>事件事后</strong>检测</li>
+</ul>
+<hr />
+<h2 id="section-2-6-methods-cstm-bench-results-discussion">Section 2-6 — Methods, CSTM-Bench, Results &amp; Discussion<a class="headerlink" href="#section-2-6-methods-cstm-bench-results-discussion" title="Permanent link">&para;</a></h2>
+<h3 id="_5">中文翻译（核心内容）<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<p><strong>2. CSTM-Bench基准</strong></p>
+<p><strong>26种攻击taxonomy</strong>，两维分类：
+- <strong>Kill Chain维度</strong>（5阶段）：Reconnaissance → Weaponize/Persist → Lateral Movement → Collection/Exfiltration → Impact
+- <strong>Operations本体论维度</strong>（4类操作 × 7身份锚点）：accumulate / compose / launder / inject_on_reader</p>
+<p>每种攻击绑定到一个<strong>身份锚点</strong>（如GitHub token、AWS credential、Slack channel），将"违规"定义为清晰的策略谓词。</p>
+<p><strong>两个分片</strong>：
+- <strong>Dilution分片</strong>（信号稀释轴）：targeting信号稀释效应
+- <strong>Cross-session分片</strong>（12个隔离不可见场景）：闭环重写器软化表面措辞但保留跨会话攻击artifacts逐字</p>
+<p><strong>3. LLM Correlator可行性测量</strong></p>
+<p>关键发现：<strong>Full-Log Correlator从dilution分片移至cross-session-only分片时丢失约50%攻击召回率</strong>。累积token压力在任何前沿上下文窗口内——因此退化是correlator在稀释下的固有属性。</p>
+<p><strong>4. Coreset Memory Reader算法</strong></p>
+<p>有界内存的Coreset Reader排序并保留<strong>最高信号的跨会话片段</strong>。容量K=50时它是唯一在两个分片上都维持攻击召回的读者。<strong>CSR_prefix（有序前缀稳定性）</strong>被提升为一阶服务指标。</p>
+<p><strong>5. 主要结果</strong></p>
+<table>
+<thead>
+<tr>
+<th>指标</th>
+<th>值/发现</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>攻击场景数</td>
+<td>54个/分片 × 2分片 = 108个场景</td>
+</tr>
+<tr>
+<td>流量分类</td>
+<td>Attack / Benign-pristine / Benign-hard 三类</td>
+</tr>
+<tr>
+<td>Full-Log召回率损失(dilution→cross-session)</td>
+<td><strong>~50%</strong></td>
+</tr>
+<tr>
+<td>Coreset Reader(K=50)</td>
+<td>两分片均保持高召回</td>
+</tr>
+<tr>
+<td>CSTM复合指标</td>
+<td>0.7·F1 + 0.3·CSR_prefix</td>
+</tr>
+</tbody>
+</table>
+<p><strong>6. 讨论：动态性与局限性</strong></p>
+<ul>
+<li>Agent上下文窗口持续增长使<strong>意图时状态保留首次可行</strong></li>
+<li>Absorbers（环境兼容、访问控制、LLM自身拒绝）存在但不能作为最后防线</li>
+<li>Naive Full-Log Correlator不关闭gap——架构形状仍是"一个无界日志，一次批处理调用"</li>
+<li>本工作 sized for <strong>一阶特征表征</strong>（pattern-level瓶颈形状），非精细模型排名</li>
+</ul>
+<h3 id="takeaway_1">关键 takeaway<a class="headerlink" href="#takeaway_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>要点1</strong>：<strong>CSTM-Bench填补了跨会话安全评估的基准空白</strong></li>
+<li><strong>要点2</strong>：<strong>~50%召回损失</strong>是纯LLM correlator的结构性限制</li>
+<li><strong>要点3</strong>：Coreset Reader + CSR_prefix提供了<strong>实用的实时检测路径</strong></li>
+<li><strong>要点4</strong>：当前方案适用于<strong>一阶特征验证</strong>——需更大规模多provider数据集推动</li>
+</ul>
+<hr />
+<h2 id="_6">全文总结<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<h3 id="_7">核心创新点<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>CSTM-Bench基准</strong>——首个跨会话威胁评估专用基准，26种攻击taxonomy + 双分片设计</li>
+<li><strong>LLM Correlator可行性实证</strong>——证明Full-Log方案在跨会话场景下损失~50%召回</li>
+<li><strong>Coreset Memory Reader算法</strong>——有界内存+排序保留高信号片段的实用检测架构</li>
+<li><strong>CSTM复合指标</strong>——F1(检测质量) + CSR_prefix(服务成本)的非补偿融合</li>
+</ol>
+<h3 id="agent">对Agent安全的启示<a class="headerlink" href="#agent" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>"每会话重置"是根本性安全缺陷</strong>——需要跨会话状态管理</li>
+<li><strong>SIEM不适合Agent时代</strong>——需要在<strong>意图时</strong>检测而非<strong>事件后</strong>关联</li>
+<li><strong>语义清洗是最大隐蔽风险</strong>——敏感值经多次会话"洗白"最难检测</li>
+<li><strong>Absorber不是充分防御</strong>——对抗性prompting是无限空间自适应的</li>
+</ol>
+<h3 id="_8">局限性<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<ul>
+<li>单模型家族(Claude)、单correlator、首轮提示未优化</li>
+<li>规模适合概念验证，非生产部署级别</li>
+<li>未覆盖multi-agent横向扩散场景</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.expand", "navigation.indexes", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
