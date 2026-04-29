@@ -1,4 +1,4 @@
-site_name: 深度学习时序预测与智能体论文知识库
+site_name: 论文自动研学知识库
 site_url: https://groupechou.github.io/paper-learning-hub/
 repo_name: GroupeChou/paper-learning-hub
 theme:
@@ -9,7 +9,6 @@ theme:
     - navigation.expand
     - navigation.indexes
     - content.code.copy
-    - toc.integrate
 plugins:
   - search
 markdown_extensions:
@@ -26,14 +25,13 @@ extra_javascript:
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
 extra_css:
   - stylesheets/extra.css
-
 nav:
   # ===== 总层（入口）=====
   - 首页: index.md
   - 📖 学习总纲: roadmap.md
   - 📅 今日更新: guides/daily-guide.md
 
-  # ===== 分层：两大主线 =====
+  # ===== 🤖 AI Agent 主线 =====
   - 🤖 AI Agent 主线:
     - agents/index.md
     - 第一章 Agent 基础架构篇: agents/ch01-basics.md
@@ -45,6 +43,7 @@ nav:
     - 第七章 Agent评估与安全篇: agents/ch07-safety.md
     - 第八章 前沿探索篇: agents/ch08-frontier.md
 
+  # ===== 📈 时序预测主线 =====
   - 📈 时序预测主线:
     - time_series/index.md
     - 第一章 基础理论篇: time_series/ch01-basics.md
@@ -73,12 +72,6 @@ nav:
     - 国内大厂系列: organizations/domestic.md
     - 学术机构: organizations/academic.md
 
-  # ===== 论文详情（所有已收录论文）=====
+  # ===== 论文详情（动态生成）=====
   - 论文详情:
     - papers/index.md
-    - ✅ Spatial Atlas（已精读）: papers/2604.12102v2/index.md
-    - ATBench: papers/2604.14858v1/index.md
-    - Jailbreak Attacks: papers/2604.15725v1/index.md
-    - ✅ When Agents Look the Same（已精读）: papers/2604.21255v1/index.md
-
-  - 关于: about.md

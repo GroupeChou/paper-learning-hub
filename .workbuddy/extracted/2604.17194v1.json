@@ -1,0 +1,96 @@
+{
+  "paper_id": "2604.17194v1",
+  "title": "Forecast Sports Outcomes under Efficient Market Hypothesis: Theoretical and Experimental Analysis of Odds-Only and Generalised Linear Models",
+  "organization": "智谱",
+  "publish_date": "2026-04-19",
+  "theme": "深度学习时序预测",
+  "source_name": "GLM arXiv query",
+  "source_url": "https://arxiv.org/abs/2604.17194v1",
+  "paper_url": "https://arxiv.org/pdf/2604.17194v1",
+  "summary": "Converting betting odds into accurate outcome probabilities is a fundamental challenge in order to use betting odds as a benchmark for sports forecasting and market efficiency analysis. In this study, we propose two methods to overcome t...",
+  "priority": 890,
+  "total_chars": 62735,
+  "chunk_count": 13,
+  "image_paths": [],
+  "notes": [],
+  "chunks": [
+    {
+      "index": 1,
+      "heading": "Section 1",
+      "text_len": 4993,
+      "text_preview": "[Page 1]\nForecast Sports Outcomes under\nEfficient Market Hypothesis: Theoretical\nand Experimental Analysis of Odds-Only\nand Generalised Linear Models\nJournal Title\nXX(X):1–13\n©The Author(s) 0000\nRepri"
+    },
+    {
+      "index": 2,
+      "heading": "Section 2",
+      "text_len": 6490,
+      "text_preview": "[Page 2]\n2\nJournal Title XX(X)\nFour notable methods currently convert betting odds to\nprobabilities without using historical data. The multiplicative\nconversion Chernov and Vovk (2009), two variants o"
+    },
+    {
+      "index": 3,
+      "heading": "Section 3",
+      "text_len": 4427,
+      "text_preview": "[Page 3]\nRELATED WORKS\n3\nAlgorithm 1: Multiplicative Conversion\n1 Input: Number of possible outcomes denoted by k;\nInput vector of betting odds denoted by\nx = [x1, x2, ..., xk]; Number of successful o"
+    },
+    {
+      "index": 4,
+      "heading": "Section 4",
+      "text_len": 3722,
+      "text_preview": "[Page 4]\n4\nJournal Title XX(X)\nSumming over all i, we get:\nlim\nz→0\nk\nX\ni=1\nˆyi =\nk\nX\ni=1\nx−1\ni√s = 1\n√s\nk\nX\ni=1\nx−1\ni\n=\ns\n√s = √s\nSince the implied probabilities must sum to 1 when there\nis one succes"
+    },
+    {
+      "index": 5,
+      "heading": "Section 5",
+      "text_len": 4905,
+      "text_preview": "[Page 5]\nPROPOSED METHODS\n5\nOrdered logistic regression McCullagh (1980) attempts\nto capture the ordinal relationship between betting odds.\nBut under EMH, betting odds have already adjusted for the\nor"
+    },
+    {
+      "index": 6,
+      "heading": "Section 6",
+      "text_len": 4671,
+      "text_preview": "[Page 6]\n6\nJournal Title XX(X)\nStep 5 of Algorithm 5 intuitively means that the\nbookmakers have equal confidence in the profitability of\neach outcome’s betting odds, because the inverse odds of all\nou"
+    },
+    {
+      "index": 7,
+      "heading": "Section 7",
+      "text_len": 5235,
+      "text_preview": "[Page 7]\nEXPERIMENTS\n7\nThus, Property 5 proves that the multiplicative conversion\nassumes the power term of our proposed FL-GLM can be\nassumed to be 1.\nProperty 6. Our proposed FL-GLM is equivalent to"
+    },
+    {
+      "index": 8,
+      "heading": "Section 8",
+      "text_len": 5757,
+      "text_preview": "[Page 8]\n8\nJournal Title XX(X)\nOdds-Only Method\nBet365\nBet&Win\nInterwetten\nPinnacle\nWilliam Hill\nMultiplicative\n1.00372\n1.00417\n1.00575\n1.00449\n1.00425\nNumerical Shin\n1.00336\n1.00356\n1.00477\n1.00432\n1"
+    },
+    {
+      "index": 9,
+      "heading": "Section 9",
+      "text_len": 3171,
+      "text_preview": "[Page 9]\nDISCUSSIONS\n9\nGeneralised Linear Model\nBet365\nBet&Win\nInterwetten\nPinnacle\nWilliam Hill\nMultinomial Logistic\n1.00573\n1.00601\n1.00550\n1.00557\n1.00473\nOrdered Logistic\n1.00722\n1.00766\n1.00684\n1"
+    },
+    {
+      "index": 10,
+      "heading": "Section 10",
+      "text_len": 4153,
+      "text_preview": "[Page 10]\n10\nJournal Title XX(X)\nBet365\nBet&Win\nInterwetten\nPinnacle\nWilliam Hill\n10500\n11000\n11500\n12000\n11767\n11804.3\n11341.3\n11752.5\n11574\n11797.9\n11837.7\n11368\n11784.8\n11603.4\n11523\n11389.6\n10947."
+    },
+    {
+      "index": 11,
+      "heading": "Section 11",
+      "text_len": 5298,
+      "text_preview": "[Page 11]\nDISCUSSIONS\n11\nDiscussion for Future Work\nFuture work is needed to alleviate the draw bias that exists\nin all bias-adjusted odds-only methods shown on Figure 1\nand in our proposed FL-GLM sho"
+    },
+    {
+      "index": 12,
+      "heading": "Section 12",
+      "text_len": 5802,
+      "text_preview": "[Page 12]\n12\nJournal Title XX(X)\nprediction competitions from 2019 to 2025. We defined\nour six success criteria to align with the medal thresholds,\nbecause the typical motivation of Kaggle participant"
+    },
+    {
+      "index": 13,
+      "heading": "Section 13",
+      "text_len": 4087,
+      "text_preview": "[Page 13]\nCONCLUSION\n13\nBaxter M (1990) Generalised linear models , by p. mccullagh and ja\nnelder. pp 511.£ 30. 1989. isbn 0-412-31760-5 (chapman and\nhall). The Mathematical Gazette 74(469): 320–321.\n"
+    }
+  ]
+}

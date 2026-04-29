@@ -1,0 +1,93 @@
+{
+  "paper_id": "2604.24512v1",
+  "title": "Beyond the Attention Stability Boundary: Agentic Self-Synthesizing Reasoning Protocols",
+  "organization": "DeepSeek",
+  "publish_date": "2026-04-27",
+  "theme": "AI Agent",
+  "source_name": "DeepSeek arXiv query",
+  "source_url": "https://arxiv.org/abs/2604.24512v1",
+  "paper_url": "https://arxiv.org/pdf/2604.24512v1",
+  "summary": "As LLM agents transition to autonomous digital coworkers, maintaining deterministic goal-directedness in non-linear multi-turn conversations emerged as an architectural bottleneck. We identify and formalize a systemic failure mode termed...",
+  "priority": 958,
+  "total_chars": 46277,
+  "chunk_count": 11,
+  "image_paths": [
+    "assets/page-003-img-01.png",
+    "assets/page-004-img-01.png",
+    "assets/page-005-img-01.png",
+    "assets/page-005-img-02.png",
+    "assets/page-005-img-03.png",
+    "assets/page-008-img-01.png",
+    "assets/page-008-img-02.png",
+    "assets/page-009-img-01.png"
+  ],
+  "notes": [],
+  "chunks": [
+    {
+      "index": 1,
+      "heading": "Section 1",
+      "text_len": 3695,
+      "text_preview": "[Page 1]\nBeyond the Attention Stability Boundary:\nAgentic Self-Synthesizing Reasoning Protocols\nDahlia Shehata\ndahlia.shehata@uwaterloo.ca\nUniversity of Waterloo\nCanada\nMing Li\nmli@uwaterloo.ca\nUniver"
+    },
+    {
+      "index": 2,
+      "heading": "Section 2",
+      "text_len": 5519,
+      "text_preview": "[Page 2]\nidentify a ’Scientific Cliff’ where 3-hop synthesis causes ReAct baselines to collapse to 0.1% success,\nmarking the ASB where stateless attention breaks. This collapse is often exacerbated by"
+    },
+    {
+      "index": 3,
+      "heading": "Section 3",
+      "text_len": 3917,
+      "text_preview": "[Page 3]\nthat autonomous scaffolding purges trajectory entropy to maintain deterministic reliability.\nFigure 1: Comparative Reasoning Trajectories: Mitigating the Attention Latch via SSRP Re-Synthesis"
+    },
+    {
+      "index": 4,
+      "heading": "Section 4",
+      "text_len": 4168,
+      "text_preview": "[Page 4]\n3.1\nArchitectural Design\nThe SSRP framework implements a discrete architectural separation modeled after the Architect\n(reflective) and Executive (reactive) cognitive paradigm.\n•The Architect"
+    },
+    {
+      "index": 5,
+      "heading": "Section 5",
+      "text_len": 4192,
+      "text_preview": "[Page 5]\n(a) Shallow Retrieval (Pilot)\n(b) High Entropy Synthesis (Stress)\n(c) Scientific Cliff\nFigure 3: Resilience Lift for the Three-Tiered Stress Testing Methodology.\nreasoning path of obsolete in"
+    },
+    {
+      "index": 6,
+      "heading": "Section 6",
+      "text_len": 3849,
+      "text_preview": "[Page 6]\n4\nExperimental Evaluation\n4.1\nExperimental Setup And Dataset\nAll simulations are executed within a Google Colab environment. We utilize the public SDKs for\nGemini, Claude, GPT and DeepSeek to"
+    },
+    {
+      "index": 7,
+      "heading": "Section 7",
+      "text_len": 4927,
+      "text_preview": "[Page 7]\nTable 1: Cross-Model Reliability Matrix (N = 1, 000 per anchor). Methodology categories define\nthe level of context load and trajectory entropy: Shallow Retrieval (2k tokens, recency seeding)"
+    },
+    {
+      "index": 8,
+      "heading": "Section 8",
+      "text_len": 4272,
+      "text_preview": "[Page 8]\nFigure 4: The Attention Stability Boundary:\nRecall Accuracy vs. Information Position.\nFigure 5: The Inverse Overhead Curve:\nQuantifying IB in Agentic Scaffolding\nbias. GPT 5.4 achieved a base"
+    },
+    {
+      "index": 9,
+      "heading": "Section 9",
+      "text_len": 4476,
+      "text_preview": "[Page 9]\nRefusal. High-alignment models often prioritize internal safety guardrails over procedural protocols\nwhen they perceive re-scaffolding as a context-manipulation attack, leading to a 18% refus"
+    },
+    {
+      "index": 10,
+      "heading": "Section 10",
+      "text_len": 3709,
+      "text_preview": "[Page 10]\nReferences\n[1] Mamdouh Alenezi. From prompt-response to goal-directed systems: The evolution of agentic\nai software architecture. arXiv preprint arXiv:2602.10479, 2026. Unpublished preprint."
+    },
+    {
+      "index": 11,
+      "heading": "Section 11",
+      "text_len": 3533,
+      "text_preview": "[Page 11]\n[15] Lianmin Zheng, Wei-Lin Chiang, Ying Sheng, Siyuan Zhuang, Zhanghao Wu, Yonghao Zhuang,\nZi Lin, Zhuohan Li, Dacheng Li, Eric P. Xing, Hao Zhang, Joseph E. Gonzalez, and Ion Stoica.\nJudgi"
+    }
+  ]
+}

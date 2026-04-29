@@ -1,0 +1,3147 @@
+[Page 1]
+Inferring High-Level Events from Timestamped Data:
+Complexity and Medical Applications
+Yvon K. Awuklu1,2,3 , Meghyn Bienvenu1 , Katsumi Inoue4 , Vianney Jouhet2,3 , Fleur Mougin3
+1Univ. Bordeaux, CNRS, Bordeaux INP, LaBRI, UMR 5800, F-33400, Talence, France
+2CHU de Bordeaux, Service d’Information M´edicale, F-33000, Bordeaux, France
+3Univ. Bordeaux, INSERM, BPH, U1219, F-33000, Bordeaux, France
+4National Institute of Informatics, Tokyo, Japan
+{kokou-yvon.awuklu,fleur.mougin,meghyn.bienvenu}@u-bordeaux.fr,
+vianney.jouhet@chu-bordeaux.fr,inoue@nii.ac.jp
+Abstract
+In this paper, we develop a novel logic-based approach to
+detecting high-level temporally extended events from time-
+stamped data and background knowledge. Our framework
+employs logical rules to capture existence and termination
+conditions for simple temporal events and to combine these
+into meta-events. In the medical domain, for example, di-
+sease episodes and therapies are inferred from timestamped
+clinical observations, such as diagnoses and drug administra-
+tions stored in patient records, and can be further combined
+into higher-level disease events. As some incorrect events
+might be inferred, we use constraints to identify incompatible
+combinations of events and propose a repair mechanism to
+select preferred consistent sets of events. While reasoning in
+the full framework is intractable, we identify relevant restric-
+tions that ensure polynomial-time data complexity. Our pro-
+totype system implements core components of the approach
+using answer set programming. An evaluation on a lung can-
+cer use case supports the interest of the approach, both in
+terms of computational feasibility and positive alignment of
+our results with medical expert opinions. While strongly mo-
+tivated by the needs of the healthcare domain, our framework
+is purposely generic, enabling its reuse in other areas.
+1
+Introduction
+The adoption of electronic health records (EHRs) has sig-
+nificantly improved access to vast amounts of clinical data.
+While this access is invaluable for healthcare delivery and
+research, it also introduces new challenges due to the in-
+herent complexity of medical data (Tsai et al. 2020; Rance
+et al. 2016), and in particular, its inherently temporal na-
+ture (Augusto 2005; Zhou and Hripcsak 2007; Li et al. 2020;
+Awuklu et al. 2025). In practice, data in EHRs is recorded
+as a sequence of time-stamped observations, such as test re-
+sults, diagnoses, and treatments. Each observation implicitly
+refers to a clinical event—an underlying phenomenon such
+as a disease episode or a therapeutic intervention—that is
+relevant to the patient’s care (Hripcsak and Albers 2013), but
+these events are not explicitly documented in EHRs. Physi-
+cians routinely infer clinical events using their medical ex-
+pertise, which is rarely formalized in the data. For exam-
+ple, observing repeated antibiotic intake may lead a clini-
+cian to deduce the presence of a bacterial infection. Here,
+the data shows the observation (antibiotic intake), while
+the associated clinical events (bacterial infection, antibiotic
+therapy) and the reasoning process remain implicit. How-
+ever, as the volume of observations per patient can over-
+whelm clinicians, there is a need for information systems
+to adopt a higher-level, event-based representation more
+closely aligned with clinical reasoning and decision-making.
+Moreover, given the high-stakes nature of healthcare de-
+cisions and medical research, the event inference process
+should also be transparent, making it possible to trace in-
+ferred high-level events back to the original observations.
+These considerations motivate us to develop a new logic-
+based framework for identifying high-level temporally ex-
+tended events, designed with the medical domain in mind
+yet sufficiently generic to enable reuse in other areas.
+Overview of the Logical Framework We briefly outline the
+main intuitions and components of our framework, which
+borrows ideas from various existing KR formalisms (see
+Section 6 for a comparison with related work). Recall that
+our aim is to be able to infer temporally-extended events like
+ABTherapy(p, d, [t1, t2]), expressing that patient p receives
+antibiotic therapy with drug d during the time period [t1, t2],
+from the timestamped observations in medical data. The
+starting point for our proposal is the realisation that while it
+can be quite difficult for medical experts to directly specify
+the interval endpoints (t1, t2), it is typically much easier for
+them to supply existence conditions which ensure (or sug-
+gest) that a given event is ongoing at timepoint t, e.g. the ob-
+servation DrugAdmin(p, d, t) available in patient p’s records
+indicates that a therapy with drug d is ongoing at time t. In
+some cases, experts may also be able to formulate termina-
+tion conditions that indicate that an event (might or must)
+end at a given timepoint. For example, hospital records may
+contain DrugStopNotification(p, d, t), stating that the pre-
+scription for drug d was terminated at time t, indicating an
+end to the therapy with d. In our work, we will use the term
+simple event to refer to events for which we can define exis-
+tence conditions (and optionally termination conditions) in
+terms of data predicates, without reference to other events.
+How can we use the existence and termination conditions
+to identify the intervals of simple events? Here, we shall
+distinguish two kinds of simple events: persistent and non-
+arXiv:2604.21793v1  [cs.AI]  23 Apr 2026
+
+[Page 2]
+persistent. Intuitively, persistent events continue once initi-
+ated until some termination condition is met (similar to the
+principle of inertia in reasoning about actions (Reiter 2001;
+Shanahan 1997)), while non-persistent events require regu-
+lar observations to endure. For persistent events, we con-
+sider the maximal intervals starting from a timepoint veri-
+fying the existence condition and continuing until some ter-
+mination condition (if present) is reached (else marking the
+event as ongoing).
+For non-persistent events, the idea is
+to group together timepoints satisfying existence conditions
+if they are sufficiently close (with ‘closeness’ being deter-
+mined by a provided time window), ending an event when a
+termination condition is reached or there are no further time-
+points in the vicinity that satisfy existence conditions.
+Our framework also supports meta-events, defined from
+simple events and possibly other meta-events. Such higher-
+level events allow one e.g. to group disease episodes or iden-
+tify concurrent conditions or treatments. They also make
+it possible to present events at different levels of abstrac-
+tion (e.g. DrugTherapy generalizes ABTherapy). Moreover,
+since it is difficult to provide existence and termination con-
+ditions which are both fully accurate and ensure sufficient
+coverage, our framework allows for event facts to be an-
+notated with confidence levels, based upon the rules which
+created them. Constraints can also be used to specify con-
+sistency requirements, and a repair mechanism employed to
+select consistent combinations of events.
+Contributions Our first contribution is the formal definition
+of a novel logic-based language for temporal event detec-
+tion, which uses rules to specify the existence and termi-
+nation conditions for simple events and for defining meta-
+events in terms of other events, as well as constraints to de-
+fine consistency requirements. The semantics defines four
+different kinds of timelines (na¨ıve, consistent, preferred,
+cautious), with each timeline consisting of simple event and
+meta-event facts that can be inferred from the rules, possibly
+taking into account the constraints and confidence levels.
+As our second contribution, we explore the computa-
+tional properties of our framework, presenting algorithms
+and complexity results for recognizing and generating the
+different kinds of timeline. Given the expressivity of the
+framework, we show unsurprisingly that the consistent, pre-
+ferred, and cautious cannot be tractably recognized. How-
+ever, we also identify a relevant fragment for which there is
+a unique preferred timeline, and for which both the preferred
+timeline and cautious timeline can be efficiently computed.
+As a third contribution, we implemented core compo-
+nents of the framework using answer set programming
+(ASP), a well-known declarative programming paradigm
+(Brewka, Eiter, and Truszczynski 2011; Gebser et al. 2012;
+Lifschitz 2019). An experimental evaluation on a cancer
+use case involving hospital data demonstrates computational
+feasibility, and feedback from medical experts supports the
+clinical plausibility of the inferred events.
+Paper Organization Section 2 defines the syntax and se-
+mantics of our logical framework, while Section 3 provides
+algorithms and complexity results for the relevant reasoning
+tasks. Sections 4 and 5 present respectively the implemented
+system and its evaluation on a medical use case. Discussions
+of related approaches and future work are given in Sections
+6 and 7. Omitted proofs and further details on the modelling
+and evaluation of the case study are given in the appendix.
+2
+A Logical Framework for Event Detection
+We formalize our logical framework for specifying high-
+level events from temporal observations and expert know-
+ledge, motivated and illustrated by medical applications. We
+shall assume that readers are acquainted with the basics of
+first-order logic and logic programming.
+2.1
+Logical Vocabulary
+We use three disjoint sets of first-order predicates to de-
+scribe the domain: a set RA of atemporal predicates, a set
+of RO of observation predicates, and a set RE of event pre-
+dicates, further partitioned into the sets RPS, RNS, and RM
+of persistent simple event predicates, non-persistent simple
+event predicates, and meta-event predicates. Each predicate
+R ∈RA ∪RO ∪RE has an arity k ≥0, corresponding to
+its number of atemporal arguments. We use Rk
+A (resp. Rk
+O,
+Rk
+E) for the set of k-ary predicates in RA (resp. RO, RE).
+The atemporal and observation predicates correspond to the
+predicates occurring in the data, the key difference being that
+observation predicates have a timepoint as final argument (to
+capture timestamped facts). The event predicates are used
+for the inferred events and will contain a temporal interval
+as argument to indicate the start and end of the event.
+For simplicity, we use natural numbers to represent time-
+points (and positive integers for confidence levels and tem-
+poral windows), so we assume the set C of constants con-
+tains N.
+Temporal intervals take the form [t1, t2] where
+t1 ∈N, t2 ∈N ∪{∗}, and t1 ≤t2 if t2 ̸= ∗, where
+the special symbol ∗is used to indicate events which are
+still ongoing. Our rules will use variables drawn from a
+set V. To ensure variables are appropriately instantiated,
+we assume V is partitioned into four subsets Vd, Vn, V+
+n ,
+and V∗
+n whose variables must be instantiated respectively by
+elements of C, N, N+, and N ∪{∗}. We also allow for sets
+Fn, F+
+n , and Fint of functions to manipulate (positive) natu-
+ral numbers or intervals. For example, we will use min to
+aggregate confidence levels and inter to compute the inter-
+section of two intervals. Finally, we can define the following
+sets of terms: (i) Td = C∪Vd, (ii) Tn (resp. T+
+n ) is defined
+as the closure of N∪Vn (resp. N+ ∪V+
+n ) under applications
+of functions in Fn (resp. F+
+n ), and (iii) Tint is obtained by
+closing {[t1, t2] | t1 ∈N ∪Vn, t2 ∈N ∪{∗} ∪V∗
+n, t1 ≤
+t2 if t1, t2 ∈N} under functions in Fint.
+An atemporal atom has the form R(u1, . . . , uk) where
+R ∈Rk
+A, and u1, . . . , uk ∈Td. An observation atom has
+the form R(u1, . . . , uk, t) where R ∈Rk
+O, u1, . . . , uk ∈Td
+and t ∈Tn. An event atom has the form R(u1, . . . , uk, ι),
+where R ∈Rk
+E, u1, . . . , uk ∈Td, ι ∈Tint. Atoms without
+variables are called facts. A dataset is a finite set of atempo-
+ral and observation facts.
+We will attach confidence levels (from N+) to event facts
+based upon how they were generated. Note that to easily
+identify the most reliable facts, we fix 1 as the best confi-
+
+[Page 3]
+dence level (thus, higher numbers will denote lower confi-
+dence). A (confidence-)annotated event atom takes the form
+R(u, ι, ℓ), where R(u, ι) is an event atom and ℓ∈T+
+n .
+Finally, as will be detailed next, we shall employ special
+auxiliary predicates exists, ends, and window to define exis-
+tence and termination conditions and temporal windows.
+2.2
+Specifying Events via Rules
+We now introduce the syntax of rules used to define simple
+and meta-event predicates.
+Simple Events
+For simple non-persistent events, we must
+provide the conditions that allow us to infer that such the
+event holds (or ends) at a given timepoint, as well as defi-
+ning a temporal window in order to know how to define the
+event intervals. Formally, a ruleset for a non-persistent sim-
+ple event predicate R ∈Rk
+NS is a set of rules consisting of:
+• one or more existence rules of the form1
+exists(R(u1, . . . , uk), t, ℓ) ←B
+• zero or more termination rules of the form
+ends(R(u1, . . . , uk), t, ℓ) ←B
+• one or more (expansion) window rules of the form
+window(R(u1, . . . , uk), w) ←B
+where u1, . . . , uk ∈Td, t ∈Tn (specifying a timepoint),
+ℓ∈N+ (giving the confidence level of the rule, with the
+convention that 1 denotes greatest confidence), and w ∈T+
+n
+(defining a temporal window). Rule bodies B take the form
+of conjunctions whose conjuncts may be (possibly negated)
+atemporal and observation atoms, inequality atoms z ̸= z′
+between terms z, z′ ∈Td, or inequality / comparison atoms
+z ▷◁z′ for z, z′ ∈Tn and ▷◁∈{̸=, <, ≤}. Rules are re-
+quired to be safe: every variable in a rule must occur either
+in some unnegated atemporal or observation body atom. Ad-
+ditionally, window rules should provide a unique window
+value w > 0 for each R(c1, . . . , ck) that exists due to the
+existence rules (this is made formal in Section 2.3). The
+simplest way to accomplish this is to assign each predicate
+R a fixed window, but it can be useful to be able to assign
+different windows based upon the event arguments.
+Example 1. For the simple event ABTherapy (shortened to
+ABTh), we could use the following rules:
+exists(ABTh(p, d), t, 1) ←Adm(p, d, t) ∧AB(d)
+ends(ABTh(p, d), t, 1) ←Stop(p, d, t) ∧AB(d)
+window(ABTh(p, d), 48) ←P(p) ∧AB(d)
+The existence condition looks for administrations (Adm) of
+an antibiotic (AB) drug. The termination rule applies when
+there is a drug stop notification (Stop). A fixed window of 48
+hours is defined, but one could use multiple rules with diffe-
+rent windows to e.g. differentiate by the class of antibiotics.
+1In line with standard notations for logics for reasoning about
+actions, auxiliary predicates may have atoms R(u1, . . . , un) of
+arbitrary arity as arguments. Alternatively, we could express the
+same thing in classical logic using reification and multiple copies
+of the auxiliary predicates to accommodate atoms of different ari-
+ties. We write rules right-to-left as typical in logic programming.
+We proceed similarly for persistent simple events, the
+main difference being that no window is needed. A rule-
+set for a persistent simple event predicate R ∈Rk
+PS thus
+comprises one or more existence rules and (optionally) ter-
+mination rules (having the same syntactic form as before).
+Example 2. Tyrosine kinase inhibitor (TKI) therapy is used
+in specific cases of lung cancer. It is intended to be taken for
+life unless it leads to toxicity or proves ineffective, in which
+case a patient is switched to another TKI drug. We model
+TKI therapy (TKITh) as a persistent simple event:
+exists(TKITh(p, d), t, 1) ←Adm(p, d, t) ∧TKI(d)
+exists(TKITh(p, d), t, 2) ←Presc(p, d, t) ∧TKI(d)
+ends(TKITh(p, d), t, 1) ←Adm(p, d′, t′) ∧TKI(d′)
+∧TKI(d) ∧d′ ̸= d
+Both administration and prescription of a TKI can be used
+to infer existence, but prescription is less reliable.
+Meta-Events
+Unlike simple events, which are defined di-
+rectly from the data, the definition of meta-event predicates
+may refer to simple events and other meta-events. A ruleset
+for RM contains rules of the following form, for R ∈Rk
+M:
+R(u1, . . . , uk, ι, ℓ) ←B
+where u1, . . . , uk ∈Td, ι ∈Tint (specifying the tempo-
+ral interval), ℓ∈T+
+n (specifying confidence level), and the
+rule body B may use the same kinds of conjuncts as for
+simple event rules, as well as (possibly negated) confidence-
+annotated event atoms. Safety of rules is defined as before,
+except that now unnegated event atoms may also be used to
+restrict the range of variables.
+Note that a predicate R ∈RM may occur both in the head
+of rules and (possibly negated) in rule bodies. In our con-
+sidered medical scenarios, we found it sufficient to consider
+stratified rulesets, for which there exists a total preorder ⪯
+on the predicates such that if a rule has head predicate R′ and
+body predicate R′ then R′ ⪯R, and if R′ occurs in negated
+body atom, then R′ ≺R (Apt, Blair, and Walker 1988).
+We thus impose this stratification condition, which ensures
+that the meta-event facts are uniquely determined from the
+simple event facts and dataset.
+Example 3. Negation can model exclusion conditions. Hy-
+perglycemia (HyperGlyc) during pregnancy (Preg) should
+not yield gestational diabetes (GestDiab) when pre-existing
+diabetes (PreDiab) is already active at onset. We encode
+this by introducing an auxiliary predicate detecting diabetes
+at hyperglycemia onset and excluding such cases in the defi-
+nition of GestDiab:
+PreDiabAtOnset(p, [t1, t2], min(ℓ1, ℓ2))
+←HyperGlyc(p, [t1, t2], ℓ1) ∧PreDiab(p, [t′
+1, t′
+2], ℓ2)
+∧t′
+1 ≤t1 ∧t1 ≤t′
+2
+GestDiab(p, inter([t1, t2], [t3, t4]), min(ℓ1, ℓ2))
+←Preg(p, [t1, t2], ℓ1) ∧HyperGlyc(p, [t3, t4], ℓ2)
+∧¬ PreDiabAtOnset(p, [t3, t4], )
+
+[Page 4]
+Constraints on Events
+To enforce consistency of the in-
+ferred events, we consider two types of constraints: domain-
+independent temporal constraints and domain-specific con-
+straints. The fixed set of temporal constraints Υtemp ensures
+that simple events having the same predicate and atemporal
+arguments (but possibly different confidence levels) cannot
+have intervals that non-trivially overlap. Υtemp contains the
+following constraints for every R ∈Rk
+PS ∪Rk
+NS:
+⊥←R(u, [t1, t2]) ∧R(u, [t′
+1, t′
+2]) ∧t1 < t′
+1 ∧t′
+1 < t2
+⊥←R(u, [t1, t2]) ∧R(u, [t1, t′
+2]) ∧t2 ̸= t′
+2
+⊥←R(u, [t1, t2]) ∧R(u, [t′
+1, t2]) ∧t1 ̸= t′
+1
+where u abbreviates the tuple of variables u1, . . . , uk (for
+distinct ui ∈Vd). We assume that domain-specific con-
+straints (if any) have the form ⊥←C, with C a conjunc-
+tive formula, whose conjuncts are (possibly negated) atem-
+poral, observation, or (unannotated) event atoms, inequality
+or comparison atoms, subject to the usual safety condition.
+Example 4. In a medical setting, we may use the follow-
+ing domain constraint enforce that a patient cannot simulta-
+neously undergo two targeted therapies with different TKIs:
+⊥←TKITh(p, d1, [t1, t2]) ∧TKITh(p, d2, [t′
+1, t′
+2])
+∧d1 ̸= d2 ∧t1 < t′
+1 ∧t′
+1 < t2 ∧t2 < t′
+2
+Temporal Event Specifications
+We now have all the ele-
+ments needed to define temporal event specifications:
+Definition 1. A temporal event specification (TES) takes the
+form Σ = (ΠSE, ΠME, Υtemp, Υdom), where:
+• ΠSE = S
+R∈RNS∪RPS ΠR, with ΠR a ruleset for R
+• ΠME is a ruleset for RM
+• Υtemp is the fixed set of temporal constraints
+• Υdom is a set of domain-specific constraints
+2.3
+Semantics of the Framework
+It remains to make precise which event facts are generated
+from a given TES and dataset. We shall present the seman-
+tics in stages, starting with simple events.
+Semantics of Simple Events
+To define the exists-, ends-,
+window-facts that hold in a dataset D, we simply evaluate
+rule bodies (seen as first-order formulas) in D (seen as a first-
+order structure). Given a rule body B over variables u ∪v,
+we let EVAL(B, v, D) = {c | D |= ∃u B[v : c]}, where
+B[v:c] is B with variables v replaced by the constants in c.
+Definition 2. Given a TES Σ = (ΠSE, ΠME, Υtemp, Υdom)
+and dataset D, we define ΠSE(D) as the set of all facts p(c)
+s.t. c ∈EVAL(B, v, D) for some rule p(v) ←B(u ∪v) ∈
+ΠSE. For a predicate R ∈Rk
+NS, k-tuple d of data constants,
+and confidence level ℓ, we define:
+T ℓ
+∃(R(d)) ={t | exists(R(d), t, ℓ′) ∈ΠSE(D), ℓ′ ≤ℓ}
+T ℓ
+×(R(d)) ={t | ends(R(d), t, ℓ′) ∈ΠSE(D), ℓ′ ≤ℓ}
+We say that ΠSE(D) is valid if whenever exists(R(d), t, ℓ) ∈
+ΠSE(D), there is a unique window(R(d), w) ∈ΠSE(D).
+Recall that for non-persistent simple events the idea
+is to construct intervals for an event by starting from
+the timepoints where the event is stated to exist (given
+by T ℓ
+∃(R(d))), then iteratively ‘expanding’ these intervals
+to incorporate nearby timepoints (with ‘near’ defined by
+window(R(d), w)) stopping either when no further such
+timepoint is encountered, or when a termination condition
+(T ℓ
+×(R(d))) is reached. As we shall assume that ΠSE(D) is
+valid (cf. previous definition), it is always clear which win-
+dow to use. The following definition formalizes this idea.
+Definition 3. A fact R(d, [t1, t2]) is inferred from (ΠSE, D)
+with confidence ℓ, denoted ΠSE, D |=ℓR(d, [t1, t2]), if:
+1. window(R(d), w) ∈ΠSE(D)
+2. there exists t′
+0, . . . , t′
+n ∈T ℓ
+∃(R(d)) such that t′
+0 = t1 and
+t′
+i+1 −t′
+i ≤w for every 0 ≤i < n
+3. there is no t† ∈T ℓ
+×(R(d)) such that t1 ≤t† < t2
+4. for every t♯
+1 ∈T ℓ
+∃(R(d)) with t1 −w ≤t♯
+1 < t1, there
+exists te ∈T ℓ
+×(R(d)) with t♯
+1 ≤te < t1
+5. if t2 = t′
+n, then there is no t† ∈T ℓ
+∃(R(d)) ∪T ℓ
+×(R(d))
+with t′
+n < t† ≤t′
+n + w
+6. if t2 ̸= t′
+n, then t2 ∈T ℓ
+×(R(d)) and t2 −t′
+n ≤w
+7. there is no ℓ′ < ℓsuch that ΠSE, D |=ℓ′ R(d, [t1, t2])
+We briefly explain the role of the different items of the
+preceding definition. Item 1 defines the (unique) time win-
+dow w associated with the event predicate R. This win-
+dow determines the maximal temporal distance allowed be-
+tween consecutive observations that belong to the same
+event occurrence. Item 2 ensures that there is a sequence
+of timepoints in T ℓ
+∃(R(d)) that are sufficiently dense (adja-
+cent timepoints are within distance w) and cover the interval
+[t1, t′
+n]. Item 3 prevents the inferred interval from crossing a
+termination condition by requiring that no termination point
+lies strictly between its start and end. Items 4 and 5 en-
+sure that the interval could not have been extended further
+in either direction by using an earlier or later timepoint from
+T ℓ
+∃(R(d)). Item 6 makes sure that if t2 ̸= t′
+n then t2 satisfies
+a termination condition (e.g., a drug stop notification). Fi-
+nally, item 7 prevents redundant inference of the exact same
+event with different confidence levels.
+Example 5. Suppose for event E we have T 1
+∃(E)
+=
+{2, 4, 9}, T 2
+∃(E) = {1, 5, 6, 10}, and T 1
+×(E) = {7, 8}:
+In this timeline, each dot represents a timepoint in T ℓ
+∃(E)
+where an existence condition for E is satisfied with confi-
+dence level ℓ(blue dots for ℓ= 1, pink dots for ℓ= 2), while
+each cross marks a timepoint in T ℓ
+×(E) where a termination
+condition holds. With a window of 2 and current time 11, we
+get the blue intervals [2, 4] and [9, 9] with confidence 1 and
+the pink intervals [1, 7] and [9, 10] with confidence 2.
+Defining intervals for persistent simple events is simpler
+since they continue until a termination condition is reached.
+
+[Page 5]
+Definition 4. Consider R ∈Rk
+PS defined in ΠSE, and let D,
+d, [t1, t2], T ℓ
+∃(R(d)) and T ℓ
+×(R(d)) be as in Definitions 2
+and 3. Then R(d, [t1, t2]) is inferred from (ΠSE, D) with
+confidence ℓ, denoted ΠSE, D |=ℓR(d, [t1, t2]), if:
+1. t1 ∈T ℓ
+∃(R(d))
+2. if t2 ̸= ∗, then t2 ∈T ℓ
+×(R(d))
+3. for every t♯
+1 ∈T ℓ
+∃(R(d)) with t♯
+1 < t1, there exists te ∈
+T ℓ
+×(R(d)) with t♯
+1 ≤te < t1
+4. if t2 ̸= ∗, there is no t♯
+2 ∈T ℓ
+×(R(d)) with t1 ≤t♯
+2 < t2
+5. if t2 = ∗, there is no t♯
+2 ∈T ℓ
+×(R(d)) with t1 ≤t♯
+2
+6. there is no ℓ′ < ℓsuch that ΠSE, D |=ℓ′ R(d, [t1, t2])
+Example 6. Take the preceding example but now let E be a
+persistent event:
+The inferred intervals become [2, 7] and [9, ∗] for confi-
+dence 1, and [1, 7] and [9, ∗] for confidence 2.
+To facilitate later definitions, we introduce some notation
+for referring to the set of inferred simple event facts (with
+and without their associated confidence levels):
+SE(D, Σ) = {R(d, [t1, t2], ℓ)|ΠSE, D |=ℓR(d, [t1, t2])}
+SE−(D, Σ) = {R(d, [t1, t2])|ΠSE, D |=ℓR(d, [t1, t2])}
+Given any set S of confidence-annotated facts, we let S−be
+the result of removing the confidence levels from all facts in
+S, and let Sℓbe the set of facts in S with confidence ℓ.
+Inferring Meta-Events
+Due to our decision to use stra-
+tified rulesets to define meta-event predicates, there will be
+a unique set of meta-event facts that can be inferred from a
+dataset and a given set of simple event facts:
+Definition 5. Consider a dataset D, set S of confidence-
+annnotated simple event facts, and TES Σ with ruleset ΠME
+for RM.
+The set ME(D, S, Σ) of inferred confidence-
+annotated meta-event facts contains all facts R(d, [t1, t2], ℓ)
+with R ∈RM appearing in the unique stratified model2
+of (D, S, ΠME). The set ME−(D, S, Σ) is obtained from
+ME(D, S, Σ) by removing the confidence levels.
+Repairing Sets of Simple Events
+So far we have defined
+inferred events without paying attention to the constraints.
+Even if the underlying dataset is accurate, the set of in-
+ferred simple events may violate the domain constraints due
+to lower confidence rules, which may sometimes incorrectly
+suggest the existence or termination of a simple event. Ad-
+ditionally, the temporal constraints may be violated by ‘du-
+plicate’ events derived with different confidence levels.
+2Stratified models are defined by evaluating the rules according
+to the ordering of the predicates (Apt, Blair, and Walker 1988;
+Dantsin et al. 2001), so that it is always clear how to interpret
+negated atoms in rule bodies.
+We thus propose to repair the set of inferred simple events
+so that they satisfy the constraints. First, we make clear how
+we define consistency w.r.t. a TES:
+Definition 6. Given a TES Σ = (ΠSE, ΠME, Υtemp, Υdom),
+we say a set S of confidence-annotated simple event facts
+is Σ-consistent if Υtemp, Υdom, D, S−, ME−(D, S, Σ) ̸|= ⊥
+(i.e. there is no constraint ⊥←C such that C evaluates to
+true w.r.t. D ∪S−∪ME−(D, S, Σ)).
+Observe that we need the annotated simple event facts (S)
+to determine the associated meta-event facts (ME(D, S, Σ)),
+but we strip the simple and meta-event facts of their anno-
+tations when we check for constraint violations (as the con-
+straints involve unannotated event atoms).
+Our first notion of repair simply considers the inclusion-
+maximal consistent sets of facts, in line with the subset re-
+pairs previously studied for databases and knowledge bases,
+cf. (Bertossi 2011; Bienvenu and Bourgaux 2016).
+Definition 7. Let S and Σ be as in Definition 6. Then R ⊆
+S is a repair of S w.r.t. Σ if (i) R is Σ-consistent, and (ii)
+there is no U ⊆S such that R ⊊U and U is Σ-consistent.
+We use Reps(S, Σ) for the set of repairs of S w.r.t. Σ.
+Example 7. Consider again the running example where
+T 1
+∃(E) = {2, 4, 9}, T 2
+∃(E) = {1, 5, 6, 10}, and T 1
+×(E) =
+{7, 8}, yielding the intervals [2, 4] and [9, 9] (confidence 1)
+and [1, 7] and [9, 10] (confidence 2). Here, both pairs of
+intervals—[2, 4] and [1, 7], as well as [9, 9] and [9, 10]—
+violate the temporal constraints because they overlap for the
+same event E. To restore consistency, one interval from each
+conflicting pair has to be selected, yielding four repairs:
+R1
+=
+{E([2, 4], 1), E([9, 9], 1)}
+R2
+=
+{E([2, 4], 1), E([9, 10], 2)}
+R3
+=
+{E([1, 7], 2), E([9, 9], 1)}
+R4
+=
+{E([1, 7], 2), E([9, 10], 2)}
+We also consider preferred repairs, which preferentially
+retain facts with better confidence levels, inspired by the
+⊆P -repairs of (Bienvenu, Bourgaux, and Goasdou´e 2014).
+Recall that the notation Rℓdenotes the set of facts in R hav-
+ing confidence ℓ, with ℓ= 1 giving the most reliable facts.
+Definition 8. Let S and Σ be as in Definition 7, and let n be
+the maximum confidence level appearing in S. Then R ⊆S
+is a preferred repair of S w.r.t. Σ if R is Σ-consistent and
+there does not exist U ⊆S and 1 ≤k ≤n such that (i)
+U is Σ-consistent, (ii) Uℓ= Rℓfor every 1 ≤ℓ< k, and
+(iii) Rk ⊊Uk. We use PrefReps(S, Σ) for the set of repairs
+of S w.r.t. Σ.
+Example 8. Under the preferred repair semantics, con-
+flicts between facts are resolved using the confidence level of
+facts. In our running example, there is a unique preferred re-
+pair, R1, which retains the two facts with confidence level 1.
+Note that we repair the set of simple events, using meta-
+events only to determine consistency, in order to avoid situ-
+ations in which a repair contains a meta-event but the simple
+events needed to create it have been removed.
+
+[Page 6]
+Semantics of Temporal Event Specifications
+We are
+now ready to define the semantics of a TES and dataset:
+Definition 9. Given a TES Σ = (ΠSE, ΠME, Υtemp, Υdom)
+and dataset D:
+• the na¨ıve timeline is SE(D, Σ) ∪ME(D, SE(D, Σ), Σ)
+• the consistent timelines take the form R ∪ME(D, R, Σ),
+where R ∈Reps(SE(D, Σ), Σ)
+• the preferred timelines take the form P ∪ME(D, P, Σ),
+where P ∈PrefReps(SE(D, Σ), Σ)
+• the cautious timeline takes the form I ∪ME(D, I, Σ),
+where I = ∩R∈Reps(SE(D,Σ),Σ)R
+The (unique) na¨ıve timeline ignores the constraints and
+infers all annotated simple event and meta-event facts. The
+consistent and preferred timelines are obtained by taking
+a (preferred) repair and completing it with the associated
+meta-event facts.
+Finally, the (unique) cautious timeline
+first intersects all repairs, then adds in the inferable meta-
+event facts. Note that in the absence of negated event atoms,
+the na¨ıve and cautious timelines provide upper and lower
+bounds, respectively, on the facts appearing in consistent and
+preferred timelines (but this does not hold in general).
+3
+Complexity & Algorithms
+In this section, we examine the computational properties
+of our framework.
+As is common for data-centric tasks,
+our complexity analysis will employ data complexity, where
+only the set(s) of facts are treated as input, while the rules
+and constraints are treated as fixed.
+In order to generate the different kinds of timelines, we
+first need to be able to compute the set of inferred simple
+event and meta-event facts. This can be done efficiently:
+Theorem 1. The sets SE(D, Σ) and ME(D, S, Σ) can be
+computed in PTIME in data complexity.
+Proof sketch. Computing ΠSE(D) essentially corresponds
+to evaluation of first-order queries over a database, a task
+well known to be computable in (sub)polynomial time3 in
+data complexity (more precisely, in AC0 ⊆LOGSPACE).
+Likewise, ME(D, S, Σ) is PTIME-computable once we have
+already computed SE(D, Σ), as this essentially corresponds
+to evaluating a stratified Datalog program, which has PTIME
+data complexity, cf. (Dantsin et al. 2001).
+It therefore only remains to explain how to compute
+SE(D, Σ) from the sets T ℓ
+∃(R(d)) and T ℓ
+×(R(d)) and the
+window provided by window(R(d), w) ∈ΠSE(D). A na¨ıve
+yet polynomial-time procedure would consider all quadra-
+tically many possible intervals [t, t′] for a given R(d) and
+check whether each condition of Definition 3 (resp. Defini-
+tion 4 for persistent events) is satisfied. Naturally, one can
+devise more efficient algorithms that consider fewer can-
+didate intervals (we describe in the appendix how simple
+events are computed in our system).
+3We direct interested readers to Chapter 17.1 of (Abiteboul,
+Hull, and Vianu 1995) for more information on the complexity of
+first-order query evaluation and a proof of membership in AC0.
+It follows that the na¨ıve timeline can be efficiently com-
+puted. By contrast, there could be exponentially many dif-
+ferent (preferred) repairs, so it may not be feasible to com-
+pute all consistent and preferred timelines. In fact, by suita-
+bly adapting complexity results for atemporal repairs, we
+can show it is intractable even to recognize such timelines:
+Theorem 2. It is CONP-complete in data complexity to de-
+cide, given a TES Σ, dataset D, and set of facts S, whether
+S is a consistent (or preferred) timeline for Σ, D.
+Proof sketch. To establish the CONP upper bound for con-
+sistent timelines, consider the following guess-and-check
+procedure, whose input is a TES Σ, dataset D, and set S
+of simple event and meta-event facts:
+1. Compute SE(D, Σ) and SSE = S ∩SE(D, Σ).
+2. Guess a subset S′
+SE of SE(D, Σ).
+3. Check if SSE and S′
+SE are Σ-consistent.
+4. Return ‘yes’ if one of the following holds (else ‘no’):
+(a) S ̸= SSE ∪ME(D, SSE, Σ)
+(b) SSE is not Σ-consistent, or
+(c) S′
+SE is Σ-consistent and SSE ⊊S′
+SE
+It can be shown that some execution of this non-
+deterministic procedure returns ‘yes’ iff S is not a consistent
+timeline. Moreover, the procedure is easily adapted to pre-
+ferred repairs by replacing (c) by the following condition:
+S′
+SE is Σ-consistent and there exists k such that (i) (S′
+SE)ℓ=
+(SSE)ℓfor every 1 ≤ℓ< k, and (ii) (SSE)k ⊊(S′
+SE)k.
+For the lower bound, we reduce 3SAT to the problem
+of testing whether a set of facts is not a consistent time-
+line. Consider a propositional 3CNF φ = λ1 ∧. . . ∧λm
+over variables v1, . . . , vk, where λi = li,1 ∨li,2 ∨li,3.
+We associate with each clause λi a corresponding vector
+(vi,1, bi,1, vi,2, bi,2, vi,3, bi,3) where vi,j is the variable in
+literal li,j and bi,j = 1 (resp. bi,j = 0) if li,j = vi,j (resp.
+li,j = ¬vi,j). We encode φ using the following dataset Dφ:
+Dφ ={Var(vi, 0) | 1 ≤i ≤k}
+∪{Clause(vi,1, bi,1, vi,2, bi,2, vi,3, bi,3) | 1 ≤i ≤m}
+We define a TES Σ = (ΠSE, ∅, Υtemp, Υdom), which uses
+two simple persistent events Q (arity 0) and Value (arity 2).
+The set ΠSE consists of the following three existence rules:
+exists(Q, t, 1) ←Var(x, t)
+exists(Value(x, 1), t, 1) ←Var(x, t)
+exists(Value(x, 0), t, 1) ←Var(x, t)
+The set Υdom contains the following three constraints:
+←Value(x, 1, [t, t′]) ∧Value(x, 0, [t, t′])
+←Var(x, t) ∧Q([t, t′])
+∧¬Value(x, 1, [t, t′]) ∧¬Value(x, 0, [t, t′])
+←Clause(x1, y1, x2, y2, x3, y3) ∧Q([t, t′])
+∧¬Value(x1, y1, [t, t′]) ∧¬Value(x2, y2, [t, t′])
+∧¬Value(x3, y3, [t, t′])
+
+[Page 7]
+Importantly, Σ does not depend on the instance φ, as re-
+quired for a data complexity reduction. It is easy to see that:
+SE(Dφ, Σ) ={Q([0, ∗], 1)}∪
+{Value(vi, b, [0, ∗], 1) | b ∈{0, 1}, 1 ≤i ≤k}
+To complete the proof, one can verify that {Q([0, ∗], 1)} is
+not a consistent timeline of (Σ, Dφ) iff φ is satisfiable.
+The reduction used to show CONP-hardness employed a
+TES with negated event atoms. We show this is necessary, as
+the recognition problems are tractable if we disallow negated
+event atoms in rules and constraints (note that negation can
+still be applied to the atemporal and observation atoms).
+Theorem 3. It can be decided in PTIME in data complexity
+whether a set of facts S is a consistent (or preferred) timeline
+for a TES Σ without negated event atoms and dataset D.
+Proof idea. The key to obtaining tractability is to show that
+Σ-inconsistency is monotonic, which implies that if S ⊆
+SE(D, Σ) is Σ-consistent and not a repair, then there exists
+φ ∈SE(D, Σ) \ S that can be added while retaining con-
+sistency. It thus suffices to iterate over all such φ and per-
+form a Σ-consistency check to determine (non-)maximality
+of the candidate consistent timeline (in line with procedures
+for recognizing subset repairs, cf. Lemma 1 of (Bienvenu
+and Bourgaux 2016)). A similar but slightly more complex
+strategy can be employed for preferred timelines.
+For the cautious timeline, however, the absence of negated
+event atoms does not suffice to ensure tractability.
+Theorem 4. It is CONP-hard in data complexity to recog-
+nize or compute the cautious timeline, even in the absence
+of negated event atoms.
+Proof idea. We again proceed by reduction from 3SAT,
+adapting the proof of Theorem 2. We modify Dφ by adding
+a constant ci to the Clause fact encoding the ith clause and
+add atemporal facts First(c1), Last(cm), and Next(ci, ci+1)
+(1 ≤i < m). We keep the same set ΠSE and retain the con-
+straint that enforces a single truth value (0 or 1) per variable.
+We add six meta-rules which serve to derive Sat(ci, [0, ∗])
+if the truth assignment selected via the Value facts makes
+c1, . . . , ci hold (using the First and Next facts to ‘iterate’
+over the clauses). Finally, a second (negation-free) domain
+constraint ←Q([t, t′])∧Last(z)∧Sat(z, [t, t′]) ensures φ is
+satisfiable iff {Q([0, ∗], 1)} is not the cautious timeline.
+Interestingly, however, if we consider the special case in
+which we only have the fixed set of temporal constraints
+(i.e. no domain constraints) and all termination rules have
+the same confidence, then there is a unique preferred repair,
+which moreover is efficiently computable:
+Theorem 5. When Υdom = ∅and termination rules all have
+confidence 1, there is a unique preferred repair, and both the
+preferred timeline and cautious timeline can be computed in
+PTIME in data complexity.
+Algorithm 1 Preferred timeline (Theorem 5)
+Input: TES Σ = (ΠSE, ΠME, Υtemp, Υdom) s.t. Υdom = ∅
+and all termination rules have confidence 1, dataset D
+Output: unique preferred timeline T ∗
+1: S ←SE(D, Σ)
+// inferred simple events //
+2: m ←min{ℓ| R(d, [t1, t2], ℓ) ∈S}
+3: n ←max{ℓ| R(d, [t1, t2], ℓ) ∈S}
+4: Partition S into Sm, . . . , Sn by confidence level
+5: R∗←Sm
+// initialize with top-confidence facts //
+6: for ℓ←m + 1 to n do
+7:
+for all φ ∈Sℓdo
+8:
+if NOTEMPORALCONFLICT(φ, R∗) then
+9:
+R∗←R∗∪{φ}
+10: T ∗←R∗∪ME(D, R∗, Σ)
+11: return T ∗
+Proof sketch. When Υdom = ∅, the cautious timeline can
+be computed in PTIME by (i) removing those R(u, [t1, t2])
+from SE(D, Σ) such that there exists some R(u, [t′
+1, t′
+2]) ∈
+SE(D, Σ) with [t′
+1, t′
+2] ̸= [t1, t2] where [t1, t2] and [t′
+1, t′
+2]
+non-trivially overlap, then (ii) applying the meta-event rules.
+The PTIME result for preferred timelines is obtained by
+analyzing how inferred intervals are related. Indeed, when
+Υdom = ∅and all termination rules have confidence 1, we
+can show that if distinct R(d, [t1, t2]) and R(d, [t′
+1, t′
+2]) are
+inferred at the same confidence level, then [t1, t2] and [t′
+1, t′
+2]
+cannot overlap, so no repair is needed within a single con-
+fidence level. Moreover, if ΠSE, D |=ℓR(d, [t1, t2]) and
+ΠSE, D |=ℓ′ R(d, [t′
+1, t′
+2]) with ℓ′ > ℓ, then [t1, t2] and
+[t′
+1, t′
+2] can only overlap if [t′
+1, t′
+2] fully contains [t1, t2]. This
+implies uniqueness and allows us to greedily build a repair
+level by level, as formalized in Algorithm 1.
+4
+HEVA System
+To evaluate the interest of our proposed approach, we im-
+plemented core components of our framework using an-
+swer set programming (ASP), a prominent declarative pro-
+gramming paradigm4. Our prototype system HEVA (High-
+level Events with ASP) currently only supports temporal
+constraints (i.e. Υdom = ∅). The system accepts termina-
+tion rules with multiple confidence levels, but the computa-
+tion of preferred repairs uses Algorithm 1, which requires
+that termination rules have confidence level 1. The source
+code, documentation, and examples are publicly available
+on GitHub (https://github.com/yvoawk/HEVA).
+System Inputs
+HEVA takes three forms of input: event
+rules, atemporal facts, and observation facts. The event rules
+of the TES (ΠSE, ΠME) are specified as ASP rules using
+head predicates exists, exists pers (existence con-
+ditions for persistent events), terminates, pt window
+(provided time window), and m event. Atemporal facts
+are encoded as usual ASP facts, e.g. tki(ceritinib),
+4We assume basic familiarity with ASP, see e.g. (Brewka, Eiter,
+and Truszczynski 2011; Gebser et al. 2012; Lifschitz 2019)
+
+[Page 8]
+while observation facts are encoded using the obs predi-
+cate, e.g. obs(has adm, p, d, t) (note the reified predicate
+name). In our experiments, these facts were generated by an
+external Python script using a mapping file that links obs
+predicates to fields in a relational database.
+System Components
+HEVA is composed of five interac-
+ting ASP modules. The non-persistent simple event mod-
+ule computes non-persistent simple events facts from the in-
+put facts and exists and terminates rules, by expand-
+ing intervals iteratively and pruning non-maximal intervals.
+The persistent simple event module computes persistent sim-
+ple events facts from the input facts and exists pers
+and terminates rules. The temporal predicate module
+defines standard temporal relations between intervals, like
+Allen interval relations (Allen 1983), interval manipulation
+predicates (e.g. to compute the intersect function), and fur-
+ther helper predicates that simplify rule writing. These de-
+fined predicates can be used in meta-event rule bodies, while
+additional helper predicates, internal to HEVA, are provided
+by the auxiliary module. Finally, the temporal repair module
+computes the set of repairs or the unique preferred repair.
+System Functionalities
+Based upon the options that have
+been selected by the user, HEVA passes the required ASP
+programs and facts to the Clingo5 ASP system (Gebser et
+al. 2019), which produces stable model(s) corresponding to
+the desired timeline(s). By default, it returns a single an-
+swer set (na¨ıve timeline), as the repair mechanism is dis-
+abled. When the repair option is enabled, HEVA may re-
+turn multiple answer sets, each corresponding to a consistent
+timeline, or the (unique) preferred or cautious timelines, if
+the preferred or cautious mode is specified. Note
+that the restriction to termination rules of confidence 1 is
+only required for the preferred mode.
+5
+Experimental Evaluation
+We evaluate our approach on a medical use case based on
+real clinical data, focusing on both computational perfor-
+mance and the quality of the inferred events.
+5.1
+Lung Cancer Use Case
+We formalized a lung cancer use case within our logical
+framework6. The objective was to identify six clinical events
+of interest. Five were modelled as simple events: (a) pri-
+mary lung cancer episode, inferred from diagnostic codes
+(ADICAP and ICD-10), ordered by confidence level ℓ: ADI-
+CAP codes (ℓ= 1), specific ICD-10 codes (ℓ= 2), and non-
+specific ICD-10 codes (ℓ= 3), (b) secondary cancer episode,
+inferred from ICD-10 codes, (c) EGFR and ALK mutations,
+both inferred from DNA sequencing results, and (d) TKI
+therapy, inferred from administration (ℓ= 1) or prescrip-
+tion records (ℓ= 2). The sixth event, lung cancer disease,
+is a meta-event, inferred using the primary and secondary
+episode events. The formalization involved 16 event rules
+with 3 confidence levels and 497 atemporal facts.
+5https://potassco.org/clingo/
+6Further details on the modelling of this use case, including the
+event rules, are can be found in the appendix.
+Table 1: Statistics for lung cancer use case (322 patients). Execu-
+tion times for computing all stable models for consistent timelines.
+Q1, Q2, and Q3 indicate first, second (median), and third quartiles.
+Min.
+Q1
+Q2
+Mean
+Q3
+Max.
+Obs. facts
+3.00 23.00 45.00 83.65
+99.50
+815.00
+Grnd. rules
+538
+708
+841.5 983.9 1,066.5
+3,918
+Models
+1.00
+2.00
+2.00
+3.42
+4.00
+24.00
+Time (s)
+0.14
+0.21
+0.31
+0.37
+0.41
+4.92
+Observation facts were extracted from the clinical data
+warehouse of Bordeaux University Hospital. For this use
+case, we focus on the 322 patients with EGFR- or ALK-
+mutated lung cancer treated with TKIs, selected from ap-
+prox. 16,800 lung cancer cases. Table 1 gives statistics on
+the number of observation facts and ground rules per patient.
+5.2
+System Performance
+All experiments were run on a machine equipped with an
+12th Gen Intel(R) Core(TM) i3-12100T @2.20GHz ×4,
+8GB RAM, under Windows 10 Professional 64 bits, with
+runtimes averaged over 5 executions. This use case involves
+rules with different confidence levels, and HEVA was there-
+fore run in its different modes to generate the four kinds of
+timeline. As runtime results across the different modes were
+broadly similar, we only report results for the lung cancer
+study in the repair mode (consistent timelines)7. Table 1
+provides statistics on runtime and the number of stable mo-
+dels (corresponding to consistent timelines) for each of the
+322 patients in the lung cancer use case.
+The number of input observation facts varied significantly
+across patients, reflecting the heterogeneity of patient histo-
+ries, which also led to variability in the number of ground
+rules and the execution times. This meant that while exe-
+cution time remained low for most patients, typically com-
+pleting in less than half a second, higher runtimes (up to 5
+seconds) were observed for the few ‘outlier’ patients. The
+vast majority of cases (295 out of 322) triggered HEVA’s
+repair mechanism to resolve temporal constraint violations,
+which led to an average of 3.4 (up to a maximum of 24)
+stable models (∼consistent timelines) per patient.
+5.3
+Qualitative Study
+To gain insights into the quality of the inferred events,
+we compared the events from HEVA’s consistent timelines
+against the individual annotations generated by four experts.
+We randomly selected 30 patients from the lung cancer co-
+hort from those with a number of observations between the
+median and third quartile. Each expert manually examined
+15 patient records (giving two sub-cohorts: Annotators 1
+& 2, Annotators 3 & 4) to identify the target clinical events
+and to indicate their start date and, when applicable, their
+end date. An inter-annotator agreement8 score was com-
+puted using a component-based weighted scheme that ac-
+7Results for the other modes are provided in the appendix.
+8Details on the agreement score computation and a breakdown
+of the results are provided in the appendix.
+
+[Page 9]
+HEVA
+Annotator 1
+Annotator 2
+Annotator 3
+Annotator 4
+57.90%
+49.81%
+49.69%
+51.12%
+56.16%
+66.36%
+Figure 1: Mean agreement between HEVA (consistent timelines)
+and annotators, with inter-annotator agreement per sub-cohort.
+counts for event structure, with higher weights assigned to
+events requiring finer-grained annotation. Figure 1 summa-
+rizes the inter-annotator agreement between the two experts
+handling the same sub-cohort, as well as the mean agree-
+ment ratios between HEVA and each annotator.
+Overall inter-annotator agreement among medical experts
+averaged 61%, reflecting substantial variability, particularly
+for temporal boundaries (start/end dates), highlighting the
+intrinsic difficulty of this task even for human experts. Com-
+paring the expert annotations, we found that agreement was
+consistently high for event presence across all categories,
+while start dates showed the lowest concordance, high-
+lighting the inherent ambiguity of temporal information in
+EHRs. Primary lung cancer episodes and lung cancer di-
+sease achieved the highest agreement, whereas secondary
+cancer episodes and ALK mutations showed lower consis-
+tency, likely due to clinical complexity and data sparsity.
+We compared HEVA’s inferred events against expert anno-
+tations using the same scoring scheme. As each consistent
+timeline gives a plausible interpretation of the data, for the
+evaluation, we retained the consistent timeline that achieved
+the highest agreement with the corresponding expert anno-
+tations. Agreement between HEVA and experts ranged from
+49% to 58% per annotator, rising to 60% when merging
+annotator pairs. This is close to the inter-annotator agree-
+ment, indicating that HEVA’s outputs are roughly as consis-
+tent with expert judgments as experts amongst themselves.
+6
+Related Work
+We briefly review approaches to temporal reasoning that are
+closest to our own in terms of motivations or methods.
+The original event calculus (EC), introduced for reasoning
+about actions and their effects (Kowalski and Sergot 1986),
+considers instantaneous events (akin to our observations)
+that initiate or terminate fluents (properties whose value
+may change over time), which persist by default through
+inertia until terminated. Domain modeling in EC is done
+via rules for specifying initiation or termination of fluents
+where rule heads use special predicates initiatesAt and
+terminatesAt, and rule bodies speak of which other
+events/actions and fluents (do not) hold at the considered
+timepoint.
+Our modeling of persistent simple events is
+broadly similar to the handling of fluents in EC (but using
+existence rules rather than initiation rules to determine in-
+terval start times and with different restrictions on rule body
+syntax).
+By contrast, our formalization of non-persistent
+simple events via existence, termination, and window rules,
+equipped with a “group close existence points together” se-
+mantics, has no direct analog in any EC dialects. Another
+common point with the EC is the use of special predicates
+which avoids the need for temporal logic operators in rule
+bodies, arguably leading to simpler and more intuitive spec-
+ifications for domain experts.
+Several extensions of the EC, in particular the runtime
+event calculus (RTEC), have been subsequently developed
+for complex (aka composite) event recognition (CER) (Ar-
+tikis, Sergot, and Paliouras 2015; Mantenoglou, Pitsikalis,
+and Artikis 2025), with an emphasis on performance to en-
+able real-time processing of streaming data. Some such EC
+dialects (like RTEC) adopt an interval-based semantics for
+fluents (akin to our event predicates) and additionally allow
+for rules to define complex events in terms of other complex
+events using interval manipulation (intersecting or unioning
+event intervals) or Allen relations (Mantenoglou, Kelesis,
+and Artikis 2023). Our meta-event rules likewise support
+hierarchical and compositional modeling of complex events.
+The need to handle various kinds of uncertainty in CER is
+widely recognized, cf. survey by Alevizos et al. (2017), mo-
+tivating the development of probabilistic CER frameworks,
+including EC-based ones, for handling uncertain data, where
+probabilities are attached to the timestamped facts. Com-
+puting the probability of a complex event is computation-
+ally challenging and has been recently tackled using linear
+algebraic methods (Tsilionis, Artikis, and Paliouras 2025).
+Uncertainty in event inference (called pattern uncertainty
+by Alevizos et al.) is less explored. Moreover, to the best
+of our knowledge, qualitative approaches to handling un-
+certainty and inconsistency (like our confidence levels and
+repair-based timeline semantics) have not yet been consid-
+ered for CER, nor is it evident how they could be simulated
+using existing probabilistic CER methods.
+Several other rule-based formalisms have been proposed
+for reasoning over temporal data. DatalogMTL (Brandt et
+al. 2018; Walega 2025) extends Datalog with metric tem-
+poral operators to define complex temporal queries. Due
+to its expressivity, reasoning is highly intractable (PSPACE
+data complexity even for the integer timeline), though rele-
+vant fragments with lower complexity have been identified
+and implemented (Walega et al. 2020b; Walega et al. 2020a;
+Wang et al. 2022), with recent support for streaming data
+(Walega et al. 2023).
+LARS is an expressive rule-based
+language specifically designed for reasoning over stream-
+ing data (Beck, Dao-Tran, and Eiter 2018), with a dedicated
+window operator to restrict to recent timepoints or atoms,
+and a recent extension to support ontological reasoning (Ur-
+bani, Kr¨otzsch, and Eiter 2022). Extensions of ASP with lin-
+ear and metric temporal operators have also been explored,
+implemented in the ASP tool telingo (Cabalar et al. 2019;
+Cabalar 2022). Differently from these works, our existence
+and termination rule bodies do not utilize temporal operators
+but only conditions close to relational queries with which
+medical informatics practitioners are typically familiar.
+In the medical domain, the need for presenting tempo-
+ral information at different levels of abstraction by com-
+bining timestamped observations has been long acknow-
+ledged (Shahar 1997; Shahar and Musen 1996). Rule-based
+
+[Page 10]
+approaches are desirable as they support easy integration
+of domain knowledge and explainability. The advantages
+of adopting declarative approaches were highlighted in the
+works of Falcionelli et al. (2019) who employ an EC-based
+CER approach to monitor chronic conditions from sensor
+data, and Dwyer et al. (2023) who employ the Vadalog rule
+language to extract and analyze patient pathways from EHRs
+(neither work considers consistency handling).
+Temporal
+rules have also been successfully used to implement domain-
+specific algorithms, as exemplified by the work of Lyu et
+al. (2022) on gestational age detection from EHR data.
+7
+Conclusion and Future Work
+In this paper, we introduced an expressive logical framework
+for inferring temporally extended events. At the heart of
+our approach is a novel method for specifying simple events
+through the use of existence and termination conditions and
+temporal windows, without the need to write rules with tem-
+poral logic operators. Another distinguishing feature is the
+use of confidence levels, constraints, and a repair mecha-
+nism to define different kinds of (preferred) timelines, ac-
+counting for the inherent uncertainty in the event detection
+process (which is a difficult task even for human experts).
+This unique combination of language features required us
+to conduct a new complexity analysis, leading to the identi-
+fication of relevant special cases with more favorable com-
+putational properties, and it also meant that we could not
+straightforwardly implement our framework on top of exist-
+ing temporal reasoning systems. We therefore developed an
+ASP-based prototype HEVA, which showed promising re-
+sults on a lung cancer use case.
+Our decision to use ASP for the implementation was
+motivated not only by its ease of use for prototyping, but
+also by its high expressive power, which will be useful
+when extending HEVA to handle arbitrary TESs and new
+reasoning tasks (e.g. temporal query answering over the
+generated timelines).
+Indeed, in order to handle repairs
+w.r.t. arbitrary constraints, we hope to leverage existing
+work on ASP-based repair techniques (Eiter et al. 2008;
+Manna, Ricca, and Terracina 2013; Bienvenu et al. 2026).
+It would also be relevant to conduct a detailed expressiv-
+ity study in order to understand precisely which fragments
+of our language can be captured by existing temporal for-
+malisms (we expect for instance that simple event inference
+could be reduced to reasoning in suitably chosen EC and
+DatalogMTL dialects). Such expressivity results may sug-
+gest new ideas for optimizing timeline computation or for
+adapting our framework to handle streaming data.
+While our logical framework is application-independent,
+it was developed with clinical event detection in mind. To
+facilitate its use by medical practitioners, we plan to de-
+velop a domain-specific language offering users a simplified
+syntax and templates covering common medical event types.
+We also wish to explore how system-generated explanations
+could help domain experts better understand, validate, and
+potentially revise their own annotations and/or support iter-
+ative refinement of the rules. The (semi-)automatic genera-
+tion of domain constraints and atemporal facts from medical
+ontologies is another interesting direction.
+Acknowledgements
+This work was partially supported by the ANR AI Chair
+INTENDED (ANR-19-CHIA-0014) and JST CREST Grant
+Number JPMJCR22D3. The authors would also like to ac-
+knowledge Frantz Thiessard, Antoine Lanusse, Guillaume
+Verdy, L´eodoric Ahouanse and Arslane Tedlaouti for their
+valuable contributions and support.
+References
+Abiteboul, S.; Hull, R.; and Vianu, V. 1995. Foundations of
+Databases. Addison-Wesley.
+Alevizos, E.; Skarlatidis, A.; Artikis, A.; and Paliouras, G.
+2017. Probabilistic complex event recognition: A survey.
+ACM Comput. Surv. 50(5):71:1–71:31.
+Allen, J. F. 1983. Maintaining knowledge about temporal
+intervals. Commun. ACM 26(11).
+Apt, K. R.; Blair, H. A.; and Walker, A. 1988. Towards a
+theory of declarative knowledge. In Minker, J., ed., Foun-
+dations of Deductive Databases and Logic Programming.
+Morgan Kaufmann. 89–148.
+Artikis, A.; Sergot, M.; and Paliouras, G. 2015. An event
+calculus for event recognition. IEEE Trans. Knowl. Data
+Eng. 27(4):895–908.
+Artstein, R., and Poesio, M. 2008. Inter-Coder Agreement
+for Computational Linguistics. Computational Linguistics
+34(4):555–596.
+Augusto, J. C. 2005. Temporal reasoning for decision sup-
+port in medicine. Artif. Intell. Med. 33(1):1–24.
+Awuklu, Y. K.; Mougin, F.; Griffier, R.; Bienvenu, M.; and
+Jouhet, V. 2025. Ontology-driven identification of inconsis-
+tencies in clinical data: A case study in lung cancer pheno-
+typing. J. Biomed. Inform. 165:104808.
+Beck, H.; Dao-Tran, M.; and Eiter, T. 2018. LARS: A logic-
+based framework for analytic reasoning over streams. Artif.
+Intell. 261:16–70.
+Bertossi, L. E. 2011. Database Repairing and Consistent
+Query Answering. Synthesis Lectures on Data Management.
+Morgan & Claypool Publishers.
+Bienvenu, M., and Bourgaux, C.
+2016.
+Inconsistency-
+tolerant querying of description logic knowledge bases. In
+Reasoning Web Tutorial Lectures, volume LNCS 4126.
+Bienvenu, M.; Bourgaux, C.; Jean, R.; and Mazzotta, G.
+2026. Using ASP(Q) to handle inconsistent prioritized data.
+In Proc. of KR.
+Bienvenu, M.; Bourgaux, C.; and Goasdou´e, F.
+2014.
+Querying inconsistent description logic knowledge bases
+under preferred repair semantics. In Proceedings of AAAI.
+Brandt, S.; Kalayci, E. G.; Ryzhikov, V.; Xiao, G.; and Za-
+kharyaschev, M. 2018. Querying log data with metric tem-
+poral logic. J. Artif. Intell. Res. 62:829–877.
+Brewka, G.; Eiter, T.; and Truszczynski, M. 2011. Answer
+set programming at a glance. Commun. ACM 54(12):92–
+103.
+Cabalar, P.; Kaminski, R.; Morkisch, P.; and Schaub, T.
+2019. telingo = ASP + time. In Proc. of LPNMR, 256–269.
+
+[Page 11]
+Cabalar, P. 2022. Temporal ASP: From logical foundations
+to practical use with telingo.
+In Reasoning Web Tutorial
+Lectures, volume LNCS 13100. 94–114.
+Dantsin, E.; Eiter, T.; Gottlob, G.; and Voronkov, A. 2001.
+Complexity and expressive power of logic programming.
+ACM Comput. Surv. 33(3):374–425.
+Dwyer, O. P.; Baldazzi, T.; Davies, J.; Sallinger, E.; and
+Vlad, A. 2023. Reasoning over health records with Vadalog:
+A rule-based approach to patient pathways.
+Proc. of Int.
+Rule Challenge @ RuleML+RR 3485:15.
+Eiter, T.; Fink, M.; Greco, G.; and Lembo, D.
+2008.
+Repair localization for query answering from inconsistent
+databases. ACM Trans. Database Syst. 33(2):10:1–10:51.
+Falcionelli, N.; Sernani, P.; Brugu´es, A.; Mekuria, D. N.;
+Calvaresi, D.; Schumacher, M.; Dragoni, A. F.; and Bro-
+muri, S. 2019. Indexing the event calculus: Towards prac-
+tical human-readable personal health systems. Artif. Intell.
+Med. 96:154–166.
+Gebser, M.; Kaminski, R.; Kaufmann, B.; and Schaub, T.
+2012. Answer Set Solving in Practice. Morgan & Claypool
+Publishers.
+Gebser, M.; Kaminski, R.; Kaufmann, B.; and Schaub, T.
+2019. Multi-shot ASP solving with clingo. Theory Pract.
+Log. Program. 19(1):27–82.
+Hripcsak, G., and Albers, D. J. 2013. Next-generation phe-
+notyping of electronic health records. J Am Med Inform As-
+soc 20(1):117–121.
+Hripcsak, G., and Rothschild, A. S. 2005. Agreement, the
+F-Measure, and Reliability in Information Retrieval. J Am
+Med Inform Assoc 12(3):296–298.
+Kowalski, R. A., and Sergot, M. J. 1986. A logic-based
+calculus of events. New Gener. Comput. 4(1):67–95.
+Li, F.; Du, J.; He, Y.; Song, H.-Y.; Madkour, M.; Rao, G.;
+Xiang, Y.; Luo, Y.; Chen, H. W.; Liu, S.; Wang, L.; Liu, H.;
+Xu, H.; and Tao, C. 2020. Time event ontology (TEO): To
+support semantic representation and reasoning of complex
+temporal relations of clinical events. J Am Med Inform Assoc
+27(7):1046–1056.
+Lifschitz, V. 2019. Answer Set Programming. Springer.
+Lyu, T.; Liang, C.; Liu, J.; Campbell, B.; Hung, P.; Shih,
+Y.-W.; Ghumman, N.; and Li, X. 2022. Temporal Events
+Detector for Pregnancy Care (TED-PC): A rule-based algo-
+rithm to infer gestational age and delivery date from elec-
+tronic health records of pregnant women with and without
+COVID-19. PLoS One 17(10):e0276923.
+Manna, M.; Ricca, F.; and Terracina, G. 2013. Consistent
+query answering via ASP from different perspectives: The-
+ory and practice. Theory Pract. Log. Program. 13(2):227–
+252.
+Mantenoglou, P.; Kelesis, D.; and Artikis, A. 2023. Com-
+plex event recognition with Allen relations. In Proc. of KR,
+502–511.
+Mantenoglou, P.; Pitsikalis, M.; and Artikis, A. 2025. Rea-
+soning over streams of events with delayed effects. J. Artif.
+Intell. Res. 84.
+Rance, B.; Canuel, V.; Countouris, H.; Laurent-Puig, P.; and
+Burgun, A.
+2016.
+Integrating heterogeneous biomedical
+data for cancer research: the CARPEM infrastructure. Appl
+Clin Inform 7(2):260–274.
+Reiter, R. 2001. Knowledge in Action: Logical Foundations
+for Specifying and Implementing Dynamical Systems. MIT
+Press.
+Shahar, Y., and Musen, M. A. 1996. Knowledge-based tem-
+poral abstraction in clinical domains. Artif. Intell. Medicine
+8(3):267–298.
+Shahar, Y. 1997. A framework for knowledge-based tempo-
+ral abstraction. Artif. Intell. 90(1-2):79–133.
+Shanahan, M. 1997. Solving the Frame Problem - A Math-
+ematical Investigation of the Common Sense Law of Inertia.
+MIT Press.
+Tsai, C. H.; Eghdam, A.; Davoody, N.; Wright, G.; Flow-
+erday, S.; and Koch, S. 2020. Effects of electronic health
+record implementation and barriers to adoption and use: A
+scoping review and qualitative analysis of the content. Life
+(Basel) 10(12):327.
+Tsilionis, E.; Artikis, A.; and Paliouras, G. 2025. A tensor-
+based probabilistic event calculus. In Proc. of KR.
+Urbani, J.; Kr¨otzsch, M.; and Eiter, T.
+2022.
+Chasing
+streams with existential rules. In Proc. of KR.
+Uzuner, O.; Luo, Y.; and Szolovits, P. 2007. Evaluating the
+State-of-the-Art in Automatic De-identification. J Am Med
+Inform Assoc 14(5):550–563.
+Walega, P. A.; Grau, B. C.; Kaminski, M.; and Kostylev,
+E. V. 2020a. DatalogMTL over the integer timeline. In
+Proc. of KR, 768–777.
+Walega, P. A.; Grau, B. C.; Kaminski, M.; and Kostylev,
+E. V. 2020b. Tractable fragments of datalog with metric
+temporal operators. In Proc. of IJCAI.
+Walega, P. A.; Kaminski, M.; Wang, D.; and Grau, B. C.
+2023. Stream reasoning with DatalogMTL. J. Web Semant.
+76:100776.
+Walega, P. A. 2025. Reasoning about time in DatalogMTL:
+Course notes. In Proc. of Reasoning Web Summer School,
+OASIcs, 9:1–9:23.
+Wang, D.; Hu, P.; Walega, P. A.; and Grau, B. C. 2022. Me-
+TeoR: Practical reasoning in datalog with metric temporal
+operators. In Proc. of AAAI.
+Zhou, L., and Hripcsak, G. 2007. Temporal reasoning with
+medical data – a review with emphasis on medical natural
+language processing. J. Biomed. Inform. 40(2):183–202.
+
+[Page 12]
+A
+Proofs for Section 3
+Theorem 1. The sets SE(D, Σ) and ME(D, S, Σ) can be
+computed in PTIME in data complexity.
+Proof. Note that the set ΠSE(D) is clearly computable in
+PTIME data complexity as it essentially corresponds to eval-
+uation of first-order queries over a database / first-order
+structure, a task which is well known to be computable
+in (sub)polynomial time9 in data complexity (more pre-
+cisely, in AC0 ⊆LOGSPACE). We assume of course that
+any considered numeric functions are PTIME-computable.
+Likewise, a routine argument can be used to show that
+ME(D, S, Σ) is PTIME-computable once we have already
+computed SE(D, Σ), as this essentially corresponds to eval-
+uation of stratified Datalog programs10. We shall therefore
+concentrate on explaining how to compute SE(D, Σ) from
+the sets T ℓ
+∃(R(d)) and T ℓ
+×(R(d)) and the window provided
+by window(R(d), w) ∈ΠSE(D).
+First take some R ∈RNS such that T ℓ
+∃(R(d)) ̸= ∅for
+some ℓ, and let w be such that window(R(d), w) ∈ΠSE(D).
+The general idea is that when computing the facts for confi-
+dence level ℓ, we can start from the timepoints in T ℓ
+∃(R(d)),
+then iteratively expand these initial intervals until we ei-
+ther get blocked by a termination timepoint in T ℓ
+×(R(d))
+or cannot find a further nearby timepoint in T ℓ
+∃(R(d)). To
+make this more formal, suppose we are considering confi-
+dence level ℓand have already treated all confidence levels
+< ℓ. We initialize the set Iℓwith the intervals [t, t] such that
+t ∈T ℓ
+∃(R(d))\T ℓ
+×(R(d)), and I×
+ℓwith those [t, t] such that
+t ∈T ℓ
+∃(R(d)) ∩T ℓ
+×(R(d)). Then until we reach a fixpoint,
+we pick an interval [t1, t2] in Iℓ∪I×
+ℓthat has not yet been
+considered and do the following:
+• If there exists t♯
+1 ∈T ℓ
+∃(R(d)) with t1 −w ≤t♯
+1 < t1 such
+that there is no te ∈T ℓ
+×(R(d)) with t♯
+1 ≤te < t1, then
+add [t♯
+1, t2] to Iℓ(or to I×
+ℓif [t1, t2] ∈I×
+ℓ)
+• If [t1, t2] ∈Iℓand there exists t♯
+2 ∈T ℓ
+∃(R(d)) with t♯
+2 −
+t2 ≤w such that there is no te ∈T ℓ
+×(R(d)) with t2 ≤
+te < t♯
+2, then add [t1, t♯
+2] to Iℓ
+• If [t1, t2] ∈Iℓand there exists te ∈T ℓ
+×(R(d)) with te −
+t2 ≤w and there is no other t′
+e ∈T ℓ
+×(R(d)) with t2 ≤
+t′
+e < te, then add [t1, te] to I×
+ℓ
+Observe that intervals in Iℓmay be expanded in either di-
+rection, while those in I×
+ℓmay only be expanded w.r.t. their
+starting timepoint, since we know by construction that the
+second timepoint satisfies a termination condition.
+Also
+note that since there are only quadratically many intervals
+that may be produced, and the preceding conditions can be
+checked in polynomial time, the whole process will termi-
+nate in polynomial time. By comparing the above conditions
+9We direct interested readers to Chapter 17.1 of (Abiteboul,
+Hull, and Vianu 1995) for more information on the complexity of
+first-order query evaluation and a proof of membership in AC0.
+10The complexity of reasoning with different extensions of Dat-
+alog with negation, including stratified negation, can be found in
+(Dantsin et al. 2001).
+with the items in Definition 3, we can see that we are sure
+to produce all of the intervals [t1, t2] such that R(d, [t1, t2])
+is inferred with confidence ℓ. Thus, it only remains to com-
+pare the intervals in Iℓto prune the non-maximal ones (and
+to eliminate those which appear in a previous confidence
+level), which can be clearly done in PTIME. The resulting
+set of intervals tells us precisely which facts R(d, [t1, t2], ℓ)
+are present in SE(D, Σ).
+Now suppose we have R ∈RPS such that T ℓ
+∃(R(d)) ̸= ∅
+for some ℓ. The argument is simpler in this case. Intuitively,
+given a timepoint t ∈T ℓ
+∃(R(d)), we make a linear pass on
+the timepoints starting from t and look for the first occur-
+rence of a termination condition. Formally, we let Iℓcontain
+all intervals [t1, t2] such that one of the following two con-
+ditions holds:
+• t1 ∈T ℓ
+∃(R(d)), t2 ∈T ℓ
+×(R(d)), and there is no t♯
+2 ∈
+T ℓ
+×(R(d)) such that t1 ≤t♯
+2 < t2
+• t1 ∈T ℓ
+∃(R(d)), t2 = ∗, and there is no t♯
+2 ∈T ℓ
+×(R(d))
+such that t1 ≤t♯
+2
+Similarly to the non-persistent case, we can argue that this
+set can be constructed in polynomial time and that it is sure
+to include the required intervals. It then suffices to remove
+non-maximal or redundant intervals, again a polynomial-
+time operation.
+We give separate proofs for the upper and lower bounds
+stated in Theorem 2. First, we establish CONP membership
+in data complexity of the problems of recognizing consistent
+and preferred timelines in the general case.
+Proposition 1. It is in CONP in data complexity to decide,
+given a TES Σ, dataset D, and set of facts S, whether S is a
+consistent (or preferred) timeline for Σ, D.
+Proof. We start with the upper bound for consistent time-
+lines. Consider the following guess-and-check procedure,
+whose input is a TES Σ, dataset D, and set of facts S (which
+may contain both simple event and meta-event facts):
+1. Compute SE(D, Σ) and SSE = S ∩SE(D, Σ).
+2. Guess a subset S′
+SE of SE(D, Σ).
+3. Check if S and S′ are Σ-consistent.
+4. Return ‘yes’ if one of the following conditions holds (else
+return ‘no’):
+(a) S ̸= SSE ∪ME(D, SSE, Σ)
+(b) SSE is not Σ-consistent, or
+(c) S′
+SE is Σ-consistent and SSE ⊊S′
+SE
+We claim that some execution of this non-deterministic pro-
+cedure returns ‘yes’ iff S is not a consistent timeline. In-
+deed, if an execution returns ‘yes’, then one of (a), (b), or (c)
+is satisfied. If condition (a) is satisfied, then S does not have
+the required form to be a consistent timeline. If condition
+(b) or (c) is satisfied, then SSE is either Σ-inconsistent, or
+there is a larger subset S′
+SE of SE(D, Σ) that is Σ-consistent.
+In either case, we can infer that SSE ̸∈Reps(SE(D, Σ), Σ),
+and hence that S is not a consistent timeline. Conversely,
+
+[Page 13]
+suppose that S is not a consistent timeline. The first possi-
+bility is that S is not equal to R ∪ME(D, R, Σ) for some
+subset R ⊆SE(D, Σ). This can occur either because S con-
+tains a simple event fact not included in SE(D, Σ) or because
+the meta-events in S do not match ME(D, SSE, Σ). In both
+cases, we obtain S ̸= SSE∪ME(D, SSE, Σ), so the procedure
+will return ‘yes’ (irrespective of the guessed set). So let us
+consider the other case, in which S = SSE∪ME(D, SSE, Σ).
+As S is not a consistent timeline, it must be the case that
+SSE ̸∈Reps(SE(D, Σ), Σ). This can be for two reasons:
+either SSE is not Σ-consistent, or we can find a larger Σ-
+consistent subset of SE(D, Σ). In the former case, we will
+return ‘yes’ due to condition (b), and in the latter case, we
+can consider an execution in which we guess this larger Σ-
+consistent of SE(D, Σ) in Step 2 and will return ‘yes’ due to
+condition (c).
+It is easy to see that this procedure runs in non-
+deterministic polynomial time (w.r.t. data complexity). In-
+deed, we have shown in Theorem 1 that the sets SE(D, Σ)
+and ME(D, SSE, Σ) are computable in PTIME data complex-
+ity. In particular, this means that the set SE(D, Σ) has poly-
+nomial size in data complexity, and so the set S′
+SE guessed
+in Step 2 is of polynomial size. The consistency checks in
+Step 3 can also be performed in PTIME data complexity, as
+it suffices to consider each of the constraints ⊥←C in Σ
+and check whether C (viewed as a first-order sentence) eval-
+uates to true w.r.t. D∪S−
+SE ∪ME−(D, SSE, Σ). We thus have
+an NP procedure for deciding whether a given set of facts is
+not a consistent timeline, which immediately yields the de-
+sired CONP upper bound for the original task of recognizing
+consistent timelines.
+We can straightforwardly adapt the preceding procedure
+to show the upper bound for preferred timelines. Indeed,
+it suffices to replace condition (c) with the condition (c’),
+given as follows:
+S′
+SE is Σ-consistent and there exists some confidence level
+k such that (i) (S′
+SE)ℓ= (SSE)ℓfor every 1 ≤ℓ< k, and
+(ii) (SSE)k ⊊(S′
+SE)k.
+Indeed, it follows from Definitions 8 and 9 that if S is a
+consistent timeline but not a preferred timeline, then there
+exists a Σ-consistent U ⊆SE(D, Σ) and k ≥1 such that
+(i) Uℓ= (SSE)ℓfor every 1 ≤ℓ< k, and (ii) (SSE)k ⊊Uk.
+Thus, by replacing (c) with (c’), we obtain a procedure for
+checking whether a set is not a preferred timeline. This es-
+tablishes CONP membership of the complementary problem
+of recognizing preferred timelines.
+To establish the CONP-hardness result from Theorem 2,
+the basic idea is to start from a propositional CNF formula
+and generate simple events that contains facts encoding all
+possible truth values for the formula’s variables, then use
+constraints involving both positive and negative event atoms
+to enforce that consistent timelines pick a set of event atoms
+that define a propositional valuation.
+An additional con-
+straint, again involving negated atoms, is used to ensure that
+there is no unsatisfied clause.
+Proposition 2. It is CONP-hard in data complexity to de-
+cide, given a TES Σ, dataset D, and set of facts S, whether
+S is a consistent (or preferred) timeline for Σ, D.
+Proof. We first note that it is sufficient to prove a CONP
+lower bound for consistent timelines, since preferred time-
+lines coincide with consistent timelines when there is a sin-
+gle confidence level.
+We reduce the well-known NP-complete problem, 3SAT,
+of testing the satisfiability of propositional 3CNF formu-
+las to the problem of testing whether a set of facts is
+not a consistent timeline. Consider a propositional 3CNF
+φ = λ1 ∧. . . ∧λm over propositional variables v1, . . . , vk,
+where each λi
+=
+li,1 ∨li,2 ∨li,3 is a clause con-
+sisting of 3 literals li,1, li,2, li,3.
+It will be convenient
+to associate with each clause λi a corresponding vector
+(vi,1, bi,1, vi,2, bi,2, vi,3, bi,3) where vi,j is the variable in lit-
+eral li,j and bi,j = 1 (resp. bi,j = 0) if li,j = vi,j (resp.
+li,j = ¬vi,j). We will use the following dataset Dφ to en-
+code φ:
+Dφ ={Var(vi, 0) | 1 ≤i ≤k}
+∪{Clause(vi,1, bi,1, vi,2, bi,2, vi,3, bi,3) | 1 ≤i ≤m}
+which uses v1, . . . , vk, 0, 1 as constants. There is a single
+observation predicate Var (of arity 1), whose facts designate
+the available propositional variables and all use the same
+timepoint (0). Each clause λi is encoded using an atemporal
+fact with the 6-ary atemporal predicate Clause and the list of
+arguments corresponding to the vector representation of λi,
+which gives the three pairs (variable, truth value) that make
+the clause true.
+We will use the TES Σ = (ΠSE, ∅, Υtemp, Υdom), which
+does not contain any meta-events and uses two simple events
+Q (arity 0) and Value (arity 2). We choose to model both
+as persistent simple events (though the argument can be
+adapted to use non-persistent events instead). The set ΠSE
+will consist of the following three existence rules, all having
+confidence level 1:
+exists(Q, t, 1) ←Var(x, t)
+exists(Value(x, 1), t, 1) ←Var(x, t)
+exists(Value(x, 0), t, 1) ←Var(x, t)
+The set Υdom of domain constraints contains the following
+three constraints:
+←Value(x, 1, [t, t′]) ∧Value(x, 0, [t, t′])
+←Var(x, t) ∧Q([t, t′])
+∧¬Value(x, 1, [t, t′]) ∧¬Value(x, 0, [t, t′])
+←Clause(x1, y1, x2, y2, x3, y3) ∧Q([t, t′])
+∧¬Value(x1, y1, [t, t′]) ∧¬Value(x2, y2, [t, t′])
+∧¬Value(x3, y3, [t, t′])
+Note that these constraints satisfy the safety condition as all
+variables appearing in negated atoms are also present in a
+positive atom. Importantly, Σ does not depend on the in-
+stance φ (as required for a data complexity reduction).
+
+[Page 14]
+It is easily verified that we obtain the following set of in-
+ferred simple events:
+SE(Dφ, Σ) ={Q([0, ∗], 1)}∪
+{Value(vi, b, [0, ∗], 1) | b ∈{0, 1}, 1 ≤i ≤k}
+To show the correctness of the reduction, we establish the
+following claim:
+Claim: {Q([0, ∗], 1)} is not a consistent timeline of (Σ, Dφ)
+iff φ is satisfiable.
+(⇒). First suppose that {Q([0, ∗], 1)} is not a consistent
+timeline. It is clear that it is Σ-consistent and closed un-
+der meta-event rules (since ΠME = ∅). It follows then that
+{Q([0, ∗], 1)} ̸∈Reps(SE(Dφ, Σ), Σ), and thus that there
+exists a larger Σ-consistent set S ⊆SE(Dφ, Σ) that contains
+Q([0, ∗], 1). However, due to the second constraint, S must
+contain either Value(vi, 0, [0, ∗], 1) or Value(vi, 1, [0, ∗], 1)
+for each 1 ≤i ≤k. The first constraint ensures that S must
+contain precisely one of these two facts, for every 1 ≤i ≤k.
+We can thus define a valuation µ of the variables v1, . . . , vk,
+by setting µ(vi) = 1 if S contains Value(vi, 1, [0, ∗], 1) and
+µ(vi) = 0 if S contains Value(vi, 0, [0, ∗], 1). Due to the
+third constraint and the encoding of clauses in Dφ, we know
+that µ must satisfy all of the clauses (since the third con-
+straint is violated if each of the literals in the clause is not
+satisfied by the valuation defined by the Value facts). It fol-
+lows that φ is satisfiable.
+(⇐). Now suppose that φ is satisfiable, and let µ be a satis-
+fying valuation. Consider the set S defined as follows:
+S ={Q([0, ∗], 1)} ∪{Value(vi, µ(vi), [0, ∗], 1) | 1 ≤i ≤k}
+We can then verify that S is Σ-consistent. The first two con-
+straints are satisfied since there is precisely one Value fact
+per vi, and the third constraint is satisfied since µ is a satis-
+fying valuation. This shows that {Q([0, ∗], 1)} is not a repair
+and hence is not a consistent timeline.
+The reduction used to show CONP-hardness employed a
+TES with negated event atoms. We show that this is nec-
+essary, as the recognition problems become tractable if we
+disallow negated event atoms in rules and constraints (note
+that negation can still be applied to the atemporal and obser-
+vation atoms). The key to obtaining tractability is to show
+that inconsistency is monotonic, which means that if a set of
+simple event facts is consistent and not a repair, then there
+must exist a single fact that can be added while retaining
+consistency, thereby witnessing that the original set is not a
+repair. This approach to testing whether a set is maximally
+consistent has been used in numerous KR settings, and in
+particular, in prior work on repairs of knowledge bases (see
+e.g. Lemma 1 of (Bienvenu and Bourgaux 2016)).
+Theorem 3. Given a TES Σ without negated event atoms, a
+dataset D, and a set of facts S, it can be decided in PTIME
+whether S is a consistent (or preferred) timeline for Σ, D.
+Proof. The central property we use is monotonicity of
+inconsistency:
+if a set of facts S
+⊆
+SE(D, Σ) is Σ-
+inconsistent, then every set S′ with S ⊆S′ ⊆SE(D, Σ) is
+also Σ-inconsistent. It is easy to see that this property holds
+when meta-event rules and constraints cannot use negated
+event atoms.
+Indeed, in the absence of negated atoms,
+S ⊆S′ implies ME(D, S, Σ) ⊆ME(D, S′, Σ), and hence
+D ∪S−∪ME−(D, S, Σ) ⊆D ∪(S′)−∪ME−(D, S′, Σ)
+Since the constraints also cannot refer to negated event
+atoms, the latter inclusion implies that if a constraint is vio-
+lated by D ∪S−∪ME−(D, S, Σ), it will also be violated by
+D ∪(S′)−∪ME−(D, S′, Σ).
+With this monotonicity property at hand, we can adopt a
+simple (and oft-used) approach to test whether a set SSE ⊆
+SE(D, Σ) is maximally consistent and hence a repair:
+• test whether SSE is Σ-consistent
+• for each σ ∈SE(D, Σ) \ SSE, test whether SSE ∪σ is
+Σ-inconsistent
+If the first consistency check succeeds, and all of the can-
+didate supersets in the second item are shown inconsistent,
+then we can be sure that SSE is maximally consistent, hence
+a repair. It follows that to check whether S is a consistent
+timeline, we can use the following procedure:
+1. Compute SE(D, Σ) and SSE = S ∩SE(D, Σ).
+2. Check if S = SSE ∪ME(D, SSE, Σ). Return ‘no’ if not.
+3. Check if SSE is Σ-consistent. Return ‘no’ if not.
+4. For each σ ∈SE(D, Σ) \ SSE, check if SSE ∪{σ} is Σ-
+consistent. If some set SSE ∪{σ} is Σ-consistent, return
+‘no’, else return ‘yes’.
+The procedure clearly runs in PTIME in data complexity and
+is correct due to the preceding characterization of maximal
+consistent sets of SE(D, Σ).
+Let us now turn to preferred repairs. Using the mono-
+tonicity property and Definition 8, it is easy to see that
+if a set SSE
+∈Reps(SE(D, Σ), Σ) does not belong to
+PrefReps(SE(D, Σ), Σ), then there exists some ℓ≥1 and
+σℓ∈SE(D, Σ)ℓ\ SSE such that (SSE)ℓ∪{σℓ} is Σ-
+consistent. It follows that we can adapt the procedure for
+consistent timelines to be able to recognize preferred time-
+lines by removing ‘else return yes’ from Step 4 and adding
+the following Step 5, where n is the maximal confidence
+level mentioned in SE(D, Σ):
+5. For every 1 ≤ℓ≤n and for every σℓ∈SE(D, Σ)ℓ\ SSE,
+test whether (SSE)ℓ∪{σℓ} is Σ-consistent. Return ‘no’ if
+some consistency check succeeds, else return ‘yes’.
+Note that this step remains polynomial-time computable
+since it involves only polynomially many consistency
+checks, and each consistency check can be done in PTIME
+data complexity (cf. proof of Proposition 1).
+For the cautious timeline, however, the absence of negated
+event atoms does not suffice to ensure tractability.
+Theorem 4. It is CONP-hard to decide, given a TES Σ,
+dataset D, and set of facts S, whether S is the cautious time-
+line for Σ, D. The lower bound holds even if we restrict to
+Σ without negated event atoms.
+
+[Page 15]
+Proof. The general proof strategy is inspired by a reduction
+that was used to show CONP-hardness of the problem of
+testing whether a fact holds in every repair of a knowledge
+base formulated in the EL⊥description logic ( Bienvenu and
+Bourgaux, 2016, proof of Theorem 29). We also reuse com-
+ponents of the proof of Proposition 2.
+We reduce 3SAT to the problem of deciding if a set is not
+the cautious timeline. Consider a 3SAT instance φ = λ1 ∧
+. . . ∧λm over propositional variables v1, . . . , vk, with λi =
+li,1∨li,2∨li,3. As in the proof of Proposition 2, we associate
+a vector (vi,1, bi,1, vi,2, bi,2, vi,3, bi,3) with each clause λi,
+and we define the dataset Dφ in almost the same way:
+Dφ ={Var(vi, 0) | 1 ≤i ≤k}∪
+{Clause(ci, vi,1, b1, vi,2, b2, vi,3, b3) | 1 ≤i ≤m}∪
+{Next(ci, ci+1) | 1 ≤i < m} ∪{First(c1), Last(cm)}
+Note that this resembles the dataset from the proof of Propo-
+sition 2, except that we add an additional argument ci to the
+Clause facts and add further atemporal facts with predicates
+First, Next, Last to identify the first and last clauses and link
+subsequent clauses.
+We will use the TES Σ = (ΠSE, ΠME, Υtemp, Υdom), with
+the same set of simple event rules ΠSE as used in the proof
+of Proposition 2, recalled here for convenience:
+exists(Q, t, 1) ←Var(x, t)
+exists(Value(x, 1), t, 1) ←Var(x, t)
+exists(Value(x, 0), t, 1) ←Var(x, t)
+However, we will now introduce a meta-event predicate Sat
+defined using the following six rules in ΠME (note that each
+of the two rules below is instantiated for j = 1, 2, 3):
+Sat(z, [t, t′], 1) ←Q([t, t′]) ∧First(z)
+(1 ≤j ≤3)
+∧Clause(z, x1, y1, x2, y2, x3, y3)
+∧Value(xj, yj, [t, t′])
+Sat(z′, [t, t′], 1) ←Sat(z, [t, t′], 1) ∧Q([t, t′])
+∧Next(z, z′)
+(1 ≤j ≤3)
+∧Clause(z′, x1, y1, x2, y2, x3, y3)
+∧Value(xj, yj, [t, t′])
+The set of domain constraints Υdom consists of:
+←Value(x, 1, [t, t′]) ∧Value(x, 0, [t, t′])
+←Q([t, t′]) ∧Last(z) ∧Sat(z, [t, t′])
+Observe that no negated atoms appear in the TES and that we
+have the same set of inferred simple events as in the proof
+of Proposition 2:
+SE(Dφ, Σ) ={Q([0, ∗], 1)}∪
+{Value(vi, b, [0, ∗], 1) | b ∈{0, 1}, 1 ≤i ≤k}
+To show the correctness of the reduction, we establish the
+following claim:
+Claim: {Q([0, ∗], 1)} is not the cautious timeline of (Σ, Dφ)
+iff φ is satisfiable.
+(⇒). First suppose that {Q([0, ∗], 1)} is not the cautious
+timeline. Note that this means that the cautious timeline
+must be equal to the empty set.
+To see why, first ob-
+serve that for every fact Value(vi, b, [0, ∗], 1) ∈SE(Dφ, Σ),
+we can find a repair that contains Value(vi, 1 −b, [0, ∗], 1)
+and hence must omit Value(vi, b, [0, ∗], 1) to ensure con-
+sistency with the first constraint.
+It follows that no fact
+of the form Value(vi, b, [0, ∗], 1) can appear in the inter-
+section of the repairs in Reps(SE(Dφ, Σ), Σ), and thus
+cannot appear in the cautious timeline.
+This means that
+the intersection of the repairs in Reps(SE(Dφ, Σ), Σ) is
+contained in {Q([0, ∗], 1)}.
+Further note that no meta-
+event rule is applicable in the absence of Value facts, i.e.
+ME(Dφ, Q([0, ∗], 1), Σ)) = ∅. Given our assumption that
+{Q([0, ∗], 1)} is not the cautious timeline, it follows that
+the intersection of repairs in Reps(SE(Dφ, Σ), Σ) yields the
+empty set. However, this means that there must exist a re-
+pair R ∈Reps(SE(Dφ, Σ), Σ) such that Q([0, ∗], 1) ̸∈R.
+Due to the maximality of repairs and the absence of negated
+atoms (cf. monotonicity property discussed in proof of The-
+orem 3), this means that adding Q([0, ∗], 1) would result in
+a constraint violation. However, this can only happen if R
+contains Sat(cm, [0, ∗]), which due to the definition of the
+rules in ΠME implies that all of the clauses in φ are satisfied.
+It follows that φ is satisfiable, with a satisfying valuation de-
+fined by the Value facts retained in R.
+(⇐). Suppose that φ is satisfiable, with satisfying valuation
+µ. Define R ⊆SE(Dφ, Σ) as follows:
+R ={Value(vi, µ(vi), [0, ∗], 1) | 1 ≤i ≤k}
+It is easily verified that R is Σ-consistent, since there is a
+single Value fact per vi and the fact Q([0, ∗], 1) is absent. It
+is also maximally consistent. Indeed:
+• No further Value fact from SE(Dφ, Σ) can be added, else
+the first constraint is violated
+• Due to the fact that the Value facts in R assign truth values
+to variables according to the satisfying valuation µ, the
+fact Sat(cm, [0, ∗]) can be derived using the meta-rules,
+and so adding Q([0, ∗], 1) would lead to a violation of the
+second constraint.
+It follows that Q([0, ∗], 1) does not belong to the intersec-
+tion of the repairs in Reps(SE(Dφ, Σ), Σ), hence it is not
+possible for {Q([0, ∗], 1)} to be the cautious timeline.
+We observe that the preceding reduction crucially relies
+upon using recursion in the meta-rules.
+It would there-
+fore be relevant to consider TESs with only non-recursive
+meta-event rules (together with additional restrictions, like
+no negated event atoms) to identify fragments for which the
+cautious timeline can be tractably computed.
+In preparation for Theorem 5, we prove the following
+lemma, which clarifies the possible relationships between
+intervals associated with the same R(d), in the case of re-
+stricted specifications. In particular, it implies that if a lower
+confidence interval non-trivially overlaps with a higher con-
+fidence interval, it must fully contain it.
+
+[Page 16]
+Lemma 1. Consider a TES Σ such that Υdom = ∅and
+termination rules all have confidence 1, and suppose that
+ΠSE, D |=ℓR(d, [t1, t2]) and ΠSE, D |=ℓ′ R(d, [t′
+1, t′
+2]).
+Then:
+1. If ℓ= ℓ′ and [t′
+1, t′
+2] ̸= [t1, t2], then t1 ≤t2 ≤t′
+1 ≤t′
+2 or
+t′
+1 ≤t′
+2 ≤t1 ≤t2
+2. If ℓ′ > ℓ, then [t′
+1, t′
+2] ̸= [t1, t2] and we cannot have t1 <
+t′
+1 < t2 ≤t′
+2 nor t′
+1 ≤t1 < t′
+2 < t2
+Proof. We give the proof for non-persistent events, the ar-
+gument for persistent events is similar but simpler.
+To show point 1,
+suppose we have ΠSE, D
+|=ℓ
+R(d, [t1, t2]) and ΠSE, D |=ℓR(d, [t′
+1, t′
+2]) with [t′
+1, t′
+2] ̸=
+[t1, t2]. We may suppose w.l.o.g. that t1 ≤t′
+1. We thus
+aim to show that t1 ≤t2 ≤t′
+1 ≤t′
+2.
+Assume for
+a contradiction that t1 ≤t′
+1 < t2.
+If t1 = t′
+1, then
+t2 ̸= t′
+2 (as we know [t′
+1, t′
+2] ̸= [t1, t2]), which implies that
+one of the intervals could have been further extended, vi-
+olating one of the conditions of Definition 3 (Items 4–5).
+Thus we have t1 < t′
+1 < t2. However, this also yields
+a contradiction, since whichever timepoints in T ℓ
+∃(R(d))
+were used to validate item 2 of Definition 3 to witness that
+ΠSE, D |=ℓR(d, [t1, t2]) could also be used to show that
+[t′
+1, t′
+2] does not verify item 4, contradicting our assumption
+that ΠSE, D |=ℓR(d, [t′
+1, t′
+2]). Thus, it must be the case that
+t1 ≤t2 ≤t′
+1 ≤t′
+2.
+To show point 2,
+suppose we have ΠSE, D
+|=ℓ
+R(d, [t1, t2]) and ΠSE, D |=ℓ′ R(d, [t′
+1, t′
+2]) with ℓ′ > ℓ. By
+item 7 of Definition 3, we directly get [t′
+1, t′
+2] ̸= [t1, t2]. Sup-
+pose for a contradiction that t1 < t′
+1 < t2 ≤t′
+2. Then the
+timepoints in T ℓ
+∃(R(d)) which were used to validate item
+2 of Definition 3 for [t1, t2] are also present in T ℓ′
+∃(R(d))
+(since ℓ′ > ℓ) and so can be used to show that [t′
+1, t′
+2] does
+not verify item 4 (as an earlier start is possible). However,
+we must also argue that there is no te ∈T ℓ′
+× (R(d)) that
+could block such an extension. It is here that we must use
+the fact that termination rules all have confidence 1, which
+means in particular that T ℓ
+×(R(d)) = T ℓ′
+× (R(d)). Since
+there was no blocking termination timepoint at level ℓ, there
+cannot be any such timepoint w.r.t. ℓ′. Now suppose for a
+contradiction that t′
+1 ≤t1 < t′
+2 < t2. Then we can use
+the timepoints in T ℓ
+∃(R(d)) that permit the interval to con-
+tinue t2 to show that we could have chosen a later end for
+[t′
+1, t′
+2]. Here again we use the assumption that termination
+rules all have confidence 1 to infer that there is no termina-
+tion timepoint that can block this extension. We thus obtain
+the desired contradiction.
+Theorem 5. When Υdom = ∅and termination rules all have
+confidence 1, there is a unique preferred repair, and both the
+preferred timeline and cautious timeline can be computed in
+PTIME in data complexity.
+Proof. Let Σ = (ΠSE, ΠME, Υtemp, Υdom) be a TES satis-
+fying the conditions of the statement, i.e. Υdom = ∅and all
+termination rules in ΠSE have the same confidence level of 1.
+For the cautious timeline, we simply note that a fact
+R(d, [t1, t2], ℓ) ∈ΠSE(D) will belong to the intersection
+of all repairs just in the case that there does not exist an-
+other fact R(d, [t′
+1, t′
+2], ℓ′) ∈ΠSE(D) such that R(d, [t1, t2])
+and R(d, [t′
+1, t′
+2]) together violate one of the temporal con-
+straints. We can thus iterate over all (polynomially many)
+pairs of facts and remove those that participate in at least one
+constraint violation. The remaining facts give us the inter-
+section of repairs, from which we can construct the cautious
+timeline, by applying the meta-event rules.
+Next, we aim to show that there is a unique preferred re-
+pair. To this end, let S = ΠSE(D), and consider the repair
+R∗constructed greedily as follows (and which is formalized
+in Algorithm 1):
+• Initialize R∗with all facts in Sm, where m is the mini-
+mum level appearing in S
+• For each ℓfrom m + 1 to n (with n the maximum
+level in S): add R(d, [t1, t2], ℓ) ∈Sℓto R∗if there
+is no R(d, [t′
+1, t′
+2], ℓ′) ∈R∗such that R(d, [t′
+1, t′
+2]) and
+R(d, [t1, t2]) violate a temporal constraint in Υtemp.
+Note that Sm
+is Σ-consistent,
+since by Lemma 1,
+there cannot exist annotated event facts R(d, [t1, t2], m)
+and R(d, [t′
+1, t′
+2], m) whose intervals non-trivially overlap.
+Moreover, the same will hold within each single confidence
+level.
+Moreover, due to the way we define R∗, we will
+never add facts which are in conflict with a fact already se-
+lected. Thus, R∗is Σ-consistent. It is also maximal, as
+every fact that is excluded would introduce a constraint vi-
+olation. Furthermore, due to the level-by-level construction
+(starting from the best confidence level), R∗is a preferred
+repair. Finally, we note that due to the lack of constraint vio-
+lations within a given level (due to Lemma 1), there is never
+a decision as to which facts from a given level can be added.
+Thus, R∗is the only preferred repair, and it is clear from its
+definition that it can be computed in polynomial time (w.r.t.
+data complexity).
+B
+HEVA System
+The diagram (Figure 2) provides an overview of the HEVA
+architecture and its main components.
+The top section
+shows the three main inputs to HEVA. In the yellow box,
+users define temporal event rules and atemporal facts. Ob-
+servation facts, shown in the purple box, are automatically
+generated via an external Python script using a mappings
+file that links observation predicates to fields in a relational
+database. The central blue box represents the HEVA system
+itself, composed of several modules: the non-persistent sim-
+ple event module, persistent simple event module, temporal
+predicate module, and auxiliary module. An additional tem-
+poral repair module can be activated if the repair option is
+enabled. Finally, the bottom red box shows the different
+types of output produced by HEVA, corresponding to vari-
+ous timelines (see Section 2.3, Definition 9): the na¨ıve time-
+line, consistent timelines, preferred timeline, and the cau-
+tious timeline.
+We now provide a more detailed description of the non-
+persistent simple event, persistent simple event, temporal
+predicate and temporal repair modules.
+
+[Page 17]
+Figure 2: Overview of the HEVA system architecture.
+B.1
+Non-persistent Simple Event Module
+This module computes inferred non-persistent simple event
+facts from the predicates exists and terminates, fol-
+lowing the formal construction of Definition 3. The compu-
+tation proceeds by iterative interval construction with level-
+aware expansion and pruning.
+Initialization.
+For a non-persistent event predicate R ∈
+RNS and arguments d, we collect all timepoints T ℓ
+∃(R(d))
+at which an existence condition holds with confidence level
+ℓ. Each such timepoint t initializes a singleton interval [t, t],
+encoded by the predicate pre candidate (see line 2 of
+Listing 1). If multiple existence facts occur at the same time-
+point, the minimal (best) confidence level is selected.
+Level-wise expansion.
+Interval expansion is performed
+hierarchically by confidence level, starting from the highest-
+priority (lowest numerical) level.
+Let [t1, t2] be a current candidate interval at level ℓ, and
+let w be the temporal window given by pt window (corre-
+sponding to window(R(d), w)).
+1. Forward expansion within the window. The interval is
+extended to [t1, t′
+2] if there exists t′
+2 ∈T ℓ
+∃(R(d)) such that
+t2 < t′
+2 ≤t2 + w
+and there is no termination timepoint t ∈T ℓ
+×(R(d)) with
+t2 ≤t ≤t′
+2. The right boundary is chosen as the maximal
+such t′
+2.
+2. Termination-aware expansion. If a termination time-
+point tb ∈T ℓ
+×(R(d)) satisfies
+t2 < tb ≤t2 + w,
+the interval is closed at tb. The earliest compatible termi-
+nation is selected.
+3. Lower-priority levels.
+After processing the highest-
+priority level,
+the procedure continues with lower-
+confidence levels. At level ℓ, only existence and termi-
+nation facts with confidence ≤ℓare considered. This en-
+sures that stronger evidence dominates weaker evidence,
+while still allowing consistent lower-confidence observa-
+tions to extend intervals.
+Pruning non-maximal intervals.
+During expansion, mul-
+tiple overlapping or nested candidates may arise.
+The
+predicates pre covered and covered eliminate non-
+maximal intervals.
+Final event construction.
+The final event facts are ob-
+tained by: (i) selecting intervals for which no strictly better
+confidence level exists, and (ii) discarding intervals still cov-
+ered by longer candidates.
+Overall, this module implements the formal construction
+of non-persistent simple events by initializing singleton in-
+tervals from existence timepoints, expanding them within
+a bounded temporal window, respecting termination condi-
+tions, propagating confidence levels hierarchically, and re-
+taining only maximal consistent intervals.
+B.2
+Persistent Simple Event Module
+This module computes inferred persistent simple event facts,
+corresponding to events that, once initiated, persist until an
+explicit termination condition occurs. It relies on the predi-
+cates exists pers and terminates, and constructs
+maximal intervals consistent with confidence levels.
+Initialization.
+For a persistent event predicate R ∈RPS
+and arguments d, each timepoint t1 ∈T ℓ
+∃(R(d)) initializes
+a singleton candidate interval [t1, t1], encoded by the predi-
+cate l candidate (see line 5 of Listing 1). If multiple ex-
+istence facts occur at the same timepoint, the minimal (best)
+confidence level is selected.
+Filtering by higher-confidence intervals.
+Before con-
+structing an interval from t1, the module checks whether t1
+is already covered by an interval inferred at a strictly better
+confidence level. Formally, if there exists a candidate inter-
+val [t′
+1, t′
+2] with confidence ℓ′ < ℓsuch that t′
+1 ≤t1 ≤t′
+2,
+then t1 is discarded. This is implemented by the auxiliary
+predicate pe covered by higher.
+Determining the effective start.
+If t1 is not covered, the
+module determines whether a termination timepoint tb ∈
+T ℓ
+×(R(d)) occurs strictly before t1. When such a tb exists,
+only the most recent one is considered. If another existence
+timepoint lies between tb and t1, the candidate is discarded
+in order to avoid generating non-maximal intervals. Other-
+wise, the true start of the interval is set to the earliest exis-
+tence timepoint following tb.
+If no prior termination exists, the module verifies that no
+earlier uncovered existence timepoint precedes t1. This en-
+sures that only minimal valid starting points are retained.
+
+[Page 18]
+1
+% pre-event candidate initialization
+2
+pre_candidate(N,P,E,(Tx,Tx),L) :- exists(N,P,E,Tx,L).
+3
+4
+% initialization of persistent simple event
+5
+l_candidate(N, P, E, (Tx, Tx), L) :- exists_pers(N, P, E, Tx, L).
+6
+7
+% repair mechanism
+8
+{ rep_event(ID,N,P,E,(Start,End),L) } :- event(ID,N,P,E,(Start,End),L).
+9
+10
+:- rep_event(_,N,P,E,(Start1,End1),_), rep_event(_,N,P,E,(Start2,End2),_),
+11
+contains((Start1,End1),(Start2,End2)).
+12
+13
+inconsistent_if_added(N,P,E,(Start2,End2)) :- rep_event(_,N,P,E,(Start1,End1),_),
+14
+contains((Start1,End1),(Start2,End2)).
+15
+16
+:- not rep_event(_,N,P,E,(Start,End),_), event(_,N,P,E,(Start,End),_),
+17
+not inconsistent_if_added(N,P,E,(Start,End)).
+18
+19
+% preferred repair
+20
+temporal_conflict_with_lower_level(N, P, E, (Start2, End2), L2) :-
+21
+event(_, N, P, E, (Start1, End1), L1), event(_, N, P, E, (Start2, End2), L2),
+22
+L1 < L2, Start1 < Start2, Start2 < End1.
+23
+...
+24
+25
+rep_event(ID, N, P, E, (Start, End), L) :- event(ID, N, P, E, (Start, End), L),
+26
+not temporal_conflict_with_lower_level(N, P, E, (Start, End), L).
+Listing 1: Some lines of source code from HEVA
+Listing 1 shows a simplified fragment of the ASP code implementing the repair mechanism in HEVA. The first choice rule
+allows the solver to freely select which inferred events (event) are retained in the repaired set (rep event). The following
+integrity constraints ensure temporal consistency by forbidding answer sets where one event interval contains another interval
+of the same type, thereby enforcing non-overlapping intervals (cf. Section 2.2). The predicate inconsistent if added
+marks events that would violate this property if included. The last part of the listing implements the computation of the
+preferred repair. The predicate temporal conflict with lower level detects events whose intervals overlap with an
+event of the same type inferred at a strictly lower confidence level. Such events are discarded, ensuring that higher-confidence
+events are always preferred over conflicting lower-confidence ones. As a result, rep event retains exactly those events that
+do not introduce temporal conflicts with events of lower confidence, yielding a unique preferred repair consistent with the
+lexicographic preference over confidence levels defined in the framework.
+Determining the end.
+For each valid start timepoint t1,
+the earliest termination timepoint t2 > t1 with confidence
+level ≤ℓis selected. If such a termination exists, the interval
+[t1, t2] is constructed.
+If no termination timepoint follows t1, the event is con-
+sidered ongoing. In this case, the interval is assigned an
+open end (e.g., [t1, ∗] or [t1, tc+1], where tc denotes the cur-
+rent time). This allows the system to distinguish explicitly
+between ongoing events and those bounded by an observed
+termination.
+Maximality
+and
+final
+construction.
+The
+predicate
+pe candidate collects all intervals satisfying the above
+conditions. As persistent events do not rely on temporal
+windows, interval construction is linear with respect to
+termination ordering. The final event facts are directly
+generated
+from
+pe candidate,
+yielding
+maximal,
+confidence-aware persistent intervals.
+Overall, the persistent simple event module implements
+the formal semantics of persistent events by: (i) initializing
+intervals from existence timepoints, (ii) preventing overlap
+with higher-confidence intervals, (iii) identifying the most
+recent blocking termination, (iv) selecting the earliest com-
+patible future termination, and (v) producing maximal inter-
+vals that remain valid until explicit termination.
+B.3
+Temporal Predicate and Auxiliary Modules
+This module provides the temporal reasoning primitives
+used throughout
+HEVA.
+It defines the standard rela-
+tions of Allen’s interval algebra (e.g. before, meets,
+overlaps, contains) for interval-interval reasoning, as
+well as Vilain’s point–interval algebra for point-based rea-
+soning. It also introduces interval manipulation predicates
+such as intersection of (to compute the intersection
+of intervals), union of (for interval union), and helper
+predicates that simplify rule writing like start and end
+to extract the earliest and latest timepoints of a given event.
+These predicates are available to users for defining meta-
+event rules, while additional internal predicates are provided
+by the auxiliary module to simplify reasoning and optimize
+performance. For example, some auxiliary rules act as con-
+
+[Page 19]
+trol switches that, when triggered, selectively prevent the
+grounding of certain rule patterns, thereby reducing the size
+of the grounded program and improving solving efficiency.
+B.4
+Temporal Repair Module
+This module computes the set of repairs—or, when appli-
+cable, the unique preferred repair—of the inferred simple
+events. By default, HEVA performs no repair; this mod-
+ule is activated only when explicitly requested at runtime.
+It implements the notions of consistency and repair intro-
+duced in Section 2.3 (Definitions 6, 7, and 8) using the
+fixed set of temporal constraints Υtemp from Section 2.2.
+The ASP encoding relies on choice rules and leverages the
+temporal relations defined in the temporal predicate—such
+as overlaps or contains—to specify constraints more
+precisely and to check for their violations.
+The computation of preferred repairs follows a level-wise
+selection strategy: events are considered in increasing order
+of confidence level, and at each level, events that do not in-
+troduce temporal conflicts with already selected events are
+retained. For the restricted fragment of TESs supported by
+HEVA (i.e., no domain constraints and all termination rules
+with confidence 1), this procedure coincides with the formal
+definition of preferred repairs and guarantees both:
+• the existence of a unique preferred repair, and
+• polynomial-time computability,
+as established in Theorem 5.
+Listing 1 displays selected (simplified) lines from the ASP
+encoding to compute (preferrred) repairs.
+C
+Lung Cancer Use Case
+C.1
+Medical Background
+According to the natural history of cancer, the disease typ-
+ically begins with localized cell proliferation in a specific
+organ tissue, called the primary tumor.
+Malignant cells
+can then spread to distant sites, forming secondary tumors,
+which retain the histological characteristics of the primary
+tumor.
+Clinically, cancer progresses through a series of
+episodes, interspersed with periods of remission, defined
+as either a partial reduction or complete disappearance of
+symptoms. After remission, the same cancer may recur at
+the original site or elsewhere; such a recurrence is called
+a relapse. Cancer treatment is multimodal, encompassing
+surgery, radiotherapy, immunotherapy, chemotherapy and/or
+targeted therapy. These modalities are often combined and
+personalized according to tumor type and patient character-
+istics. For example, targeted therapies with tyrosine kinase
+inhibitors (TKIs) are used in certain subtypes of lung cancer
+harboring specific mutations, such as EGFR or ALK muta-
+tions. Each cancer episode generally corresponds to one or
+more lines of treatment, a line designating a set of therapies
+applied sequentially or in combination. A new line of treat-
+ment is introduced when the previous one proves ineffective.
+C.2
+Lung Cancer Events
+Table 2: Summary of inferred events in the lung cancer use case:
+Simple Event (SE) - Meta-Event (ME).
+Event
+Type
+Primary lung cancer episode
+Non Persistent SE
+Secondary cancer episode
+Persistent SE
+Presence of EGFR/ALK mutation
+Persistent SE
+TKI targeted therapy
+Persistent SE
+Lung cancer disease
+ME
+Following the summary of the inferred event types in Ta-
+ble 2, we now provide excerpts of the concrete encoding
+used in the lung cancer use case. The next listings illus-
+trate how the different categories of events—simple events
+and meta-events—are instantiated within HEVA using ASP
+rules and domain knowledge.
+Listing 2 presents the temporal rules defining the simple
+events (both non-persistent and persistent), including their
+existence and termination conditions, as well as the temporal
+window used for interval construction. These rules directly
+implement the formal notions introduced in Section 2.2 for
+specifying simple events from timestamped observations.
+Listing 3 illustrates the definition of meta-events, show-
+ing how higher-level clinical constructs are derived from
+previously inferred simple events through interval relations
+and confidence propagation. This exemplifies the stratified
+meta-event mechanism described in the formal framework.
+Finally, Listing 4 provides selected atemporal facts en-
+coding domain knowledge (e.g., ADICAP codes, ICD-10
+categories, and TKI drugs) used by the rules. These facts
+serve as the semantic backbone linking structured EHR ob-
+servations to clinically meaningful event definitions. The
+corresponding ASP encodings are provided below:
+
+[Page 20]
+1
+% primary lung cancer episode (non-persistent; window below)
+2
+exists(primary_lungC_episode,P,c34,T,1) :- obs(has_lungc_adicap_diag,P,E,T).
+3
+exists(primary_lungC_episode,P,c34,T,2) :- obs(has_icd10_diag,P,E,T), E != c349, E != c348,
+4
+primary_lungC(E).
+5
+exists(primary_lungC_episode,P,c34,T,3) :- obs(has_icd10_diag,P,c348,T).
+6
+exists(primary_lungC_episode,P,c34,T,3) :- obs(has_icd10_diag,P,c349,T).
+7
+8
+% secondary cancer episode (persistent)
+9
+exists_pers(secondary_cancer_episode,P,E,T,2) :-
+10
+obs(has_icd10_diag,P,E,T), secondary_cancer(E).
+11
+12
+% TKI therapy (persistent; admin more reliable than prescription)
+13
+exists_pers(tki_target_therapy,P,D,T,1) :- obs(has_adm,P,D,T), tki(D).
+14
+terminates(tki_target_therapy,P,D,T,1) :- obs(has_adm, P, D1, T), obs(has_adm, P, D, T1),
+15
+tki(D1), tki(D), D != D1, T1 < T.
+16
+17
+exists_pers(tki_target_therapy,P,D,T,2) :- obs(has_presc,P,D,T), tki(D).
+18
+terminates(tki_target_therapy,P,D,T,2) :- obs(has_presc, P, D1, T), obs(has_presc, P, D, T1),
+19
+tki(D1), tki(D), D != D1, T1 < T.
+20
+21
+% EGFR mutation (persistent)
+22
+exists_pers(egfr_mutation,P,egfr,T,1) :- obs(has_egfr_mut,P,E,T).
+23
+terminates(egfr_mutation,P,egfr,T,1) :- obs(has_no_egfr_mut,P,E,T).
+24
+25
+% ALK mutation (persistent)
+26
+exists_pers(alk_mutation,P,alk,T,1) :- obs(has_alk_mut,P,E,T).
+27
+terminates(alk_mutation,P,alk,T,1) :- obs(has_no_alk_mut,P,E,T).
+28
+29
+% non-persistent window (time in seconds since Unix epoch)
+30
+pt_window(primary_lungC_episode,c34,48988800). % 18 months
+Listing 2: Temporal event rules for selected simple events in the lung cancer use case.
+Listing 2 defines the existential and termination rules used by HEVA to infer key simple events in the lung cancer use
+case. Here, P denotes the patient, E an observed clinical entity (e.g. diagnosis code or mutation marker), and D a drug.
+The constant c34 represents the ICD-10 category “malignant neoplasm of bronchus and lung”, serving as the general en-
+tity for a primary lung cancer episode. Time is represented in seconds since the Unix epoch. The first four rules define
+the non-persistent primary lungC episode: an event of confidence level 1 is inferred from ADICAP-coded diagnoses
+(has lungc adicap diag), while lower-confidence alternatives rely on ICD-10 codes—specific lung codes excluding
+C34.8 and C34.9 (ℓ= 2), then generic unspecified codes (ℓ= 3). The secondary cancer episode is modeled as a persistent
+event inferred when an ICD-10 diagnosis corresponds to a metastasis (secondary cancer(E)). TKI targeted therapies are
+also persistent: administration records (ℓ= 1) and prescription records (ℓ= 2) indicate therapy existence, while observing an-
+other TKI drug (D1 != D) signals termination, marking a treatment switch. EGFR and ALK mutations are persistent events
+detected from genetic test results (has egfr mut / has alk mut) and terminated when a corresponding negative obser-
+vation appears (has no ...). Finally, the pt window sets the expansion window for the non-persistent primary episode
+(48,988,800 seconds ≈18 months).
+
+[Page 21]
+1
+% lung cancer disease
+2
+m_event(lung_cancer_disease,P,(T1,T2),L) :-
+3
+start(primary_lungC_episode,P,T1,L);
+4
+not event(_,secondary_cancer_episode,P,_,(Tx,_),_) : Tx < T1, valid_time(Tx);
+5
+persist_end(P,T2).
+6
+7
+m_event(lung_cancer_disease,P,(T1,T2),L) :-
+8
+start(secondary_cancer_episode,P,T1,L);
+9
+not event(_,primary_lungC_episode,P,_,(Tx,_),_) : Tx <= T1, valid_time(Tx);
+10
+persist_end(P,T2).
+11
+12
+% targeted mutation = overlap of disease and TKI therapy (confidence via #min)
+13
+m_event(targeted_mutation,P,(T1,T2),L) :-
+14
+event(_,lung_cancer_disease,P,(T1x,T2x),_),
+15
+event(_,tki_target_therapy,P,_,(T1y,T2y),_),
+16
+intersection_of((T1x,T2x),(T1y,T2y),(T1,T2)),
+17
+L = #min{Lx : event(_,lung_cancer_disease,P,(T1x,T2x),Lx);
+18
+Ly : event(_,tki_target_therapy,P,_,(T1y,T2y),Ly)}.
+Listing 3: Example of meta-event rules.
+Listing 3 specifies meta-events.
+Underscores
+mark irrelevant arguments that are intentionally ignored (e.g., inter-
+nal IDs or entities not needed by the rule).
+The first rule builds lung cancer disease starting from the earli-
+est primary lungC episode (a simple event): start(primary lungC episode,P,T1,L) retrieves the earliest
+start; the conditional literal syntax not event( ,secondary cancer episode,P, ,(Tx, ), ) :
+Tx < T1,
+valid time(Tx) means “for every time Tx earlier than T1 that is a valid time, there must be no secondary cancer
+event”, i.e. the rule requires the absence of any prior secondary episode. Here, the part after the colon :
+Tx < T1,
+valid time(Tx) is a condition that ranges the variable Tx.
+The helper predicate persist end is used to indicate
+that the end time of an event is ongoing. The second rule symmetrically allows lung cancer disease to start from a
+secondary cancer episode provided that no primary lungC episode occurred strictly earlier (Tx <= T1). The
+last rule defines targeted mutation as the overlap between lung cancer disease and tki target therapy:
+the rule retrieves the time intervals of both the lung cancer disease and the TKI therapy for the same patient, then computes
+their temporal overlap to define the period during which both are active. The resulting meta-event, inherits its confidence level
+as the minimum of the two contributing events’ confidences. It is important to note that the last rule is provided as an example
+illustrating the use of intersect of to compute the intersection of two intervals. This meta-event is not part of the target
+events relevant to our use case.
+1
+% ADICAP histopathology codes indicating primary lung cancer
+2
+lung_cancer_adicap(rbe7a0).
+3
+lung_cancer_adicap(rba7v4).
+4
+lung_cancer_adicap(rba7a0).
+5
+...
+6
+7
+% TKI drugs
+8
+tki(ceritinib).
+9
+tki(osimertinib).
+10
+tki(crizotinib).
+11
+...
+12
+13
+% Secondary cancer (ICD-10) examples
+14
+secondary_cancer(c711).
+15
+secondary_cancer(c712).
+16
+secondary_cancer(c716).
+17
+...
+Listing 4: Atemporal facts encoding domain knowledge.
+Knowledge sources. Atemporal facts in Listing 4, encoding domain knowledge relevant to this use case draw from various
+medical thesauri such as ADICAP, ICD-10, and ATC.
+
+[Page 22]
+C.3
+Execution Time of Three Other CASPER
+Timelines
+In the main paper, we only provided the execution times for
+the mode that produces consistent timelines. Here we pro-
+vide the tables of execution times when HEVA is run in other
+three modes (corresponding to na¨ıve, cautious, and preferred
+timelines). As shown in these three tables, HEVA’s execution
+time remains similar across the different timelines.
+Table 3: Statistics on execution times for computing all stable mod-
+els associated with na¨ıve timeline in the lung cancer use case (322
+patients).
+Min.
+Q1
+Q2
+Mean
+Q3
+Max.
+Grnd. rules
+538
+673.2 793.5 928.5 1,013 3,858
+Time (s)
+0.08
+0.09
+0.09
+0.14
+0.10
+5.38
+Table 4: Statistics on execution times for computing all stable mod-
+els associated with preferred timeline in the lung cancer use case
+(322 patients).
+Min.
+Q1
+Q2
+Mean
+Q3
+Max.
+Grnd. rules
+534
+679.2 800.5 935.5 1,018.8 3,844
+Time (s)
+0.14
+0.15
+0.15
+0.20
+0.16
+4.69
+Table 5: Statistics on execution times for computing all stable mod-
+els associated with cautious timeline in the lung cancer use case
+(322 patients).
+Min.
+Q1
+Q2
+Mean
+Q3
+Max.
+Grnd. rules
+538
+708
+841.5 983.9 1,066.5 3,918
+Time (s)
+0.15 0.22
+0.24
+0.30
+0.31
+5.04
+C.4
+Annotation Agreement Evaluation
+Inter-annotator agreement.
+To assess the consistency of
+clinical event annotations across annotator pairs, we com-
+puted a weighted inter-annotator agreement based on the
+number of shared elements identified for each annotated
+event. The annotated events included primary lung cancer
+episodes, secondary cancer episodes, EGFR/ALK mutation
+status, TKI-targeted therapies, and the presence of lung can-
+cer disease. Agreement was assessed using a point-based
+scheme that considers the individual components of each
+event. A maximum score was defined for each event type,
+based on its annotation granularity:
+• for primary lung cancer episode, secondary cancer
+episode, TKI targeted therapy: up to 4 points were as-
+signed:
+– 1 point for the presence of the event,
+– 1 point for the specific subtype of event (e.g., type of
+therapy),
+– 1 point for the start date,
+– 1 point for the end date.
+• for other events (e.g. EGFR/ALK mutation, lung cancer
+disease), up to 3 points were assigned:
+– 1 point for the presence of the event,
+– 1 point for the start date,
+– 1 point for the end date.
+Note that the “Subtype” component was not applicable
+for EGFR/ALK mutation and lung cancer disease events. In
+the case of EGFR and ALK mutations, the mutation name
+itself (EGFR or ALK) inherently defines the subtype, mak-
+ing a separate annotation unnecessary. For lung cancer dis-
+ease, histological subtypes (e.g., adenocarcinoma or squa-
+mous cell carcinoma) were not annotated, as they were not
+considered relevant for this particular use case. If multi-
+ple occurrences of the same event were detected and one or
+more of these occurrences did not appear in an annotator’s
+records, such cases were counted as disagreements, with an
+agreement score of 0 assigned.
+Let Ae,i denote the number of agreement points awarded
+for an annotated instance i of event type e, and Ce,i the cor-
+responding maximum possible score. The agreement ratio
+for each annotation is then computed as follows:
+Agreement Ratioe,i = Ae,i
+Ce,i
+.
+For each event type e, the mean agreement ratio is first
+computed over its ne annotated instances (Table 6):
+Mean Agreement per Event Typee = 1
+ne
+ne
+X
+i=1
+Ae,i
+Ce,i
+To avoid bias toward event types with more annotated in-
+stances, the overall inter-annotator agreement is defined as
+the unweighted mean of these per-event-type means, giving
+equal importance to each event type:
+Mean Inter-Annotator Agreement = 1
+k
+k
+X
+e=1
+ 
+1
+ne
+ne
+X
+i=1
+Ae,i
+Ce,i
+!
+where k is the number of distinct event types and ne the
+number of annotated instances for each type. Using this for-
+mula, the mean inter-annotator agreement is 60.56%.
+We adopt this unweighted formulation because our goal
+is to evaluate HEVA’s ability to infer diverse types of clinical
+events, not merely the most frequent ones. Equal weighting
+ensures that each event type contributes uniformly to the
+final measure, providing a fairer assessment of event-
+type–level consistency.
+The highest overall agreement was observed for lung
+cancer (78.89%), closely followed by primary lung cancer
+episodes (77.42%). In both cases, annotators showed near-
+perfect agreement on the presence of the event (100.00%
+and 96.77%, respectively) and strong agreement on the end
+date (90.00% and 80.64%). This consistency was expected,
+as these two events are closely related: the presence of a
+primary tumor implies the presence of the disease. Con-
+versely, the disease is generally considered to begin with
+
+[Page 23]
+Table 6: Component-level inter-annotator agreement (%).
+Presence Subtype Start D. End D. Mean
+P. lg. cancer episode
+96.77
+93.55
+38.71
+80.64
+77.42
+S. cancer episode
+61.43
+61.43
+17.14
+40.00
+44.28
+TKI targeted th.
+80.85
+80.85
+44.68
+44.68
+62.76
+EGFR mutation
+100.00
+–
+45.45
+54.54
+66.67
+ALK mutation
+75.00
+–
+0.00
+25.00
+33.33
+Lg. cancer disease
+100.00
+–
+46.67
+90.00
+78.89
+Each row corresponds to an event category, and the columns
+report the agreement percentages for each individual compo-
+nent: presence, subtype (when applicable), start date, end
+date, and the overall mean agreement.
+Dashes (–) indicate that the component was not applicable to
+that event type.
+the initial primary episode. Yet, the two events differ in
+temporal granularity—multiple primary episodes may occur
+within the course of a single lung cancer disease—which
+likely explains the slightly lower agreement on episode end
+dates compared with the disease as a whole. By contrast,
+agreement on the start date remained much lower (46.67%
+for lung cancer disease and 38.71% for primary episodes),
+highlighting the difficulty of precisely identifying the onset
+of events from clinical records, which are often incomplete
+or implicit regarding temporal boundaries.
+In comparison, secondary cancer episodes showed sig-
+nificantly lower agreement, with an average score of only
+44.28%.
+While annotators agreed on presence and sub-
+type in just over 60% of cases, agreement on start date and
+end date dropped to 17.14% and 40.00%, respectively. This
+variability likely reflects the greater complexity and ambigu-
+ity of metastatic events, which are often inconsistently doc-
+umented or inferred retrospectively from clinical narratives.
+TKI-targeted therapies received moderate agreement
+(62.76%), with relatively balanced scores across compo-
+nents. Agreement on presence and subtype was relatively
+high (80.85% for both), but, once again, temporal bound-
+aries again introduced inconsistencies (44.68% for both
+start and end). These discrepancies may stem from varia-
+tions in documentation practices (e.g. prescription vs. ad-
+ministration dates) or from unclear indications regarding
+treatment transitions or discontinuations.
+For molecular markers, the results were mixed. Annota-
+tions related to EGFR mutations achieved a relatively high
+average agreement (66.67%), driven by perfect agreement
+on presence (100.00%) but only moderate alignment on
+start and end dates (45.45% and 54.54%). This likely re-
+flects the unambiguous nature of molecular statuses when
+explicitly mentioned, while their exact temporal relevance
+(e.g. test date vs. clinical significance date) may vary. Con-
+versely, ALK mutations had the lowest agreement (33.33%),
+with 75.00% agreement on presence but complete disagree-
+ment on the start date (0.00%) and low agreement on the
+end date (25.00%). This discrepancy may stem from the
+relative rarity of ALK mutations in the dataset, resulting in
+fewer annotated instances and greater variability in interpre-
+tation.
+Overall, the data in Table 6 reveals several key trends:
+• Presence is the most consistently agreed-upon compo-
+nent across all event types, indicating that clinicians gen-
+erally agree on whether a clinical event occurred.
+• Subtype (when applicable) shows moderate agreement
+but remains subject to interpretation, especially in cases
+involving complex therapies or metastatic events.
+• Start dates exhibit the lowest levels of agreement across
+nearly all event types, confirming that identifying the pre-
+cise onset of an event is inherently ambiguous and often
+under-documented in EHRs.
+• End dates are slightly more reliable, though still vari-
+able—possibly because an event’s conclusion is more of-
+ten linked to clear documentation such as treatment dis-
+continuation or discharge summaries.
+These results highlight the inherent difficulty of establish-
+ing a single “gold standard” for temporally extended clinical
+events, even among human experts.
+Evaluation of agreement between HEVA inferences and
+expert annotations.
+To further evaluate HEVA’s qualita-
+tive alignment with clinical reasoning, we compared the
+events inferred in its consistent timelines against the indi-
+vidual annotations produced by the four experts involved in
+the lung cancer use case. Each annotator evaluated a subset
+of patient records, forming two sub-cohorts of 15 patients
+each (Annotators 1 & 2, Annotators 3 & 4). For each pair,
+HEVA’s output was compared separately against each an-
+notator’s annotations, and we computed a component-wise
+agreement (presence, event type, start, end) using the same
+weighted scheme described earlier.
+It is important to note that the annotators had access to the
+complete EHR, including narrative reports, whereas HEVA
+only relied on structured EHR data (diagnoses, mutations,
+TKI therapy administrations or prescriptions, and death).
+Consequently, some discrepancies may reflect information
+sources unavailable to HEVA rather than reasoning errors.
+Sub-cohort 1 (Annotators 1 & 2). HEVA achieved a mean
+agreement ratio of 57.90% with Annotator 1 (Table 7), and
+49.81% with Annotator 2 (Table 8).
+The corresponding
+inter-annotator agreement for this sub-cohort is 56.16% (Ta-
+ble 9). Thus, HEVA’s agreement with individual experts falls
+within the range of variability observed between the annota-
+tors themselves.
+Table 7: Comparison between HEVA and Annotator 1.
+Presence Subtype Start D. End D. Mean
+P. lg cancer episode
+85.71
+85.71
+35.71
+71.43
+69.64
+S. cancer episode
+59.37
+59.37
+00.00
+34.37
+38.28
+TKI targeted th.
+57.89
+57.89
+10.53
+31.58
+39.47
+EGFR mutation
+88.89
+–
+33.33
+77.78
+66.67
+ALK mutation
+66.67
+–
+33.33
+66.67
+55.56
+Lg. cancer disease
+100.00
+–
+41.67
+91.67
+77.8
+Annotator 1 reported 11 events missing from HEVA’s out-
+put, while HEVA inferred 14 events not identified by the an-
+
+[Page 24]
+Table 8: Comparison between HEVA and Annotator 2.
+Presence Subtype Start D. End D. Mean
+P. lg. cancer episode
+85.71
+85.71
+35.71
+71.43
+69.64
+S. cancer episode
+56.25
+56.25
+12.50
+50.00
+43.75
+TKI targeted th.
+60.00
+60.00
+25.00
+45.00
+47.50
+EGFR mutation
+88.89
+–
+66.67
+33.33
+62.96
+ALK mutation
+00.00
+–
+00.00
+00.00
+00.00
+Lg. cancer disease
+100.00
+–
+41.67
+83.33
+75.00
+Table 9: Component-level inter-annotator agreement (%) of sub-
+cohort 1.
+Presence Subtype Start D. End D. Mean
+P. lg cancer episode
+100.00
+100.00
+40.00
+93.33
+83.33
+S. cancer episode
+71.87
+71.87
+00.00
+25.00
+40.62
+TKI targeted th.
+86.96
+86.96
+52.17
+30.43
+64.13
+EGFR mutation
+100.00
+–
+33.33
+16.67
+50.00
+ALK mutation
+50.00
+–
+00.00
+00.00
+16.67
+Lg. cancer disease
+100.00
+–
+53.33
+93.33
+82.22
+notator. Annotator 2 reported 10 events not found by HEVA,
+which in turn detected 17 events not annotated by the ex-
+pert. Overall, HEVA tended to identify slightly more events
+than the annotators, which may influence the agreement
+score since additional detections—although sometimes clin-
+ically plausible—were automatically counted as disagree-
+ments when they were absent from the expert annotations.
+The highest concordance was observed for primary
+lung cancer episodes (69.64%) and lung cancer disease
+(≈76.40%) confirming HEVA’s ability to capture the main
+clinical trajectory. By contrast, secondary cancer episodes
+and TKI therapies showed lower agreement (≈38–47%),
+likely due to missing or delayed documentation of metas-
+tases and heterogeneous recording of drug transitions.
+EGFR and ALK mutations exhibited intermediate per-
+formance, with better scores for EGFR (≈63–67%) than
+for ALK (≈0–56%), reflecting the rarity and inconsistent
+testing of ALK in the dataset.
+Sub-cohort 2 (Annotators 3 & 4). Annotator 3 reached an
+overall agreement of 49.69% and Annotator 4 of 51.12%
+(Tables 10–11). The inter-annotator agreement for this sub-
+cohort is higher (66.36%, Table 12), indicating stronger
+concordance between the two experts than in Sub-cohort 1.
+Table 10: Comparison between HEVA and Annotator 3.
+Presence Subtype Start D. End D. Mean
+P. lg. cancer episode
+100.00
+93.75
+12.50
+56.25
+65.62
+S. cancer episode
+42.55
+42.55
+8.51
+36.17
+32.45
+TKI targeted th.
+65.22
+65.22
+17.39
+39.13
+46.74
+EGFR mutation
+90.00
+–
+60.00
+60.00
+70.00
+ALK mutation
+50.00
+–
+00.00
+00.00
+16.67
+Lg. cancer disease
+100.00
+–
+20.00
+80.00
+66.67
+HEVA again identified more events (25 and 22, respec-
+tively) than the annotators (10 and 18). The best-aligned
+events remained the primary lung cancer episodes and
+Table 11: Comparison between HEVA and Annotator 4.
+Presence Subtype Start D. End D. Mean
+P. lg. cancer episode
+93.75
+93.75
+25.00
+56.25
+67.19
+S. cancer episode
+46.30
+46.30
+5.56
+40.74
+34.72
+TKI targeted th.
+66.67
+66.67
+12.50
+33.33
+44.79
+EGFR mutation
+90.00
+–
+60.00
+60.00
+70.00
+ALK mutation
+50.00
+–
+00.00
+00.00
+16.67
+Lg. cancer disease
+100.00
+–
+33.33
+86.67
+73.33
+Table 12: Component-level inter-annotator agreement (%) of sub-
+cohort 2.
+Presence Subtype Start D. End D. Mean
+P. lg cancer episode
+93.75
+87.50
+37.50
+68.75
+71.87
+S. cancer episode
+52.63
+52.63
+00.00
+31.58
+52.63
+TKI targeted th.
+75.00
+75.00
+37.50
+58.33
+61.46
+EGFR mutation
+100.00
+–
+60.00
+100.00 86.67
+ALK mutation
+100.00
+–
+00.00
+50.00
+50.00
+Lg. cancer disease
+100.00
+–
+40.00
+86.67
+75.56
+lung cancer disease (≈65–73%), both directly supported
+by structured diagnostic codes.
+Lower agreement for
+secondary cancer episodes and TKI therapies reflects the
+greater uncertainty in documenting metastatic progression
+and treatment continuity—both of which are often inferred
+retrospectively from scattered clinical entries rather than
+explicitly timestamped observations.
+Mutations showed
+moderate alignment for EGFR and very limited for ALK,
+a difference mainly attributable to data sparsity and het-
+erogeneity in genetic testing practices: EGFR testing was
+systematically performed and recorded, whereas ALK
+testing was less frequent and typically not conducted once
+an EGFR mutation had been identified.
+Merged pair evaluation.
+When merging both annota-
+tors’ results within each sub-cohort by keeping, for each
+patient and event, the best agreement score, the overall
+agreement between HEVA and human expert annotation
+reached 60.25%. This value approaches the inter-annotator
+agreement (60.56%), indicating that HEVA’s inferences are
+roughly as consistent with expert judgments as the experts
+are among themselves—an encouraging result supporting
+the clinical validity of its outputs.
+Across all comparisons, HEVA reproduced expert-level
+reasoning for well-structured events directly linked to coded
+data (primary lung cancer episodes, lung cancer disease,
+EGFR mutation).
+Lower scores for secondary cancer
+episodes and TKI therapies highlight limitations related
+to incomplete data coverage. Disagreements on temporal
+boundaries (start/end) also mirror the annotators’ own diver-
+gence, confirming that imprecision largely stems from the
+inherent ambiguity of clinical documentation and from the
+intrinsic difficulty of this task, which remains challenging
+even for human experts. Overall, these results demonstrate
+that HEVA can emulate the temporal reasoning patterns of
+clinicians using only structured data and logically specified
+
+[Page 25]
+rules, producing outputs of comparable reliability to human
+annotations.
+Justification of the evaluation method. Our component-
+level agreement approach is consistent with methodologies
+adopted in previous studies addressing complex biomedical
+or temporal annotation tasks (Hripcsak and Rothschild 2005;
+Artstein and Poesio 2008; Uzuner, Luo, and Szolovits 2007).
+In such contexts, standard agreement metrics like Cohen’s
+kappa often prove inadequate, as they assume flat categor-
+ical labels and fail to account for the internal structure or
+temporal boundaries of clinical events. Prior work has advo-
+cated for alternative strategies better suited to structured an-
+notations, including element-level or boundary-aware scor-
+ing schemes (Hripcsak and Rothschild 2005; Artstein and
+Poesio 2008; Uzuner, Luo, and Szolovits 2007).
+These
+precedents support the relevance of our method for capturing
+meaningful agreement in richly structured annotation sce-
+narios.

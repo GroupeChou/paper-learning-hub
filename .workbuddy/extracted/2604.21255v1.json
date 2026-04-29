@@ -1,0 +1,170 @@
+{
+  "paper_id": "2604.21255v1",
+  "title": "When Agents Look the Same: Quantifying Distillation-Induced Similarity in Tool-Use Behaviors",
+  "organization": "Anthropic",
+  "publish_date": "2026-04-23",
+  "theme": "AI Agent",
+  "source_name": "Anthropic arXiv query",
+  "source_url": "https://arxiv.org/abs/2604.21255v1",
+  "paper_url": "https://arxiv.org/pdf/2604.21255v1",
+  "summary": "Model distillation is a primary driver behind the rapid progress of LLM agents, yet it often leads to behavioral homogenization. Many emerging agents share nearly identical reasoning steps and failure modes, suggesting they may be distil...",
+  "priority": 974,
+  "total_chars": 85773,
+  "chunk_count": 21,
+  "image_paths": [
+    "assets/page-001-img-01.jpeg",
+    "assets/page-001-img-02.jpeg",
+    "assets/page-001-img-03.jpeg",
+    "assets/page-001-img-04.jpeg",
+    "assets/page-001-img-05.jpeg",
+    "assets/page-001-img-06.jpeg",
+    "assets/page-001-img-07.jpeg",
+    "assets/page-001-img-08.jpeg",
+    "assets/page-001-img-09.jpeg",
+    "assets/page-001-img-10.jpeg",
+    "assets/page-001-img-11.jpeg",
+    "assets/page-001-img-12.jpeg",
+    "assets/page-001-img-13.jpeg",
+    "assets/page-001-img-14.jpeg",
+    "assets/page-004-img-01.jpeg",
+    "assets/page-004-img-02.jpeg",
+    "assets/page-004-img-03.jpeg",
+    "assets/page-004-img-04.jpeg",
+    "assets/page-004-img-05.jpeg",
+    "assets/page-004-img-06.jpeg"
+  ],
+  "notes": [
+    "图片数量超过上限，仅保留前 20 张。",
+    "图片数量超过上限，仅保留前 20 张。",
+    "图片数量超过上限，仅保留前 20 张。",
+    "图片数量超过上限，仅保留前 20 张。"
+  ],
+  "chunks": [
+    {
+      "index": 1,
+      "heading": "Section 1",
+      "text_len": 3714,
+      "text_preview": "[Page 1]\nWhen Agents Look the Same: Quantifying Distillation-Induced Similarity\nin Tool-Use Behaviors\nChenghao Yang1,2, Yuning Zhang1,2, Zhoufutu Wen3,†, Tao Gong1,2,†,\nJiaheng Liu4, Qi Chu1,2, Nengha"
+    },
+    {
+      "index": 2,
+      "heading": "Section 2",
+      "text_len": 4803,
+      "text_preview": "[Page 2]\nteachers. Such pervasive mimicry leads to a conver-\ngence of \"bad habits\" across theoretically indepen-\ndent models (Peng et al., 2025; Chen et al., 2025).\nFor instance, rather than optimizin"
+    },
+    {
+      "index": 3,
+      "heading": "Section 3",
+      "text_len": 4781,
+      "text_preview": "[Page 3]\narbitrary architectures. However, empirical studies\nshow that distillation can cause homogenization\nproblems in LLMs (Lee et al., 2025).\nData Contamination.\nData contamination, or\nbenchmark l"
+    },
+    {
+      "index": 4,
+      "heading": "Section 4",
+      "text_len": 4069,
+      "text_preview": "[Page 4]\nI need to cancel my flight tomorrow\nget_user_details\nuser_id \nU123\nFound your account. Now, I will do...\nget_reservation_details\nres_id \nR456\ncancel_reservation\nsuccess\nYour flight has been c"
+    },
+    {
+      "index": 5,
+      "heading": "Section 5",
+      "text_len": 4545,
+      "text_preview": "[Page 5]\nalong three dimensions. For sequential and depen-\ndency patterns, we design three heuristic features,\neach based on its interpretability.\nOptional Tool Agreement Snode measures the\nconsistenc"
+    },
+    {
+      "index": 6,
+      "heading": "Section 6",
+      "text_len": 4246,
+      "text_preview": "[Page 6]\nTable 1: Behavioral similarity of 18 models to Claude Sonnet 4.5 (thinking) across four baseline metrics, three\nAGS sub-metrics, and three RPS dimensions. Anthropic models (shaded) serve as w"
+    },
+    {
+      "index": 7,
+      "heading": "Section 7",
+      "text_len": 4147,
+      "text_preview": "[Page 7]\nLLM Judge\n• Style Score: 4.67  \nLLM Judge\nYes, please send me the payment \nrequest so I can pay\nsend_payment_request\nPayment \nrequest sent\nPerfect! I've sent a payment request \nfor the $65.00"
+    },
+    {
+      "index": 8,
+      "heading": "Section 8",
+      "text_len": 4265,
+      "text_preview": "[Page 8]\nTool AFG\nGPT-5\nSonnet-4.5\nKimi-K2\nget product \ndetails\nfind user id \nby email\nfind user id \nby name zip\nget user \ndetails\nget order \ndetails\nexchange \ndelivered \norder items\nseq\ndepend\nPerfec"
+    },
+    {
+      "index": 9,
+      "heading": "Section 9",
+      "text_len": 4360,
+      "text_preview": "[Page 9]\nthis convergence spans distinct behavioral dimen-\nsions. Correlation analysis with baseline metrics\nand additional ablation studies are provided in Ap-\npendix D.6.\n6\nConclusion\nWe present a f"
+    },
+    {
+      "index": 10,
+      "heading": "Section 10",
+      "text_len": 4979,
+      "text_preview": "[Page 10]\nShao, Zhuoshu Li, Ziyi Gao, and 181 others. 2025a.\nDeepSeek-R1: Incentivizing Reasoning Capability\nin LLMs via Reinforcement Learning. Accessed:\nJanuary 2026.\nDeepSeek-AI, Aixin Liu, Bei Fen"
+    },
+    {
+      "index": 11,
+      "heading": "Section 11",
+      "text_len": 4631,
+      "text_preview": "[Page 11]\nOpenAI. 2025a.\nGPT-4.1:\nA large language\nmodel.\nhttps://platform.openai.com/docs/\nmodels/gpt-4.1. Accessed: January 2026.\nOpenAI.\n2025b.\nGPT-5:\nA\nlarge\nlanguage\nmodel.\nhttps://platform.opena"
+    },
+    {
+      "index": 12,
+      "heading": "Section 12",
+      "text_len": 3391,
+      "text_preview": "[Page 12]\nscoring pipeline is agnostic to this particular taxon-\nomy; applying RPS to a different domain requires\nonly replacing the stage definitions and annotation\nprompt.\n• Authentication. Identify"
+    },
+    {
+      "index": 13,
+      "heading": "Section 13",
+      "text_len": 3593,
+      "text_preview": "[Page 13]\ntories, the two blocks are sent together to the LLM\njudge as one scoring unit. Labels appearing in only\none trajectory are excluded.\nA.3\nSimilarity Evaluation\nEach shared stage is then score"
+    },
+    {
+      "index": 14,
+      "heading": "Section 14",
+      "text_len": 3402,
+      "text_preview": "[Page 14]\n- Wording of opening and closing\nstatements\n- Information organization (what to say\nfirst and last)\n- Common vocabulary and phrases\n- Tone characteristics (formal/colloquial\n)\n**Distillation"
+    },
+    {
+      "index": 15,
+      "heading": "Section 15",
+      "text_len": 3228,
+      "text_preview": "[Page 15]\n```\n**Notes**:\n- The three scores in `scores` correspond\nto the similarity ratings for each\ndimension\n- `overall` is the comprehensive score,\nnot necessarily a simple average of\nthe three sc"
+    },
+    {
+      "index": 16,
+      "heading": "Section 16",
+      "text_len": 4265,
+      "text_preview": "[Page 16]\ndecision from both models (both invoke it or both\nskip it), and divide by the total number of optional\ntools. Snode is the average of this ratio across all\ntasks. Tasks where Fopt\nt\n= ∅are e"
+    },
+    {
+      "index": 17,
+      "heading": "Section 17",
+      "text_len": 3627,
+      "text_preview": "[Page 17]\nTable 5: Read, write, and generic tool classification for the airline, retail, and telecom domains from τ-Bench and\nτ 2-Bench. This classification is used to compute Sseq.\nDomain\nType\nTools\n"
+    },
+    {
+      "index": 18,
+      "heading": "Section 18",
+      "text_len": 4348,
+      "text_preview": "[Page 18]\nTable 8: Full controlled-distillation results for LoRA\nfine-tuning of Qwen2.5-14B-Instruct on trajectories gen-\nerated by Claude Sonnet 4.5 (thinking).\nMetric\nBase→Claude\nDist→Claude\n∆(Teach"
+    },
+    {
+      "index": 19,
+      "heading": "Section 19",
+      "text_len": 3985,
+      "text_preview": "[Page 19]\nTable 11: Inter-rater agreement for RPS scoring between\nGemini-2.5-Flash-Thinking and DeepSeek-V3 on 50\nairline-domain stage comparisons for Claude Sonnet\n4.5 (thinking) versus Kimi-K2 (thin"
+    },
+    {
+      "index": 20,
+      "heading": "Section 20",
+      "text_len": 4301,
+      "text_preview": "[Page 20]\nTable 15: Pairwise correlations among GED, AGS,\nRSE, and RPS over 16 non-Anthropic models evalu-\nated against Claude Sonnet 4.5 (thinking) on τ-bench.\nMetric Pair\nPearson r\np-val\nSpearman ρ\n"
+    },
+    {
+      "index": 21,
+      "heading": "Section 21",
+      "text_len": 3053,
+      "text_preview": "[Page 21]\nCould you also check fares from \nEWR to other major West Coast cities\nsearch_direct_flight\nflight_id\n[None]\nI will search direct return flights \nfrom LAX to EWR on May 25 ...\nsearch_direct_f"
+    }
+  ]
+}

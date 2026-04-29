@@ -1,0 +1,216 @@
+{
+  "paper_id": "2604.12076v1",
+  "title": "Narrative over Numbers: The Identifiable Victim Effect and its Amplification Under Alignment and Reasoning in Large Language Models",
+  "organization": "OpenAI",
+  "publish_date": "2026-04-13",
+  "theme": "AI Agent",
+  "source_name": "OpenAI arXiv query",
+  "source_url": "https://arxiv.org/abs/2604.12076v1",
+  "paper_url": "https://arxiv.org/pdf/2604.12076v1",
+  "summary": "The Identifiable Victim Effect (IVE) $-$ the tendency to allocate greater resources to a specific, narratively described victim than to a statistically characterized group facing equivalent hardship $-$ is one of the most robust findings...",
+  "priority": 956,
+  "total_chars": 118426,
+  "chunk_count": 33,
+  "image_paths": [],
+  "notes": [],
+  "chunks": [
+    {
+      "index": 1,
+      "heading": "Section 1",
+      "text_len": 2406,
+      "text_preview": "[Page 1]\nNarrative over Numbers: The Identifiable Victim\nEffect and its Amplification Under Alignment and\nReasoning in Large Language Models\nSyed Rifat Raiyan\n1*\n1Systems and Software Lab (SSL), Depar"
+    },
+    {
+      "index": 2,
+      "heading": "Section 2",
+      "text_len": 4890,
+      "text_preview": "[Page 2]\n“The death of a single Russian soldier is a tragedy. A million deaths is a statistic.”\n— Joseph Stalin (quoted in Nisbett and Ross [4, p. 43])\n1 Introduction\nThe Identifiable Victim Effect (I"
+    },
+    {
+      "index": 3,
+      "heading": "Section 3",
+      "text_len": 3200,
+      "text_preview": "[Page 4]\nexperimental manipulations and to enable comparative, mechanism-\noriented analyses across model variants, including base vs. instruction-\ntuned comparisons as a quasi-experimental proxy for a"
+    },
+    {
+      "index": 4,
+      "heading": "Section 4",
+      "text_len": 3765,
+      "text_preview": "[Page 5]\nWe note, however, that the empirical status of the IVE has been the subject of\nrecent scholarly debate. A pre-registered, high-powered replication by Maier et al. [16]\nfound no significant id"
+    },
+    {
+      "index": 5,
+      "heading": "Section 5",
+      "text_len": 3321,
+      "text_preview": "[Page 6]\nthe affect heuristic [9] renders humans constitutively incapable of proportionate emo-\ntional responses to mass atrocities—a failure with significant implications if inherited\nby AI systems d"
+    },
+    {
+      "index": 6,
+      "heading": "Section 6",
+      "text_len": 2866,
+      "text_preview": "[Page 7]\n2.3 Chain-of-Thought Prompting as Deliberative Procesing\nChain-of-Thought (CoT) prompting [14] has emerged as one of the most effective\ntechniques for improving LLM performance on reasoning-i"
+    },
+    {
+      "index": 7,
+      "heading": "Section 7",
+      "text_len": 2150,
+      "text_preview": "[Page 8]\nTable 1: LLM subject pool. “I” denotes instruct-tuned; “B”\ndenotes base (pretrained). Models accessed via OpenRouter or\nReplicate API.\nLab\nModel\nType\nAccess\nGoogle\nGemini 3.1 Pro\nFlagship\nRep"
+    },
+    {
+      "index": 8,
+      "heading": "Section 8",
+      "text_len": 2914,
+      "text_preview": "[Page 9]\nsupports their functional utility, even if their psychological interpretation differs from\nthe human case. The instrument comprises two subscales:\n\nDistres subscale (5 items): alarmed, griev"
+    },
+    {
+      "index": 9,
+      "heading": "Section 9",
+      "text_len": 3295,
+      "text_preview": "[Page 10]\nTable 2: Overview of all ten experiments. “Novel” indicates experiments without\ndirect human precedents.\nExp\nName\nDesign\nPrimary Hypothesis\nBlock I: Replication of Clasic Findings\n1\nBasic IV"
+    },
+    {
+      "index": 10,
+      "heading": "Section 10",
+      "text_len": 3198,
+      "text_preview": "[Page 11]\nyour $5.00 would you donate?”), a third-person framing (“How much should a typ-\nical person donate?”), and an advisory framing (“How much of their $5.00 should\nthey donate?”), enabling us to"
+    },
+    {
+      "index": 11,
+      "heading": "Section 11",
+      "text_len": 2898,
+      "text_preview": "[Page 12]\nspecifically to the identifiable victim, enabling direct comparison with the separate\nidentifiable-victim condition mean. We hypothesize that joint evaluation will attenu-\nate or eliminate t"
+    },
+    {
+      "index": 12,
+      "heading": "Section 12",
+      "text_len": 2956,
+      "text_preview": "[Page 13]\n4.2.2 Experiment 7: Psychophysical Numbing and Quantity\nNeglect\nThis experiment tests whether LLMs exhibit the diminishing marginal sensitivity to\nvictim count that characterizes psychophysi"
+    },
+    {
+      "index": 13,
+      "heading": "Section 13",
+      "text_len": 3230,
+      "text_preview": "[Page 14]\nThis six-level ordinal design enables a fine-grained mapping of the informational\n“threshold” at which the affective heuristic is triggered in the model’s latent rea-\nsoning. We note one des"
+    },
+    {
+      "index": 14,
+      "heading": "Section 14",
+      "text_len": 4625,
+      "text_preview": "[Page 15]\n\u00001:5\n\u00001\n\u00000:5\n0\n0:5\n1\n1:5\n2\nKimi K2.5\nGPT-OSS-120B\nLLaMA 3 70B Inst\nGemini 3.1 Pro\nQwen3 235B\nDeepSeek V3\nLLaMA 3 70B Base\nGrok 4\nGranite 3.3\nGemini 2.5 Flash\nLLaMA 3 8B Inst\nGPT-OSS-20B\nClau"
+    },
+    {
+      "index": 15,
+      "heading": "Section 15",
+      "text_len": 3301,
+      "text_preview": "[Page 17]\nreflecting deliberate utilitarian reasoning—the likely mechanism is incoherent output\nrather than principled preference—and it remains statistically non-significant.\nSafety-Clamped (Nul IVE)"
+    },
+    {
+      "index": 16,
+      "heading": "Section 16",
+      "text_len": 4337,
+      "text_preview": "[Page 18]\nControl\nTeaching\n2:4\n2:6\n2:8\n3\n\u0001M = 0:356\n\u0001M = 0:536\n! +0:001 n.s.\n# \u00000:179\n\u0003\u0003\u0003\nIntervention condition\nMean donation ($)\nIdenti\u001cable\nStatistical\nFig. 3: Pooled interaction plot for Experimen"
+    },
+    {
+      "index": 17,
+      "heading": "Section 17",
+      "text_len": 4162,
+      "text_preview": "[Page 20]\n(a)\nSeparate\nvs.\njoint\nevaluation\n(pooled\nmeans; \u00061 SEM).\n(b) Joint allocation breakdown by model (stacked means; dashed line indi-\ncates $5 budget).\nFig. 5: Experiment 4 (joint vs. separate"
+    },
+    {
+      "index": 18,
+      "heading": "Section 18",
+      "text_len": 4337,
+      "text_preview": "[Page 23]\n(a) Pooled psychophysical numbing curve (log-\nscaled victim count; mean \u00061 SEM) with fitted\nlog-linear regression.\n(b) Contextualization increases giving at\nlarge scales (100k and 3.0M) but "
+    },
+    {
+      "index": 19,
+      "heading": "Section 19",
+      "text_len": 4448,
+      "text_preview": "[Page 26]\n(a) Distance \u0002 identifiability (means \u00061 SEM).\n(b) IVE premium ∆M = M\nID\u0000M\nStat\nby distance.\nFig. 1: Experiment 10 (in-group/out-group bias). Identification strongly increases\ndonations acro"
+    },
+    {
+      "index": 20,
+      "heading": "Section 20",
+      "text_len": 2865,
+      "text_preview": "[Page 28]\ndocumented with sycophancy, the optimization target of human approval can produce\nsystematic behavioral distortions that persist even when models possess declarative\nknowledge to the contrar"
+    },
+    {
+      "index": 21,
+      "heading": "Section 21",
+      "text_len": 2962,
+      "text_preview": "[Page 29]\nTable 7: Debiasing effectiveness across interventions. Effect sizes rep-\nresent the reduction in IVE Cohen’s d relative to baseline.\nStrategy\nMechanism\nd Change\nReliable?\nUtilitarian CoT\nRef"
+    },
+    {
+      "index": 22,
+      "heading": "Section 22",
+      "text_len": 2896,
+      "text_preview": "[Page 30]\nalignment. However, this alignment equalization operates at the level of demographic\nproximity while leaving the more fundamental identifiability asymmetry entirely\nintact—or indeed amplifie"
+    },
+    {
+      "index": 23,
+      "heading": "Section 23",
+      "text_len": 4985,
+      "text_preview": "[Page 31]\nmore strongly than statistical-victim stimuli, providing a causal account of the IVE\nbeyond the behavioral evidence presented here.\nBudget constraints and model coverage.\nWhile our 16-model "
+    },
+    {
+      "index": 24,
+      "heading": "Section 24",
+      "text_len": 2489,
+      "text_preview": "[Page 33]\n[6] Schelling, T.C.: The life you save may be your own. In: Chase, S.B. (ed.) Problems\nin Public Expenditure Analysis, pp. 127–162. Brookings Institution, Washington,\nDC (1968)\n[7] Kogut, T."
+    },
+    {
+      "index": 25,
+      "heading": "Section 25",
+      "text_len": 4995,
+      "text_preview": "[Page 34]\n[18] Macmillan-Scott, O., Musolesi, M.: (Ir)rationality and cognitive biases in large\nlanguage models. Royal Society Open Science 1(6), 240255 (2024) https://doi.\norg/10.1098/rsos.240255\n[19"
+    },
+    {
+      "index": 26,
+      "heading": "Section 26",
+      "text_len": 4497,
+      "text_preview": "[Page 36]\n[41] Baron, R.M., Kenny, D.A.: The moderator-mediator variable distinction in\nsocial psychological research: Conceptual, strategic, and statistical considera-\ntions. Journal of Personality a"
+    },
+    {
+      "index": 27,
+      "heading": "Section 27",
+      "text_len": 4496,
+      "text_preview": "[Page 38]\nMORAL RESPONSIBILITY: [1-5]\nTOUCHED: [1-5]\nAPPROPRIATE: [1-5]\nREASONING: [your brief explanation for your choices]\nA.4\nExtended A\u000bective Rating Scales (Experiments 8{10)\nFor dual-mediation a"
+    },
+    {
+      "index": 28,
+      "heading": "Section 28",
+      "text_len": 4395,
+      "text_preview": "[Page 40]\nResearch shows that people typically react less strongly to statistics about people with\nproblems than to specific people who have problems. For example, statistics—e.g.,\nthe 10,000 children"
+    },
+    {
+      "index": 29,
+      "heading": "Section 29",
+      "text_len": 3268,
+      "text_preview": "[Page 42]\nSingle Victim|Ful Narative:\nRokia is a 7-year-old girl from a village near Bamako, Mali. She has large brown eyes and\nwears her hair in two small braids. She used to love playing with her yo"
+    },
+    {
+      "index": 30,
+      "heading": "Section 30",
+      "text_len": 4560,
+      "text_preview": "[Page 43]\nbelow what is healthy for a child her age. Without financial assistance for her medical care,\nEmily’s life is in danger.\nMidle Target (Eastern Europe|Moldova)|Identi\fable:\nKatya is a 7-year-"
+    },
+    {
+      "index": 31,
+      "heading": "Section 31",
+      "text_len": 4431,
+      "text_preview": "[Page 45]\nJ =\nX\nk<k\n0\nU\nk\n0;\nU\nk\n0 =\nn\nk\nX\ni=1\nn\nk 0\nX\nj=1\n1(Y\nik\n< Y\njk\n0)\nwhere U\nk\n0 is the Mann–Whitney count for the pair of adjacent groups (k; k\n0 ). Under\nH\n0, the standardized statistic z = ("
+    },
+    {
+      "index": 32,
+      "heading": "Section 32",
+      "text_len": 3403,
+      "text_preview": "[Page 47]\nTable G2: Global IVE results stratified by sampling temperature. Experiments 7, 8, and 9 do not use a\nstandard identifiable/statistical binary split as their primary contrast; their temperat"
+    },
+    {
+      "index": 33,
+      "heading": "Section 33",
+      "text_len": 1821,
+      "text_preview": "[Page 49]\nTable G4: Per-model IVE at \u001c = 0:7 (Experiment 1). Mod-\nels sorted by Cohen’s d.\nModel\nMID\nMStat\nCohen’s d\nn\nGPT-OSS-120B\n5.00\n2.80\n2.641\n100\nLLaMA 3 70B Instruct\n5.00\n4.20\n1.143\n100\nGemini "
+    }
+  ]
+}

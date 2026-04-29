@@ -1,0 +1,120 @@
+{
+  "paper_id": "2604.19459v1",
+  "title": "Do LLMs Game Formalization? Evaluating Faithfulness in Logical Reasoning",
+  "organization": "DeepSeek",
+  "publish_date": "2026-04-21",
+  "theme": "AI Agent",
+  "source_name": "DeepSeek arXiv query",
+  "source_url": "https://arxiv.org/abs/2604.19459v1",
+  "paper_url": "https://arxiv.org/pdf/2604.19459v1",
+  "summary": "Formal verification guarantees proof validity but not formalization faithfulness. For natural-language logical reasoning, where models construct axiom systems from scratch without library constraints, this gap between valid proofs and fa...",
+  "priority": 937,
+  "total_chars": 61139,
+  "chunk_count": 16,
+  "image_paths": [
+    "assets/page-006-img-01.png",
+    "assets/page-024-img-01.png",
+    "assets/page-024-img-02.png",
+    "assets/page-024-img-03.png",
+    "assets/page-024-img-04.png"
+  ],
+  "notes": [],
+  "chunks": [
+    {
+      "index": 1,
+      "heading": "Section 1",
+      "text_len": 3439,
+      "text_preview": "[Page 1]\nPublished at the VerifAI-2 Workshop, ICLR 2026\nDO LLMS GAME FORMALIZATION?\nEVALUATING FAITHFULNESS IN LOGICAL REASONING\nKyuhee Kim\nEPFL\nkyuhee.kim@epfl.ch\nAuguste Poiroux\nEPFL\nauguste.poiroux"
+    },
+    {
+      "index": 2,
+      "heading": "Section 2",
+      "text_len": 3042,
+      "text_preview": "[Page 2]\nPublished at the VerifAI-2 Workshop, ICLR 2026\nPremises\nAll birds fly.\nTweety is a bird.\nConclusion\nTweety can fly.\naxiom h1 : ∀x, Bird x →Fly x\naxiom h2 : Bird Tweety\ntheorem : Fly Tweety :="
+    },
+    {
+      "index": 3,
+      "heading": "Section 3",
+      "text_len": 3008,
+      "text_preview": "[Page 3]\nPublished at the VerifAI-2 Workshop, ICLR 2026\nTable 1: Error taxonomy by category. Full definitions and source attribution in Appendix D.\nCategory\nError Type\nExample\nLocation\nMistranslation\n"
+    },
+    {
+      "index": 4,
+      "heading": "Section 4",
+      "text_len": 2708,
+      "text_preview": "[Page 4]\nPublished at the VerifAI-2 Workshop, ICLR 2026\nNL Premise + Conclusion\nLLM\nAxioms + Theorem + Proof\nLean 4 Compiler\nOK?\nn < 3?\nFail\nSuccess\nNo\nYes (n++)\nNo\nYes\nUnified\nNL Premise + Conclusion"
+    },
+    {
+      "index": 5,
+      "heading": "Section 5",
+      "text_len": 4170,
+      "text_preview": "[Page 5]\nPublished at the VerifAI-2 Workshop, ICLR 2026\n4\nRESULTS AND ANALYSIS\n4.1\nEND-TO-END PERFORMANCE\nFrontier models achieve high compilation and accuracy.\nTable 3 presents results across all con"
+    },
+    {
+      "index": 6,
+      "heading": "Section 6",
+      "text_len": 4787,
+      "text_preview": "[Page 6]\nPublished at the VerifAI-2 Workshop, ICLR 2026\nTable 4: Prediction errors by type (pooled across 3 runs). Each entry counts compiled proofs yield-\ning incorrect definite answers. T→F = ground"
+    },
+    {
+      "index": 7,
+      "heading": "Section 7",
+      "text_len": 3893,
+      "text_preview": "[Page 8]\nPublished at the VerifAI-2 Workshop, ICLR 2026\nCase 177 (Table 8) illustrates this difference. Both models face a missing bridging rule but respond\ndifferently. DeepSeek-R1’s reasoning trace "
+    },
+    {
+      "index": 8,
+      "heading": "Section 8",
+      "text_len": 4144,
+      "text_preview": "[Page 9]\nPublished at the VerifAI-2 Workshop, ICLR 2026\nboth models maintain high definite precision (94–98%), and most prediction errors reflect faithful\nformalization rather than unfaithful exploita"
+    },
+    {
+      "index": 9,
+      "heading": "Section 9",
+      "text_len": 4147,
+      "text_preview": "[Page 10]\nPublished at the VerifAI-2 Workshop, ICLR 2026\nThilo Hagendorff.\nDeception abilities emerged in large language models.\nProceedings of the\nNational Academy of Sciences, 121(24), June 2024.\nIS"
+    },
+    {
+      "index": 10,
+      "heading": "Section 10",
+      "text_len": 3585,
+      "text_preview": "[Page 11]\nPublished at the VerifAI-2 Workshop, ICLR 2026\nRamya Keerthy Thatikonda, Jiuzhou Han, Wray Buntine, and Ehsan Shareghi. Strategies for im-\nproving nl-to-fol translation with llms: Data gener"
+    },
+    {
+      "index": 11,
+      "heading": "Section 11",
+      "text_len": 3731,
+      "text_preview": "[Page 12]\nPublished at the VerifAI-2 Workshop, ICLR 2026\nTable 9: Dataset statistics.\nDataset\nLabel/Depth\nCount\n%\nFOLIO (n=203)\nTrue\n72\n35.5\nFalse\n62\n30.5\nUncertain\n69\n34.0\nMulti-LogiEval (n=100)\nDept"
+    },
+    {
+      "index": 12,
+      "heading": "Section 12",
+      "text_len": 4238,
+      "text_preview": "[Page 14]\nPublished at the VerifAI-2 Workshop, ICLR 2026\nYou must wrap ALL your Lean code in <lean></lean> tags.\nEXAMPLE 1 ({target answer}):\n[Example showing successful proof in target direction]\nEXA"
+    },
+    {
+      "index": 13,
+      "heading": "Section 13",
+      "text_len": 3102,
+      "text_preview": "[Page 17]\nPublished at the VerifAI-2 Workshop, ICLR 2026\nTable 11: Full error taxonomy with definitions and source attribution. BP08 = Barker-Plummer et al.\n(2008), T24 = Thatikonda et al. (2024).\nCat"
+    },
+    {
+      "index": 14,
+      "heading": "Section 14",
+      "text_len": 4421,
+      "text_preview": "[Page 18]\nPublished at the VerifAI-2 Workshop, ICLR 2026\ncommon sense\n**MISTRANSLATION**:\nAxiom incorrectly translates its source\npremise\n- WRONG NEGATION: Polarity error (P vs ¬P)\n- WRONG QUANTIFIER:"
+    },
+    {
+      "index": 15,
+      "heading": "Section 15",
+      "text_len": 4807,
+      "text_preview": "[Page 20]\nPublished at the VerifAI-2 Workshop, ICLR 2026\nTable 13: Iteration distribution among compiled cases (avg per run). Iter = avg iterations (S1→S2\nfor Two-Stage). n@N = cases compiled at itera"
+    },
+    {
+      "index": 16,
+      "heading": "Section 16",
+      "text_len": 3887,
+      "text_preview": "[Page 22]\nPublished at the VerifAI-2 Workshop, ICLR 2026\nTable 17: Stage modification classification by dataset (GPT-5, n=105).\nCategory\nSubtype\nFOLIO\nMulti-LogiEval\nTotal\nFabrication\nCONCLUSION AS AX"
+    }
+  ]
+}

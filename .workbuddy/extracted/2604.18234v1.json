@@ -1,0 +1,96 @@
+{
+  "paper_id": "2604.18234v1",
+  "title": "Evaluating Multi-Hop Reasoning in RAG Systems: A Comparison of LLM-Based Retriever Evaluation Strategies",
+  "organization": "OpenAI",
+  "publish_date": "2026-04-20",
+  "theme": "AI Agent",
+  "source_name": "OpenAI arXiv query",
+  "source_url": "https://arxiv.org/abs/2604.18234v1",
+  "paper_url": "https://arxiv.org/pdf/2604.18234v1",
+  "summary": "Retrieval-augmented generation (RAG) enhances large language models (LLMs) with external knowledge to answer questions more accurately. However, research on evaluating RAG systems-particularly the retriever component-remains limited, as...",
+  "priority": 961,
+  "total_chars": 41631,
+  "chunk_count": 13,
+  "image_paths": [],
+  "notes": [],
+  "chunks": [
+    {
+      "index": 1,
+      "heading": "Section 1",
+      "text_len": 2480,
+      "text_preview": "[Page 1]\nEvaluating Multi-Hop Reasoning in RAG\nSystems: A Comparison of LLM-Based Retriever\nEvaluation Strategies\nLorenz Brehme[0009−0009−4711−2564], Thomas Ströhle[0000−0002−1954−6412], and\nRuth Breu"
+    },
+    {
+      "index": 2,
+      "heading": "Section 2",
+      "text_len": 3364,
+      "text_preview": "[Page 2]\n2\nBrehme et al.\nLLM to process the retrieved data together with the input query to generate\nthe final response. Evaluating all three components is essential for assessing the\nperformance of a"
+    },
+    {
+      "index": 3,
+      "heading": "Section 3",
+      "text_len": 3056,
+      "text_preview": "[Page 3]\nMulti-Hop Retriever Evaluation\n3\nstantially from it, underscoring the importance of context-aware evaluation for\nimproving the reliability and accuracy of RAG systems in challenging scenarios"
+    },
+    {
+      "index": 4,
+      "heading": "Section 4",
+      "text_len": 3193,
+      "text_preview": "[Page 4]\n4\nBrehme et al.\nLLM correctly distinguishes relevant information from not relevant. For our ex-\nperiments, we simulate the RAG pipeline using the multi-hop datasets Hot-\nPotQA [31] and MuSiQu"
+    },
+    {
+      "index": 5,
+      "heading": "Section 5",
+      "text_len": 2877,
+      "text_preview": "[Page 5]\nMulti-Hop Retriever Evaluation\n5\nindirect\nCompare Generated Answer with\nGround Truth Answer\nQuestion q\nContext ℓi \nAnswer ai\nLabel yi\nAnswer \"{ q }\" using only \"{ ℓi }\", or\nrespond \"Cannot an"
+    },
+    {
+      "index": 6,
+      "heading": "Section 6",
+      "text_len": 2968,
+      "text_preview": "[Page 6]\n6\nBrehme et al.\napproaches assume that, in the RAG evaluation process, a dataset with questions\nand their corresponding ground-truth answers is available, and that a question\nmay require mult"
+    },
+    {
+      "index": 7,
+      "heading": "Section 7",
+      "text_len": 2646,
+      "text_preview": "[Page 7]\nMulti-Hop Retriever Evaluation\n7\nfrom permutation tests with an asterisk (*) relative to the highlighted baseline\n(Base). For the CARE approach, we indicate the number of contexts in the\ncont"
+    },
+    {
+      "index": 8,
+      "heading": "Section 8",
+      "text_len": 4710,
+      "text_preview": "[Page 8]\n8\nBrehme et al.\nTable 2: Model comparison on the HotPotQA dataset.\nApproach\nModel\nAccuracy\nF1-Score\nRecall\nPrecision\nIndirect [24] GPT-4.1Base\n0.642±0.03\n0.474±0.04\n0.322±0.04\n0.898±0.04\no4-m"
+    },
+    {
+      "index": 9,
+      "heading": "Section 9",
+      "text_len": 2465,
+      "text_preview": "[Page 10]\n10\nBrehme et al.\nerrors (214 instances), where it failed to use the provided context effectively;\nand context interpretation errors (26 instances), where the model’s relevance\njudgment diffe"
+    },
+    {
+      "index": 10,
+      "heading": "Section 10",
+      "text_len": 3312,
+      "text_preview": "[Page 11]\nMulti-Hop Retriever Evaluation\n11\n(cf. Figure 2). The length depends on the size and number of retrieved contexts\nincluded in the prompt.\n7\nDiscussion\nWe evaluated three LLM-as-judge retriev"
+    },
+    {
+      "index": 11,
+      "heading": "Section 11",
+      "text_len": 3287,
+      "text_preview": "[Page 12]\n12\nBrehme et al.\nels often hallucinate, lose track of the task, or fail to consider the full context.\nWhile future LLM improvements may mitigate these issues, our experiments\nshow that curre"
+    },
+    {
+      "index": 12,
+      "heading": "Section 12",
+      "text_len": 3062,
+      "text_preview": "[Page 13]\nMulti-Hop Retriever Evaluation\n13\nmulti-hop reasoning, especially given its weaker performance in single-hop cases\nand when used with reasoning-focused models.\nAcknowledgements. The authors "
+    },
+    {
+      "index": 13,
+      "heading": "Section 13",
+      "text_len": 4187,
+      "text_preview": "[Page 14]\n14\nBrehme et al.\n13. Gao,\nY.,\nXiong,\nY.,\nGao,\nX.,\nJia,\nK.,\nPan,\nJ.,\nBi,\nY.,\nDai,\nY.,\nSun,\nJ.,\nWang,\nM.,\nWang,\nH.:\nRetrieval-augmented\ngeneration\nfor\nlarge\nlan-\nguage\nmodels:\nA\nsurvey\n(2024)."
+    }
+  ]
+}

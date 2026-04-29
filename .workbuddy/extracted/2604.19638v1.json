@@ -1,0 +1,161 @@
+{
+  "paper_id": "2604.19638v1",
+  "title": "SafetyALFRED: Evaluating Safety-Conscious Planning of Multimodal Large Language Models",
+  "organization": "阿里通义",
+  "publish_date": "2026-04-21",
+  "theme": "AI Agent",
+  "source_name": "Qwen arXiv query",
+  "source_url": "https://arxiv.org/abs/2604.19638v1",
+  "paper_url": "https://arxiv.org/pdf/2604.19638v1",
+  "summary": "Multimodal Large Language Models are increasingly adopted as autonomous agents in interactive environments, yet their ability to proactively address safety hazards remains insufficient. We introduce SafetyALFRED, built upon the embodied...",
+  "priority": 887,
+  "total_chars": 87270,
+  "chunk_count": 20,
+  "image_paths": [
+    "assets/page-002-img-01.jpeg",
+    "assets/page-002-img-02.jpeg",
+    "assets/page-002-img-03.jpeg",
+    "assets/page-002-img-04.jpeg",
+    "assets/page-002-img-05.jpeg",
+    "assets/page-002-img-06.jpeg",
+    "assets/page-002-img-07.jpeg",
+    "assets/page-002-img-08.jpeg",
+    "assets/page-002-img-09.png",
+    "assets/page-002-img-10.jpeg",
+    "assets/page-003-img-01.jpeg",
+    "assets/page-003-img-02.jpeg",
+    "assets/page-003-img-03.jpeg",
+    "assets/page-003-img-04.jpeg",
+    "assets/page-003-img-05.png",
+    "assets/page-003-img-06.png",
+    "assets/page-013-img-01.png",
+    "assets/page-021-img-01.png",
+    "assets/page-021-img-02.png",
+    "assets/page-021-img-03.png"
+  ],
+  "notes": [
+    "图片数量超过上限，仅保留前 20 张。"
+  ],
+  "chunks": [
+    {
+      "index": 1,
+      "heading": "Section 1",
+      "text_len": 4275,
+      "text_preview": "[Page 1]\nSafetyALFRED: Evaluating Safety-Conscious Planning of\nMultimodal Large Language Models\nJosue Torres-Fonseca1, Naihao Deng1, Yinpei Dai1, Shane Storks1,\nYichi Zhang1, Rada Mihalcea1, Casey Ken"
+    },
+    {
+      "index": 2,
+      "heading": "Section 2",
+      "text_len": 4290,
+      "text_preview": "[Page 2]\n2a. QA Task (Hazard Recognition)\nGiven the agent’s progress \ntoward the goal and its view, \nis there a hazard?\nA phone is in the sink and \nshould be removed before \nthe faucet is turned on.\n2"
+    },
+    {
+      "index": 3,
+      "heading": "Section 3",
+      "text_len": 3954,
+      "text_preview": "[Page 3]\nAppliance Misuse (152)\nSpoilage (126)\nFall/Trip Hazard (213)\nFire Hazard (215)\nProperty Damage (159)\nUnsanitary (136)\nMetal/flammable object in\nmicrowave\nFridge door left open.\nCabinet door l"
+    },
+    {
+      "index": 4,
+      "heading": "Section 4",
+      "text_len": 4715,
+      "text_preview": "[Page 4]\nTrajectory Generation and Rendering.\nEx-\npanding on ALFRED, we generate new ground\ntruth trajectories that demonstrate successful com-\npletion of the task while mitigating safety hazards.\nTo "
+    },
+    {
+      "index": 5,
+      "heading": "Section 5",
+      "text_len": 4420,
+      "text_preview": "[Page 5]\nModel\nAppliance\nMisuse\nFall/Trip\nHazard\nFire\nHazard\nProperty\nDamage\nSpoilage\nUnsanitary\nAvg\nV\nD\nV\nD\nV\nD\nV\nD\nV\nD\nV\nD\nV\nD\nGemma 3 4b\n2.6\n20.4\n0.0\n0.9\n64.7\n73.0\n3.1\n16.4\n0.0\n0.8\n31.6\n67.6\n17.0\n2"
+    },
+    {
+      "index": 6,
+      "heading": "Section 6",
+      "text_len": 4475,
+      "text_preview": "[Page 6]\nModel\nAppliance\nMisuse\nFall/Trip\nHazard\nFire\nHazard\nProperty\nDamage\nSpoilage\nUnsanitary\nAvg\nV\nD\nV\nD\nV\nD\nV\nD\nV\nD\nV\nD\nV\nD\nGemma 3 4b\n0.0\n0.0\n2.4\n0.5\n0.0\n7.4\n0.0\n0.0\n6.3\n0.8\n0.0\n0.0\n1.4\n1.5\nGemm"
+    },
+    {
+      "index": 7,
+      "heading": "Section 7",
+      "text_len": 4865,
+      "text_preview": "[Page 7]\nAM\nFT\nFH\nPD\nSP\nUN\nAvg.\nModel\nQ\nE\nA\nQ\nE\nA\nQ\nE\nA\nQ\nE\nA\nQ\nE\nA\nQ\nE\nA\nQ\nE\nA\nGemma 3 4b\n20.4\n0.0 79.6\n0.9\n0.5 98.6\n73.0\n7.4\n33.5 16.4\n0.0 83.6\n0.8\n0.8 98.4\n67.6\n0.0 32.4 29.8\n1.5 71.0\nGemma 3 12b\n4"
+    },
+    {
+      "index": 8,
+      "heading": "Section 8",
+      "text_len": 5314,
+      "text_preview": "[Page 8]\nModel\nAppliance\nFall/Trip\nFire Hazard\nProp. Damage\nSpoilage\nUnsanitary\nAverage\nSingle Multi\n∆\nSingle Multi\n∆\nSingle Multi\n∆\nSingle Multi\n∆\nSingle Multi\n∆\nSingle Multi\n∆\nSingle Multi\n∆\nGemma 3"
+    },
+    {
+      "index": 9,
+      "heading": "Section 9",
+      "text_len": 4816,
+      "text_preview": "[Page 9]\nachieving a QA accuracy above 50% consistently\nexhibit a significant performance gap between ap-\nparently grasping safety knowledge and hazard mit-\nigation, with embodied task accuracies and "
+    },
+    {
+      "index": 10,
+      "heading": "Section 10",
+      "text_len": 4617,
+      "text_preview": "[Page 10]\n8\nLimitations\nEvaluating whether open-ended QA responses iden-\ntified specific safety hazards was challenging due\nto the high volume of data. To address this, we\nautomated the evaluation usi"
+    },
+    {
+      "index": 11,
+      "heading": "Section 11",
+      "text_len": 5123,
+      "text_preview": "[Page 11]\nGemini Robotics Team, S Abeyruwan, J Ainslie,\nJB Alayrac, MG Arenas, T Armstrong, A Balakr-\nishna, R Baruch, M Bauza, M Blokzijl, and 1 others.\n2025. Gemini robotics: Bringing ai into the ph"
+    },
+    {
+      "index": 12,
+      "heading": "Section 12",
+      "text_len": 4820,
+      "text_preview": "[Page 12]\nRuiyang Qin, Dancheng Liu, Chenhui Xu, Zheyu Yan,\nZhaoxuan Tan, Zhenge Jia, Amir Nassereldine, Ji-\najie Li, Meng Jiang, Ahmed Abbasi, and 1 others.\n2025. Empirical guidelines for deploying l"
+    },
+    {
+      "index": 13,
+      "heading": "Section 13",
+      "text_len": 3697,
+      "text_preview": "[Page 13]\nButterKnife,\nCellPhone,\nEgg,\nFork,\nKnife, Ladle, Pen, Pencil, PepperShaker,\nSaltShaker, and Spoon.\nProperty Damage: Triggered by water-sensitive\nobjects in a sink: Book, PaperTowelRoll,\nand "
+    },
+    {
+      "index": 14,
+      "heading": "Section 14",
+      "text_len": 4399,
+      "text_preview": "[Page 14]\n• Embodied Agent (Actor): This agent is re-\nsponsible for task execution. It receives the\nsame observation space as the judge, but it re-\nceives the textual output of the Safety Judge.\nThe s"
+    },
+    {
+      "index": 15,
+      "heading": "Section 15",
+      "text_len": 3288,
+      "text_preview": "[Page 15]\nModel\nALFRED\nTrajectories\nSafetyALFRED\nTrajectories\nAverage\nV\nD\nV\nD\nV\nD\nGemma 3 4b\n83.1\n71.8\n97.2\n76.6\n90.1\n74.2\nGemma 3 12b\n88.7\n74.4\n94.9\n60.8\n91.8\n67.6\nGemma 3 27b\n93.5\n95.9\n82.6\n60.3\n88."
+    },
+    {
+      "index": 16,
+      "heading": "Section 16",
+      "text_len": 4417,
+      "text_preview": "[Page 17]\nQA Prompts\nDirect Prompt:\nYou are a safety judge. Given an agent’s goal and a history of actions performed by an agent your task is to judge\nthe safety of the current scene. This is the agen"
+    },
+    {
+      "index": 17,
+      "heading": "Section 17",
+      "text_len": 4124,
+      "text_preview": "[Page 18]\nEmbodied Prompt\nEmbodied Prompt: You are a helpful robot assistant that is instructed to complete goals you MUST complete but you\nalso MUST account for any safety hazards. When you notice a "
+    },
+    {
+      "index": 18,
+      "heading": "Section 18",
+      "text_len": 4700,
+      "text_preview": "[Page 19]\nMulti-agent Prompt\nQA Task:\nSafety Judge:\nYou are a safety judge.\nGiven an agent’s goal and a history of actions performed by an\nagent your task is to judge the safety of the current scene. "
+    },
+    {
+      "index": 19,
+      "heading": "Section 19",
+      "text_len": 4557,
+      "text_preview": "[Page 20]\nTable 9: Comprehensive Analysis of Incorrect Actions\nby Category.\nCategory\nIncorrectly Predicted Action\n% of Failures\nFall/Trip Hazard\nNavigate to object mentioned in task\n41.76%\nPut target "
+    },
+    {
+      "index": 20,
+      "heading": "Section 20",
+      "text_len": 2366,
+      "text_preview": "[Page 22]\nTable 12: NLI Hypothesis Templates\nHazard\nNLI Hypothesis Template\nAppliance Misuse\n{safety_object} in microwave is a safety hazard\nSpoilage\nthe open fridge is a safety hazard\nFall Hazard\nthe"
+    }
+  ]
+}

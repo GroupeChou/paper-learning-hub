@@ -1,0 +1,191 @@
+{
+  "paper_id": "2604.18584v1",
+  "title": "MathNet: a Global Multimodal Benchmark for Mathematical Reasoning and Retrieval",
+  "organization": "DeepSeek",
+  "publish_date": "2026-04-20",
+  "theme": "AI Agent",
+  "source_name": "DeepSeek arXiv query",
+  "source_url": "https://arxiv.org/abs/2604.18584v1",
+  "paper_url": "https://arxiv.org/pdf/2604.18584v1",
+  "summary": "Mathematical problem solving remains a challenging test of reasoning for large language and multimodal models, yet existing benchmarks are limited in size, language coverage, and task diversity. We introduce MathNet, a high-quality, larg...",
+  "priority": 936,
+  "total_chars": 93509,
+  "chunk_count": 24,
+  "image_paths": [
+    "assets/page-001-img-01.png",
+    "assets/page-001-img-02.png",
+    "assets/page-001-img-03.jpeg",
+    "assets/page-001-img-04.jpeg",
+    "assets/page-001-img-05.jpeg",
+    "assets/page-001-img-06.png",
+    "assets/page-001-img-07.png",
+    "assets/page-001-img-08.png",
+    "assets/page-001-img-09.png",
+    "assets/page-001-img-10.png",
+    "assets/page-001-img-11.png",
+    "assets/page-001-img-12.png",
+    "assets/page-001-img-13.jpeg",
+    "assets/page-001-img-14.png",
+    "assets/page-001-img-15.png",
+    "assets/page-001-img-16.png",
+    "assets/page-001-img-17.png",
+    "assets/page-001-img-18.png",
+    "assets/page-001-img-19.png",
+    "assets/page-001-img-20.png"
+  ],
+  "notes": [
+    "图片数量超过上限，仅保留前 20 张。",
+    "图片数量超过上限，仅保留前 20 张。",
+    "图片数量超过上限，仅保留前 20 张。",
+    "图片数量超过上限，仅保留前 20 张。",
+    "图片数量超过上限，仅保留前 20 张。",
+    "图片数量超过上限，仅保留前 20 张。",
+    "图片数量超过上限，仅保留前 20 张。"
+  ],
+  "chunks": [
+    {
+      "index": 1,
+      "heading": "Section 1",
+      "text_len": 3090,
+      "text_preview": "[Page 1]\nPublished as a conference paper at ICLR 2026\nMATHNET: A GLOBAL MULTIMODAL BENCHMARK\nFOR MATHEMATICAL REASONING AND RETRIEVAL\nShaden Alshammari1∗\nKevin Wen1∗\nAbrar Zainal3∗\nMark Hamilton1\nNavi"
+    },
+    {
+      "index": 2,
+      "heading": "Section 2",
+      "text_len": 4866,
+      "text_preview": "[Page 2]\nPublished as a conference paper at ICLR 2026\n1\nINTRODUCTION\nRecent large language models (LLMs) and large multimodal models (LMMs) have made rapid\nimprovements on mathematical reasoning bench"
+    },
+    {
+      "index": 3,
+      "heading": "Section 3",
+      "text_len": 5128,
+      "text_preview": "[Page 3]\nPublished as a conference paper at ICLR 2026\n2\nRELATED WORK\nMathematical problem solving has long been a core benchmark for evaluating AI reasoning capabili-\nties. Early efforts focused on te"
+    },
+    {
+      "index": 4,
+      "heading": "Section 4",
+      "text_len": 2739,
+      "text_preview": "[Page 4]\nPublished as a conference paper at ICLR 2026\n3\nDATASET AND BENCHMARK DESIGN\nMATHNET consists of Olympiad-level problems together with benchmarks in three tasks that eval-\nuates mathematical r"
+    },
+    {
+      "index": 5,
+      "heading": "Section 5",
+      "text_len": 4629,
+      "text_preview": "[Page 5]\nPublished as a conference paper at ICLR 2026\nText Extraction\nwith DotsOCR\nInput Booklets\nDocument \nSegmentation\nExtracted Text\nFormat Normalization\nwith GPT4.1\nProblem \nBlocks\nSolution \nBlock"
+    },
+    {
+      "index": 6,
+      "heading": "Section 6",
+      "text_len": 4230,
+      "text_preview": "[Page 6]\nPublished as a conference paper at ICLR 2026\n3.3\nRETRIEVAL IN MATHEMATICS\n3.3.1\nUNDERSTANDING DIFFERENT TYPES OF MATHEMATICAL SIMILARITY\nMathematical progress often depends on recognizing whe"
+    },
+    {
+      "index": 7,
+      "heading": "Section 7",
+      "text_len": 3798,
+      "text_preview": "[Page 7]\nPublished as a conference paper at ICLR 2026\nExample Conceptual Problem Pair from MathNet-RAG\nProblem A. [Chinese TST 2014] Show that there are no 2-tuples (x, y) of positive integers satisfy"
+    },
+    {
+      "index": 8,
+      "heading": "Section 8",
+      "text_len": 4140,
+      "text_preview": "[Page 8]\nPublished as a conference paper at ICLR 2026\nRetrieval-Augmented Problem Solving on MathNet-RAG. To assess the impact of retrieval on\ndownstream problem solving, we evaluate three settings. I"
+    },
+    {
+      "index": 9,
+      "heading": "Section 9",
+      "text_len": 4522,
+      "text_preview": "[Page 9]\nPublished as a conference paper at ICLR 2026\n4.3.2\nMATH-AWARE RETRIEVAL ON MA T HNE T-RE T R I E V E\nAs shown in Table\n4, Math-Aware Retrieval on MathNet-Retrieve remains highly chal-\nlenging"
+    },
+    {
+      "index": 10,
+      "heading": "Section 10",
+      "text_len": 4018,
+      "text_preview": "[Page 10]\nPublished as a conference paper at ICLR 2026\nRetrieval-Augmented Problem Solving Accuracy (%, ↑) on MathNet-RAG\nModel\nRD\nHuman Grading\nLLM Grading\n(2025)\nZero-shot\nEmbed-RAG\nExpert-RAG\nZero-"
+    },
+    {
+      "index": 11,
+      "heading": "Section 11",
+      "text_len": 4049,
+      "text_preview": "[Page 11]\nPublished as a conference paper at ICLR 2026\nWe are also grateful to the graders who generously volunteered their time to evaluate solutions and\nprovide feedback: Smbat Gogyan1, Dominik Bure"
+    },
+    {
+      "index": 12,
+      "heading": "Section 12",
+      "text_len": 4443,
+      "text_preview": "[Page 12]\nPublished as a conference paper at ICLR 2026\nDan Hendrycks, Collin Burns, Saurav Kadavath, Akul Arora, Steven Basart, Eric Tang, Dawn Song, and Jacob\nSteinhardt. Measuring mathematical probl"
+    },
+    {
+      "index": 13,
+      "heading": "Section 13",
+      "text_len": 4749,
+      "text_preview": "[Page 13]\nPublished as a conference paper at ICLR 2026\nHandong Zheng, Yumeng Li, Kaile Zhang, Liang Xin, Guangwei Zhao, Hao Liu, Jiayu Chen, Jie Lou, Jiyu\nQiu, Qi Fu, Rui Yang, Shuo Jiang, Weijian Luo"
+    },
+    {
+      "index": 14,
+      "heading": "Section 14",
+      "text_len": 4199,
+      "text_preview": "[Page 16]\nPublished as a conference paper at ICLR 2026\nSource\nYears\nCompetitions\nMongolia\n2010–2025\nMongolian Mathematical Olympiad; IMO TST; EGMO TST\nNetherlands\n2006–2025\nDutch Mathematical Olympiad"
+    },
+    {
+      "index": 15,
+      "heading": "Section 15",
+      "text_len": 2567,
+      "text_preview": "[Page 18]\nPublished as a conference paper at ICLR 2026\nB\nTAXONOMY OF TOPICS COMMONLY USED IN MATH OLYMPIAD\nWe provide the curated taxonomy used for labeling domains, subjects, topics, and subtopics. T"
+    },
+    {
+      "index": 16,
+      "heading": "Section 16",
+      "text_len": 3938,
+      "text_preview": "[Page 19]\nPublished as a conference paper at ICLR 2026\nSub-subtopic\nKey Concepts\nSequences / Series\nRecurrences, Charachteristic equations, monotonocity, boundedness,\nperiodicity, convergence and dive"
+    },
+    {
+      "index": 17,
+      "heading": "Section 17",
+      "text_len": 4517,
+      "text_preview": "[Page 21]\nPublished as a conference paper at ICLR 2026\nC\nDATASET EXAMPLES AND ADDITIONAL STATISTICS\nExample from MathNet-Solve\nProblem. Given positive integers m and n, find the smallest integer N (≥m"
+    },
+    {
+      "index": 18,
+      "heading": "Section 18",
+      "text_len": 2996,
+      "text_preview": "[Page 23]\nPublished as a conference paper at ICLR 2026\nExample from MathNet-Solve with figures\nProblem. Andrew and Olesya take turns cutting out either a 2 × 2 square or a 1 × 1 square from a 2 × 2n\nr"
+    },
+    {
+      "index": 19,
+      "heading": "Section 19",
+      "text_len": 3795,
+      "text_preview": "[Page 24]\nPublished as a conference paper at ICLR 2026\nLanguage\nEnglish\nPortuguese\nSpanish\nFrench\nItalian\nSerbian\nCount\n22909\n1320\n900\n868\n703\n650\nLanguage\nSlovenian\nGerman\nChinese\nRomanian\nKorean\nDut"
+    },
+    {
+      "index": 20,
+      "heading": "Section 20",
+      "text_len": 2483,
+      "text_preview": "[Page 25]\nPublished as a conference paper at ICLR 2026\nMathNet Sources\n(official problems/solutions)\nOther Benchmarks Sources\ne.g. Omni-MATH (ICLR 2025)\nFigure 4: MathNet is a collection of official O"
+    },
+    {
+      "index": 21,
+      "heading": "Section 21",
+      "text_len": 3156,
+      "text_preview": "[Page 27]\nPublished as a conference paper at ICLR 2026\nProblem Solving Accuracy (%, ↑) on MathNet-Solve-Test\nModel\nFull Set\nChinese\nEnglish\nFrench\nItalian\nPortuguese\nSlovenian\nSpanish\ngemini-3.1-pro\n7"
+    },
+    {
+      "index": 22,
+      "heading": "Section 22",
+      "text_len": 3557,
+      "text_preview": "[Page 28]\nPublished as a conference paper at ICLR 2026\nAccuracy (%, ↑) on MathNet-RAG: LLM vs. Human Expert Grading\nModel\nLLM Grading\nHuman Grading\nLLaMA-4\nDeepSeek-V3\nGPT-4.1\nGPT-4o\nLLM Avg.\nHuman Ex"
+    },
+    {
+      "index": 23,
+      "heading": "Section 23",
+      "text_len": 4967,
+      "text_preview": "[Page 29]\nPublished as a conference paper at ICLR 2026\n=====================================================================\n=====================================================================\nPROBL"
+    },
+    {
+      "index": 24,
+      "heading": "Section 24",
+      "text_len": 2887,
+      "text_preview": "[Page 31]\nPublished as a conference paper at ICLR 2026\n- \"final answer only\": problem only asks for a value/choice with no proof\nrequired.\n- \"proof and answer\": requires both reasoning and a final val"
+    }
+  ]
+}

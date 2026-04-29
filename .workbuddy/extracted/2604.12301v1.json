@@ -1,0 +1,90 @@
+{
+  "paper_id": "2604.12301v1",
+  "title": "Local-Splitter: A Measurement Study of Seven Tactics for Reducing Cloud LLM Token Usage on Coding-Agent Workloads",
+  "organization": "OpenAI",
+  "publish_date": "2026-04-14",
+  "theme": "AI Agent",
+  "source_name": "OpenAI arXiv query",
+  "source_url": "https://arxiv.org/abs/2604.12301v1",
+  "paper_url": "https://arxiv.org/pdf/2604.12301v1",
+  "summary": "We present a systematic measurement study of seven tactics for reducing cloud LLM token usage when a small local model can act as a triage layer in front of a frontier cloud model. The tactics are: (1) local routing, (2) prompt compressi...",
+  "priority": 956,
+  "total_chars": 40519,
+  "chunk_count": 12,
+  "image_paths": [],
+  "notes": [],
+  "chunks": [
+    {
+      "index": 1,
+      "heading": "Section 1",
+      "text_len": 2900,
+      "text_preview": "[Page 1]\nLocal-Splitter: A Measurement Study of Seven Tactics for Reducing\nCloud LLM Token Usage on Coding-Agent Workloads\nJustice Owusu Agyemang1,2,3∗,\nJerry John Kponyo3†,\nElliot Amponsah3‡,\nGodfred"
+    },
+    {
+      "index": 2,
+      "heading": "Section 2",
+      "text_len": 3255,
+      "text_preview": "[Page 2]\n• A reference implementation that is vendor-agnostic at both ends — any Ollama-compatible\nlocal model and any OpenAI-compatible cloud endpoint — and exposes both an MCP interface\nand an OpenA"
+    },
+    {
+      "index": 3,
+      "heading": "Section 3",
+      "text_len": 3542,
+      "text_preview": "[Page 3]\nas anything requiring multi-step reasoning, ambiguous requirements, or multi-file refactoring. The\nclassifier runs at temperature 0 with a 3-token output budget. On parse failure, the request"
+    },
+    {
+      "index": 4,
+      "heading": "Section 4",
+      "text_len": 3324,
+      "text_preview": "[Page 4]\nRisks.\nIf the local draft is poor, the cloud spends more tokens correcting it than it would have\nspent writing from scratch. Additionally, the review prompt prepends the original conversation"
+    },
+    {
+      "index": 5,
+      "heading": "Section 5",
+      "text_len": 2422,
+      "text_preview": "[Page 5]\n4\nSystem Design\nLocal-Splitter is a single process that exposes two interfaces to the outside world:\n1. An MCP server over stdio [3], for agents that speak the Model Context Protocol natively"
+    },
+    {
+      "index": 6,
+      "heading": "Section 6",
+      "text_len": 2743,
+      "text_preview": "[Page 6]\n5\nEvaluation Setup\n5.1\nWorkloads\nWe evaluate on four workload classes, each containing 10 synthetic samples matching the statistics\nof real coding-agent sessions. Samples are generated from p"
+    },
+    {
+      "index": 7,
+      "heading": "Section 7",
+      "text_len": 3619,
+      "text_preview": "[Page 7]\nSecondary metrics (per-tactic).\nRouting accuracy (T1), compression ratio (T2), cache hit rate\n(T3), draft acceptance rate (T4), diff shrink factor (T5), intent extraction F1 (T6), and batch f"
+    },
+    {
+      "index": 8,
+      "heading": "Section 8",
+      "text_len": 4923,
+      "text_preview": "[Page 9]\nTable 2: Cloud token savings (%) for tactic combinations. Mean of two runs; individual runs varied\nby ±1–5 pp.\nSubset\nWL1 (edit)\nWL2 (explain)\nWL3 (chat)\nWL4 (RAG)\nT1+T3\n33.7%\n70.4%\n57.4%\n36."
+    },
+    {
+      "index": 9,
+      "heading": "Section 9",
+      "text_len": 3002,
+      "text_preview": "[Page 11]\n7.2\nRecommendations for agent vendors\nBased on our results (Tables 1–2, Figure 4), we offer concrete deployment guidance:\n1. Start with T1+T2. This combination is the best two-tactic default"
+    },
+    {
+      "index": 10,
+      "heading": "Section 10",
+      "text_len": 4741,
+      "text_preview": "[Page 12]\nT6 intent extraction parse failures.\nT6 requires the local model to output a structured JSON\nobject. In our runs, Llama 3.2 3B frequently returned prose or Markdown-fenced JSON instead of\nra"
+    },
+    {
+      "index": 11,
+      "heading": "Section 11",
+      "text_len": 3145,
+      "text_preview": "[Page 14]\n• Cloud model (eval proxy): Gemma 3 4B via Ollama on the same machine (to avoid network\nvariance). Production deployments would target a remote OpenAI-compatible endpoint.\n• OS: macOS 15 (Da"
+    },
+    {
+      "index": 12,
+      "heading": "Section 12",
+      "text_len": 2881,
+      "text_preview": "[Page 15]\n[12] Yaniv Leviathan, Matan Kalman, and Yossi Matias. Fast inference from transformers via\nspeculative decoding. In Proceedings of the 40th International Conference on Machine Learning,\nvolu"
+    }
+  ]
+}

@@ -1,0 +1,1844 @@
+[Page 1]
+ReflectMT: Internalizing Reflection for Efficient and High-Quality Machine
+Translation
+Kunquan Li1*, Yingxue Zhang2, Fandong Meng2, Jinsong Su1
+1School of Informatics, Xiamen University, China
+2WeChat AI, Tencent Inc, China
+likunquan@stu.xmu.edu.cn, jssu@xmu.edu.cn
+{yxuezhang,fandongmeng}@tencent.com
+Abstract
+Recent years have witnessed growing interest
+in applying Large Reasoning Models (LRMs)
+to Machine Translation (MT). Existing ap-
+proaches predominantly adopt a “think-first-
+then-translate” paradigm. Although explicit
+reasoning trajectories significantly enhance
+translation quality, they incur prohibitive in-
+ference costs and latency. To address these
+limitations, we propose ReflectMT, a two-stage
+reflection internalization algorithm for machine
+translation that employs a “translate-first-think-
+later” paradigm. Our approach develops the
+model’s “translate–reflect–refine” capability
+through reinforcement learning. In the first
+stage, we cultivate the model’s capacity for
+high-quality reflection and refinement, thereby
+enhancing its semantic comprehension and
+task-specific knowledge. In the second stage,
+we train the model to internalize the knowl-
+edge acquired during reflection. As a result,
+during inference, ReflectMT operates in a di-
+rect translation mode, producing high-quality
+translations on the first attempt without any ex-
+plicit reasoning steps. Experimental results on
+datasets such as WMT24 demonstrate that our
+model’s first-pass translations during inference
+outperform multi-step reasoning LRMs such
+as DeepSeek-R1 in both automatic metrics and
+GPT-based evaluation, achieving a 2.16-point
+improvement in GPT-based translation quality
+evaluation while reducing token consumption
+by 94.33%.
+1
+Introduction
+In recent years, Large Reasoning Models (LRMs),
+such as OpenAI-o1 (OpenAI, 2024) and DeepSeek-
+R1 (Guo et al., 2025), have demonstrated powerful
+capabilities in complex tasks such as mathemat-
+ics, programming, and logical reasoning. These
+models typically leverage long Chain-of-Thought
+* Work was done when Kunquan Li was interning at
+WeChat AI, Tencent Inc, China.
+(CoT) processes, exploring different solution paths
+through reasoning, self-verification, and iterative
+refinement before generating the final answer.
+Inspired by these advances, researchers have be-
+gun exploring the introduction of long CoT into
+Machine Translation (MT). We categorize these
+methods as the “pre-thinking” paradigm, wherein
+the model performs explicit reasoning before gener-
+ating the translation. For instance, Marco-o1 (Zhao
+et al., 2024) preliminarily validated the effective-
+ness of long CoT in slang translation with brief
+examples; Wang et al. (2024a) trained the DRT
+model through supervised fine-tuning, demonstrat-
+ing the potential of long CoT in literary translation;
+ExTrans (Wang et al., 2025b) further proposed an
+exemplar-enhanced reinforcement learning frame-
+work, achieving synergistic improvement of rea-
+soning chains and translation quality. However, al-
+though the explicit reasoning process significantly
+enhances the model’s ability to handle difficult
+translation tasks, the “pre-thinking” paradigm re-
+quires the model to generate explicit and lengthy
+chains of thought during the inference stage, re-
+sulting in substantial computational overhead and
+latency, which limits its application.
+To address the above limitations, this paper pro-
+poses a novel “post-thinking” algorithm for ma-
+chine translation, named ReflectMT. Unlike the
+“think-first-then-translate” paradigm, our core moti-
+vation is to leverage the reflection mechanism to en-
+hance model capabilities during training, enabling
+the direct generation of high-quality translations
+during inference without incurring additional com-
+putational costs. Specifically, we adopt a “generate-
+reflect-refine” workflow during the training stage:
+the model first generates an initial translation, then
+initiates a structured reflection process to critically
+evaluate it, and finally generates a refined transla-
+tion. Different from free-form reflection in general
+tasks, we design a multi-dimensional structured re-
+flection process tailored to the specific needs of MT
+1
+arXiv:2604.19144v1  [cs.CL]  21 Apr 2026
+
+[Page 2]
+[Source Sentence] The company's pivot to a subscription-based model, while initially met with resistance from legacy customers, 
+ultimately drove a 340% increase in customer lifetime value and reduced churn by half, demonstrating that sometimes short-term pain 
+is necessary for long-term sustainable growth.
+[Model Response] <answer>该公司转向订阅模式，虽然最初遭到老客户的反对，但最终推动客户终身价值增长了340%，并将流失率
+减少了一半，这表明有时短期痛苦对于长期可持续增长是必要的。</answer>
+<reflection> Accuracy check:
+The translation of ‘pivot’ as‘ 转向 ’is somewhat awkward, but in the context of business,‘ 战略转型 ’is more accurate; The translation of 
+‘老客户’ as‘ old customers’ is not precise enough, it should be‘ 原有客户 ’ or ’ 存量客户‘; Churn “translated as” 流失率 “is correct, but it 
+can be more professional.
+Integrity:
+The basic information has been conveyed, but the “subscription based model” can be more clearly defined as a “订阅制模式"; Lack of 
+emphasis on the progressive tone of 'ultimate’.
+definition:
+Overall readability, but lack of professionalism in business terminology; The expression of ‘短期痛苦’ is somewhat colloquial, while ‘短期
+阵痛’ are more in line with the style of commercial texts.
+Severity of the problem: Moderate - does not affect basic understanding, but there is room for improvement in professionalism and 
+accuracy
+Improvement direction:
+Use more professional business terms; Enhance the sense of progression in tone; Optimize the formality of expression </reflection>
+<need_revision>是</need_revision>
+<final_answer> 该公司向订阅制模式的战略转型，尽管最初遭到存量客户的抵制，但最终使客户终身价值提升了340%，并将客户流失
+率降低了一半，充分证明了短期阵痛往往是实现长期可持续增长的必经之路。 </final_answer>
+Figure 1: Training vs. Inference Paradigm of ReflectMT. During training, the model generates the complete
+reflective translation process, including initial translation (in black), reflection analysis, revision decision, and final
+translation (in gray). During inference, while the model retains full reflective capabilities, we employ an early
+stopping strategy to output only the initial translation (in black).
+(covering error identification, ambiguity analysis,
+etc.) and construct a high-quality reflection dataset
+through multi-agent collaboration.
+Furthermore, to achieve internalization of re-
+flection capabilities, we propose a two-stage pro-
+gressive training strategy based on Reinforcement
+Learning (RL). This strategy mirrors the skill devel-
+opment of human translators: novices rely on ex-
+plicit reflection and revision, whereas accumulated
+experience allows these processes to be internal-
+ized, enabling the direct generation of high-quality
+translations. In the first stage (reflection capability
+establishment), we guide the model to learn the
+complete “translate-reflect-refine” process through
+carefully designed reward functions. In the second
+stage (capability internalization and transfer), we
+guide the model to integrate the acquired reflection
+knowledge into the initial translation process by
+reinforcing the reward signal for direct translation.
+This training paradigm achieves the transformation
+from “explicit reflection” to “implicit capability”,
+enabling the model to directly output high-quality
+translations during inference.
+Experimental results on multiple datasets, in-
+cluding WMT24, demonstrate that our method out-
+performs representative strong baseline models,
+including DeepSeek-R1, in both automatic met-
+rics and GPT-based evaluation. Notably, under the
+setting where explicit reflection is not performed
+during the inference stage, our model achieves a
+2.16-point improvement in GPT-based evaluation
+compared to the version executing the complete
+reflection process, while reducing token consump-
+tion by 94.33%, truly achieving dual enhancement
+of translation efficiency and quality.
+The main contributions of this paper are summa-
+rized as follows:
+• We introduce a “post-thinking” reflection
+mechanism into neural machine translation,
+designing a multi-dimensional structured re-
+flection process tailored to MT tasks that en-
+ables systematic evaluation and iterative im-
+provement of translations.
+• We propose a reflection internalization train-
+ing algorithm based on RL, which internal-
+izes reflection knowledge into the model’s
+direct generation capability through a two-
+stage training strategy, significantly improv-
+ing translation quality while eliminating ad-
+ditional computational overhead during infer-
+ence.
+• We construct a high-quality MT reflection
+dataset via multi-agent collaboration, provid-
+ing a robust data foundation for learning com-
+plete reasoning chains. Extensive ablation
+studies on the dataset validate the effective-
+ness of our proposed framework.
+2
+
+[Page 3]
+Src: “Local fall-outs turning into shop thy neighbour.“, Round1: {Translation:”局部问题
+演变成邻家店铺。”, Reflection:”…”, Score:”30”}., Round2:{Translation:”…”, 
+Reflction:”…”, Score:”74”}…
+Data
+Refine
+ Loop
+Reflection
+Reflection
+Translation Quality Analysis: … 
+“shop thy neighbour…“turning a blind 
+eye rather than… “邻家店铺” …
+Score:30
+Reflection
+Translation
+局部冲突演变为以邻为壑的局面。
+Translation
+Round1
+Reflection
+Reflection
+Translation Quality Analysis: … is 
+translated very accurately
+Score:92
+Reflection
+Final Iteration
+Data Construction
+Reflective Internalization
+(a)
+(b)
+Local fall-outs turning 
+into shop thy neighbour.
+Source Sentence
+局部问题演变成邻家店
+铺。
+Translation
+Translator
+Translator
+Reflector
+Qwen2.5-
+7b-instruct
+ReflectMT-
+SFT
+Cold Start
+Structured
+Translation
+Ability
+ReflectMT-
+SFT
+ReflectMT-
+Stage1
+GRPO Train
+Reflection
+Optimization
+ReflectMT-
+Stage1
+ReflectMT-
+Stage2
+GRPO Train
+Reflection
+Internalization
+Stage II
+Stage I
+Figure 2: Overview of the Reflection Internalization Framework. (a) Data Construction: A multi-agent system
+synthesizes training data with reflection chains, including initial translations and refinements. (b) Reinforcement
+Learning Strategy: Stage 1 establishes structured reflection and optimization capabilities, while Stage 2 internalizes
+reflection knowledge for effective first-pass translation during inference.
+2
+Methodology
+2.1
+Overview
+We present our Reflection Internalization frame-
+work, which comprises three core modules: (1)
+constructing training data with complete reflection
+chains via multi-agent collaboration (Section 2.2);
+(2) designing multi-dimensional reward functions
+to jointly optimize format compliance, translation
+quality, reflection quality, and translation improve-
+ment (Section 2.3.1); and (3) employing a two-
+stage Reinforcement Learning (RL) strategy to first
+establish and then internalize reflection capabilities
+(Sections 2.3.2 and 2.3.3). The ultimate objective
+of our framework is to leverage explicit reflection
+steps during training to build cognitive capabili-
+ties, and subsequently internalize them, enabling
+the model to generate high-quality translations in a
+single forward pass during inference without rea-
+soning overhead.
+2.2
+Data Construction
+High-quality reflective data is crucial for equipping
+models with explicit reasoning capabilities. How-
+ever, existing machine translation datasets typically
+only contain parallel corpora and lack intermediate
+reasoning steps. To address this issue, we designed
+an iterative multi-agent collaboration system that
+automatically constructs datasets containing com-
+plete reflection chains through dialogues between
+the Translator and the Reflector.
+As illustrated in Figure 2, for each pre-collected
+sentence (denoted as x), we adopt a dual-agent
+framework for translation. The synthesis process is
+as follows:
+(1)Initial Translation: The Translator generates an
+initial translation of the source sentence x, denoted
+as y0 = Translator(x).
+(2)Reflective Evaluation:
+The Reflector criti-
+cally evaluates y0 to provide a multi-dimensional
+assessment.
+This includes a quality score
+r0 = Reflector_score(x, y0) ∈[0, 100] based
+on predefined criteria (such as semantic accu-
+racy, cultural adaptability, and fluency), along-
+side structured refinement suggestions f0
+=
+Reflector_suggest(x, y0, r0), that target specific
+lexical and structural deficiencies.
+(3)Iterative Refinement Loop: The agents col-
+laboratively optimize the translation through a
+feedback loop.
+At each iteration k (k ≥1),
+the Translator generates an updated translation
+yk = Translator(x, yk−1, fk−1, rk−1). The Reflec-
+tor then returns a new score rk and updated sug-
+gestions fk. This loop terminates when the score
+3
+
+[Page 4]
+reaches a satisfactory threshold (rk ≥θ) or the
+maximum iteration limit is reached (k ≥Kmax).
+The sequence {(yk, rk, fk)}K
+k=0 forms a complete
+reflective translation chain.
+Data filtering and hyperparameter settings are
+detailed in Appendix A.
+2.3
+Progressive Reflection Internalization
+Our training paradigm is inspired by the cognitive
+development of professional human translators: the
+ability to produce high-quality first-pass transla-
+tions stems from internalizing long-accumulated
+“deliberate reflection” experiences into intuitive
+competence.
+Based on this insight, we design
+a two-stage progressive Reinforcement Learning
+(RL) strategy. Stage 1 trains the model to mas-
+ter the explicit “translate-reflect-refine” pipeline,
+while Stage 2 shifts the focus to the initial transla-
+tion, forcing the model to internalize the acquired
+reflection knowledge into its first-pass generation.
+2.3.1
+Reward Modeling
+To implement our RL algorithm, we design four
+reward components. Given a source sentence x, we
+require the model to generate outputs adhering to a
+strictly defined structural template:
+<answer>yinit</answer> <reflection>frefl </re-
+flection> <need_revision>vrev</need_revision>
+<final_answer>yfin</final_answer>.
+We employ DeepSeek-V3 (DeepSeek-AI et al.,
+2025) as an LLM-as-a-Judge, denoted as Jv3(·),
+to score texts on a 0-100 scale.
+Format Reward (rform). We use regular expres-
+sions to verify whether the output strictly contains
+all required XML tags in the correct order.
+rform =
+(
+1
+if format is correct
+0
+otherwise
+(1)
+Reflection Quality Reward (rrefl). We evaluate
+the reflection content frefl based on the accuracy of
+problem identification and the actionability of the
+suggestions:
+rrefl = Jv3(x, yinit, frefl)
+100
+(2)
+Translation Quality Scores (sinit and sfin). We
+score the quality (e.g., semantic accuracy, fluency)
+of both the initial and final translations: sinit =
+Jv3(x, yinit) and sfin = Jv3(x, yfin). To facilitate
+a smooth transition from explicit reflection to im-
+plicit internalization, the formulation of the Trans-
+lation Quality Reward (rtrans) dynamically adapts
+according to the training stage (detailed in Sections
+2.3.2 and 2.3.3).
+Reflection Improvement Reward (rimp). To
+encourage meaningful refinement, we define the
+score difference ∆s = sfin −sinit and design a
+piecewise reward:
+rimp =
+
+
+
+
+
+1
+if ∆s ≥η
+µ × ∆s
+if 0 < ∆s < η
+0
+if ∆s ≤0
+(3)
+where µ and η are predefined hyperparameters.
+Total Reward (R).
+The total reward is a
+weighted sum of the aforementioned components:
+R=wformrform + wtransrtrans + wreflrrefl + wimprimp
+(4)
+where wform, wtrans, wrefl, wimp denote the corre-
+sponding weights assigned to each reward compo-
+nent. (see Appendix B for detailed hyperparameter
+settings).
+2.3.2
+Stage 1: Reflection Capability
+Establishment
+In Stage 1, our objective is for the model to mas-
+ter the complete reflective translation task. We
+use Qwen2.5-7B-Instruct (Yang et al., 2024) as
+the base model and perform a cold-start Super-
+vised Fine-Tuning (SFT) via Low-Rank Adapta-
+tion (LoRA) (Hu et al., 2021), leveraging the data
+constructed in Section 2.2, enabling the model to
+generate the structured output format.
+Subsequently, we apply the GRPO (Shao et al.,
+2024) algorithm. In this stage, we expect the model
+to produce a reasonable initial translation and a
+highly refined final translation. Therefore, the trans-
+lation quality reward for Stage 1 is defined as the
+average of the initial and final translation scores:
+rstage1
+trans = sinit + sfin
+200
+(5)
+Given a source sentence x, GRPO samples n
+generations {g1, . . . , gn} from the policy π. We
+compute the Stage 1 total reward ri for each gi
+using Equation 4. GRPO optimizes the policy π′
+by maximizing:
+1
+n
+n
+X
+i=1
+"
+min
+
+ρiAi, clip(ρi, 1 −ϵ, 1 + ϵ)Ai
+
+−βDKL
+ π′πref
+
+#
+(6)
+4
+
+[Page 5]
+where ρi =
+π′(gi|x)
+π(gi|x) , πref is the cold-start SFT
+model, and ϵ, β are hyperparameters. The advan-
+tage Ai is computed by normalizing the rewards:
+Ai = ri −mean({r1, r2, · · · , rn})
+std({r1, r2, · · · , rn})
+.
+(7)
+2.3.3
+Stage 2: Capability Internalization and
+Transfer
+In Stage 2, we shift the training focus to the quality
+of the initial translation. To force the model to inter-
+nalize the reflection knowledge acquired in Stage
+1 into its first-round generation, we introduce two
+critical modifications to the reward mechanism.
+First, the translation quality reward is solely de-
+termined by the initial translation score, disregard-
+ing the final translation:
+rstage2
+trans = sinit
+100
+(8)
+Second, we adjust the weight configuration of
+the total reward by significantly increasing the
+translation weight wnew
+trans and correspondingly de-
+creasing the improvement weight wnew
+imp. However,
+the model is still required to output the full struc-
+tured tags during training to maintain RL stability
+and prevent catastrophic forgetting of the reasoning
+format. This reward restructuring forces the model
+to produce a near-perfect translation on its very
+first attempt (yinit), thereby reducing its reliance on
+subsequent reflection steps.
+Inference Phase.
+Owing to this internaliza-
+tion mechanism, during inference, we employ
+an early stopping strategy that terminates gener-
+ation upon detecting the </answer> token. The
+model directly outputs high-quality first-pass trans-
+lations, completely bypassing <reflection>
+and <final_answer>. This effectively elimi-
+nates the computational overhead and latency asso-
+ciated with explicit long reasoning chains.
+3
+Experiments
+3.1
+Experimental Setups
+Data.
+We constructed a reflective transla-
+tion dataset specifically designed for English-to-
+Chinese machine translation, with the data volume
+shown in Table 4. Each sample comprises the
+source sentence, the initial translation, the reflec-
+tive analysis, and the final translation. In addition,
+we used official test sets from WMT231, WMT242,
+1https://www2.statmt.org/wmt23/
+translation-task.html
+2https://www2.statmt.org/wmt24/
+translation-task.html
+and FLORES-200 (Team et al., 2022) to evaluate
+the model’s generalization ability. Comprehensive
+dataset statistics and qualitative examples are pro-
+vided in Appendix A.
+Metrics.
+Following Wang et al. (2024a), we
+primarily employed the evaluation metric GRF
+(GPT Reference-Free) to assess the translation re-
+sults of the model. GRF evaluates translations
+without requiring human references.
+The eval-
+uation prompt is detailed in Appendix B. Addi-
+tionally, we reported two widely used semantic-
+level evaluation metrics based on pre-trained mod-
+els: COMETKIWI-XL(CK) (Rei et al., 2023) and
+MetricX-24(MX24) (Juraska et al., 2024). In terms
+of efficiency, we evaluate using the number of to-
+kens, calculated uniformly as “average number of
+output tokens per sentence”.
+Backbones.
+We use Qwen2.5-7b as our base
+model. For detailed training information, please
+refer to Appendix C.
+3.2
+Baselines
+To comprehensively evaluate the performance of
+our model, we selected three categories of baseline
+models, covering general large language models,
+reasoning-based large models, and specialized ma-
+chine translation models.
+General LLMs. We use Llama3.1-8B (Grattafiori
+et al., 2024), Qwen2.5-7B, Qwen2.5-14B (Yang
+et al., 2024), and GPT-4o (OpenAI, 2024) (see
+results in Appendix E) as baselines.
+LRMs. We use Marco-o1-7B (Zhao et al., 2024),
+QwQ-32B (Qwen, 2024), DeepSeek-R1 (Guo et al.,
+2025), and Qwen3-8B (Yang et al., 2025) as base-
+lines.
+Specialized MT models. We train an adaptive pre-
+thinking baseline based on Qwen2.5-7B-Instruct
+(Appendix D). We also include DRT-7B (Wang
+et al., 2024a), DeepTrans-7B (Wang et al., 2025a),
+and ExTrans-7B (Wang et al., 2025b), which are
+fine-tuned on MetaphorTrans (Wang et al., 2024a)
+for literary translation and follow a “think-first-
+then-translate” paradigm.
+To ensure a rigorous and equitable comparison,
+we additionally evaluated the baseline models un-
+der a “translate-reflect-refine” setting, denoted as
+w/ refl. Specifically, during inference, we apply an
+identical structured reflective prompt to the base-
+lines. Notably, both our method and the baselines
+demonstrate perfect compliance with this format,
+consistently outputting the initial translation, reflec-
+5
+
+[Page 6]
+Model
+Our
+WMT23
+WMT24
+FLORES-200
+GRF
+MX24
+CK
+Token
+GRF
+MX24
+CK
+Token
+GRF
+MX24
+CK
+Token
+GRF
+MX24
+CK
+Token
+Qwen-7B-Instruct
+73.52
+2.7
+76.43
+33.08
+75.54
+2.65
+78.83
+28.33
+69.51
+3.23
+76.51
+39.37
+77.82
+2.37
+82.09
+25.69
+Qwen2.5-14B
+74.21
+2.65
+77.02
+29.06
+83.69
+2.17
+80.67
+31.14
+77.63
+2.77
+78.81
+43.38
+85.83
+1.75
+84.18
+29.59
+Qwen2.5-14B(w/ refl)
+79.08
+2.58
+77.21
+188.44
+88.48
+2.07
+80.85
+193.38
+85.33
+2.63
+79.29
+208.86
+88.19
+1.67
+84.47
+183.86
+Llama3.1-8B
+62.19
+3.2
+74.98
+39.18
+75.35
+2.58
+79.29
+31.71
+65.57
+3.46
+75.95
+52.34
+75.82
+2.2
+82.49
+46.87
+Qwen3-8B
+79.54
+2.53
+77.9
+628.63
+88.2
+2
+81.18
+588.59
+82.56
+2.59
+79.58
+654.06
+89.49
+1.61
+84.64
+612.31
+Qwen3-8B(w/ refl)
+81.78
+2.42
+78.03
+863.12
+89
+2
+81.24
+738.92
+85.92
+2.51
+79.66
+786.63
+90.78
+1.67
+84.72
+726.28
+Marco-o1-7B
+68.43
+2.9
+75.8
+489.24
+79.58
+2.38
+79.42
+548.34
+74.67
+2.97
+77.35
+584.3
+82.72
+1.86
+83.5
+535.6
+Marco-o1-7B(w/ refl)
+75.09
+2.84
+76.07
+731.71
+85.34
+2.26
+80.03
+725.51
+81.88
+2.88
+78.18
+763.97
+86.84
+1.86
+83.55
+720.18
+DeepSeek-R1
+78
+3.03
+76.5
+541.88
+88.37
+2.06
+79.39
+593.12
+84.03
+2.64
+77.93
+605.42
+90.23
+1.8
+83.17
+783.2
+DeepSeek-R1(w/ refl)
+81.15
+2.5
+76.67
+659.83
+89.79
+1.93
+81.04
+1029.68
+85.61
+2.56
+79.28
+1069.07
+90.5
+1.56
+84.8
+982.33
+QwQ-32B
+79.5
+2.22
+77.77
+523.72
+85.51
+2.79
+78.59
+632.56
+78.9
+3.03
+74.82
+684.29
+89.03
+2.19
+82.84
+547.19
+QwQ-32B(w/ refl)
+81.65
+2.16
+77.97
+1063.01
+87.17
+2.6
+78.33
+1136.59
+84.47
+2.98
+77.61
+1102
+89.86
+2.11
+82.94
+1007.71
+DeepTrans-7B
+75
+3.29
+72.62
+386.66
+78.23
+2.61
+77.12
+2018.96
+76.22
+2.99
+77.39
+2581.52
+82.36
+2.58
+81.92
+707.06
+DRT-7B
+75.69
+2.93
+75.48
+478.99
+79.7
+2.54
+78.87
+479.64
+76.39
+3
+77.4
+520.03
+85.15
+2.22
+82.85
+463.02
+ExTrans-7B
+78.95
+2.33
+77.63
+979.08
+81.83
+2.17
+78.96
+1547.55
+81.7
+2.72
+77.51
+1957.79
+86.64
+1.82
+82.89
+1232.43
+Qwen-7B-Adapt-LoRA
+76.22
+2.63
+77.11
+51.3
+82.15
+2.13
+80.55
+150.15
+76.59
+2.57
+78.74
+183.75
+85.65
+1.6
+83.22
+139.48
+Qwen-7B-Adapt-RL†
+79.81
+2.27
+77.62
+56.29
+83.7
+1.73
+80.77
+192.73
+79.4
+2.15
+79.68
+239.31
+86.53
+1.37
+84.56
+172.99
+Qwen-7B-Full-RL‡
+78.59
+2.32
+77.43
+127.47
+82.89
+1.74
+80.71
+201.31
+79.92
+2.16
+79.67
+245.99
+86.29
+1.35
+84.71
+187.63
+ReflectMT-SFT(Cold Start)
+76.35
+2.65
+76.7
+23.25
+86.01
+2.21
+80.35
+25.94
+80.82
+2.73
+79.12
+37.57
+87.53
+1.7
+84.24
+24.09
+ReflectMT-Stage1(Our)
+79.73
+2.37
+77.45
+29.41
+87.89
+1.82
+80.78
+28.91
+83.39
+2.49
+79.41
+41.39
+89.32
+1.45
+84.39
+24.88
+ReflectMT-Stage2(Our)
+82.55
+2
+78.05
+30.73
+89.48
+1.7
+81.18
+30.67
+86.16
+2.1
+79.86
+47.57
+91.42
+1.33
+84.72
+29.1
+Table 1: Experimental results in English-to-Chinese translation. Bold and underlined values denote the best and
+second-best scores, respectively. † indicates Qwen with adaptive thought, while ‡ indicates full thought.
+0
+40
+80
+120
+160
+200
+240
+280
+320
+330
+Training Steps
+0
+100
+200
+300
+400
+500
+600
+Difficulty Modify
+578
+502
+461
+382
+247
+203
+348
+174
+65
+14
+Difficulty Modify
+(a) Number of Modifications
+0
+40
+80
+120
+160
+200
+240
+280
+320
+330
+Training Steps
+78
+79
+80
+81
+82
+83
+Accuracy (%)
+79.73
+80.15
+81.14
+81.81
+81.93
+82.15
+81.67
+82.21
+82.40
+82.55
+Accuracy
+(b) Accuracy
+0
+40
+80
+120
+160
+200
+240
+280
+320
+330
+Training Steps
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+Divergence
+0.78
+0.54
+0.24
+0.11
+0.13
+0.02
+0.33
+0.16
+0.03
+0.00
+Divergence
+(c) Divergence
+0
+40
+80
+120
+160
+200
+240
+280
+320
+330
+Training Steps
+0
+50
+100
+150
+200
+250
+300
+Count
+Hard
+Medium
+Easy
+(d) Modifications by Difficulty
+Figure 3: Training Dynamics: As the training steps increase (a) indicates the number of refinements; (b) represents
+the GRF score; (c) illustrates the score difference between initial and final translations; (d) shows the number of
+refinements for tasks of varying difficulty.
+tive analysis, and final translation without excep-
+tion.
+3.3
+Main Result
+Our ReflectMT models employ a direct translation
+mode (without reflection mechanisms) during in-
+ference. Experimental results demonstrate that Re-
+flectMT achieves substantial improvements across
+all evaluation metrics. To comprehensively validate
+its effectiveness, we conduct comparative analyses
+from four perspectives:
+Comparison with general LLMs.
+As shown
+in Table 1, our optimal model ReflectMT-Stage2
+achieves a GRF score of 82.55 on our dataset, rep-
+resenting a 12.3% improvement over the baseline
+model Qwen2.5-7B-Instruct (73.52). For MetricX-
+24 and CometKiwi metrics, our method relative
+improvements of 26.0% and 2.1%, respectively.
+Notably, our model consumes an average of 30.73
+tokens per sample during inference, nearly iden-
+tical to the non-reflective general LLM (33.08 to-
+kens/sample), introducing negligible additional in-
+ference overhead.
+Comparison with strong LRM baselines. Our
+model demonstrates superior performance over
+strong LRMs, outperforming QwQ-32B (79.50)
+and DeepSeek-R1 (78.00) by 3.05 and 4.55 GRF
+points, respectively. To ensure a rigorous com-
+parison, we also evaluated these baselines in a
+“translate-reflect-refine” mode. While this explicit
+reflection universally improves their translation
+quality (e.g., DeepSeek-R1 w/ refl improves to
+81.15), it necessitates generating lengthy chains
+of thought, resulting in substantially higher token
+consumption (e.g., DeepSeek-R1 consumes 541.88
+tokens/sample, 17× that of our model). In contrast,
+our model, built upon the compact Qwen2.5-7B
+backbone, internalizes this reflection capability to
+generate high-quality translations directly, offering
+significant advantages in both parameter scale and
+computational efficiency.
+Comparison with MT-specialized models. Com-
+pared to existing reasoning models specialized for
+machine translation, our method achieves optimal
+performance across all datasets and evaluation met-
+rics. Relative to ExTrans-7B (78.95), our method
+6
+
+[Page 7]
+Model
+Our
+WMT23
+WMT24
+FLORES-200
+GRF
+MX24
+CK
+Token
+GRF
+MX24
+CK
+Token
+GRF
+MX24
+CK
+Token
+GRF
+MX24
+CK
+Token
+ReflectMT-SFT-initial
+76.35
+2.65
+76.7
+23.25
+86.01
+2.21
+80.35
+25.94
+80.82
+2.73
+79.12
+37.57
+87.53
+1.7
+84.24
+24.09
+ReflectMT-SFT-final
+77.26
+2.63
+77.32
+297.51
+86.05
+2.16
+80.87
+273.78
+83.15
+2.69
+79.42
+323.75
+87.83
+1.69
+84.3
+248.34
+ReflectMT-Stage1-initial
+79.73
+2.37
+77.45
+29.41
+87.89
+1.82
+80.78
+28.91
+83.39
+2.49
+79.41
+41.39
+89.32
+1.45
+84.39
+24.88
+ReflectMT-Stage1-final
+80.51
+2.23
+77.81
+261.25
+88.46
+1.87
+80.99
+239.15
+84.55
+2.24
+79.51
+298.27
+90.06
+1.39
+84.5
+322.28
+ReflectMT-Stage2-initial
+82.55
+2
+78.05
+30.73
+89.48
+1.7
+81.18
+30.67
+86.16
+2.1
+79.86
+47.57
+91.42
+1.33
+84.72
+29.1
+ReflectMT-Stage2-final
+82.55
+2
+78.05
+322.29
+89.49
+1.7
+81.18
+288.35
+86.19
+2.1
+79.87
+350.77
+91.47
+1.33
+84.72
+244.5
+Table 2: Comparative performance of initial translations and final refinements across different training stages. The
+shrinking performance gap demonstrates the successful internalization of reflection capabilities.
+improves by 3.6 GRF points.
+Comparison with pre-thinking models. To verify
+the advantages of post-editing reflection over pre-
+thinking, we trained a pre-thinking baseline under
+identical training configurations. Compared to the
+adaptive pre-thinking model (79.81), our method
+improves by 2.74 GRF points while reducing token
+consumption by 45%. This strongly indicates that
+the post-thinking reflection paradigm is superior
+to the pre-thinking approach in both translation
+quality and token efficiency.
+3.4
+Reflection Internalization Analysis
+Training Dynamics of Reflection Internaliza-
+tion. We evaluate the model every 50 steps during
+Stage 2 on a 2000-sample test set, temporarily dis-
+abling early-stopping to observe both initial and
+final translations. As shown in Figure 3(b), GRF
+scores exhibit a fluctuating upward trend, reflect-
+ing the model’s adjustment of internal representa-
+tions to balance preliminary translation quality and
+reflective improvement ability during the gradual
+internalization of its reflective capability.
+Furthermore, we monitor the frequency of ex-
+plicit modifications. Crucially, the model learns
+to self-assess, triggering refinement only when it
+judges the initial translation as sub-optimal. As
+shown in Figure 3(a), modifications drop mono-
+tonically from 578 (28.9%) at Step 0 to a mere 14
+(0.7%) by Step 330. This trend indicates that as the
+reflective capability is internalized, the model gen-
+erates higher-quality translations in the first pass.
+Figure 3(c) shows that the score difference between
+first-pass and final translations exhibits a fluctuat-
+ing downward trend. As the reflective capability is
+gradually internalized, the model ultimately gen-
+erates optimal translations in the first pass without
+subsequent modifications. Table 2 displays first-
+pass and final translation results at different train-
+ing stages. This demonstrates the effectiveness
+of our reflective internalization training strategy:
+the model successfully incorporates the knowledge
+learned during reflection into its initial translation
+capability, achieving quality close to the final trans-
+lation during the first generation.
+Performance Across Difficulty Levels. To eval-
+uate model performance on translation tasks of
+varying difficulty, we divided samples into three
+levels based on GRF scores: easy (>90), medium
+(70-90), and difficult (<70), with proportions ap-
+proximately 11:6:3. We recorded the number of
+samples requiring reflective modifications during
+training at each difficulty level.
+As shown in Figure 3(d), at Step 0, the model
+modified 65 easy, 218 medium, and 295 difficult
+samples, indicating significant room for improve-
+ment in the initial translation stage despite acquired
+reflective capability after first-phase training, espe-
+cially for difficult samples.
+After second-phase reflective internalization
+training, model performance at Step 330 showed
+qualitative improvement. For easy samples, the
+model required no reflective modifications, indicat-
+ing first-round translations meet high-quality stan-
+dards. For difficult samples, modifications drasti-
+cally decreased from 295 to 12, a 96% reduction.
+This demonstrates the model’s sensitivity to trans-
+lation difficulty: for easy and medium samples, the
+model fully internalized reflective capability, gener-
+ating high-quality translations during initial trans-
+lation; for genuinely difficult samples, the model
+retained reflective improvement capability to en-
+sure translation quality.
+3.5
+Ablation Study
+To validate the effectiveness of the reflection mech-
+anism, we compare three training configurations,
+where init and refl denote initial translation and
+reflection:
+1)ReflectMT (w/o init & refl). The model is
+trained to map the source sentence directly to the fi-
+nal translation, omitting both the initial translation
+and the reflection steps.
+2)ReflectMT (w/o refl). The model is trained to
+generate an initial translation followed directly by
+a refined translation, bypassing the explicit reflec-
+7
+
+[Page 8]
+Model Configuration
+Initial
+Final
+Qwen-7B-Instruct (Baseline)
+73.52
+–
+ReflectMT-LoRA (w/o init & refl)
+–
+75.86
+ReflectMT-LoRA (w/o refl)
+76.85
+76.49
+ReflectMT-LoRA (full)
+76.35
+77.26
+ReflectMT-RL (w/o init & refl)
+–
+78.62
+ReflectMT-RL (full)
+79.73
+80.51
+Table 3: Ablation study on the reflection mechanism
+evaluated by GRF scores. “Initial” and “Final” refer
+to the translations generated before and after explicit
+reflection. The “RL” stage is initialized from the check-
+point of the LoRA-SFT model.
+tion analysis. This variant learns a “translation-
+refinement” process.
+3)ReflectMT (full). Our complete configuration,
+which trains the model on the full “translation-
+reflection-refinement” trajectory.
+Table 3 demonstrates that the reflection mech-
+anism significantly enhances translation quality.
+During the LoRA-SFT stage, the w/o refl variant
+yields a final GRF score (76.49) lower than its ini-
+tial translation (76.85), indicating that blind refine-
+ment without explicit guidance can degrade perfor-
+mance. Conversely, the full model improves from
+76.35 to 77.26, proving reflection provides accu-
+rate modification directions. Having established
+the necessity of reflection during SFT, we evaluate
+the ultimate performance ceiling after RL training.
+Comparing direct translation (w/o init & refl, 78.62)
+to the full ReflectMT (80.51), the 1.89-point GRF
+gap confirms the substantial benefit of the complete
+“translate-reflect-refine” paradigm.
+4
+Related Work
+Application of Deep Reasoning Models in Ma-
+chine Translation.
+With the emergence of
+Large Reasoning Models (LRMs) such as OpenAI
+o1 (OpenAI, 2024) and DeepSeek-R1 (Guo et al.,
+2025), deep reasoning capabilities have pioneered
+extensive research in long Chain-of-Thought (CoT)
+reasoning (Gao et al., 2026). Recently, researchers
+have begun exploring their potential in Machine
+Translation (MT). Zhao et al. (2024) and Liu et al.
+(2025b) demonstrated the prospects of long CoT
+reasoning in translation through heuristic examples.
+Wang et al. (2024a) constructed the MetaphorTrans
+dataset and trained the DRT model to handle rhetor-
+ical devices in literary translation.
+DeepTrans-
+7B (Wang et al., 2025a) leveraged DeepSeek-V3
+for reference-free evaluation during Reinforcement
+Learning (RL) training, exploiting the powerful ca-
+pability of large language models as judges. Build-
+ing on this, Wang et al. (2025b) proposed the Ex-
+Trans model with exemplar-enhanced RL reward
+modeling, integrating dual capabilities of LLMs
+as both exemplar generators and judges, achieving
+breakthroughs in deep reasoning MT and extending
+to low-resource multilingual translation.
+Reflection and self-improving Behind Long CoT.
+Reflection and self-improvement capabilities under-
+lying long CoT have been extensively validated in
+LLM research (Bao et al., 2026). Shinn et al. (2023)
+proposed the Reflexion framework, systematically
+embedding self-reflection into LLM reasoning pro-
+cesses to enable iterative evaluation and improve-
+ment. Ji et al. (2023) explored self-reflection tech-
+niques to mitigate hallucination problems through
+factual checking and logical consistency verifica-
+tion. Weng et al. (2023) proposed a self-verification
+method introducing multiple verification points to
+prevent error propagation in CoT reasoning. Recent
+work has further optimized reflection efficiency
+and adaptability. Wang et al. (2024b) proposed the
+TasTe framework, improving translation through in-
+struction fine-tuning for two-stage reflective trans-
+lation. Liu et al. (2025a) proposed the IoRT frame-
+work, addressing redundancy and drift in static re-
+flection through dynamic meta-instruction-guided
+processes. Costa et al. (2026) proposed PR-CoT,
+enabling multi-perspective structured reflection to
+improve model adaptability in complex tasks.
+5
+Conclusion
+This paper introduces a novel “translate-reflect-
+refine” paradigm for machine translation. We de-
+sign a multi-agent collaborative system to construct
+reflective translation datasets and propose a two-
+stage reinforcement learning strategy that internal-
+izes reflection capabilities into the model’s direct
+responses. Extensive experiments demonstrate that
+our approach significantly outperforms strong base-
+lines, including both LRMs and specialized transla-
+tion models. Critically, our model generates high-
+quality translations without explicit reflection steps
+during inference, avoiding the computational over-
+head of long COT reasoning while maintaining
+superior translation quality. Ablation studies vali-
+date the effectiveness of our reflection mechanism
+in providing interpretable reasoning paths for sys-
+tematic improvement.
+8
+
+[Page 9]
+Limitations
+While we have demonstrated the effectiveness of
+our reflection framework, several limitations are
+worth noting: Our research primarily focuses on
+English-to-Chinese translation tasks and has not
+been sufficiently validated on other language pairs.
+Significant linguistic differences exist across dif-
+ferent language pairs, and the effectiveness of our
+reflection mechanism on other language pairs re-
+quires further empirical investigation. Moreover,
+while our model avoids the computational over-
+head of long COT reasoning during inference, the
+training phase—including the data construction
+process using the multi-agent collaborative sys-
+tem and the two-stage reinforcement learning train-
+ing—still requires substantial computational re-
+sources, which may limit the application of this
+method in resource-constrained environments.
+References
+Yicheng Bao, Xuhong Wang, and Xin Tan. 2026. To
+deceive is to teach? forging perceptual robustness via
+adversarial reinforcement learning. arXiv preprint
+arXiv:2602.22227.
+Mariana Costa, Alberlucia Rafael Soarez, Daniel
+Kim, and Camila Ferreira. 2026. Enhancing self-
+correction in large language models through multi-
+perspective reflection. Preprint, arXiv:2601.07780.
+DeepSeek-AI, Aixin Liu, Bei Feng, Bing Xue, Bingx-
+uan Wang, Bochao Wu, Chengda Lu, Chenggang
+Zhao, Chengqi Deng, Chenyu Zhang, Chong Ruan,
+Damai Dai, Daya Guo, Dejian Yang, Deli Chen,
+Dongjie Ji, Erhang Li, Fangyun Lin, Fucong Dai,
+and 181 others. 2025. Deepseek-v3 technical report.
+Preprint, arXiv:2412.19437.
+Zhenkun Gao, Xuhong Wang, Xin Tan, and Yuan Xie.
+2026. Tpru: Advancing temporal and procedural
+understanding in large multimodal models. arXiv
+preprint arXiv:2602.18884.
+Aaron Grattafiori, Abhimanyu Dubey, Abhinav Jauhri,
+Abhinav Pandey, Abhishek Kadian, Ahmad Al-
+Dahle, Aiesha Letman, Akhil Mathur, Alan Schelten,
+Alex Vaughan, and 1 others. 2024. The llama 3 herd
+of models. arXiv preprint arXiv:2407.21783.
+Daya Guo, Dejian Yang, Haowei Zhang, Junxiao
+Song, Ruoyu Zhang, Runxin Xu, Qihao Zhu, Shi-
+rong Ma, Peiyi Wang, Xiao Bi, and 1 others. 2025.
+Deepseek-r1: Incentivizing reasoning capability in
+llms via reinforcement learning.
+arXiv preprint
+arXiv:2501.12948.
+Edward J. Hu, Yelong Shen, Phillip Wallis, Zeyuan
+Allen-Zhu, Yuanzhi Li, Shean Wang, Lu Wang, and
+Weizhu Chen. 2021. Lora: Low-rank adaptation of
+large language models. Preprint, arXiv:2106.09685.
+Ziwei Ji, Tiezheng Yu, Yan Xu, Nayeon Lee, Etsuko
+Ishii, and Pascale Fung. 2023.
+Towards mitigat-
+ing hallucination in large language models via self-
+reflection. Preprint, arXiv:2310.06271.
+Juraj Juraska, Daniel Deutsch, Mara Finkelstein, and
+Markus Freitag. 2024.
+Metricx-24: The google
+submission to the wmt 2024 metrics shared task.
+Preprint, arXiv:2410.03983.
+Tom Kocmi and Christian Federmann. 2023. Large lan-
+guage models are state-of-the-art evaluators of trans-
+lation quality. In Proceedings of the 24th Annual
+Conference of the European Association for Machine
+Translation, pages 193–203, Tampere, Finland. Euro-
+pean Association for Machine Translation.
+Yunlong Liang, Fandong Meng, Jiaan Wang, and
+Jie Zhou. 2025.
+Slangdit:
+Benchmarking llms
+in interpretative slang translation.
+Preprint,
+arXiv:2505.14181.
+Liping Liu, Chunhong Zhang, Likang Wu, Chuang
+Zhao, Zheng Hu, Ming He, and Jianping Fan. 2025a.
+Instruct-of-reflection:
+Enhancing large language
+models iterative reflection capabilities via dynamic-
+meta instruction. Preprint, arXiv:2503.00902.
+Sinuo Liu, Chenyang Lyu, Minghao Wu, Longyue
+Wang, Weihua Luo, and Kaifu Zhang. 2025b. New
+trends for modern machine translation with large rea-
+soning models. arXiv preprint arXiv:2503.10351.
+Qingsong Ma, Johnny Wei, Ondˇrej Bojar, and Yvette
+Graham. 2019. Results of the wmt19 metrics shared
+task: Segment-level and strong mt systems pose big
+challenges. In Proceedings of the Fourth Conference
+on Machine Translation (Volume 2: Shared Task Pa-
+pers, Day 1), pages 62–90.
+OpenAI. 2024. Learning to reason with large language
+models.
+https://openai.com/index/
+learning-to-reason-with-llms/.
+Team Qwen. 2024. Qwq: Reflect deeply on the bound-
+aries of the unknown. Hugging Face.
+Ricardo Rei, Nuno M. Guerreiro, José Pombal, Daan
+van Stigt, Marcos Treviso, Luisa Coheur, José G. C.
+de Souza, and André F. T. Martins. 2023.
+Scal-
+ing up cometkiwi: Unbabel-ist 2023 submission
+for the quality estimation shared task.
+Preprint,
+arXiv:2309.11925.
+Zhihong Shao, Peiyi Wang, Qihao Zhu, Runxin Xu,
+Junxiao Song, Xiao Bi, Haowei Zhang, Mingchuan
+Zhang, Y. K. Li, Y. Wu, and Daya Guo. 2024.
+Deepseekmath: Pushing the limits of mathemati-
+cal reasoning in open language models. Preprint,
+arXiv:2402.03300.
+9
+
+[Page 10]
+Noah Shinn, Federico Cassano, Edward Berman, Ash-
+win Gopinath, Karthik Narasimhan, and Shunyu Yao.
+2023. Reflexion: Language agents with verbal rein-
+forcement learning. Preprint, arXiv:2303.11366.
+NLLB Team, Marta R. Costa-jussà, James Cross, Onur
+Çelebi, Maha Elbayad, Kenneth Heafield, Kevin Hef-
+fernan, Elahe Kalbassi, Janice Lam, Daniel Licht,
+Jean Maillard, Anna Sun, Skyler Wang, Guillaume
+Wenzek, Al Youngblood, Bapi Akula, Loic Barrault,
+Gabriel Mejia Gonzalez, Prangthip Hansanti, and
+20 others. 2022.
+No language left behind: Scal-
+ing human-centered machine translation. Preprint,
+arXiv:2207.04672.
+Jiaan Wang, Fandong Meng, Yunlong Liang, and Jie
+Zhou. 2024a. Drt-o1: Optimized deep reasoning
+translation via long chain-of-thought. arXiv e-prints,
+pages arXiv–2412.
+Jiaan Wang, Fandong Meng, and Jie Zhou. 2025a.
+Deep reasoning translation via reinforcement learn-
+ing. arXiv preprint arXiv:2504.10187.
+Jiaan Wang, Fandong Meng, and Jie Zhou. 2025b. Ex-
+trans: Multilingual deep reasoning translation via
+exemplar-enhanced reinforcement learning. arXiv
+preprint arXiv:2505.12996.
+Yutong Wang, Jiali Zeng, Xuebo Liu, Fandong Meng,
+Jie Zhou, and Min Zhang. 2024b.
+Taste: Teach-
+ing large language models to translate through self-
+reflection. Preprint, arXiv:2406.08434.
+Yixuan Weng, Minjun Zhu, Fei Xia, Bin Li, Shizhu He,
+Shengping Liu, Bin Sun, Kang Liu, and Jun Zhao.
+2023. Large language models are better reasoners
+with self-verification. Preprint, arXiv:2212.09561.
+An Yang, Anfeng Li, Baosong Yang, Beichen Zhang,
+Binyuan Hui,
+Bo Zheng,
+Bowen Yu,
+Chang
+Gao, Chengen Huang, Chenxu Lv, and 1 others.
+2025.
+Qwen3 technical report.
+arXiv preprint
+arXiv:2505.09388.
+An Yang, Baosong Yang, Beichen Zhang, Binyuan Hui,
+Bo Zheng, Bowen Yu, Chengyuan Li, Dayiheng Liu,
+Fei Huang, Haoran Wei, and 1 others. 2024. Qwen2.
+5 technical report. arXiv preprint arXiv:2412.15115.
+Yu Zhao, Huifeng Yin, Bo Zeng, Hao Wang, Tianqi
+Shi, Chenyang Lyu, Longyue Wang, Weihua Luo,
+and Kaifu Zhang. 2024. Marco-o1: Towards open
+reasoning models for open-ended solutions. arXiv
+preprint arXiv:2411.14405.
+A
+Our Data
+Our dataset is constructed by randomly sampling
+from WMT19 (Ma et al., 2019), SlangDIT (Liang
+et al., 2025), and MetaphorTrans (Wang et al.,
+2024a). We employ DeepSeek-V3 to generate the
+corresponding translations and reflections. Subse-
+quently, we categorize the difficulty of these sam-
+ples based on their final GRF scores and filter the
+data accordingly. The resulting dataset maintains
+an approximate 1:1 ratio of simple to difficult sam-
+ples. The detailed data distribution illustrated in
+Table 4. By incorporating these difficult samples,
+we aim to fully elicit the model’s reasoning capa-
+bilities, thereby encouraging it to learn in-depth
+reflection and idiomatic translation.
+During the Cold Start Supervised Fine-Tuning
+(SFT) stage, we train the model using the com-
+plete samples—comprising the initial translation,
+reflection analysis, and final translation—to help it
+internalize the entire reflective translation pipeline.
+Conversely, in the Reinforcement Learning (RL)
+stage, we provide only the source English sen-
+tences as input, without any reference translations
+or annotations. For data generation, we locally de-
+ploy DeepSeek-V3 (671B) with the temperature
+set to 0.1 and top-p to 0.95. Furthermore, the hy-
+perparameters in Section 2.2(3) are set as follows:
+θ = 90, Kmax = 5.
+To ensure data quality, we apply rigorous filter-
+ing to exclude: (1) samples with invalid formats; (2)
+samples with consistently low scores (rK < 40);
+and (3) samples exhibiting performance degrada-
+tion after reflection (rK < r0).
+The initial format of our reflective translation
+dataset is as follows:
+{"src": "The big losers from this economic
+disaster are workers in the advanced coun-
+tries that bought into the laissez-faire flexibil-
+ity of American-style capitalism.",
+"ref": "这场经济灾难的大输家是那些认
+同美式资本主义放任自流政策的发达国
+家的工人。",
+"final_translation": "在这场经济灾难中遭
+受重大损失的是那些接受了美国式资
+本主义自由放任灵活性的发达国家的工
+人。",
+"total_rounds": 1,
+"final_score": 90,
+"best_round": 1,
+"history": [{"round": 1,
+"translation": "在这场经济灾难中遭受重
+大损失的是那些信奉美国式资本主义自
+由放任灵活性的发达国家的工人。",
+10
+
+[Page 11]
+"reflection": "1.
+翻译质量分析：- 准
+确性：翻译基本准确传达了原文的意
+思，特别是“economic disaster”（经济灾
+难）、“big losers”（遭受重大损失）
+和“American-style capitalism”（美国式资
+本主义）等关键术语的处理得当。- 流
+畅性：译文整体较为流畅，符合中文表
+达习惯。句子结构清晰，逻辑连贯。
+- 语境适配：译文很好地适应了原文的
+经济学背景，尤其是对“laissez-faire flex-
+ibility”（自由放任灵活性）的解释和处
+理，符合经济学领域的常用表达。- 过
+度翻译：没有明显的过度翻译现象，所
+有信息点都得到了恰当的传达。2. 存
+在的问题：- “bought into”这一短语的
+翻译略显生硬，直译为“信奉”虽然可以
+理解，但可能不够精准。“bought into”在
+这里更强调对这些理念的接受或认同，
+而非单纯的“信奉”。3. 改进建议：- 可
+以将“bought into”翻译为“接受了”或“认同
+了”，以更准确地传达原文的含义。例
+如：“在这场经济灾难中遭受重大损失的
+是那些接受了美国式资本主义自由放任
+灵活性的发达国家的工人。",
+"score": 90}]}}
+The data format for cold start SFT is as follows:
+<answer>2018年非洲面临的三大人道
+主义挑战</answer> <reflection>1. 翻译
+质量分析：- 准确性：翻译准确传达了
+原文的核心信息，"Three Humanitarian
+Challenges"被准确地译为"三大人道主义
+挑战"，"for Africa in 2018"也被正确地处
+理为"2018年非洲面临的"。- 流畅性：
+译文符合中文表达习惯，语句通顺自
+然。- 语境适配：译文很好地适应了新
+闻报道或学术文章的语境，保持了正式
+和客观的语气。- 过度翻译：未发现过
+度翻译现象，译文简洁明了。2. 存在的
+问题：- 无显著问题。译文在各方面都
+达到了较高的标准。3. 改进建议：- 虽
+然译文已经很完美，但可以考虑在特定
+语境下增加一些修饰词以增强感染力，
+例如："2018年非洲亟待解决的三大紧
+迫人道主义挑战"。这种调整可以根据
+具体使用场景灵活选择。"</reflection>
+<need_revision>否</need_revision>
+<fi-
+nal_answer>2018年非洲面临的三大人道
+主义挑战</final_answer>
+B
+Evaluation Prompt
+The evaluation prompt of GRF borrows from
+Kocmi and Federmann (2023), and is also em-
+ployed in Wang et al. (2024a, 2025a,b):
+Score the following translation from [src
+lang] to [trg lang] on a continuous
+scale from 0 to 100, where score of zero
+means "no meaning preserved" and score of
+one hundred means "perfect preservation of
+meaning, with faithfulness, expressiveness,
+and elegance".
+[src lang] source: {src}
+[trg lang] translation: {hyp}
+Score:
+The prompt evaluates a translation from a gen-
+eral perspective, and achieves a high correlation
+with humans (Kocmi and Federmann, 2023).
+C
+Implementation Details
+Cold Start SFT. We employed the LLaMA-
+Factory framework for Supervised Fine-Tuning
+(SFT). The model was trained for 3 epochs with
+a learning rate of 1 × 10−4 and a batch size of 1
+with 8 gradient accumulation steps. The entire SFT
+process required approximately 3 GPU hours.
+RL Training. We implemented the GRPO al-
+gorithm using the verl3 library. We locally de-
+ployed DeepSeek-V3 to serve as the reward model
+for optimizing the policy model. For the training
+configuration, we set the global batch size to 64,
+the learning rate to 2×10−7, the number of rollouts
+to 8, the rollout temperature to 0.7, and the KL co-
+efficient to 5 × 10−3. The training was conducted
+for 2 epochs, consuming a total of approximately
+770 GPU hours.
+Hyperparameters. Based on empirical results,
+we set η and µ to 5 and 0.2, respectively. In Stage
+1, the reward weights were set as follows: wform =
+0.15, wtrans = 0.45, wrefl = 0.2, and wimp = 0.2.
+In Stage 2, we adjusted these weights to wform =
+0.15, wtrans = 0.75, wrefl = 0.05, and wimp =
+0.05.
+Evaluation. To evaluate the baseline models, we
+obtained open-source models from Hugging Face
+and accessed closed-source models via their official
+APIs. We utilized the official implementations and
+3https://github.com/volcengine/verl
+11
+
+[Page 12]
+Split
+EN→ZH
+ZH→EN
+Train
+11,389
+8,000
+Test
+2,000
+2,000
+Val
+1,000
+1,000
+Table 4: Dataset statistics for translation tasks.
+model checkpoints to compute the COMETKIWI-
+XL and MetricX metrics. Similarly, the GRF scores
+were obtained via API calls.
+D
+Our Adapt thinking Baseline
+Our pre-thinking baseline uses training data aligned
+with our method, employing DeepSeek-V3 to gen-
+erate pre-thinking data for SFT cold start. The data
+format is as follows:
+<think>首先，"kind of"是一个常见的俚语
+表达，通常用来表示某种程度的不确定
+性或轻微的程度。然后，"Riverdale"是
+一个专有名词，但在这个上下文中，
+它可能指的是一个地方名，也可能是
+电视剧《Riverdale》中的Riverdale镇。
+如果是指地点，那么“his last meal in
+Riverdale”可以理解为他在Riverdale的最
+后一次用餐；如果是指电视剧，则可
+能是在描述剧中人物即将离开或结束
+在Riverdale的生活。考虑到俚语的使
+用，这句句子更有可能出自一种非正
+式的语境，比如电视剧的讨论或者个人
+的情感表达。因此，我将假设此句出自
+电视剧的讨论背景。</think><answer>有
+点希望这是他在Riverdale的最后一顿
+饭</answer>
+In datasets where no reflection is required, the
+‘<think></think>‘ tag remains empty. The ratio of
+reflective to non-reflective data is set at 2:3. Us-
+ing LLaMA-Factory for fine-tuning and verl for
+GRPO training, we cultivated a model capable of
+adaptively deciding whether to engage in reflec-
+tion before generating a response. This adaptive
+reflection method allows the model to avoid exces-
+sive contemplation on simple tasks, thereby pre-
+venting performance degradation. Furthermore, it
+effectively reduces token consumption, enhancing
+overall efficiency.
+Model
+GRF
+MX24
+CK
+Token
+GPT-4o
+77.62
+2.63
+77.97
+28.57
+ReflectMT-Stage2 (Our)
+82.55
+2.00
+78.05
+30.73
+Table 5:
+Performance metrics for GPT-4o and
+ReflectMT-Stage2.
+E
+GPT-4o Score
+Due to the costs associated with using the GPT-
+4o API, we limited our testing of GPT-4o to our
+custom dataset. As shown in Table 5, ReflectMT
+achieves higher GRF scores compared to GPT-4o,
+while maintaining similar token consumption.
+12

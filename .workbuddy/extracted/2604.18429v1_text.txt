@@ -1,0 +1,845 @@
+[Page 1]
+1
+Revisiting Change VQA in Remote Sensing with
+Structured and Native Multimodal Qwen Models
+Yakoub Bazi, Mohamad M. Al Rahhal, Mansour Zuair, and Faroun Mohamed
+Abstract—Change visual question answering (Change VQA)
+addresses the problem of answering natural-language questions
+about semantic changes between bi-temporal remote sensing (RS)
+images. Although vision–language models (VLMs) have recently
+been studied for temporal RS image understanding, Change VQA
+remains underexplored in the context of modern multimodal
+models. In this letter, we revisit the CDVQA benchmark using
+recent Qwen models under a unified low-rank adaptation (LoRA)
+setting. We compare Qwen3-VL, which follows a structured
+vision–language pipeline with multi-depth visual conditioning
+and a full-attention decoder, with Qwen3.5, a native multimodal
+model that combines a single-stage alignment with a hybrid
+decoder backbone. Experimental results on the official CDVQA
+test splits show that recent VLMs improve over earlier specialized
+baselines. They further show that performance does not scale
+monotonically with model size, and that native multimodal mod-
+els are more effective than structured vision–language pipelines
+for this task. These findings indicate that tightly integrated
+multimodal backbones contribute more to performance than scale
+or explicit multi-depth visual conditioning for language-driven
+semantic change reasoning in RS imagery.
+Index Terms—Change visual question answering, semantic
+change understanding, structured multimodal models, native
+multimodal models, low-rank adaptation.
+I. INTRODUCTION
+RS change detection is a fundamental problem in Earth
+observation, with broad relevance to applications such as
+urban growth monitoring, land-use assessment, environmental
+surveillance, and disaster analysis. In most practical settings,
+however, change detection systems produce outputs in the
+form of binary maps or semantic change labels. Although
+such outputs are useful for visualization and quantitative
+analysis, they are less natural when users seek direct answers
+to questions such as what changed, how it changed, or where
+the change occurred. This limitation has motivated growing
+interest in language-centered interaction with RS imagery,
+where natural-language queries provide a more flexible and
+accessible interface to visual information. Within this context,
+Change VQA provides a natural formulation by enabling
+question answering over bi-temporal imagery and thereby
+moving beyond static map prediction toward semantic, query-
+driven change understanding [1].
+This work was supported by the Ongoing Research Funding Program,
+King Saud University, Riyadh, Saudi Arabia, under Grant ORF-2026-995.
+(Corresponding author: Yakoub Bazi.)
+Yakoub Bazi, Mansour Zuair, and Faroun Mohamed are with the
+Computer Engineering Department, College of Computer and Informa-
+tion Sciences, King Saud University, Riyadh 11543, Saudi Arabia (e-mail:
+ybazi@ksu.edu.sa; zuair@ksu.edu.sa, faroun@ksu.edu.sa).
+Mohamad M. Al Rahhal is with the Applied Computer Science Department,
+College of Applied Computer Science, King Saud University, Riyadh 11543,
+Saudi Arabia (e-mail: mmalrahhal@ksu.edu.sa).
+This direction builds on earlier progress in RS visual
+question answering (RS-VQA), which introduced language as
+a flexible interface for querying Earth observation imagery.
+Initial efforts such as RSVQA [2] demonstrated the feasibility
+of RS-VQA, while later benchmarks such as HRVQA [3]
+and EarthVQA [4] expanded the task toward higher-resolution
+imagery and more demanding reasoning. At the same time,
+vision–language modeling in RS has developed rapidly, with
+recent models such as RS-LLaVA [5] and recent surveys [6],
+[7] highlighting the growing role of generalist multimodal
+backbones in RS image understanding. However, much of this
+progress has remained centered on single-image reasoning,
+whereas temporal change understanding requires question-
+guided comparison across multiple observations.
+To address the temporal setting, Yuan et al. introduced the
+CDVQA benchmark [1], where questions are posed over co-
+registered bi-temporal image pairs rather than single scenes.
+This makes the task substantially more challenging, since the
+model must not only interpret each scene but also infer the
+relevant semantic change between them. CDVQA spans mul-
+tiple reasoning modes, including change existence, semantic
+transitions, increase/decrease, largest or smallest change, and
+discretized change ratios. More recent work has extended
+this line toward grounding, domain generalization, and more
+interactive change-language modeling [8]–[10]. These devel-
+opments show that Change VQA is not simply a temporal
+extension of conventional RS-VQA, but a more demanding
+task requiring question-conditioned temporal comparison and
+fine-grained semantic reasoning over multiple observations.
+At the same time, multimodal foundation models have
+progressed rapidly. Recent generalist VLMs can now handle
+multiple visual inputs, and in some cases even video, within
+a unified multimodal framework. This makes them a natural
+setting for revisiting Change VQA. In particular, the Qwen
+family offers a useful comparison between two different
+multimodal designs. Qwen3-VL follows a more structured
+vision–language pipeline with explicit visual conditioning
+[11]. Qwen3.5, by contrast, is presented as a native vision–
+language model trained with early fusion on multimodal
+tokens, leading to a more tightly integrated multimodal design
+[12]. This raises an important question for the RS community:
+can such modern generalist VLMs address Change VQA
+effectively without relying on handcrafted change-specific
+modules?
+Motivated by this question, this letter revisits the CDVQA
+benchmark through a controlled comparison of multimodal
+formulations for Change VQA. Using recent Qwen-family
+VLMs, we compare two representative designs: a structured
+pipeline and a more tightly integrated multimodal formulation
+arXiv:2604.18429v1  [cs.CV]  20 Apr 2026
+
+[Page 2]
+2
+across multiple model scales. Rather than proposing another
+handcrafted model for change analysis, our goal is to under-
+stand how well current generalist VLMs can handle this task
+and how multimodal design influences performance. The study
+therefore provides an updated empirical view of CDVQA and
+a clearer picture of what modern generalist VLMs can offer
+for language-driven change analysis.
+II. METHODOLOGY
+A. Problem Formulation
+Let I(1) ∈RH×W ×3 and I(2) ∈RH×W ×3 denote a
+co-registered bi-temporal RS image pair acquired over the
+same geographic region at two different times, where H
+and W denote the image height and width, respectively. Let
+q = (q1, q2, . . . , qLq) denote a natural-language question of
+length Lq. In Change VQA, the answer is determined by
+the question-conditioned semantic relationship between the
+two temporal observations. The task therefore requires joint
+reasoning over I(1), I(2), and q.
+In the CDVQA setting [1], valid answers belong to a prede-
+fined closed set Y = {y1, . . . , yC}, where C is the number of
+candidate answers. The prediction problem is therefore written
+as
+y∗= arg max
+y∈Y pθ
+
+y | I(1), I(2), q
+
+,
+(1)
+where θ denotes the model parameters.
+Unlike specialized Change VQA methods that typically
+formulate prediction as classification over a predefined answer
+space, in this work the task is formulated within an autore-
+gressive multimodal generation framework. That is, the answer
+is modeled as a conditional token sequence even though
+evaluation is ultimately performed in a closed-set manner.
+For an answer sequence a = (a1, . . . , aLa) of length La, the
+underlying conditional distribution is
+pθ
+
+a | I(1), I(2), q
+
+=
+La
+Y
+t=1
+pθ
+
+at | I(1), I(2), q, a<t
+
+,
+(2)
+which reduces to (1) once generation is constrained to the
+valid answer set Y during inference.
+B. Multimodal Formulations of the Qwen Families
+Both Qwen families considered in this work receive the
+same three inputs: a pre-event image, a post-event image,
+and a question. In both cases, each temporal image is first
+processed by a vision encoder, and the resulting visual features
+are mapped into the language-model hidden space before being
+combined with the question embeddings. The joint multimodal
+sequence is written as
+X =
+
+V(1); V(2); Q
+
+,
+(3)
+where V(1) and V(2) denote the merged visual token se-
+quences for the two temporal images and Q denotes the ques-
+tion embeddings. The comparison in this work is therefore not
+between different input structures, but between two different
+multimodal formulations built on the same paired-image and
+question representation. A conceptual overview is shown in
+Fig. 1.
+Qwen3-VL follows a more structured vision–language
+pipeline. After visual token extraction, a PatchMerger projects
+the visual features into the language-model hidden space,
+establishing the main visual–language alignment. It then em-
+ploys additional DeepStack mergers to inject intermediate
+visual features into the decoder at multiple depths [11]. The
+resulting interaction is written as
+HVL = GVL
+
+X,
+n
+M (j)
+DS(Z(j)
+mid)
+o3
+j=1
+
+,
+(4)
+where Z(j)
+mid denotes intermediate visual features, M (j)
+DS denotes
+the jth DeepStack merger, and GVL denotes the multimodal
+decoder. In this formulation, interaction between the temporal
+visual tokens and the question is mediated through repeated
+multi-depth visual conditioning, with decoding performed by
+a full self-attention backbone.
+Qwen3.5 retains a similar visual front-end and an initial
+PatchMerger that maps visual features into the language space,
+but it does not use the repeated DeepStack conditioning
+adopted in Qwen3-VL. Instead, after this single alignment
+stage, the two temporal views and the question are processed
+jointly by a more tightly integrated multimodal backbone. In
+our formulation, this interaction is written as
+HN = GN(X),
+(5)
+where GN denotes the hybrid multimodal decoder. Unlike the
+uniform full-attention decoder used in Qwen3-VL, Qwen3.5
+combines GatedDeltaNet and full-attention layers, allowing
+multimodal information to interact more directly within a uni-
+fied decoder rather than through repeated explicit conditioning.
+[12].
+In essence, the main difference between the two families
+lies in how multimodal interaction is handled after the ini-
+tial visual–language alignment. Qwen3-VL follows a more
+structured pipeline in which visual features are repeatedly
+reinforced through explicit multi-depth conditioning, whereas
+Qwen3.5 uses a more integrated multimodal backbone in
+which the two images and the question interact more directly
+after the initial alignment step.
+C. LoRA Adaptation and Training Objective
+To adapt the Qwen-family models to the Change VQA task
+efficiently, we employ Low-Rank Adaptation (LoRA) [13].
+Given a pretrained weight matrix W0 ∈Rdout×din, LoRA
+keeps W0 frozen and learns a low-rank update
+∆W = BA,
+A ∈Rr×din, B ∈Rdout×r,
+(6)
+so that
+W = W0 + α
+r BA,
+(7)
+where r denotes the LoRA rank and α is a scaling factor.
+In all experiments, we use the same LoRA hyperparameters
+(r = 16, α = 32) and apply LoRA to the decoder attention
+projections (query, key, value, and output). The vision encoder
+and visual alignment modules remain frozen. Note that the
+
+[Page 3]
+3
+Answer: buildings
+Answer: 0_to_10
+Qwen3-VL-2B
+Qwen3.5-2B
+Shared ViT encoder
+24 blocks · hidden 1024 · merge 2×2
+PatchMerger
+LN → 4096 → GELU → 2048 · 25.2M
+DeepStack × 3
+deep visual conditioning · 75.5M
+Question
+tokenize → embed
+LLM Decoder
+28 × Full Self-Attention
+Quadratic complexity · 1.72B params
+Shared ViT encoder
+24 blocks · hidden 1024 · merge 2×2
+PatchMerger
+LN → 4096 → GELU → 2048 · 25.2M
+No DeepStack
+single-stage alignment only
+Question
+tokenize → embed
+LLM Decoder
+18 × GatedDeltaNet + 6 × Full-Attn
+Linear + quadratic · 1.88B params
+What type of change
+is the largest in the
+second image?
+What is the change ratio
+of trees in the post-event
+image?
+Pre-Image
+Pre-Image
+Post-Image
+Post-Image
+LORA
+LORA
+Inject visual feautres
+at different levels
+Fig. 1. Comparison of the two Qwen-family multimodal formulations used for Change VQA, shown with the 2B variants. Qwen3-VL-2B follows a more
+structured vision–language pipeline with DeepStack-based multi-depth conditioning and a full self-attention decoder, whereas Qwen3.5-2B adopts a more
+native multimodal design with a simpler alignment stage and a hybrid decoder based on GatedDeltaNet and full attention.
+TABLE I
+MODEL SCALE AND PARAMETER-EFFICIENT ADAPTATION DETAILS OF THE
+EVALUATED QWEN-FAMILY VARIANTS.
+Model
+Params
+Trainable (LoRA)
+Ratio
+Qwen3.5-0.8B
+0.8B
+6.39M
+0.80%
+Qwen3-VL-2B
+2.1B
+17.43M
+0.83%
+Qwen3.5-2B
+2.2B
+10.91M
+0.50%
+Qwen3-VL-4B
+4B
+33.03M
+0.83%
+Qwen3.5-4B
+4B
+21.23M
+0.53%
+Qwen3-VL-8B
+8B
+66.00M
+0.83%
+Qwen3.5-9B
+9B
+29.10M
+0.32%
+resulting number of trainable LoRA parameters is not identical
+across model families. This is expected because Qwen3-VL
+relies on full self-attention blocks throughout the decoder,
+while Qwen3.5 uses a hybrid decoder design with fewer
+full-attention layers. Under the same target rule (Q/K/V/O
+only), Qwen3-VL therefore exposes more attention projection
+matrices to LoRA than Qwen3.5. For transparency, we report
+the resulting trainable parameter counts in Table I.
+During training, the model is optimized with the standard
+negative log-likelihood objective
+L = −1
+N
+N
+X
+i=1
+log pθ
+
+ai | I(1)
+i , I(2)
+i , qi
+
+,
+(8)
+where {(I(1)
+i , I(2)
+i , qi, ai)}N
+i=1 denotes the training set and ai
+is the target answer sequence.
+III. EXPERIMENTS
+A. Dataset and Experimental Setup
+We evaluate all models on the CDVQA benchmark [1],
+which is designed for change visual question answering on
+bi-temporal aerial imagery. CDVQA is built from the public
+subset of the SECOND semantic change detection dataset and
+contains 2,968 image pairs of size 512 × 512 with more than
+122,000 automatically generated question–answer pairs. Each
+sample consists of a pre-event image, a post-event image, and
+a question, with answers defined over six land-cover classes:
+non-vegetated ground surface, buildings, playgrounds, water,
+low vegetation, and trees.
+The benchmark is divided into training, validation, and two
+official test splits. The training split contains 65,967 question–
+answer pairs from 1,600 image pairs, while the validation
+split contains 16,441 question–answer pairs from 400 image
+pairs. The remaining 968 image pairs form two official test
+sets: test1, with 39,686 question–answer pairs, and test2, with
+31,036 question–answer pairs. Following [1], we report per-
+question-type accuracy together with average accuracy (AA)
+and overall accuracy (OA). The evaluated question types
+include change ratio, class change ratio, change or not,
+change to what, increase or not, decrease or not, smallest
+change, and largest change. As shown in Fig. 2, the benchmark
+covers multiple reasoning modes and exhibits a non-uniform
+distribution across question categories and answers.
+All models are fine-tuned on the official training split using
+LoRA with rank r = 16 and scaling factor α = 32. Fine-tuning
+
+[Page 4]
+4
+Train
+Val
+Test1
+Test2
+0
+10000
+20000
+30000
+40000
+50000
+60000
+Count
+(a) Split sizes
+QA pairs
+Image pairs
+C/N
+Inc.
+Dec.
+Sml.
+Lrg.
+CtW
+CR
+CCR
+0
+10
+20
+30
+40
+Prop. (%)
+(b) Question-type dist.
+Yes/No
+Land-
+cover
+Ratio
+range
+0
+10
+20
+30
+40
+50
+60
+Prop. (%)
+(c) Answer-family dist.
+no
+yes
+0
+0-10
+NVG
+Buildings
+LowVeg
+Trees
+10-20
+Water
+0
+10000
+20000
+30000
+40000
+Count
+(d) Top answer freqs.
+Fig. 2.
+Statistics of the CDVQA benchmark. (a) Number of QA pairs and
+image pairs in each split. (b) Distribution of question categories across train,
+validation, test1, and test2. (c) Distribution of answer families. (d) Top answer
+frequencies over all splits.
+is conducted using the LLaMA-Factory framework [14]. We
+use a batch size of 32 and train for 3 epochs with a learning
+rate of 5 × 10−5, cosine decay, and a warmup ratio of 0.1.
+Weight decay is set to 0.01 and the maximum gradient norm
+to 1.0. Training is performed in bfloat16 with a maximum
+sequence length of 1024. The best checkpoint is selected on
+the validation set and then used for testing. Inference time
+is reported as the average runtime per sample on a single
+NVIDIA RTX A6000 GPU.
+B. Results on the Test Sets
+Table II summarizes the CDVQA results of the Qwen
+variants evaluated in this work. Overall, Qwen3.5 generally
+performs better than Qwen3-VL at a similar model scale. This
+difference is especially clear on test2, where the 2B variant
+improves OA from 65.38 to 70.94. Increasing model size does
+not always lead to better performance. For example, within
+Qwen3-VL, the 8B model performs slightly worse than the
+4B model on both test sets. A similar trend can be observed
+for Qwen3.5, where the best overall results are achieved by the
+2B variant, while larger models are slower and do not provide
+consistent gains on this benchmark.
+To better understand these results, Table II also reports
+performance for each question type. The binary directional
+categories, including change or not, increase or not, and
+decrease or not, remain relatively stable across model vari-
+ants, particularly on test1. This suggests that the models can
+reliably capture coarse change existence and direction after
+adaptation. Larger differences appear in question types that
+require identifying the dominant semantic pattern. This is most
+evident on test2 for largest change and change to what, where
+Qwen3.5-2B achieves the best results among the compared
+models.
+In contrast, smallest change is the most difficult category for
+all variants. This is likely because it requires fine-grained rank-
+ing under subtle differences and very small change regions.
+Change ratio is also challenging, which is expected since
+estimating discretized change magnitude can easily lead to
+confusion between neighboring categories. These two question
+types contribute most of the remaining errors.
+Finally, the inference-time results show a clear increase in
+runtime for larger models. Since the accuracy improvements
+from scaling are limited, Qwen3.5-2B provides the best trade-
+off between accuracy and efficiency among the evaluated
+variants. For this reason, it is used as the representative setting
+in the following comparison with prior CDVQA methods.
+T1 (pre-event)
+T2 (post-event)
+[Yes/No]
+Did the regions of trees change?
+Pred: yes
+GT: no
+[Land-cover]
+What type of change is the smallest?
+Pred: trees
+GT: NVG_surface
+What is the percentage of changed regions?
+Pred: 10_to_20
+GT: 20_to_30
+Fig. 3. Representative failure cases of Qwen3.5-2B on CDVQA. The exam-
+ples illustrate three common error modes: false positives under subtle temporal
+variation, mistakes in fine-grained semantic comparison, and inaccuracies in
+quantitative change estimation.
+C. Comparison with Prior Methods
+To compare our results with earlier CDVQA methods,
+Table III reports the performance of the best compact Qwen
+variant against representative approaches previously evaluated
+on this benchmark, including the original CDVQA model [1],
+SOBA [15], and the recent VisTA framework [8]. These meth-
+ods represent the main reference points in the literature, from
+the original change-aware baseline to more recent solutions.
+Table III shows that Qwen3.5-2B outperforms all previous
+methods on both test sets. In particular, it achieves better AA
+and OA than the strongest prior model, VisTA, on both test1
+and test2. This is an encouraging result because Qwen3.5-2B
+is a compact general-purpose multimodal model rather than a
+method specifically designed for change question answering.
+Overall, this comparison suggests that recent generalist vision-
+language models can already provide a strong foundation for
+Change VQA, even without heavily specialized task-specific
+design.
+Fig. 3 shows representative failure cases of Qwen3.5-2B
+on CDVQA. Three main error patterns can be observed.
+First, the model may predict a change when the temporal
+difference is subtle and the correct answer is negative. Second,
+it may struggle with fine-grained comparison, especially when
+distinguishing the smallest semantic change among similar
+categories. Third, quantitative reasoning remains difficult, as
+the model may predict a nearby ratio range instead of the
+correct one. These examples show that, despite its strong
+overall results, the model still has difficulty with subtle tem-
+poral differences, fine-grained semantic reasoning, and precise
+change estimation.
+IV. CONCLUSION
+This letter revisited Change VQA in RS using modern
+VLMs on the CDVQA benchmark. The results show that re-
+cent general-purpose VLMs can improve performance on this
+
+[Page 5]
+5
+TABLE II
+PER-QUESTION-TYPE RESULTS OF DIFFERENT QWEN-FAMILY MODELS ON THE TWO OFFICIAL CDVQA TEST SPLITS (%). AA AND OA DENOTE
+AVERAGE ACCURACY AND OVERALL ACCURACY, RESPECTIVELY.
+Question Type
+Test1
+Test2
+VL-2B
+VL-4B
+VL-8B
+3.5-0.8B
+3.5-2B
+3.5-4B
+3.5-9B
+VL-2B
+VL-4B
+VL-8B
+3.5-0.8B
+3.5-2B
+3.5-4B
+3.5-9B
+change ratio
+53.88
+56.78
+54.45
+54.01
+57.55
+57.15
+55.61
+54.06
+59.48
+58.47
+58.20
+59.57
+60.41
+58.95
+class change ratio
+79.12
+78.79
+79.31
+78.47
+79.86
+79.08
+78.83
+77.04
+79.21
+78.70
+78.65
+80.68
+79.45
+79.50
+change or not
+83.53
+83.32
+83.27
+83.11
+83.95
+82.79
+83.18
+77.06
+79.10
+78.33
+78.31
+79.90
+78.77
+78.59
+change to what
+61.45
+61.22
+59.14
+61.85
+61.72
+61.85
+61.85
+59.91
+61.42
+59.31
+61.22
+64.62
+61.69
+62.22
+increase or not
+81.63
+82.87
+81.65
+81.61
+83.24
+82.39
+82.41
+77.06
+84.04
+81.27
+81.77
+80.99
+82.49
+82.88
+decrease or not
+82.37
+82.46
+82.50
+82.25
+82.70
+83.34
+81.75
+74.06
+81.41
+82.16
+82.21
+84.85
+84.15
+83.01
+smallest change
+34.09
+35.26
+32.33
+33.57
+35.23
+34.78
+34.64
+27.89
+35.64
+32.16
+33.92
+37.22
+34.78
+34.30
+largest change
+63.57
+62.16
+62.84
+62.26
+64.46
+65.39
+65.50
+56.82
+62.29
+62.84
+61.60
+68.61
+65.22
+65.36
+AA
+67.45
+67.86
+66.94
+67.14
+68.59
+68.35
+67.97
+62.99
+67.82
+66.65
+66.99
+69.56
+68.37
+68.10
+OA
+73.85
+74.08
+73.47
+73.53
+74.74
+74.22
+74.05
+65.38
+69.33
+68.29
+68.50
+70.94
+69.71
+69.44
+Inf. time (s/sample)
+0.12
+0.17
+0.35
+0.13
+0.16
+0.28
+0.37
+0.16
+0.18
+0.35
+0.13
+0.16
+0.28
+0.37
+TABLE III
+COMPARISON WITH PRIOR METHODS ON THE TWO CDVQA TEST SETS
+(%).
+Model
+Test1 AA
+Test1 OA
+Test2 AA
+Test2 OA
+CDVQA [1]
+55.3
+65.9
+55.4
+61.1
+SOBA [15]
+60.3
+69.2
+60.3
+64.8
+VisTA [8]
+65.9
+73.1
+65.9
+68.5
+Qwen3.5-2B
+68.59
+74.74
+69.56
+70.94
+task compared with earlier specialized methods. The results
+also suggest that native multimodal models are more effective
+than structured vision–language pipelines for Change VQA,
+highlighting the importance of tighter interaction between
+the temporal images and the question. Some challenges still
+remain, especially in subtle temporal comparison, fine-grained
+semantic discrimination, and quantitative change estimation.
+These results suggest that further gains may come from better
+instruction tuning, stronger reasoning during training, and
+better question-guided use of the two temporal images. It may
+also be useful to build on these modern VLMs with lightweight
+change-aware components, such as change spotting rather than
+designing entirely new architectures from scratch.
+REFERENCES
+[1] Z. Yuan, L. Mou, Z. Xiong, and X. X. Zhu, “Change detection meets
+visual question answering,” IEEE Transactions on Geoscience and
+Remote Sensing, vol. 60, pp. 1–13, 2022, art. no. 5630613.
+[2] S. Lobry, D. Marcos, J. Murray, and D. Tuia, “Rsvqa: Visual question
+answering for remote sensing data,” IEEE Transactions on Geoscience
+and Remote Sensing, vol. 58, no. 12, pp. 8555–8566, 2020.
+[3] K. Li, G. Vosselman, and M. Y. Yang, “Hrvqa: A visual question
+answering benchmark for high-resolution aerial images,” ISPRS Journal
+of Photogrammetry and Remote Sensing, vol. 214, pp. 65–81, Aug. 2024.
+[4] J. Wang, Z. Zheng, Z. Chen, A. Ma, and Y. Zhong, “Earthvqa: To-
+wards queryable earth via relational reasoning-based remote sensing
+visual question answering,” in Proceedings of the AAAI Conference on
+Artificial Intelligence, vol. 38, no. 6, Mar. 2024, pp. 5481–5489.
+[5] Y. Bazi, L. Bashmal, M. Al Rahhal, R. Ricci, and F. Melgani, “Rs-
+llava: A large vision-language model for joint captioning and question
+answering in remote sensing imagery,” Remote Sensing, vol. 16, no. 9,
+p. 1477, 2024.
+[6] L. Bashmal, Y. Bazi, F. Melgani, M. M. Al Rahhal, and M. A. Al Zuair,
+“Language integration in remote sensing: Tasks, datasets, and future
+directions,” IEEE Geoscience and Remote Sensing Magazine, vol. 11,
+no. 4, pp. 63–93, 2023.
+[7] X. Weng, C. Pang, and G.-S. Xia, “Vision-language modeling meets
+remote sensing: Models, datasets, and perspectives,” IEEE Geoscience
+and Remote Sensing Magazine, vol. 13, no. 3, pp. 276–323, 2025.
+[8] K. Li, F. Dong, D. Wang, S. Li, Q. Wang, X. Gao, and T.-S. Chua, “Show
+me what and where has changed? question answering and grounding
+for remote sensing change detection,” arXiv preprint arXiv:2410.23828,
+2024.
+[9] E. Ghazaei and E. Aptoula, “Text-conditioned state space model for
+domain-generalized change detection visual question answering,” arXiv
+preprint arXiv:2508.08974, 2025.
+[10] P. Deng, W. Zhou, and H. Wu, “Deltavlm: Interactive remote sensing
+image change analysis via instruction-guided difference perception,”
+Remote Sensing, vol. 18, no. 4, p. 541, 2026.
+[11] S. Bai, Y. Cai, R. Chen, K. Chen, X. Chen et al., “Qwen3-vl technical
+report,” arXiv preprint arXiv:2511.21631, 2025.
+[12] Alibaba
+Cloud
+Community,
+“Qwen3.5:
+Towards
+native
+multimodal
+agents,”
+https://www.alibabacloud.com/blog/
+qwen3-5-towards-native-multimodal-agents 602894,
+Feb.
+2026,
+accessed 2026-03-28.
+[13] E. J. Hu, Y. Shen, P. Wallis, Z. Allen-Zhu, Y. Li, S. Wang, L. Wang,
+and W. Chen, “Lora: Low-rank adaptation of large language models,”
+in International Conference on Learning Representations (ICLR), 2022,
+arXiv:2106.09685 / OpenReview: nZeVKeeFYf9.
+[14] Y. Zheng, R. Zhang, J. Zhang, Y. Ye, Z. Luo, Z. Feng, and Y. Ma,
+“Llamafactory: Unified efficient fine-tuning of 100+ language models,”
+arXiv preprint arXiv:2403.13372, 2024.
+[15] Y. Wang, F. Dong, K. Li, and D. Chen, “Kernel-adaptive change
+detection network in remote sensing imagery,” in IEEE International
+Geoscience and Remote Sensing Symposium (IGARSS).
+IEEE, 2024,
+pp. 10 192–10 196.

@@ -1,0 +1,123 @@
+{
+  "paper_id": "2604.14858v1",
+  "title": "Benchmarks for Trajectory Safety Evaluation and Diagnosis in OpenClaw and Codex: ATBench-Claw and ATBench-CodeX",
+  "organization": "OpenAI",
+  "publish_date": "2026-04-16",
+  "theme": "AI Agent",
+  "source_name": "OpenAI arXiv query",
+  "source_url": "https://arxiv.org/abs/2604.14858v1",
+  "paper_url": "https://arxiv.org/pdf/2604.14858v1",
+  "summary": "As agent systems move into increasingly diverse execution settings, trajectory-level safety evaluation and diagnosis require benchmarks that evolve with them. ATBench is a diverse and realistic agent trajectory benchmark for safety evalu...",
+  "priority": 962,
+  "total_chars": 67256,
+  "chunk_count": 17,
+  "image_paths": [
+    "assets/page-001-img-01.png",
+    "assets/page-001-img-02.png"
+  ],
+  "notes": [],
+  "chunks": [
+    {
+      "index": 1,
+      "heading": "Section 1",
+      "text_len": 3649,
+      "text_preview": "[Page 1]\nATBench-Claw/CodeX\nBenchmarks for Trajectory Safety Evaluation and\nDiagnosis in OpenClaw and Codex:\nATBench-Claw and ATBench-CodeX\nZhonghao Yang\nYu Li\nYanxu Zhu\nTianyi Zhou\nYuejin Xie\nHaoyu L"
+    },
+    {
+      "index": 2,
+      "heading": "Section 2",
+      "text_len": 4618,
+      "text_preview": "[Page 2]\nBenchmarks for Trajectory Safety Evaluation and Diagnosis in OpenClaw and Codex\n2024; Yao et al., 2024). In this context, trajectory-safety benchmarks also need to be customized and updated\na"
+    },
+    {
+      "index": 3,
+      "heading": "Section 3",
+      "text_len": 4708,
+      "text_preview": "[Page 3]\nBenchmarks for Trajectory Safety Evaluation and Diagnosis in OpenClaw and Codex\nThree-dimensional agentic safety taxonomy\nRisk Source (Where risk comes from)\nFailure Mode (How the agent fails"
+    },
+    {
+      "index": 4,
+      "heading": "Section 4",
+      "text_len": 4526,
+      "text_preview": "[Page 4]\nBenchmarks for Trajectory Safety Evaluation and Diagnosis in OpenClaw and Codex\nBenchmark\nNew customized categories\nKey strengthened inherited\ncategories\nHarm-side customization\nExecution-con"
+    },
+    {
+      "index": 5,
+      "heading": "Section 5",
+      "text_len": 4395,
+      "text_preview": "[Page 5]\nBenchmarks for Trajectory Safety Evaluation and Diagnosis in OpenClaw and Codex\nCategory\nRepresentative structures\nRole in ATBench-Claw\nMeta\nexample identifier, scenario group-\ning, release f"
+    },
+    {
+      "index": 6,
+      "heading": "Section 6",
+      "text_len": 4502,
+      "text_preview": "[Page 6]\nBenchmarks for Trajectory Safety Evaluation and Diagnosis in OpenClaw and Codex\nversus non-approval-required actions, short trajectories versus long-context or multi-tool trajectories, and\nco"
+    },
+    {
+      "index": 7,
+      "heading": "Section 7",
+      "text_len": 4116,
+      "text_preview": "[Page 7]\nBenchmarks for Trajectory Safety Evaluation and Diagnosis in OpenClaw and Codex\nCategory\nRepresentative structures\nRole in ATBench-CodeX\nMeta\nid, output_format\nIdentifies the benchmark exampl"
+    },
+    {
+      "index": 8,
+      "heading": "Section 8",
+      "text_len": 4615,
+      "text_preview": "[Page 8]\nBenchmarks for Trajectory Safety Evaluation and Diagnosis in OpenClaw and Codex\nTable 4: Main results on ATBench-Claw (left) and ATBench-CodeX (right) under a shared evaluation setup.\nATBench"
+    },
+    {
+      "index": 9,
+      "heading": "Section 9",
+      "text_len": 4019,
+      "text_preview": "[Page 9]\nBenchmarks for Trajectory Safety Evaluation and Diagnosis in OpenClaw and Codex\n0\n20\n40\n60\n80\n100\nCoarse Accuracy (%)\nMalicious User / Jailbreak\n(n=19)\nDirect Prompt Injection\n(n=18)\nIndirect"
+    },
+    {
+      "index": 10,
+      "heading": "Section 10",
+      "text_len": 3737,
+      "text_preview": "[Page 10]\nBenchmarks for Trajectory Safety Evaluation and Diagnosis in OpenClaw and Codex\n0\n20\n40\n60\n80\n100\nCoarse Accuracy (%)\nIndirect Prompt Injection\n(n=26)\nUnreliable or Misinformation\n(n=41)\nToo"
+    },
+    {
+      "index": 11,
+      "heading": "Section 11",
+      "text_len": 4146,
+      "text_preview": "[Page 11]\nBenchmarks for Trajectory Safety Evaluation and Diagnosis in OpenClaw and Codex\nQihao Lin, Yi Yu, Bo Zhang, Jiaxuan Guo, Jie Zhang, Wenqi Shao, Huiqi Deng, Zhiheng Xi, Wenjie\nWang, Wenxuan W"
+    },
+    {
+      "index": 12,
+      "heading": "Section 12",
+      "text_len": 3113,
+      "text_preview": "[Page 13]\nBenchmarks for Trajectory Safety Evaluation and Diagnosis in OpenClaw and Codex\nA\nDetailed Customized Safety Taxonomy Tables\nThis appendix provides the detailed customized taxonomy tables us"
+    },
+    {
+      "index": 13,
+      "heading": "Section 13",
+      "text_len": 3325,
+      "text_preview": "[Page 14]\nBenchmarks for Trajectory Safety Evaluation and Diagnosis in OpenClaw and Codex\nRisk Source\nCategory\nSubcategory\nDescription\nATBench-Claw\nnote\nATBench-CodeX\nnote\nPersistent Memory /\nSession-"
+    },
+    {
+      "index": 14,
+      "heading": "Section 14",
+      "text_len": 3330,
+      "text_preview": "[Page 15]\nBenchmarks for Trajectory Safety Evaluation and Diagnosis in OpenClaw and Codex\nRisk Source\nCategory\nSubcategory\nDescription\nATBench-Claw\nnote\nATBench-CodeX\nnote\nPolicy Precedence\nMisinterpr"
+    },
+    {
+      "index": 15,
+      "heading": "Section 15",
+      "text_len": 3447,
+      "text_preview": "[Page 16]\nBenchmarks for Trajectory Safety Evaluation and Diagnosis in OpenClaw and Codex\nFailure Mode\nCategory\nSubcategory\nDescription\nATBench-Claw\nnote\nATBench-CodeX\nnote\nInefficient or Wasteful\nExe"
+    },
+    {
+      "index": 16,
+      "heading": "Section 16",
+      "text_len": 3539,
+      "text_preview": "[Page 17]\nBenchmarks for Trajectory Safety Evaluation and Diagnosis in OpenClaw and Codex\nFailure Mode\nCategory\nSubcategory\nDescription\nATBench-Claw\nnote\nATBench-CodeX\nnote\nGeneration of Malicious\nExe"
+    },
+    {
+      "index": 17,
+      "heading": "Section 17",
+      "text_len": 3439,
+      "text_preview": "[Page 18]\nBenchmarks for Trajectory Safety Evaluation and Diagnosis in OpenClaw and Codex\nReal-world Harm\nDescription\nATBench-Claw\nnote\nATBench-CodeX\nnote\nInfo-ecosystem & Societal\nHarm\nHarms that deg"
+    }
+  ]
+}

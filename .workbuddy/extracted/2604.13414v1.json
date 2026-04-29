@@ -1,0 +1,126 @@
+{
+  "paper_id": "2604.13414v1",
+  "title": "Minimax Optimality and Spectral Routing for Majority-Vote Ensembles under Markov Dependence",
+  "organization": "MiniMax",
+  "publish_date": "2026-04-15",
+  "theme": "深度学习时序预测",
+  "source_name": "MiniMax arXiv query",
+  "source_url": "https://arxiv.org/abs/2604.13414v1",
+  "paper_url": "https://arxiv.org/pdf/2604.13414v1",
+  "summary": "Majority-vote ensembles achieve variance reduction by averaging over diverse, approximately independent base learners. When training data exhibits Markov dependence, as in time-series forecasting, reinforcement learning (RL) replay buffe...",
+  "priority": 886,
+  "total_chars": 62496,
+  "chunk_count": 18,
+  "image_paths": [],
+  "notes": [],
+  "chunks": [
+    {
+      "index": 1,
+      "heading": "Section 1",
+      "text_len": 2981,
+      "text_preview": "[Page 1]\nMinimax Optimality and Spectral Routing for\nMajority-Vote Ensembles under Markov Dependence\nIbne Farabi Shihab∗†1\nSanjeda Akter∗1\nAnuj Sharma2\n1Department of Computer Science, Iowa State Univ"
+    },
+    {
+      "index": 2,
+      "heading": "Section 2",
+      "text_len": 4538,
+      "text_preview": "[Page 2]\nTwo natural questions emerge. First, what is the fundamental statistical limit for ensemble learning\nunder Markov dependence, measured in terms of the mixing time Tmix? Second, does the defau"
+    },
+    {
+      "index": 3,
+      "heading": "Section 3",
+      "text_len": 3797,
+      "text_preview": "[Page 3]\napplies to continuous parametric regression, and uniform bootstrap resampling fractures contiguous\ntrajectories in a way that repeatedly resets the estimator into the burn-in phase, which is "
+    },
+    {
+      "index": 4,
+      "heading": "Section 4",
+      "text_len": 3343,
+      "text_preview": "[Page 4]\nwith |i −j| ≤τ for a fixed window τ; for spatial or tabular data, edges are assigned via k-nearest\nneighbors in physical or feature space. Since the underlying process has spectral gap γ0, th"
+    },
+    {
+      "index": 5,
+      "heading": "Section 5",
+      "text_len": 3619,
+      "text_preview": "[Page 5]\nProposition 4 (Margin autocovariance). Under Assumptions 1–2 on a stationary reversible chain,\nthe Bayes-optimal margin process M ∗\nt = Yth∗(Xt) satisfies\nTmix−1\nX\nk=0\nCov(M ∗\n0 , M ∗\nk) ≥cMT"
+    },
+    {
+      "index": 6,
+      "heading": "Section 6",
+      "text_len": 3158,
+      "text_preview": "[Page 6]\nAlgorithm 1 Adaptive Spectral Routing for Ensembles\nRequire: Data {(Xi, Yi)}n\ni=1, empirical dependency graph G, ensemble size m.\n1: Compute the normalized Laplacian ˜L = I −D−1/2WD−1/2 (for "
+    },
+    {
+      "index": 7,
+      "heading": "Section 7",
+      "text_len": 3863,
+      "text_preview": "[Page 7]\nProof. The proof combines a within-partition blocking variance bound, the cross-partition decoupling\nassumption (G4), and the graph-dependent cut-to-risk conversion bound of Zhang et al. [201"
+    },
+    {
+      "index": 8,
+      "heading": "Section 8",
+      "text_len": 3141,
+      "text_preview": "[Page 8]\nLag-Based Thinning (discarding intermediate samples to reduce correlation); ˆTmix-Thinning, which\nsubsamples every ˆTmix ∝1/ˆλ2 steps using our empirical spectral estimate and isolates the ef"
+    },
+    {
+      "index": 9,
+      "heading": "Section 9",
+      "text_len": 2953,
+      "text_preview": "[Page 9]\nstructure they attempt to exploit. Spectral routing acts directly on the k-NN spatial graph via the\nFiedler vector, consistent with the spatial cut bounds of Theorem 10.\n5.3\nUCR Archive and C"
+    },
+    {
+      "index": 10,
+      "heading": "Section 10",
+      "text_len": 4218,
+      "text_preview": "[Page 10]\n5.4\nAtari DQN: Testing the Mechanism in Deep RL\nTo test whether the bootstrap covariance mechanism of Lemma 5 appears in replay-buffer learning, we\nevaluate 5-head ensemble DQN architectures"
+    },
+    {
+      "index": 11,
+      "heading": "Section 11",
+      "text_len": 3815,
+      "text_preview": "[Page 11]\ndependency-agnostic uniform bagging exhibits a provable √Tmix suboptimality gap on the same\nAR(1) witness subclass, and adaptive spectral routing recovers the minimax rate up to a lower-orde"
+    },
+    {
+      "index": 12,
+      "heading": "Section 12",
+      "text_len": 2987,
+      "text_preview": "[Page 12]\nBalaji Lakshminarayanan, Alexander Pritzel, and Charles Blundell. Simple and scalable predictive\nuncertainty estimation using deep ensembles. In Advances in Neural Information Processing\nSys"
+    },
+    {
+      "index": 13,
+      "heading": "Section 13",
+      "text_len": 3206,
+      "text_preview": "[Page 13]\nA\nFormal Proof of Theorem 3\nProof. We use a generalized Fano reduction over a localized packing of Markov transition kernels\n[Tsybakov, 2009], with d0 fixed throughout.\nStep 1: hypercube pac"
+    },
+    {
+      "index": 14,
+      "heading": "Section 14",
+      "text_len": 2952,
+      "text_preview": "[Page 14]\nΩ((n/Tmix)δ2) plus a drift-driven term of order Ω(ν2n/Tmix), and applying Fano to the combined\ndivergence suggests the perturbative scaling\np\nTmix/n + νTmix/n\nunder the AR(1) witness constru"
+    },
+    {
+      "index": 15,
+      "heading": "Section 15",
+      "text_len": 3914,
+      "text_preview": "[Page 15]\nD\nSufficient Conditions for Assumption 1(iii)\nProposition 13. Let (Xt, Yt) be drawn from a geometrically ergodic reversible chain with spectral\ngap γ0 and stationary distribution π. Suppose "
+    },
+    {
+      "index": 16,
+      "heading": "Section 16",
+      "text_len": 3630,
+      "text_preview": "[Page 16]\nthe matrix exponential governing the solution is determined by the eigenspace of Θ, which preserves\nthe Ω(Tmix) structural covariance of the data.\nFor an ensemble of m networks with independ"
+    },
+    {
+      "index": 17,
+      "heading": "Section 17",
+      "text_len": 3077,
+      "text_preview": "[Page 17]\nTable 8: Runtime (seconds) for spectral gap compu-\ntation.\nBuffer size (n)\n104\n105\n106 steps\nExact eigensolve\n15.8 s\n1,495 s\nOOM\nNyström approx.\n2.4 s\n27.2 s\n298.5 s\n103\n104\n105\n106\n0\n20\n40\n"
+    },
+    {
+      "index": 18,
+      "heading": "Section 18",
+      "text_len": 3269,
+      "text_preview": "[Page 18]\nI\nExtended UCR Benchmark Analysis\nTable 11 gives detailed accuracy for a representative 40-dataset slice of the full 128 UCR datasets,\nsplit by autocorrelation. A Friedman test across all 8 "
+    }
+  ]
+}

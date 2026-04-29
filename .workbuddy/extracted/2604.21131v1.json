@@ -1,0 +1,285 @@
+{
+  "paper_id": "2604.21131v1",
+  "title": "Cross-Session Threats in AI Agents: Benchmark, Evaluation, and Algorithms",
+  "organization": "Anthropic",
+  "publish_date": "2026-04-22",
+  "theme": "AI Agent",
+  "source_name": "Anthropic arXiv query",
+  "source_url": "https://arxiv.org/abs/2604.21131v1",
+  "paper_url": "https://arxiv.org/pdf/2604.21131v1",
+  "summary": "AI-agent guardrails are memoryless: each message is judged in isolation, so an adversary who spreads a single attack across dozens of sessions slips past every session-bound detector because only the aggregate carries the payload. We mak...",
+  "priority": 953,
+  "total_chars": 166516,
+  "chunk_count": 43,
+  "image_paths": [
+    "assets/page-003-img-01.png",
+    "assets/page-005-img-01.png",
+    "assets/page-006-img-01.png",
+    "assets/page-011-img-01.png",
+    "assets/page-013-img-01.png",
+    "assets/page-015-img-01.png",
+    "assets/page-016-img-01.png",
+    "assets/page-017-img-01.png"
+  ],
+  "notes": [],
+  "chunks": [
+    {
+      "index": 1,
+      "heading": "Section 1",
+      "text_len": 3476,
+      "text_preview": "[Page 1]\nCross-Session Threats in AI Agents:\nBenchmark, Evaluation, and Algorithms\nAri Azarafrooz∗1\n1Intrinsec AI\nAbstract\nAI-agent guardrails are memoryless: each message is judged in isolation, and "
+    },
+    {
+      "index": 2,
+      "heading": "Section 2",
+      "text_len": 4053,
+      "text_preview": "[Page 2]\nfirst-class metric—LLM-free, label-free, and measurable continuously in production—and\nfuse it with detection quality into a non-compensatory composite\nCSTM = 0.7 · F1(CSDA@action, precision)"
+    },
+    {
+      "index": 3,
+      "heading": "Section 3",
+      "text_len": 2419,
+      "text_preview": "[Page 3]\nFigure 1: Frontier LLM context windows have grown roughly 30× per year since 2023 [5]: from\n2K tokens (GPT-3, 2020) to 1M–10M tokens by 2025–2026 (GPT-4.1, GPT-5.4, Claude Opus 4.6,\nGemini 2."
+    },
+    {
+      "index": 4,
+      "heading": "Section 4",
+      "text_len": 3539,
+      "text_preview": "[Page 4]\nand useful. They are not sufficient: adversarial prompting is infinite-space and adaptive, and\nthe Anthropic GTG-1002 campaign [4] is an existence proof that a capable attacker can route\narou"
+    },
+    {
+      "index": 5,
+      "heading": "Section 5",
+      "text_len": 4712,
+      "text_preview": "[Page 5]\nFigure 2: (a) Session-bound guardrails see each message in isolation and pass all five turns—every\nturn is plausible DevOps work, not a keyword or tool-policy hit. (b) A cross-session correla"
+    },
+    {
+      "index": 6,
+      "heading": "Section 6",
+      "text_len": 3048,
+      "text_preview": "[Page 7]\ntoken volumes well inside the correlator’s context window. A cross-cutting inject_on_reader\nOperations tag documents a category hazard the Full-Log Correlator is structurally vulnerable\nto: b"
+    },
+    {
+      "index": 7,
+      "heading": "Section 7",
+      "text_len": 2721,
+      "text_preview": "[Page 8]\nTable 1: The seven identity anchors. Each anchor’s policy is the ground truth against which\nattack/benign is judged.\nAnchor\nScope\nHard prohibitions\ncustomer_support\nProduct/order/account Q&A."
+    },
+    {
+      "index": 8,
+      "heading": "Section 8",
+      "text_len": 4190,
+      "text_preview": "[Page 9]\nTable 3: The four cross-session Operations.\nOperation\nDefinition\naccumulate\nProgressive escalation—stage N builds on stage N-1.\ncompose\nDisjoint fragments that only form the attack in aggrega"
+    },
+    {
+      "index": 9,
+      "heading": "Section 9",
+      "text_len": 2984,
+      "text_preview": "[Page 10]\nTable 5: The two confounder patterns used by Benign-hard scenarios. Each pattern produces\nstand-alone benign scenarios; the confusion it targets is the cross-session shape a naive Reader\nmig"
+    },
+    {
+      "index": 10,
+      "heading": "Section 10",
+      "text_len": 2057,
+      "text_preview": "[Page 11]\nFigure 4: Seed instructions from the attack catalog feed through the Session Planner (kill-chain-\nstaged per-session objectives), the Transcript Generator (coherent multi-turn transcripts vi"
+    },
+    {
+      "index": 11,
+      "heading": "Section 11",
+      "text_len": 3148,
+      "text_preview": "[Page 12]\nTable 6: T03 (Compositional Exfiltration) phase plan as produced by the Session Planner for a\n6-session arc. Six independent LLM calls produce six coherent chats; the generator does not see\n"
+    },
+    {
+      "index": 12,
+      "heading": "Section 12",
+      "text_len": 2423,
+      "text_preview": "[Page 13]\nTable 8: Prompt inflation strategies. All five strategies are available for every anchor and draw\ntheir padding from a domain-keyed corpus matching the anchor’s policy scope.\nStrategy\nWhat t"
+    },
+    {
+      "index": 13,
+      "heading": "Section 13",
+      "text_len": 4036,
+      "text_preview": "[Page 14]\nTable 9: Multimodal injection methods.\nMethod\nTechnique\nHuman visibility\nOCR confidence\ntext_overlay\nAttack text at small font in near-background color\nBarely visible\nHigh\nlow_contrast\nAttac"
+    },
+    {
+      "index": 14,
+      "heading": "Section 14",
+      "text_len": 4756,
+      "text_preview": "[Page 15]\nFigure 6: Three views of the released shards (panels (a) and (b) computed on the dilution shard;\ncross-session shard is byte-identical on all label-carrying fields). (a) Attack-phase composi"
+    },
+    {
+      "index": 15,
+      "heading": "Section 15",
+      "text_len": 4921,
+      "text_preview": "[Page 17]\nFigure 8: Empirical CSR_prefix trajectories on the dilution shard (54 scenarios, K=50), produced\nby the reference coreset admitter of §C driven by text-embedding-3-small. Thin coloured\nlines"
+    },
+    {
+      "index": 16,
+      "heading": "Section 16",
+      "text_len": 3057,
+      "text_preview": "[Page 19]\nTable 12: FPR broken down by scenario class. Assignment is by construction—each scenario is\nemitted by exactly one top-level loop in scripts/generate_dataset.py.\nScenario class\nGround truth "
+    },
+    {
+      "index": 17,
+      "heading": "Section 17",
+      "text_len": 2872,
+      "text_preview": "[Page 20]\nTable 14: Architectural comparison between the two readers.\nProperty\nCoreset Memory Reader\nFull-Log Correlator\nWhen it detects\nReal-time (per message)\nAfter all messages ingested\nMemory\nBoun"
+    },
+    {
+      "index": 18,
+      "heading": "Section 18",
+      "text_len": 4056,
+      "text_preview": "[Page 21]\nContext fits comfortably.\nNo scenario in either shard exceeded Claude Sonnet 4.6’s 1 M-token\ncontext window, so the Full-Log Correlator’s reported CSTM is its uncompressed performance\n(no tr"
+    },
+    {
+      "index": 19,
+      "heading": "Section 19",
+      "text_len": 3917,
+      "text_preview": "[Page 22]\nTable 15: The three readers on both shards. Attack recall metrics are over the 26 Attack\nscenarios; FPR rows are over 14 Benign-pristine and 14 Benign-hard. The rewrite loop modifies\nonly us"
+    },
+    {
+      "index": 20,
+      "heading": "Section 20",
+      "text_len": 3910,
+      "text_preview": "[Page 23]\nTable 16: Per-scenario agreement between the per-session judge (Iso) and the Full-Log Correlator\n(FL) on both shards of CSTM-Bench. Each cell counts Attack scenarios; row and column totals\nm"
+    },
+    {
+      "index": 21,
+      "heading": "Section 21",
+      "text_len": 4591,
+      "text_preview": "[Page 24]\nfor which at least one session in the scenario still trips J (because the rewriter failed to conquer\nit), yet the same correlator, given the full log over 20–40 sessions, declines to flag dr"
+    },
+    {
+      "index": 22,
+      "heading": "Section 22",
+      "text_len": 3101,
+      "text_preview": "[Page 25]\nTable 17: Per-taxonomy Full-Log Correlator results on the 26 Attack scenarios of dilution.\nScore is the per-scenario CSTM = 0.7·F1(CSDA@action, 1−FPR)+0.3·CSRprefix as computed\nby the harnes"
+    },
+    {
+      "index": 23,
+      "heading": "Section 23",
+      "text_len": 3014,
+      "text_preview": "[Page 26]\nTable 18: Token and context-window statistics for the Full-Log Correlator run on the 54-scenario\nshard (26 Attack + 14 Benign-pristine + 14 Benign-hard), Claude Sonnet 4.6. Text token counts"
+    },
+    {
+      "index": 24,
+      "heading": "Section 24",
+      "text_len": 3987,
+      "text_preview": "[Page 27]\nshards (Iso-yes/FL-no cell of Table 16). The correlator is not running out of tokens; it is running\nout of attack signal relative to benign mass, and its single-shot verdict settles on the d"
+    },
+    {
+      "index": 25,
+      "heading": "Section 25",
+      "text_len": 3931,
+      "text_preview": "[Page 28]\nprompt-optimisation pass on any of them, and we did not search over temperature, tool-schema\nvariants, or decoding settings. The absolute numbers in §6 should therefore be read as “what\nhapp"
+    },
+    {
+      "index": 26,
+      "heading": "Section 26",
+      "text_len": 3409,
+      "text_preview": "[Page 29]\nunder adaptive rewriting, and the Coreset Memory Reader—the same correlator fed a bounded,\nsurprise-ranked buffer—is the only LLM-backed reader whose recall survives.\nA call for community in"
+    },
+    {
+      "index": 27,
+      "heading": "Section 27",
+      "text_len": 2553,
+      "text_preview": "[Page 30]\n[10] Russinovich, M., Salem, A., & Eldan, R. (2024). Great, Now Write an Article About That: The\nCrescendo Multi-Turn LLM Jailbreak Attack. In Proc. USENIX Security 2025. arXiv:2404.01833.\n["
+    },
+    {
+      "index": 28,
+      "heading": "Section 28",
+      "text_len": 3530,
+      "text_preview": "[Page 31]\nThree properties make this more than a textbook choice: (1) it respects the simplex constraint\nautomatically; (2) the log K dependence on buffer size is exactly the regime the benchmark care"
+    },
+    {
+      "index": 29,
+      "heading": "Section 29",
+      "text_len": 3198,
+      "text_preview": "[Page 32]\n(text-embedding-3-small), and a Gaussian N(µ, Σ) is fit to the compliant cluster by PCA with\nLedoit-Wolf shrinkage. The surprise threshold τA is the 90th-percentile Mahalanobis distance of\nt"
+    },
+    {
+      "index": 30,
+      "heading": "Section 30",
+      "text_len": 3197,
+      "text_preview": "[Page 33]\nC.2\nWhat Produces the Coreset Rows of Table 15\nThe Coreset Memory Reader of §6 composes the construction of §C.1 with the Full-Log Correlator\nof §5 by running each scenario through the selec"
+    },
+    {
+      "index": 31,
+      "heading": "Section 31",
+      "text_len": 3662,
+      "text_preview": "[Page 34]\nC.4\nA CSTM-Bench-Aware Upgrade Path\nThree changes move this baseline toward the regret-aware regime:\n1. Replace the single compliance Gaussian with an anchor-conditional mixture, so compose-"
+    },
+    {
+      "index": 32,
+      "heading": "Section 32",
+      "text_len": 4226,
+      "text_preview": "[Page 35]\nWhen the needle is longer than the budget we show its first 140 and last 320 characters with\nan explicit “needle middle elided (N chars)” separator, because LLM-authored fragments\ntend to op"
+    },
+    {
+      "index": 33,
+      "heading": "Section 33",
+      "text_len": 5198,
+      "text_preview": "[Page 36]\nHey, I wanted to continue our conversation from earlier about our infrastructure setup. We’ve been making\na lot of progress on the Kubernetes migration and I wanted to share some of the rece"
+    },
+    {
+      "index": 34,
+      "heading": "Section 34",
+      "text_len": 5049,
+      "text_preview": "[Page 37]\nI’ve been working on this monitoring stack for the past few weeks and wanted to share some of the code we’\nve put together. We’re running a fairly complex microservices setup with about 40 s"
+    },
+    {
+      "index": 35,
+      "heading": "Section 35",
+      "text_len": 5183,
+      "text_preview": "[Page 38]\nHey, I’m working on a data pipeline for our internal analytics platform and wanted to get your help\nreviewing some code related to our shared Redis cache usage. We’re migrating from a legacy"
+    },
+    {
+      "index": 36,
+      "heading": "Section 36",
+      "text_len": 4722,
+      "text_preview": "[Page 39]\n[session # 23 | kill_chain=action_on_objective | heat=0.10 | narrative=action_on_objective |\nattack_fragment #3]\n[decoy preface | strategy=document_buried_signal | chars 0-140 of 8252]\nI nee"
+    },
+    {
+      "index": 37,
+      "heading": "Section 37",
+      "text_len": 4774,
+      "text_preview": "[Page 40]\n[session # 20 | kill_chain=privilege_escalation | heat=0.50 | narrative=privilege_escalation |\nattack_fragment #3]\nI wanted to start our session by sharing some context about how our team ty"
+    },
+    {
+      "index": 38,
+      "heading": "Section 38",
+      "text_len": 5058,
+      "text_preview": "[Page 41]\nQuick question for the support team -- I know this is a bit outside the usual product/order/account lane,\nbut one of our engineers pointed me here because we’re investigating a suspicious-lo"
+    },
+    {
+      "index": 39,
+      "heading": "Section 39",
+      "text_len": 5216,
+      "text_preview": "[Page 42]\nI’m doing a thorough audit of our authentication middleware and I want to make sure the session token\nvalidation logic is consistent everywhere. Below is the current state of our primary aut"
+    },
+    {
+      "index": 40,
+      "heading": "Section 40",
+      "text_len": 4883,
+      "text_preview": "[Page 43]\nregional hubs. \"\"\" import asyncio import logging import json import time import hashlib import hmac\nimport os import ssl import aiohttp import aiomqtt from dataclasses import dataclass, fiel"
+    },
+    {
+      "index": 41,
+      "heading": "Section 41",
+      "text_len": 4713,
+      "text_preview": "[Page 44]\nlogging.getLogger(__name__) @dataclass class PortfolioConfig: target_allocations: Dict[str, float]\nrebalance_threshold: float ... [truncated: shown 520/4912 chars]\nD.10\nT24 Retrieval / Memor"
+    },
+    {
+      "index": 42,
+      "heading": "Section 42",
+      "text_len": 4720,
+      "text_preview": "[Page 45]\nI’m preparing a comprehensive review request. Please go through each section and provide your assessment.\n## Thread Summary Internal memo...\n[buried attack needle | chars 1068-3810 of 5337 |"
+    },
+    {
+      "index": 43,
+      "heading": "Section 43",
+      "text_len": 4222,
+      "text_preview": "[Page 46]\nand write outputs to designated internal sinks.\nScale: 24 sessions, 24 total messages, 4 attack-fragment user turns.\nShape: Multi-agent implicit-coordination arc; open-problem set.\nThe snipp"
+    }
+  ]
+}

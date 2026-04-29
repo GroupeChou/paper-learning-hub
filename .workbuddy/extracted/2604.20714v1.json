@@ -1,0 +1,105 @@
+{
+  "paper_id": "2604.20714v1",
+  "title": "Learning to Evolve: A Self-Improving Framework for Multi-Agent Systems via Textual Parameter Graph Optimization",
+  "organization": "Meta FAIR",
+  "publish_date": "2026-04-22",
+  "theme": "AI Agent",
+  "source_name": "Meta FAIR arXiv query",
+  "source_url": "https://arxiv.org/abs/2604.20714v1",
+  "paper_url": "https://arxiv.org/pdf/2604.20714v1",
+  "summary": "Designing and optimizing multi-agent systems (MAS) is a complex, labor-intensive process of \"Agent Engineering.\" Existing automatic optimization methods, primarily focused on flat prompt tuning, lack the structural awareness to debug the...",
+  "priority": 925,
+  "total_chars": 54488,
+  "chunk_count": 14,
+  "image_paths": [
+    "assets/page-001-img-01.png",
+    "assets/page-004-img-01.png"
+  ],
+  "notes": [],
+  "chunks": [
+    {
+      "index": 1,
+      "heading": "Section 1",
+      "text_len": 3557,
+      "text_preview": "[Page 1]\nLearning to Evolve: A Self-Improving Framework for Multi-Agent Systems\nvia Textual Parameter Graph Optimization\nShan He∗\nRunze Wang∗\nZhuoyun Du\nHuiyu Bai\nZouying Cao\nYu Cheng\nBo Zheng†\nFuture"
+    },
+    {
+      "index": 2,
+      "heading": "Section 2",
+      "text_len": 4650,
+      "text_preview": "[Page 2]\nwhere the system must improve without a \"golden\"\nanswer, relying on self-correction from execution\nfeedback. On the other hand, imitative optimiza-\ntion seeks to align the system’s behavior w"
+    },
+    {
+      "index": 3,
+      "heading": "Section 3",
+      "text_len": 4491,
+      "text_preview": "[Page 3]\nguided by manually crafted personas (Lin et al.,\n2025), which is crucial for achieving sophisticated\noutcomes beyond single-agent performance. Con-\nsequently, the overall system performance i"
+    },
+    {
+      "index": 4,
+      "heading": "Section 4",
+      "text_len": 2775,
+      "text_preview": "[Page 4]\nFigure 2: Overview of the Textual Parameter Graph Optimization (TPGO) framework. The framework\noperates in a closed-loop cycle: (1) Graph Construction, where unstructured agent prompts are di"
+    },
+    {
+      "index": 5,
+      "heading": "Section 5",
+      "text_len": 4194,
+      "text_preview": "[Page 5]\nestablished by connecting nodes across different\nagent subgraphs.\nGraph-based Optimization.\nThis graph-based\nrepresentation transforms the challenge of prompt\nengineering into a structured gr"
+    },
+    {
+      "index": 6,
+      "heading": "Section 6",
+      "text_len": 4436,
+      "text_preview": "[Page 6]\n4.4\nSelf-Evolving Optimization via GRAO\nThe gradient-driven evolution process relies on an\nOptimizer LLM to generate optimization proposals\n(∆G). However, a static optimizer may repeatedly\nsu"
+    },
+    {
+      "index": 7,
+      "heading": "Section 7",
+      "text_len": 3441,
+      "text_preview": "[Page 7]\nTable 1: Performance on the MCP-Universe benchmark, an exploratory optimization scenario. TPGO significantly\nenhances the success rate of ReAct agents across all four complex task domains by "
+    },
+    {
+      "index": 8,
+      "heading": "Section 8",
+      "text_len": 4328,
+      "text_preview": "[Page 8]\nprimary metric for effectiveness. Average Time is\nthe wall-clock time in seconds from task initiation\nto completion, measuring system efficiency.\n5.2\nMain Results and Analysis\nThis section ad"
+    },
+    {
+      "index": 9,
+      "heading": "Section 9",
+      "text_len": 4058,
+      "text_preview": "[Page 9]\nTable 4:\nCross-domain generalization on MCP-\nUniverse. TPGO is optimized on Browser Automation\nonly.\nMethod\nBrowser\nWeb\nRepo\n3D\nReAct (DS-V3.2)\n20.51\n16.36\n42.18\n60.03\n+ TPGO\n28.03\n18.18\n44.9"
+    },
+    {
+      "index": 10,
+      "heading": "Section 10",
+      "text_len": 4741,
+      "text_preview": "[Page 10]\nReferences\nJinyuan Fang, Yanwen Peng, Xi Zhang, Yingxu Wang,\nXinhao Yi, Guibin Zhang, Yi Xu, Bin Wu, Siwei\nLiu, Zihao Li, and 1 others. 2025. A comprehensive\nsurvey of self-evolving ai agent"
+    },
+    {
+      "index": 11,
+      "heading": "Section 11",
+      "text_len": 4561,
+      "text_preview": "[Page 11]\nB\nEthical Considerations\nNo human participants, crowdsourcing, or person-\nally identifiable information (PII) were involved in\nthis research. All experiments were conducted on\npublic benchma"
+    },
+    {
+      "index": 12,
+      "heading": "Section 12",
+      "text_len": 3733,
+      "text_preview": "[Page 12]\nretaining key instructions and output schemas.\nD.1\nGraph Construction Prompt (Parser\nLLM)\nParser System Prompt\nRole. Convert an agent prompt into a Textual Parameter\nGraph (TPG).\nTask. Decom"
+    },
+    {
+      "index": 13,
+      "heading": "Section 13",
+      "text_len": 2291,
+      "text_preview": "[Page 13]\nTable 6: Analysis of a Representative Trajectory Failure\nComponent\nDescription\nTrajectory Flaw\nThe agent identified Ollie Watkins but only validated 2 of 4 constraints (current\nseason stats)"
+    },
+    {
+      "index": 14,
+      "heading": "Section 14",
+      "text_len": 3206,
+      "text_preview": "[Page 14]\nE\nCase Study\nWe present a representative case to illustrate how\nTPGO diagnoses a trajectory-level failure, maps it\nto a structured graph update, and produces an inter-\npretable prompt modifi"
+    }
+  ]
+}

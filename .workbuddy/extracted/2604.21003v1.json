@@ -1,0 +1,56 @@
+{
+  "paper_id": "2604.21003v1",
+  "title": "The Last Harness You'll Ever Build",
+  "organization": "Meta FAIR",
+  "publish_date": "2026-04-22",
+  "theme": "AI Agent",
+  "source_name": "Meta FAIR arXiv query",
+  "source_url": "https://arxiv.org/abs/2604.21003v1",
+  "paper_url": "https://arxiv.org/pdf/2604.21003v1",
+  "summary": "AI agents are increasingly deployed on complex, domain-specific workflows -- navigating enterprise web applications that require dozens of clicks and form fills, orchestrating multi-step research pipelines that span search, extraction, a...",
+  "priority": 910,
+  "total_chars": 21073,
+  "chunk_count": 6,
+  "image_paths": [
+    "assets/page-002-img-01.png"
+  ],
+  "notes": [],
+  "chunks": [
+    {
+      "index": 1,
+      "heading": "Section 1",
+      "text_len": 3521,
+      "text_preview": "[Page 1]\nTechnical Report\nTHE LAST HARNESS YOU’LL EVER BUILD\nHaebin Seong\nSylph.AI\nLi Yin\nSylph.AI\nHaoran Zhang\nSylph.AI\nABSTRACT\nAI agents are increasingly deployed on complex, domain-specific workfl"
+    },
+    {
+      "index": 2,
+      "heading": "Section 2",
+      "text_len": 4773,
+      "text_preview": "[Page 2]\nTechnical Report\nFigure 1: System architecture. The Meta-Evolution Loop (green, outer) optimizes the evolution\nprotocol Λ by running the Harness Evolution Loop (blue, inner) across diverse tr"
+    },
+    {
+      "index": 3,
+      "heading": "Section 3",
+      "text_len": 3412,
+      "text_preview": "[Page 4]\nTechnical Report\n• Hooks and middleware: deterministic execution guarantees injected around the model\n(compaction, continuation, lint checks, verification loops).\n• Model configurations: the "
+    },
+    {
+      "index": 4,
+      "heading": "Section 4",
+      "text_len": 3474,
+      "text_preview": "[Page 5]\nTechnical Report\nperformance. This historical context prevents the evolution agent from repeating unsuc-\ncessful strategies and enables it to build on prior insights.\n2. Identifies failure pa"
+    },
+    {
+      "index": 5,
+      "heading": "Section 5",
+      "text_len": 3270,
+      "text_preview": "[Page 6]\nTechnical Report\nworker harness H(K). Measure the convergence trajectory: how quickly and how well the\nworker improves on this task.\n• Outer loop (the Meta-Evolution): Across multiple tasks t"
+    },
+    {
+      "index": 6,
+      "heading": "Section 6",
+      "text_len": 2613,
+      "text_preview": "[Page 7]\nTechnical Report\nWhere harness engineering has traditionally required deep human expertise applied to each specific\ntask domain, the Harness Evolution Loop automates this process entirely—tra"
+    }
+  ]
+}

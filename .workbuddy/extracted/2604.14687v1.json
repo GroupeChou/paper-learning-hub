@@ -1,0 +1,153 @@
+{
+  "paper_id": "2604.14687v1",
+  "title": "M2-PALE: A Framework for Explaining Multi-Agent MCTS--Minimax Hybrids via Process Mining and LLMs",
+  "organization": "MiniMax",
+  "publish_date": "2026-04-16",
+  "theme": "AI Agent",
+  "source_name": "MiniMax arXiv query",
+  "source_url": "https://arxiv.org/abs/2604.14687v1",
+  "paper_url": "https://arxiv.org/pdf/2604.14687v1",
+  "summary": "Monte-Carlo Tree Search (MCTS) is a fundamental sampling-based search algorithm widely used for online planning in sequential decision-making domains. Despite its success in driving recent advances in artificial intelligence, understandi...",
+  "priority": 897,
+  "total_chars": 59185,
+  "chunk_count": 16,
+  "image_paths": [
+    "assets/page-005-img-01.png",
+    "assets/page-006-img-01.png",
+    "assets/page-007-img-01.png",
+    "assets/page-013-img-01.png",
+    "assets/page-013-img-02.png",
+    "assets/page-013-img-03.png",
+    "assets/page-024-img-01.png",
+    "assets/page-025-img-01.png",
+    "assets/page-026-img-01.png",
+    "assets/page-027-img-01.png",
+    "assets/page-027-img-02.png",
+    "assets/page-028-img-01.png",
+    "assets/page-029-img-01.png",
+    "assets/page-030-img-01.png",
+    "assets/page-031-img-01.png",
+    "assets/page-031-img-02.png",
+    "assets/page-032-img-01.png",
+    "assets/page-033-img-01.png",
+    "assets/page-033-img-02.png",
+    "assets/page-034-img-01.png"
+  ],
+  "notes": [
+    "图片数量超过上限，仅保留前 20 张。",
+    "图片数量超过上限，仅保留前 20 张。",
+    "图片数量超过上限，仅保留前 20 张。",
+    "图片数量超过上限，仅保留前 20 张。",
+    "图片数量超过上限，仅保留前 20 张。",
+    "图片数量超过上限，仅保留前 20 张。",
+    "图片数量超过上限，仅保留前 20 张。",
+    "图片数量超过上限，仅保留前 20 张。",
+    "图片数量超过上限，仅保留前 20 张。",
+    "图片数量超过上限，仅保留前 20 张。",
+    "图片数量超过上限，仅保留前 20 张。",
+    "图片数量超过上限，仅保留前 20 张。",
+    "图片数量超过上限，仅保留前 20 张。",
+    "图片数量超过上限，仅保留前 20 张。",
+    "图片数量超过上限，仅保留前 20 张。",
+    "图片数量超过上限，仅保留前 20 张。",
+    "图片数量超过上限，仅保留前 20 张。"
+  ],
+  "chunks": [
+    {
+      "index": 1,
+      "heading": "Section 1",
+      "text_len": 2277,
+      "text_preview": "[Page 1]\nM2-PALE: A Framework for Explaining\nMulti-Agent MCTS–Minimax Hybrids via\nProcess Mining and LLMs\nYiyu Qian1[0009−0008−8866−7761], Liyuan Zhao2[0009−0001−3588−7698], and Tim\nMiller3[0000−0003−"
+    },
+    {
+      "index": 2,
+      "heading": "Section 2",
+      "text_len": 3428,
+      "text_preview": "[Page 2]\n2\nQian, Zhao, and Miller\nto discern how specific outputs are generated [4]. This opacity is commonly\ntermed the “black-box problem” [7], signifying that the internal logic of the\nalgorithm re"
+    },
+    {
+      "index": 3,
+      "heading": "Section 3",
+      "text_len": 3173,
+      "text_preview": "[Page 3]\nTitle Suppressed Due to Excessive Length\n3\n– LLM-enhanced explanations: We integrate LLMs to generate causal [20]\nand distal explanations [19] derived directly from the extracted process mod-"
+    },
+    {
+      "index": 4,
+      "heading": "Section 4",
+      "text_len": 3872,
+      "text_preview": "[Page 4]\n4\nQian, Zhao, and Miller\n2. Procedural depth: By employing process discovery algorithms (Alpha\nMiner, iDHM, and Inductive Miner), we move beyond state-centric anal-\nysis to extract structural"
+    },
+    {
+      "index": 5,
+      "heading": "Section 5",
+      "text_len": 4854,
+      "text_preview": "[Page 6]\n6\nQian, Zhao, and Miller\nAlgorithm 2 General MCTS approach\n1: function MCTS(s0)\n2:\ncreate root node v0 with state s0\n3:\nwhile within computational budget do\n4:\nvl ←TREEPOLICY(v0)\n5:\n∆←DEFAULT"
+    },
+    {
+      "index": 6,
+      "heading": "Section 6",
+      "text_len": 4957,
+      "text_preview": "[Page 9]\nTitle Suppressed Due to Excessive Length\n9\n- **Requirement:** Analyze the forward-looking trajectory. Based on the\nprocedural loops and paths, predict the agent’s long-term objectives\nand the"
+    },
+    {
+      "index": 7,
+      "heading": "Section 7",
+      "text_len": 3252,
+      "text_preview": "[Page 11]\nTitle Suppressed Due to Excessive Length\n11\nTable 1: Red and White Episode Data and Event Log. LT=last_turn, P=piece,\nC=captured.\nLT_id LT_movement P_id\nmove\nC reward\n-1\n()\n2\n(‘left’,’down’)"
+    },
+    {
+      "index": 8,
+      "heading": "Section 8",
+      "text_len": 4073,
+      "text_preview": "[Page 12]\n12\nQian, Zhao, and Miller\nshows visual plots of fitness metrics across all experimental models. Appendix A\ndetails how process models are evaluated across Trial 1, Trial 2, and Trial 3.\nTabl"
+    },
+    {
+      "index": 9,
+      "heading": "Section 9",
+      "text_len": 2516,
+      "text_preview": "[Page 14]\n14\nQian, Zhao, and Miller\nTable 3: Comparison of Global Statistics across Models 5 to 40\nModel\nCalculation\nTime (ms)\nTrace\nFitness\nMove-\nModel\nFitness\nMove-\nLog\nFitness\nNum. States Approx.\nm"
+    },
+    {
+      "index": 10,
+      "heading": "Section 10",
+      "text_len": 3892,
+      "text_preview": "[Page 15]\nTitle Suppressed Due to Excessive Length\n15\n7\nLimitations\nThere are some limitations in the research, as follows.\n– Narrow Evaluation of Quality Dimensions: This study primarily eval-\nuates "
+    },
+    {
+      "index": 11,
+      "heading": "Section 11",
+      "text_len": 3478,
+      "text_preview": "[Page 17]\nTitle Suppressed Due to Excessive Length\n17\nReferences\n1. Van der Aalst, W., Adriansyah, A., van Dongen, B.: Replaying history on process\nmodels for conformance checking and performance anal"
+    },
+    {
+      "index": 12,
+      "heading": "Section 12",
+      "text_len": 4444,
+      "text_preview": "[Page 18]\n18\nQian, Zhao, and Miller\n18. Kocsis, L., Szepesvári, C.: Bandit based monte-carlo planning. In: Machine Learn-\ning: ECML 2006: 17th European Conference on Machine Learning Berlin, Ger-\nmany"
+    },
+    {
+      "index": 13,
+      "heading": "Section 13",
+      "text_len": 4419,
+      "text_preview": "[Page 20]\n20\nQian, Zhao, and Miller\nTrial 2: Fixed Iteration Times, Fixed Minimax Search Depth, Variable\nSimulation Depth\n– Simulation Depth = 10:\n• Both Red (Models 17, 18) and White (Models 19, 20) "
+    },
+    {
+      "index": 14,
+      "heading": "Section 14",
+      "text_len": 4927,
+      "text_preview": "[Page 22]\n22\nQian, Zhao, and Miller\nGPT-5 Generated Strategic Interpretation Report\n1. Red Agent Strategic Analysis (Ref: Figure 6)\nThe following insights are derived from the hierarchical transition "
+    },
+    {
+      "index": 15,
+      "heading": "Section 15",
+      "text_len": 4979,
+      "text_preview": "[Page 28]\n28\nQian, Zhao, and Miller\nFig. 10: White agent C-net generated by iDHM (Fixed Simulation Depth, Fixed\nMinimax Search Depth, Iteration Times = 1000)\n\n[Page 29]\nTitle Suppressed Due to Excessi"
+    },
+    {
+      "index": 16,
+      "heading": "Section 16",
+      "text_len": 614,
+      "text_preview": "[Page 50]\n50\nQian, Zhao, and Miller\nFig. 40: Red agent C-net generated by iDHM (Fixed Simulation Depth, Fixed\nIteration Times, Minimax Search Depth = 3)\nFig. 41: Red agent Petri-net generated by induc"
+    }
+  ]
+}

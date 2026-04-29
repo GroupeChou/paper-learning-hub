@@ -1,0 +1,161 @@
+{
+  "paper_id": "2604.19572v1",
+  "title": "A Self-Evolving Framework for Efficient Terminal Agents via Observational Context Compression",
+  "organization": "MiniMax",
+  "publish_date": "2026-04-21",
+  "theme": "AI Agent",
+  "source_name": "MiniMax arXiv query",
+  "source_url": "https://arxiv.org/abs/2604.19572v1",
+  "paper_url": "https://arxiv.org/pdf/2604.19572v1",
+  "summary": "As model capabilities advance, research has increasingly shifted toward long-horizon, multi-turn terminal-centric agentic tasks, where raw environment feedback is often preserved in the interaction history to support future decisions. Ho...",
+  "priority": 902,
+  "total_chars": 75753,
+  "chunk_count": 21,
+  "image_paths": [
+    "assets/page-002-img-01.png",
+    "assets/page-002-img-02.png",
+    "assets/page-004-img-01.png",
+    "assets/page-004-img-02.png",
+    "assets/page-004-img-03.jpeg",
+    "assets/page-004-img-04.png",
+    "assets/page-004-img-05.png",
+    "assets/page-004-img-06.jpeg",
+    "assets/page-004-img-07.jpeg",
+    "assets/page-004-img-08.png",
+    "assets/page-004-img-09.png",
+    "assets/page-004-img-10.png",
+    "assets/page-004-img-11.png",
+    "assets/page-004-img-12.jpeg",
+    "assets/page-004-img-13.png",
+    "assets/page-004-img-14.png"
+  ],
+  "notes": [],
+  "chunks": [
+    {
+      "index": 1,
+      "heading": "Section 1",
+      "text_len": 3250,
+      "text_preview": "[Page 1]\nA Self-Evolving Framework for Efficient Terminal\nAgents via Observational Context Compression\nJincheng Ren1 ∗Siwei Wu1 ∗† Yizhi Li1 ∗Kang Zhu2\nShu Xu3\nBoyu Feng2\nRuibin Yuan4\nWei Zhang5\nRiza "
+    },
+    {
+      "index": 2,
+      "heading": "Section 2",
+      "text_len": 3735,
+      "text_preview": "[Page 2]\nprompt-based compression, expert-crafted rules, and LLM-based compression, often yield only\nlimited or unstable gains across tasks, as shown in Fig. 1 (b). This is because terminal environmen"
+    },
+    {
+      "index": 3,
+      "heading": "Section 3",
+      "text_len": 4276,
+      "text_preview": "[Page 3]\n2\nRelated Work\n2.1\nTerminal Tasks, Code Agents, and Context Compression.\nRecent code-agent research has moved beyond snippet-level generation toward repository-level and\nterminal-based softwa"
+    },
+    {
+      "index": 4,
+      "heading": "Section 4",
+      "text_len": 3157,
+      "text_preview": "[Page 4]\ncandidate rules\nInput & Rule Initialization\nTask Batch {… 𝑇!\"#, 𝑇$ … }\nGlobal Rule Pool\n（𝑅!）\nTop-k Retrieval\nSelection & Refinement\n{𝑅\"}\nLLM\n𝑇!\"#\n𝑇!\"$\n𝑇!\n…\n𝑇!\"%\nBatch Execution with TACO\n…\n𝑇&"
+    },
+    {
+      "index": 5,
+      "heading": "Section 5",
+      "text_len": 3515,
+      "text_preview": "[Page 5]\nTask-Level Rule Selection.\nDifferent tasks require different compression behavior. Therefore, we\nretrieve the top-k rules from Rg according to their ranking scores Rgs(r) and use them as cand"
+    },
+    {
+      "index": 6,
+      "heading": "Section 6",
+      "text_len": 3150,
+      "text_preview": "[Page 6]\nMulti Turns and Batch Size of TACO.\nTo obtain broader and more transferable compression\nrules, TACO performs self-evolution across tasks rather than relying only on evolution within a single\n"
+    },
+    {
+      "index": 7,
+      "heading": "Section 7",
+      "text_len": 3108,
+      "text_preview": "[Page 7]\nTable 1: Results on TerminalBench (TB) 1.0 and 2.0.\n* and † indicate results reported on the\nTerminalBench leaderboard and in the corresponding technical report, respectively.\nModel\nModel Siz"
+    },
+    {
+      "index": 8,
+      "heading": "Section 8",
+      "text_len": 2928,
+      "text_preview": "[Page 8]\n6.2\nEfficiency Comparison\nTable 2: Compression efficiency analysis. Avg Step denotes\nthe average number of agent steps per run, and Token per\nStep denotes the average number of prompt tokens "
+    },
+    {
+      "index": 9,
+      "heading": "Section 9",
+      "text_len": 2730,
+      "text_preview": "[Page 9]\n4\n5\n6\n7\n8\nk\n38%\n40%\n42%\n44%\n46%\nQwen3-Coder-480B\nBaseline (pass@k)\nSelf-Evo (pass@k)\n4\n5\n6\n7\n8\nk\n58%\n60%\n62%\n64%\n66%\n68%\n70%\nDeepSeek-V3.2\nBaseline (pass@k)\nSelf-Evo (pass@k)\n4\n5\n6\n7\n8\nk\n58%\n"
+    },
+    {
+      "index": 10,
+      "heading": "Section 10",
+      "text_len": 3258,
+      "text_preview": "[Page 10]\n10\n20\n30\n40\n50\nTop-k Rule Retrieval Size\n24.0\n24.5\n25.0\n25.5\n26.0\nAccuracy (%)\nChosen k=30\nTop-k Retrieval: Accuracy vs. Self-evo Cost\nAccuracy\nSelf-evo Tokens\n2\n4\n8\n16\n20\nBatch Size / Paral"
+    },
+    {
+      "index": 11,
+      "heading": "Section 11",
+      "text_len": 4158,
+      "text_preview": "[Page 11]\nDeepSeek-V3.2. For the setting without Intra-Task Rule Set Evolution, we use the final Global\nRule Pool obtained by running TACO on TB 2.0 as a fixed initialization source for each task. Dur"
+    },
+    {
+      "index": 12,
+      "heading": "Section 12",
+      "text_len": 3744,
+      "text_preview": "[Page 12]\nYuxuan Cai, Lu Chen, Qiaoling Chen, Yuyang Ding, Liwen Fan, Wenjie Fu, Yufei Gao, Honglin\nGuo, Pinxue Guo, Zhenhua Han, et al. Nex-n1: Agentic models trained via a unified ecosystem for\nlarg"
+    },
+    {
+      "index": 13,
+      "heading": "Section 13",
+      "text_len": 4373,
+      "text_preview": "[Page 13]\nPeng Xia, Jianwen Chen, Xinyu Yang, Haoqin Tu, Jiaqi Liu, Kaiwen Xiong, Siwei Han, Shi Qiu,\nHaonian Ji, Yuyin Zhou, Zeyu Zheng, Cihang Xie, and Huaxiu Yao. Metaclaw: Just talk – an agent\ntha"
+    },
+    {
+      "index": 14,
+      "heading": "Section 14",
+      "text_len": 1906,
+      "text_preview": "[Page 14]\nWeng Lam Tam, Wenjie Liang, Wentao Liu, Xiao Wang, Xiaohan Jia, Xiaotao Gu, Xiaoying Ling,\nXin Wang, Xing Fan, Xingru Pan, Xinyuan Zhang, Xinze Zhang, Xiuqing Fu, Xunkai Zhang, Yabo\nXu, Yand"
+    },
+    {
+      "index": 15,
+      "heading": "Section 15",
+      "text_len": 4217,
+      "text_preview": "[Page 15]\nA\nCase Study\nTo provide a concrete illustration of TACO’s self-evolving compression behavior, we examine three\nsuccessful trajectories from TerminalBench 2.0, executed by the Terminus-2 agen"
+    },
+    {
+      "index": 16,
+      "heading": "Section 16",
+      "text_len": 3306,
+      "text_preview": "[Page 16]\nA.2\nQuantitative Compression Analysis\nTab. 6 reports the compression statistics extracted from each trajectory.\nTable 6: Compression statistics for the three case study trajectories. “Entrie"
+    },
+    {
+      "index": 17,
+      "heading": "Section 17",
+      "text_len": 3083,
+      "text_preview": "[Page 17]\nA.3.2\nBuild System Output (make)\nIn sqlite-with-gcov (episode 14), the agent executes make to compile SQLite with gcov coverage\ninstrumentation. The raw output contains verbose file-copying "
+    },
+    {
+      "index": 18,
+      "heading": "Section 18",
+      "text_len": 4936,
+      "text_preview": "[Page 18]\nCompressed output (821 characters, ratio = 0.146):\n$ objdump\n-d vulnerable | sed -n ’150 ,250p’\n4011 e5:\n31 f6\nxor\n%esi ,% esi\n4011 e7:\nbf 11 00 00 00\nmov\n$0x11 ,% edi\n4011 ec:\n31 c0\nxor\n%ea"
+    },
+    {
+      "index": 19,
+      "heading": "Section 19",
+      "text_len": 4199,
+      "text_preview": "[Page 20]\nListing 2: The structured JSON specification of the predefined seed rules in TACO (Part 2 of 2: apt,\ncompiler, and openssl).\n[\n{\n\"rule_id \": \" seed_apt_install \",\n\" trigger_regex \": \"\\\\ bapt"
+    },
+    {
+      "index": 20,
+      "heading": "Section 20",
+      "text_len": 4892,
+      "text_preview": "[Page 22]\nC\nPrompt\nThis appendix presents the prompts used in TACO for task-level rule initialization and rule evolution.\nAs described in the method section, TACO invokes LLMs in three cases: (1) sele"
+    },
+    {
+      "index": 21,
+      "heading": "Section 21",
+      "text_len": 3792,
+      "text_preview": "[Page 24]\nC.2\nPrompt for New Rule Generation\nThis prompt is used when a command produces a long terminal output but no active rule matches\nthat command type. In this case, TACO treats the output as an"
+    }
+  ]
+}

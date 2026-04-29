@@ -1,0 +1,1157 @@
+[Page 1]
+Quantum Knowledge Graph: Modeling Context-Dependent
+Triplet Validity
+Yao WANG1,2
+Zixu GENG3
+Jun YAN1∗
+1HKAI-Sci, City University of Hong Kong
+2Department of Automation, Tsinghua University
+3Pratt School of Engineering, Duke University
+ywan75@cityu.edu.hk, zg73@duke.edu, yan.jun@cityu.hk
+April 28, 2026
+Abstract
+Knowledge graphs (KGs) are increasingly used to support large language model (LLM)
+reasoning, but standard triplet-based KGs treat each relation as globally valid. In many
+settings, whether a relation should count as evidence depends on the context. We therefore
+formulate triplet validity as a triplet-specific function of context and refer to this formulation
+as a Quantum Knowledge Graph (QKG).
+We instantiate QKG in medicine using a diabetes-centered PrimeKG subgraph, whose
+68,651 context-sensitive relations are further annotated with patient-group-specific constraints.
+We evaluate it in a reasoner–validator pipeline for medical question answering on a KG-
+grounded subset of MedReason containing 2,788 questions. With Haiku-4.5 as both the
+Reasoner and the Validator, KG-backed validation significantly improves over a no-validator
+baseline (+0.61 pp), and QKG with context matching yields the largest gain, outperforming
+both KG validation without context matching (+0.79 pp) and the no-validator baseline
+(+1.40 pp; paired McNemar, all p < 0.05). Under a stronger validator (Qwen-3.6-Plus),
+the raw QKG gain over the no-validator baseline grows from +1.40 pp to +5.96 pp; the
+context-matching gap is non-significant (p = 0.73) on the raw set but becomes borderline
+significant (p = 0.05) after adjustment for knowledge leakage and suspicious questions,
+consistent with a benchmark-gold ceiling rather than a QKG limitation.
+Taken together, the results support the view that the value of a KG in LLM-based clinical
+reasoning lies not merely in storing medically related facts, but in representing whether those
+facts are applicable to the specific patient context. For reproducibility and further research,
+we release the curated QKG datasets and source code.1
+Keywords: Quantum Knowledge Graph, context-dependent triplet validity, applicability
+conditions, reasoner–validator pipeline, patient-context reasoning
+∗Corresponding author.
+1https://github.com/HKAI-Sci/QKG
+1
+arXiv:2604.23972v1  [cs.CL]  27 Apr 2026
+
+[Page 2]
+Working Draft
+2
+Graphical abstract. Context-dependent triplet validity in a Quantum Knowledge Graph.
+
+[Page 3]
+Working Draft
+3
+1 Introduction
+Large language models (LLMs) and knowledge graphs (KGs) are increasingly being developed as
+complementary components rather than competing paradigms. Recent work has shown that KGs
+can improve LLM systems by providing structured, explicit, and verifiable knowledge for retrieval,
+reasoning, and trustworthiness, while LLMs can in turn assist the construction, enrichment, and
+operational use of KGs (Sui et al., 2025; Wu et al., 2025b; Parović et al., 2025). This emerging
+interplay suggests that, in the LLM era, the value of KGs lies not merely in serving as retrieval
+resources, as in standard RAG pipelines, but in functioning as explicit and inspectable validation
+substrates that determine whether model-generated claims are applicable in a given context.
+This property is especially important in LLM-based agent systems, where generating plausible
+outputs is not the sole objective, and reliable performance requires verifying whether the claims
+underlying those outputs are supported by external evidence and context (Dougrez-Lewis et al.,
+2025; Kolli et al., 2025).
+Conventional KGs typically represent knowledge as triples consisting of a head entity, a relation,
+and a tail entity. A useful way to characterize the applicability of a triplet τ = (h, r, t) is through
+a context-dependent probabilistic quantity P(τ | C), where C denotes the observation context.
+Different KG paradigms can then be viewed as different parameterizations of this quantity:
+P(τ | C) =
+
+
+
+
+
+
+
+{0, 1},
+conventional KG,
+µτ,
+probabilistic KG,
+Fτ(C),
+triplet-specific function.
+Here, µτ ∈[0, 1]. The first case treats triplets as universally valid or invalid, the second encodes
+a population-level prior, and the third allows validity to be determined by a triplet-specific
+function Fτ that takes context C as input; in practice, Fτ may be instantiated as an explicit
+function, a classical statistical learning model such as logistic regression or XGBoost, or an LLM.
+This distinction matters because, in most real-world settings, triplet validity depends on context:
+P(τ | C) is not constant over C. Standard triplet-based KGs collapse this dependence into a
+binary value that records only whether a triplet holds, limiting their usefulness as validation
+substrates. Prior efforts have partially relaxed this assumption with structured qualifiers such as
+temporal scopes and hyper-relational key-value attributes (Galkin et al., 2020; Saxena et al.,
+2021), but these still capture only selected dimensions of C, whereas real-world conditions are
+often richer and more complex (Ding et al., 2024; Chen et al., 2023).
+This issue is especially consequential in medicine, where incorrect validation can lead to harmful
+conclusions. In this setting, P(τ | C) is rarely a universal constant: whether a medical claim
+holds often depends on patient-specific context such as comorbidities, laboratory findings, disease
+stage, treatment history, and contraindications. Some prior work has replaced binary validity
+with probabilistic validity (Li et al., 2020b), corresponding to a population-level prior such as
+µτ. While this captures aggregate uncertainty, it still does not explicitly specify the concrete
+contexts under which a knowledge statement should or should not be considered applicable for a
+particular case.
+To address this limitation, we turn to triplet-specific functions and seek a practical way to imple-
+ment and evaluate Fτ(C). In this paper, we operationalize Fτ(C) by attaching natural-language
+validity conditions to relations. To make this implementation scalable, triplet applicability cannot
+be reduced to a small set of manually engineered structured fields, because the relevant conditions
+are often diverse and compositional. We therefore represent these conditions as natural-language
+constraints, which preserve expressive flexibility while remaining compatible with LLM-based
+interpretation and downstream evaluation. Hereafter, we refer to the Fτ(C)-based formulation of
+
+[Page 4]
+Working Draft
+4
+A. Context-Insensitive KG
+P(τ|C) ∈ {0,1}
+unable to model context-dependent validity
+(drug A, treats, disease B)
+Context 1: patient without
+renal failure
+holds
+Context 2: patient with
+renal failure
+does not hold
+B. Quantum Knowledge Graph
+P(τ|C) = Fτ(C)
+models context-dependent validity with LLMs
+(drug A, treats, disease B)
+patient with eGFR >= 60 mL/min/1.73 m^2,
+UACR < 30 mg/g, and no other clues of renal failure
+Validity condition
+C. Reasoner-Validator System
+Medical question
+Reasoner
+LLM only
+Validator
+QKG
+ﬁnal answer
+patient context
+answer + claims
+validation report
+D. Outcome
+accuracy
+LLM
+only
+LLM +
+KG
+LLM +
+QKG
+Figure 1: Overview of the proposed Quantum Knowledge Graph (QKG) framework. Panel A
+illustrates the limitation of conventional knowledge graph triples, whose validity is effectively
+reduced to a context-insensitive binary assignment and therefore may hold in one patient context
+but fail in another. Panel B shows how QKG operationalizes the triplet-specific function Fτ(C)
+by attaching natural-language validity conditions, enabling context-dependent triplet evaluation
+with LLMs. Panel C presents the reasoner-validator setup used in this work, where a reasoner
+generates an answer and its supporting claims, and a QKG-based validator evaluates those
+claims against the patient context and graph knowledge. Panel D summarizes the qualitative
+performance trend observed in our experiments, where QKG-based validation outperforms
+validation with the original KG and the no-validator baseline.
+triplet validity as a Quantum Knowledge Graph (QKG)2, emphasizing that whether a knowledge
+statement is valid depends on the observation context in which it is evaluated.
+Based on this formulation, we instantiate QKG in the medical domain by curating a graph
+from PrimeKG (Chandak et al., 2023) and building a validator agent that evaluates whether
+medical claims are supported in the patient context. We then integrate this validator into
+a reasoner-validator pipeline for LLM-based reasoning, and evaluate the resulting system on
+medical question answering using samples from MedReason (Wu et al., 2025a) whose entities are
+covered by the curated graph. Our experiments compare QKG-based validation against both
+the original KG and the no-validator baseline, and show that QKG-based validation improves
+system performance over both.
+In summary, this paper makes the following contributions: 1) we introduce a triplet-validity
+framing in which the applicability of a knowledge statement is modeled as a context-dependent
+quantity P(τ | C), and operationalize its triplet-specific form Fτ(C) as a Quantum Knowledge
+Graph (QKG); 2) we instantiate this formulation in medicine by curating a QKG derived from
+PrimeKG and building a QKG-based validator agent; and 3) we show that integrating QKG-
+based validation into an LLM reasoner-validator pipeline improves medical question answering
+over relevant baselines. All curated QKG data and experimental code will be open-sourced.
+2Here, “quantum” refers to context-dependent validity rather than quantum-theoretic formalism.
+
+[Page 5]
+Working Draft
+5
+2 Background
+2.1 Context-Dependent Validity in Knowledge Graphs
+Conventional knowledge graphs represent facts as triples (h, r, t) and usually treat each triple
+as globally valid once it is stored. A substantial body of work has already shown that this
+assumption is too restrictive. One direction is to enrich triples with qualifiers or additional
+attributes. Hyper-relational KG methods, such as StarE (Galkin et al., 2020), explicitly model
+relation-specific qualifiers and demonstrate that many facts are better understood as statements
+that hold together with auxiliary conditions rather than as isolated triples. Another direction is
+temporalization: temporal KG question answering and reasoning methods allow facts to hold
+only during specific intervals or at specific granularities, showing that validity may depend on
+time rather than being universal (Saxena et al., 2021; Chen et al., 2023; Ding et al., 2024). Taken
+together, these works establish an important general point: triplet validity is often conditional.
+At the same time, existing contextual extensions usually operationalize context through a limited
+and pre-specified structure. Hyper-relational KGs assume that relevant contextual dimensions
+can be attached as explicit qualifiers, while temporal KGs focus primarily on time. These are
+important advances, but they do not fully address settings where applicability depends on richer
+and more compositional conditions that are difficult to enumerate in advance. In such cases, the
+central problem is no longer whether a fact exists in the graph, but in what context that fact
+should be regarded as valid.
+2.2 Context-Dependent Validity in Medical Knowledge Graphs
+This limitation is especially visible in medicine, where the validity of a knowledge statement
+often depends on patient-specific details such as comorbidities, laboratory findings, disease
+stage, medication history, and contraindications. Biomedical KGs such as PrimeKG (Chandak
+et al., 2023) provide broad relational coverage for precision medicine, but their edges mainly
+record that an association exists, not the exact conditions under which it should be applied
+to a particular patient. Prior medical KG research has already moved beyond the plain-triple
+formulation in two relevant ways. Li et al. (Li et al., 2020b) propose a real-world medical KG
+with a quadruplet structure, showing that clinical facts often require richer factual representation
+than a bare (h, r, t) tuple. Li et al. (Li et al., 2020a) further introduce a probabilistic medical
+KG embedding method that models uncertainty at the triplet level, moving from binary validity
+toward population-level confidence. These studies are important because they show that medical
+knowledge is neither purely context-free nor strictly deterministic.
+Related work in clinical temporal knowledge graphs reinforces the same point from a different
+angle. Diao et al. (Diao et al., 2021) model temporal clinical KGs for diabetic complication
+prediction, showing that medical knowledge use is often inseparable from evolving clinical
+context. However, richer schemas, temporalization, and probabilistic weighting still do not
+directly provide a mechanism for deciding whether a specific triplet is applicable to a specific
+patient in a given question. Benchmarks such as MedReason (Wu et al., 2025a) make the need
+for KG-grounded medical reasoning concrete: the task is not only to retrieve medically related
+entities and relations, but also to organize them into reasoning paths that are consistent with
+clinical logic and evidence-based medicine. This motivates treating triplet validity itself as
+context-dependent, rather than assuming that retrieval of relevant facts is sufficient.
+
+[Page 6]
+Working Draft
+6
+3 Method
+3.1 Knowledge Sources
+3.1.1 Disease-Centric Subgraph from PrimeKG
+PrimeKG (Chandak et al., 2023) provides the source biomedical knowledge graph for this work.
+Working with the full graph is computationally prohibitive and introduces noise irrelevant to a
+given clinical domain. We therefore construct a focused subgraph centered on a target disease
+entity—in our experiments, diabetes mellitus (MONDO:5015). The construction proceeds in
+two layers. The direct layer collects all triplets (h, r, t) ∈PrimeKG in which either h or t
+is the target disease entity, yielding the intermediate entity set E1 of entities one hop away
+from diabetes. The indirect layer then collects all triplets in which at least one endpoint
+belongs to E1, capturing second-order associations—e.g., drugs that act on proteins involved in
+diabetes-related pathways—without expanding to the entire graph. The two layers are merged
+and deduplicated to form the final subgraph Gsub. The direct layer yields 1,470 triplets and
+|E1| = 735 intermediate entities; the indirect layer contributes a further 861,070 triplets. After
+deduplication, Gsub contains 862,540 triplets across 18,387 unique entities spanning 10
+biomedical entity types (gene/protein, drug, disease, biological process, phenotype, pathway,
+exposure, molecular function, cellular component, and anatomy) and 25 relation types.
+3.1.2 Focused Relation Annotation
+Most PrimeKG relation types encode biological or molecular facts whose validity is relatively
+stable across patient contexts. We therefore focus on relation types whose applicability is more
+likely to vary with patient-specific factors: indication, contraindication, off-label use,
+and drug_effect. For each unique triplet (h, r, t) over these four types, we use the Baichuan-
+M2-Plus API (Baichuan Intelligence, 2025) to generate evidence about population-specific
+applicability. The outputs are stored as structured ConstraintItem records, each containing the
+patient_characteristics in which the relation holds (e.g., “eGFR < 30”, “HbA1c > 9%”),
+an applicability level drawn from a five-point ordinal scale (Definitely Applicable through
+Definitely NOT Applicable), and supporting evidence text. The resulting relation_with_facts
+collection contains 68,651 annotated facts spanning 2,591 unique entities and 4 relation types.
+These annotations are retrieved at inference time to support patient-context filtering.
+3.2 Reasoning Pipeline
+We implement a two-agent loop in which a pure-LLM Reasoner and a KG-grounded Validator
+collaborate iteratively (Figure 1, Panel C). The Reasoner first proposes an answer and emits
+structured claims; the Validator then checks each claim against the QKG and the patient
+context; finally, the Reasoner reconsiders its answer in light of the resulting validation report.
+To perform this validation step, the patient context is derived directly from the clinical question,
+including demographic factors, comorbidities, laboratory values, and current medications. For
+each retrieved KG relation, the Validator examines its associated ConstraintItem records and
+determines whether the constraint applies to the current patient. Relations whose constraints are
+not met are down-weighted or excluded before being used as evidence, allowing claim verification
+to be conditioned on the patient context rather than on raw graph connectivity alone. In
+our implementation, the validator is allowed up to 20 tool-use turns per round. Algorithm 1
+summarizes the full procedure.
+
+[Page 7]
+Working Draft
+7
+Algorithm 1 QKG Reasoning Pipeline
+Require: question Q, choices C, knowledge graph Gsub
+Ensure: final answer A∗
+1: P ←ExtractPatientContext(Q)
+2: (A, claims) ←Reasoner(Q, C)
+▷pure LLM; emits claims for answer options
+3: for each claim c ∈claims do
+4:
+E ←SearchEntities(c)
+5:
+R ←GetRelationsWithContext(E, Gsub)
+6:
+RP ←ApplyConstraintItems(R, P)
+7:
+if RP supports c then
+8:
+status(c) ←SUPPORTED
+9:
+else if RP contradicts c then
+10:
+status(c) ←CONTRADICTED
+11:
+else
+12:
+status(c) ←NO_COVERAGE
+13:
+end if
+14: end for
+15: report ←{(c, status(c)) | c ∈claims}
+16: if any claim in report is CONTRADICTED then
+17:
+A∗←Reasoner(Q, C, report)
+▷reconsider
+18: else
+19:
+A∗←A
+20: end if
+21: return A∗
+3.3 Statistical Testing
+To test whether accuracy differences between two pipeline settings are statistically significant,
+we apply McNemar’s test on paired per-sample correctness. For settings A and B evaluated on
+the same questions, let b and c denote the counts of samples that are correct under A but wrong
+under B, and wrong under A but correct under B, respectively. Under the null hypothesis that
+each discordant flip is equally likely in either direction, we report the exact two-sided binomial p-
+value p = min{1, 2 Pb+c
+k=max(b,c)
+ b+c
+k
+2−(b+c)}. For comparisons against the no-validator baseline,
+the reasoner-only correctness is treated as condition A and the validated final correctness as
+condition B on the same run. For leakage-adjusted comparisons on the Qwen-validator runs,
+samples are removed before the paired test if, in either run, their W→C revision was labelled
+LIKELY_LEAKAGE or their C→W regression was labelled LIKELY_KG_SUPPORTED with decisive
+evidence citing a QKG applicability token (the ctx-driven subset). This matches the per-run
+adjustment in Eq. 1 (Appendix A.3).
+4 Experimental Setup
+This section describes the datasets, evaluation protocol, and compared settings used in our
+experiments.
+4.1 Datasets
+We evaluate our approach on medical question answering using samples from MedReason (Wu
+et al., 2025a), a medical reasoning dataset of approximately 30,000 questions built from seven
+
+[Page 8]
+Working Draft
+8
+source QA datasets: MedQA, MedMCQA, PubMedQA, MMLU, MedXpert, HuatuoGPT-o1,
+and the medical subset of Humanity’s Last Exam (HLE). To ensure alignment with our curated
+PrimeKG subset, we construct a KG-grounded evaluation set by extracting question and option
+entities, grounding them to UMLS, aligning them to PrimeKG nodes, filtering out samples
+with no recoverable KG paths, and annotating patient characteristics from the question text for
+downstream context matching. The resulting evaluation set contains 2,788 samples spanning
+a range of diabetes-related clinical scenarios with verified KG coverage.
+Detailed dataset
+construction steps and a table reporting QA-source distributions are provided in Appendix A.1.
+4.2 Evaluation Protocol
+For each sample, the model generates a single answer (A–J) along with structured reasoning.
+Outputs are constrained using a Pydantic schema (QAResponse; see Appendix A.2) to ensure
+consistent JSON formatting. Evaluation is fully automated by parsing model outputs and
+computing exact-match accuracy against the gold answers.
+The primary evaluation metric is exact-match accuracy, defined as the proportion of predictions
+that match the gold answer. We also report secondary metrics for the reasoner-validator pipeline,
+including the number and percentage of cases whose answers change after validation, as well as
+how often those revisions improve or degrade final correctness.
+4.3 Models and Compared Settings
+The main experiments use two LLMs: Haiku-4.5 (Anthropic, 2025) and Qwen-3.6-Plus (Qwen
+Team, 2026). We treat Haiku-4.5 as the baseline model and Qwen-3.6-Plus as the higher-capability
+model in our study setup. We compare three settings: a no-validator baseline, KG validation
+without context matching, and QKG validation with context matching. These settings are used
+to study both patient-context ablation and model-capacity effects in the reasoner–validator
+pipeline.
+5 Results
+5.1 Main Results and Patient-Context Ablation
+Figure 2 shows the main results on the curated evaluation set (N = 2,788). Across all three
+settings, Haiku-4.5 is used as the Reasoner; in the two validation settings, Haiku-4.5 is also used
+as the Validator. The main ablation compares KG validation without context matching against
+QKG validation with context matching.
+Validation changes 2.19% of answers in the no-context setting (39 W→C, 22 C→W) and 2.55%
+in the with-context setting (55 W→C, 16 C→W), so the with-context setting also yields a higher
+wrong-to-correct rate and a lower correct-to-wrong rate.
+5.2 Case Studies of Context-Dependent Correction
+Figure 3 presents two case studies of context-dependent correction. The top case is a compositional
+patient-context example, where the validator combines multiple patient-specific factors—age,
+smoking, alcohol use, and temporal proximity to ciprofloxacin exposure—to revise the initial
+answer. The bottom case is a threshold-based example, where the validator matches a patient-
+specific platelet count of 95,000/mm3 against the eligibility threshold for IV tPA.
+
+[Page 9]
+Working Draft
+9
+No validator
+KG w/o context
+QKG w/ context
+74
+75
+76
+77
+78
+79
+80
+Final accuracy (%)
+77.5
+78.1
+(+0.6 pp)
+78.9
+(+1.4 pp)
+(a) Final Accuracy
+No validator
+KG without context
+QKG with context
+0
+10
+20
+30
+40
+50
+Number of answers revised
+No validator
+KG w/o context
+QKG w/ context
+no revisions
+39
+22
+net +17
+55
+16
+net +39
+(b) Validator Revisions
+Improved (W
+C)
+Regressed (C
+W)
+Haiku-Validator Results and Context Ablation
+Figure 2: Haiku-validator results and context ablation on the curated evaluation set (N = 2,788),
+using Haiku-4.5 as the Reasoner throughout. Panel (a) shows final accuracy for the no-validator
+baseline, KG validation without context matching, and QKG validation with context matching;
+the two validation settings use Haiku-4.5 as the Validator. Panel (b) shows the number of
+answers revised by validation, separated into wrong-to-correct improvements and correct-to-
+wrong regressions. Paired McNemar tests (exact two-sided; Section 3.3) confirm all three pairwise
+differences: baseline vs. KG w/o context p=0.04, baseline vs. QKG w/ context p≈3.8×10−6,
+and KG w/o context vs. QKG w/ context p=0.014.
+5.3 Qwen-3.6-Plus as Validator
+Figure 4 shows the strong-validator comparison on the same curated evaluation set (N = 2,788).
+Across all three settings, Haiku-4.5 is used as the Reasoner. The comparison then varies whether
+validation is absent, performed with KG evidence without context matching, or performed
+with QKG validation with context matching, using Qwen-3.6-Plus as the Validator in the
+latter two settings. Qwen-3.6-Plus is substantially stronger than Haiku-4.5 on this set—its
+standalone accuracy as a reasoner is 89.1%, against the 77.5% Haiku-4.5 reasoner baseline—so
+this configuration pairs a weaker Reasoner with a stronger Validator, which is the setting in
+which validator-supplied prior knowledge is most likely to contaminate the measured validation
+gain.
+Case studies of strong-validator answer leakage.
+Two W→C revisions from the no-
+context Qwen-3.6-Plus validator run illustrate how leakage manifests. In qa_9542 (gold: shingles
+vaccine), the KG provides no directly relevant scheduling edge for any option, yet the elimination
+of the gold answer is still flagged CONTRADICTED on a seasonal-influenza-timing argument the
+Validator supplies itself. In qa_6324 (gold: antibiotic prophylaxis before molar extraction),
+two CONTRADICTED statuses similarly rest on validator-supplied medical knowledge after the KG
+lookup fails to return a directly relevant edge—one citing AHA prophylaxis guidance for the
+gold answer, the other citing general pharmacology of nitrous oxide and trapped gas spaces for
+the eliminated option. Full vignettes, quoted evidence, and the with-context status pattern on
+these samples are in Appendix A.4.
+
+[Page 10]
+Working Draft
+10
+Figure 3: Two case studies of context-dependent correction. The top panel shows a compo-
+sitional risk-amplifier case, where the validator combines multiple patient-specific factors to
+identify fluoroquinolone-associated tendinopathy. The bottom panel shows a threshold-based
+contraindication case, where the validator matches a patient-specific platelet count to the eligi-
+bility threshold for IV tPA.
+Quantitative leakage classification.
+To estimate how often validator answer leakage drives
+W→C revisions, we label each W→C case in both Qwen-validator runs as likely KG-supported,
+mixed, or likely leakage, based on whether the validator’s decisive CONTRADICTED evidence cites
+a KG entity/relation (or a QKG applicability annotation), pivots from a KG gap to clinical-
+guideline knowledge, or sits between the two. The exact rules, the LLM re-labelling step for
+cases the regex leaves indeterminate, the leakage-adjusted accuracy formula, and the released
+per-case CSV are described in Appendix A.3.
+Table 1 summarizes the high-level accounting, and Table 2 reports the class-level breakdown of
+W→C and C→W revisions. Both runs leak comparably (∼55–60 W→C revisions labeled likely
+leakage out of ∼200; Table 1), but the with-context run produces noticeably more KG-supported
+W→C revisions (123 vs. 97; Table 2), and 27 of those explicitly invoke a QKG-specific applicability
+token (AVOID, RECOMMENDED, CAUTION, ConstraintItem, or safety judgment) versus 0 in the
+no-context run, indicating that the patient-context-conditioned QKG mechanism is responsible
+for that excess. After dropping the likely-leakage W→C revisions and the ctx-driven KG-
+supported C→W regressions from both numerator and denominator (Appendix A.3, Eq. 1),
+the leakage-adjusted final accuracies are 82.88% in the no-context setting and 83.75% in the
+with-context setting; both still exceed the no-validator Reasoner baseline (77.5%) by more
+
+[Page 11]
+Working Draft
+11
+No validator
+KG w/o context
+QKG w/ context
+74
+76
+78
+80
+82
+84
+Final accuracy (%)
+77.5
+83.3
+(+5.8 pp)
+83.5
+(+6.0 pp)
+(a) Final Accuracy
+No validator
+KG without context
+QKG with context
+0
+50
+100
+150
+200
+Number of answers revised
+No validator
+KG w/o context
+QKG w/ context
+no revisions
+177
+16
+net +161
+204
+38
+net +166
+(b) Validator Revisions
+Improved (W
+C)
+Regressed (C
+W)
+Qwen-Validator Results and Context Ablation
+Figure 4: Qwen-validator results and context ablation on the curated evaluation set (N = 2,788),
+with Haiku-4.5 used as the Reasoner throughout. Panel (a) shows final accuracy for the no-
+validator baseline, KG validation without context matching, and QKG validation with context
+matching. Panel (b) shows the corresponding wrong-to-correct improvements and correct-to-
+wrong regressions.
+than 5 percentage points, and the with-context setting still exceeds the no-context setting after
+adjustment.
+Leakage classification of C→W regressions.
+Applying the same classifier to the C→W
+regressions in both Qwen-validator runs tests whether the elevated C→W under QKG w/ context
+reflects correct patient-context-conditioned elimination of an option whose underlying fact is
+MCQ-gold (KG-supported), or validator-supplied prior knowledge that misled the Reasoner
+away from gold (leakage). A C→W is decisive when a CONTRADICTED claim either contradicts
+the option the Reasoner originally chose (the gold) or un-eliminates the option that eventually
+became the final (wrong) answer; the regex rules and the LLM re-labeling pass on Unclassified
+cases are the same as for the W→C classification. The resulting per-class counts are reported
+alongside the W→C breakdown in Table 2. Of the 38 C→W in the with-context run, 36 are
+KG-supported and only 1 is likely leakage; 20 of the 36 KG-supported cases explicitly cite a
+QKG applicability token, versus 0 of the 12 KG-supported cases in the no-context run. The
+increase from 16 to 38 C→W under QKG is therefore dominated by KG-supported regressions
+(+24) and by QKG-token-driven regressions specifically (+20), not by validator hallucination.
+6 Discussion
+6.1 Not Merely Facts, but Applicable Knowledge
+In clinical reasoning, the key issue is not whether a KG fact is medically related, but whether that
+fact is applicable in the patient’s specific context. This is the central distinction highlighted by the
+case studies in Section 5.2. In the first case, the validator succeeds only after combining multiple
+patient-specific factors—age, smoking, alcohol use, and timing after ciprofloxacin exposure—to
+determine that the drug-induced tendinopathy relation is applicable to this particular patient.
+
+[Page 12]
+Working Draft
+12
+Table 1: Leakage-adjusted accuracy accounting for the two Qwen-3.6-Plus validator runs (Haiku-
+4.5 Reasoner throughout). W→C and C→W are the counts of wrong-to-correct revisions and
+correct-to-wrong regressions after validation. Est. adj. is the total number of samples dropped
+from the Adj. final accuracy; exclusion rules and the formula are in Appendix A.3, Eq. 1.
+Class-level breakdowns of W→C and C→W are reported in Table 2. A paired McNemar test
+for the with-context vs. no-context comparison gives exact two-sided p=0.73 on the raw paired
+set (N=2,782, b=65, c=70), and p=0.05 on the leakage-adjusted subset (N=2,665, b=33, c=52;
+samples flagged in either run removed). See Section 3.3.
+Final Acc. (%)
+Setting
+N
+W→C
+C→W
+Est. adj.
+Raw
+Adj.
+KG w/o context
+2,788
+177
+16
+60
+83.25
+82.88
+QKG w/ context
+2,788
+204
+38
+75
+83.46
+83.75
+Table 2:
+Class-level leakage-classification breakdown of W→C (wrong-to-correct) re-
+visions
+and
+C→W
+(correct-to-wrong)
+regressions
+in
+the
+two
+Qwen-3.6-Plus
+valida-
+tor runs,
+using the rules in Appendix A.3.
+The parenthesised count under KG-
+supp.
+is
+the
+subset
+whose
+decisive
+evidence
+cites
+a
+QKG-specific
+applicability
+to-
+ken (AVOID/RECOMMENDED/CAUTION/ConstraintItem/safety judgment). Each block’s class
+columns sum to the W→C or C→W totals in Table 1.
+W→C class counts
+C→W class counts
+Setting
+KG-supp. (ctx)
+Mixed
+Leakage
+KG-supp. (ctx)
+Mixed
+Leakage
+KG w/o context
+97 (0)
+20
+60
+12 (0)
+0
+4
+QKG w/ context
+123 (27)
+26
+55
+36 (20)
+1
+1
+In the second case, the validator succeeds only by matching a concrete laboratory value, a
+platelet count of 95,000/mm3, against the threshold for tPA eligibility. One case is compositional
+and multifactorial; the other is threshold-based. Together, they show that the relevant clinical
+knowledge cannot be treated as context-free once retrieved from the graph.
+This is exactly the motivation for modeling triplet validity under context. If a KG edge is
+treated as simply true once retrieved, the validator cannot distinguish between knowledge that
+is generally relevant and knowledge that is actually valid for the current patient. In other words,
+the failure mode is not simply missing facts; it is the inability to decide when a retrieved fact
+should count as evidence. QKG addresses this problem by attaching conditions under which a
+triplet should be accepted, contradicted, or ignored in the current patient context.
+The aggregate results are consistent with this interpretation. Figure 2 suggests that merely
+adding KG-backed knowledge is already somewhat useful, since KG validation without context
+matching still improves over the no-validator baseline. But the larger gain comes from context-
+aware validation: the full QKG setting performs better because it does not stop at retrieving
+medically related knowledge, and instead decides whether a retrieved relation should count
+for this patient. Figure 4 preserves the same ordering under a stronger validator, with QKG
+with context matching still outperforming KG validation without context matching, which in
+turn outperforms the no-validator baseline. Though the Qwen-as-validator result makes the
+gap between with-context and without-context settings appear relatively small, in the next
+subsection we argue that this pattern is compounded by the strong validator’s own model-internal
+knowledge. Even with that caution, the repeated ordering still supports the central idea that
+applicability carries useful signal beyond raw factual relatedness alone.
+
+[Page 13]
+Working Draft
+13
+6.2 Why Strong-Validator Results Require Caution
+The Qwen-3.6-Plus validator results are harder to interpret causally than the Haiku-validator
+ablation. The case studies in Section 5.3 and the log analysis summarized in Table 1 show that
+both Qwen-validator runs contain answer leakage: some wrong-to-correct revisions are driven by
+validator-supplied medical or guideline knowledge rather than by a directly relevant retrieved
+edge, so the raw gains in both Qwen settings are not clean measurements of graph-grounded
+validation.
+We read both the paired-test null (p=0.73) between raw accuracy w/ context and w/o context
+and the elevated C→W under w/ context (38 vs. 16) in Table 1 as symptoms of the benchmark’s
+fact-level rather than patient-level gold, not of a noisy QKG mechanism. Applying the per-case
+leakage classifier to the C→W regressions (Table 2) supports this reading directly: 36 of 38
+QKG-w/-context C→W cases are KG-supported and only 1 is likely leakage, with 20 of the
+KG-supported cases explicitly citing QKG applicability tokens (versus 0 of 12 KG-supported
+C→W in the no-context run). The elevated C→W under QKG is therefore dominated by
+patient-context-conditioned reasoning that correctly eliminates an option whose underlying fact
+is nonetheless the one the MCQ gold rewards, not by validator-supplied prior knowledge at
+the applicability step. Removing these benchmark-gold-noise cases from the paired comparison
+confirms the reading quantitatively: the leakage-adjusted paired McNemar (Section 3.3) shifts
+the with-context vs. no-context p-value from 0.73 on the raw set to 0.05 on the adjusted set—right
+at the conventional α=0.05 threshold, turning a strong null into a borderline-significant effect
+once the benchmark-gold-noise cases are removed.
+QKG’s context effect should be most material in real-world clinical reasoning, where answers
+routinely depend on context-conditioned combinations of evidence rather than single-fact recall.
+In the absence of a suitable real-world benchmark (see Limitation and Future Work below), we
+evaluate on MCQ medical QA, whose fact-level gold cannot fully expose this regime. On this
+benchmark, Figure 2—the Haiku-validator context effect of +0.79 pp with paired McNemar
+p=0.014—is the cleanest observation of the mechanism, whereas the Qwen-validator picture
+requires the leakage adjustment to unmask the effect (p from 0.73 to 0.05) against the benchmark’s
+fact-level gold.
+6.3 Limitations and Future Work
+The main limitation of the current study is that evaluation on benchmark medical QA cannot
+fully disentangle QKG-based contextual validation from model-internal medical knowledge. This
+issue becomes especially important for strong validators, whose gains may reflect both explicit
+use of patient-conditioned KG evidence and prior familiarity with benchmark-style medical
+questions. A cleaner test would use real-world patient-level reasoning tasks, but such evaluation
+remains difficult because publicly available clinical datasets rarely provide scalable gold-standard
+labels for contextual reasoning, while routine clinical data are often noisy, incomplete, and
+not annotated with unambiguous reasoning traces. Existing open clinical resources are highly
+valuable, but they are usually optimized either for general EHR access, as in MIMIC-IV (Johnson
+et al., 2023), or for predictive benchmarking, as in EHRSHOT’s few-shot patient classification
+tasks (Wornow et al., 2023), rather than for evaluating whether a system can determine which
+knowledge is applicable under a patient’s specific context. The current results should therefore be
+interpreted as strong benchmark evidence for the usefulness of QKG, but not yet as a definitive
+causal measurement of its contribution in real-world clinical workflows.
+In future work, we aim to build such a real-world clinical reasoning benchmark and share it
+with the community. Our goal is to use it not only to test QKG under more realistic clinical
+conditions, but also to diagnose its failure modes and improve context-dependent KG validation
+
+[Page 14]
+Working Draft
+14
+at larger scale.
+7 Conclusion
+This paper introduces the Quantum Knowledge Graph (QKG), a framework for modeling triplet
+validity as context-dependent rather than context-insensitive. We instantiate QKG in the medical
+domain by augmenting KG relations with natural-language applicability conditions and using
+them in a reasoner–validator pipeline for medical question answering. Under a matched Haiku-4.5
+Reasoner–Validator setting, patient-context matching delivers a small but paired-significant
+gain over KG validation without context (+0.79 pp, p=0.014), and both settings exceed the
+no-validator baseline. Under a stronger validator (Qwen-3.6-Plus), the raw paired gap is a null
+(p=0.73) that becomes borderline significant (p=0.05) after adjusting for knowledge leakage and
+suspicious questions—consistent with a benchmark-gold ceiling in multiple-choice medical QA
+rather than QKG redundancy—and we propose real-world clinical reasoning tasks as a direct
+next step for testing context-dependent KG validation at larger scale. More broadly, the findings
+support the view that the value of a knowledge graph in LLM-based reasoning lies not only
+in storing relevant facts, but in representing whether those facts are applicable in the specific
+context in which they are used.
+Acknowledgements
+This work was supported by City University of Hong Kong under project number 9610777.
+We gratefully acknowledge Baichuan Intelligence for providing complimentary token credits to
+support our use of the Baichuan M2 Plus model. We also thank Dr. Linfeng Li, lead author
+of Li et al. (2020b,a), for his insightful discussions with us, which helped inspire this work. In
+addition, we thank Prof. Wei-Ying Ma, Director of HKAI-Sci, for encouraging our exploration
+of this research frontier.
+Reproducibility Checklist.
+See Appendix A.5 for release and reproducibility details.
+References
+Anthropic.
+Introducing
+claude
+haiku
+4.5.
+https://www.anthropic.com/news/
+claude-haiku-4-5, 10 2025. Release note; accessed 2026-04-17.
+Baichuan Intelligence. Baichuan-m2 technical blog. https://www.baichuan-ai.com/blog/
+baichuan-M2, 2025. Accessed 2026-04-13.
+P. Chandak et al. Primekg: A knowledge graph for precision medicine. Scientific Data, 2023.
+Ziyang Chen, Jinzhi Liao, and Xiang Zhao.
+Multi-granularity temporal question answer-
+ing over knowledge graphs.
+In Proceedings of the 61st Annual Meeting of the Associa-
+tion for Computational Linguistics (Volume 1: Long Papers), pages 11380–11395. Asso-
+ciation for Computational Linguistics, 2023.
+doi: 10.18653/v1/2023.acl-long.637.
+URL
+https://aclanthology.org/2023.acl-long.637/.
+Lijuan Diao, Wei Yang, Penghua Zhu, Gaofang Cao, Shoujun Song, and Yang Kong. The
+research of clinical temporal knowledge graph based on deep learning. Journal of Intelligent
+& Fuzzy Systems, 41(3):4265–4274, 2021. doi: 10.3233/JIFS-189687.
+
+[Page 15]
+Working Draft
+15
+Zejin Ding, Ning Wang, Shujian Liu, and Guodong Zhou. Temporal fact reasoning over hyper-
+relational knowledge graphs. In Findings of the Association for Computational Linguistics:
+EMNLP 2024, pages 345–357. Association for Computational Linguistics, 2024. doi: 10.18653/
+v1/2024.findings-emnlp.20. URL https://aclanthology.org/2024.findings-emnlp.20/.
+John Dougrez-Lewis, Mahmud Elahi Akhter, Federico Ruggeri, Sebastian Löbbers, Yulan He, and
+Maria Liakata. Assessing the reasoning capabilities of llms in the context of evidence-based
+claim verification. In Findings of the Association for Computational Linguistics: ACL 2025,
+pages 20604–20628. Association for Computational Linguistics, 2025. doi: 10.18653/v1/2025.
+findings-acl.1059. URL https://aclanthology.org/2025.findings-acl.1059/.
+Mikhail Galkin, Priyansh Trivedi, Gaurav Maheshwari, Ricardo Usbeck, and Jens Lehmann.
+Message passing for hyper-relational knowledge graphs. In Proceedings of the 2020 Conference
+on Empirical Methods in Natural Language Processing (EMNLP), pages 7346–7366. Association
+for Computational Linguistics, 2020. doi: 10.18653/v1/2020.emnlp-main.596. URL https:
+//aclanthology.org/2020.emnlp-main.596/.
+Alistair E. W. Johnson, Lucas Bulgarelli, Lu Shen, Alvin Gayles, Ayad Shammout, Steven Horng,
+Tom J. Pollard, Sicheng Hao, Benjamin Moody, Brian Gow, Li-wei H. Lehman, Leo A. Celi,
+and Roger G. Mark. Mimic-iv, a freely accessible electronic health record dataset. Scientific
+Data, 10(1):1, 2023. doi: 10.1038/s41597-022-01899-x.
+Shaghayegh Kolli, Richard Rosenbaum, Timo Cavelius, Lasse Strothe, Andrii Lata, and Jana
+Diesner. Hybrid fact-checking that integrates knowledge graphs, large language models, and
+search-based retrieval agents improves interpretable claim verification. In Proceedings of the 9th
+Widening NLP Workshop, pages 106–115. Association for Computational Linguistics, 2025. doi:
+10.18653/v1/2025.winlp-main.19. URL https://aclanthology.org/2025.winlp-main.19/.
+Linfeng Li, Peng Wang, Yao Wang, Shenghui Wang, Jun Yan, Jinpeng Jiang, Buzhou Tang,
+Chengliang Wang, and Yuting Liu. A method to learn embedding of a probabilistic medical
+knowledge graph: Algorithm development. JMIR Medical Informatics, 8(5):e17645, 2020a.
+doi: 10.2196/17645.
+Linfeng Li, Peng Wang, Jun Yan, Yao Wang, Simin Li, Jinpeng Jiang, Zhe Sun, Buzhou Tang,
+Tsung-Hui Chang, Shenghui Wang, and Yuting Liu. Real-world data medical knowledge graph:
+construction and applications. Artificial Intelligence in Medicine, 103:101817, 2020b. doi:
+10.1016/j.artmed.2020.101817.
+Marinela Parović, Ze Li, and Jinhua Du. Generating domain-specific knowledge graphs from large
+language models. In Findings of the Association for Computational Linguistics: ACL 2025,
+pages 11558–11574, Vienna, Austria, 2025. Association for Computational Linguistics. doi:
+10.18653/v1/2025.findings-acl.602. URL https://aclanthology.org/2025.findings-acl.
+602/.
+Qwen Team. Qwen3.6-plus: Towards real world agents. https://qwen.ai/blog?email_hash=
+0d7a7050906b225db2718485ca0f3472&id=qwen3.6, 4 2026. Release note; accessed 2026-04-
+17.
+Apoorv Saxena, Aakash Tripathi, and Partha Talukdar. Question answering over temporal knowl-
+edge graphs. In Proceedings of the 59th Annual Meeting of the Association for Computational
+Linguistics and the 11th International Joint Conference on Natural Language Processing (Vol-
+ume 1: Long Papers), pages 6663–6676. Association for Computational Linguistics, 2021. doi:
+10.18653/v1/2021.acl-long.520. URL https://aclanthology.org/2021.acl-long.520/.
+
+[Page 16]
+Working Draft
+16
+Yuan Sui, Yufei He, Zifeng Ding, and Bryan Hooi.
+Can knowledge graphs make large
+language models more trustworthy?
+an empirical study over open-ended question an-
+swering.
+In Proceedings of the 63rd Annual Meeting of the Association for Computa-
+tional Linguistics (Volume 1: Long Papers), pages 12685–12701, Vienna, Austria, 2025.
+Association for Computational Linguistics.
+doi:
+10.18653/v1/2025.acl-long.622.
+URL
+https://aclanthology.org/2025.acl-long.622/.
+Michael Wornow, Rahul Thapa, Ethan Steinberg, Jason A. Fries, and Nigam H. Shah.
+Ehrshot:
+An ehr benchmark for few-shot evaluation of foundation models.
+In
+Advances in Neural Information Processing Systems 36:
+Datasets and Benchmarks
+Track, 2023.
+URL https://proceedings.neurips.cc/paper_files/paper/2023/file/
+d42db1f74df54cb992b3956eb7f15a6f-Paper-Datasets_and_Benchmarks.pdf.
+Juncheng Wu, Wenlong Deng, Xingxuan Li, Sheng Liu, Taomian Mi, Yifan Peng, Ziyang Xu,
+Yi Liu, Hyunjin Cho, Chang-In Choi, et al. Medreason: Eliciting factual medical reasoning
+steps in llms via knowledge graphs. arXiv preprint arXiv:2504.00993, 2025a.
+Junde Wu, Jiayuan Zhu, Yunli Qi, Jingkun Chen, Min Xu, Filippo Menolascina, Yueming Jin,
+and Vicente Grau. Medical graph rag: Evidence-based medical large language model via graph
+retrieval-augmented generation. In Proceedings of the 63rd Annual Meeting of the Association
+for Computational Linguistics (Volume 1: Long Papers), pages 28443–28467, Vienna, Austria,
+2025b. Association for Computational Linguistics. doi: 10.18653/v1/2025.acl-long.1381. URL
+https://aclanthology.org/2025.acl-long.1381/.
+A Appendix
+A.1 Evaluation Dataset Construction
+We derive the evaluation set from MedReason (Wu et al., 2025a) through a four-stage pipeline.
+QA source distribution.
+Table 3 reports the distribution of source datasets in the full
+MedReason collection and in the curated evaluation set. The curated set is strongly skewed
+toward MedQA (71.0%), reflecting that MedQA questions tend to involve rich clinical scenarios
+with multiple named entities, yielding higher PrimeKG path counts and thus higher ranks after
+Stage 3 filtering.
+Stage 1: Entity extraction and UMLS grounding.
+For each question and its answer
+choices, an LLM-based agent extracts named medical entities. Each entity name is embedded
+and matched to a UMLS CUI via approximate nearest-neighbor search over a precomputed
+UMLS embedding index (Tencent VectorDB, google/gemini-embedding-001, 768 dimensions).
+Stage 2: PrimeKG alignment.
+Each UMLS CUI is mapped to PrimeKG nodes through two
+strategies applied in order: (i) direct (source, id) match where the CUI resolves to a PrimeKG
+entity identifier, and (ii) UMLS hierarchy traversal, which walks ancestor CUIs until a match
+is found in PrimeKG. This two-stage alignment tolerates the ontological gap between UMLS
+concepts and PrimeKG entities.
+
+[Page 17]
+Working Draft
+17
+Table 3: QA-source distribution for the full MedReason dataset (N = 32,682) and the curated
+evaluation set (N = 2,788). Percentages are row-normalized within each column.
+MedReason (full)
+Curated set
+Source
+n
+%
+n
+%
+MedQA
+8,016
+24.5
+1,981
+71.0
+PubMedQA (artificial)
+8,094
+24.8
+62
+2.3
+HuatuoGPT-o1
+6,475
+19.8
+313
+11.2
+MedMCQA
+6,197
+19.0
+144
+5.2
+PubMedQA (unlabeled)
+1,747
+5.3
+10
+0.4
+MMLU
+827
+2.5
+58
+2.1
+MedXpertQA
+666
+2.0
+208
+7.5
+PubMedQA
+603
+1.8
+7
+0.3
+HLE (medical)
+57
+0.2
+5
+0.2
+Total
+32,682
+100.0
+2,788
+100.0
+Stage 3: Subgraph path filtering.
+For each sample, we enumerate all 1-hop paths between
+the matched PrimeKG nodes. Samples with no recoverable path (path count = 0) are excluded,
+as QKG can provide no evidence for them. Remaining samples are ranked by path count and
+the top 2,788 are retained, ensuring sufficient KG grounding for evaluation.
+Stage 4:
+Patient-characteristic annotation.
+For each retained sample, a structured
+PatientCharacter record is extracted from the question text using an LLM, capturing demo-
+graphics (age, sex), diagnoses, laboratory values, and current medications. This record is used
+as the patient context P at inference time (Algorithm 1).
+A.2 QAResponse Schema
+The question-answering outputs are constrained by the following Pydantic schema:
+class QAResponse(BaseModel):
+llm_answer_choice: str
+selected_option_text: str
+reasoning: str
+A.3 Leakage-Classification Heuristic
+This subsection records the rule set used to label every wrong-to-correct (W→C) revision
+in Table 1. The classifier implementation and per-case labels are released with the paper
+(Appendix A.5), enabling reviewers to audit any individual case.
+Signals.
+For each decisive CONTRADICTED evidence string e we test four signals via regex (full
+pattern lists are in the script header):
+• KG_SUPPORT(e): e cites a KG entity, relation, or edge as the basis of the contradiction (e.g.,
+“KG confirms . . . indication relation,” “entity 30494 has direct positive phenotype relations
+to AKI,” “KG explicitly links X to Y”).
+• KG_GAP(e): e concedes that the KG had no relevant edge for the question (e.g., “KG lacks,”
+“returned no,” “empty list,” “no clinical guideline data”).
+
+[Page 18]
+Working Draft
+18
+• PARAMETRIC(e): e asserts external clinical or guideline knowledge (e.g., “Medically,” “Clini-
+cally,” “AHA/CDC/ACIP guidelines,” “standard of care”).
+• CONTEXT(e): e contains a QKG-specific applicability token, matched narrowly so that generic
+patient mentions do not count: case-sensitive AVOID, RECOMMENDED, or CAUTION (the upper-
+case ConstraintItem labels emitted by the validator), or case-insensitive ConstraintItem
+or safety judgment. The looser token applicability was deliberately excluded because
+it appears in ordinary clinical-trial prose (e.g., “evidence-based applicability for this trial”)
+and would produce false positives in the no-context run where the QKG ConstraintItem
+layer is inactive.
+Decisive evidence.
+A CONTRADICTED item in the validation report is decisive if either (i) its
+supports flag is true and its option matches the Reasoner’s original answer, or (ii) its supports
+flag is false and its option matches the gold answer. These are the items the Reasoner reconsiders
+against. If no decisive items exist for a case, all CONTRADICTED items are used.
+Algorithm 2 Per-case leakage classifier
+1: function LabelEvidence(e)
+2:
+if Context(e) then return EvContext
+3:
+else if KgGap(e) and Parametric(e) then return EvLeakage
+4:
+else if Parametric(e) and not KgSupport(e) and not KgGap(e) then return
+EvLeakage
+5:
+else if KgSupport(e) then return EvKgGrounded
+6:
+else return EvUnclassified
+7:
+end if
+8: end function
+9: function ClassifyCase(record)
+10:
+D ←decisive items in record.validation_report
+11:
+if D = ∅then D ←all CONTRADICTED items
+12:
+end if
+13:
+L ←{LabelEvidence(e.evidence) : e ∈D}
+14:
+supp ←(EvContext ∈L) ∨(EvKgGrounded ∈L)
+15:
+leak ←EvLeakage ∈L
+16:
+if supp ∧leak then return Mixed
+17:
+else if supp then return LikelyKgSupported
+18:
+else if leak then return LikelyLeakage
+19:
+else return Unclassified
+20:
+end if
+21: end function
+Adjusted accuracy.
+The leakage-adjusted final accuracy reported in Table 1 drops, from both
+numerator and denominator, (i) W→C revisions labelled LikelyLeakage (validator-parametric
+credit rather than clean graph-grounded validation), and (ii) C→W regressions whose decisive
+evidence cites a QKG applicability token (the ctx-driven subset of LikelyKgSupported C→W),
+on the grounds of Section 5.2’s argument that these are QKG correctly eliminating an option
+whose underlying fact is MCQ-gold—a benchmark-gold quality issue rather than a QKG failure:
+adj_final_acc = # final_correct −nW→C
+leak
+N −nW→C
+leak
+−nC→W
+ctx
+,
+(1)
+
+[Page 19]
+Working Draft
+19
+where nW→C
+leak
+denotes W→C revisions labelled LikelyLeakage and nC→W
+ctx
+denotes C→W
+regressions whose decisive evidence cites a QKG applicability token. For W→C we adjust away
+only the LikelyLeakage bucket: the Mixed bucket contains both KG-supported and leakage
+signals across decisive evidence, so its W→C revisions are not assumed to be entirely leakage-
+driven, and the Unclassified bucket includes many W→C revisions whose evidence cites a
+specific KG entity or relation in phrasing that the regex does not match (e.g., “KG entity 30494
+has direct positive phenotype relations to acute kidney injury” for sample qa_6771); treating
+all of them as leakage would be too pessimistic. For C→W we drop only the ctx-driven subset
+of LikelyKgSupported, not the full LikelyKgSupported column, because Section 5.2’s
+benchmark-gold argument rests specifically on the QKG applicability-token evidence (20 for
+QKG w/ context vs. 0 for no-context). The reported adjustment is therefore conservative in
+both directions, and the per-case CSV makes alternative aggregations trivial to compute.
+Sanity check.
+On a set of 17 W→C cases that we manually labelled as either context-driven
+(9 cases) or leakage (8 cases) prior to running the classifier, ClassifyCase agrees on 9/9
+context-driven cases and 7/8 leakage cases. The single disagreement (qa_2856) is now caught
+by the pure-parametric branch of LabelEvidence introduced after the manual labelling.
+LLM re-labeling of Unclassified cases.
+The regex pass leaves 29 W→C cases in the
+no-context run and 27 in the with-context run as Unclassified, and 3 C→W cases in each
+run. Manual inspection of a sample (e.g., qa_6771, whose decisive evidence is “KG entity 30494
+has direct positive phenotype relations to acute kidney injury”) showed that many such cases
+do cite KG content but in phrasing that the regex does not match. Because the combined
+Unclassified set is small (62 cases total), we re-label each Unclassified case by prompting
+the Haiku-4.5 LLM (configuration key patient-context-llm) with the same decisive evidence
+strings and asking it to assign one of LikelyKgSupported, Mixed, LikelyLeakage, or
+Unclassified. The same prompt is used for W→C and C→W up to a short preamble describing
+the flip direction. The two re-label drivers and the combined per-case CSVs (regex label, LLM
+label, source of the final label, and the LLM’s one-sentence justification) are released with the
+paper (Appendix A.5), enabling any individual decision to be audited.
+A.4 Strong-Validator Answer-Leakage Case Studies
+The two cases below are wrong-to-correct revisions from the Qwen-3.6-Plus validator run without
+patient-context filtering (Section 5.3). Each case lists the relevant question and option set,
+the Reasoner’s initial answer, the Validator’s per-option status and verbatim evidence string,
+and the Reasoner’s reconsideration outcome. Both revisions are produced even though the KG
+returns no edge that directly contradicts the Reasoner’s chosen option, and the Validator’s
+CONTRADICTED justification is delivered as validator-supplied medical or guideline knowledge
+after the KG lookup fails to yield a directly relevant edge.
+The per-option status patterns reported below—multiple NO_COVERAGE flags on the recommendation-
+relevant options—are specific to the no-context run. In the with-context run, the same Validator
+returns SUPPORTED on several of these options for the same samples (e.g., options B/A/C in
+qa_9542 and options B/D in qa_6324), indicating that patient-context-conditioned QKG an-
+notations were retrieved when patient context was supplied. The cases below should therefore
+be read as illustrations of the no-context leakage pattern, not as descriptions of with-context
+Validator behavior on these samples.
+
+[Page 20]
+Working Draft
+20
+Case A: qa_9542 (gold = D, shingles vaccine).
+Vignette. A 62-year-old woman is seen
+in June for a routine check-up. Past history includes appendectomy, chronic back pain, normal
+mammogram 6 months ago, normal Pap smear 2 years ago, normal colonoscopy 5 years ago.
+Her immunisation record shows: never received pneumococcal or shingles vaccine; last tetanus
+booster 6 years ago; last influenza vaccine 2 years ago. Vitals are within normal limits.
+Options. (A) Colonoscopy. (B) Influenza vaccine. (C) Tetanus vaccine. (D) Shingles vaccine.
+Reasoner answer. B (incorrect). Reasoner argues that influenza vaccine is annual and the
+patient’s last dose was 2 years ago, making it “more immediately overdue” than shingles.
+Validator report. Options A, B, and C receive NO_COVERAGE from the KG, while option D is
+marked CONTRADICTED. Representative evidence strings:
+[B, NO_COVERAGE] “KG contains ’influenza’ disease entity (index 37766) but lacks explicit
+vaccination schedule, age-threshold, or dosing-interval relations. While medically accurate
+that annual vaccination is standard, the KG does not encode this clinical guideline.”
+[D, CONTRADICTED] “KG contains ’Varicella Zoster Vaccine’ entities (indices 20940, etc.)
+but no scheduling data. Medically, this claim incorrectly eliminates D. For a 62-year-old
+who has never received the shingles vaccine, RZV is a high-priority, age-based preventive
+recommendation. Influenza vaccine, while annual, is season-dependent (patient seen in June,
+off-season), making the Shingles vaccine the most appropriate immediate recommendation
+per standard clinical guidelines. The claim’s reasoning to prioritize influenza over shingles is
+clinically flawed for this vignette.”
+Reconsideration. The Reasoner accepts the validator’s argument that influenza vaccination is
+off-season in June and that the patient has never received the shingles vaccine, switches to D,
+and matches the gold answer.
+Case B: qa_6324 (gold = A, antibiotic prophylaxis before molar extraction).
+Vi-
+gnette. A 72-year-old man presents for medical clearance for a molar extraction. He climbs
+three flights of stairs without dyspnea. Past history includes hypertension, type 2 diabetes
+mellitus, ischemic heart disease, aortic valve replacement for severe aortic stenosis one year ago,
+and angioplasty with two stents 12 years ago. Current medications include aspirin, warfarin,
+lisinopril, metformin, sitagliptin, and simvastatin. A systolic ejection click is heard at the right
+second intercostal space.
+Options. (A) Administer oral amoxicillin 1 hour before the procedure. (B) Obtain echocardiog-
+raphy prior to procedure. (C) Avoid nitrous oxide during the procedure. (D) Discontinue aspirin
+and warfarin 72 hours prior to procedure.
+Reasoner answer. C (incorrect). Reasoner argues that nitrous oxide is contraindicated in patients
+with prosthetic valves due to expansion of gas-filled spaces.
+Validator report. Options B and D receive NO_COVERAGE; options A and C receive CONTRADICTED.
+Verbatim evidence:
+[C, CONTRADICTED] “KG query for Nitrous oxide (DB06690) contraindications returned an
+empty list. No edges link nitrous oxide to prosthetic valves or valve dysfunction. Medically,
+nitrous oxide is contraindicated in closed gas-filled spaces (e.g., pneumothorax, bowel obstruc-
+tion, intraocular gas), not in solid/metallic prosthetic heart valves. The claim is factually
+incorrect.”
+[A, CONTRADICTED] “KG search for Amoxicillin (DB01060) indications lists various bacterial
+infections but contains no clinical guideline or prophylaxis protocol data. Medically, AHA
+guidelines explicitly RECOMMEND antibiotic prophylaxis for patients with prosthetic
+cardiac valves undergoing dental procedures involving gingival manipulation. The claim
+incorrectly states it is not recommended.”
+
+[Page 21]
+Working Draft
+21
+Reconsideration. The Reasoner accepts both contradictions, removes nitrous-oxide contraindica-
+tion as the chosen rationale, and revises to A, matching the gold answer.
+A.5 Released Code and Data
+The paper will be accompanied by the following two to-be-published projects.
+• Codebase and results CSVs. A GitHub repository containing the evaluation code,
+analysis scripts, paper materials, and results CSVs used in this work.
+• Data assets. A separate data release comprising three Hugging Face dataset reposito-
+ries: qkg-primekg-entities-with-cui for PrimeKG entities with UMLS CUI mappings;
+qkg-relation-with-facts for the focused relation annotation / relation-facts dataset; and
+qkg_qa_dataset for the curated QA evaluation dataset.
+Reproducibility details.
+The paper release packages the evaluation code, analysis scripts,
+paper assets, and per-sample result CSVs together. The evaluation set is the curated N=2,788
+KG-grounded MedReason subset used throughout the paper. Runtime settings are specified by
+conf/config_template.yaml. The paper uses Haiku-4.5 as the Reasoner throughout, and Haiku-
+4.5 or Qwen-3.6-Plus as the Validator depending on the experiment. The patient-context-llm
+role is used only for the Appendix A.3 LLM re-labeling step and is not part of the agentic pipeline
+itself. The main evaluation entrypoint is conditionKgTestAgentic.py. Paired significance tests
+are reproduced by paper/data_result/significance_tests.py. The leakage re-label scripts
+are classify_unclassified_with_llm.py and classify_unclassified_c2w_with_llm.py.

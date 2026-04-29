@@ -1,0 +1,150 @@
+{
+  "paper_id": "2604.11623v3",
+  "title": "Context Kubernetes: Declarative Orchestration of Enterprise Knowledge for Agentic AI Systems",
+  "organization": "Microsoft",
+  "publish_date": "2026-04-13",
+  "theme": "AI Agent",
+  "source_name": "Microsoft arXiv query",
+  "source_url": "https://arxiv.org/abs/2604.11623v3",
+  "paper_url": "https://arxiv.org/pdf/2604.11623v3",
+  "summary": "We introduce Context Kubernetes, an architecture for orchestrating enterprise knowledge in agentic AI systems, with a prototype implementation and eight experiments. The core observation is that delivering the right knowledge, to the rig...",
+  "priority": 910,
+  "total_chars": 73875,
+  "chunk_count": 22,
+  "image_paths": [],
+  "notes": [],
+  "chunks": [
+    {
+      "index": 1,
+      "heading": "Section 1",
+      "text_len": 2932,
+      "text_preview": "[Page 1]\nCONTEXT KUBERNETES:\nDECLARATIVE ORCHESTRATION OF ENTERPRISE KNOWLEDGE\nFOR AGENTIC AI SYSTEMS\nCHARAFEDDINE MOUZOUNI\nOPIT – Open Institute of Technology, and Cohorte AI, Paris, France.\ncharafed"
+    },
+    {
+      "index": 2,
+      "heading": "Section 2",
+      "text_len": 3042,
+      "text_preview": "[Page 2]\n2\nCHARAFEDDINE MOUZOUNI\n1. INTRODUCTION\nThe most profound technologies are those that disappear. They weave\nthemselves into the fabric of everyday life until they are indistinguishable from\ni"
+    },
+    {
+      "index": 3,
+      "heading": "Section 3",
+      "text_len": 3520,
+      "text_preview": "[Page 3]\nCONTEXT KUBERNETES\n3\na formal isomorphism, and we are explicit about where it holds tightly and where it\nstretches.\nScope. This paper presents an architecture, a prototype implementation, and"
+    },
+    {
+      "index": 4,
+      "heading": "Section 4",
+      "text_len": 2784,
+      "text_preview": "[Page 4]\n4\nCHARAFEDDINE MOUZOUNI\n2. BACKGROUND AND MOTIVATION\n2.1. The Container Orchestration Precedent. Docker (2013) standardized the container\nas a portable unit of compute. The Open Container Ini"
+    },
+    {
+      "index": 5,
+      "heading": "Section 5",
+      "text_len": 3147,
+      "text_preview": "[Page 5]\nCONTEXT KUBERNETES\n5\nThe critical observation is that the governance layer is universally the weakest, least\nstandardized, and most vendor-locked (Mouzouni, 2025). Copilot Studio’s governance"
+    },
+    {
+      "index": 6,
+      "heading": "Section 6",
+      "text_len": 3271,
+      "text_preview": "[Page 6]\n6\nCHARAFEDDINE MOUZOUNI\n(4) Agent authority as strict subset of human authority (Req. 2.3). An architectural\ninvariant. No mechanism exists for an agent to exceed its user’s scope.\n(5) Intell"
+    },
+    {
+      "index": 7,
+      "heading": "Section 7",
+      "text_len": 4651,
+      "text_preview": "[Page 7]\nCONTEXT KUBERNETES\n7\nmodule, and Γ is the guardrail set. Operators extend the base system with domain intel-\nligence, inspired by Kubernetes Operators (Dobies and Wood, 2020) that extend the "
+    },
+    {
+      "index": 8,
+      "heading": "Section 8",
+      "text_len": 4689,
+      "text_preview": "[Page 9]\nCONTEXT KUBERNETES\n9\nTABLE 3. Approval isolation survey: four enterprise agentic platforms as-\nsessed against Design Invariant 3.8. All platforms provide human-in-the-\nloop mechanisms, but no"
+    },
+    {
+      "index": 9,
+      "heading": "Section 9",
+      "text_len": 4114,
+      "text_preview": "[Page 11]\nCONTEXT KUBERNETES\n11\n1\napiVersion :\ncontext /v1\n2\nkind :\nContextDomain\n3\nmetadata :\n4\nname :\ns a l e s\n5\nnamespace :\nacme - corp\n6\nl a b e l s :\n– s e n s i t i v i t y :\nc o n f i d e n t "
+    },
+    {
+      "index": 10,
+      "heading": "Section 10",
+      "text_len": 2704,
+      "text_preview": "[Page 13]\nCONTEXT KUBERNETES\n13\nTABLE 4. Structural analogy: Kubernetes ↔Context Kubernetes. Tight-\nness: Tight (functional equivalence), Moderate (shared pattern, different\nmechanics), Loose (design "
+    },
+    {
+      "index": 11,
+      "heading": "Section 11",
+      "text_len": 2790,
+      "text_preview": "[Page 14]\n14\nCHARAFEDDINE MOUZOUNI\nTABLE 5. Four distinguishing properties: architectural response and open\nproblems\nProperty\nComponent & mechanism\nOpen problem\nHeterogeneity\nCxRI + ingestion pipeline"
+    },
+    {
+      "index": 12,
+      "heading": "Section 12",
+      "text_len": 3642,
+      "text_preview": "[Page 15]\nCONTEXT KUBERNETES\n15\nSeed data for the experiments models a 10-person consulting firm with three clients,\nfive context domains (clients, sales, delivery, HR, finance), and 12 context files "
+    },
+    {
+      "index": 13,
+      "heading": "Section 13",
+      "text_len": 2967,
+      "text_preview": "[Page 16]\n16\nCHARAFEDDINE MOUZOUNI\norganizational data. Validation on naturally occurring enterprise queries is the critical\nnext step (Section 9.6).\nV1: Governed vs. ungoverned context quality. 200 q"
+    },
+    {
+      "index": 14,
+      "heading": "Section 14",
+      "text_len": 2287,
+      "text_preview": "[Page 17]\nCONTEXT KUBERNETES\n17\nTABLE 7. Attack scenarios: three permission models compared\nAttack scenario\nNo gov.\nRBAC\nCK8s\nSend email with confidential pricing\nAllowed\nAllowed\nBlocked\nAccess HR sal"
+    },
+    {
+      "index": 15,
+      "heading": "Section 15",
+      "text_len": 3718,
+      "text_preview": "[Page 18]\n18\nCHARAFEDDINE MOUZOUNI\n8. RELATED WORK\nContainer orchestration. Kubernetes (Burns et al., 2016; Verma et al., 2015), Docker\nSwarm, and Mesos (Hindman et al., 2011) established the declarat"
+    },
+    {
+      "index": 16,
+      "heading": "Section 16",
+      "text_len": 3441,
+      "text_preview": "[Page 19]\nCONTEXT KUBERNETES\n19\nextends these principles to agent-consumable knowledge with semantic routing and\norganizational intelligence accumulation. Documented failure modes of data mesh—\nre-sil"
+    },
+    {
+      "index": 17,
+      "heading": "Section 17",
+      "text_len": 3298,
+      "text_preview": "[Page 20]\n20\nCHARAFEDDINE MOUZOUNI\nOrganizational intelligence not implemented. Requirement R7 (Context Operators\nwith pattern extraction, learning loops) is designed but not implemented in the proto-"
+    },
+    {
+      "index": 18,
+      "heading": "Section 18",
+      "text_len": 3527,
+      "text_preview": "[Page 21]\nCONTEXT KUBERNETES\n21\n• Legal discoverability. Can an operator’s accumulated knowledge be subpoenaed?\nIf organizational insights are stored as indexed knowledge, they may be subject to le-\ng"
+    },
+    {
+      "index": 19,
+      "heading": "Section 19",
+      "text_len": 2833,
+      "text_preview": "[Page 22]\n22\nCHARAFEDDINE MOUZOUNI\n• Operator knowledge poisoning. If the organizational intelligence module ingests\ncorrupted signals, it may propagate incorrect patterns. The minimum signal thresh-\n"
+    },
+    {
+      "index": 20,
+      "heading": "Section 20",
+      "text_len": 3248,
+      "text_preview": "[Page 23]\nCONTEXT KUBERNETES\n23\n10. CONCLUSION\nEvery new computational primitive produces a scaling crisis. Every scaling\ncrisis is resolved by an orchestration layer. The orchestration layer outlasts"
+    },
+    {
+      "index": 21,
+      "heading": "Section 21",
+      "text_len": 3298,
+      "text_preview": "[Page 24]\n24\nCHARAFEDDINE MOUZOUNI\nApoorva Adimulam, Rajesh Gupta, and Sumit Kumar.\nThe orchestration of multi-\nagent systems:\nArchitectures, protocols, and enterprise adoption.\narXiv preprint\narXiv:2"
+    },
+    {
+      "index": 22,
+      "heading": "Section 22",
+      "text_len": 3930,
+      "text_preview": "[Page 25]\nCONTEXT KUBERNETES\n25\nInfoWorld.\nWhy\ncontext\nengineering\nwill\ndefine\nthe\nnext\nera\nof\nenter-\nprise\nAI.\nInfoWorld,\n2026.\nhttps://www.infoworld.com/article/4084378/\nwhy-context-engineering-will"
+    }
+  ]
+}

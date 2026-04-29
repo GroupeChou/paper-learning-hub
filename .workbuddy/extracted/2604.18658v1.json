@@ -1,0 +1,102 @@
+{
+  "paper_id": "2604.18658v1",
+  "title": "Owner-Harm: A Missing Threat Model for AI Agent Safety",
+  "organization": "Microsoft",
+  "publish_date": "2026-04-20",
+  "theme": "AI Agent",
+  "source_name": "Microsoft arXiv query",
+  "source_url": "https://arxiv.org/abs/2604.18658v1",
+  "paper_url": "https://arxiv.org/pdf/2604.18658v1",
+  "summary": "Existing AI agent safety benchmarks focus on generic criminal harm (cybercrime, harassment, weapon synthesis), leaving a systematic blind spot for a distinct and commercially consequential threat category: agents harming their own deploy...",
+  "priority": 926,
+  "total_chars": 50432,
+  "chunk_count": 14,
+  "image_paths": [],
+  "notes": [],
+  "chunks": [
+    {
+      "index": 1,
+      "heading": "Section 1",
+      "text_len": 3071,
+      "text_preview": "[Page 1]\nOwner-Harm: A Missing Threat Model for AI Agent\nSafety\nDongcheng Zhang∗\nBlueFocus Communication Group\nBeijing, China\nzdclink@gmail.com\nYiqing Jiang\nTongji University\nShanghai, China\njyq.russe"
+    },
+    {
+      "index": 2,
+      "heading": "Section 2",
+      "text_len": 3806,
+      "text_preview": "[Page 2]\nharassing content. Yet a qualitatively different and commercially urgent threat class has emerged in\npractice—agents harming the very organizations that deploy and trust them.\nThree incidents"
+    },
+    {
+      "index": 3,
+      "heading": "Section 3",
+      "text_len": 3554,
+      "text_preview": "[Page 3]\nTable 1: Coverage of Owner-Harm Categories by Existing Frameworks\nCategory\nAgentHarm\nToolEmu\nOWASP\nAgentDojo\nC1: Credential Leak\n∼\n✓\n✓\n∼\nC2: Infrastructure Exposure\n×\n∼\n✓\n×\nC3: Privacy Exposu"
+    },
+    {
+      "index": 4,
+      "heading": "Section 4",
+      "text_len": 3031,
+      "text_preview": "[Page 4]\nTable 2: Generic Defense Failure Modes for Owner-Harm\nDefense Class\nOwner-Harm Blind Spot\nContent classifier\nIgnores RO; “send email” is benign\nby content\nInjection detector\nDetects injection"
+    },
+    {
+      "index": 5,
+      "heading": "Section 5",
+      "text_len": 3563,
+      "text_preview": "[Page 5]\ntext concatenation of context may not enable structured comparison (as P1 in Section 4.6 demon-\nstrates).\nAssumption (Detection-Coverage Monotonicity). TPR(D, a) is non-decreasing in Cover(D,"
+    },
+    {
+      "index": 6,
+      "heading": "Section 6",
+      "text_len": 3118,
+      "text_preview": "[Page 6]\nTable 3: AgentDojo Results: Safety Score vs. Utility (27 injection tasks, 97 user tasks)\nConfiguration\nSafety\nUtility\nFPR\nL1 only (baseline)\n3.7% (1/27)†\n97.9% (95/97)\n2.1% (2/97)\nL1 + L4\n3.7"
+    },
+    {
+      "index": 7,
+      "heading": "Section 7",
+      "text_len": 3446,
+      "text_preview": "[Page 7]\nTable 5: Owner-Harm Benchmark: Per-Category Results (Post-Hoc Diagnostic)\nCategory\nNh\nGate TPR\nCombined TPR\nGate FPR\nC1: Credential Leak\n28\n100.0%\n100.0%\n0.0%\nC2: Infrastructure Exposure\n50\n1"
+    },
+    {
+      "index": 8,
+      "heading": "Section 8",
+      "text_len": 3147,
+      "text_preview": "[Page 8]\nTable 6: Hijacking (C7) Detection Quadrant Analysis (60 harmful, 30 benign)\nQuadrant\nCount\n%\nGate-only (verifier misses)\n11\n18.3%\nVerifier-only (gate allows)\n30\n50.0%\nBoth layers detect\n15\n25"
+    },
+    {
+      "index": 9,
+      "heading": "Section 9",
+      "text_len": 3555,
+      "text_preview": "[Page 9]\nTable 8: Controlled Experiment: Gap Attribution (Nous vs. Generic LLM Classifier)\nSystem\nAgentHarm TPR\nAgentDojo TPR\nGap\nNous (L1+L3+L4)\n100.0%\n14.8% (4/27)\n85.2 pp\nGeneric LLM\n62.7%\n59.3% (1"
+    },
+    {
+      "index": 10,
+      "heading": "Section 10",
+      "text_len": 4031,
+      "text_preview": "[Page 10]\n5\nProduction Deployment Evidence\nNous was deployed in shadow mode alongside an existing rule-based system in a production multi-\nagent environment for 11+ days (30,204 calls total).\nConsiste"
+    },
+    {
+      "index": 11,
+      "heading": "Section 11",
+      "text_len": 3575,
+      "text_preview": "[Page 11]\nularies (3.7% on AgentDojo). This is structurally expected—Datalog rules encode extensional facts\n(“tool t is prohibited”) rather than intensional harm semantics. Any tool name not in the ru"
+    },
+    {
+      "index": 12,
+      "heading": "Section 12",
+      "text_len": 4297,
+      "text_preview": "[Page 12]\n5. Evaluation mode: AgentDojo evaluation uses ground-truth mode without an adversarial\nattack LLM; real-world adaptive adversaries may achieve different results.\n6. Infrastructure Exposure F"
+    },
+    {
+      "index": 13,
+      "heading": "Section 13",
+      "text_len": 3904,
+      "text_preview": "[Page 13]\nPolicy-driven agent enforcement (2025–2026). A rapidly growing body of work explores policy-\ndriven runtime enforcement for LLM agents. PCAS Palumbo et al. [2026] compiles a Datalog-\nderived"
+    },
+    {
+      "index": 14,
+      "heading": "Section 14",
+      "text_len": 4308,
+      "text_preview": "[Page 14]\nMaksym Andriushchenko, Francesco Croce, and Nicolas Flammarion. Agentharm: A benchmark\nfor measuring harmfulness of llm agents. In Proceedings of the International Conference on\nLearning Rep"
+    }
+  ]
+}

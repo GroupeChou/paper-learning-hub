@@ -1,0 +1,9 @@
+{
+  "paper_id": "2604.17111v1",
+  "status": "completed",
+  "target_markdown": "/Users/zhouqunchen/Desktop/study/paper-learning-hub/papers/zh/2604.17111v1/paper_zh.md",
+  "updated_at": "2026-04-28T23:45:00+08:00",
+  "notes": "逐字逐句精读完成，8个Section全覆盖，含6张图表解读、5组术语表、8组takeaway",
+  "retry_count": 0,
+  "file_size": $(wc -c < /Users/zhouqunchen/Desktop/study/paper-learning-hub/papers/zh/2604.17111v1/paper_zh.md)
+}

@@ -1,0 +1,135 @@
+{
+  "paper_id": "2604.18356v1",
+  "title": "ComPASS: Towards Personalized Agentic Social Support via Tool-Augmented Companionship",
+  "organization": "阿里通义",
+  "publish_date": "2026-04-20",
+  "theme": "AI Agent",
+  "source_name": "Qwen arXiv query",
+  "source_url": "https://arxiv.org/abs/2604.18356v1",
+  "paper_url": "https://arxiv.org/pdf/2604.18356v1",
+  "summary": "Developing compassionate interactive systems requires agents to not only understand user emotions but also provide diverse, substantive support. While recent works explore empathetic dialogue generation, they remain limited in response f...",
+  "priority": 883,
+  "total_chars": 85654,
+  "chunk_count": 16,
+  "image_paths": [
+    "assets/page-002-img-01.png",
+    "assets/page-002-img-02.png",
+    "assets/page-002-img-03.png",
+    "assets/page-002-img-04.png",
+    "assets/page-002-img-05.png",
+    "assets/page-005-img-01.png",
+    "assets/page-005-img-02.png",
+    "assets/page-005-img-03.png",
+    "assets/page-005-img-04.png",
+    "assets/page-005-img-05.png",
+    "assets/page-005-img-06.png",
+    "assets/page-005-img-07.png",
+    "assets/page-005-img-08.png",
+    "assets/page-005-img-09.png",
+    "assets/page-005-img-10.png",
+    "assets/page-008-img-01.png",
+    "assets/page-008-img-02.png",
+    "assets/page-008-img-03.png",
+    "assets/page-017-img-01.png",
+    "assets/page-017-img-02.png"
+  ],
+  "notes": [],
+  "chunks": [
+    {
+      "index": 1,
+      "heading": "Section 1",
+      "text_len": 5219,
+      "text_preview": "[Page 1]\nComPASS: Towards Personalized Agentic Social Support via\nTool-Augmented Companionship\nZhaopei Huang∗\nRenmin University of China\nBeijing, China\nhuangzhaopei@ruc.edu.cn\nYanfeng Jia∗\nBeihang Uni"
+    },
+    {
+      "index": 2,
+      "heading": "Section 2",
+      "text_len": 6234,
+      "text_preview": "[Page 2]\nConference acronym ’XX, June 03–05, 2018, Woodstock, NY\nHuang et al.\nProfile\n· Age: 50      · Gender: Female    · Occupation: …\nTool Set\n…\nI was really looking forward to my child's visit, bu"
+    },
+    {
+      "index": 3,
+      "heading": "Section 3",
+      "text_len": 6826,
+      "text_preview": "[Page 3]\nComPASS: Towards Personalized Agentic Social Support via Tool-Augmented Companionship\nConference acronym ’XX, June 03–05, 2018, Woodstock, NY\nneeds when they experience negative emotions or p"
+    },
+    {
+      "index": 4,
+      "heading": "Section 4",
+      "text_len": 5030,
+      "text_preview": "[Page 4]\nConference acronym ’XX, June 03–05, 2018, Woodstock, NY\nHuang et al.\nTable 1: List and taxonomy of the tools designed in this study. The 12 interactive tools span five multimedia application "
+    },
+    {
+      "index": 5,
+      "heading": "Section 5",
+      "text_len": 5575,
+      "text_preview": "[Page 5]\nComPASS: Towards Personalized Agentic Social Support via Tool-Augmented Companionship\nConference acronym ’XX, June 03–05, 2018, Woodstock, NY\nProfile\nSituations and Utterances\nDemographics\n· "
+    },
+    {
+      "index": 6,
+      "heading": "Section 6",
+      "text_len": 6218,
+      "text_preview": "[Page 6]\nConference acronym ’XX, June 03–05, 2018, Woodstock, NY\nHuang et al.\ntwo negative ⟨𝑐,𝑟𝑎⟩pairs for each situation, where the response\nconflicts with the user’s preferences.\nTo ensure data qual"
+    },
+    {
+      "index": 7,
+      "heading": "Section 7",
+      "text_len": 4157,
+      "text_preview": "[Page 7]\nComPASS: Towards Personalized Agentic Social Support via Tool-Augmented Companionship\nConference acronym ’XX, June 03–05, 2018, Woodstock, NY\nTable 2: Performance comparison under the profile"
+    },
+    {
+      "index": 8,
+      "heading": "Section 8",
+      "text_len": 6617,
+      "text_preview": "[Page 8]\nConference acronym ’XX, June 03–05, 2018, Woodstock, NY\nHuang et al.\nI spent some time getting my meds sorted and all my paperwork ready for my next check-up. I may not \nalways be the most or"
+    },
+    {
+      "index": 9,
+      "heading": "Section 9",
+      "text_len": 9478,
+      "text_preview": "[Page 9]\nComPASS: Towards Personalized Agentic Social Support via Tool-Augmented Companionship\nConference acronym ’XX, June 03–05, 2018, Woodstock, NY\nthe user’s previously scheduled check-up appointm"
+    },
+    {
+      "index": 10,
+      "heading": "Section 10",
+      "text_len": 1946,
+      "text_preview": "[Page 10]\nConference acronym ’XX, June 03–05, 2018, Woodstock, NY\nHuang et al.\nDeng, Mei Li, Mingfeng Xue, Mingze Li, Pei Zhang, Peng Wang, Qin Zhu, Rui\nMen, Ruize Gao, Shixuan Liu, Shuang Luo, Tianha"
+    },
+    {
+      "index": 11,
+      "heading": "Section 11",
+      "text_len": 6859,
+      "text_preview": "[Page 11]\nComPASS: Towards Personalized Agentic Social Support via Tool-Augmented Companionship\nConference acronym ’XX, June 03–05, 2018, Woodstock, NY\nA\nDetails of Tool Invocation Environment\nA.1\nToo"
+    },
+    {
+      "index": 12,
+      "heading": "Section 12",
+      "text_len": 4890,
+      "text_preview": "[Page 12]\nConference acronym ’XX, June 03–05, 2018, Woodstock, NY\nHuang et al.\nTable 6: Descriptions of the interactive tools in our social support environment.\nTool Name\nTool Description\nPsychologica"
+    },
+    {
+      "index": 13,
+      "heading": "Section 13",
+      "text_len": 3464,
+      "text_preview": "[Page 13]\nComPASS: Towards Personalized Agentic Social Support via Tool-Augmented Companionship\nConference acronym ’XX, June 03–05, 2018, Woodstock, NY\nTable 8: Age-based constraints on educational at"
+    },
+    {
+      "index": 14,
+      "heading": "Section 14",
+      "text_len": 4492,
+      "text_preview": "[Page 14]\nConference acronym ’XX, June 03–05, 2018, Woodstock, NY\nHuang et al.\nFigure 7: Nested pie chart showing the mapping between the\n7 coarse-grained emotions and the 31 fine-grained emotions.\nC\n"
+    },
+    {
+      "index": 15,
+      "heading": "Section 15",
+      "text_len": 4436,
+      "text_preview": "[Page 15]\nComPASS: Towards Personalized Agentic Social Support via Tool-Augmented Companionship\nConference acronym ’XX, June 03–05, 2018, Woodstock, NY\nTable 9: Empathy assessment rubric.\nScore\nDescri"
+    },
+    {
+      "index": 16,
+      "heading": "Section 16",
+      "text_len": 4183,
+      "text_preview": "[Page 16]\nConference acronym ’XX, June 03–05, 2018, Woodstock, NY\nHuang et al.\nTable 12: Informativeness assessment rubric.\nScore\nDescription\n5\nThe response reaches the level of a senior professional;"
+    }
+  ]
+}

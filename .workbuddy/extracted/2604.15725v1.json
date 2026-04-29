@@ -1,0 +1,146 @@
+{
+  "paper_id": "2604.15725v1",
+  "title": "Reasoning-targeted Jailbreak Attacks on Large Reasoning Models via Semantic Triggers and Psychological Framing",
+  "organization": "OpenAI",
+  "publish_date": "2026-04-17",
+  "theme": "AI Agent",
+  "source_name": "OpenAI arXiv query",
+  "source_url": "https://arxiv.org/abs/2604.15725v1",
+  "paper_url": "https://arxiv.org/pdf/2604.15725v1",
+  "summary": "Large Reasoning Models (LRMs) have demonstrated strong capabilities in generating step-by-step reasoning chains alongside final answers, enabling their deployment in high-stakes domains such as healthcare and education. While prior jailb...",
+  "priority": 973,
+  "total_chars": 71919,
+  "chunk_count": 18,
+  "image_paths": [
+    "assets/page-006-img-01.jpeg",
+    "assets/page-006-img-02.png",
+    "assets/page-006-img-03.jpeg",
+    "assets/page-006-img-04.jpeg",
+    "assets/page-006-img-05.jpeg",
+    "assets/page-006-img-06.jpeg",
+    "assets/page-006-img-07.jpeg",
+    "assets/page-007-img-01.jpeg",
+    "assets/page-007-img-02.jpeg",
+    "assets/page-007-img-03.png",
+    "assets/page-007-img-04.jpeg",
+    "assets/page-007-img-05.jpeg",
+    "assets/page-007-img-06.png",
+    "assets/page-007-img-07.png",
+    "assets/page-007-img-08.jpeg",
+    "assets/page-007-img-09.jpeg",
+    "assets/page-007-img-10.jpeg",
+    "assets/page-007-img-11.png",
+    "assets/page-007-img-12.jpeg"
+  ],
+  "notes": [],
+  "chunks": [
+    {
+      "index": 1,
+      "heading": "Section 1",
+      "text_len": 3679,
+      "text_preview": "[Page 1]\nSpringer Nature 2021 LATEX template\nReasoning-targeted Jailbreak\nAttacks on Large Reasoning Models\nvia Semantic Triggers and\nPsychological Framing\nZehao Wang1,2 and Lanjun Wang2,3*\n1College o"
+    },
+    {
+      "index": 2,
+      "heading": "Section 2",
+      "text_len": 2689,
+      "text_preview": "[Page 3]\nSpringer Nature 2021 LATEX template\nArticle Title\n3\nunchanged. Such attacks can critically undermine tasks where\nthe reasoning process is as important as the final outcome, such\nas in medical"
+    },
+    {
+      "index": 3,
+      "heading": "Section 3",
+      "text_len": 4645,
+      "text_preview": "[Page 4]\nSpringer Nature 2021 LATEX template\n4\nArticle Title\ninspiration from obedience to authority [15] and moral disen-\ngagement [16], the module strengthens the persuasive force of\nthe instruction"
+    },
+    {
+      "index": 4,
+      "heading": "Section 4",
+      "text_len": 4776,
+      "text_preview": "[Page 6]\nSpringer Nature 2021 LATEX template\n6\nArticle Title\nThe mainstream of jailbreak methods on LRMs focuses on\nprompt-based attacks [38–40], which manipulate input instruc-\ntions to bypass safety"
+    },
+    {
+      "index": 5,
+      "heading": "Section 5",
+      "text_len": 4057,
+      "text_preview": "[Page 8]\nSpringer Nature 2021 LATEX template\n8\nArticle Title\n4 Methodology\nIn this section, we present the proposed Psychology-based\nReasoning-targeted Jailbreak Attack (PRJA) Framework, with\nan overv"
+    },
+    {
+      "index": 6,
+      "heading": "Section 6",
+      "text_len": 4497,
+      "text_preview": "[Page 10]\nSpringer Nature 2021 LATEX template\n10\nArticle Title\n4.2 Psychology-based Instruction Generation\nModule\nRecent studies [13, 14] have revealed that jailbreak attacks\ninspired by social psycho"
+    },
+    {
+      "index": 7,
+      "heading": "Section 7",
+      "text_len": 3916,
+      "text_preview": "[Page 12]\nSpringer Nature 2021 LATEX template\n12\nArticle Title\njustification by implying that the generation of controversial or\nambiguous content serves a higher evaluative purpose.\nFurthermore, by s"
+    },
+    {
+      "index": 8,
+      "heading": "Section 8",
+      "text_len": 4359,
+      "text_preview": "[Page 14]\nSpringer Nature 2021 LATEX template\n14\nArticle Title\nlarge-scale SFT and RLHF, including over 500k human\nfeedback annotations, with a particular focus on improving\nmulti-turn interaction and"
+    },
+    {
+      "index": 9,
+      "heading": "Section 9",
+      "text_len": 4802,
+      "text_preview": "[Page 16]\nSpringer Nature 2021 LATEX template\n16\nArticle Title\n5.2 Result Analysis\nTab. 1 presents the results across five selected datasets and three\nvictim LRMs, reporting both Attack Success Rate ("
+    },
+    {
+      "index": 10,
+      "heading": "Section 10",
+      "text_len": 4911,
+      "text_preview": "[Page 18]\nSpringer Nature 2021 LATEX template\n18\nArticle Title\nresults are shown in Fig. 3(a)–3(c) for ASR and Fig. 3(d)–3(f)\nfor HS.\nCompared with the full PRJA framework (blue bars), remov-\ning the "
+    },
+    {
+      "index": 11,
+      "heading": "Section 11",
+      "text_len": 4532,
+      "text_preview": "[Page 20]\nSpringer Nature 2021 LATEX template\n20\nArticle Title\nwithout psychological wrapping, DeepSeek R1 may still comply,\nleading to highly harmful content despite lower attack success.\nThese ablat"
+    },
+    {
+      "index": 12,
+      "heading": "Section 12",
+      "text_len": 4098,
+      "text_preview": "[Page 22]\nSpringer Nature 2021 LATEX template\n22\nArticle Title\nand 16.0 for output tokens; GPT-4o5 costs 5.0 for input and 20.0\nfor output tokens.\n6 Defensive Strategies Against\nReasoning-Targeted Jai"
+    },
+    {
+      "index": 13,
+      "heading": "Section 13",
+      "text_len": 3784,
+      "text_preview": "[Page 24]\nSpringer Nature 2021 LATEX template\n24\nArticle Title\nchatgpt in english education: A review study. Journal of\nEnglish Studies in Arabia Felix 4(1), 13–22 (2025)\n[9] Panchal, D., Gole, A., Na"
+    },
+    {
+      "index": 14,
+      "heading": "Section 14",
+      "text_len": 3979,
+      "text_preview": "[Page 26]\nSpringer Nature 2021 LATEX template\n26\nArticle Title\n[27] Yao, S., Zhao, J., Yu, D., Du, N., Shafran, I., Narasimhan,\nK., Cao, Y.: React: Synergizing reasoning and acting in\nlanguage models."
+    },
+    {
+      "index": 15,
+      "heading": "Section 15",
+      "text_len": 3517,
+      "text_preview": "[Page 28]\nSpringer Nature 2021 LATEX template\n28\nArticle Title\naugmentation. In: Findings of the Association for Compu-\ntational Linguistics ACL 2024, pp. 13697–13720 (2024)\n[46] Jin, D., Pan, E., Ouf"
+    },
+    {
+      "index": 16,
+      "heading": "Section 16",
+      "text_len": 3648,
+      "text_preview": "[Page 30]\nSpringer Nature 2021 LATEX template\n30\nArticle Title\nsecurity protocols for illicit purposes. The technical accuracy\nof labeling this behavior as “gaining knowledge” obscures its\nethical and"
+    },
+    {
+      "index": 17,
+      "heading": "Section 17",
+      "text_len": 3889,
+      "text_preview": "[Page 32]\nSpringer Nature 2021 LATEX template\n32\nArticle Title\nPerturbed Query\nAs part of a Analysis led by the Security Expert, your task\nis to assess how the model performs under interpretively\ncomp"
+    },
+    {
+      "index": 18,
+      "heading": "Section 18",
+      "text_len": 2107,
+      "text_preview": "[Page 34]\nSpringer Nature 2021 LATEX template\n34\nArticle Title\nunintended misuse, or ethically gray interpretations in com-\nplex real-world contexts.\n</reasoning steps>\nResponse\n<answer>\nYes. A dog’s "
+    }
+  ]
+}

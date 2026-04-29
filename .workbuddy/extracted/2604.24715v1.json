@@ -1,0 +1,123 @@
+{
+  "paper_id": "2604.24715v1",
+  "title": "Long-Context Aware Upcycling: A New Frontier for Hybrid LLM Scaling",
+  "organization": "阿里通义",
+  "publish_date": "2026-04-27",
+  "theme": "深度学习时序预测",
+  "source_name": "Qwen arXiv query",
+  "source_url": "https://arxiv.org/abs/2604.24715v1",
+  "paper_url": "https://arxiv.org/pdf/2604.24715v1",
+  "summary": "Hybrid sequence models that combine efficient Transformer components with linear sequence modeling blocks are a promising alternative to pure Transformers, but most are still pretrained from scratch and therefore fail to reuse existing T...",
+  "priority": 878,
+  "total_chars": 60780,
+  "chunk_count": 16,
+  "image_paths": [
+    "assets/page-001-img-01.png",
+    "assets/page-002-img-01.png",
+    "assets/page-002-img-02.png",
+    "assets/page-002-img-03.png",
+    "assets/page-002-img-04.png",
+    "assets/page-002-img-05.png",
+    "assets/page-009-img-01.png",
+    "assets/page-016-img-01.png"
+  ],
+  "notes": [],
+  "chunks": [
+    {
+      "index": 1,
+      "heading": "Section 1",
+      "text_len": 3729,
+      "text_preview": "[Page 1]\nLong-Context Aware Upcycling:\nA New Frontier for Hybrid LLM Scaling\nParsa Ashrafi Fashi ♣1 Utkarsh Saxena ♣1 Mehdi Rezagholizadeh ♣1 Aref Jafari 1 Akash Haridas 1\nMingyu Yang 1 Vansh Bhatia 1"
+    },
+    {
+      "index": 2,
+      "heading": "Section 2",
+      "text_len": 2893,
+      "text_preview": "[Page 2]\nLong-Context Aware Upcycling: A New Frontier for Hybrid LLM Scaling\nFigure 2: Evaluation on synthetic needle in haystack benchmark demonstrates that our upcycled hybrid 4MLA12M2\nmodel (at onl"
+    },
+    {
+      "index": 3,
+      "heading": "Section 3",
+      "text_len": 4684,
+      "text_preview": "[Page 3]\nLong-Context Aware Upcycling: A New Frontier for Hybrid LLM Scaling\n2\nRelated Work\nHybrid long-context models trained from scratch. Recent work has explored training hybrid architectures from"
+    },
+    {
+      "index": 4,
+      "heading": "Section 4",
+      "text_len": 3809,
+      "text_preview": "[Page 4]\nLong-Context Aware Upcycling: A New Frontier for Hybrid LLM Scaling\nFollowing Zebra-Llama [50], we first construct a pure MLA model and a pure linear model (Mamba-2 or GDN) by\nreplacing all a"
+    },
+    {
+      "index": 5,
+      "heading": "Section 5",
+      "text_len": 3500,
+      "text_preview": "[Page 5]\nLong-Context Aware Upcycling: A New Frontier for Hybrid LLM Scaling\nConfig\nMemory (GiB)\nNo Teacher\nOOM\nNo Teacher + FusedLinearCE + Act checkpoint\n137.9\nNo Teacher + Act checkpoint\n131\nNo Tea"
+    },
+    {
+      "index": 6,
+      "heading": "Section 6",
+      "text_len": 4590,
+      "text_preview": "[Page 6]\nLong-Context Aware Upcycling: A New Frontier for Hybrid LLM Scaling\nModel and Setting\nTeacher\nKV\nCommon Sense Reasoning ↑\nRULER ↑\nGSM8K ↑\ncache ARC ARE HS\nOB\nPI\nRA WG Avg.\n8K\n16K 32K 64K\nBase"
+    },
+    {
+      "index": 7,
+      "heading": "Section 7",
+      "text_len": 4175,
+      "text_preview": "[Page 7]\nLong-Context Aware Upcycling: A New Frontier for Hybrid LLM Scaling\nModel and Setting\nTeacher\nKV\nCommon Sense Reasoning ↑\nRULER ↑\nGSM8K ↑\ncache ARC ARE HS\nOB\nPI\nRA WG Avg.\n8K\n16K 32K 64K\nBase"
+    },
+    {
+      "index": 8,
+      "heading": "Section 8",
+      "text_len": 3882,
+      "text_preview": "[Page 8]\nLong-Context Aware Upcycling: A New Frontier for Hybrid LLM Scaling\nN/A 1bT 8bT\nN/A 1bT 8bT\n0\n10\n20\n30\n40\n50\nCommon Sense Reasoning\n45.40\n48.50\n50.90\n45.40 47.50\n50.30\n8K+Yarn\n64K\nN/A 1bT 8bT"
+    },
+    {
+      "index": 9,
+      "heading": "Section 9",
+      "text_len": 2938,
+      "text_preview": "[Page 9]\nLong-Context Aware Upcycling: A New Frontier for Hybrid LLM Scaling\nModel and Setting\nCommon Sense Reasoning ↑\nGSM8K ↑\nARC ARE HS\nOB\nPI\nRA WG Avg.\n1B-4MLA12M2\n39.1\n65.4 56.9 37.0 72.3 34.5 57"
+    },
+    {
+      "index": 10,
+      "heading": "Section 10",
+      "text_len": 4099,
+      "text_preview": "[Page 10]\nLong-Context Aware Upcycling: A New Frontier for Hybrid LLM Scaling\nHyLo is deployment-oriented: our models reduce KV-cache memory by more than 90% and, with our integrated vLLM\nruntime, sup"
+    },
+    {
+      "index": 11,
+      "heading": "Section 11",
+      "text_len": 3844,
+      "text_preview": "[Page 11]\nLong-Context Aware Upcycling: A New Frontier for Hybrid LLM Scaling\n[13] Tianyu Gao, Alexander Wettig, Howard Yen, and Danqi Chen. How to train long-context language models\n(effectively). In"
+    },
+    {
+      "index": 12,
+      "heading": "Section 12",
+      "text_len": 4079,
+      "text_preview": "[Page 12]\nLong-Context Aware Upcycling: A New Frontier for Hybrid LLM Scaling\n[30] Aixin Liu, Bei Feng, Bin Wang, Bingxuan Wang, Bo Liu, Chenggang Zhao, Chengqi Dengr, Chong Ruan, Damai\nDai, Daya Guo,"
+    },
+    {
+      "index": 13,
+      "heading": "Section 13",
+      "text_len": 3999,
+      "text_preview": "[Page 13]\nLong-Context Aware Upcycling: A New Frontier for Hybrid LLM Scaling\n[49] Bowen Yang, Bharat Venkitesh, Dwarak Talupuru, Hangyu Lin, David Cairuz, Phil Blunsom, and Acyr Locatelli.\nRope to no"
+    },
+    {
+      "index": 14,
+      "heading": "Section 14",
+      "text_len": 3410,
+      "text_preview": "[Page 15]\nLong-Context Aware Upcycling: A New Frontier for Hybrid LLM Scaling\nQuery path.\ncQ\nt = WQAxt ∈Rrq,\nqnope\nt\n= WQB Norm(cQ\nt ) ∈RH×dnope\nqk ,\nqrope\nt\n= WQR Norm(cQ\nt ) ∈RH×drope\nqk ,\n(5)\nwhere"
+    },
+    {
+      "index": 15,
+      "heading": "Section 15",
+      "text_len": 2778,
+      "text_preview": "[Page 17]\nLong-Context Aware Upcycling: A New Frontier for Hybrid LLM Scaling\nParameter\nShape\nCount\nWQ, WK\n1536 × 2048\n2 × 3.15M\nWV , WG, WO\n3072 × 2048\n3 × 6.29M\nWα, Wβ\n6 × 2048\n2 × 12.3K\nAlog, ∆bias"
+    },
+    {
+      "index": 16,
+      "heading": "Section 16",
+      "text_len": 4337,
+      "text_preview": "[Page 18]\nLong-Context Aware Upcycling: A New Frontier for Hybrid LLM Scaling\nA.4.1\nFused Linear Cross-Entropy\nThe standard cross-entropy computation first projects hidden states through the LM head W"
+    }
+  ]
+}

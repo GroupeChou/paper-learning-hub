@@ -1,0 +1,92 @@
+{
+  "paper_id": "2604.19144v1",
+  "title": "ReflectMT: Internalizing Reflection for Efficient and High-Quality Machine Translation",
+  "organization": "DeepSeek",
+  "publish_date": "2026-04-21",
+  "theme": "AI Agent",
+  "source_name": "DeepSeek arXiv query",
+  "source_url": "https://arxiv.org/abs/2604.19144v1",
+  "paper_url": "https://arxiv.org/pdf/2604.19144v1",
+  "summary": "Recent years have witnessed growing interest in applying Large Reasoning Models (LRMs) to Machine Translation (MT). Existing approaches predominantly adopt a \"think-first-then-translate\" paradigm. Although explicit reasoning trajectories...",
+  "priority": 937,
+  "total_chars": 49707,
+  "chunk_count": 11,
+  "image_paths": [
+    "assets/page-003-img-01.jpeg",
+    "assets/page-003-img-02.jpeg",
+    "assets/page-003-img-03.jpeg",
+    "assets/page-003-img-04.png",
+    "assets/page-003-img-05.png",
+    "assets/page-003-img-06.png",
+    "assets/page-003-img-07.jpeg"
+  ],
+  "notes": [],
+  "chunks": [
+    {
+      "index": 1,
+      "heading": "Section 1",
+      "text_len": 4240,
+      "text_preview": "[Page 1]\nReflectMT: Internalizing Reflection for Efficient and High-Quality Machine\nTranslation\nKunquan Li1*, Yingxue Zhang2, Fandong Meng2, Jinsong Su1\n1School of Informatics, Xiamen University, Chin"
+    },
+    {
+      "index": 2,
+      "heading": "Section 2",
+      "text_len": 4617,
+      "text_preview": "[Page 2]\n[Source Sentence] The company's pivot to a subscription-based model, while initially met with resistance from legacy customers, \nultimately drove a 340% increase in customer lifetime value an"
+    },
+    {
+      "index": 3,
+      "heading": "Section 3",
+      "text_len": 3710,
+      "text_preview": "[Page 3]\nSrc: “Local fall-outs turning into shop thy neighbour.“, Round1: {Translation:”局部问题\n演变成邻家店铺。”, Reflection:”…”, Score:”30”}., Round2:{Translation:”…”, \nReflction:”…”, Score:”74”}…\nData\nRefine\n"
+    },
+    {
+      "index": 4,
+      "heading": "Section 4",
+      "text_len": 3813,
+      "text_preview": "[Page 4]\nreaches a satisfactory threshold (rk ≥θ) or the\nmaximum iteration limit is reached (k ≥Kmax).\nThe sequence {(yk, rk, fk)}K\nk=0 forms a complete\nreflective translation chain.\nData filtering an"
+    },
+    {
+      "index": 5,
+      "heading": "Section 5",
+      "text_len": 4386,
+      "text_preview": "[Page 5]\nwhere ρi =\nπ′(gi|x)\nπ(gi|x) , πref is the cold-start SFT\nmodel, and ϵ, β are hyperparameters. The advan-\ntage Ai is computed by normalizing the rewards:\nAi = ri −mean({r1, r2, · · · , rn})\nst"
+    },
+    {
+      "index": 6,
+      "heading": "Section 6",
+      "text_len": 5564,
+      "text_preview": "[Page 6]\nModel\nOur\nWMT23\nWMT24\nFLORES-200\nGRF\nMX24\nCK\nToken\nGRF\nMX24\nCK\nToken\nGRF\nMX24\nCK\nToken\nGRF\nMX24\nCK\nToken\nQwen-7B-Instruct\n73.52\n2.7\n76.43\n33.08\n75.54\n2.65\n78.83\n28.33\n69.51\n3.23\n76.51\n39.37\n7"
+    },
+    {
+      "index": 7,
+      "heading": "Section 7",
+      "text_len": 5043,
+      "text_preview": "[Page 7]\nModel\nOur\nWMT23\nWMT24\nFLORES-200\nGRF\nMX24\nCK\nToken\nGRF\nMX24\nCK\nToken\nGRF\nMX24\nCK\nToken\nGRF\nMX24\nCK\nToken\nReflectMT-SFT-initial\n76.35\n2.65\n76.7\n23.25\n86.01\n2.21\n80.35\n25.94\n80.82\n2.73\n79.12\n37"
+    },
+    {
+      "index": 8,
+      "heading": "Section 8",
+      "text_len": 4667,
+      "text_preview": "[Page 8]\nModel Configuration\nInitial\nFinal\nQwen-7B-Instruct (Baseline)\n73.52\n–\nReflectMT-LoRA (w/o init & refl)\n–\n75.86\nReflectMT-LoRA (w/o refl)\n76.85\n76.49\nReflectMT-LoRA (full)\n76.35\n77.26\nReflectM"
+    },
+    {
+      "index": 9,
+      "heading": "Section 9",
+      "text_len": 4683,
+      "text_preview": "[Page 9]\nLimitations\nWhile we have demonstrated the effectiveness of\nour reflection framework, several limitations are\nworth noting: Our research primarily focuses on\nEnglish-to-Chinese translation ta"
+    },
+    {
+      "index": 10,
+      "heading": "Section 10",
+      "text_len": 4169,
+      "text_preview": "[Page 10]\nNoah Shinn, Federico Cassano, Edward Berman, Ash-\nwin Gopinath, Karthik Narasimhan, and Shunyu Yao.\n2023. Reflexion: Language agents with verbal rein-\nforcement learning. Preprint, arXiv:230"
+    },
+    {
+      "index": 11,
+      "heading": "Section 11",
+      "text_len": 4795,
+      "text_preview": "[Page 11]\n\"reflection\": \"1.\n翻译质量分析：- 准\n确性：翻译基本准确传达了原文的意\n思，特别是“economic disaster”（经济灾\n难）、“big losers”（遭受重大损失）\n和“American-style capitalism”（美国式资\n本主义）等关键术语的处理得当。- 流\n畅性：译文整体较为流畅，符合中文表\n达习惯。句子结构清晰，逻辑连贯。\n- 语"
+    }
+  ]
+}

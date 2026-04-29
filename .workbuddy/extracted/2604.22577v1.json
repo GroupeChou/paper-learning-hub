@@ -1,0 +1,108 @@
+{
+  "paper_id": "2604.22577v1",
+  "title": "QuantClaw: Precision Where It Matters for OpenClaw",
+  "organization": "智谱",
+  "publish_date": "2026-04-24",
+  "theme": "AI Agent",
+  "source_name": "GLM arXiv query",
+  "source_url": "https://arxiv.org/abs/2604.22577v1",
+  "paper_url": "https://arxiv.org/pdf/2604.22577v1",
+  "summary": "Autonomous agent systems such as OpenClaw introduce significant efficiency challenges due to long-context inputs and multi-turn reasoning. This results in prohibitively high computational and monetary costs in real-world development. Whi...",
+  "priority": 905,
+  "total_chars": 35841,
+  "chunk_count": 11,
+  "image_paths": [
+    "assets/page-001-img-01.png",
+    "assets/page-001-img-02.png",
+    "assets/page-001-img-03.png",
+    "assets/page-001-img-04.png",
+    "assets/page-004-img-01.png",
+    "assets/page-006-img-01.jpeg",
+    "assets/page-006-img-02.jpeg",
+    "assets/page-006-img-03.png",
+    "assets/page-006-img-04.png",
+    "assets/page-006-img-05.png",
+    "assets/page-006-img-06.png",
+    "assets/page-006-img-07.png",
+    "assets/page-006-img-08.png",
+    "assets/page-006-img-09.png",
+    "assets/page-006-img-10.png",
+    "assets/page-006-img-11.jpeg",
+    "assets/page-006-img-12.png",
+    "assets/page-006-img-13.jpeg",
+    "assets/page-006-img-14.jpeg",
+    "assets/page-006-img-15.png"
+  ],
+  "notes": [
+    "图片数量超过上限，仅保留前 20 张。",
+    "图片数量超过上限，仅保留前 20 张。"
+  ],
+  "chunks": [
+    {
+      "index": 1,
+      "heading": "Section 1",
+      "text_len": 2472,
+      "text_preview": "[Page 1]\nQuantClaw: Precision Where It Matters for OpenClaw\nTECHNICAL REPORT\nManyi Zhang1\nJi-Fu Li1∗\nZhongao Sun1\nXiaohao Liu2\nZhenhua Dong1\nXianzhi Yu1\nHaoli Bai1\nXiaobo Xia3\n1Huawei Technologies\n2Na"
+    },
+    {
+      "index": 2,
+      "heading": "Section 2",
+      "text_len": 4227,
+      "text_preview": "[Page 2]\nHowever, this shift toward agentic systems introduces new computational challenges. Unlike traditional inference\nworkloads, agent execution often involves long context accumulation, tool outp"
+    },
+    {
+      "index": 3,
+      "heading": "Section 3",
+      "text_len": 4031,
+      "text_preview": "[Page 3]\nTable 1: Model performance, cost, and latency under native precision (BF16 or FP8) and NVFP4 quantization.\nLarge-scale models show strong robustness to quantization, and in some cases even ex"
+    },
+    {
+      "index": 4,
+      "heading": "Section 4",
+      "text_len": 2166,
+      "text_preview": "[Page 4]\nFigure 1: Scaling behavior of quantization degradation under NVFP4. Left: Absolute performance gap vs. model\nsize on a linear scale, showing diminishing degradation as model parameters increa"
+    },
+    {
+      "index": 5,
+      "heading": "Section 5",
+      "text_len": 2984,
+      "text_preview": "[Page 5]\n30\n20\n10\n0\n10\n20\n30\n40\n50\n %\nCoding\nCompliance\nTerminal\nSafety\nSynthesis\nWorkflow\nOrganization\nOperations\nSecurity\nRewriting\nFile_ops\nFinance\nProcurement\nContent\nProductivity\nOps\nMemory\nCommu"
+    },
+    {
+      "index": 6,
+      "heading": "Section 6",
+      "text_len": 4764,
+      "text_preview": "[Page 6]\nOpenClaw Evaluation\nTask Sensitivity Analysis\nRouting Policy\nClawEval, WildClawBench, PinchBench\n16bit/8bit vs. 4bit per task\nTask-type profiles\nResponse\nScore\n4-bit\nUser Query\n…\nRoute Config"
+    },
+    {
+      "index": 7,
+      "heading": "Section 7",
+      "text_len": 3175,
+      "text_preview": "[Page 8]\nTable 2: Comparison of QuantClaw with fixed-precision baselines on PinchBench. QuantClaw achieves better\nperformance-efficiency trade-offs, reducing cost and latency while maintaining or impr"
+    },
+    {
+      "index": 8,
+      "heading": "Section 8",
+      "text_len": 2422,
+      "text_preview": "[Page 9]\nThe ablation study on task detection methods is shown in Table 3. QuantClaw supports various detection methods,\nincluding individual detectors such as RuleDetector, an embedding model (i.e., "
+    },
+    {
+      "index": 9,
+      "heading": "Section 9",
+      "text_len": 3494,
+      "text_preview": "[Page 10]\nReferences\n[1] Qingyun Wu, Gagan Bansal, Jieyu Zhang, Yiran Wu, Beibin Li, Erkang Zhu, Li Jiang, Xiaoyun Zhang, Shaokun\nZhang, Jiale Liu, et al. Autogen: Enabling next-gen llm applications v"
+    },
+    {
+      "index": 10,
+      "heading": "Section 10",
+      "text_len": 3673,
+      "text_preview": "[Page 11]\n[20] APIYI Technical Team. Why is OpenClaw so token-intensive? 6 reasons analyzed and money-saving guide.\n[21] Zechun Liu, Barlas Oguz, Changsheng Zhao, Ernie Chang, Pierre Stock, Yashar Meh"
+    },
+    {
+      "index": 11,
+      "heading": "Section 11",
+      "text_len": 2413,
+      "text_preview": "[Page 12]\n[36] Mengzhao Chen, Meng Wu, Hui Jin, Zhihang Yuan, Jing Liu, Chaoyi Zhang, Yunshui Li, Jie Huang, Jin Ma,\nZeyue Xue, et al. Int vs fp: A comprehensive study of fine-grained low-bit quantiza"
+    }
+  ]
+}

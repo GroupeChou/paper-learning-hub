@@ -1,0 +1,175 @@
+{
+  "paper_id": "2604.23701v1",
+  "title": "Agri-CPJ: A Training-Free Explainable Framework for Agricultural Pest Diagnosis Using Caption-Prompt-Judge and LLM-as-a-Judge",
+  "organization": "阿里通义",
+  "publish_date": "2026-04-26",
+  "theme": "AI Agent",
+  "source_name": "Qwen arXiv query",
+  "source_url": "https://arxiv.org/abs/2604.23701v1",
+  "paper_url": "https://arxiv.org/pdf/2604.23701v1",
+  "summary": "Crop disease diagnosis from field photographs faces two recurring problems: models that score well on benchmarks frequently hallucinate species names, and when predictions are correct, the reasoning behind them is typically inaccessible...",
+  "priority": 877,
+  "total_chars": 97071,
+  "chunk_count": 22,
+  "image_paths": [
+    "assets/page-002-img-01.jpeg",
+    "assets/page-002-img-02.jpeg",
+    "assets/page-002-img-03.jpeg",
+    "assets/page-002-img-04.jpeg",
+    "assets/page-002-img-05.jpeg",
+    "assets/page-002-img-06.jpeg",
+    "assets/page-002-img-07.jpeg",
+    "assets/page-002-img-08.jpeg",
+    "assets/page-002-img-09.jpeg",
+    "assets/page-002-img-10.jpeg",
+    "assets/page-002-img-11.jpeg",
+    "assets/page-002-img-12.jpeg",
+    "assets/page-002-img-13.jpeg",
+    "assets/page-002-img-14.jpeg",
+    "assets/page-002-img-15.jpeg",
+    "assets/page-002-img-16.jpeg",
+    "assets/page-003-img-01.jpeg",
+    "assets/page-003-img-02.jpeg",
+    "assets/page-003-img-03.jpeg",
+    "assets/page-003-img-04.jpeg"
+  ],
+  "notes": [
+    "图片数量超过上限，仅保留前 20 张。",
+    "图片数量超过上限，仅保留前 20 张。",
+    "图片数量超过上限，仅保留前 20 张。"
+  ],
+  "chunks": [
+    {
+      "index": 1,
+      "heading": "Section 1",
+      "text_len": 4367,
+      "text_preview": "[Page 1]\nAgri-CPJ: A Training-Free Explainable Framework for Agricultural\nPest Diagnosis Using Caption-Prompt-Judge and LLM-as-a-Judge\nWentao Zhanga, Qi Zhangb, Mingkun Xuc, Mu Youd, Henghua Shend, Zh"
+    },
+    {
+      "index": 2,
+      "heading": "Section 2",
+      "text_len": 4832,
+      "text_preview": "[Page 2]\nAgri-CPJ: A Training-Free Explainable Framework for Agricultural Pest Diagnosis\nVQA\n \"Question\": \"Is this a whea\nt leaf or a corn leaf ?\"\n\"Ground-Truth\": \"This is a \nwheat leaf.\"\nImage-captio"
+    },
+    {
+      "index": 3,
+      "heading": "Automated",
+      "text_len": 4721,
+      "text_preview": "Automated \nEvaluation Agent\n(LLM-as-a-Judge ) \n\"Rating\":7,\n\"Reasoning\":”Specificsymptoms ar\ne well-detailed but lacks the host pl\nant and potential disease causes, lim\niting practicaluse.”\n\"Suggestion"
+    },
+    {
+      "index": 4,
+      "heading": "Section 4",
+      "text_len": 5371,
+      "text_preview": "[Page 4]\nAgri-CPJ: A Training-Free Explainable Framework for Agricultural Pest Diagnosis\nby the vision encoder’s perceptual resolution. For photographs taken during the earliest infection stages—when "
+    },
+    {
+      "index": 5,
+      "heading": "Section 5",
+      "text_len": 4883,
+      "text_preview": "[Page 5]\nAgri-CPJ: A Training-Free Explainable Framework for Agricultural Pest Diagnosis\nin-domain results (Yang et al., 2024; Ranario and Earles, 2025; Su et al., 2022), but models trained on them te"
+    },
+    {
+      "index": 6,
+      "heading": "Section 6",
+      "text_len": 5735,
+      "text_preview": "[Page 6]\nAgri-CPJ: A Training-Free Explainable Framework for Agricultural Pest Diagnosis\ncommitted those observations to any retrievable representation before generating an answer. The diagnostic erro"
+    },
+    {
+      "index": 7,
+      "heading": "Section 7",
+      "text_len": 3952,
+      "text_preview": "[Page 7]\nAgri-CPJ: A Training-Free Explainable Framework for Agricultural Pest Diagnosis\nreliably elicited morphology-focused, nomenclature-free descriptions took approximately twelve revision rounds\n"
+    },
+    {
+      "index": 8,
+      "heading": "Section 8",
+      "text_len": 4172,
+      "text_preview": "[Page 8]\nAgri-CPJ: A Training-Free Explainable Framework for Agricultural Pest Diagnosis\nfeatures, and structural markers. For knowledge tasks—explaining mechanisms or recommending management—the\npair"
+    },
+    {
+      "index": 9,
+      "heading": "Section 9",
+      "text_len": 2851,
+      "text_preview": "[Page 9]\nAgri-CPJ: A Training-Free Explainable Framework for Agricultural Pest Diagnosis\nAlgorithm 1 Agri-CPJ Framework: Complete Inference Pipeline\nRequire: Crop disease image 𝐼, Diagnostic query 𝑄, "
+    },
+    {
+      "index": 10,
+      "heading": "Section 10",
+      "text_len": 5181,
+      "text_preview": "[Page 10]\nAgri-CPJ: A Training-Free Explainable Framework for Agricultural Pest Diagnosis\n4. Experiments and Analysis\n4.1. Experimental Setup\nTwo benchmarks stress different aspects of the framework. "
+    },
+    {
+      "index": 11,
+      "heading": "Section 11",
+      "text_len": 4143,
+      "text_preview": "[Page 11]\nAgri-CPJ: A Training-Free Explainable Framework for Agricultural Pest Diagnosis\nTable 1: Performance comparison on CDDMBench dataset. Baseline methods use zero-shot without caption enhance-\n"
+    },
+    {
+      "index": 12,
+      "heading": "Section 12",
+      "text_len": 5201,
+      "text_preview": "[Page 12]\nAgri-CPJ: A Training-Free Explainable Framework for Agricultural Pest Diagnosis\n4.3. Caption Impact Analysis\nWe isolate the contribution of caption enhancement by comparing model performance"
+    },
+    {
+      "index": 13,
+      "heading": "Section 13",
+      "text_len": 2069,
+      "text_preview": "[Page 13]\nAgri-CPJ: A Training-Free Explainable Framework for Agricultural Pest Diagnosis\n0\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n0\n10\n20\n30\n40\n50\n60\n70\n80\n90\nDiagnostic Accuracy (%)\nCaption Quality Score (τ)\nCaption "
+    },
+    {
+      "index": 14,
+      "heading": "Section 14",
+      "text_len": 5110,
+      "text_preview": "[Page 14]\nAgri-CPJ: A Training-Free Explainable Framework for Agricultural Pest Diagnosis\nTable 2: Error pattern analysis with frequency distribution from 150 sampled predictions. The table presents s"
+    },
+    {
+      "index": 15,
+      "heading": "Section 15",
+      "text_len": 4615,
+      "text_preview": "[Page 15]\nAgri-CPJ: A Training-Free Explainable Framework for Agricultural Pest Diagnosis\nTable 3: Task-specific performance on AgMMU-MCQs (767 samples) across five agricultural tasks. Baseline models"
+    },
+    {
+      "index": 16,
+      "heading": "Section 16",
+      "text_len": 2965,
+      "text_preview": "[Page 16]\nAgri-CPJ: A Training-Free Explainable Framework for Agricultural Pest Diagnosis\n0\n20\n40\n60\n80\n100\nDisease/Issue ID\nInsect/Pest ID\nSpecies Recog.\nManagement Instructions\nSymptom / Visual Desc"
+    },
+    {
+      "index": 17,
+      "heading": "Section 17",
+      "text_len": 5807,
+      "text_preview": "[Page 17]\nAgri-CPJ: A Training-Free Explainable Framework for Agricultural Pest Diagnosis\nlabel. Co-infection cases require multi-label output, not single-winner selection. The management instruction "
+    },
+    {
+      "index": 18,
+      "heading": "Section 18",
+      "text_len": 6969,
+      "text_preview": "[Page 18]\nAgri-CPJ: A Training-Free Explainable Framework for Agricultural Pest Diagnosis\nLi, J., Li, D., Savarese, S., Hoi, S., 2023. Blip-2: Bootstrapping language-image pre-training with frozen ima"
+    },
+    {
+      "index": 19,
+      "heading": "Section 19",
+      "text_len": 2767,
+      "text_preview": "[Page 19]\nAgri-CPJ: A Training-Free Explainable Framework for Agricultural Pest Diagnosis\nZheng, L., Chiang, W.L., Sheng, Y., Zhuang, S., Wu, Z., Zhuang, Y., Lin, Z., Li, Z., Li, D., Xing, E., et al.,"
+    },
+    {
+      "index": 20,
+      "heading": "Section 20",
+      "text_len": 2916,
+      "text_preview": "[Page 20]\nAgri-CPJ: A Training-Free Explainable Framework for Agricultural Pest Diagnosis\nA.1.2. Caption Evaluation and Refinement Prompts\nCaptions are evaluated by an LLM judge on five criteria: (1) "
+    },
+    {
+      "index": 21,
+      "heading": "Section 21",
+      "text_len": 4956,
+      "text_preview": "[Page 21]\nAgri-CPJ: A Training-Free Explainable Framework for Agricultural Pest Diagnosis\ncontrol (temp/RH/ventilation).\n6. Address resistance management: rotate modes of action\n(e.g., FRAC for fungic"
+    },
+    {
+      "index": 22,
+      "heading": "Section 22",
+      "text_len": 3438,
+      "text_preview": "[Page 23]\nAgri-CPJ: A Training-Free Explainable Framework for Agricultural Pest Diagnosis\nTable 7: Caption quality evaluation criteria (10-point scale).\nCriterion\nDescription\nQuality Level\nAccuracy\nCo"
+    }
+  ]
+}

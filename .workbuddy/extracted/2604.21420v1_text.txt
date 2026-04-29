@@ -1,0 +1,2191 @@
+[Page 1]
+FairQE: Multi-Agent Framework for Mitigating Gender Bias in
+Translation Quality Estimation
+Jinhee Jang1 Juhwan Choi2† Dongjin Lee1† Seunguk Yu1 Youngbin Kim1
+1Chung-Ang University
+2AITRICS
+{jinheejang, dongjinlee30, bokju128, ybkim85}@cau.ac.kr,
+jhchoi@aitrics.com
+Abstract
+Quality Estimation (QE) aims to assess ma-
+chine translation quality without reference
+translations, but recent studies have shown that
+existing QE models exhibit systematic gender
+bias.
+In particular, they tend to favor mas-
+culine realizations in gender-ambiguous con-
+texts and may assign higher scores to gender-
+misaligned translations even when gender is
+explicitly specified. To address these issues, we
+propose FairQE, a multi-agent-based, fairness-
+aware QE framework that mitigates gender
+bias in both gender-ambiguous and gender-
+explicit scenarios. FairQE detects gender cues,
+generates gender-flipped translation variants,
+and combines conventional QE scores with
+LLM-based bias-mitigating reasoning through
+a dynamic bias-aware aggregation mechanism.
+This design preserves the strengths of exist-
+ing QE models while calibrating their gender-
+related biases in a plug-and-play manner. Ex-
+tensive experiments across multiple gender bias
+evaluation settings demonstrate that FairQE
+consistently improves gender fairness over
+strong QE baselines. Moreover, under MQM-
+based meta-evaluation following the WMT
+2023 Metrics Shared Task, FairQE achieves
+competitive or improved general QE perfor-
+mance. These results show that gender bias in
+QE can be effectively mitigated without sacri-
+ficing evaluation accuracy, enabling fairer and
+more reliable translation evaluation.
+1
+Introduction
+Quality Estimation (QE) aims to automatically as-
+sess the quality of machine translation (MT) out-
+puts without relying on human-written reference
+translations (Zhao et al., 2024). By removing the
+dependency on references, QE offers a practical
+and scalable alternative for translation evaluation,
+which has led to growing interest from both the
+MT and evaluation communities (Rei et al., 2022;
+Mehandru et al., 2023; Lavie et al., 2025).
+†Equal contribution.
+Figure 1: Illustration of gender bias in QE model (Rei
+et al., 2022). (a) In gender-ambiguous cases, mascu-
+line translations receive higher QE scores despite the
+absence of gender cues in the source. (b) In gender-
+explicit cases requiring feminine forms, QE models may
+still assign higher scores to masculine translations. Our
+proposed FairQE aims to alleviate such gender biases
+with a fairer evaluation.
+Despite their effectiveness, recent studies have
+shown that existing QE models may exhibit system-
+atic biases in gender-related contexts (Savoldi et al.,
+2021; Filandrianos et al., 2025; Mastromichalakis
+et al., 2025). In particular, two scenarios have been
+identified as especially problematic (Zaranis et al.,
+2025). First, in gender-ambiguous cases, where the
+source sentence does not explicitly specify gender,
+QE models often assign higher scores to transla-
+tions that realize a specific gender, typically mas-
+culine forms, as illustrated in Figure 1(a). Second,
+in gender-explicit cases, where the source sentence
+clearly requires a feminine form, QE models may
+still favor masculine translations. This leads to a
+phenomenon known as preference inversion, shown
+in Figure 1(b).
+These biases undermine the fairness of QE-
+based evaluation and may have cascading effects
+on downstream decision-making processes that rely
+arXiv:2604.21420v1  [cs.AI]  23 Apr 2026
+
+[Page 2]
+on QE scores, such as model selection, data filter-
+ing, and deployment monitoring (Peter et al., 2023).
+In particular, reinforcing gender preferences in
+gender-ambiguous contexts runs counter to broader
+societal efforts to discourage the reproduction of
+unnecessary gender stereotypes and to promote in-
+clusive language use (Sun et al., 2019; Stanczak
+and Augenstein, 2021). While a growing body of
+work has focused on identifying and analyzing gen-
+der bias in QE models (Savoldi et al., 2024; Zaranis
+et al., 2025; Filandrianos et al., 2025), relatively
+few approaches have proposed concrete method-
+ological solutions to mitigate such biases (Behnke
+et al., 2022; Huang et al., 2023; Lee et al., 2024).
+To address these limitations, we propose FairQE,
+a multi-agent-based QE framework designed to
+mitigate gender-related biases. FairQE jointly ad-
+dresses both gender-ambiguous and gender-explicit
+scenarios to provide more equitable translation
+quality estimates. Specifically, FairQE first detects
+gender cues to distinguish between ambiguous and
+explicit cases, and then generates gender-flipped
+translation variants for each instance. During eval-
+uation, it combines quantitative scores from con-
+ventional QE models with large language model
+(LLM)-based bias-mitigation reasoning, dynami-
+cally aggregating these signals according to the
+estimated severity of gender bias. This design pre-
+serves the strengths of existing QE models while
+effectively calibrating their potential gender bias.
+It is also model-agnostic, which enables broad ap-
+plicability across different QE architectures.
+We empirically evaluate FairQE under four eval-
+uation settings related to gender bias. Experimental
+results demonstrate that FairQE produces more eq-
+uitable evaluation behavior than existing QE base-
+lines in both gender-ambiguous and gender-explicit
+conditions, while simultaneously achieving com-
+petitive or improved performance on general QE
+quality as measured against multidimensional qual-
+ity metrics (MQM)-based benchmarks.
+Our contributions are summarized as follows:
+• We propose FairQE, a multi-agent-based,
+fairness-aware QE framework that jointly ad-
+dresses gender-ambiguous and gender-explicit
+scenarios.
+• We introduce a bias-aware dynamic score ag-
+gregation mechanism that quantifies gender
+bias using gender-flipped translation variants
+and incorporates this information into QE
+scoring.
+• Through extensive experiments across diverse
+gender bias evaluation settings and MQM-
+based QE benchmarks, we demonstrate that
+FairQE improves both fairness and overall
+evaluation performance compared to existing
+QE models.
+2
+FairQE Framework
+FairQE is a multi-agent framework designed to mit-
+igate gender bias in QE. As illustrated in Figure 2,
+the overall workflow is organized into four sequen-
+tial stages: (1) Gender Cue Detection, (2) Gender-
+Flipped Variant Generation, (3) Dual-Stream Qual-
+ity Estimation, and (4) Dynamic Bias-Aware Ag-
+gregation.
+Across these stages, FairQE employs five agents:
+four LLM-based agents—the Gender Cue Detector
+(Agentcue), Gender-Ambiguous Variant Genera-
+tor (Agentamb), Gender-Explicit Variant Genera-
+tor (Agentexp), and Bias-Mitigating Quality Esti-
+mator (Agentuqe)—and a conventional QE model
+(Agentqe), which jointly combine LLM-based rea-
+soning with traditional QE scoring. The details of
+each stage are described below.
+2.1
+Gender Cue Detection
+The first stage serves as an initial verification mod-
+ule that identifies gender-related linguistic cues in
+a source–target sentence pair (s, t). We employ
+a Gender Cue Detector (Agentcue) to determine
+whether the source sentence contains lexical cues,
+possibly spanning one or more words, that may
+induce gendered realizations in translation.
+To ensure consistent and interpretable cue detec-
+tion, we define an explicit taxonomy of gender bias
+cues to guide the behavior of Agentcue. Following
+prior work (Zaranis et al., 2025), gender cues are
+first categorized into two primary types: Gender-
+Ambiguous and Gender-Explicit cues. Building on
+this distinction, we further decompose gender cues
+into twelve fine-grained categories that capture di-
+verse linguistic sources of gender bias. These cate-
+gories, denoted by C, are summarized in Table 13
+and provided to Agentcue through a prompt.
+Based on this taxonomy, Agentcue takes the cue
+taxonomy C as an explicit input and yields a set
+of detected gender cues, each linking a source cue
+span cs to its corresponding cue span in the target
+sentence ct, along with its assigned cue category.
+
+[Page 3]
+Figure 2: Overview of the proposed FairQE framework. FairQE mitigates gender bias using four LLM-based agents
+for gender cue detection, variant generation, and bias-aware reasoning, in conjunction with a conventional QE
+module for quality scoring, yielding a fairer QE score. Here, F, M, and N represent Feminine, Masculine, and
+Neutral, respectively, and Orig refers to the original translation.
+Formally, the output of this stage is defined as:
+D = Agentcue(s, t, C)
+= {(c(i)
+s , c(i)
+t ) | c(i)
+s
+⊂s, c(i)
+t
+⊂t}k
+i=1
+(1)
+where D denotes the set of k detected gender
+cue pairs and their assigned categories. If D = ∅,
+the subsequent gender-flipped variant generation
+stages in Section 2.2 are skipped to optimize com-
+putational efficiency.
+2.2
+Gender-Flipped Variant Generation
+At this stage, we generate gender-flipped variants
+of the original target sentence t by applying modifi-
+cations guided by the cues D detected by Agentcue.
+The goal is to produce alternative gender realiza-
+tions—Feminine (F), Masculine (M), and Neu-
+tral (N)—while preserving the original context
+and fluency. For instance, if t contains a feminine
+cue, the agents generate valid masculine or neutral
+counterparts, ensuring they remain linguistically
+natural.
+Given the distinct nature of gender-ambiguous
+and gender-explicit cues, we employ two special-
+ized agents: the Gender-Ambiguous Variant Gen-
+erator (Agentamb) and the Gender-Explicit Variant
+Generator (Agentexp). These agents operate selec-
+tively or in parallel depending on the cue category.
+Gender-Ambiguous Variant Generator.
+The
+Agentamb handles cases where the gender of a cue
+in the source text is underspecified (correspond-
+ing to the ambiguous cue categories). Since the
+source gender is unknown, the goal of this agent is
+to generate all valid gender realizations that were
+not present in the original translation.
+Formally, for the set of detected ambiguous cues
+Damb = {(cs, ct) ∈D | category(cs, ct) ∈Camb} ,
+Agentamb generates a set of gender-flipped variants
+Vamb:
+Vamb = S
+(cs,ct)∈Damb Agentamb(s, t, cs, ct)
+(2)
+Each element in Vamb is represented as a tuple
+(s, t′, g′), where t′ denotes the target sentence
+modified to reflect a specific gender realization
+g′ ∈{F, M, N}.
+Gender-Explicit
+Variant
+Generator.
+The
+Agentexp handles cues where the source gender is
+explicitly marked. Unlike the ambiguous case, the
+target gender is deterministically constrained to
+align with the source. Accordingly, the agent veri-
+fies whether the target realization ct satisfies the
+source gender cue cs, and generates gender-flipped
+variants for comparison. The resulting alignment
+signal is used in the subsequent bias-mitigating
+reasoning stage.
+Formally, for the set of detected explicit cues
+Dexp = {(cs, ct) ∈D | category(cs, ct) ∈Cexp},
+Agentexp produces an alignment outcome Ai ∈
+{True, False} and a set of gender-flipped variants
+Vi for each cue (cs, ct):
+(Ai, Vi) = Agentexp(s, t, cs, ct)
+(3)
+
+[Page 4]
+The final alignment signal Aexp and the set of
+explicit variants Vexp are obtained by aggregating
+the cue-level outputs:
+Aexp = V
+(cs,ct)∈Dexp Ai,
+Vexp = S
+(cs,ct)∈Dexp Vi
+(4)
+2.3
+Dual-Stream Quality Estimation
+This stage aims to perform a multi-faceted as-
+sessment of translation quality.
+We employ a
+dual-stream approach that operates in parallel:
+quantitative scoring via a conventional QE model
+(Agentqe) and bias-mitigating reasoning via an
+LLM (Agentuqe). Both agents exploit the origi-
+nal sentence pair (s, t) and the set of generated
+gender-flipped variants V.
+Quantitative Scoring via QE Model.
+The con-
+ventional QE model acts as a robust anchor for eval-
+uating general fluency. Agentqe computes quality
+scores for the original pair as well as for each gen-
+erated gender-flipped variant. This allows us to
+measure not only the absolute quality but also the
+volatility of the model’s predictions under gender
+perturbations.
+Formally, let qorig be the score for (s, t), and
+Qvar be the set of scores for the set of variants
+V = {(s′
+i, t′
+i)}N
+i=1:
+qorig = Agentqe(s, t),
+Qvar = {Agentqe(s′, t′) | (s′, t′) ∈V}
+(5)
+If the model is biased, it is expected to assign signif-
+icantly divergent scores to semantically equivalent
+variants despite the context remaining largely iden-
+tical.
+Bias-mitigating Reasoning via LLM.
+Unlike
+Agentqe, which treats inputs as a black box,
+Agentuqe performs explicit reasoning to derive a
+debiased quality score quqe. The agent takes the
+detected cues D, the set of variants V, and the
+alignment signal Aexp as context, applying distinct
+reasoning strategies based on the cue type:
+• For Gender-Ambiguous Cues: The agent
+checks for consistency. It evaluates whether
+the translation quality remains invariant across
+valid gender realizations (F, M, N). Score dis-
+parities without contextual justification are
+flagged as bias.
+• For Gender-Explicit Cues: The agent vali-
+dates fidelity by analyzing the generated vari-
+ants alongside the deterministic alignment
+check Aexp. It contrasts the translation with
+the gender-flipped variants to confirm that the
+target gender strictly adheres to the source
+constraints, penalizing violations flagged by
+the verification signal.
+Through this adaptive process, Agentuqe outputs
+the final score:
+quqe = Agentuqe(s, t, D, V, Aexp)
+(6)
+2.4
+Dynamic Bias-Aware Score Aggregation
+The final stage synthesizes the quantitative score
+from Agentqe (qorig) and the reasoning-based score
+from Agentuqe (quqe) to derive the final quality
+score, qfinal.
+Recent MQM-based studies suggest that while
+supervised QE models excel in fine-grained
+segment-level precision, LLMs demonstrate supe-
+rior capabilities in reasoning-intensive tasks (Lu
+et al., 2024). Leveraging this complementarity,
+FairQE adopts a dynamic bias-aware score aggre-
+gation mechanism. Instead of static averaging, we
+use the QE model as a reliable anchor and dynam-
+ically increase the intervention of the LLM only
+when the severity of gender bias (bias score) war-
+rants it.
+2.4.1
+Quantifying Bias Scores
+We quantify bias score by analyzing the score dis-
+tribution from Agentqe to compute the ambiguous
+bias and explicit bias.
+Ambiguous Bias (bamb).
+For gender-ambiguous
+cases, a bias-mitigating model should assign con-
+sistent scores across gender variations. We define
+volatility as the range between the maximum and
+minimum scores across the gender variants, and
+use it as the metric for bias.
+bamb = max
+ Qvar ∪{qorig}
+
+−min
+ Qvar ∪{qorig}
+
+(7)
+Explicit Bias (bexp).
+For gender-explicit cases,
+bias score is defined as a preference violation when
+a translation that violates the explicit gender con-
+straint is scored higher than a constraint-consistent
+alternative.
+Let Aexp ∈{True, False} indicate
+whether the original translation satisfies the explicit
+gender constraint. If Aexp = True, bias occurs
+when any constraint-violating variant outperforms
+the original translation. Otherwise, bias occurs
+when the original, constraint-violating translation
+is preferred over any gender-flipped variant.
+
+[Page 5]
+bexp = max
+
+
+
+max
+
+0, max(Qvar) −qorig
+
+if Aexp = True
+max
+
+0, qorig −max(Qvar)
+
+if Aexp = False
+(8)
+2.4.2
+Final Score Aggregation
+Here, α and β control the relative contribution of
+bamb and bexp, respectively. The total bias score
+B is a weighted sum of the components, which
+determines the mixing weight w via a soft-gating
+mechanism.
+B = α · bamb + β · bexp
+(9)
+w =
+B
+1 + B ,
+(0 ≤w < 1)
+(10)
+When bias is negligible (B
+≈
+0), w ap-
+proaches 0, prioritizing the segment-level precision
+of Agentqe. As bias score increases, w grows, shift-
+ing reliance toward the bias-mitigating reasoning
+of Agentuqe. The final score is computed as:
+qfinal = w · quqe + (1 −w) · qorig
+(11)
+3
+Experiments
+3.1
+Experimental Setup
+We evaluate FairQE under two complementary ex-
+perimental settings: (1) Gender fairness eval-
+uation, which assesses whether existing gender
+bias is effectively mitigated, and (2) QE perfor-
+mance evaluation, which assesses whether FairQE
+maintains general-purpose QE performance. All
+datasets follow an EN–* language-pair setting.
+Gender Fairness Evaluation.
+Gender bias is
+evaluated using setting-specific criteria tailored to
+the nature of gender ambiguity and explicitness.
+Dataset details for this evaluation and formal def-
+initions of all evaluation metrics are provided in
+Appendix A.2 and Appendix A.3, respectively.
+• Gender-ambiguous (Fem.
+vs.
+Masc.):
+We compare semantically equivalent femi-
+nine and masculine translations for gender-
+ambiguous sources. Fairness is evaluated us-
+ing the feminine-to-masculine QE score ratio,
+where values closer to 1 indicate less gender
+preference. We conduct this evaluation using
+the GATE (Rarrick et al., 2023) dataset and
+the contextual subset of MT-GenEval (Currey
+et al., 2022), with preceding context removed
+to preserve gender ambiguity.
+• Gender-ambiguous (Neutral vs.
+Gen-
+dered):
+We
+evaluate
+whether
+a
+QE
+model prefers gender-neutral translations over
+gender-specific ones for gender-ambiguous
+sources. Fairness is assessed using the neutral-
+to-gendered QE score ratio, where values
+greater than 1 indicate a preference for pre-
+serving gender ambiguity. We conduct this
+evaluation using the mGeNTE (Savoldi et al.,
+2025) dataset.
+• Gender-explicit: We assess whether the QE
+model assigns higher scores to gender-aligned
+translations than to gender-misaligned ones
+for gender-explicit sources. Performance is
+measured using binary accuracy, where a pre-
+diction is considered correct if the gender-
+aligned translation receives a higher QE score.
+We conduct this evaluation using the counter-
+factual subset of MT-GenEval.
+QE Performance Evaluation.
+We assess QE per-
+formance following the official WMT 2023 Metrics
+Shared Task (Freitag et al., 2023) setup. We evalu-
+ate on the EN–DE language pair using MQM rat-
+ings, covering 14 MT systems with 557 segments
+per system.
+Baselines.
+We
+compare
+FairQE
+against
+regression-based
+QE
+models,
+includ-
+ing
+COMETKiwi
+22
+(Rei
+et
+al.,
+2022),
+COMETKiwi 23 XL (Rei et al., 2023), Met-
+ricX 24 L (Juraska et al., 2024) and MetricX 24 XL
+(Juraska et al., 2024). We also include GEMBA-
+MQM
+(Kocmi
+and
+Federmann,
+2023),
+an
+LLM-based evaluator that performs MQM-style er-
+ror analysis, instantiated with gpt-4.1-mini*.
+For QE performance evaluation, we additionally
+include BERTScore (Zhang et al., 2020), BLEU
+(Papineni et al., 2002), and ChrF (Popovi´c, 2015)
+as baselines, enabling comparisons with both
+learned QE models and traditional automatic
+evaluation metrics.
+Models and Implementation.
+For all exper-
+iments,
+including both gender bias mitiga-
+tion and QE performance evaluation, we use
+gpt-4.1-mini for all LLM-based agents.
+As the underlying QE backbone, we employ
+COMETKiwi 22 and MetricX 24 L. For the ag-
+gregation hyperparameters in Equation (9), we set
+*https://platform.openai.com/docs/
+models/gpt-4.1-mini
+
+[Page 6]
+Method
+ES
+FR
+IT
+AR
+DE
+HI
+COMETKiwi 22 (Rei et al., 2022)
+0.9832
+0.9783
+0.9791
+0.9851
+0.9937
+0.9909
+COMETKiwi 23 XL (Rei et al., 2023)
+0.9398
+0.9028
+0.9261
+0.9841
+0.9906
+0.9840
+MetricX 24 L (Juraska et al., 2024)
+0.9804
+0.9714
+0.9782
+0.9623
+0.9911
+0.9945
+MetricX 24 XL (Juraska et al., 2024)
+0.9802
+0.9701
+0.9816
+0.9943
+0.9986
+0.9989
+GEMBA-MQM (Kocmi and Federmann, 2023)
+0.9737
+0.9658
+0.9695
+0.9700
+0.9749
+0.9740
+FairQE (ours, w/ COMETKiwi 22)
+0.9947
+0.9857
+0.9917
+0.9938
+0.9993
+0.9965
+FairQE (ours, w/ MetricX 24 L)
+0.9876
+0.9731
+0.9881
+0.9650
+0.9954
+0.9956
+Table 1: Feminine-to-masculine QE score ratio on EN–* language pairs under gender-ambiguous (Fem. vs. Masc.)
+setting. The best score for each language is shown in bold, and the second-best score is underlined.
+Method
+DE
+ES
+IT
+COMETKiwi 22
+0.9737
+0.9689
+0.9694
+COMETKiwi 23 XL
+0.9643
+0.9513
+0.9436
+MetricX 24 L
+0.9918
+0.9805
+0.9737
+MetricX 24 XL
+0.9877
+0.9756
+0.9707
+GEMBA-MQM
+0.9820
+0.9801
+0.9797
+FairQE (ours, w/ COMETKiwi 22)
+0.9801
+0.9693
+0.9727
+FairQE (ours, w/ MetricX 24 L)
+0.9921
+0.9948
+0.9884
+Table 2: Neutral-to-gendered QE score ratio on EN–*
+language pairs under gender-ambiguous (Neutral vs.
+Gendered) setting. The best score for each language is
+shown in bold, and the second-best score is underlined.
+Method
+AR
+DE
+HI
+COMETKiwi 22
+95.0
+99.2
+55.3
+COMETKiwi 23 XL
+95.0
+98.7
+73.1
+MetricX 24 L
+34.1
+97.6
+74.0
+MetricX 24 XL
+94.2
+98.5
+78.9
+GEMBA-MQM
+88.5
+94.0
+72.0
+FairQE (ours, w/ COMETKiwi 22)
+97.3
+99.7
+74.0
+FairQE (ours, w/ MetricX 24 L)
+56.0
+98.2
+79.1
+Table 3: Accuracy on EN–* language pairs under
+gender-explicit setting. The highest score for each lan-
+guage is shown in bold, and the second-highest score is
+underlined.
+α = β = 5 in all experiments unless otherwise
+stated.
+3.2
+Experimental Results
+3.2.1
+Gender-ambiguous (Fem. vs. Masc.)
+Table 1 reports the results for this setting. Across
+most language pairs, all baseline QE models ex-
+hibit a feminine-to-masculine QE score ratio below
+1, indicating a systematic masculine bias that fa-
+vors masculine translations even when the source
+sentence contains no gender cues.
+Under
+the
+same
+conditions,
+FairQE
+(w/
+COMETKiwi 22) achieves the closest performance
+to parity in four out of six language pairs (EN–
+ES, EN–FR, EN–IT, EN–DE), and attains the
+second-best performance on the remaining two
+pairs (EN–AR, EN–HI). In addition, FairQE with
+MetricX 24 L as the QE backbone consistently out-
+performs its corresponding backbone across all lan-
+guage pairs. These results demonstrate that FairQE
+consistently restores gender balance across diverse
+language settings.
+3.2.2
+Gender-ambiguous (Neutral vs.
+Gendered)
+Table 2 reports the results for this setting. Base-
+line QE models generally fail to sufficiently favor
+gender-neutral translations, indicating a bias to-
+ward unnecessary gender assignment even in the
+absence of explicit gender cues.
+In contrast, FairQE (w/ MetricX 24 L) achieves
+the best performance across all language pairs
+(EN–DE, EN–ES, EN–IT), while FairQE (w/
+COMETKiwi 22) consistently improves over its
+backbone model.
+These results indicate that
+FairQE functions as a model-agnostic framework
+for improving gender-neutral evaluation.
+3.2.3
+Gender-explicit
+Table 3 reports the results for this setting. FairQE
+(w/ COMETKiwi 22) achieves the highest accuracy
+on two out of three language pairs (EN–AR, EN–
+DE), and attains the second-best performance on
+the remaining pair (EN–HI). This corresponds to
+an improvement of 18.7 percentage points over its
+underlying QE backbone, COMETKiwi 22, demon-
+strating that FairQE effectively corrects erroneous
+QE judgments even when gender cues are explicitly
+specified.
+Meanwhile, GEMBA-MQM, a representative
+LLM-as-judge–based QE method, achieves an
+average accuracy of approximately 84% across
+the three language pairs, which is notably lower
+than the approximately 90% accuracy achieved by
+FairQE (w/ COMETKiwi 22). This observation is
+consistent with prior findings that gender bias inher-
+ent to LLMs can propagate into the evaluation stage
+
+[Page 7]
+Method
+avg-corr
+System-Level
+Segment-Level
+accuracy
+pearson
+acc-t
+pearson
+BLEU
+0.742
+0.894
+0.917
+0.520
+0.192
+chrF
+0.722
+0.818
+0.866
+0.519
+0.232
+BERTScore
+0.754
+0.879
+0.891
+0.528
+0.325
+COMETKiwi 22
+0.743
+0.864
+0.901
+0.548
+0.224
+COMETKiwi 23 XL
+0.764
+0.909
+0.900
+0.541
+0.308
+MetricX 24 L
+0.734
+0.894
+0.940
+0.493
+0.155
+MetricX 24 XL
+0.750
+0.848
+0.872
+0.528
+0.378
+GEMBA-MQM
+0.830
+0.970
+0.981
+0.574
+0.568
+FairQE (ours, w/ COMETKiwi 22)
+0.812
+0.985
+0.950
+0.574
+0.424
+FairQE (ours, w/ MetricX 24 L)
+0.806
+0.970
+0.953
+0.545
+0.463
+Table 4: Results on the WMT 2023 Metrics Shared Task for EN–DE at system-level and segment-level evaluation.
+The highest score in each column is shown in bold, and the second-highest score is underlined.
+0
+2
+4
+6
+8
+10
+0.980
+0.985
+0.990
+0.995
+1.000
+Mean Female/Male Ratio
+(a) Mean Ratio vs  ( =0)
+0
+2
+4
+6
+8
+10
+0.0005
+0.0010
+0.0015
+0.0020
+0.0025
+0.0030
+0.0035
+0.0040
+Variance
+(b) Variance vs  ( =0)
+0
+2
+4
+6
+8
+10
+0.980
+0.985
+0.990
+0.995
+1.000
+Mean Female/Male Ratio
+(c) Mean Ratio vs  ( =0)
+0
+2
+4
+6
+8
+10
+0.0004
+0.0006
+0.0008
+0.0010
+0.0012
+0.0014
+0.0016
+Variance
+(d) Variance vs  ( =0)
+Language Pairs
+EN-DE
+EN-ES
+EN-FR
+EN-HI
+EN-IT
+EN-AR
+Figure 3: Analysis of hyperparameters α and β across six language pairs under gender-ambiguous (Fem. vs. Masc.)
+setting. Panels (a) and (c) show the mean feminine-to-masculine QE score ratio, while panels (b) and (d) report the
+variance of QE scores as the hyperparameter value increases.
+(Chen et al., 2024). In contrast, by performing ex-
+plicit reasoning over multiple gender-flipped vari-
+ants, FairQE provides more reliable gender judg-
+ments in gender-explicit scenarios.
+3.2.4
+QE Performance
+Experimental results in Table 4 show that the pro-
+posed method achieves the best performance in
+terms of accuracy and accuracy-t at both the sys-
+tem and segment levels. In contrast, it obtains a
+slightly lower score on the overall avg-corr met-
+ric (0.812) compared to GEMBA-MQM (0.830).
+However, considering that GEMBA-MQM exhib-
+ited relatively substantial gender bias in the gen-
+der bias experiments, this result can be interpreted
+as a meaningful trade-off between fairness and
+evaluation performance. Moreover, FairQE with
+COMETKiwi 22 as the QE backbone substantially
+outperforms its backbone model, improving the
+avg-corr from 0.743 to 0.812. This demonstrates
+that our approach not only mitigates gender bias
+in existing QE models but also improves overall
+QE performance by effectively integrating more
+neutral LLM-based evaluation signals.
+3.3
+Ablation Studies
+3.3.1
+Effect of α and β on Fairness and
+Stability
+We analyze the impact of the hyperparameters α
+and β. Figure 3 presents the feminine-to-masculine
+QE score ratio and variance under the Gender-
+ambiguous (Fem. vs. Masc.) setting as α and β
+vary. We evaluate both hyperparameters from 0 to
+10 in increments of 2.
+As shown in panel (a), the ratio gradually in-
+creases across all language pairs as α increases.
+This indicates that the previously masculine-biased
+score distribution moves closer to the ideal value
+of 1, or may shift toward feminine bias when α
+becomes sufficiently large. This behavior is not
+
+[Page 8]
+Method
+ES
+FR
+IT
+AR
+DE
+HI
+Avg.
+COMETKiwi 22
+0.9832
+0.9783
+0.9791
+0.9851
+0.9937
+0.9909
+0.9851
+GEMBA-MQM
+0.9737
+0.9658
+0.9695
+0.9700
+0.9749
+0.9740
+0.9713
+FairQE-NoVar (Ours)
+0.9892
+0.9826
+0.9899
+0.9925
+0.9928
+0.9921
+0.9899
+FairQE-UQEOnly (Ours)
+0.9812
+0.9799
+0.9777
+0.9951
+0.9879
+0.9774
+0.9832
+FairQE (Ours)
+0.9947
+0.9857
+0.9917
+0.9938
+0.9993
+0.9965
+0.9936
+Table 5: Component-wise ablation analysis of the FairQE framework on EN–* language pairs under the gender-
+ambiguous (Fem. vs. Masc.) setting. FairQE-NoVar removes gender-flipped variant generation (Stage 2), while
+FairQE-UQEOnly uses only the UQE-based score (quqe).
+due to differences in score ranges, but rather to the
+tendency of LLM-based score inference to produce
+relatively larger score magnitudes (or score differ-
+ences) than the base QE model, even within the
+same scoring scale.
+Regarding variance, panel (b) shows that most
+language pairs except EN–AR exhibit a slight de-
+crease at smaller α values followed by an increase
+as α grows. This shows that even when the ratio
+approaches 1 and gender bias is mitigated, setting
+α excessively large can increase score instability,
+highlighting the importance of proper hyperparam-
+eter selection for α.
+The analysis of the hyperparameter β is shown
+in panels (c) and (d). Unlike α, changes in β result
+in largely similar levels of feminine-to-masculine
+QE score ratio and variance. This is because the
+experiment uses gender-ambiguous source inputs,
+for which the influence of β, which operates on
+explicit gender cues, is limited. In contrast, under
+the gender-explicit setting, the effect of β becomes
+more pronounced, while the influence of α is rel-
+atively reduced (See Appendix B.2 for additional
+details.).
+Overall, these ablation results show that α plays
+a more important role in gender-ambiguous set-
+tings, while β is more influential in gender-explicit
+settings, confirming that FairQE operates in accor-
+dance with its design intent.
+3.3.2
+Component-wise Ablation Analysis
+Table 5 presents the component-wise ablation re-
+sults of FairQE under the gender-ambiguous (Fem.
+vs. Masc.) setting. In this experiment, FairQE uses
+COMETKiwi 22 and gpt-4.1-mini as backbones.
+We analyze how the performance improvements
+stem from (1) the gender-flipped variant genera-
+tion (Stage 2) and (2) the LLM-based evaluation
+component and its aggregation with traditional
+QE metrics.
+Effect of Gender-Flipped Variant Generation
+(FairQE-NoVar).
+To assess the contribution of
+Stage 2, we consider FairQE-NoVar, which re-
+moves gender-flipped variant generation. In this
+setting, the detected gender cues, source, and trans-
+lation are directly provided to the LLM without
+contrastive comparison.
+FairQE-NoVar outper-
+forms both COMETKiwi 22 and GEMBA-MQM
+in most language pairs (except EN-DE), but consis-
+tently underperforms the full FairQE model. This
+indicates that cue-guided LLM evaluation alone
+provides improvements, while contrastive compar-
+ison via gender-flipped variants yields additional
+gains.
+Effect of the LLM-based Evaluator (quqe)
+To
+examine the effectiveness of the LLM-based evalua-
+tion component, we consider the FairQE-UQEOnly
+setting, where only the LLM-based score (quqe) is
+used. The results show that the standalone quqe
+achieves competitive performance, outperforming
+COMETKiwi 22 for some language pairs, while un-
+derperforming it for others. These results suggest
+that the LLM-based evaluator does not consistently
+provide superior performance across all settings.
+In contrast, the full FairQE model, which incor-
+porates Bias-Aware Score Aggregation, achieves
+the best performance across all language pairs ex-
+cept EN–AR. This demonstrates that dynamically
+combining signals from the LLM-based metric and
+the traditional QE metric yields more stable and
+reliable performance than relying on either compo-
+nent alone.
+4
+Related Works
+QE seeks to assess the quality of MT outputs
+without relying on reference translations, and has
+emerged as a practical complement to reference-
+based MT evaluation (Zhao et al., 2024).
+A
+dominant line of research in QE has focused on
+regression-based models that leverage pretrained
+
+[Page 9]
+language models as encoders. These approaches
+typically combine contextualized representations
+with task-specific prediction heads to estimate
+translation quality, and have demonstrated strong
+correlations with human judgments across diverse
+language pairs and domains (Rei et al., 2020, 2022;
+Juraska et al., 2024).
+Beyond conventional regression-based QE mod-
+els, recent work has explored LLM-as-a-judge ap-
+proaches for QE. Rather than relying on explicit
+regression objectives, these methods leverage the
+reasoning and instruction-following capabilities
+of LLMs to evaluate translation quality through
+prompt-based inference, often from multiple com-
+plementary perspectives. Several studies incorpo-
+rate MQM (Lommel et al., 2013; Freitag et al.,
+2021) guidelines or fine-grained error taxonomies
+directly into prompts to structure and guide the
+evaluation process (Kocmi and Federmann, 2023;
+Lu et al., 2024). In addition, recent work has in-
+troduced multi-agent debate mechanisms to further
+enhance QE robustness and coverage (Feng et al.,
+2025). Together, these advances reflect a growing
+interest in interpretable, reasoning-driven evalua-
+tion paradigms for QE.
+Meanwhile, prior research has shown that QE
+models can encode various linguistic and social
+biases, with gender bias emerging as a particularly
+salient concern. Existing studies report that QE
+models may systematically favor specific gender
+realizations in gender-ambiguous source sentences,
+or assign higher scores to gender-mismatched trans-
+lations even when the source sentence is gender-
+explicit (Savoldi et al., 2021). To investigate these
+phenomena, the MT community has conducted ex-
+tensive analyses of score distributions across gen-
+der conditions, compared bias patterns across dif-
+ferent QE architectures, and proposed benchmarks
+and evaluation protocols to quantify gender-related
+biases in a controlled manner (Zaranis et al., 2025;
+Filandrianos et al., 2025; Mastromichalakis et al.,
+2025).
+While these studies provide valuable insights
+into diagnosing and comparing gender bias in QE
+models, methodological approaches that directly
+mitigate gender bias at the QE evaluation stage
+remain underexplored. This work addresses this
+gap by proposing a new direction for systematically
+considering and improving gender fairness at the
+QE evaluation stage.
+5
+Conclusion
+We propose FairQE, a multi-agent, fairness-aware
+framework for quality estimation that mitigates
+gender bias in both gender-ambiguous and gender-
+explicit scenarios. FairQE detects gender cues,
+generates gender-flipped variants, and dynamically
+combines conventional QE scores with LLM-based
+unbiased reasoning using a bias-aware aggrega-
+tion mechanism. Experimental results across di-
+verse gender bias evaluation settings show that
+FairQE consistently improves gender fairness over
+strong QE baselines, while maintaining or improv-
+ing general QE performance under MQM-based
+meta-evaluation. These findings demonstrate that
+gender bias in QE can be mitigated without sacrific-
+ing evaluation accuracy, making FairQE a practical
+and model-agnostic solution for fairer MT evalua-
+tion.
+Limitations
+FairQE relies on LLM-based components for un-
+biased quality estimation, which may introduce
+variability depending on the underlying LLM and
+decoding configuration. To mitigate this issue, all
+LLM-based components are executed with deter-
+ministic decoding and fixed prompts, and the final
+quality score is anchored to the underlying QE
+backbone, with the contribution of the LLM-based
+unbiased estimator increased only when the esti-
+mated bias score is high.
+Errors in gender cue detection may propagate
+to downstream stages; however, the benchmarks
+used in this study are constructed to explicitly con-
+tain gender-related phenomena, and FairQE con-
+sistently reduces bias relative to the corresponding
+QE backbones across all experimental settings, in-
+dicating stable behavior of the overall pipeline in
+practice.
+The bias aggregation hyperparameters may be
+sensitive to the choice of QE backbone or dataset,
+but we use a single fixed setting across all experi-
+ments and observe consistent improvements, sug-
+gesting reasonable stability and generality.
+Finally, our experiments rely on API-based
+LLMs to ensure reliable instruction-following be-
+havior and do not include evaluations with open-
+source LLMs; nevertheless, FairQE is designed to
+be model-agnostic with respect to the choice of
+LLM, and extending the evaluation to open-source
+models is left for future work.
+
+[Page 10]
+Ethics Statement
+This work aims to improve fairness in machine
+translation quality estimation by mitigating gender-
+related biases in existing evaluation models, par-
+ticularly in gender-ambiguous and gender-explicit
+contexts. All experiments are conducted on pub-
+licly available benchmarks, and we do not collect
+or infer sensitive personal attributes beyond the ex-
+plicit linguistic gender phenomena encoded in the
+data.
+FairQE relies on LLMs for bias-aware reasoning.
+While LLMs may themselves encode social biases,
+our framework is explicitly designed to detect and
+mitigate such biases at the evaluation stage rather
+than amplify them, without enforcing a single nor-
+mative notion of gender usage. Finally, FairQE
+is intended as an offline evaluation and analysis
+framework, and should be applied with appropriate
+human oversight in sensitive or high-stakes set-
+tings.
+Acknowledgements
+This work was supported by the Institute of Infor-
+mation & Communications Technology Planning
+& Evaluation (IITP) grant funded by the Korea gov-
+ernment (MSIT) [RS-2021-II211341, Artificial In-
+telligence Graduate School Program (Chung-Ang
+University)] and by the National Research Foun-
+dation of Korea (NRF) grant funded by the Korea
+government (MSIT) (RS-2025-00556246).
+References
+Hanna Behnke, Marina Fomicheva, and Lucia Specia.
+2022. Bias mitigation in machine translation qual-
+ity estimation. In Proceedings of ACL, pages 1475–
+1487.
+Guiming Hardy Chen, Shunian Chen, Ziche Liu, Feng
+Jiang, and Benyou Wang. 2024. Humans or llms as
+the judge? a study on judgement bias. In Proceedings
+of EMNLP, pages 8301–8327.
+Anna Currey, Maria Nadejde, Raghavendra Reddy Pap-
+pagari, Mia Mayer, Stanislas Lauly, Xing Niu, Ben-
+jamin Hsu, and Georgiana Dinu. 2022. Mt-geneval:
+A counterfactual and contextual dataset for evalu-
+ating gender accuracy in machine translation. In
+Proceedings of EMNLP, pages 4287–4299.
+Zhaopeng Feng, Jiayuan Su, Jiamei Zheng, Jiahan Ren,
+Yan Zhang, Jian Wu, Hongwei Wang, and Zuozhu
+Liu. 2025. M-mad: Multidimensional multi-agent
+debate for advanced machine translation evaluation.
+In Proceedings of ACL, pages 7084–7107.
+George Filandrianos, Orfeas Menis Mastromicha-
+lakis, Wafaa Mohammed, Giuseppe Attanasio, and
+Chrysoula Zerva. 2025. Gambit+: A challenge set for
+evaluating gender bias in machine translation quality
+estimation metrics. In Proceedings of WMT, pages
+314–326.
+Markus Freitag, George Foster, David Grangier, Viresh
+Ratnakar, Qijun Tan, and Wolfgang Macherey. 2021.
+Experts, errors, and context: A large-scale study of
+human evaluation for machine translation. Transac-
+tions of ACL, 9:1460–1474.
+Markus Freitag, Nitika Mathur, Chi-kiu Lo, Elefthe-
+rios Avramidis, Ricardo Rei, Brian Thompson, Tom
+Kocmi, Frederic Blain, Daniel Deutsch, Craig Stew-
+art, Chrysoula Zerva, Sheila Castilho, Alon Lavie,
+and George Foster. 2023. Results of wmt23 metrics
+shared task: Metrics might be guilty but references
+are not innocent. In Proceedings of WMT, pages
+578–628.
+Hui Huang, Shuangzhi Wu, Kehai Chen, Hui Di, Muyun
+Yang, and Tiejun Zhao. 2023. Improving translation
+quality estimation with bias mitigation. In Proceed-
+ings of ACL, pages 2175–2190.
+Juraj Juraska, Daniel Deutsch, Mara Finkelstein, and
+Markus Freitag. 2024. Metricx-24: The google sub-
+mission to the wmt 2024 metrics shared task. In
+Proceedings of WMT, pages 492–504.
+Tom Kocmi and Christian Federmann. 2023. Gemba-
+mqm: Detecting translation quality error spans with
+gpt-4. In Proceedings of WMT, pages 768–775.
+Alon Lavie, Greg Hanneman, Sweta Agrawal, Diptesh
+Kanojia, Chi-Kiu Lo, Vilem Zouhar, Frederic Blain,
+Chrysoula Zerva, Eleftherios Avramidis, Sourabh De-
+oghare, Archchana Sindhujan, Jiayi Wang, David Ife-
+oluwa Adelani, Brian Thompson, Tom Kocmi,
+Markus Freitag, and Daniel Deutsch. 2025. Findings
+of the wmt25 shared task on automated translation
+evaluation systems: Linguistic diversity is challeng-
+ing and references still help. In Proceedings of WMT,
+pages 436–483.
+Minwoo Lee, Hyukhun Koh, Minsung Kim, and Ky-
+omin Jung. 2024. Fine-grained gender control in
+machine translation with large language models. In
+Proceedings of NAACL.
+Arle Richard Lommel, Aljoscha Burchardt, and Hans
+Uszkoreit. 2013. Multidimensional quality metrics:
+a flexible system for assessing translation quality. In
+Proceedings of TC.
+Qingyu Lu, Baopu Qiu, Liang Ding, Kanjian Zhang,
+Tom Kocmi, and Dacheng Tao. 2024. Error analysis
+prompting enables human-like translation evaluation
+in large language models. In Findings of ACL, pages
+8801–8816.
+Orfeas Menis Mastromichalakis, Giorgos Filandrianos,
+Maria Symeonaki, and Giorgos Stamou. 2025. As-
+sumed identities: Quantifying gender bias in machine
+
+[Page 11]
+translation of gender-ambiguous occupational terms.
+In Proceedings of EMNLP, pages 32221–32237.
+Nikita Mehandru, Sweta Agrawal, Yimin Xiao, Ge Gao,
+Elaine Khoong, Marine Carpuat, and Niloufar Salehi.
+2023. Physician detection of clinical harm in ma-
+chine translation: Quality estimation aids in reliance
+and backtranslation identifies critical errors. In Pro-
+ceedings of EMNLP, pages 11633–11647.
+Kishore Papineni, Salim Roukos, Todd Ward, and Wei-
+Jing Zhu. 2002. Bleu: A method for automatic evalu-
+ation of machine translation. In Proceedings of ACL,
+pages 311–318.
+Jan-Thorsten Peter, David Vilar, Daniel Deutsch, Mara
+Finkelstein, Juraj Juraska, and Markus Freitag. 2023.
+There’s no data like better data: Using qe metrics
+for mt data filtering. In Proceedings of WMT, pages
+561–577.
+Maja Popovi´c. 2015. chrf: Character n-gram f-score for
+automatic mt evaluation. In Proceedings of WMT,
+pages 392–395.
+Spencer Rarrick, Ranjita Naik, Varun Mathur, Sundar
+Poudel, and Vishal Chowdhary. 2023. Gate: A chal-
+lenge set for gender-ambiguous translation examples.
+arXiv preprint.
+Ricardo Rei, Nuno M. Guerreiro, Jose Pombal, Daan
+van Stigt, Marcos Treviso, Luisa Coheur, Jose G. C.
+de Souza, and Andre F. T. Martins. 2023. Scaling
+up cometkiwi: Unbabel-ist 2023 submission for the
+quality estimation shared task. In Proceedings of
+WMT, pages 841–848.
+Ricardo Rei, Craig Stewart, Ana C Farinha, and Alon
+Lavie. 2020. Comet: A neural framework for mt
+evaluation. In Proceedings of EMNLP, pages 2685–
+2702.
+Ricardo Rei, Marcos Treviso, Nuno M. Guerreiro,
+Chrysoula Zerva, Ana C. Farinha, Christine Maroti,
+Jose G. C. de Souza, Taisiya Glushkova, Duarte
+Alves, Luisa Coheur, Alon Lavie, and Andre F. T.
+Martins. 2022. Cometkiwi: Ist-unbabel 2022 sub-
+mission for the quality estimation shared task. In
+Proceedings of WMT, pages 634–645.
+Beatrice Savoldi, Giuseppe Attanasio, Eleonora Cu-
+pin, Eleni Gkovedarou, Janica Hackenbuchner, Anne
+Lauscher, Matteo Negri, Andrea Piergentili, Manjin-
+der Thind, and Luisa Bentivogli. 2025. Mind the
+inclusivity gap: Multilingual gender-neutral trans-
+lation evaluation with mgente. In Proceedings of
+EMNLP, pages 13698–13720.
+Beatrice Savoldi, Marco Gaido, Luisa Bentivogli, Mat-
+teo Negri, and Marco Turchi. 2021. Gender bias in
+machine translation. Transactions of ACL, 9:845–
+874.
+Beatrice Savoldi, Sara Papi, Matteo Negri, Ana
+Guerberof-Arenas, and Luisa Bentivogli. 2024. What
+the harm? quantifying the tangible impact of gender
+bias in machine translation with a human-centered
+study.
+In Proceedings of EMNLP, pages 18048–
+18076.
+Karolina Stanczak and Isabelle Augenstein. 2021. A
+survey on gender bias in natural language processing.
+arXiv preprint.
+Tony Sun, Andrew Gaut, Shirlyn Tang, Yuxin Huang,
+Mai ElSherief, Jieyu Zhao, Diba Mirza, Elizabeth
+Belding, Kai-Wei Chang, and William Yang Wang.
+2019. Mitigating gender bias in natural language
+processing: Literature review. In Proceedings of
+ACL, pages 1630–1640.
+Emmanouil Zaranis,
+Giuseppe Attanasio,
+Sweta
+Agrawal, and Andre Martins. 2025. Watching the
+watchers: Exposing gender disparities in machine
+translation quality estimation.
+In Proceedings of
+ACL, pages 25261–25284.
+Tianyi Zhang, Varsha Kishore, Felix Wu, Kilian Q.
+Weinberger, and Yoav Artzi. 2020. Bertscore: Eval-
+uating text generation with bert. In Proceedings of
+ICLR.
+Haofei Zhao, Yilun Liu, Shimin Tao, Weibin Meng,
+Yimeng Chen, Xiang Geng, Chang Su, Min Zhang,
+and Hao Yang. 2024. From handcrafted features to
+llms: A brief survey for machine translation quality
+estimation. In Proceedings of IJCNN, pages 1–10.
+
+[Page 12]
+A
+Experimental Details
+A.1
+Models
+To improve readability, the following abbrevia-
+tions are used in our experiment tables to de-
+note specific evaluation models: COMETKiwi 22
+(Unbabel/wmt22-cometkiwi-da), COMETKiwi 23
+XL (Unbabel/wmt23-cometkiwi-da-xl), MetricX
+24 L (google/metricx-24-hybrid-large-v2p6), Met-
+ricX 24 XL (google/metricx-24-hybrid-xl-v2p6),
+and GEMBA-MQM (instantiated with GPT-4.1-
+mini).
+A.2
+Datasets
+This study evaluates the effectiveness of FairQE
+with respect to gender ambiguity and gender ex-
+plicitness in source sentences, following the exper-
+imental protocols of prior work and using three
+benchmark datasets.
+MT-GenEval (Currey et al., 2022) is a Wikipedia-
+based benchmark for gender bias evaluation. We
+use two subsets: the Contextual Subset, in which
+the preceding context is removed to preserve gen-
+der ambiguity in the source sentences, and the
+Counterfactual Subset, which evaluates explicit
+gender distinctions using contrastive pairs such as
+“He/She is a doctor.” Among the eight available
+target languages (AR, DE, ES, FR, HI, IT, PT, RU),
+we conduct experiments on AR, DE, and HI.
+GATE (Rarrick et al., 2023) is a linguistically de-
+signed corpus that contains single gender-marked
+entities, and we evaluate on the ES, FR, and IT
+language pairs.
+mGeNTE (Savoldi et al., 2025) includes gender-
+neutral translations produced by professional trans-
+lators. We use the gender-ambiguous source set
+(Set-N) to analyze whether models prefer neutral
+expressions over unnecessary gender assignments.
+The target languages are ES, DE, and IT.
+All datasets are provided in EN–* language-pair
+settings. These datasets are freely available for
+research use under the MIT, CC-BY-SA-3.0, and
+CC-BY-4.0 licenses, respectively.
+A.3
+Evaluation Metrics on Gender Fairness
+A.3.1
+Gender-Ambiguous: Feminine vs.
+Masculine
+For a gender-ambiguous source sentence s, we
+compare a feminine translation hF and a masculine
+translation hM, which are semantically equivalent
+except for gender realization. We compute the rela-
+tive score ratio:
+rm/f(s) = QE(s, hF )
+QE(s, hM).
+(12)
+An ideal fair QE model yields rm/f(s) = 1, indicat-
+ing no preference for either gender form.
+A.3.2
+Gender-Ambiguous: Neutral vs.
+Gendered
+For gender-ambiguous sources, we additionally
+compare a gender-neutral translation hN with a
+gender-specific translation hG. The relative prefer-
+ence for neutrality is measured as:
+rneutral(s) = QE(s, hN)
+QE(s, hG) .
+(13)
+Values greater than 1 indicate a preference for pre-
+serving gender ambiguity through neutral transla-
+tions.
+A.3.3
+Gender-Explicit Accuracy
+For gender-explicit source sentences, we compare
+a gender-aligned translation hcorr with a gender-
+misaligned translation hincorr.
+Following prior
+work, we evaluate performance using binary ac-
+curacy:
+Accexplicit(S) =
+1
+|S|
+X
+sG∈S
+I
+h
+QE(sG, hcorr) > QE(sG, hincorr)
+i
+.
+(14)
+where I[·] is the indicator function.
+A.4
+Hardware Specification
+All our experiments were conducted using a single
+NVIDIA A100 GPU.
+B
+Additional Results
+B.1
+Experimental Results with Variance
+Table 6 reports the results under the gender-
+ambiguous (Fem. vs. Masc.) source setting. Over-
+all, the variance does not increase substantially
+compared to the baseline, and for certain language
+pairs (EN–ES and EN–IT), it even decreases, while
+the average feminine-to-masculine ratio remains
+close to 1, indicating reduced gender bias. Al-
+though a slight increase in variance can occur due
+to differences in the score scale between the agent-
+based QE outputs and the underlying QE model pre-
+dictions, this does not negatively impact overall per-
+formance. In fact, despite marginally higher vari-
+
+[Page 13]
+Method
+ES
+FR
+IT
+AR
+DE
+HI
+Avg.
+Std.
+Avg.
+Std.
+Avg.
+Std.
+Avg.
+Std.
+Avg.
+Std.
+Avg.
+Std.
+CometKiwi 22
+0.9832 0.0332 0.9783 0.0348 0.9791 0.0543 0.9851 0.0470 0.9937 0.0240 0.9909 0.0234
+CometKiwi 23 XL 0.9398 0.1089 0.9028 0.1484 0.9261 0.1037 0.9841 0.0910 0.9906 0.0544 0.9840 0.0498
+MetricX 24 L
+0.9804 0.0381 0.9714 0.0545 0.9782 0.0433 0.9623 0.0580 0.9911 0.0285 0.9945 0.0275
+MetricX 24 XL
+0.9802 0.0454 0.9701 0.0589 0.9816 0.0517 0.9943 0.0517 0.9986 0.0241 0.9989 0.0172
+GEMBA-MQM
+0.9737 0.0460 0.9658 0.0404 0.9695 0.0285 0.9700 0.0641 0.9749 0.0508 0.9740 0.0407
+FairQE (CK22)
+0.9947 0.0347 0.9857 0.0356 0.9917 0.0244 0.9938 0.0523 0.9993 0.0265 0.9965 0.0186
+FairQE (MX24L)
+0.9876 0.0304 0.9731 0.0517 0.9881 0.0441 0.9650 0.0581 0.9954 0.0327 0.9956 0.0342
+Table 6: Average (Avg.) and standard deviation (Std.; lower is better) of the feminine-to-masculine QE score ratio
+on EN–* language pairs under gender-ambiguous (Fem. vs. Masc.) setting. The best score for each language is
+shown in bold, and the second-best score is underlined.
+Method
+ES
+FR
+IT
+AR
+DE
+HI
+Avg.
+COMETKiwi 22
+0.9832
+0.9783
+0.9791
+0.9851
+0.9937
+0.9909
+0.9851
+FairQE (ours, w/ COMETKiwi 22)
+0.9947
+0.9857
+0.9917
+0.9938
+0.9993
+0.9965
+0.9936
+COMETKiwi 23 XL
+0.9398
+0.9028
+0.9261
+0.9841
+0.9906
+0.9840
+0.9546
+FairQE (ours, w/ COMETKiwi 23 XL)
+0.9718
+0.9271
+0.9564
+0.9924
+1.0224
+1.0100
+0.9800
+Table 7: Feminine-to-masculine QE score ratio on EN–* language pairs under the gender-ambiguous (Fem. vs.
+Masc.) setting. For each backbone, the better score between the baseline and FairQE is highlighted in bold.
+ance, our method consistently outperforms lower-
+variance baselines across all three gender bias eval-
+uation settings (see Section 3.2.1–3.2.3) as well
+as in general QE performance evaluation (see Sec-
+tion 3.2.4), suggesting that the observed variance
+increase is acceptable in practice.
+B.2
+Hyperparameter Analysis on
+Gender-explicit Settings
+As shown in panel (b) of Figure 4, the hyperpa-
+rameter β exhibits a larger change in accuracy
+under gender-explicit settings than under gender-
+ambiguous settings (see Section 3.3.1), indicating a
+stronger impact in the gender-explicit case. In con-
+trast, as shown in panel (a), accuracy varies only
+marginally with respect to α, suggesting that the
+influence of this hyperparameter is reduced. This
+behavior aligns with the framework design, as β
+exerts greater influence when explicit gender cues
+are detected.
+B.3
+Analysis with an Additional QE Backbone
+Table 7 reports the evaluation results on EN–* lan-
+guage pairs under the gender-ambiguous (Fem.
+vs. Masc.) setting, where we additionally use
+COMETKiwi 23 XL to examine the generality
+of FairQE across different QE backbones. While
+COMETKiwi 23 XL exhibits larger deviations in
+gender score ratios compared to COMETKiwi 22,
+it provides a complementary setting to evaluate the
+0
+2
+4
+6
+8
+10
+50
+60
+70
+80
+90
+100
+Accuracy (%)
+(a) Accuracy vs  ( =0)
+EN-DE
+EN-AR
+EN-HI
+0
+2
+4
+6
+8
+10
+50
+60
+70
+80
+90
+100
+Accuracy (%)
+(b) Accuracy vs  ( =0)
+EN-DE
+EN-AR
+EN-HI
+Figure 4: Analysis of hyperparameters α and β across
+three language pairs under gender-explicit setting. Both
+panels (a) and (b) report binary accuracy, where the
+gender-aligned translation is scored higher.
+robustness of FairQE under varying bias character-
+istics.
+Overall, FairQE consistently moves the score
+ratios closer to 1 for most language pairs, with
+more pronounced improvements in cases where the
+
+[Page 14]
+Method
+ES
+FR
+IT
+AR
+DE
+HI
+GEMBA-MQM (w/ gpt-4.1-mini)
+0.9737
+0.9658
+0.9695
+0.9700
+0.9749
+0.9740
+GEMBA-MQM (w/ o3)
+0.9738
+0.9723
+0.9660
+0.9767
+0.9772
+0.9762
+FairQE (ours)
+0.9947
+0.9857
+0.9917
+0.9938
+0.9993
+0.9965
+Table 8: Feminine-to-masculine QE score ratio on EN–* language pairs in the gender-ambiguous (Fem. vs. Masc.)
+setting. FairQE (ours) uses COMETKiwi 22 and gpt-4.1-mini as backbones.
+Detected Cue Type
+Count
+Proportion (%)
+Ratio
+Gender Ambiguous
+1,007
+67.0
+1.0033
+Gender Explicit
+324
+21.6
+0.9925
+Both
+9
+0.6
+0.9836
+None
+163
+10.8
+0.9889
+Table 9:
+Cue detection distribution and feminine-
+to-masculine QE score ratio analysis in the gender-
+ambiguous setting (EN–DE).
+Detected Cue Type
+Count
+Proportion (%)
+Accuracy
+Gender Explicit
+1,093
+91.1
+99.9
+Gender Ambiguous
+27
+2.3
+100
+Both
+28
+2.3
+96.4
+None
+52
+4.3
+96.2
+Table 10: Cue detection distribution and accuracy in the
+gender-explicit setting (EN–DE).
+baseline deviations are larger (e.g., EN–ES, EN–
+FR, EN–IT).
+For EN–DE and EN–HI, where the baseline
+score ratios are already close to 1, the application of
+FairQE results in slight overcorrections (i.e., score
+ratios exceeding 1), indicating a mild shift toward
+feminine translations. However, for EN–HI, the
+absolute deviation from 1 is reduced from 0.016
+to 0.01, suggesting that the overall fairness is still
+improved despite the directional shift.
+These results demonstrate that the proposed Bias-
+Aware Score Aggregation is not tied to a specific
+QE backbone and remains effective across models
+with different levels of inherent bias. This sup-
+ports the generality and robustness of the proposed
+framework.
+B.4
+Comparison with Stronger LLM
+Evaluators
+Table 8 reports the evaluation results on EN–*
+language pairs under the gender-ambiguous (Fem.
+vs. Masc.) setting, comparing FairQE with direct
+LLM-based evaluators of different capacities.
+While using a stronger LLM (o3) improves
+fairness over gpt-4.1-mini in most language
+pairs (except EN–IT), FairQE—despite using
+gpt-4.1-mini—consistently achieves score ra-
+tios closer to 1. In terms of average absolute de-
+viation from 1, o3 yields 0.0263, whereas FairQE
+achieves 0.00638.
+Moreover, prior work (Zaranis et al., 2025)
+shows that even stronger models such as gpt-4o
+still exhibit greater gender bias under the same
+setting. These results suggest that fairness improve-
+ments are not solely driven by model capacity, but
+by the structured design of FairQE, which com-
+bines contrastive evaluation with bias-aware aggre-
+gation.
+B.5
+Analysis of Error Propagation from
+Gender Cue Detection
+To analyze the potential impact of incorrect gen-
+der cue detection, we categorize the outputs of
+Agentcue into four detected cue types: Gender
+Ambiguous, Gender Explicit, Both, and None, and
+evaluate sentence-level correctness. The analysis
+is conducted on the EN–DE dataset under two set-
+tings: (1) the gender-ambiguous (Fem. vs. Masc.)
+setting and (2) the gender-explicit setting. In each
+setting, only one cue type is considered correct, al-
+lowing us to assess the extent of misdetection and
+its downstream effects.
+For each detected cue type, we examine both
+the the QE model’s score ratio (Fem./Masc.) and
+cue detection accuracy to quantify potential error
+propagation.
+In the gender-ambiguous setting (Table 9),
+67.0% of instances are correctly detected as Gen-
+der Ambiguous, yielding a near-ideal score ratio of
+1.0033. Although 21.6% of instances are detected
+as Gender Explicit, the corresponding score ratio
+(0.9925) remains close to 1, indicating minimal
+degradation in fairness. Instances detected as Both
+or None similarly do not exhibit significant fairness
+deterioration.
+In the gender-explicit setting (Table 10), 91.1%
+of instances are correctly detected as Gender Ex-
+plicit, with a detection accuracy of 99.9%. In-
+stances detected as Gender Ambiguous account for
+only 2.3% and do not lead to a noticeable drop in
+fairness performance.
+Overall, while cue detection accuracy varies
+
+[Page 15]
+Type
+Sentence
+quqe
+qorig
+FairQE Score
+Source
+It has been two days and I have to think about telling
+all those adventurers.
+–
+–
+–
+Target (Masc.)
+Lleva dos días y tengo que ir pensando en decírselo
+a todos esos aventureros.
+95
+0.7605
+0.7605
+Target (Fem.)
+Lleva dos días y tengo que ir pensando en decírselo
+a todas esas aventureras.
+95
+0.7467
+0.8420
+Table 11: A failure case in the gender-ambiguous (Fem. vs. Masc.) setting for EN–ES.
+across settings, the impact of misdetection on
+downstream gender fairness remains limited. These
+results suggest that error propagation from the
+Agentcue component is not substantially amplified
+in the QE evaluation stage.
+B.6
+Failure Case Analysis
+Table 11 presents a representative example from the
+EN–ES language pair under the gender-ambiguous
+(Fem. vs. Masc.) setting, where the bias is in-
+creased after applying FairQE.
+In this example, Agentcue detects a gender cue
+when the source sentence is paired with the femi-
+nine translation, but fails to detect it when paired
+with the masculine translation. Ideally, the noun
+adventurers should be aligned with its Spanish
+realizations (aventureros / aventureras) to enable
+consistent cue detection. However, masculine plu-
+ral forms such as aventureros are often used as
+generic masculine expressions in Spanish, refer-
+ring to mixed-gender groups, which makes them
+less likely to be detected as explicit gender cues.
+Although the Agentuqe score is identical for
+both variants (95), no cue is detected in the mas-
+culine case, resulting in bamb and bexp being set to
+0 and leaving the original score qorig unchanged.
+In contrast, the feminine variant triggers a non-
+zero bamb, leading to an upward adjustment and
+ultimately reversing the final ranking.
+Future work will focus on better understanding
+how LLMs handle gender-related expressions, as
+well as systematically analyzing failure patterns
+and exploring strategies to mitigate them.
+C
+API Usage and Cost Analysis
+We employ GPT-4.1-mini for all four LLM
+agents in our framework, and the resulting API
+costs are summarized in Table 12.
+Using the
+EN–DE dataset from the WMT 2023 Metrics
+Shared Task, we randomly sampled 100 instances
+and measured the corresponding API usage. The
+Statistic
+Amount
+API Cost (GPT-4.1-mini)
+Total API calls
+176
+Input tokens
+157,192
+Output tokens
+19,824
+Total tokens
+177,016
+Input cost ($)
+0.0629
+Output cost ($)
+0.0317
+Total cost ($)
+0.0946
+Avg. tokens / sample
+1,770.2
+Avg. cost / sample ($)
+0.00095
+Table 12: Estimated API cost statistics scaled to 100
+samples using GPT-4.1-mini.
+total number of API calls amounts to 176, which is
+substantially lower than the maximum of 400 calls
+required when all four agents are invoked for every
+sample. This reduction is achieved by a dynamic
+and efficient invocation strategy, where subsequent
+agents are selectively triggered based on the out-
+puts of the gender cue detection agent. Overall, the
+total cost per 100 samples is 0.0946 USD, indicat-
+ing that the proposed framework can be executed
+with a cost of less than 0.1 USD per 100 samples.
+D
+AI Assistant Usage
+We have used Claude Code during the development
+of our research work.
+
+[Page 16]
+E
+Gender Cue Taxonomy
+Cue
+Type
+Description
+Examples
+C1
+Explicit
+Gendered pronouns that directly indicate gender.
+he / she, him / her, his / her
+C2
+Explicit
+Gender-fixed kinship nouns inherently tied to gen-
+der.
+mother, father, sister, brother, uncle, aunt
+C3
+Explicit
+Gendered noun pairs with lexical gender distinc-
+tion.
+actor / actress, waiter / waitress
+C4
+Explicit
+Titles or honorifics with explicit gender marking.
+Mr., Ms., Mrs., señor / señora
+C5
+Explicit
+Speaker-gender-marking expressions that encode
+the speaker’s gender directly.
+Japanese 僕/ 私; Arabic gender-marked verbs
+C6
+Explicit
+Gender agreement requirements where morpho-
+logical forms must match gender.
+noun–adjective agreement in Romance languages
+C7
+Ambiguous
+Gender-neutral occupation or role nouns without
+gender information in the source.
+doctor, teacher, engineer
+C8
+Ambiguous
+Gender-neutral pronouns or indefinites.
+singular they / them / their; someone, anybody
+C9
+Ambiguous
+Gender-unknown proper names where gender
+cannot be reliably inferred.
+Alex, Sam
+C10
+Ambiguous
+Subject omission or passive constructions where
+agent gender is unspecified.
+“Arrived early”, agentless passive
+C11
+Ambiguous
+Neutral relation nouns that do not encode gender.
+colleague, partner, friend
+C12
+Ambiguous
+Generic or plural group references without gender
+specification.
+doctors, people, students
+Table 13: Cue taxonomy for gender-related signals, grouped into explicit (C1–C6) and ambiguous (C7–C12)
+categories.
+
+[Page 17]
+F
+Prompt Construction for FairQE
+Gender Cue Detector (Agentcue)
+SYSTEM_PROMPT = """You are a Gender Cue Detection Agent.
+Your ONLY job:
+- Detect gender-related cues in BOTH source and target sentences.
+Decision procedure:
+1) Examine the source sentence only.
+2) If the source contains any explicit gender marker (C1-C6), classify as
+gender_explicit.
+3) Otherwise, if the source contains gender-neutral expressions or lacks
+gender information, classify as gender_ambiguous.
+4) Use the target sentence only to align corresponding expressions, not to
+determine ambiguity or explicitness.
+Hard constraints:
+- Do NOT judge translation quality.
+- If no gender-related cues (C1-C12) are found in BOTH source and target,
+return an empty JSON object {}.
+- Output JSON only.
+Output schema (JSON object only):
+{
+"gender_ambiguous":
+[
+{"source_token":
+string|null, "target_token":
+string|null}, ...],
+"gender_explicit":
+[
+{"source_token":
+string|null, "target_token":
+string|null}, ...]
+}
+Cue taxonomy (C1-C12):
+[Explicit cues:
+C1-C6]
+C1 (Explicit) Gendered pronouns:
+- Pronouns that directly indicate gender
+(he/she, him/her, his/her, etc.)
+C2 (Explicit) Gender-fixed kinship nouns:
+- Kinship terms inherently tied to gender
+(mother, father, sister, brother, uncle, aunt, etc.)
+C3 (Explicit) Gendered noun pairs:
+- Lexical pairs with gender distinction
+(actor/actress, waiter/waitress, etc.)
+C4 (Explicit) Titles / honorifics:
+- Explicit gender markers in titles or honorifics
+(Mr., Ms., Mrs., señor/señora, etc.)
+C5 (Explicit) Speaker-gender-marking expressions:
+- Source/target forms that encode speaker gender (e.g., Japanese 僕/
+私;
+Arabic
+gender-marked verbs, etc.)
+- Note:
+Detect as explicit when the expression itself marks speaker gender.
+C6 (Explicit) Gender agreement requirements:
+- Morphological agreement that must match gender
+(e.g., pronoun-adjective or noun-adjective endings in Romance languages)
+- Detect mismatches as cues present (NOT as errors);only record where such
+agreement markers appear.
+
+[Page 18]
+[Ambiguous cues:
+C7-C12]
+C7 (Ambiguous) Gender-neutral occupation or role nouns:
+- Role or occupation nouns without gender information in the source (doctor,
+teacher, engineer, etc.)
+C8 (Ambiguous) Gender-neutral pronouns / indefinites:
+- they/them/their (singular), someone, anybody, etc.
+C9 (Ambiguous) Gender-unknown proper names:
+- Names where gender cannot be reliably inferred
+(Alex, Sam, etc.)
+C10 (Ambiguous) Subject omission / passive constructions:
+- Source does not specify agent gender
+(e.g., “Arrived early”, agentless passive voice)
+C11 (Ambiguous) Neutral relation nouns:
+- colleague, partner, friend, etc.
+C12 (Ambiguous) Generic group or generalization:
+- plural or generic references without specifying gender (doctors, people,
+students, etc.)
+"""
+USER_PROMPT = """
+Source:
+“‘{source}“‘
+Target:
+“‘{target}“‘
+"""
+Gender-Ambiguous Variant Generator (Agentamb)
+SYSTEM_PROMPT = """You are a Gender-Ambiguous Variant Generator.
+You ONLY handle cases where the Gender Cue Detection Agent has identified
+gender_ambiguous cues in the source sentence.
+Your job:
+- Generate alternative gender versions of the target sentence by WORD-LEVEL
+substitution only,
+- Using ONLY the target_token positions provided by the Gender Cue Detection
+Agent as anchors.
+Hard constraints:
+- NO paraphrase and NO sentence restructuring.
+Keep punctuation, word order,
+and all other tokens unchanged.
+- ONLY substitute gender-related words or phrases that correspond to the Gender
+Cue Detection Agent’s ambiguous cues.
+- If substitution is impossible, return an empty list [].
+- Generate only linguistically natural and contextually valid versions.
+Output schema (JSON object only):
+[
+{"transformed_text":
+string,
+"gender_version":
+"Feminine" | "Masculine" | "Neutral"},
+...
+]
+"""
+USER_PROMPT = """
+Source:
+“‘{source}“‘
+Target:
+“‘{target}“‘
+Gender Cue Detection Agent’s ambiguous cues:
+{ambiguous_pairs_json}
+"""
+
+[Page 19]
+Gender-Explicit Variant Generator (Agentexp)
+SYSTEM_PROMPT = """You are a Gender-Explicit Variant Generator.
+You ONLY handle cases where the Gender Cue Detection Agent has identified
+gender_explicit cues in the source sentence.
+Your job:
+1) Using ONLY the explicit gender cues provided by the Gender Cue Detection
+Agent as anchors, compare the source and target sentences to verify whether
+explicit gender constraints are preserved.
+2) Detect the following violations:
+- gender flip (e.g., feminine →masculine or vice versa),
+- gender agreement errors (e.g., pronouns or gendered nouns),
+- clear mismatches for gender-fixed expressions.
+3) Set error = True ONLY if such violations exist.
+Decision logic:
+- If error == True:
+Generate corrected versions of the target sentence by WORD-LEVEL substitution
+ONLY.
+- If error == False:
+Generate gender-flipped versions of the target sentence by WORD-LEVEL
+substitution ONLY.
+Hard constraints:
+- NO paraphrase and NO sentence restructuring.
+Keep punctuation, word order,
+and all other tokens unchanged.
+- ONLY substitute gender-related words or phrases that correspond to the Gender
+Cue Detection Agent’s explicit cues.
+- If substitution is impossible, return an empty list [].
+- Generate only linguistically natural and contextually valid versions.
+Output schema (JSON object only):
+[
+"error":
+boolean,
+"rationale":
+string,
+"transformed":
+[
+{"transformed_text":
+string, "gender_version":
+"Feminine" | "Masculine" |
+"Neutral"},
+...
+]
+]
+"""
+USER_PROMPT = """
+Source:
+“‘{source}“‘
+Target:
+“‘{target}“‘
+Gender Cue Detection Agent’s explicit cues:
+{explicit_pairs_json}
+"""
+
+[Page 20]
+Bias-Mitigating Quality Estimator (Agentuqe)
+SYSTEM_PROMPT = """You are an Unbiased QE Scorer.
+Your task is to evaluate translation quality using an MQM-style protocol,
+while remaining as gender-independent as possible by following the rules
+below.
+MQM Evaluation Rules:
+- Based on the source segment and the machine translation enclosed in triple
+backticks, identify and classify ALL translation errors.
+- Error types include:
+* accuracy (addition, mistranslation, omission, untranslated text)
+* fluency (character encoding, grammar, inconsistency, punctuation, register,
+spelling)
+* locale convention (currency, date, name, telephone, time format)
+* style (awkward)
+* terminology (inappropriate for context, inconsistent use)
+* non-translation
+* other
+* or no-error
+- For EACH identified error, assign a severity level:
+* Critical
+* Major
+* Minor
+Scoring:
+- Start from a score of 100 points.
+- Deduct points as follows:
+* Critical:
+-15 points
+* Major:
+-5 points
+* Minor:
+-1 point
+- The final score must be between 0 and 100.
+- Optionally, apply a holistic Direct Assessment (DA)-style judgment ONLY
+if the MQM-based score clearly under- or over-estimates overall translation
+quality.
+You are given:
+- a source sentence,
+- its original translation,
+- and gender-flipped target translations generated by substituting ONLY
+gender-related expressions.
+Use the gender-flipped translations to compare them against the source and the
+original translation, and determine whether meaning is preserved.
+1) Gender-Ambiguous Source Cases
+- The source contains no explicit gender information.
+- Gender-flipped translations differ ONLY in gender expression and are all
+valid (Feminine / Masculine / Neutral).
+Rules:
+- Gender differences MUST NOT affect the quality score.
+- The Neutral form MAY be preferred if it is most natural, but this preference
+MUST NOT lower the scores of Feminine or Masculine variants.
+2) Gender-Explicit Source Cases
+- The source specifies a clear gender constraint.
+- A gender error flag (error) and its explanation are provided.
+- If error == True:
+Gender-corrected translations are provided and MUST be reflected as MQM
+errors with appropriate severity.
+- If error == False:
+Alternative gender variants (0-2 among Feminine / Masculine / Neutral) are
+provided and used to assess whether the original translation deserves an
+appropriate score.
+Rules:
+- Violations of explicit gender constraints MUST be marked as MQM errors with
+appropriate severity.
+
+[Page 21]
+Output schema (JSON object only):
+{
+"qe_score":
+number,
+"rationale":
+string
+}
+"""
+USER_PROMPT = """
+Source:
+“‘{source}“‘
+Target:
+“‘{target}“‘
+Gender cues:
+- ambiguous:
+{ambiguous_pairs_json}
+- explicit:
+{explicit_pairs_json}
+Gender-Ambiguous source cases
+(with gender-flipped target translations):
+{amb_alternatives_text}
+Gender-Explicit source cases
+(with error analysis and gender-flipped target translations):
+{exp_analysis_text}
+"""

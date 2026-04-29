@@ -1,0 +1,84 @@
+{
+  "paper_id": "2604.23449v1",
+  "title": "ArguAgent: AI-Supported Real-Time Grouping for Productive Argumentation in STEM Classrooms",
+  "organization": "OpenAI",
+  "publish_date": "2026-04-25",
+  "theme": "AI Agent",
+  "source_name": "OpenAI arXiv query",
+  "source_url": "https://arxiv.org/abs/2604.23449v1",
+  "paper_url": "https://arxiv.org/pdf/2604.23449v1",
+  "summary": "Argumentation is a core practice in STEM education, but its productivity depends on who participates and how they interact. Higher-achieving students often dominate the talk and decision-making, while lower-achieving peers may disengage,...",
+  "priority": 966,
+  "total_chars": 38961,
+  "chunk_count": 11,
+  "image_paths": [],
+  "notes": [],
+  "chunks": [
+    {
+      "index": 1,
+      "heading": "Section 1",
+      "text_len": 2547,
+      "text_preview": "[Page 1]\nArguAgent: AI-Supported Real-Time Grouping\nfor Productive Argumentation in STEM\nClassrooms\nJennifer Kleiman[0009−0000−3171−1954], Yizhu Gao[0000−0002−7791−3700], Xin\nXia[0009−0009−1717−8511],"
+    },
+    {
+      "index": 2,
+      "heading": "Section 2",
+      "text_len": 3038,
+      "text_preview": "[Page 2]\n2\nJ. Kleiman et al.\n1\nIntroduction\nArgumentation is widely recognized as a core practice in STEM education be-\ncause it supports learners in constructing, evaluating, and revising evidence-\nb"
+    },
+    {
+      "index": 3,
+      "heading": "Section 3",
+      "text_len": 3345,
+      "text_preview": "[Page 3]\nAI-Supported Grouping for STEM Argumentation\n3\n2\nLearning to Argue in Small Groups in STEM\nClassrooms\nArgumentation is not a single skill but a family of related competencies. Research\ndistin"
+    },
+    {
+      "index": 4,
+      "heading": "Section 4",
+      "text_len": 2687,
+      "text_preview": "[Page 4]\n4\nJ. Kleiman et al.\nwhere adjacent LP levels identify students whose argumentation differs enough\nto create productive tension but not so much that the gap prevents mutual\nengagement.\nTo impl"
+    },
+    {
+      "index": 5,
+      "heading": "Section 5",
+      "text_len": 4825,
+      "text_preview": "[Page 5]\nAI-Supported Grouping for STEM Argumentation\n5\nTable 1. Example Responses at Each Argumentation Quality Level\nLevel Example Response\n0\n“Video B was my favorite one.”\n1\n“I think objects never "
+    },
+    {
+      "index": 6,
+      "heading": "Section 6",
+      "text_len": 2968,
+      "text_preview": "[Page 7]\nAI-Supported Grouping for STEM Argumentation\n7\nsensus score was calculated as the average of the two coder scores, rounded to\nthe nearest integer.\nAI Scoring and Calibration The AI implementa"
+    },
+    {
+      "index": 7,
+      "heading": "Section 7",
+      "text_len": 4783,
+      "text_preview": "[Page 8]\n8\nJ. Kleiman et al.\n200 responses into three stance categories: “All objects change shape” (ALL),\n“Only some/no objects change shape” (SOME/NO), or “Unsure.” AI-extracted\nclaims from the earl"
+    },
+    {
+      "index": 8,
+      "heading": "Section 8",
+      "text_len": 4925,
+      "text_preview": "[Page 10]\n10\nJ. Kleiman et al.\nTable 6. Decomposing Improvement Sources\nComparison\nQWK Change % of Total\nPrompt engineering (uncalibrated →calibrated)\n+0.155\n89%\nModel upgrade (4o-mini →5.2, calibrate"
+    },
+    {
+      "index": 9,
+      "heading": "Section 9",
+      "text_len": 2920,
+      "text_preview": "[Page 12]\n12\nJ. Kleiman et al.\nexpert from naive rubric application. They are transferable: the same calibrated\nprompt works across three model generations with minimal performance vari-\nation between"
+    },
+    {
+      "index": 10,
+      "heading": "Section 10",
+      "text_len": 2603,
+      "text_preview": "[Page 13]\nAI-Supported Grouping for STEM Argumentation\n13\n6.5\nFuture Work\nWe plan to pilot the system in Spring 2026 with both teachers and students.\nOur classroom pilot will gather data allowing us t"
+    },
+    {
+      "index": 11,
+      "heading": "Section 11",
+      "text_len": 4300,
+      "text_preview": "[Page 14]\n14\nJ. Kleiman et al.\n3. Buchs, C., Filippou, D., Pulfrey, C., Volpé, Y.: Challenges for cooperative learning\nimplementation: Reports from elementary school teachers. Journal of Education\nfor"
+    }
+  ]
+}

@@ -1,0 +1,84 @@
+{
+  "paper_id": "2604.21282v1",
+  "title": "Strategic Heterogeneous Multi-Agent Architecture for Cost-Effective Code Vulnerability Detection",
+  "organization": "DeepSeek",
+  "publish_date": "2026-04-23",
+  "theme": "AI Agent",
+  "source_name": "DeepSeek arXiv query",
+  "source_url": "https://arxiv.org/abs/2604.21282v1",
+  "paper_url": "https://arxiv.org/pdf/2604.21282v1",
+  "summary": "Automated code vulnerability detection is critical for software security, yet existing approaches face a fundamental trade-off between detection accuracy and computational cost. We propose a heterogeneous multi-agent architecture inspire...",
+  "priority": 949,
+  "total_chars": 55710,
+  "chunk_count": 11,
+  "image_paths": [],
+  "notes": [],
+  "chunks": [
+    {
+      "index": 1,
+      "heading": "Section 1",
+      "text_len": 5600,
+      "text_preview": "[Page 1]\nStrategic Heterogeneous Multi-Agent Architecture for\nCost-Effective Code Vulnerability Detection\nZhaohui Geoffrey Wang\nUniversity of Southern California\nLos Angeles, CA, USA\nzwang000@usc.edu\n"
+    },
+    {
+      "index": 2,
+      "heading": "Section 2",
+      "text_len": 6097,
+      "text_preview": "[Page 2]\n(1) A game-theory-inspired framework for heterogeneous\nmulti-agent vulnerability detection, formalizing cooperative\nexpert analysis and adversarial verification as a principled\ndesign methodo"
+    },
+    {
+      "index": 3,
+      "heading": "Section 3",
+      "text_len": 5255,
+      "text_preview": "[Page 3]\n3\nMETHODOLOGY\nWe present a game-theoretic framework for heterogeneous multi-\nagent vulnerability detection. Unlike prior multi-agent approaches\nthat treat agent coordination as an engineering"
+    },
+    {
+      "index": 4,
+      "heading": "Section 4",
+      "text_len": 4746,
+      "text_preview": "[Page 4]\nAlgorithm 1 3+1 Multi-Agent Detection (Game Implementation)\nRequire: Code 𝑥, Experts 𝐸= {𝑒1,𝑒2,𝑒3}, Verifier 𝑉\nEnsure: Vulnerability prediction, CWE classification\n1:\n⊲Layer 1: Cooperative Ga"
+    },
+    {
+      "index": 5,
+      "heading": "Section 5",
+      "text_len": 5305,
+      "text_preview": "[Page 5]\ndefining its analysis perspective and structured output format. Ex-\nperts run concurrently via Python asyncio.\nVerifier Agent: Qwen3-8B [17] deployed locally via Hugging-\nFace Transformers on"
+    },
+    {
+      "index": 6,
+      "heading": "Section 6",
+      "text_len": 5041,
+      "text_preview": "[Page 6]\nTable 3: Adversarial verifier impact (parallel mode). The ver-\nifier significantly reduces false positives.\nMetric\n+V\n−V\nΔ\n𝑝-value\nPrecision\n62.9%\n52.6%\n+10.3%\n< 10−6\nRecall\n100%\n100%\n0%\nF1\n7"
+    },
+    {
+      "index": 7,
+      "heading": "Section 7",
+      "text_len": 7444,
+      "text_preview": "[Page 7]\nExternal Validity: The Juliet Test Suite provides controlled,\nsynthetic test cases. Real-world vulnerabilities are more complex;\nstate-of-the-art approaches achieve only ∼35% F1 on PrimeVul ["
+    },
+    {
+      "index": 8,
+      "heading": "Section 8",
+      "text_len": 5513,
+      "text_preview": "[Page 8]\nTable 6: Complete dataset composition by CWE type\nCWE\nDescription\nVuln.\nBenign\nTotal\nCWE-121\nStack Buffer Overflow\n10\n10\n20\nCWE-122\nHeap Buffer Overflow\n10\n10\n20\nCWE-190\nInteger Overflow\n10\n1"
+    },
+    {
+      "index": 9,
+      "heading": "Section 9",
+      "text_len": 3893,
+      "text_preview": "[Page 9]\nTable 7: CWE hierarchy equivalence classes for matching\nParent Category\nEquivalent CWEs\nBuffer Overflow\nCWE-119, CWE-120, CWE-121, CWE-122, CWE-787\nInteger Issues\nCWE-190, CWE-191\nCONFIDENCE—"
+    },
+    {
+      "index": 10,
+      "heading": "Section 10",
+      "text_len": 5274,
+      "text_preview": "[Page 10]\nE.2\nTrue Negative Example (CWE-457,\nUninitialized Variable)\nA patched function that properly initializes all variables before use.\nThe verifier notes that while two experts flag potential is"
+    },
+    {
+      "index": 11,
+      "heading": "Section 11",
+      "text_len": 1522,
+      "text_preview": "[Page 11]\n(100% CWE match). The adversarial game predicted preci-\nsion improvement from independent verification—confirmed\n(𝑝< 10−6).\n(2) Design guidance: Without the game-theoretic framework,\nthe cho"
+    }
+  ]
+}

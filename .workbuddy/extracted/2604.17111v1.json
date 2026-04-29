@@ -1,0 +1,90 @@
+{
+  "paper_id": "2604.17111v1",
+  "title": "HiveMind: OS-Inspired Scheduling for Concurrent LLM Agent Workloads",
+  "organization": "OpenAI",
+  "publish_date": "2026-04-18",
+  "theme": "AI Agent",
+  "source_name": "OpenAI arXiv query",
+  "source_url": "https://arxiv.org/abs/2604.17111v1",
+  "paper_url": "https://arxiv.org/pdf/2604.17111v1",
+  "summary": "When multiple LLM coding agents share a rate-limited API endpoint, they exhibit resource contention patterns analogous to unscheduled OS processes competing for CPU, memory, and I/O. In a motivating incident, 3 of 11 parallel agents died...",
+  "priority": 979,
+  "total_chars": 36654,
+  "chunk_count": 12,
+  "image_paths": [],
+  "notes": [],
+  "chunks": [
+    {
+      "index": 1,
+      "heading": "Section 1",
+      "text_len": 2827,
+      "text_preview": "[Page 1]\nHiveMind: OS-Inspired Scheduling for\nConcurrent LLM Agent Workloads\nJustice Owusu Agyemang∗1,2,3, Jerry John Kponyo†3, Obed Kwasi Somuah‡2, Elliot\nAmponsah§3, Godfred Manu Addo Boakye¶3, and "
+    },
+    {
+      "index": 2,
+      "heading": "Section 2",
+      "text_len": 3567,
+      "text_preview": "[Page 2]\nTable 1: Results of 11 uncoordinated concurrent\nagents (April 15, 2026).\nOutcome\nCount\n%\nCompleted successfully\n8\n73\nDied (ECONNRESET)\n2\n18\nDied (HTTP 502)\n1\n9\nTokens wasted (dead agents)\n∼13"
+    },
+    {
+      "index": 3,
+      "heading": "Section 3",
+      "text_len": 2978,
+      "text_preview": "[Page 3]\n2.2\nOS Scheduling Principles\nThe resource contention patterns exhibited by\nconcurrent LLM agents are structurally identi-\ncal to those solved by operating system sched-\nulers [5, 14]:\n• Admis"
+    },
+    {
+      "index": 4,
+      "heading": "Section 4",
+      "text_len": 2989,
+      "text_preview": "[Page 4]\nTable 2: Structural mapping between OS resource management and LLM agent scheduling. Each\nrow identifies an OS mechanism, its HiveMind counterpart, and the failure mode it addresses.\nOS Conce"
+    },
+    {
+      "index": 5,
+      "heading": "Section 5",
+      "text_len": 2932,
+      "text_preview": "[Page 5]\nAlgorithm\n1:\nAIMD\nwith\ncircuit\nbreaker.\nInput: latency sample ℓor error event\nResult: Updated concurrency ct, circuit state\n1 if error event then\n2\nct ←max(Cmin, ct · β);\n3\ne ←e + 1;\nn ←n + 1"
+    },
+    {
+      "index": 6,
+      "heading": "Section 6",
+      "text_len": 3182,
+      "text_preview": "[Page 6]\nchunks as they arrive from the upstream API.\nToken counts are extracted from message_delta\nand message_start events in the SSE stream.\nThe admission slot is held for the duration of\nthe strea"
+    },
+    {
+      "index": 7,
+      "heading": "Section 7",
+      "text_len": 3177,
+      "text_preview": "[Page 7]\n4.4\nToken\nCounting\nfrom\nSSE\nStreams\nFor streaming responses, token counts are em-\nbedded in the SSE event stream.\nThe proxy\nparses message_start events (which contain\ninput token counts) and "
+    },
+    {
+      "index": 8,
+      "heading": "Section 8",
+      "text_len": 2671,
+      "text_preview": "[Page 8]\nTable 5: Evaluation scenarios and results. Error rates are p502 + preset. ∆f is the change in failure\nrate (percentage points); ∆w is the reduction in tokens consumed by dead agents.\nError\nFa"
+    },
+    {
+      "index": 9,
+      "heading": "Section 9",
+      "text_len": 3013,
+      "text_preview": "[Page 9]\n0\n20\n40\n60\n80\n100\nFailure Rate (%)\nFull HiveMind\nAdmission Only\nNo Admission\nNo Ratelimit\nNo Backpressure\nNo Retry\n81.8%\n9.1%\n63.6%\nFigure 5:\nAblation study results.\nRemov-\ning retry causes t"
+    },
+    {
+      "index": 10,
+      "heading": "Section 10",
+      "text_len": 3383,
+      "text_preview": "[Page 10]\nprobing).\nCircuit breaker pattern.\nNygard [18] intro-\nduced the circuit breaker as a stability pattern\nfor distributed systems.\nOur circuit breaker\nadapts this for the LLM API context: the e"
+    },
+    {
+      "index": 11,
+      "heading": "Section 11",
+      "text_len": 3431,
+      "text_preview": "[Page 11]\n• Token estimation.\nWhen provider tok-\nenizers are unavailable, token counting uses\na heuristic (4 chars/token). This underesti-\nmates for languages with long tokens (e.g.,\nCJK) and overesti"
+    },
+    {
+      "index": 12,
+      "heading": "Section 12",
+      "text_len": 2482,
+      "text_preview": "[Page 12]\n[5] A.\nSilberschatz,\nP.\nB.\nGalvin,\nand\nG.\nGagne,\nOperating System Concepts.\nWiley, 10th ed., 2018.\n[6] E.\nG.\nCoffman,\nM.\nJ.\nElphick,\nand\nA. Shoshani, “System deadlocks,” ACM\nComputing Survey"
+    }
+  ]
+}

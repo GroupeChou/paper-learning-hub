@@ -1,0 +1,123 @@
+{
+  "paper_id": "2604.21420v1",
+  "title": "FairQE: Multi-Agent Framework for Mitigating Gender Bias in Translation Quality Estimation",
+  "organization": "Meta FAIR",
+  "publish_date": "2026-04-23",
+  "theme": "AI Agent",
+  "source_name": "Meta FAIR arXiv query",
+  "source_url": "https://arxiv.org/abs/2604.21420v1",
+  "paper_url": "https://arxiv.org/pdf/2604.21420v1",
+  "summary": "Quality Estimation (QE) aims to assess machine translation quality without reference translations, but recent studies have shown that existing QE models exhibit systematic gender bias. In particular, they tend to favor masculine realizat...",
+  "priority": 909,
+  "total_chars": 67362,
+  "chunk_count": 17,
+  "image_paths": [
+    "assets/page-001-img-01.png",
+    "assets/page-003-img-01.png"
+  ],
+  "notes": [],
+  "chunks": [
+    {
+      "index": 1,
+      "heading": "Section 1",
+      "text_len": 3519,
+      "text_preview": "[Page 1]\nFairQE: Multi-Agent Framework for Mitigating Gender Bias in\nTranslation Quality Estimation\nJinhee Jang1 Juhwan Choi2† Dongjin Lee1† Seunguk Yu1 Youngbin Kim1\n1Chung-Ang University\n2AITRICS\n{j"
+    },
+    {
+      "index": 2,
+      "heading": "Section 2",
+      "text_len": 4563,
+      "text_preview": "[Page 2]\non QE scores, such as model selection, data filter-\ning, and deployment monitoring (Peter et al., 2023).\nIn particular, reinforcing gender preferences in\ngender-ambiguous contexts runs counte"
+    },
+    {
+      "index": 3,
+      "heading": "Section 3",
+      "text_len": 2956,
+      "text_preview": "[Page 3]\nFigure 2: Overview of the proposed FairQE framework. FairQE mitigates gender bias using four LLM-based agents\nfor gender cue detection, variant generation, and bias-aware reasoning, in conjun"
+    },
+    {
+      "index": 4,
+      "heading": "Section 4",
+      "text_len": 4056,
+      "text_preview": "[Page 4]\nThe final alignment signal Aexp and the set of\nexplicit variants Vexp are obtained by aggregating\nthe cue-level outputs:\nAexp = V\n(cs,ct)∈Dexp Ai,\nVexp = S\n(cs,ct)∈Dexp Vi\n(4)\n2.3\nDual-Stream"
+    },
+    {
+      "index": 5,
+      "heading": "Section 5",
+      "text_len": 3849,
+      "text_preview": "[Page 5]\nbexp = max\n\n\n\nmax\n\u0010\n0, max(Qvar) −qorig\n\u0011\nif Aexp = True\nmax\n\u0010\n0, qorig −max(Qvar)\n\u0011\nif Aexp = False\n(8)\n2.4.2\nFinal Score Aggregation\nHere, α and β control the relative contribution of\nba"
+    },
+    {
+      "index": 6,
+      "heading": "Section 6",
+      "text_len": 4042,
+      "text_preview": "[Page 6]\nMethod\nES\nFR\nIT\nAR\nDE\nHI\nCOMETKiwi 22 (Rei et al., 2022)\n0.9832\n0.9783\n0.9791\n0.9851\n0.9937\n0.9909\nCOMETKiwi 23 XL (Rei et al., 2023)\n0.9398\n0.9028\n0.9261\n0.9841\n0.9906\n0.9840\nMetricX 24 L (J"
+    },
+    {
+      "index": 7,
+      "heading": "Section 7",
+      "text_len": 3143,
+      "text_preview": "[Page 7]\nMethod\navg-corr\nSystem-Level\nSegment-Level\naccuracy\npearson\nacc-t\npearson\nBLEU\n0.742\n0.894\n0.917\n0.520\n0.192\nchrF\n0.722\n0.818\n0.866\n0.519\n0.232\nBERTScore\n0.754\n0.879\n0.891\n0.528\n0.325\nCOMETKi"
+    },
+    {
+      "index": 8,
+      "heading": "Section 8",
+      "text_len": 4163,
+      "text_preview": "[Page 8]\nMethod\nES\nFR\nIT\nAR\nDE\nHI\nAvg.\nCOMETKiwi 22\n0.9832\n0.9783\n0.9791\n0.9851\n0.9937\n0.9909\n0.9851\nGEMBA-MQM\n0.9737\n0.9658\n0.9695\n0.9700\n0.9749\n0.9740\n0.9713\nFairQE-NoVar (Ours)\n0.9892\n0.9826\n0.9899"
+    },
+    {
+      "index": 9,
+      "heading": "Section 9",
+      "text_len": 4542,
+      "text_preview": "[Page 9]\nlanguage models as encoders. These approaches\ntypically combine contextualized representations\nwith task-specific prediction heads to estimate\ntranslation quality, and have demonstrated stron"
+    },
+    {
+      "index": 10,
+      "heading": "Section 10",
+      "text_len": 4703,
+      "text_preview": "[Page 10]\nEthics Statement\nThis work aims to improve fairness in machine\ntranslation quality estimation by mitigating gender-\nrelated biases in existing evaluation models, par-\nticularly in gender-amb"
+    },
+    {
+      "index": 11,
+      "heading": "Section 11",
+      "text_len": 3588,
+      "text_preview": "[Page 11]\ntranslation of gender-ambiguous occupational terms.\nIn Proceedings of EMNLP, pages 32221–32237.\nNikita Mehandru, Sweta Agrawal, Yimin Xiao, Ge Gao,\nElaine Khoong, Marine Carpuat, and Niloufa"
+    },
+    {
+      "index": 12,
+      "heading": "Section 12",
+      "text_len": 3674,
+      "text_preview": "[Page 12]\nA\nExperimental Details\nA.1\nModels\nTo improve readability, the following abbrevia-\ntions are used in our experiment tables to de-\nnote specific evaluation models: COMETKiwi 22\n(Unbabel/wmt22-"
+    },
+    {
+      "index": 13,
+      "heading": "Section 13",
+      "text_len": 3452,
+      "text_preview": "[Page 13]\nMethod\nES\nFR\nIT\nAR\nDE\nHI\nAvg.\nStd.\nAvg.\nStd.\nAvg.\nStd.\nAvg.\nStd.\nAvg.\nStd.\nAvg.\nStd.\nCometKiwi 22\n0.9832 0.0332 0.9783 0.0348 0.9791 0.0543 0.9851 0.0470 0.9937 0.0240 0.9909 0.0234\nCometKiw"
+    },
+    {
+      "index": 14,
+      "heading": "Section 14",
+      "text_len": 3969,
+      "text_preview": "[Page 14]\nMethod\nES\nFR\nIT\nAR\nDE\nHI\nGEMBA-MQM (w/ gpt-4.1-mini)\n0.9737\n0.9658\n0.9695\n0.9700\n0.9749\n0.9740\nGEMBA-MQM (w/ o3)\n0.9738\n0.9723\n0.9660\n0.9767\n0.9772\n0.9762\nFairQE (ours)\n0.9947\n0.9857\n0.9917\n"
+    },
+    {
+      "index": 15,
+      "heading": "Section 15",
+      "text_len": 4642,
+      "text_preview": "[Page 15]\nType\nSentence\nquqe\nqorig\nFairQE Score\nSource\nIt has been two days and I have to think about telling\nall those adventurers.\n–\n–\n–\nTarget (Masc.)\nLleva dos días y tengo que ir pensando en decí"
+    },
+    {
+      "index": 16,
+      "heading": "Section 16",
+      "text_len": 3922,
+      "text_preview": "[Page 17]\nF\nPrompt Construction for FairQE\nGender Cue Detector (Agentcue)\nSYSTEM_PROMPT = \"\"\"You are a Gender Cue Detection Agent.\nYour ONLY job:\n- Detect gender-related cues in BOTH source and target"
+    },
+    {
+      "index": 17,
+      "heading": "Section 17",
+      "text_len": 4547,
+      "text_preview": "[Page 19]\nGender-Explicit Variant Generator (Agentexp)\nSYSTEM_PROMPT = \"\"\"You are a Gender-Explicit Variant Generator.\nYou ONLY handle cases where the Gender Cue Detection Agent has identified\ngender_"
+    }
+  ]
+}

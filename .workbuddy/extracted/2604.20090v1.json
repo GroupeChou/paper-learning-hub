@@ -1,0 +1,137 @@
+{
+  "paper_id": "2604.20090v1",
+  "title": "Less Languages, Less Tokens: An Efficient Unified Logic Cross-lingual Chain-of-Thought Reasoning Framework",
+  "organization": "DeepSeek",
+  "publish_date": "2026-04-22",
+  "theme": "AI Agent",
+  "source_name": "DeepSeek arXiv query",
+  "source_url": "https://arxiv.org/abs/2604.20090v1",
+  "paper_url": "https://arxiv.org/pdf/2604.20090v1",
+  "summary": "Cross-lingual chain-of-thought (XCoT) with self-consistency markedly enhances multilingual reasoning, yet existing methods remain costly due to extensive sampling of full trajectories across languages. Moreover, multilingual LLM represen...",
+  "priority": 938,
+  "total_chars": 62903,
+  "chunk_count": 16,
+  "image_paths": [
+    "assets/page-001-img-01.png",
+    "assets/page-001-img-02.png",
+    "assets/page-001-img-03.png",
+    "assets/page-001-img-04.png",
+    "assets/page-001-img-05.png",
+    "assets/page-001-img-06.png",
+    "assets/page-001-img-07.png",
+    "assets/page-001-img-08.png",
+    "assets/page-003-img-01.png",
+    "assets/page-003-img-02.png",
+    "assets/page-003-img-03.png",
+    "assets/page-003-img-04.png",
+    "assets/page-003-img-05.png",
+    "assets/page-003-img-06.png",
+    "assets/page-003-img-07.png",
+    "assets/page-003-img-08.jpeg",
+    "assets/page-003-img-09.jpeg",
+    "assets/page-003-img-10.png",
+    "assets/page-003-img-11.png",
+    "assets/page-003-img-12.png"
+  ],
+  "notes": [
+    "图片数量超过上限，仅保留前 20 张。"
+  ],
+  "chunks": [
+    {
+      "index": 1,
+      "heading": "Section 1",
+      "text_len": 3879,
+      "text_preview": "[Page 1]\nLess Languages, Less Tokens: An Efficient Unified Logic Cross-lingual\nChain-of-Thought Reasoning Framework\nChenyuan Zhang1,6*\nQiguang Chen2*\nXie Chen5,6\nZhuotao Tian1\nBowen Xing4\nMeishan Zhan"
+    },
+    {
+      "index": 2,
+      "heading": "Section 2",
+      "text_len": 4565,
+      "text_preview": "[Page 2]\n(2024) prompt the model to simulate multilingual\nexperts, generate diverse trajectories, and derive\nanswers via cross-referencing. Khairi et al. (2025)\napply temperature scaling and Bayesian "
+    },
+    {
+      "index": 3,
+      "heading": "Section 3",
+      "text_len": 3571,
+      "text_preview": "[Page 3]\nLanguage \nProjection\nCharacterize \nLanguage Center\n(§2.3) Candidate Language Selection \nUnderstanding \nSimilarity Score \n(§2.4) Dynamic Chain-of-thought Pruning\nCandidate Set \nSelection \nDe\nR"
+    },
+    {
+      "index": 4,
+      "heading": "Section 4",
+      "text_len": 3888,
+      "text_preview": "[Page 4]\n2.3\nCandidate Language Selection\nCandidate Language Selection (CLS) compares in-\nputs across languages in the unified logic space\nfor pre-screening. Since it requires no generation,\nhidden st"
+    },
+    {
+      "index": 5,
+      "heading": "Section 5",
+      "text_len": 3749,
+      "text_preview": "[Page 5]\nLanguages\nar      bn     de      en      es \nfr \n  id       it       ja       ko     ms     pt      ru      sw      te      th      vi       zh     AVG\n0\n10k\n20k\n30k\n40k\n50k\n60k\n70k\nUL-XCoT\nC"
+    },
+    {
+      "index": 6,
+      "heading": "Section 6",
+      "text_len": 5644,
+      "text_preview": "[Page 6]\nTable 1: Performance on PolyMath across 18 languages and four difficulty levels from top to bottom.\nACC\nar\nbn\nde\nen\nes\nfr\nid\nit\nja\nko\nms\npt\nru\nsw\nte\nth\nvi\nzh\nAVG\nPolyMath-Low\nCoT (Wei et al.,"
+    },
+    {
+      "index": 7,
+      "heading": "Section 7",
+      "text_len": 3831,
+      "text_preview": "[Page 7]\nTable 3: Additional benchmark results on MMLU-ProX-Lite across 29 languages.\nLanguages\naf\nar\nbn\ncs\nde\nen\nes\nfr\nhi\nhu\nid\nit\nja\nko\nmr\nne\npt\nru\nsr\nsw\nte\nth\nuk\nur\nvi\nwo\nyo\nzh\nzu\nAVG\nCLSP (Qin et "
+    },
+    {
+      "index": 8,
+      "heading": "Section 8",
+      "text_len": 3727,
+      "text_preview": "[Page 8]\n100\n200\n50\n150\nInstance L2 Distance\n500\n250\nCumulative L2\nDistance\n15\n3\n21\n9\nLayer\nLayer\n15\n3\n21\n9\nLayer\n100\n50\n150\n0\nInstance Angular\nCumulative Angular\n2\n4\n1\n3\n5\n750\n1000\n1250\n21\n3\n9\n15\n21\n"
+    },
+    {
+      "index": 9,
+      "heading": "Section 9",
+      "text_len": 3589,
+      "text_preview": "[Page 9]\nPruning Ratio\nAccuracy (%)\n70\n80\n0.25\n0.40\n0.55\n0.70\n0.85\n81.8\n81.5\n79.5\n75.8\n63.2\nLatency (s)\nPruning Ratio\n22.9\n21.3\n18.2\n16.0\n13.7\n20\n15\n0.25 0.40\n0.55\n0.70 0.85\nTokens (#)\nPruning Ratio\n3"
+    },
+    {
+      "index": 10,
+      "heading": "Section 10",
+      "text_len": 4569,
+      "text_preview": "[Page 10]\nLimitations\nPrior interpretability work suggests that trans-\nformer hidden states encode information-rich repre-\nsentations that can be meaningfully inspected and\nanalyzed (Yang et al., 2024"
+    },
+    {
+      "index": 11,
+      "heading": "Section 11",
+      "text_len": 5010,
+      "text_preview": "[Page 11]\nDaya Guo, Dejian Yang, Haowei Zhang, Junxiao Song,\nPeiyi Wang, Qihao Zhu, Runxin Xu, Ruoyu Zhang,\nShirong Ma, Xiao Bi, et al. 2025. Deepseek-r1: In-\ncentivizing reasoning capability in llms "
+    },
+    {
+      "index": 12,
+      "heading": "Section 12",
+      "text_len": 4421,
+      "text_preview": "[Page 12]\nKhanh-Tung Tran, Nguyet-Hang Vu, Barry O’Sullivan,\nand Harry Nguyen. 2025b. Disentangling language\nunderstanding and reasoning structures in cross-\nlingual chain-of-thought prompting.\nIn EMN"
+    },
+    {
+      "index": 13,
+      "heading": "Section 13",
+      "text_len": 3097,
+      "text_preview": "[Page 13]\nA\nMathematical Details of DCP\nLogic-space curvature signal.\nBuilding upon\nhidden-state based self-truncation ideas (Wang\net al., 2025c; Zhang et al., 2025a; Bae et al., 2023;\nChen et al., 20"
+    },
+    {
+      "index": 14,
+      "heading": "Section 14",
+      "text_len": 2851,
+      "text_preview": "[Page 14]\nLanguages\nar      bn     de      en      es \nfr \n  id       it       ja       ko     ms     pt      ru      sw      te      th      vi       zh     AVG\n0\n10k\n20k\nTokens (#)\nUL-XCoT\nCLSP\nAuto"
+    },
+    {
+      "index": 15,
+      "heading": "Section 15",
+      "text_len": 4569,
+      "text_preview": "[Page 15]\nUL-XCoT\nCLSP\nAutoCap\nSC\nLanguages\nar      bn     de      en      es \nfr \n  id       it       ja       ko     ms     pt      ru      sw      te      th      vi       zh     AVG\n0\n15\n30\n45\n60\n"
+    },
+    {
+      "index": 16,
+      "heading": "Section 16",
+      "text_len": 1901,
+      "text_preview": "[Page 17]\nconcise-reasoning template\nYou are an expert in mathematical / geometric reasoning.\nThink strictly in <LANG_NAME> step by step. Do not use any other language.\nFormat:\n<think>\nStep 1: ...\nSte"
+    }
+  ]
+}

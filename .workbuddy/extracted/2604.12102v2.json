@@ -1,0 +1,84 @@
+{
+  "paper_id": "2604.12102v2",
+  "title": "Spatial Atlas: Compute-Grounded Reasoning for Spatial-Aware Research Agent Benchmarks",
+  "organization": "OpenAI",
+  "publish_date": "2026-04-13",
+  "theme": "AI Agent",
+  "source_name": "OpenAI arXiv query",
+  "source_url": "https://arxiv.org/abs/2604.12102v2",
+  "paper_url": "https://arxiv.org/pdf/2604.12102v2",
+  "summary": "We introduce compute-grounded reasoning (CGR), a design paradigm for spatial-aware research agents in which every answerable sub-problem is resolved by deterministic computation before a language model is asked to generate. Spatial Atlas...",
+  "priority": 975,
+  "total_chars": 41741,
+  "chunk_count": 11,
+  "image_paths": [],
+  "notes": [],
+  "chunks": [
+    {
+      "index": 1,
+      "heading": "Section 1",
+      "text_len": 3432,
+      "text_preview": "[Page 1]\nSpatial Atlas: Compute-Grounded Reasoning\nfor Spatial-Aware Research Agent Benchmarks\nArun Sharma\nUniversity of Minnesota, Twin Cities\narunshar@umn.edu\nAbstract\nWe introduce compute-grounded "
+    },
+    {
+      "index": 2,
+      "heading": "Section 2",
+      "text_len": 4850,
+      "text_preview": "[Page 2]\n1. Spatial Scene Graph Engine: A structured representation that extracts entities and relations from\nvision model descriptions, computes spatial relationships deterministically, and produces "
+    },
+    {
+      "index": 3,
+      "heading": "Section 3",
+      "text_len": 2209,
+      "text_preview": "[Page 3]\nA2A Protocol Server\nDomain Classifier\nFieldWorkArena\nHandler\nMLE-Bench\nHandler\nSpatial Scene\nGraph Engine\nSelf-Healing\nML Pipeline\nShared Infrastructure\nLiteLLM · 3-Tier Routing · Cost Tracki"
+    },
+    {
+      "index": 4,
+      "heading": "Section 4",
+      "text_len": 3916,
+      "text_preview": "[Page 4]\nEarlier iterations of the system collapsed Standard and Strong onto the same OpenAI model, leaving\nthe router effectively two-tier. Splitting Strong onto Anthropic Claude Opus 4.6 places a ge"
+    },
+    {
+      "index": 5,
+      "heading": "Section 5",
+      "text_len": 2845,
+      "text_preview": "[Page 5]\nTable 2: FieldWorkArena scoring functions. Each task specifies one scoring function that produces a\nbinary 0/1 score.\nMetric\nDescription\nfuzzy_match\nToken-level overlap with configurable thre"
+    },
+    {
+      "index": 6,
+      "heading": "Section 6",
+      "text_len": 2737,
+      "text_preview": "[Page 6]\nAlgorithm 1 Entropy-Guided Reasoning\nRequire: Task T, knowledge state K0, budget B, threshold τ\n1: a0, σ0 ←FastModel(T, K0)\n2: if σ0 ≥0.8 then\n3:\nreturn a0\n4: end if\n5: K1 ←K0 ∪SceneGraph(T)\n"
+    },
+    {
+      "index": 7,
+      "heading": "Section 7",
+      "text_len": 4679,
+      "text_preview": "[Page 7]\ners a second loop on top of self-healing.\nAfter the first successful run, the handler parses a\nmachine-readable line of the form VALIDATION_SCORE: <float> from the pipeline’s std-\nout. It the"
+    },
+    {
+      "index": 8,
+      "heading": "Section 8",
+      "text_len": 3664,
+      "text_preview": "[Page 8]\nTable 4: FieldWorkArena ablation study. Scores represent the fraction of tasks answered correctly.\nSSG = Spatial Scene Graph, EG = Entropy-Guided reasoning, F2 = Florence-2 preprocessing.\nCon"
+    },
+    {
+      "index": 9,
+      "heading": "Section 9",
+      "text_len": 4473,
+      "text_preview": "[Page 9]\nTable 6: Average resource consumption per task across domains. MLE-Bench costs include up to 2\nrefinement iterations when the initial pipeline succeeds.\nDomain\nAvg. Tokens\nAvg. Cost\nAvg. Late"
+    },
+    {
+      "index": 10,
+      "heading": "Section 10",
+      "text_len": 4825,
+      "text_preview": "[Page 10]\nThe entropy-guided reasoning framework provides moderate but consistent improvements. Interest-\ningly, its primary benefit is not improving top-line accuracy but reducing the variance of ans"
+    },
+    {
+      "index": 11,
+      "heading": "Section 11",
+      "text_len": 4091,
+      "text_preview": "[Page 11]\nReferences\n[1] Anthropic. Claude model family: Claude Opus 4.6 and Claude Sonnet 4.6. Technical report, 2025.\n[2] K. Chaloner and I. Verdinelli. Bayesian experimental design: A review. Stati"
+    }
+  ]
+}

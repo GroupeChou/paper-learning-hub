@@ -1,0 +1,1782 @@
+[Page 1]
+Minimax Optimality and Spectral Routing for
+Majority-Vote Ensembles under Markov Dependence
+Ibne Farabi Shihab∗†1
+Sanjeda Akter∗1
+Anuj Sharma2
+1Department of Computer Science, Iowa State University
+2Department of Civil, Construction & Environmental Engineering, Iowa State University
+ishihab@iastate.edu
+Abstract
+Majority-vote ensembles achieve variance reduction by averaging over diverse,
+approximately independent base learners. When training data exhibits Markov de-
+pendence, as in time-series forecasting, reinforcement learning (RL) replay buffers,
+and spatial grids, this classical guarantee degrades in ways that existing theory does
+not fully quantify. We provide a minimax characterization of this phenomenon
+for discrete classification in a fixed-dimensional Markov setting, together with
+an adaptive algorithm that matches the rate on a graph-regular subclass. We first
+establish an information-theoretic lower bound for stationary, reversible, geomet-
+rically ergodic chains in fixed ambient dimension, showing that no measurable
+estimator can achieve excess classification risk better than Ω(
+p
+Tmix/n). We then
+prove that, on the AR(1) witness subclass underlying the lower-bound construction,
+dependence-agnostic uniform bagging is provably suboptimal with excess risk
+bounded below by Ω(Tmix/√n), exhibiting a √Tmix algorithmic gap. Finally,
+we propose adaptive spectral routing, which partitions the training data via the
+empirical Fiedler eigenvector of a dependency graph and achieves the minimax
+rate O(
+p
+Tmix/n) up to a lower-order geometric cut term on a graph-regular sub-
+class, without knowledge of Tmix. Experiments on synthetic Markov chains, 2D
+spatial grids, the 128-dataset UCR archive, and Atari DQN ensembles validate the
+theoretical predictions. Consequences for deep RL target variance, scalability via
+Nyström approximation, and bounded non-stationarity are developed as supporting
+material in the appendix.
+1
+Introduction
+Ensemble methods are foundational in statistical machine learning. Their effectiveness relies on a
+classical principle: averaging over diverse, approximately independent base learners reduces variance.
+When m learners are trained on i.i.d. subsamples, the ensemble variance decreases as O(1/m) and
+the excess classification risk of the majority vote drops as O(1/√m) [Breiman, 1996, 2001].
+Modern training data, however, is structurally dependent. Time-series forecasting relies on sequential
+data, RL ensembles draw from temporally correlated replay buffers, and spatial sensors produce
+locally correlated measurements. Under Markov dependence, bootstrap samples share overlapping
+information that uniform resampling does not account for. This reduces effective diversity among
+base learners and degrades ensemble performance in a way that existing i.i.d. analyses do not capture.
+∗Equal contribution.
+†Corresponding author: ishihab@iastate.edu.
+Preprint. Under review.
+arXiv:2604.13414v1  [cs.LG]  15 Apr 2026
+
+[Page 2]
+Two natural questions emerge. First, what is the fundamental statistical limit for ensemble learning
+under Markov dependence, measured in terms of the mixing time Tmix? Second, does the default
+practice of uniform bootstrap resampling approach this limit, or is there a systematic gap between
+oblivious resampling and the information-theoretic optimum? Existing results on learning under
+mixing conditions [Yu, 1994, Mohri and Rostamizadeh, 2008, Kuznetsov and Mohri, 2017, Nagaraj
+et al., 2020] address related regression settings but do not characterize the discrete classification risk
+of majority-vote margins, where a non-convex threshold intervenes between the continuous base
+predictions and the aggregate loss.
+Contributions.
+This paper answers both questions for majority-vote ensembles on geometrically
+ergodic chains. Our three contributions form a single theorem arc.
+1. Information-theoretic minimax lower bound (Theorem 3). For the class P(d0)
+Tmix of station-
+ary, reversible, geometrically ergodic Markov chains in fixed ambient dimension d0 with
+mixing time at most Tmix, we show that no measurable estimator achieves expected excess
+classification risk better than Ω(
+p
+Tmix/n). The proof uses a generalized Fano reduction
+applied to a Gaussian AR(1) witness class, exploiting the tridiagonal structure of the AR(1)
+precision matrix to bound the trajectory-level KL divergence.
+2. Algorithmic suboptimality of uniform bagging (Theorem 6). We prove that, on the
+AR(1) witness subclass underlying our lower-bound construction, a majority-vote ensemble
+using uniform bootstrap resampling cannot achieve excess risk better than Ω(Tmix/√n),
+exhibiting a multiplicative √Tmix gap relative to the minimax limit. The lower bound is
+obtained via a Le Cam reduction on the ensemble’s continuous margin output, using a
+pairwise covariance bound on bootstrap base learners (Lemma 5). Corollary 7 extends the
+obstruction to fixed-block schemes chosen without knowledge of Tmix.
+3. Adaptive spectral routing closes the gap (Theorem 10). We propose Algorithm 1, which
+computes the empirical Fiedler eigenvalue ˆλ2 of a dependency graph and partitions the
+training data into ˆP = Θ(1/ˆλ2) groups via recursive bisection along the Fiedler vector.
+Under n ≫T 3
+mix log n and a spectral concentration lemma (Lemma 8), the resulting
+ensemble achieves excess risk O(
+p
+Tmix/n) + ∆Rgeom, matching the minimax lower
+bound up to a lower-order topology-dependent remainder on a graph-regular subclass that
+includes 1D paths and bounded-degree spatial lattices.
+The remainder of the paper is organized around these three results. Section 5 presents synthetic
+experiments that directly verify the rate predictions and the covariance mechanism, followed by
+validation on real spatial grids, the 128-dataset UCR archive, and Atari DQN ensembles. As practical
+context, our theory suggests that uniform bagging on a replay buffer with Tmix ≈50 should incur a
+√
+50 ≈7× excess-risk penalty relative to the information-theoretic optimum, and spectral routing
+recovers most of this gap on Atari benchmarks (Section 5.4). Supporting consequences of the core
+theorem, specifically a replay-buffer variance analysis, a Nyström-based scalable implementation,
+and a bounded non-stationarity extension, are developed in the appendix and are not co-equal
+contributions.
+2
+Related Work
+Generalization under dependence.
+Classical works [Yu, 1994, Mohri and Rostamizadeh, 2008,
+Kuznetsov and Mohri, 2017] derive uniform convergence bounds under β-mixing and ϕ-mixing
+conditions via blocking. Abélès et al. [2025] establish online-to-PAC bounds under graph-mixing
+dependencies. Most directly related, Nagaraj et al. [2020] prove minimax lower bounds for continuous
+least-squares regression with Markovian data, establishing a Tmix factor penalty for empirical risk
+minimization. Our lower bound adapts the information-theoretic machinery of this line of work to
+the discrete classification risk of non-convex majority-vote margins. The Toeplitz precision-matrix
+KL bound is structurally similar to the regression setting, but the target functional is different: we
+bound the zero-one loss of the aggregated sign rather than a squared-loss Fisher information, and we
+must separately control the bootstrap-induced covariance that governs the algorithmic lower bound.
+Advances based on trajectory hypercontractivity [Ziemann and Hanneke, 2022] show that certain
+least-squares estimators can match i.i.d. rates after a burn-in period. This framework generally
+2
+
+[Page 3]
+applies to continuous parametric regression, and uniform bootstrap resampling fractures contiguous
+trajectories in a way that repeatedly resets the estimator into the burn-in phase, which is consistent
+with the discrete penalty we identify.
+Ensemble variance and resampling.
+Mentch and Hooker [2016] quantify random forest variance
+under strict i.i.d. assumptions. The time-series literature addresses dependence via lag-based thinning,
+the Circular Block Bootstrap [Politis and Romano, 1992], and the Stationary Bootstrap [Politis and
+Romano, 1994]. Modern deep ensembles [Lakshminarayanan et al., 2017] address model uncertainty
+via random initialization but not data dependence. In RL, bootstrapped DQN [Osband et al., 2016]
+and randomized prior functions [Osband et al., 2018] leverage ensemble diversity, while Prioritized
+Experience Replay [Schaul et al., 2016] and Random Ensemble Mixture [Agarwal et al., 2020]
+address error magnitudes and prediction combinations. None of these methods target the structural
+covariance induced by temporal sequence dependence in the ensemble’s bootstrap step, which is the
+quantity our algorithm controls.
+Spectral methods on graphs.
+Our algorithm relies on Fiedler-vector partitioning [Fiedler, 1973]
+and spectral clustering consistency [von Luxburg et al., 2008]. The scalability analysis in Appendix F
+builds on Nyström approximation theory [Williams and Seeger, 2001] and graph sparsification results
+[Spielman and Srivastava, 2011].
+3
+Problem Setting
+3.1
+Data Model and Ensembles
+Let S = {(X1, Y1), . . . , (Xn, Yn)} be drawn from a stationary, geometrically ergodic Markov chain
+on X × {−1, +1} with absolute spectral gap γ0 > 0. Let Tmix denote the total variation mixing
+time, and write Tmix = Θ(1/γ0) when relating it to the absolute spectral gap. For the lower-bound
+and autocovariance arguments we work with stationary, reversible, geometrically ergodic chains;
+reversibility is invoked explicitly where needed. A homogeneous voting ensemble of size m trains
+base classifiers h1, . . . , hm via a randomized learning algorithm on uniform bootstrap subsamples
+of expected size n/m. The aggregate prediction is H(x) = sign
+  1
+m
+Pm
+j=1 hj(x)
+
+, and the excess
+classification risk is
+Rexcess(H) =
+Pr
+(X,Y )∼π
+
+Y H(X) ≤0
+
+−R⋆,
+where π is the stationary distribution and R⋆is the Bayes risk under π.
+We write ρ(x) =
+1
+m
+Pm
+j=1 hj(x) for the continuous voting margin used in the algorithmic lower-bound argument.
+3.2
+Regularity Assumptions
+Assumption 1 (Margin regularity). Let Mt = Yth∗(Xt) denote the margin of the Bayes-optimal
+classifier h∗at time t. We require: (i) |Mt| ≤1 almost surely; (ii) Var(Mt) ≥σ2
+0 > 0 under the
+stationary distribution; and (iii) non-trivial spectral overlap: a1 := ⟨Mt, ϕ1⟩2
+L2(π) > 0, where ϕ1 is
+the eigenfunction corresponding to the largest non-trivial eigenvalue λ1 = 1 −γ0 of the transition
+operator.
+Condition (iii) excludes pathological chains where the margin process is orthogonal to the slow-mixing
+eigenspace. For geometrically ergodic chains with non-degenerate label noise, this holds whenever
+the Bayes boundary intersects the support of the stationary distribution; a sufficient condition and
+verification for the AR(1) witness used in our lower bounds are given in Appendix D.
+Assumption 2 (Learning algorithm regularity). The base learning algorithm A maps a subsample
+Sj ⊂S to a classifier hj = A(Sj) ∈H for a hypothesis class H with finite VC dimension
+dVC < ∞. Moreover, A is consistent: hj
+P−→h∗as |Sj| →∞under any stationary ergodic
+sampling distribution.
+3.3
+Empirical Dependency Graph
+The exact transition matrix is typically unknown. We construct an unweighted empirical dependency
+graph G = ([n], E) whose edges encode proximity. For temporal data, we connect sequence indices
+3
+
+[Page 4]
+with |i −j| ≤τ for a fixed window τ; for spatial or tabular data, edges are assigned via k-nearest
+neighbors in physical or feature space. Since the underlying process has spectral gap γ0, the empirical
+graph converges in the spectral limit, and the Fiedler eigenvalue ˆλ2 of its normalized Laplacian
+estimates the true spectral gap (Lemma 8).
+4
+Theoretical Analysis
+This section develops the three-part theorem arc in order: lower bound, bagging suboptimality,
+spectral routing upper bound.
+4.1
+Information-Theoretic Minimax Lower Bound
+Theorem 3 (Information-theoretic minimax lower bound). Fix an ambient dimension d0 < ∞. Let
+P(d0)
+Tmix denote the class of stationary, reversible, geometrically ergodic Markov chains on Rd0 ×
+{−1, +1} with mixing time at most Tmix, satisfying Assumption 1. Then there exist constants
+c, C > 0, depending only on d0 and the fixed witness-class parameters, such that for all n ≥CTmix,
+inf
+ˆ
+H
+sup
+P ∈P(d0)
+Tmix
+EP
+h
+Rexcess( ˆH)
+i
+≥c
+r
+Tmix
+n .
+(1)
+The proof proceeds by restricting the minimax problem to a Gaussian AR(1) witness subclass
+contained in P(d0)
+Tmix.
+Proof sketch (full proof in Appendix A). We follow the standard recipe of exhibiting hardness within a
+parametric subclass [Tsybakov, 2009], specialized to a Gaussian AR(1) witness in fixed dimension
+d0. Let λ = 1 −1/Tmix and let V ⊂{−1, 1}d0 be a Varshamov-Gilbert packing of size |V| ≥ed0/8.
+For each v ∈V, define a latent feature process X(v)
+t
+= µv + ξt with ξt a stationary Gaussian AR(1)
+at parameter λ, and set Yt = sign(⟨v, X(v)
+t
+⟩+ ηt) for a small independent noise. This construction
+lies in P(d0)
+Tmix by design.
+The departure from the i.i.d. case appears in the trajectory-level KL divergence. Let mv ∈Rnd0
+denote the stacked trajectory mean vector under hypothesis v and let Σn ∈Rnd0×nd0 denote the
+trajectory covariance. Then
+DKL(P n
+v ∥P n
+v′) = 1
+2(mv −mv′)⊤Σ−1
+n (mv −mv′).
+Because the AR(1) covariance is Toeplitz in time and separable across the d0 feature coordinates, the
+precision matrix Σ−1
+n
+reduces to a block-tridiagonal form whose Rayleigh quotient along constant-
+direction mean shifts scales as O(n/Tmix), so
+DKL(P n
+v ∥P n
+v′) ≤O
+
+n
+Tmix δ2
+,
+where δ = ∥µv∥is the per-step mean shift magnitude. This scales the sequence-level information
+as O((n/Tmix)δ2) rather than the i.i.d. rate O(nδ2). Because d0 is fixed, log |V| ≍d0 is a constant
+of the model class, and generalized Fano over the packing yields the Ω(
+p
+Tmix/n) floor on excess
+classification risk.
+Positioning. Nagaraj et al. [2020] establish a comparable Tmix-factor penalty for continuous least-
+squares regression. Theorem 3 adapts the underlying Toeplitz machinery to the discrete classification
+risk of majority-vote margins. The key difference is the choice of target functional: we bound the zero-
+one loss of an aggregated sign rather than a squared-loss Fisher information, which requires handling
+the non-convex margin threshold. A heuristic perturbative extension to a restricted linear-drift
+non-stationarity is discussed in Appendix A.1.
+4.2
+Algorithmic Suboptimality of Uniform Bagging
+With the minimax floor in place, we now show that uniform bagging cannot match it. The key
+structural fact is that pairs of base learners trained via uniform bootstrap sampling from a dependent
+sequence have irreducibly correlated margins.
+4
+
+[Page 5]
+Proposition 4 (Margin autocovariance). Under Assumptions 1–2 on a stationary reversible chain,
+the Bayes-optimal margin process M ∗
+t = Yth∗(Xt) satisfies
+Tmix−1
+X
+k=0
+Cov(M ∗
+0 , M ∗
+k) ≥cMTmix,
+(2)
+for some cM > 0 depending on σ2
+0, a1, and γ0.
+Proof. By the spectral representation of reversible chains, γk := Cov(M ∗
+0 , M ∗
+k) = P
+i≥1 aiλk
+i , with
+ai ≥0 and a1 > 0 by Assumption 1(iii). Summing and using λ1 = 1−γ0 with Tmix = Θ(1/γ0), the
+leading term contributes a1(1 −λTmix
+1
+)/(1 −λ1) = Ω(Tmix). Since ˆh is consistent (Assumption 2),
+the realized empirical variance functional preserves this Ω(Tmix) scaling; the uniform convergence
+argument is given in Appendix C.
+Lemma 5 (Pairwise bootstrap covariance). Let n = mTmix and let h1, h2 be two base learners
+trained via uniform bootstrap sampling on subsets of expected size n/m from S. Under Proposition 4,
+their continuous margin predictions V1, V2 satisfy
+Cov(V1, V2) ≥Ω
+Tmix
+m
+
+= Ω
+T 2
+mix
+n
+
+.
+(3)
+Proof sketch (full proof in Appendix C). The bound follows from the Law of Total Covariance
+expanded over the resampling mechanism. The non-trivial step is showing that the empirical variance
+functional preserves the Ω(Tmix) population scaling under uniform convergence over H; this is
+established via block-based Rademacher complexity bounds for β-mixing sequences [Kuznetsov
+and Mohri, 2017], with the error term ˜O(T 3/2
+mix/√n) dominated by the leading scaling whenever
+n = mTmix with m ≫Tmix.
+Theorem 6 (Suboptimality of uniform bagging). Let PAR(1),d0
+Tmix
+⊂P(d0)
+Tmix denote the AR(1) witness
+subclass used in the proof of Theorem 3. Then the expected excess classification risk of a homogeneous
+voting ensemble trained via uniform bootstrap resampling on n samples satisfies
+sup
+P ∈PAR(1),d0
+Tmix
+EP [Rexcess] ≥Ω
+Tmix
+√n
+
+.
+(4)
+Proof. We apply Le Cam’s two-point reduction to the ensemble’s continuous margin output ρ =
+1
+m
+Pm
+j=1 Vj, evaluated on the AR(1) witness pair from Theorem 3. Because the underlying sequence
+is Gaussian and ρ is a linear combination of the base margins, ρ is itself Gaussian under each
+hypothesis. The KL divergence between the two output distributions is therefore
+DKL(D1∥D0) = (E[ρ | P1] −E[ρ | P0])2
+2 Var(ρ)
+=
+∆2
+2 Var(ρ).
+(5)
+Lemma 5 implies Var(ρ) ≥Ω(T 2
+mix/n) for uniform bagging. Setting ∆= c0Tmix/√n then bounds
+the KL divergence by a constant C < 1. Le Cam’s inequality therefore yields the stated Ω(Tmix/√n)
+lower bound for homogeneous majority-vote ensembles trained by uniform bootstrap resampling on
+the witness subclass PAR(1),d0
+Tmix
+.
+Remark 1 (Algorithmic minimax gap). Comparing Theorems 3 and 6, uniform bagging incurs
+an excess-risk penalty of √Tmix relative to the information-theoretic floor. We interpret this as an
+algorithmic gap: the lower bound constrains estimators whose ensemble variance behaves as in
+Lemma 5, which includes uniform bootstrap bagging but not estimators that exploit dependence
+structure. Closing the gap requires an algorithm that avoids the Ω(T 2
+mix/n) pairwise covariance
+floor, which is the goal of Section 4.3.
+Corollary 7 (Limits of oblivious block resampling). Any block-bagging strategy with block size B
+chosen independently of Tmix fails to be uniformly minimax optimal across P(d0)
+Tmix. If an adversary
+chooses Tmix ≫B, residual autocovariance inflates the margin variance; if B ≫Tmix, the
+effective sample size collapses to n/B, inducing an Ω(
+p
+B/n) penalty that dominates the target rate.
+Uniform optimality across the class therefore requires an adaptive estimate of the dependence scale;
+spectral-gap estimation provides one such route.
+5
+
+[Page 6]
+Algorithm 1 Adaptive Spectral Routing for Ensembles
+Require: Data {(Xi, Yi)}n
+i=1, empirical dependency graph G, ensemble size m.
+1: Compute the normalized Laplacian ˜L = I −D−1/2WD−1/2 (for n ≫104, use the dynamic
+Nyström approximation of Theorem 16).
+2: Compute the Fiedler eigenvalue ˆλ2 and eigenvector v2 via implicitly restarted Lanczos iteration.
+3: Set the partition count ˆP = min
+ ⌈c/ˆλ2⌉, m
+
+.
+4: Partition the data into ˆP groups D1, . . . , D ˆ
+P via recursive bisection along v2.
+5: Train ⌊m/ ˆP⌋base learners on each partition Dp using standard bagging within the partition.
+6: Aggregate via H(x) = sign
+  1
+m
+P ˆ
+P
+p=1
+P
+j∈Dp hj(x)
+
+.
+7: return Ensemble classifier H.
+Having established that oblivious resampling cannot close the gap, we now exhibit an algorithm that
+does.
+4.3
+Optimal Upper Bound via Adaptive Spectral Routing
+Lemma 8 (Spectral concentration under Markov dependence). Under geometric ergodicity with
+absolute spectral gap γ0 > 0, the Fiedler eigenvalue ˆλ2 of the unweighted empirical dependency
+graph on n samples satisfies |ˆλ2 −λ∗
+2| ≤O(
+p
+Tmix log n/n) with high probability.
+The proof, in Appendix B, combines Berbee’s coupling lemma to reduce to independent blocks with
+a Matrix Bernstein bound [Tropp, 2012] on the resulting decoupled Laplacian.
+Definition 9 (Graph-regular subclass). Fix d0 < ∞. The graph-regular subclass P(d0)
+Tmix,graph ⊂P(d0)
+Tmix
+consists of laws satisfying the following four conditions:
+(G1) the empirical dependency graph G satisfies the spectral concentration bound of Lemma 8;
+(G2) recursive Fiedler bisection at the adaptive partition count ˆP = Θ(1/ˆλ2) yields a cutset
+Ecut satisfying |Ecut| = o(n√Tmix);
+(G3) n ≥CT 3
+mix log n for the constant C of Lemma 8;
+(G4) margins from distinct routed partitions satisfy P
+p̸=q Cov(ρp, ρq) = o(Tmix/n).
+Condition (G1) is a concentration condition on sampling, (G2) is a geometric condition on the
+underlying topology, (G3) is a sample-complexity condition, and (G4) is an explicit cross-partition
+decoupling assumption requiring structurally separated routed partitions to contribute approximately
+independent margins at aggregation time. Under the graph-dependent risk conversion bound of Zhang
+et al. [2019], condition (G2) implies
+∆Rgeom ≤O
+
+|Ecut|/n3/2
+= o(
+p
+Tmix/n),
+so the risk remainder is automatically of lower order once the cut bound (G2) holds. We verify (G2)
+explicitly for 1D temporal paths and bounded-degree s-dimensional lattices in the proof below; other
+topologies for which (G2) and (G4) are known to hold can be substituted directly.
+Theorem 10 (Spectral routing attains the minimax rate on the graph-regular subclass). Fix d0 < ∞,
+and let P(d0)
+Tmix,graph be the graph-regular subclass of Definition 9. Then Algorithm 1, using ˆP =
+Θ(1/ˆλ2), achieves
+Rexcess ≤C1
+r
+Tmix
+n
++ ∆Rgeom,
+(6)
+and hence matches the minimax rate of Theorem 3 up to a lower-order remainder on P(d0)
+Tmix,graph.
+Conditions (G2) and (G4) of Definition 9 are verified for 1D temporal path graphs (|Ecut| =
+Θ(Tmix), giving ∆Rgeom = O(Tmix/n3/2)) and bounded-degree s-dimensional lattices (|Ecut| =
+O(√Tmixn), giving ∆Rgeom = O(√Tmix/n)).
+6
+
+[Page 7]
+Proof. The proof combines a within-partition blocking variance bound, the cross-partition decoupling
+assumption (G4), and the graph-dependent cut-to-risk conversion bound of Zhang et al. [2019].
+Step 1: consistent partitioning. Under condition (G3), Lemma 8 gives |ˆλ2 −λ∗
+2| = o(λ∗
+2) with high
+probability, so ˆλ2 = Θ(1/Tmix) and ˆP = Θ(Tmix).
+Step 2: local and global variance. Training mp = m/ ˆP learners on partition Dp yields a local margin
+variance bounded via standard blocking [Yu, 1994] by Var[ρp(X)] ≤O(1/mp) + O(Tmix/np) ≤
+O(Tmix/m)+O(T 2
+mix/n). Aggregating globally, ρ = ˆP −1 P
+p ρp, and condition (G4) of Definition 9
+bounds the aggregated cross-partition covariance by P
+p̸=q Cov(ρp, ρq) = o(Tmix/n). Combining
+the local variance with the decoupling condition yields the global variance
+Var[ρ] = ˆP −2
+
+X
+p
+Var[ρp] +
+X
+p̸=q
+Cov(ρp, ρq)
+
+≤O(Tmix/n),
+which matches the O(
+p
+Tmix/n) standard deviation of the minimax rate.
+Step 3: geometric cut penalty. To bound the approximation error from empirical graph partition-
+ing, the graph-dependent fractional Rademacher bounds of Zhang et al. [2019] give ∆Rgeom ≤
+O(|Ecut|/n3/2). For 1D path graphs the Fiedler vector is monotone [Fiedler, 1973], so recursive
+bisection produces contiguous blocks cutting exactly ˆP −1 = Θ(Tmix) edges, giving ∆Rgeom ≤
+O(Tmix/n3/2) = o(
+p
+Tmix/n) for n ≥Tmix. For s-dimensional bounded-degree lattices, spectral
+bisection approximates the optimal isoperimetric bound |Ecut| ≤O(
+p
+ˆPn) = O(√Tmixn), yielding
+∆Rgeom ≤O(√Tmix/n), which is o(
+p
+Tmix/n) whenever n ≫Tmix.
+Sample complexity.
+The condition n ≫T 3
+mix log n ensures spectral estimation error is of lower
+order than the spectral gap itself. For moderate Tmix ≤50, this scaling suggests n on the order of 105,
+which is realistic for large replay buffers and long sequential datasets, though not for all benchmark
+time-series collections. For slowly mixing chains with Tmix ∼n1/3, the condition becomes binding
+and the spectral gap is too small to estimate reliably; this boundary is inherent to any method that
+estimates λ∗
+2 to accuracy o(λ∗
+2), and is not specific to our algorithm.
+Scalability and extensions.
+An explicit eigensolve of the full empirical Laplacian has complexity
+O(|E| + n log n), which can strain streaming settings. Appendix F shows that a dynamic Nyström
+approximation (Theorem 16) preserves Theorem 10 with sub-linear ˜O(nT 2
+mix) overhead under a
+bounded intrinsic rank condition on the underlying feature manifold (Assumption 15), which we verify
+empirically on Atari replay buffers. Appendix A.1 discusses a restricted linear-drift extension, which
+suggests an additional perturbative term of order O(νTmix/n) under the AR(1) witness construction.
+Appendix E provides a mechanistic bridge from Lemma 5 to deep RL target variance via the NTK
+regime; this is intended as an explanatory bridge rather than a theorem about finite-width DQN
+training.
+5
+Experiments
+Our experiments are organized around the theorem arc rather than around method breadth. Section 5.1
+verifies the rate and covariance predictions on controlled synthetic chains. Section 5.2 tests topology
+generalization on real 2D spatial grids. Section 5.3 evaluates empirical breadth on the 128-dataset
+UCR archive. Section 5.4 probes whether the bootstrap covariance mechanism appears in deep RL
+replay buffers. All tables report mean and standard deviation over 50 seeds (10 seeds for Atari), and
+significance is assessed via Wilcoxon signed-rank tests. Full seed-level results, hyperparameters, and
+plotting scripts are provided in the supplementary material.
+5.1
+Synthetic Chains: Verifying the Rate and the Mechanism
+We simulate the AR(1) witness processes of Theorem 6. For Tmix ∈{1, 10, 50, 200}, we train
+random forests of size m = 100 on n = 50,000 sequential samples. Baselines are: Uniform Bagging;
+7
+
+[Page 8]
+Lag-Based Thinning (discarding intermediate samples to reduce correlation); ˆTmix-Thinning, which
+subsamples every ˆTmix ∝1/ˆλ2 steps using our empirical spectral estimate and isolates the effect
+of the graph cut from the cost of data deletion; Stationary Bootstrap [Politis and Romano, 1994];
+Circular Block Bootstrap [Politis and Romano, 1992]; Hypercontractive Burn-in [Ziemann and
+Hanneke, 2022]; Oracle Block Bagging with block size set to the true Tmix; and Adaptive Spectral
+Routing.
+Table 1: Excess risk on AR(1) chains, mean ± standard deviation over 50 seeds.
+Tmix
+Uniform
+Lag Thin.
+ˆTmix-Thin
+Stat. Boot
+Circ. BB
+Burn-in
+Oracle BB
+Spec. Rte.
+1
+.030±.001
+.031±.002
+.031±.001
+.031±.001
+.030±.001
+.030±.001
+.030±.001
+.030±.001
+10
+.104±.004
+.086±.003
+.054±.003
+.066±.003
+.063±.002
+.041±.002
+.038±.001
+.039±.002
+50
+.228±.008
+.189±.006
+.062±.004
+.071±.004
+.067±.003
+.052±.003
+.045±.002
+.046±.003
+200
+.457±.013
+.355±.010
+.090±.005
+.126±.008
+.119±.007
+.069±.004
+.052±.003
+.053±.003
+100
+101
+102
+10−3
+10−1
+Tmix
+Empirical pairwise Cov(V1, V2)
+Uniform bagging
+Theory: T 2
+mix/n
+Spectral routing
+Figure 1: Measured pairwise base-learner covari-
+ance versus Tmix on the AR(1) witness. Uni-
+form bagging tracks the T 2
+mix/n prediction of
+Lemma 5, while spectral routing compresses the
+covariance by roughly two orders of magnitude.
+100
+101
+102
+10−1.5
+10−1
+10−0.5
+Tmix
+Excess risk
+Uniform
+Theory: Tmix/√n
+Spec. Rte.
+Theory:
+p
+Tmix/n
+Figure 2: Excess risk on AR(1) chains versus
+Tmix. Uniform bagging tracks Tmix/√n (Theo-
+rem 6); spectral routing tracks
+p
+Tmix/n (Theo-
+rem 10).
+Two observations directly match the theory. First, Figure 1 tracks the empirical base-learner covari-
+ance of uniform bagging, which scales as T 2
+mix/n as predicted by Lemma 5, while spectral routing
+compresses it by roughly two orders of magnitude. This is a direct test of the mechanism, not only
+the rate. Second, Figure 2 and Table 1 show excess risk scaling as Tmix/√n for uniform bagging
+and
+p
+Tmix/n for spectral routing, consistent with Theorems 6 and 10. The ˆTmix-Thinning ablation
+isolates a secondary finding: explicitly estimating the mixing time improves over lag-based thinning,
+but discarding intermediate data curtails effective sample size. Spectral routing uses the entire dataset
+and tracks Oracle Block Bagging without knowledge of Tmix.
+5.2
+Real Spatial Grids
+We evaluate on non-sequential physical topologies using Sentinel-2 European crop classification
+(BigEarthNet) and NOAA Sea Surface Temperature grids, constructing G via unweighted k-NN
+spatial proximity.
+Table 2: Excess risk on real-world 2D spatial grids.
+Topology
+Uniform
+Lag Thin.†
+Stat. Boot.†
+Circ. BB†
+ˆTmix-Thin†
+Spec. Rte.
+Sentinel-2
+.216±.008
+.213±.007
+.208±.006
+.205±.006
+.201±.005
+.087±.004
+BigEarthNet
+.242±.010
+.238±.009
+.233±.007
+.228±.008
+.225±.007
+.106±.005
+NOAA SST
+.320±.013
+.316±.011
+.310±.009
+.305±.010
+.301±.009
+.188±.008
+†Applied via 1D row-major linearization.
+All 1D-based resampling strategies struggle on spatial data because linearizing a √n × √n grid
+separates physically adjacent vertical pixels by √n sequence indices, breaking the dependency
+8
+
+[Page 9]
+structure they attempt to exploit. Spectral routing acts directly on the k-NN spatial graph via the
+Fiedler vector, consistent with the spatial cut bounds of Theorem 10.
+5.3
+UCR Archive and Composition with ROCKET
+We evaluate on the full 128-dataset UCR Archive using 5×10-fold cross validation, comparing
+Random Forests (RF), Lag-Based Thinning, Auto-BB (a heuristic block bootstrap), Stationary
+Bootstrap, Time Series Forest [Deng et al., 2013], and ROCKET [Dempster et al., 2020], with
+Spectral Routing applied as a wrapper to both RF and ROCKET. Figure 3 plots autocorrelation
+against Spectral Routing gain across all 128 datasets; a detailed 40-dataset slice is provided in
+Appendix I.
+0
+0.1
+0.2
+0.3
+0.4
+0.5
+0.6
+0.7
+0.8
+0.9
+1
+0
+2
+4
+6
+8
+FordB (−0 7%)
+Fish (+1.4%)
+rs = 0.82, p < 10−3
+Dataset autocorrelation (ρlag-1)
+Spectral Routing gain (%)
+Figure 3: Relationship between dataset autocorrelation and the accuracy gain of Spectral Routing
+over standard bagging across the 128-dataset UCR archive. Dashed red line is the linear trend.
+The relationship is monotonic and well correlated with Tmix severity (Spearman rs = 0.82, p <
+10−3). For low-correlation datasets (ρlag-1 < 0.8), the gain is statistically indistinguishable from
+noise; for highly autocorrelated datasets (ρlag-1 > 0.85) the gain reaches 3 to 7 percentage points.
+FordB is a notable outlier (−0.7%) due to a known structural train/test sensor shift unrelated to
+ensemble variance.
+Table 3: Global accuracy and rank over 128 UCR
+datasets.
+Method
+Mean Acc (%)
+Avg Rank
+Rand. Forest
+78.4 ± 1.2
+5.8
+Lag-Thinning
+78.7 ± 1.1
+5.3
+Auto-BB (Heur.)
+79.1 ± 1.1
+4.8
+Stat. Bootstrap
+79.4 ± 1.0
+4.2
+Time Series Forest
+80.5 ± 0.9
+3.5
+RF + Spec. Rte.
+81.7 ± 0.8
+2.7
+ROCKET
+82.7 ± 0.6
+1.8
+ROCKET + SR
+83.6 ± 0.5
+1.2
+Table 4: ROCKET + SR on highly correlated
+datasets.
+Dataset
+ROCKET
+ROCKET+SR
+Gain
+FordA
+90.1 ± 0.4
+91.3 ± 0.3
++1.2%
+StarLight
+92.3 ± 0.3
+93.4 ± 0.2
++1.1%
+Wafer
+94.8 ± 0.1
+95.9 ± 0.1
++1.1%
+TwoPat.
+88.4 ± 0.5
+89.8 ± 0.4
++1.4%
+GunPoint
+89.4 ± 0.5
+90.9 ± 0.4
++1.5%
+Avg
+91.0%
+92.2%
++1.2%
+Spectral routing composes cleanly with multiple ensemble backbones in our experiments. Replacing
+ROCKET’s uniform bagging with spectral routing improves accuracy to 92.2% on the highly corre-
+lated subset of Table 4. Because ROCKET uses Ridge Regression as its terminal classifier, its base
+estimators are analytically stable, so spectral routing compresses sequence variance without injecting
+the secondary noise typical of decision trees. Absolute gains of roughly 1.2% may appear small in
+isolation, but these SOTA models operate near the empirical ceiling of the datasets: moving from
+94.8% to 95.9% on Wafer corresponds to a roughly 21% relative reduction in remaining classification
+error. A Wilcoxon signed-rank test over the 50 seeds confirms that the improvements are statistically
+significant (p < 0.001). Across the full 128 datasets ROCKET+SR achieves the highest average rank.
+9
+
+[Page 10]
+5.4
+Atari DQN: Testing the Mechanism in Deep RL
+To test whether the bootstrap covariance mechanism of Lemma 5 appears in replay-buffer learning, we
+evaluate 5-head ensemble DQN architectures on 7 Atari benchmarks with 106-step buffers, comparing
+against compute-matched Uniform Replay (granted 25% additional gradient steps to equal the spectral
+routing overhead), Prioritized Experience Replay (PER) [Schaul et al., 2016], and Random Ensemble
+Mixture (REM) [Agarwal et al., 2020]. We report IQM returns with 95% bootstrap CIs over 10 seeds
+and, in the rightmost column, the empirical drop in Bellman target variance Var(yi) during the first
+105 steps of training. This column is the mechanistic link: the replay-buffer variance discussion in
+Appendix E suggests that dependence-aware routing should reduce target variance, and we measure
+that effect directly.
+Table 5: Ensemble DQN IQM returns (with 95% CIs) over 10 seeds. Final column reports the
+empirical drop in Bellman target variance, isolating the mechanism suggested by Lemma 5 together
+with the replay-buffer variance discussion of Appendix E.
+Uniform Replay
+Replay Baselines
+Spectral Routing
+Target Var.
+Environment
+(Compute-Match)
+PER
+REM
+IQM (95% CI)
+Time (hr)
+Drop (%)
+Breakout
+328 [301, 355]
+340 [314, 362]
+346 [318, 368]
+364 [340, 386]
+5.1
+−23%
+SpaceInvaders
+918 [851, 978]
+931 [865, 988]
+958 [892, 1010]
+1028 [975, 1082]
+5.6
+−38%
+Seaquest
+1489 [1365, 1598]
+1525 [1415, 1625]
+1550 [1435, 1655]
+1642 [1548, 1726]
+5.7
+−42%
+Q*bert
+7595 [7250, 7925]
+7750 [7440, 8000]
+7870 [7590, 8105]
+8160 [7905, 8400]
+5.4
+−35%
+Pong⋆
+19.3 [18.6, 20.0]
+19.5 [18.9, 20.1]
+19.6 [19.0, 20.2]
+19.8 [19.3, 20.3]
+4.8
+−2%
+Montezuma⋆
+0 [0, 0]
+0 [0, 0]
+0 [0, 0]
+0 [0, 0]
+5.5
+−1%
+Pitfall⋆
+−12 [−20, 0]
+−10 [−20, 0]
+−8 [−15, 0]
+0 [0, 0]
+5.3
+−11%
+⋆Pong, Montezuma, and Pitfall serve as negative controls (saturated reward or hard exploration) where target variance is not the dominant
+bottleneck, confirming that spectral routing does not alter environmental dynamics.
+Two findings. First, on the four environments where target variance is the dominant bottleneck,
+spectral routing outperforms all replay baselines, with confidence intervals separated from the
+uniform baseline on SpaceInvaders, Seaquest, and Q*bert. Second, the rightmost column is the
+one reviewers should weight most heavily: the replay-buffer variance discussion in Appendix E
+suggests that dependence-aware routing should reduce target variance, and we measure that effect
+directly, finding an average compression of 35% on these environments. On Pong, Montezuma, and
+Pitfall, target variance is not the dominant bottleneck, and spectral routing neither helps nor hurts, as
+expected. PER clusters high-TD-error transitions temporally, which increases rather than decreases
+structural correlation within a sampled batch, and this is consistent with its modest gains over uniform
+replay here.
+Table 6:
+Inflating Tmix via frame-skip on
+SpaceInvaders.
+Frame Skip
+Unif. Rep.
+Spec. Rte.
+Gap
+8 (low Tmix)
+1060 ± 23
+1094 ± 20
++3.2%
+4 (standard)
+918 ± 26
+1028 ± 23
++12.0%
+2 (high Tmix)
+624 ± 21
+910 ± 17
++45.8%
+1 (max Tmix)
+228 ± 14
+659 ± 16
++189%
+Table 7: Adaptive ˆP versus fixed partition counts,
+AR(1) chain at Tmix = 50.
+P Count
+1
+5
+10
+50 (≈Tmix)
+100
+Adaptive ˆP
+Risk
+0.228
+0.170
+0.118
+0.045 ± .002
+0.070
+0.046 ± .002
+Isolating Tmix via frame-skip. Atari’s standard frame-skip of 4 is a heuristic that manually reduces
+Tmix. Table 6 manipulates it as a controlled way to increase temporal correlation. As frame-skip
+falls from 8 to 1, uniform replay degrades severely, consistent with the Ω(Tmix/√n) penalty of
+Theorem 6. Adaptive spectral routing preserves policy performance across the full sweep without
+tuning. Table 7 shows that the adaptive rule matches oracle performance at the optimal fixed
+P = Tmix, and outperforms fixed choices that are off by a small factor.
+6
+Discussion and Limitations
+We provide a minimax characterization for a fixed-dimensional class of stationary, reversible, geomet-
+rically ergodic Markov chains, together with an adaptive algorithm that matches this rate on a graph-
+regular subclass up to a lower-order remainder. The information-theoretic limit is Ω(
+p
+Tmix/n),
+10
+
+[Page 11]
+dependency-agnostic uniform bagging exhibits a provable √Tmix suboptimality gap on the same
+AR(1) witness subclass, and adaptive spectral routing recovers the minimax rate up to a lower-order
+geometric remainder. The AR(1) witness subclass is used as a standard hard subclass for the minimax
+lower bound and is not intended to exhaust the broader fixed-dimensional Markov class. Experiments
+on synthetic chains directly verify both the rate predictions and the pairwise covariance mechanism
+that drives them; experiments on spatial grids, the UCR archive, and Atari DQN ensembles show that
+the mechanism appears outside the stylized model class as well, and that spectral routing composes
+cleanly with multiple ensemble backbones in our experiments.
+Limitations.
+The core theory is non-asymptotic but applies to stationary, reversible, geometrically
+ergodic chains with a non-trivial spectral gap. The lower-bound class and upper-bound subclass are
+intentionally not identical: the minimax lower bound is proved over a fixed-dimensional reversible
+Markov class, while the matching upper bound requires additional graph-regularity and cross-partition
+decoupling structure (conditions (G1)–(G4) of Definition 9). The sample-complexity requirement
+n ≫T 3
+mix log n is binding when Tmix is comparable to n1/3; in that regime the spectral gap cannot
+be estimated reliably by any method. The appendix extensions to bounded linear drift, replay-
+buffer variance via NTK, and Nyström scalability apply to restricted settings and should be read as
+consequences of the main theorem rather than as independent guarantees. Formalizing the covariance
+limits for finite-width networks with dynamically moving targets, without NTK simplifications,
+remains open.
+Ethics statement.
+This work establishes fundamental limits on majority vote ensembles under
+Markov dependence and proposes spectral routing to approach these limits. Ensemble methods are
+widely used in safety-critical applications such as medical diagnosis and autonomous systems, and
+understanding their theoretical limits under realistic dependence structures helps practitioners make
+informed decisions about ensemble reliability. Our experiments use publicly available datasets and
+do not involve human subjects.
+References
+François Abélès, Eugenio Clerico, and Massimiliano Pontil. Online-to-PAC generalization bounds
+under graph-mixing dependencies. In Proceedings of the 28th International Conference on
+Artificial Intelligence and Statistics (AISTATS), 2025.
+Rishabh Agarwal, Dale Schuurmans, and Mohammad Norouzi. An optimistic perspective on offline
+reinforcement learning. In International Conference on Machine Learning, pages 104–114. PMLR,
+2020.
+Leo Breiman. Bagging predictors. Machine Learning, 24(2):123–140, 1996.
+Leo Breiman. Random forests. Machine Learning, 45(1):5–32, 2001.
+Angus Dempster, François Petitjean, and Geoffrey I. Webb. ROCKET: Exceptionally fast and accurate
+time series classification using random convolutional kernels. Data Mining and Knowledge
+Discovery, 34(5):1454–1495, 2020.
+Houtao Deng, George Runger, Eugene Tuv, and Martyanov Vladimir. A time series forest for
+classification and feature extraction. Information Sciences, 239:142–153, 2013.
+Miroslav Fiedler. Algebraic connectivity of graphs. Czechoslovak Mathematical Journal, 23(2):
+298–305, 1973.
+Albert Gu and Tri Dao. Mamba: Linear-time sequence modeling with selective state spaces. arXiv
+preprint arXiv:2312.00752, 2023.
+Arthur Jacot, Franck Gabriel, and Clément Hongler. Neural tangent kernel: Convergence and gener-
+alization in neural networks. In Advances in Neural Information Processing Systems, volume 31,
+2018.
+Vitaly Kuznetsov and Mehryar Mohri. Generalization bounds for non-stationary mixing processes.
+Machine Learning, 106(1):93–117, 2017.
+11
+
+[Page 12]
+Balaji Lakshminarayanan, Alexander Pritzel, and Charles Blundell. Simple and scalable predictive
+uncertainty estimation using deep ensembles. In Advances in Neural Information Processing
+Systems, volume 30, 2017.
+Lucas Mentch and Giles Hooker. Quantifying uncertainty in random forests via variance. Journal of
+Machine Learning Research, 17(1):841–881, 2016.
+Mehryar Mohri and Afshin Rostamizadeh. Rademacher complexity bounds for non-iid processes. In
+Advances in Neural Information Processing Systems, volume 21, 2008.
+Dheeraj Nagaraj, Xian Wu, Guy Bresler, Prateek Jain, and Praneeth Netrapalli. Least squares
+regression with Markovian data: Fundamental limits and algorithms. In Advances in Neural
+Information Processing Systems, volume 33, pages 16666–16676, 2020.
+Ian Osband, Charles Blundell, Alexander Pritzel, and Benjamin Van Roy. Deep exploration via
+bootstrapped DQN. In Advances in Neural Information Processing Systems, volume 29, 2016.
+Ian Osband, John Aslanides, and Albin Cassirer. Randomized prior functions for deep reinforcement
+learning. In Advances in Neural Information Processing Systems, volume 31, 2018.
+Dimitris N. Politis and Joseph P. Romano. A circular block-resampling procedure for stationary data.
+In Raoul LePage and Lynne Billard, editors, Exploring the Limits of Bootstrap, pages 263–270.
+Wiley, 1992.
+Dimitris N. Politis and Joseph P. Romano. The stationary bootstrap. Journal of the American
+Statistical Association, 89(428):1303–1313, 1994.
+Tom Schaul, John Quan, Ioannis Antonoglou, and David Silver. Prioritized experience replay. In
+International Conference on Learning Representations, 2016.
+Daniel A. Spielman and Nikhil Srivastava. Graph sparsification by effective resistances. SIAM
+Journal on Computing, 40(6):1913–1926, 2011.
+Joel A. Tropp. User-friendly tail bounds for sums of random matrices. Foundations of Computational
+Mathematics, 12(4):389–434, 2012.
+Alexandre B. Tsybakov. Introduction to Nonparametric Estimation. Springer Series in Statistics.
+Springer, 2009.
+Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N. Gomez,
+Łukasz Kaiser, and Illia Polosukhin. Attention is all you need. In Advances in Neural Information
+Processing Systems, volume 30, 2017.
+Ulrike von Luxburg, Mikhail Belkin, and Olivier Bousquet. Consistency of spectral clustering. The
+Annals of Statistics, 36(2):555–586, 2008.
+Christopher K. I. Williams and Matthias Seeger. Using the Nyström method to speed up kernel
+machines. In Advances in Neural Information Processing Systems, volume 13, pages 682–688,
+2001.
+Bin Yu. Rates of convergence for empirical processes of stationary mixing sequences. The Annals of
+Probability, 22(1):94–116, 1994.
+Rui Zhang, Liu Liu, and Xiaojin Zhu. Graph-dependent generalization bounds. In International
+Conference on Machine Learning. PMLR, 2019.
+Ingvar Ziemann and Steve Hanneke. Learning with little mixing. In Advances in Neural Information
+Processing Systems, volume 35, 2022.
+12
+
+[Page 13]
+A
+Formal Proof of Theorem 3
+Proof. We use a generalized Fano reduction over a localized packing of Markov transition kernels
+[Tsybakov, 2009], with d0 fixed throughout.
+Step 1: hypercube packing. Let Θ = {−1, 1}d0. By Varshamov-Gilbert, there exists V ⊂Θ with
+|V| ≥ed0/8 such that any two distinct v, v′ ∈V satisfy ∆H(v, v′) ≥d0/4.
+Step 2: AR(1) witness. For each v ∈V, define latent features X(v)
+t
+= µv + ξt, where ξt evolves
+as ξt = λξt−1 +
+√
+1 −λ2 Wt with Wt ∼N(0, Id0) and λ = 1 −1/Tmix. Labels are Yt =
+sign(⟨v, X(v)
+t
+⟩+ ηt). The chain is stationary, reversible, and has spectral gap Θ(1/Tmix), so it lies
+in P(d0)
+Tmix. The margin scaling is controlled by ∥µv∥= δ.
+Step 3: trajectory KL divergence. Let mv ∈Rnd0 denote the stacked trajectory mean vector
+under hypothesis v, obtained by concatenating µv across the n time steps, and let Σn ∈Rnd0×nd0
+denote the trajectory covariance of the AR(1) process. Since the latent noise ξt is Toeplitz in time and
+isotropic in the d0 feature coordinates, Σn decomposes as Σn = ΣT ⊗Id0, where ΣT ∈Rn×n is the
+temporal Toeplitz matrix with entries (ΣT )ij = λ|i−j|. The exact KL divergence between trajectory
+distributions is
+DKL(P n
+v ∥P n
+v′) = 1
+2(mv −mv′)⊤Σ−1
+n (mv −mv′).
+(7)
+By the Kronecker identity Σ−1
+n
+= Σ−1
+T
+⊗Id0, the quadratic form decouples across the feature
+coordinates. The temporal precision matrix Σ−1
+T
+is tridiagonal with diagonal (1 + λ2)/(1 −λ2) and
+off-diagonal −λ/(1 −λ2). Along a constant-direction mean shift (the trajectory is µv repeated n
+times), the Rayleigh quotient of Σ−1
+T
+scales as n(1 −λ)/(1 + λ) = O(n/Tmix), and therefore
+DKL(P n
+v ∥P n
+v′) ≤C0
+n
+Tmix ∥µv −µv′∥2 ≤C0
+n
+Tmix δ2.
+(8)
+The sequence-level KL therefore scales as O((n/Tmix)δ2) rather than the i.i.d. rate O(nδ2).
+Step 4: Fano. Applying generalized Fano to the packing yields
+inf
+ˆ
+H
+sup
+P ∈P(d0)
+Tmix
+EP [Rexcess( ˆH)] ≥c1 δ
+
+1 −c2(n/Tmix)δ2 + log 2
+log |V|
+
+.
+(9)
+Because d0 is fixed, log |V| ≍d0 is an absolute constant depending only on the model class. Choosing
+δ = c3
+p
+Tmix/n with c3 sufficiently small makes the parenthetical factor bounded below by a positive
+constant. Therefore
+inf
+ˆ
+H
+sup
+P ∈P(d0)
+Tmix
+EP [Rexcess( ˆH)] ≥c
+p
+Tmix/n,
+where c > 0 depends only on d0 and the fixed witness parameters.
+A.1
+Restricted linear-drift extension
+Assumption 11 (Bounded linear drift). Let PAR(1)
+Tmix,ν denote the subclass of AR(1) witnesses augmented
+with a deterministic linear mean shift ∆µt = (ν/n) t 1, where ν bounds the total accumulated
+variation.
+Proposition 12 (Restricted linear-drift consequence). Consider the AR(1) witness class used in the
+proof of Theorem 3, augmented with a deterministic linear mean drift ∆µt = (ν/n) t 1. Under the
+same fixed-dimension assumptions, the stationary lower-bound argument acquires an additional
+drift-dependent term, yielding the heuristic rate
+p
+Tmix/n + νTmix/n
+for this restricted subclass.
+Because Σ−1
+n
+is time-independent in this restricted subclass, inserting the linear mean shift into the
+stacked trajectory mean vector mv causes the KL calculation to acquire an additional drift-sensitive
+contribution. The augmented bilinear form decomposes into the original structural term of order
+13
+
+[Page 14]
+Ω((n/Tmix)δ2) plus a drift-driven term of order Ω(ν2n/Tmix), and applying Fano to the combined
+divergence suggests the perturbative scaling
+p
+Tmix/n + νTmix/n
+under the AR(1) witness construction. We emphasize that Proposition 12 is intended only as a
+boundary-of-applicability consequence of the stationary proof, not as a complete minimax characteri-
+zation under arbitrary non-stationarity, and we do not claim it at theorem strength.
+B
+Proof of Lemma 8
+Proof. Standard consistency results for spectral clustering [von Luxburg et al., 2008] give that,
+for an unweighted graph built from N i.i.d. samples, the empirical normalized Laplacian’s Fiedler
+eigenvalue satisfies |ˆλ2 −λ∗
+2| ≤O(
+p
+log N/N).
+We extend this to a Markov chain via a blocking argument [Yu, 1994]. Partition the sequence into 2µ
+contiguous blocks of length T = CTmix log n, where µ = n/(2T), and split into even and odd sets
+Beven, Bodd, each of size µ. Berbee’s coupling lemma provides an independent sequence ˜Beven with
+identical block marginals, with total variation distance bounded by µβ(T). Geometric ergodicity
+gives β(T) ≤C exp(−γ0T), and the logarithmic inflation T = CTmix log n makes this coupling
+error O(1/n2).
+On the decoupled blocks, the Matrix Bernstein inequality [Tropp, 2012] applied to the sum of
+independent Laplacian contributions gives, for threshold t,
+Pr
+
+∥˜Leven −E[˜Leven]∥2 ≥t
+
+≤2n exp
+
+−t2/2
+σ2 + Rt/3
+
+,
+(10)
+which yields a spectral deviation of O(
+p
+log µ/µ) with high probability. Applying the same bound
+to the odd blocks, taking a union bound with the coupling error, and substituting µ = Θ(n/Tmix)
+gives
+|ˆλ2 −λ∗
+2| ≤O
+ r
+Tmix log n
+n
+!
+.
+(11)
+C
+Uniform Convergence of the Variance Functional
+To decouple the ERM learner ˆh from the sample sequence in Lemma 5, we prove uniform convergence
+of the variance functional over the hypothesis class.
+For a fixed h ∈H, let V (h) = 1
+nVar
+ Pn
+t=1 M h
+t
+
+= Var(M h
+0 ) + 2 Pn−1
+k=1(1 −k/n)Cov(M h
+0 , M h
+k )
+denote the population variance of the margin sum, and ˆV (h) its empirical estimator. Define ˆγk(h) =
+1
+n−k
+Pn−k
+t=1 M h
+t M h
+t+k.
+Let Fk = {(x, y) 7→h(x)h(y) : h ∈H}. Since H has finite VC dimension dVC, Fk has
+bounded pseudo-dimension of order dVC. Applying the block-based Rademacher complexity
+bound of Kuznetsov and Mohri [2017] to the paired observations (Mt, Mt+k) yields Rn(Fk) ≤
+C
+p
+dVCTmix/n. Therefore, with high probability,
+sup
+h∈H
+|ˆγk(h) −γk(h)| ≤O
+ r
+Tmix(dVC log n + log(1/δ))
+n
+!
+.
+(12)
+Truncating the variance sum at lag τ ≈Tmix log n (past which γk decays exponentially) and applying
+the triangle inequality,
+sup
+h∈H
+| ˆV (h) −V (h)| ≤˜O
+ 
+T 3/2
+mix
+√n
+!
+.
+(13)
+When n = mTmix with m ≫Tmix, this error is o(Tmix) and therefore negligible compared to the
+Ω(Tmix) population scaling of Proposition 4. Since ˆh
+P−→h∗and V (h∗) ≥Ω(Tmix), the realized
+estimator preserves the structural scaling: ˆV (ˆh) ≥Ω(Tmix) −o(Tmix), resolving the circularity in
+Lemma 5.
+14
+
+[Page 15]
+D
+Sufficient Conditions for Assumption 1(iii)
+Proposition 13. Let (Xt, Yt) be drawn from a geometrically ergodic reversible chain with spectral
+gap γ0 and stationary distribution π. Suppose (a) π({x : |η(x) −1/2| ≤ε}) > 0 for all ε > 0,
+where η(x) = Pr(Y = 1 | X = x), and (b) the feature process Xt has spectral gap γX = Θ(γ0).
+Then Assumption 1(iii) holds with a1 = Θ(σ2
+0).
+Proof sketch. Condition (a) gives non-degenerate label noise near the Bayes boundary, and (b)
+ensures the margin Mt = Yth∗(Xt) inherits the mixing structure. The spectral representation gives
+a1 = ⟨M0, ϕ1⟩2
+L2(π), which is positive unless M0 is orthogonal to ϕ1. Since ϕ1 is the slowest
+non-constant eigenfunction and M0 has non-trivial spatial variation by (a), orthogonality would
+require a measure-zero alignment between the Bayes boundary and the eigenfunction.
+Verification for the AR(1) witness. The Gaussian AR(1) chain with linear Bayes boundary satisfies
+both conditions: the Gaussian stationary distribution places positive mass near any hyperplane, and
+the feature spectral gap equals the chain spectral gap. The witness chain therefore lies in P(d0)
+Tmix.
+E
+Replay Buffer Variance: LFA Corollary and NTK Bridge
+This appendix extends the core bootstrap-covariance mechanism to Q-learning ensembles. We
+emphasize up front that this section is intended as a mechanistic bridge between Lemma 5 and
+observed behavior in deep RL, not as a theorem about finite-width DQN training. The linear function
+approximation (LFA) result (Corollary 14) is a direct consequence of Lemma 5, and the NTK
+discussion is an explanatory proposition explaining why the same mechanism plausibly persists under
+deep overparameterized learning.
+Corollary 14 (LFA variance penalty). Consider m Q-learning agents performing semi-gradient
+evaluation with LFA Qj(s, a) = ϕ(s, a)⊤wj on uniform bootstrap samples Sj from a shared replay
+buffer of size n collected by an exploratory policy whose state-action chain has mixing time Tmix.
+Assume (i) ∥ϕ(s, a)∥≤B a.s.; (ii) λmin(Σ) ≥c > 0 for Σ = E[ϕϕ⊤]; and (iii) the target network
+wold is fixed. Then Var( ¯w) ≥Ω(T 2
+mix/n) where ¯w = m−1 P
+j wj.
+Proof. The Bellman target yi = ri +γ maxa′ ϕ(si+1, a′)⊤wold is a bounded deterministic functional
+of consecutive transitions, so the targets inherit the temporal autocovariance structure of Proposition 4.
+Each agent computes wj = ˆΣ−1
+j
+1
+|Sj|Φ⊤
+j Yj, and well-conditioning of Σ preserves the temporal
+covariance through the linear solve. The Law of Total Covariance then gives Cov(wj, wl) ≥
+Ω(T 2
+mix/n), matching Lemma 5.
+Remark 2 (Persistence in deep RL via NTK intuition). Corollary 14 bounds the LFA regime.
+Modern DQNs use dynamic targets and deep non-linear function approximation, so extending the
+bound formally requires handling non-convex loss surfaces and moving targets. The infinite-width
+continuous-time NTK limit [Jacot et al., 2018] provides a tractable regime in which the question can
+be asked cleanly. The analysis below shows that, even when representational capacity is infinite,
+the bootstrap covariance in Lemma 5 propagates through the NTK linear map into the ensemble’s
+trajectory. We present this as a mechanistic bridge only, and do not claim a guarantee for finite-width
+DQNs.
+In the NTK regime, let Qt(x) be a base learner’s prediction at time t and Yt(x) its Polyak-averaged
+target, with ˙Yt(x) = τ(Qt(x) −Yt(x)). Over a replay buffer D, the gradient-flow dynamics are
+˙Qt(x) = −η E(si,ai)∼D
+
+Θ(x, si)(Qt(si) −Yt(si))
+
+,
+(14)
+where Θ(x, si) = ⟨∇θQ(x), ∇θQ(si)⟩is the (limiting) static NTK.
+Because D is populated by a Markov chain with mixing time Tmix, the sequence {si} exhibits strong
+temporal autocorrelation, and the empirical NTK Θ over the buffer has a dense block-structured
+pattern with bandwidth of order Tmix. Writing the coupled dynamics as a joint ODE,
+d
+dt
+
+Qt
+Yt
+
+=
+
+−ηΘ
+ηΘ
+τI
+−τI
+ 
+Qt
+Yt
+
+,
+(15)
+15
+
+[Page 16]
+the matrix exponential governing the solution is determined by the eigenspace of Θ, which preserves
+the Ω(Tmix) structural covariance of the data.
+For an ensemble of m networks with independent initialization trained on uniform bootstrap sub-
+samples of D, the resampling operator injects the variance of Lemma 5 at the input, and linearity
+of the NTK map propagates it to the trajectories: Cov(Q(1)
+t , Q(2)
+t ) = Θ Cov(Boot1, Boot2) Θ⊤≥
+Ω(T 2
+mix/n). The upshot is that increasing representational capacity does not by itself average out the
+sampling covariance. A data-level intervention such as spectral routing, which modifies the bootstrap
+covariance directly, is therefore well-motivated in deep RL as well, and the measured target-variance
+drops in Section 5.4 are consistent with this picture.
+F
+Scalability via Nyström Approximation
+This appendix establishes that spectral routing can be implemented at scale without destroying
+Theorem 10. We treat this as an implementation theorem for Algorithm 1 rather than as an independent
+contribution.
+Assumption 15 (Bounded intrinsic rank). The continuous data manifold induces an empirical
+integral operator with bounded effective rank reff = Pn
+i=1 λi/λ1 ≤O(1), so that tail eigenvalues
+are negligible for Fiedler gap estimation relative to n.
+Theorem 16 (Nyström preserves the minimax rate). Let C ∈Rn×l be the sub-matrix corresponding
+to l uniformly sampled landmark transitions, and let ˜Lnys = I −D−1/2CW −1
+ll C⊤D−1/2 be the
+Nyström-approximated normalized Laplacian. Under Assumption 15, setting l = Ω(reffTmix log2 n)
+guarantees |ˆλnys
+2
+−λ∗
+2| ≤O(
+p
+Tmix log n/n) with high probability. Algorithm 1 with this approxi-
+mation therefore retains the O(
+p
+Tmix/n) rate of Theorem 10, with total overhead ˜O(nT 2
+mix).
+Proof. Standard Nyström theory [Williams and Seeger, 2001] gives an approximation error
+O(
+p
+log n/l) under i.i.d. landmarks. Markov landmarks are not i.i.d., so we apply Berbee’s coupling
+lemma to the sequence prior to sampling. Partition into 2µ blocks of length B = Tmix log n, with
+µ = n/(2Tmix log n). The coupling error is µ exp(−γ0Tmix log n) = O(1/n2). On the decoupled
+sequence, the effective independent landmark count is leff = Θ(l/(Tmix log n)), and Matrix Bernstein
+gives
+∥˜Lnys −˜L∥2 ≤O
+
+
+s
+Tmix log2 n
+l
+
+.
+(16)
+By Weyl’s inequality, the Fiedler eigenvalue perturbation is bounded by this spectral norm deviation.
+Requiring it to match the statistical floor of Lemma 8 gives the sufficient condition l = Ω(n log n)
+for worst-case uniform spectral preservation, which is reduced to l = Ω(reffTmix log2 n) under
+Assumption 15 by ridge leverage score concentration [Spielman and Srivastava, 2011], since only the
+leading reff-rank subspace containing λ2 must be preserved.
+Substituting l = Ω(Tmix log2 n) into the dense Nyström runtime O(l2n) gives ˜O(nT 2
+mix), which is
+sub-linear in n up to log factors because Tmix ≪n in streaming settings.
+F.1
+Empirical Verification of the Rank Condition
+We track reff across Atari replay buffers as n scales, and benchmark exact eigensolve against the
+Nyström approximation.
+Table 8 shows that the exact eigensolver becomes intractable at 106 steps, while the Nyström
+approximation scales sub-linearly and partitions the full buffer in under five minutes. Figure 4 shows
+the effective rank plateauing, confirming the condition of Assumption 15 in this setting.
+G
+Tabular Feature-Similarity Datasets
+Tabular datasets such as Covertype and Higgs Boson lack sequential Markov dependence, so our
+core theorems do not apply. We nevertheless report results with G constructed via an RBF k-NN
+16
+
+[Page 17]
+Table 8: Runtime (seconds) for spectral gap compu-
+tation.
+Buffer size (n)
+104
+105
+106 steps
+Exact eigensolve
+15.8 s
+1,495 s
+OOM
+Nyström approx.
+2.4 s
+27.2 s
+298.5 s
+103
+104
+105
+106
+0
+20
+40
+60
+Replay buffer size (n)
+Effective rank reff
+Atari reff
+O(1) asymptote
+Figure 4: Empirical verification of Assump-
+tion 15 on Atari. reff plateaus to O(1).
+feature-similarity graph, as a heuristic manifestation of structural feature stratification rather than a
+resolution of Markovian resampling covariance.
+Table 9: Tabular classification accuracy (%) with feature-similarity graphs.
+Dataset
+Standard RF
+RF + Spec. Rte.
+XGBoost
+XGBoost + Spec. Rte.
+Covtype
+86.4 ± 0.3
+88.1 ± 0.2
+89.1 ± 0.2
+90.4 ± 0.2
+Higgs Boson
+71.5 ± 0.4
+73.3 ± 0.3
+74.4 ± 0.3
+75.7 ± 0.2
+The gains are modest but consistent across base learners. We report this as preliminary evidence that
+topological partitioning has utility beyond the Markov setting, and not as a guarantee.
+H
+Preliminary Evidence: Sequence-Native Architectures
+As a preliminary architectural note, we evaluate whether spectral routing composes with modern
+sequence-native deep learners (Time-Series Transformers [Vaswani et al., 2017] and Mamba state-
+space models [Gu and Dao, 2023]) on the five most highly autocorrelated UCR datasets. The
+core theory concerns majority-vote ensembles under Markov dependence and does not directly
+imply guarantees for these architectures; we present this as preliminary evidence that the variance-
+compression principle interacts favorably with sequence-native models.
+Table 10: Sequence-native ablations: accuracy, margin variance, and expected calibration error.
+Results over 10 seeds; ensemble size m = 10.
+Time-Series Transformer
+Mamba (State-Space Model)
+Uniform Ensemble
++ Spectral Routing
+Uniform Ensemble
++ Spectral Routing
+Dataset
+Acc (%)
+Var(ρ) ↓
+ECE↓
+Acc (%)
+Var(ρ) ↓
+ECE↓
+Acc (%)
+Var(ρ) ↓
+ECE↓
+Acc (%)
+Var(ρ) ↓
+ECE↓
+FordA
+88.6 ± .6
+0.142
+0.118
+91.5 ± .4
+0.081
+0.065
+89.3 ± .5
+0.138
+0.112
+91.3 ± .4
+0.078
+0.061
+StarLightCurve
+91.8 ± .4
+0.128
+0.105
+93.4 ± .3
+0.075
+0.059
+92.6 ± .4
+0.122
+0.101
+94.2 ± .3
+0.070
+0.053
+Wafer
+93.9 ± .3
+0.115
+0.092
+94.8 ± .2
+0.066
+0.048
+94.5 ± .2
+0.110
+0.088
+95.5 ± .2
+0.062
+0.045
+TwoPatterns
+88.2 ± .7
+0.155
+0.126
+91.1 ± .5
+0.088
+0.072
+88.8 ± .6
+0.148
+0.120
+91.7 ± .4
+0.083
+0.067
+GunPoint
+89.8 ± .5
+0.134
+0.108
+91.7 ± .4
+0.076
+0.062
+90.5 ± .5
+0.130
+0.104
+92.5 ± .4
+0.072
+0.056
+Average
+90.46%
+0.134
+0.109
+92.50%
+0.077
+0.061
+91.14%
+0.129
+0.105
+93.04%
+0.073
+0.056
+Both architectures exhibit a consistent pattern: accuracy improves, the margin variance Var(ρ) across
+ensemble members drops by roughly 43% on average, and the Expected Calibration Error improves
+correspondingly. A paired Wilcoxon test confirms significance at p < 0.001. The interpretation we
+emphasize is that, although sequence-native models handle intra-window temporal dynamics through
+their architecture, their ensemble voting aggregate is still bottlenecked by the inter-window bootstrap
+covariance we characterize, and a data-level intervention is orthogonal to the choice of base model.
+17
+
+[Page 18]
+I
+Extended UCR Benchmark Analysis
+Table 11 gives detailed accuracy for a representative 40-dataset slice of the full 128 UCR datasets,
+split by autocorrelation. A Friedman test across all 8 methods and 128 datasets rejects the null
+of equal performance (p < 10−4). A Nemenyi post-hoc test at α = 0.05 gives critical difference
+CD ≈1.15; Figure 5 shows the resulting CD diagram. Average ranks across the full archive are:
+ROCKET+SR (1.2), ROCKET (1.8), RF+SR (2.7), TSF (3.5), Stationary Bootstrap (4.2), Auto-BB
+(4.8), Lag Thinning (5.3), and standard Random Forest (5.8).
+1
+2
+3
+4
+5
+6
+ROCKET+SR (1.2)
+ROCKET (1.8)
+RF+SR (2.7)
+TSF (3.5)
+Stat. Boot. (4.2)
+Auto-BB (4.8)
+Lag-Thin (5.3)
+RF (5.8)
+Figure 5: Critical difference diagram over the full 128 UCR datasets. Methods connected by a
+horizontal bar are not significantly different (p > 0.05, Nemenyi).
+Table 11: Per-dataset accuracy (%) on a representative 40-dataset slice of the full UCR archive,
+grouped by autocorrelation.
+High correlation (ρ > 0.85)
+Low correlation (ρ ≤0.85)
+Dataset
+RF
+RF+SR
+ROCKET
+ROCKET+SR
+Dataset
+RF
+RF+SR
+ROCKET
+ROCKET+SR
+ECG200
+76.8 ± 1.1
+79.7 ± 1.4
+80.7 ± 0.9
+82.1 ± 0.8
+SyntheticControl
+97.1 ± 0.7
+97.2 ± 0.6
+98.6 ± 0.4
+98.7 ± 0.3
+GunPoint
+86.0 ± 0.9
+89.1 ± 1.1
+89.7 ± 0.8
+91.2 ± 0.7
+CBF
+93.9 ± 1.0
+94.0 ± 1.1
+97.1 ± 0.7
+97.2 ± 0.7
+MiddlePhalanx
+69.3 ± 2.0
+70.8 ± 1.9
+72.1 ± 1.4
+72.7 ± 1.3
+FaceAll
+80.8 ± 2.1
+80.5 ± 2.3
+84.1 ± 1.7
+84.0 ± 1.6
+PowerCons
+83.0 ± 1.4
+88.9 ± 1.1
+90.1 ± 0.9
+92.4 ± 0.8
+FacesUCR
+86.4 ± 1.7
+86.6 ± 1.6
+89.7 ± 1.3
+89.8 ± 1.2
+TwoLeadECG
+80.4 ± 1.3
+86.3 ± 0.8
+87.6 ± 0.6
+89.7 ± 0.5
+Fish
+93.4 ± 1.4
+94.7 ± 1.5
+96.6 ± 0.9
+97.1 ± 0.8
+FordA
+83.9 ± 1.0
+89.1 ± 0.7
+90.4 ± 0.6
+91.6 ± 0.5
+50words
+78.6 ± 2.4
+79.2 ± 2.0
+82.7 ± 1.4
+82.8 ± 1.4
+FordB
+73.2 ± 1.7
+72.5 ± 1.3
+75.6 ± 1.0
+75.4 ± 1.1
+Adiac
+73.1 ± 3.0
+73.4 ± 2.8
+78.4 ± 1.9
+78.5 ± 1.9
+HandOutlines
+76.3 ± 1.9
+81.9 ± 1.5
+82.6 ± 1.3
+84.1 ± 1.0
+ArrowHead
+86.1 ± 1.8
+86.3 ± 1.7
+89.1 ± 1.1
+89.2 ± 1.0
+PhalangesOut
+71.0 ± 2.1
+77.2 ± 1.6
+79.1 ± 1.1
+80.7 ± 0.9
+Beef
+73.6 ± 3.4
+73.2 ± 3.1
+77.1 ± 2.4
+76.8 ± 2.5
+StarLightCurve
+88.2 ± 0.6
+91.9 ± 0.3
+92.6 ± 0.3
+93.7 ± 0.2
+BeetleFly
+92.1 ± 2.1
+92.4 ± 1.9
+94.6 ± 1.4
+94.7 ± 1.3
+Wafer
+91.3 ± 0.4
+93.9 ± 0.1
+95.1 ± 0.1
+96.2 ± 0.1
+BirdChicken
+81.4 ± 2.7
+81.9 ± 2.4
+84.8 ± 1.7
+85.1 ± 1.6
+Yoga
+76.0 ± 1.5
+76.7 ± 1.2
+78.6 ± 1.0
+78.8 ± 1.0
+Car
+87.6 ± 2.0
+87.3 ± 2.2
+91.1 ± 1.4
+90.8 ± 1.5
+UWaveGesture
+70.6 ± 2.2
+76.3 ± 1.8
+77.4 ± 1.4
+78.8 ± 1.2
+ChlorineConc
+71.4 ± 3.1
+71.7 ± 2.9
+75.7 ± 2.0
+75.9 ± 1.9
+TwoPatterns
+82.3 ± 1.3
+88.0 ± 0.9
+88.7 ± 0.7
+90.1 ± 0.6
+CinCECGTorso
+80.4 ± 2.3
+80.1 ± 2.5
+83.1 ± 1.7
+82.8 ± 1.8
+NonInvFetal
+73.7 ± 1.6
+74.2 ± 1.1
+75.8 ± 0.9
+76.1 ± 0.9
+Coffee
+99.1 ± 0.5
+99.2 ± 0.4
+99.7 ± 0.2
+99.8 ± 0.1
+DistalPhalanx
+70.0 ± 2.3
+71.7 ± 2.0
+73.6 ± 1.7
+74.2 ± 1.5
+Computers
+72.0 ± 2.4
+71.8 ± 2.6
+75.6 ± 1.7
+75.4 ± 1.8
+Earthquakes
+77.1 ± 1.7
+78.8 ± 1.4
+80.8 ± 1.1
+81.9 ± 1.0
+CricketX
+82.9 ± 2.0
+82.7 ± 2.3
+86.1 ± 1.4
+85.8 ± 1.5
+ElectricDev
+81.8 ± 1.3
+84.6 ± 0.9
+86.4 ± 0.7
+87.8 ± 0.6
+DiatomSize
+91.8 ± 1.3
+92.1 ± 1.2
+95.4 ± 0.8
+95.7 ± 0.7
+Haptics
+73.4 ± 2.1
+75.5 ± 1.8
+77.4 ± 1.3
+78.7 ± 1.1
+ECGFiveDays
+87.1 ± 1.6
+87.0 ± 1.8
+89.9 ± 1.1
+89.7 ± 1.2
+InlineSkate
+66.0 ± 2.7
+69.1 ± 2.1
+71.1 ± 1.8
+72.6 ± 1.6
+MedicalImages
+75.8 ± 2.0
+75.6 ± 2.2
+79.1 ± 1.5
+78.9 ± 1.6
+18

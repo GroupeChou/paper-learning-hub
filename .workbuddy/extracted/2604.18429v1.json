@@ -1,0 +1,57 @@
+{
+  "paper_id": "2604.18429v1",
+  "title": "Revisiting Change VQA in Remote Sensing with Structured and Native Multimodal Qwen Models",
+  "organization": "阿里通义",
+  "publish_date": "2026-04-20",
+  "theme": "深度学习时序预测",
+  "source_name": "Qwen arXiv query",
+  "source_url": "https://arxiv.org/abs/2604.18429v1",
+  "paper_url": "https://arxiv.org/pdf/2604.18429v1",
+  "summary": "Change visual question answering (Change VQA) addresses the problem of answering natural-language questions about semantic changes between bi-temporal remote sensing (RS) images. Although vision-language models (VLMs) have recently been...",
+  "priority": 873,
+  "total_chars": 26106,
+  "chunk_count": 5,
+  "image_paths": [
+    "assets/page-003-img-01.png",
+    "assets/page-003-img-02.png",
+    "assets/page-003-img-03.png",
+    "assets/page-003-img-04.png",
+    "assets/page-004-img-01.png",
+    "assets/page-004-img-02.png",
+    "assets/page-004-img-03.png",
+    "assets/page-004-img-04.png"
+  ],
+  "notes": [],
+  "chunks": [
+    {
+      "index": 1,
+      "heading": "Section 1",
+      "text_len": 6043,
+      "text_preview": "[Page 1]\n1\nRevisiting Change VQA in Remote Sensing with\nStructured and Native Multimodal Qwen Models\nYakoub Bazi, Mohamad M. Al Rahhal, Mansour Zuair, and Faroun Mohamed\nAbstract—Change visual questio"
+    },
+    {
+      "index": 2,
+      "heading": "Section 2",
+      "text_len": 5222,
+      "text_preview": "[Page 2]\n2\nacross multiple model scales. Rather than proposing another\nhandcrafted model for change analysis, our goal is to under-\nstand how well current generalist VLMs can handle this task\nand how "
+    },
+    {
+      "index": 3,
+      "heading": "Section 3",
+      "text_len": 3806,
+      "text_preview": "[Page 3]\n3\nAnswer: buildings\nAnswer: 0_to_10\nQwen3-VL-2B\nQwen3.5-2B\nShared ViT encoder\n24 blocks · hidden 1024 · merge 2×2\nPatchMerger\nLN → 4096 → GELU → 2048 · 25.2M\nDeepStack × 3\ndeep visual conditi"
+    },
+    {
+      "index": 4,
+      "heading": "Section 4",
+      "text_len": 5548,
+      "text_preview": "[Page 4]\n4\nTrain\nVal\nTest1\nTest2\n0\n10000\n20000\n30000\n40000\n50000\n60000\nCount\n(a) Split sizes\nQA pairs\nImage pairs\nC/N\nInc.\nDec.\nSml.\nLrg.\nCtW\nCR\nCCR\n0\n10\n20\n30\n40\nProp. (%)\n(b) Question-type dist.\nYes"
+    },
+    {
+      "index": 5,
+      "heading": "Section 5",
+      "text_len": 5479,
+      "text_preview": "[Page 5]\n5\nTABLE II\nPER-QUESTION-TYPE RESULTS OF DIFFERENT QWEN-FAMILY MODELS ON THE TWO OFFICIAL CDVQA TEST SPLITS (%). AA AND OA DENOTE\nAVERAGE ACCURACY AND OVERALL ACCURACY, RESPECTIVELY.\nQuestion "
+    }
+  ]
+}

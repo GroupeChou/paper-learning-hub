@@ -1,0 +1,120 @@
+{
+  "paper_id": "2604.21896v1",
+  "title": "Nemobot Games: Crafting Strategic AI Gaming Agents for Interactive Learning with Large Language Models",
+  "organization": "MiniMax",
+  "publish_date": "2026-04-23",
+  "theme": "AI Agent",
+  "source_name": "MiniMax arXiv query",
+  "source_url": "https://arxiv.org/abs/2604.21896v1",
+  "paper_url": "https://arxiv.org/pdf/2604.21896v1",
+  "summary": "This paper introduces a new paradigm for AI game programming, leveraging large language models (LLMs) to extend and operationalize Claude Shannon's taxonomy of game-playing machines. Central to this paradigm is Nemobot, an interactive ag...",
+  "priority": 899,
+  "total_chars": 72404,
+  "chunk_count": 13,
+  "image_paths": [
+    "assets/page-001-img-01.png",
+    "assets/page-001-img-02.png",
+    "assets/page-001-img-03.png",
+    "assets/page-001-img-04.png",
+    "assets/page-001-img-05.png",
+    "assets/page-002-img-01.png",
+    "assets/page-002-img-02.png",
+    "assets/page-002-img-03.png",
+    "assets/page-002-img-04.png",
+    "assets/page-002-img-05.png",
+    "assets/page-002-img-06.png",
+    "assets/page-002-img-07.png",
+    "assets/page-002-img-08.png",
+    "assets/page-002-img-09.png",
+    "assets/page-005-img-01.png",
+    "assets/page-005-img-02.png",
+    "assets/page-006-img-01.png",
+    "assets/page-006-img-02.png",
+    "assets/page-006-img-03.png",
+    "assets/page-006-img-04.png"
+  ],
+  "notes": [
+    "图片数量超过上限，仅保留前 20 张。",
+    "图片数量超过上限，仅保留前 20 张。"
+  ],
+  "chunks": [
+    {
+      "index": 1,
+      "heading": "Section 1",
+      "text_len": 5038,
+      "text_preview": "[Page 1]\n1\nNemobot Games: Crafting Strategic AI Gaming\nAgents for Interactive Learning with Large\nLanguage Models\nChee Wei Tan, Yuchen Wang, Shangxin Guo\nAbstract—This paper introduces a new paradigm "
+    },
+    {
+      "index": 2,
+      "heading": "Section 2",
+      "text_len": 5061,
+      "text_preview": "[Page 2]\n2\nType 1. Dictionary-\ntype machines\nType 2. Machines\nusing formulas\ne.g. tic-tac-toe\ne.g. Nim\ne.g. Mini\nMancala\nmore complex\ngames\nType 3. Machines\napplying principles \nType 4. Learning machi"
+    },
+    {
+      "index": 3,
+      "heading": "Section 3",
+      "text_len": 6375,
+      "text_preview": "[Page 3]\n3\ncrowdsourced strategy refinement, and a tiered curriculum\nthat scaffolds learning from simple dictionary-based games\nto advanced reinforcement-learning agents. This positions\nthe contributi"
+    },
+    {
+      "index": 4,
+      "heading": "Section 4",
+      "text_len": 6577,
+      "text_preview": "[Page 4]\n4\nstrategic elements of the game and the efficient implemen-\ntation of mathematical algorithms, optimizing computational\nperformance through context-aware code generation.\nThe third category,"
+    },
+    {
+      "index": 5,
+      "heading": "Section 5",
+      "text_len": 5768,
+      "text_preview": "[Page 5]\n5\nthe potential and limitations of collective decision-making in\nhuman-machine collaboration. Crowdsourcing offers a scal-\nable way to improve natural language understanding by lever-\naging d"
+    },
+    {
+      "index": 6,
+      "heading": "Section 6",
+      "text_len": 3742,
+      "text_preview": "[Page 6]\n6\n(a) Coding Pad\n(b) Chat Playground\n(c)-1 LLM functions\n(c)-2 Function Definition\nFig. 4: UI of Nemobot. (a)&(b) Programs written on the coding pad are synchronously executed and rendered on"
+    },
+    {
+      "index": 7,
+      "heading": "Section 7",
+      "text_len": 6224,
+      "text_preview": "[Page 7]\n7\na dataset D of test cases, yielding rewards Ri that guide adjust-\nments to improve subsequent iterations. This loop continues\nuntil the AI meets a predefined performance threshold.\nThis tra"
+    },
+    {
+      "index": 8,
+      "heading": "Section 8",
+      "text_len": 5505,
+      "text_preview": "[Page 8]\n8\nTABLE I: Nemobot games, powered by OpenAI Codex and Application Programming Interface (API) between 2021 and\n2023, categorized according to Shannon’s game taxonomy. These games demonstrate "
+    },
+    {
+      "index": 9,
+      "heading": "Section 9",
+      "text_len": 4838,
+      "text_preview": "[Page 9]\n9\npassed to the LLM, which leverages its pretrained knowledge\nof mathematical solutions for the Nim game to determine\nthe optimal move and contextualize the mathematical strategy.\nThis approa"
+    },
+    {
+      "index": 10,
+      "heading": "Section 10",
+      "text_len": 5245,
+      "text_preview": "[Page 10]\n10\nFig. 6: Training process illustrating the number of game trials\nrequired for our Nim game agent to master a skillful strategy\nthrough a single simulation run of Michie’s algorithm that ca"
+    },
+    {
+      "index": 11,
+      "heading": "Section 11",
+      "text_len": 6234,
+      "text_preview": "[Page 11]\n11\ngameplay; they actively design, test, and refine game-\nplaying strategies through collaborative prompt engineering\nand crowdsourced feedback. This programmability distin-\nguishes Nemobot "
+    },
+    {
+      "index": 12,
+      "heading": "Section 12",
+      "text_len": 8948,
+      "text_preview": "[Page 12]\n12\nThis programming paradigm showcases how games in\nNemobot surpass rigid algorithms, enabling flexibility and\ncreativity in identifying patterns and evolving strategies in AI\ngames. By auto"
+    },
+    {
+      "index": 13,
+      "heading": "Section 13",
+      "text_len": 2825,
+      "text_preview": "[Page 13]\n13\n[42] ——, “Discovery as collaboration: It takes two (at least) to tango,”\nElectronic Transactions on Artificial Intelligence, vol. 4, no. B, pp. 1–19,\n2000.\n[43] P. F. Christiano, J. Leike"
+    }
+  ]
+}

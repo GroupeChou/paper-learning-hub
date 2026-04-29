@@ -1,0 +1,82 @@
+{
+  "paper_id": "2604.18038v1",
+  "title": "First, Do No Harm (With LLMs): Mitigating Racial Bias via Agentic Workflows",
+  "organization": "DeepSeek",
+  "publish_date": "2026-04-20",
+  "theme": "AI Agent",
+  "source_name": "DeepSeek arXiv query",
+  "source_url": "https://arxiv.org/abs/2604.18038v1",
+  "paper_url": "https://arxiv.org/pdf/2604.18038v1",
+  "summary": "Large language models (LLMs) are increasingly used in clinical settings, raising concerns about racial bias in both generated medical text and clinical reasoning. Existing studies have identified bias in medical LLMs, but many focus on s...",
+  "priority": 938,
+  "total_chars": 37248,
+  "chunk_count": 10,
+  "image_paths": [
+    "assets/page-004-img-01.png",
+    "assets/page-006-img-01.png",
+    "assets/page-007-img-01.png"
+  ],
+  "notes": [],
+  "chunks": [
+    {
+      "index": 1,
+      "heading": "Section 1",
+      "text_len": 3236,
+      "text_preview": "[Page 1]\nFIRST, DO NO HARM (WITH LLMS): MITIGATING RACIAL BIAS\nVIA AGENTIC WORKFLOWS\nSihao Xing*\nSchool of Enterprise Computing and Digital Transformation\nTechnological University Dublin\nx00230945@myt"
+    },
+    {
+      "index": 2,
+      "heading": "Section 2",
+      "text_len": 4639,
+      "text_preview": "[Page 2]\nA PREPRINT - DECEMBER 2025\nrecord-keeping, transparency, human oversight, and accuracy and robustness [3]. In this study, the AI Act is used as a\ngovernance lens for structuring evaluation an"
+    },
+    {
+      "index": 3,
+      "heading": "Section 3",
+      "text_len": 3899,
+      "text_preview": "[Page 3]\nA PREPRINT - DECEMBER 2025\nGeneration (RAG), decision optimization, and human-in-the-loop, improving both efficiency and accuracy across\ndiverse medical applications. Yet, empirical evidence "
+    },
+    {
+      "index": 4,
+      "heading": "Section 4",
+      "text_len": 2035,
+      "text_preview": "[Page 4]\nA PREPRINT - DECEMBER 2025\nFigure 1: Experimental Pipeline\n• response: the model’s case description, including demographic details (with racial label), past history, chief\ncomplaint, and phys"
+    },
+    {
+      "index": 5,
+      "heading": "Section 5",
+      "text_len": 4482,
+      "text_preview": "[Page 5]\nA PREPRINT - DECEMBER 2025\nThe overall experimental procedure is divided into two stages. Experiment I measures racial bias through two sub-\nexperiments: Sub-experiment 1 (patient case genera"
+    },
+    {
+      "index": 6,
+      "heading": "Section 6",
+      "text_len": 3561,
+      "text_preview": "[Page 6]\nA PREPRINT - DECEMBER 2025\nFigure 2: Pipeline Of Agentic Workflow\n4.2.3\nExperiment II: AI Agentic Workflow\nAs illustrated in Figure 2, the overall workflow of this agentic AI system comprises"
+    },
+    {
+      "index": 7,
+      "heading": "Section 7",
+      "text_len": 2473,
+      "text_preview": "[Page 7]\nA PREPRINT - DECEMBER 2025\nTable 2: Benjamini–Hochberg-adjusted P-values of Models\nGPT-4.1\nDeepSeek V3\nLlama 3.3\nGemini 2.5 Pro\nGrok 3\nBacterial Pneumonia\n1.059677e-13\n2.123344e-12\n3.267196e-"
+    },
+    {
+      "index": 8,
+      "heading": "Section 8",
+      "text_len": 3895,
+      "text_preview": "[Page 8]\nA PREPRINT - DECEMBER 2025\nTable 4: Statistical Summary of Model Comparisons\nMean\np-value\nMedian\np-value\nMean\ndifference\nDeepSeek V3\n0.7859\n0.8834\n0.2588\nGemini 2.5 Pro\n0.6623\n0.7312\n0.4921\nG"
+    },
+    {
+      "index": 9,
+      "heading": "Section 9",
+      "text_len": 4503,
+      "text_preview": "[Page 9]\nA PREPRINT - DECEMBER 2025\nworkflow was applied only to the differential diagnosis task; future work should examine whether similar designs can\nreduce bias in synthetic case generation or oth"
+    },
+    {
+      "index": 10,
+      "heading": "Section 10",
+      "text_len": 4507,
+      "text_preview": "[Page 10]\nA PREPRINT - DECEMBER 2025\n[17] Eric Lehman. gpt4_bias: Assessing gpt-4’s potential for perpetuating racial and gender biases in healthcare.\nhttps://github.com/elehman16/gpt4_bias, 2023. Acc"
+    }
+  ]
+}

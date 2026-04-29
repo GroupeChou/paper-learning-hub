@@ -1,0 +1,184 @@
+{
+  "paper_id": "2604.11753v1",
+  "title": "Agentic Aggregation for Parallel Scaling of Long-Horizon Agentic Tasks",
+  "organization": "智谱",
+  "publish_date": "2026-04-13",
+  "theme": "AI Agent",
+  "source_name": "GLM arXiv query",
+  "source_url": "https://arxiv.org/abs/2604.11753v1",
+  "paper_url": "https://arxiv.org/pdf/2604.11753v1",
+  "summary": "We study parallel test-time scaling for long-horizon agentic tasks such as agentic search and deep research, where multiple rollouts are generated in parallel and aggregated into a final response. While such scaling has proven effective...",
+  "priority": 900,
+  "total_chars": 97492,
+  "chunk_count": 27,
+  "image_paths": [
+    "assets/page-001-img-01.png",
+    "assets/page-001-img-02.png",
+    "assets/page-002-img-01.png"
+  ],
+  "notes": [],
+  "chunks": [
+    {
+      "index": 1,
+      "heading": "Section 1",
+      "text_len": 2622,
+      "text_preview": "[Page 1]\nAgentic Aggregation for Parallel Scaling of Long-Horizon\nAgentic Tasks\nYoonsang Lee Howard Yen Xi Ye Danqi Chen\nPrinceton Language and Intelligence, Princeton University\n{yoonsang, hyen, danq"
+    },
+    {
+      "index": 2,
+      "heading": "Section 2",
+      "text_len": 4361,
+      "text_preview": "[Page 2]\nTASK\nAccording to the Council on Tall Buildings and Urban Habitat\ninformation on the tallest buildings in the world in 1990, from\nnumber 44 to 46 on the list, which respective city has the\nol"
+    },
+    {
+      "index": 3,
+      "heading": "Section 3",
+      "text_len": 3908,
+      "text_preview": "[Page 3]\nCriterion\nMV\nWMV\nBoN\nFewTool\nSolAgg\nSummAgg\nAggAgent (Ours)\nTask-agnostic\n✗\n✗\n✓\n✓\n✓\n✓\n✓\nNon-heuristic\n✗\n✗\n✗\n✗\n✓\n✓\n✓\nTrajectory Info.\n✗\n✗\n✗\n✗\n✗\n✓\n✓\nFull Fidelity\n✗\n✗\n✗\n✗\n✗\n✗\n✓\nAggregation Cost"
+    },
+    {
+      "index": 4,
+      "heading": "Section 4",
+      "text_len": 3899,
+      "text_preview": "[Page 4]\nWe classify these baselines into two groups. Heuristic methods (MV, WMV, BoN, FewTool)\nrely on shallow signals such as answer frequency, confidence scores, or trajectory length,\nwithout inspe"
+    },
+    {
+      "index": 5,
+      "heading": "Section 5",
+      "text_len": 3791,
+      "text_preview": "[Page 5]\ntargets multi-answer queries where completeness across all valid answers is required. 2)\nDeep research: Healthbench-Hard (Arora et al., 2025) requires generating comprehensive\nlong-form respo"
+    },
+    {
+      "index": 6,
+      "heading": "Section 6",
+      "text_len": 2856,
+      "text_preview": "[Page 6]\nHeuristic Aggregation@8\nLLM-based Aggregation@8\nMV\nWMV\nBoN\nFewTool\nSolAgg\nSummAgg AggAgent\nBrowseComp\n27.42\n32.67\n50.67\n51.33\n41.33\n53.33\n55.33\n56.00\nBrowseComp-Plus\n49.08\n59.33\n68.67\n68.67\n6"
+    },
+    {
+      "index": 7,
+      "heading": "Section 7",
+      "text_len": 3250,
+      "text_preview": "[Page 7]\ntion on deep research tasks, as trajectory compression harms the detail and coherence of\nlong-form responses. While no single baseline is universally optimal, AggAgent achieves\nstrong perform"
+    },
+    {
+      "index": 8,
+      "heading": "Section 8",
+      "text_len": 3009,
+      "text_preview": "[Page 8]\nAggAgent (GLM)\nSelection (GLM)\nAggAgent (Qwen)\nSelection (Qwen)\nAggAgent (MiniMax)\nSelection (MiniMax)\nNumber of Parallel Trajectories\nBrowseComp\n1\n2\n4\n8\n20\n40\n60\n80\nPerformance\nBrowseComp-Pl"
+    },
+    {
+      "index": 9,
+      "heading": "Section 9",
+      "text_len": 3735,
+      "text_preview": "[Page 9]\nget_solution\nsearch_trajectory\nget_segment\nfinish\nGLM-4.7-Flash\n18.0\n16.0\n14.7\n18.0\n9.9\n8.6\nBrowseComp\nBrowseComp-Plus\nHLE\nDeepSearchQA\nHealthBench-Hard\nResearchRubrics\n0\n5\n10\n15\n20\nNumber of"
+    },
+    {
+      "index": 10,
+      "heading": "Section 10",
+      "text_len": 5210,
+      "text_preview": "[Page 10]\n1. Minority Answer Identification\nHLE\nSTEP #2 THINK\nTrajectory 1: n = 58\nTrajectory 2: n = 2\nTrajectory 3: n = 6\nTrajectory 4: n = 3\nTrajectory 5: n = 2\nTrajectory 6: n = 2\nTrajectory 7: n ="
+    },
+    {
+      "index": 11,
+      "heading": "Section 11",
+      "text_len": 3420,
+      "text_preview": "[Page 11]\nReferences\nJosh Achiam, Steven Adler, Sandhini Agarwal, Lama Ahmad, Ilge Akkaya, Florencia Leoni\nAleman, Diogo Almeida, Janko Altenschmidt, Sam Altman, Shyamal Anadkat, et al.\nGPT-4 technica"
+    },
+    {
+      "index": 12,
+      "heading": "Section 12",
+      "text_len": 3713,
+      "text_preview": "[Page 12]\nDaya Guo, Dejian Yang, Haowei Zhang, Junxiao Song, Peiyi Wang, Qihao Zhu, Runxin Xu,\nRuoyu Zhang, Shirong Ma, Xiao Bi, et al. DeepSeek-R1: Incentivizing reasoning capability\nin LLMs via rein"
+    },
+    {
+      "index": 13,
+      "heading": "Section 13",
+      "text_len": 3381,
+      "text_preview": "[Page 13]\nZhuofeng Li, Dongfu Jiang, Xueguang Ma, Haoxiang Zhang, Ping Nie, Yuyu Zhang, Kai\nZou, Jianwen Xie, Yu Zhang, and Wenhu Chen. OpenResearcher: A Fully Open Pipeline\nfor Long-Horizon Deep Rese"
+    },
+    {
+      "index": 14,
+      "heading": "Section 14",
+      "text_len": 3870,
+      "text_preview": "[Page 14]\nCharlie Victor Snell, Jaehoon Lee, Kelvin Xu, and Aviral Kumar. Scaling LLM test-time\ncompute optimally can be more effective than scaling parameters for reasoning. In\nThe Thirteenth Interna"
+    },
+    {
+      "index": 15,
+      "heading": "Section 15",
+      "text_len": 3379,
+      "text_preview": "[Page 15]\nJohn Yang, Carlos E Jimenez, Alexander Wettig, Kilian Lieret, Shunyu Yao, Karthik\nNarasimhan, and Ofir Press. SWE-agent: Agent-computer interfaces enable automated\nsoftware engineering. Adva"
+    },
+    {
+      "index": 16,
+      "heading": "Section 16",
+      "text_len": 2799,
+      "text_preview": "[Page 16]\nA.2\nRollout Agent Tools\nBrowseComp-Plus The local corpus contains 100,195 documents. search uses Qwen3-\nEmbedding-8B to retrieve the top-5 documents by score, with each snippet truncated to "
+    },
+    {
+      "index": 17,
+      "heading": "Section 17",
+      "text_len": 3257,
+      "text_preview": "[Page 17]\nA.4\nLatency Measurement\nWe measure latency by processing one problem at a time, using 2×H100 for GLM-4.7-Flash\nand 4×H100 for Qwen3.5-122B and MiniMax-M2.5.\nRollout latency (ℓr): Wall-clock "
+    },
+    {
+      "index": 18,
+      "heading": "Section 18",
+      "text_len": 3158,
+      "text_preview": "[Page 18]\nB\nPrompts\nRollout agent\nWe use the system prompt from Tongyi DeepResearch (Tongyi DeepRe-\nsearch Team et al., 2025) (Figure 12), with an additional instruction from Dr. Tulu (Shao et al.,\n20"
+    },
+    {
+      "index": 19,
+      "heading": "Section 19",
+      "text_len": 3836,
+      "text_preview": "[Page 19]\nTask\nK\nPass\nHeuristic Aggregation\nLLM-based Aggregation\nMV\nWMV\nBoN\nFewTool\nSolAgg\nSummAgg\nAggAgent\nBrowseComp\n1\n27.422.17\n-\n-\n-\n-\n-\n-\n-\n2\n37.862.63\n27.262.36\n35.793.03\n35.603.04\n33.242.47\n35"
+    },
+    {
+      "index": 20,
+      "heading": "Section 20",
+      "text_len": 3701,
+      "text_preview": "[Page 21]\nTask\nK\nPass\nHeuristic Aggregation\nLLM-based Aggregation\nMV\nWMV\nBoN\nFewTool\nSolAgg\nSummAgg\nAggAgent\nBrowseComp\n1\n50.173.35\n-\n-\n-\n-\n-\n-\n-\n2\n60.862.32\n50.402.15\n59.402.36\n59.362.34\n57.382.47\n60"
+    },
+    {
+      "index": 21,
+      "heading": "Section 21",
+      "text_len": 3595,
+      "text_preview": "[Page 22]\nTask\nK\nRollout\nCost (cr)\nTool Call\nCost (ct)\nAggregation Cost (ca)\nRollout\nLatency (tr)\nAggregation Latency (ta)\nSolAgg\nSummAgg\nAggAgent\nSolAgg\nSummAgg\nAggAgent\nBrowseComp\n1\n.0409\n.0315\n-\n-\n"
+    },
+    {
+      "index": 22,
+      "heading": "Section 22",
+      "text_len": 4753,
+      "text_preview": "[Page 23]\nTask\nK\nPass\nGLM-4.7-Flash\nMiniMax-M2.5\nSolAgg\nSummAgg AggAgent\nSolAgg\nSummAgg AggAgent\nBrowseComp\n1\n27.42\n-\n-\n-\n-\n-\n-\n2\n37.86\n35.78\n34.89\n37.78\n36.22\n37.11\n39.11\n4\n49.21\n45.33\n46.22\n45.78\n46"
+    },
+    {
+      "index": 23,
+      "heading": "Section 23",
+      "text_len": 2166,
+      "text_preview": "[Page 27]\nWrong\nCorrect\n0.0\n0.2\n0.4\n0.6\n0.8\n1.0\nConfidence\nn=1200\nMean  W:0.45  C:0.93\nMedian W:0.60  C:0.95\nWrong\nCorrect\n0.0\n0.2\n0.4\n0.6\n0.8\n1.0\nn=1200\nMean  W:0.62  C:0.95\nMedian W:0.75  C:0.95\nWro"
+    },
+    {
+      "index": 24,
+      "heading": "Section 24",
+      "text_len": 3112,
+      "text_preview": "[Page 28]\nRollout agent system prompt for agentic search tasks\nYou are a deep research assistant. Your core function is to conduct thorough, multi-source\ninvestigations into any topic. You must handle"
+    },
+    {
+      "index": 25,
+      "heading": "Section 25",
+      "text_len": 4252,
+      "text_preview": "[Page 29]\nAggAgent system prompt for agentic search tasks\nYou are an aggregation agent. You are provided with a task and a set of candidate trajectories\nfrom independent agents that attempted to solve"
+    },
+    {
+      "index": 26,
+      "heading": "Section 26",
+      "text_len": 3874,
+      "text_preview": "[Page 30]\n<explanation>We need the 2020 population. The census table shows state X with 1.2M and state\nY with 0.8M; the question asks for the sum. 1.2 + 0.8 = 2.0 million.</explanation><answer>2.0\nmil"
+    },
+    {
+      "index": 27,
+      "heading": "Section 27",
+      "text_len": 4533,
+      "text_preview": "[Page 31]\n—\n**COMMON PITFALLS**\n- **Cherry-picking the best-sounding candidate:** Length or fluency is not quality. A shorter\ncandidate may cover a critical aspect better.\n- **Ignoring minority candid"
+    }
+  ]
+}

@@ -1,0 +1,129 @@
+{
+  "paper_id": "2604.23972v1",
+  "title": "Quantum Knowledge Graph: Modeling Context-Dependent Triplet Validity",
+  "organization": "阿里通义",
+  "publish_date": "2026-04-27",
+  "theme": "AI Agent",
+  "source_name": "Qwen arXiv query",
+  "source_url": "https://arxiv.org/abs/2604.23972v1",
+  "paper_url": "https://arxiv.org/pdf/2604.23972v1",
+  "summary": "Knowledge graphs (KGs) are increasingly used to support large lan guage model (LLM) reasoning, but standard triplet-based KGs treat each relation as globally valid. In many settings, whether a relation should count as evidence depends on...",
+  "priority": 878,
+  "total_chars": 60400,
+  "chunk_count": 18,
+  "image_paths": [
+    "assets/page-002-img-01.png",
+    "assets/page-010-img-01.jpeg"
+  ],
+  "notes": [],
+  "chunks": [
+    {
+      "index": 1,
+      "heading": "Section 1",
+      "text_len": 2453,
+      "text_preview": "[Page 1]\nQuantum Knowledge Graph: Modeling Context-Dependent\nTriplet Validity\nYao WANG1,2\nZixu GENG3\nJun YAN1∗\n1HKAI-Sci, City University of Hong Kong\n2Department of Automation, Tsinghua University\n3P"
+    },
+    {
+      "index": 2,
+      "heading": "Section 2",
+      "text_len": 4024,
+      "text_preview": "[Page 3]\nWorking Draft\n3\n1 Introduction\nLarge language models (LLMs) and knowledge graphs (KGs) are increasingly being developed as\ncomplementary components rather than competing paradigms. Recent wor"
+    },
+    {
+      "index": 3,
+      "heading": "Section 3",
+      "text_len": 3113,
+      "text_preview": "[Page 4]\nWorking Draft\n4\nA. Context-Insensitive KG\nP(τ|C) ∈ {0,1}\nunable to model context-dependent validity\n(drug A, treats, disease B)\nContext 1: patient without\nrenal failure\nholds\nContext 2: patie"
+    },
+    {
+      "index": 4,
+      "heading": "Section 4",
+      "text_len": 3758,
+      "text_preview": "[Page 5]\nWorking Draft\n5\n2 Background\n2.1 Context-Dependent Validity in Knowledge Graphs\nConventional knowledge graphs represent facts as triples (h, r, t) and usually treat each triple\nas globally va"
+    },
+    {
+      "index": 5,
+      "heading": "Section 5",
+      "text_len": 3533,
+      "text_preview": "[Page 6]\nWorking Draft\n6\n3 Method\n3.1 Knowledge Sources\n3.1.1 Disease-Centric Subgraph from PrimeKG\nPrimeKG (Chandak et al., 2023) provides the source biomedical knowledge graph for this work.\nWorking"
+    },
+    {
+      "index": 6,
+      "heading": "Section 6",
+      "text_len": 2136,
+      "text_preview": "[Page 7]\nWorking Draft\n7\nAlgorithm 1 QKG Reasoning Pipeline\nRequire: question Q, choices C, knowledge graph Gsub\nEnsure: final answer A∗\n1: P ←ExtractPatientContext(Q)\n2: (A, claims) ←Reasoner(Q, C)\n▷"
+    },
+    {
+      "index": 7,
+      "heading": "Section 7",
+      "text_len": 3079,
+      "text_preview": "[Page 8]\nWorking Draft\n8\nsource QA datasets: MedQA, MedMCQA, PubMedQA, MMLU, MedXpert, HuatuoGPT-o1,\nand the medical subset of Humanity’s Last Exam (HLE). To ensure alignment with our curated\nPrimeKG "
+    },
+    {
+      "index": 8,
+      "heading": "Section 8",
+      "text_len": 4736,
+      "text_preview": "[Page 9]\nWorking Draft\n9\nNo validator\nKG w/o context\nQKG w/ context\n74\n75\n76\n77\n78\n79\n80\nFinal accuracy (%)\n77.5\n78.1\n(+0.6 pp)\n78.9\n(+1.4 pp)\n(a) Final Accuracy\nNo validator\nKG without context\nQKG wi"
+    },
+    {
+      "index": 9,
+      "heading": "Section 9",
+      "text_len": 2678,
+      "text_preview": "[Page 11]\nWorking Draft\n11\nNo validator\nKG w/o context\nQKG w/ context\n74\n76\n78\n80\n82\n84\nFinal accuracy (%)\n77.5\n83.3\n(+5.8 pp)\n83.5\n(+6.0 pp)\n(a) Final Accuracy\nNo validator\nKG without context\nQKG wit"
+    },
+    {
+      "index": 10,
+      "heading": "Section 10",
+      "text_len": 3513,
+      "text_preview": "[Page 12]\nWorking Draft\n12\nTable 1: Leakage-adjusted accuracy accounting for the two Qwen-3.6-Plus validator runs (Haiku-\n4.5 Reasoner throughout). W→C and C→W are the counts of wrong-to-correct revis"
+    },
+    {
+      "index": 11,
+      "heading": "Section 11",
+      "text_len": 4092,
+      "text_preview": "[Page 13]\nWorking Draft\n13\n6.2 Why Strong-Validator Results Require Caution\nThe Qwen-3.6-Plus validator results are harder to interpret causally than the Haiku-validator\nablation. The case studies in "
+    },
+    {
+      "index": 12,
+      "heading": "Section 12",
+      "text_len": 2883,
+      "text_preview": "[Page 14]\nWorking Draft\n14\nat larger scale.\n7 Conclusion\nThis paper introduces the Quantum Knowledge Graph (QKG), a framework for modeling triplet\nvalidity as context-dependent rather than context-ins"
+    },
+    {
+      "index": 13,
+      "heading": "Section 13",
+      "text_len": 3565,
+      "text_preview": "[Page 15]\nWorking Draft\n15\nZejin Ding, Ning Wang, Shujian Liu, and Guodong Zhou. Temporal fact reasoning over hyper-\nrelational knowledge graphs. In Findings of the Association for Computational Lingu"
+    },
+    {
+      "index": 14,
+      "heading": "Section 14",
+      "text_len": 2876,
+      "text_preview": "[Page 16]\nWorking Draft\n16\nYuan Sui, Yufei He, Zifeng Ding, and Bryan Hooi.\nCan knowledge graphs make large\nlanguage models more trustworthy?\nan empirical study over open-ended question an-\nswering.\nI"
+    },
+    {
+      "index": 15,
+      "heading": "Section 15",
+      "text_len": 4724,
+      "text_preview": "[Page 17]\nWorking Draft\n17\nTable 3: QA-source distribution for the full MedReason dataset (N = 32,682) and the curated\nevaluation set (N = 2,788). Percentages are row-normalized within each column.\nMe"
+    },
+    {
+      "index": 16,
+      "heading": "Section 16",
+      "text_len": 3798,
+      "text_preview": "[Page 19]\nWorking Draft\n19\nwhere nW→C\nleak\ndenotes W→C revisions labelled LikelyLeakage and nC→W\nctx\ndenotes C→W\nregressions whose decisive evidence cites a QKG applicability token. For W→C we adjust "
+    },
+    {
+      "index": 17,
+      "heading": "Section 17",
+      "text_len": 3822,
+      "text_preview": "[Page 20]\nWorking Draft\n20\nCase A: qa_9542 (gold = D, shingles vaccine).\nVignette. A 62-year-old woman is seen\nin June for a routine check-up. Past history includes appendectomy, chronic back pain, no"
+    },
+    {
+      "index": 18,
+      "heading": "Section 18",
+      "text_len": 1583,
+      "text_preview": "[Page 21]\nWorking Draft\n21\nReconsideration. The Reasoner accepts both contradictions, removes nitrous-oxide contraindica-\ntion as the chosen rationale, and revises to A, matching the gold answer.\nA.5 "
+    }
+  ]
+}

@@ -1,0 +1,2696 @@
+[Page 1]
+TRAINING AND AGENTIC INFERENCE STRATEGIES FOR
+LLM-BASED MANIM ANIMATION GENERATION
+Ravidu Suien Rammuni Silva1, Ahmad Lotfi1, Isibor Kennedy Ihianle1, Golnaz Shahtahmassebi2, and
+Jordan J. Bird1
+1Department of Computer Science, Nottingham Trent University, Nottingham, United Kingdom,
+{ravidu.rammunisilva, ahmad.lotfi, isibor.ihianle, jordan.bird}@ntu.ac.uk
+2Department of Physics and Mathematics, Nottingham Trent University, Nottingham, United Kingdom,
+golnaz.shahtahmassebi@ntu.ac.uk
+ABSTRACT
+Generating programmatic animation using libraries such as Manim presents unique challenges for
+Large Language Models (LLMs), requiring spatial reasoning, temporal sequencing, and familiarity
+with domain-specific APIs that are underrepresented in general pre-training data. A systematic study
+of how training and inference strategies interact in this setting is lacking in current research. This
+study introduces ManimTrainer, a training pipeline that combines Supervised Fine-tuning (SFT)
+with Reinforcement Learning (RL) based Group Relative Policy Optimisation (GRPO) using a
+unified reward signal that fuses code and visual assessment signals, and ManimAgent, an inference
+pipeline featuring Renderer-in-the-loop (RITL) and API documentation-augmented RITL (RITL-
+DOC) strategies. Using these techniques, this study presents the first unified training and inference
+study for text-to-code-to-video transformation with Manim. It evaluates 17 open-source sub-30B
+LLMs across nine combinations of training and inference strategies using ManimBench. Results
+show that SFT generally improves code quality, while GRPO enhances visual outputs and increases
+the models’ responsiveness to extrinsic signals during self-correction at inference time. The Qwen
+3 Coder 30B model with GRPO and RITL-DOC achieved the highest overall performance, with a
+94% Render Success Rate (RSR) and 85.7% Visual Similarity (VS) to reference videos, surpassing
+the baseline GPT-4.1 model by +3 percentage points in VS. Additionally, the analysis shows that
+the correlation between code and visual metrics strengthens with SFT and GRPO but weakens with
+inference-time enhancements, highlighting the complementary roles of training and agentic inference
+strategies in Manim animation generation.
+Keywords Explainable AI · Computer Vision · Image Classification
+1
+Introduction
+Programmatically generated animations show promise as reliable mediators for the efficient, automated generation of
+educational videos using Large Language Models (LLMs). Leveraging LLMs’ code-generation abilities with simple
+yet effective animation libraries, such as Manim [1], provides greater accuracy and efficiency than diffusion-based
+video generation models. It is efficient, as video generation pipelines rely on diffusion-based models that require
+significantly more computing resources than compact LLMs, and it is accurate, since the text-to-code-to-video process
+makes the generated video precise by relying on the generated code, especially in mathematical animations such as
+graphing. LLMs have demonstrated increasingly accurate code-generation capabilities [2, 3, 4]. However, generating
+correct Manim code remains difficult, as it requires not only syntactic fluency in Python but also reasoning about
+three-dimensional coordinate systems, sequencing of animations over time, and knowledge of the Manim API, which is
+under-represented in general code-based pre-training datasets [5].
+Recent advancements in Parameter-efficient Fine-tuning (PEFT), notably LoRA [6] and the more efficient quantised
+variant QLoRA [7], have enabled specialising sub-30B LLMs on a single consumer-grade GPU. Supervised Fine-tuning
+arXiv:2604.18364v1  [cs.AI]  20 Apr 2026
+
+[Page 2]
+Training and Agentic Inference Strategies for LLM-based Manim Animation Generation
+Rammuni Silva et al.
+(SFT) can establish a lexical foundation for the Manim API, while Reinforcement Learning (RL) based approaches,
+such as Group Relative Policy Optimisation (GRPO) [8, 5], can further improve the model through execution-based
+reward signals without requiring a separate critic model. SFT, together with RL, encompasses the text-to-code-to-video
+process in LLM-based Manim animation generation. However, the interaction between these distinct training strategies
+and how each contributes to the code quality of the generated Manim code, as well as the visual quality of the video it
+renders, has not been systematically examined.
+At inference time, iterative self-correction with extrinsic feedback from compilers has been shown to effectively improve
+the quality of LLM-generated code [9]. Additionally, Retrieval-Augmented Generation (RAG) has been demonstrated
+to decrease API hallucinations by incorporating relevant API documentation into the prompt context [10, 11]. However,
+the interaction between the training strategies mentioned earlier and these inference-time strategies remains unexplored,
+particularly in domains where both the generated code and its visual output need to be assessed.
+This need for a multifaceted evaluation requires metrics that span both the code and visual domains and encompass the
+entire text-to-code-to-video process. Code metrics such as CodeBLEU [12] and CodeBERT similarity [13] may focus
+solely on the generated code, while visual metrics such as SSIM [14] and CLIP-based vector similarity [15] can assess
+visual quality and accuracy but overlook the code quality. Moreover, the extent to which these two metric families agree
+across different training and inference strategies has not yet been studied.
+This study hypothesises that combining supervised fine-tuning (SFT) and GRPO-based reinforcement learning with
+agentic inference strategies would yield better performance in the LLM-based text-to-code-to-video process.
+Based on the identified gaps and the formulated hypothesis above, this work makes four key contributions:
+1. ManimTrainer: A training pipeline that combines SFT with GRPO using a unified reward function that fuses
+code metrics with visual metrics to fine-tune LLMs for the Manim code generation task, covering the full
+text-to-code-to-video process.
+2. ManimAgent: An inference pipeline featuring Renderer-in-the-loop (RITL) self-correction and API
+documentation-augmented RITL (RITL-DOC) inference strategies to further improve the performance of
+LLMs in Manim code generation at inference time.
+3. A comprehensive evaluation of 17 open-source sub-30B LLMs ranging from 0.5B in size using the unified
+ManimTrainer and ManimAgent pipeline, examining the individual effects and interactions between training-
+time optimisation (SFT, GRPO) and agentic inference strategies (RITL, RITL-DOC) using both code and
+visual metrics.
+4. An analysis of the correlation between code and visual metrics across all strategy combinations, showing
+that inference-time strategies weaken their correlation while improving resultant visual quality, highlighting
+limitations of code-only evaluation.
+The remainder of this paper is organised as follows. Section 2 reviews related work. Section 3 presents the technical
+details of ManimTrainer and ManimAgent. Section 4 presents the results of the experiments, discusses the findings and
+limitations, and Section 5 concludes the paper.
+2
+Related Work
+2.1
+SFT and RL for LLM-based Code Generation
+LLM-based code generation has progressed rapidly from Codex [2] to recent compact models such as Qwen 2.5 Coder
+[3] and SeedCoder [4], which rival much larger systems on standard benchmarks [16]. However, these models often
+underperform on domain-specific libraries with custom APIs [17, 5].
+While SFT establishes vocabulary and syntactic foundations for code generation, it does not incorporate execution-based
+feedback [18]. Reinforcement learning addresses this gap, but earlier approaches such as PPO [19] and DPO [20]
+require a separate critic network or preference pairs.
+Group Relative Policy Optimisation (GRPO) [8] addresses this by offering a critic-free alternative suited to code gener-
+ation, where outputs are evaluated using non-differentiable execution-based signals. While DeepSeek-R1 demonstrated
+that GRPO can significantly improve functional correctness [18], the interaction between SFT- and GRPO-trained
+models with inference-time enhancement strategies remains unexplored.
+2
+
+[Page 3]
+Training and Agentic Inference Strategies for LLM-based Manim Animation Generation
+Rammuni Silva et al.
+2.2
+Inference-time enhancements and Self-correction
+Iterative self-correction approaches such as Self-Debugging [9], Reflexion [21], and Self-Refine [22] allow LLMs
+to improve code via in-context learning (ICL), though systematic evaluations show intrinsic correction yields only
+marginal gains [23] and extrinsic validation is significantly more effective [24].
+Extrinsic feedback from compilers, interpreters and renderers can significantly improve the self-correction capabilities
+of LLMs. CodeRL [25], InterCode [26], and SWE-Agent [27] demonstrate that more informative error messages lead
+to faster convergence [9]. ReLook [28] extends this to the visual domain, using a multimodal LLM-based critic to
+detect defects that execution logs cannot surface.
+Supplementing the self-correction loops, Retrieval-Augmented Generation (RAG) has the potential to address text-based
+errors, such as hallucinated APIs and their parameters, by injecting relevant documentation into the prompt context [10].
+While RAG consistently reduces hallucinations, models can struggle with dense technical APIs and longer contexts
+[11]. The interaction between API information augmentation with iterative execution and/or renderer-based refinement
+loops, however, remains largely unexplored.
+2.3
+Programmatic Animation Generation via LLMs
+Combined with the code generation capabilities of LLMs, libraries such as Manim [1] offer a more efficient and
+precise alternative to generating animations with LLMs. While other works generate visuals via HTML or SVG code
+[29, 30, 31], Manim enables complex animations in a few lines of Python. However, it requires spatial reasoning about
+3D coordinates, temporal sequencing of animations, and knowledge of a specialised API that is not well represented in
+general pre-training corpora.
+ManimBench [5] addresses the need for a domain-specific evaluation benchmark for Manim by providing a dataset of
+417 human-reviewed, paired natural-language descriptions and executable Manim code snippets. Automated pipelines
+such as Manimator [32] and TheoremExplainAgent [33] employ multi-stage processes to generate code for visualising
+educational and academic content, primarily using commercial, API-based, closed-source LLMs. Code2Video [34]
+further explores this multi-stage process, highlighting the gap between the code execution success and the quality of the
+visual outputs.
+2.4
+Evaluating LLM-generated Code and its Visual Output
+Code-level metrics such as CodeBLEU [12] and CodeBERT similarity [13] evaluate the structure of generated code,
+but may penalise Manim snippets that produce similar visual outputs via different coding pathways [5].
+Visual metrics such as Structural Similarity Index (SSIM) [35, 14] and Contrastive Language-Image Pretraining (CLIP)
+[15] based schematic similarity can evaluate the quality of rendered outputs against reference frames, capturing visual
+fidelity that code-level metrics overlook. Conversely, relying solely on visual metrics may reward inefficient code. This
+necessitates combining both metric families and extending evaluation to the temporal dimension of video.
+3
+Methodology
+This section presents the training pipeline, ManimTrainer, and the inference pipeline, ManimAgent, used in this study
+to fine-tune and generate Manim code using sub-30B LLMs. The methodology comprises four key stages. First, SFT
+provides the key understanding of the task and adds Manim-specific knowledge to the LLM at a parametric level.
+Second, a unified reward function R is formulated by fusing a code-based text reward RT with a visual reward RV
+computed from the visual similarity between the generated video and the reference video. Third, the formulated
+reward function is utilised to fine-tune the LLM via RL, using GRPO to visually ground the SFT-trained LLM. Fourth,
+inference-time enhancements, Renderer-in-the-loop (RITL) and Manim API documentation-supported RITL (RITL-
+DOC), are introduced to be applied to the fine-tuned models. Together, these stages support the systematic investigation
+of this study’s hypothesis. An overview of the ManimTrainer pipeline is illustrated in Figure 1, while the strategised
+inference pipeline is summarised in Figure 2. The following subsections detail each stage.
+3.1
+SFT Optimisation
+Using the ManimBench dataset [5], the models are first trained with SFT to establish Manim-specific vocabulary and
+syntax. The detailed SFT and GRPO training configurations are presented in Section 3.5.1.
+3
+
+[Page 4]
+Training and Agentic Inference Strategies for LLM-based Manim Animation Generation
+Rammuni Silva et al.
+Group Relative Policy
+Optimisation
+ManimTrainer: Overview
+Supervised Fine-tuning
+with LoRA
+Training Dataset
+Quantised Base LLM 
+Generated Code
+Generated Code
+Generated Code
+Text Reward
+Calculation
+Iterative Policy Updates
+Fine-tuned LLM
+from manim import *
+class BraceDemo(Scene):
+    def construct(self):
+        dot = Dot([-2, -1, 0])
+       ....
+Generated Code
+Generated Code
+Generated Video
+Generated Code
+Generated Code
+Reference Code
+from manim import *
+class BraceAnnotation(Scene):
+    def construct(self):
+        dot = Dot([-2, -1, 0])
+       ....
+Generated Code
+Generated Code
+Reference Video
+Visual Reward
+Calculation
+Visually Grounded
+Manim LLM
+Reward Unification
+Manim
+Renderer
+Manim
+Renderer
+Figure 1: Overview of the ManimTrainer pipeline. The pipeline uses a quantised base LLM and visually grounds it for
+Manim code generation, using both visual and text reward signals.
+3.2
+Reward Function
+Let a training instance (x, ˆy), where x is the formulated prompt which includes the textual description and ˆy is the
+reference Manim code snippet. During the RL training cycle using GRPO, policy πθ samples completion c ∼πθ(·|x)
+from which executable Manim code is deterministically extracted using H:
+y = H(c),
+(1)
+where H is a regex-based function that extracts the generated code snippet y, where H(c) = ∅when no code can be
+extracted. The regex function attempts to find the code wrapped between <CODE> and </CODE> tags and/or ```python
+markdown-based fences. The extracted Manim code y is then used to calculate the Text Reward RT and the Visual
+Reward RV, and to derive the Unified Reward R as shown below.
+3.2.1
+Text Reward (RT )
+The text reward is based on two code-oriented similarity metrics, CodeBLEU (C-BLEU) [12] and CodeBERT similarity
+(C-BERT) [13]. C-BERT is calculated as below, taking the cosine similarity of the two embeddings obtained for the
+reference code and the generated code:
+C-BERT = cos(fC-BERT(y), fC-BERT(ˆy)),
+(2)
+where fC-BERT(y) denotes the mean-pooled final hidden layer of embedding y. Then, finally, the text reward RT is
+calculated by obtaining the geometric mean of the two scores as below:
+RT (y, ˆy) =
+p
+C-BLEU(y, ˆy) · C-BERT(y, ˆy).
+(3)
+3.2.2
+Visual Reward (RV)
+Firstly, rendered videos v and ˆv are produced:
+4
+
+[Page 5]
+Training and Agentic Inference Strategies for LLM-based Manim Animation Generation
+Rammuni Silva et al.
+v = M(y), ˆv = M(ˆy),
+(4)
+where M represents the Manim rendering engine.
+Then, to ensure visual correctness, as indicated by visual similarity to the expected video, the rendered videos ˆv and v
+are compared using both structural similarity Sssim and semantic similarity Ssem measures with dynamic time warping
+(DTW) alignment to fairly compare two videos of different lengths. The comparison is performed at each frame, with
+frames sampled at a fixed rate of 5 frames per second (FPS). The sample rate was set empirically, based on many
+Manim-based GIF images that work at 5 FPS.
+From each video pair (v,ˆv), a pair of sets of grayscale frames (G, ˆG) (for Sssim(v, ˆv) calculation) and a pair of sets of
+RGB frames (I,ˆI) (for Ssem(v, ˆv) calculation) are obtained.
+Firstly, the SSIM matrix between all elements of G and ˆG is computed:
+S′ = SSIM(G, ˆG), S′ ∈RT × ˆT ,
+(5)
+where T and ˆT represents frame counts sampled from respectively v and ˆv.
+Then the matrix S′ is summarised into two sequences, S′
+ref and S′
+gen, yielding per-frame best matches for the reference
+and generated videos, respectively:
+S′
+ref = max
+T
+S′, S′
+gen = max
+ˆT
+S′,
+(6)
+Then, S′
+ref and S′
+gen are aligned using DTWeuclidean, normalised and mapped to range [0, 1]:
+Sssim(v, ˆv) = exp
+
+−k ·
+DTWeuclidean(S′
+gen, S′
+ref)
+max(T, ˆT)
+
+,
+(7)
+where k was set to k = 5, making the final metric Sssim stricter. For the DTWeuclidean calculation, the fastDTW [36]
+library is used for calculation efficiency, and the euclidean distance is used to calculate the distance of the elements in
+the two sequences.
+Then to get Ssem, each of the two RGB frame sets was encoded with CLIP embeddings and ℓ2 normalised to get
+semantic encoding for generated video E and reference video ˆE:
+E =
+fCLIP(I)
+||fCLIP(I)||2
+,
+ˆE =
+fCLIP(ˆI)
+||fCLIP(ˆI)||2
+,
+(8)
+where fCLIP represents the CLIP encoder from the ViT-L/14 [15] model. Then, DTW is calculated comparing E and ˆE,
+normalised and mapped to range [0, 1] to get Ssem using a custom distance calculation d(e, ˆe):
+Ssem(v, ˆv) = exp
+
+−DTWd(e,ˆe)(E, ˆE)
+max(T, ˆT)
+
+,
+(9)
+where d(e, ˆe) = 1 −⟨e, ˆe⟩and (e ∈E, ˆe ∈ˆE). Then, the final visual reward RV is obtained calculating the geometric
+mean of Sssim and Ssem:
+RV(v, ˆv) =
+p
+Sssim(v, ˆv) · Ssem(v, ˆv).
+(10)
+3.2.3
+Unified Reward (R)
+Unifying both text reward RT and visual reward RV unified reward R is obtained as below:
+R(y, v, ˆy, ˆv) = λT RT (y, ˆy) + λVRV(v, ˆv),
+(11)
+and from Equations 1 and 4,
+5
+
+[Page 6]
+Training and Agentic Inference Strategies for LLM-based Manim Animation Generation
+Rammuni Silva et al.
+R(x, c, ˆy) = λT RT [H(c), ˆy] + λVRV [M (H(c)) , M(ˆy)] ,
+(12)
+where λT and λV are later set to λT = 0.2 and λV = 0.8. The goal of the RL training cycle is to enable the model to
+ground its knowledge in the visual results. However, the visual result was produced only when the code generated valid
+Manim code, resulting in a reward signal with high variance. A portion of the Text Similarity had to be introduced
+to mitigate this issue, since RT produces a signal for both valid and invalid Manim code. The λT and λV values are
+empirically set after evaluating the geometric and arithmetic means of RT and RV, with λT ∈{0.0, 0.2, 0.5}, and the
+(0.2, 0.8) pair yielded the most stable results.
+3.3
+GRPO-based RL Optimisation
+Using the reward function R(x, c, ˆy) formulated in section 3.2, the final loss optimisation based on Dr GRPO [37] can
+be summarised as below:
+LDr. GRPO(θ) = −1
+LG
+G
+X
+i=1
+|ci|
+X
+t=1
+li,t,
+(13)
+where LDr. GRPO(θ) represents optimisation loss calculated at ith sample’s tth token,
+li,t = min
+h
+ri,t(θ) ˆAi,t, clip(ri,t(θ), 1 −ϵ, 1 + ϵ) ˆAi,t
+i
+−β DKL
+
+πθ∥πref
+
+,
+(14)
+where
+ri,t(θ) = πθ(ci,t | x, ci,<t)
+πθold(ci,t | x, ci,<t),
+(15)
+and
+ˆAi,t = R(xi, ci, ˆyi) −mean[R(x, c, ˆy)]
+std[R(x, c, ˆy)]
+.
+(16)
+The mean and standard deviation (std) in Equation 16 are calculated over a sample of 8 produced for each xi, setting
+G = 8 and maximum completion length L, is set L ≈2048 × 0.8. Further, β = 0.005, and ϵ = 0.2 in Equation
+14. G is selected based on the available resources during training and the stability of the GRPO training cycle, and
+L is determined after analysing the expected token lengths of completed examples. β and ϵ are selected based on
+recommended values [37]. GRPOTrainer from TRL is used for the above optimisations in the code implementation.
+3.4
+Inference-time enhancements
+To investigate the influence of inference-time enhancements, two major inference-time enhancements were introduced
+in this study: Renderer-in-the-loop (RITL) and RITL with API Documentation (RITL-DOC). As shown in Figure 2,
+ManimAgent uses these techniques to iteratively validate and fix, involving the renderer within the loop, while
+embedding relevant API Documentation based on the initial Manim code generated by the LLM.
+3.4.1
+Renderer in the loop (RITL)
+Let d represent the textual description of the animation, M the LLM, and ManimRender(·) the Python-based Manim
+Community Edition (ManimCE) 0.19.0 rendering engine that returns a status s, where s ∈{success, fail} together
+with a renderer error output e.
+Given initial code c1 ←M(d), RITL iteratively loops for a maximum of K rounds, transforming (d, ck, ek) into an
+improved code ck+1 and re-rendering it using BuildPromptRITL(·). As shown in Algorithm 1, the loop terminates
+either upon finding a successful render s = success or when reaching k = K. To reduce noise in the formulated
+prompt pRITL, the last ten lines of the render error log are used, which are sufficient to highlight the actual issue in the
+code.
+6
+
+[Page 7]
+Training and Agentic Inference Strategies for LLM-based Manim Animation Generation
+Rammuni Silva et al.
+API Knowledge Augmentation
+Prompt Builder
+Initial Code
+Generation
+Initial Manim
+Code
+LLM
+Parametric Knowledge
+Renderer Feedback Augmentation
+Call Extractor
+API Calls List
+API Information
+API Inspector
+Prompt Template
+Initial Code
+Prompt Template
+with API Knowledge
+Prompt Template
+with API+Render Error Details
+LLM
+Parametric + API
+Knowledge
+Manim
+Renderer
+API-Aware
+Manim Code
+Video Text
+Script
+Final Manim
+Video
+LLM
+Parametric + API +
+Rendering Knowledge
+Render Fail
+Render Pass
+Figure 2: Inference Pipeline of the ManimAgent.
+Algorithm 1 Feedback + RAG-Augmented Iterative Code Generation (RITL/RITL-DOC)
+Require: Textual description d, maximum RITL rounds K, model M, Manim API knowledge base D
+Ensure: Generated Manim code c, render status s
+1: c1 ←M(d)
+▷Initial code generation
+2: s1, e1 ←ManimRender(c1)
+▷Render and capture status/errors
+3: for k = 1 to K do
+4:
+if sk = success then
+5:
+break
+▷Rendering succeeded; stop
+6:
+end if
+7:
+if RITL-DOC then
+8:
+Ak ←ExtractAPICalls(ck)
+▷Identify Manim API calls in code
+9:
+Rk ←RetrieveDocs(Ak, D)
+▷Relevant API documentation
+10:
+p ←BuildPromptRITL-DOC(d, ck, ek, Rk)
+▷Prompt with renderer output & API documentation
+11:
+else
+12:
+p ←BuildPromptRITL(d, ck, ek)
+▷Prompt with renderer output
+13:
+end if
+14:
+ck+1 ←M(p)
+▷Regenerate code
+15:
+sk+1, ek+1 ←ManimRender(ck+1)
+16: end for
+17: return c, s
+3.4.2
+RITL-DOC - RITL with retrieved API Documentation
+As shown in the Algorithm 1, RITL-DOC follows a functionally similar approach to RITL in Section 3.4.1, but
+additionally incorporates API documentation Rk retrieved via the extracted API calls set Ak = {ak,1, . . . , ak,m} when
+m number of API calls are extracted using BuildPromptRITL-DOC.
+The API calls were extracted from the function header comments in Manim’s Python library files. To address the
+prompt pRITL−DOC being excessively large, only the parameter details of the API functions were included, while
+examples usually found in the function comments were left out. Using this approach, RITL-DOC bypasses the need for
+an LLM-based or a vector-based retriever by directly extracting API information from the initial code.
+3.5
+Experimental Setup
+The following sections present the technical details of the experimental setup built for this study.
+7
+
+[Page 8]
+Training and Agentic Inference Strategies for LLM-based Manim Animation Generation
+Rammuni Silva et al.
+3.5.1
+Training and Evaluation Setup
+The ManimBench [5] dataset was used in this study to investigate the research question, as it includes human-written
+Manim code snippets alongside natural-language descriptions of the resulting videos. The dataset covers all Manim
+APIs via code examples, providing a comprehensive knowledge base for learning. Of the total 417 code samples, the
+official test set of 100 samples was kept for evaluation, while the remaining samples were used for training. The training
+prompt was modelled on the ManimBench study and employed “System” and “User” roles where available in the model
+tokens.
+The models used for the fine-tuning experiments were selected from the Hugging Face Unsloth repository [38], mainly
+because it supports resource-efficient fine-tuning techniques. Seventeen models with fewer than 30B parameters were
+chosen for the experiments from various model families: Qwen 3 [39], Qwen 2.5 [3], SeedCoder [4], LLaMA 3.1 [40],
+Mistral 3.2, and Ministral 3 [41]. In selecting these models, performance on code generation tasks in BigCodeBench
+[16], and their availability in the Unsloth model collection were considered. The following LoRA parameters were used
+in the training pipeline: Rank r = 8; scaling α = r × 2; and targeting the Query, Key, Value and Output Projection
+modules.
+For both SFT and GRPO training cycles, the batch size was set to 16. The LoRA adapters were trained with 16-bit
+precision, using the 8-bit AdamW optimiser while keeping the base model frozen at 4-bit Unsloth quantisation. A rank
+of 8 was selected to balance the adapter capacity with the dataset size. During the SFT phase, the models were trained
+for 2 epochs with a learning rate of 2e −6 and a linear learning-rate reduction schedule. A weight decay of 0.01 and a
+warmup ratio of 0.1 were set to prevent overfitting. The GRPO training cycle was run with a reduced learning rate of
+5e −7. GRPO training is performed on top of the SFT model to mitigate reward hacking.
+All training and evaluation experiments were conducted on an Ubuntu 24.04 LTS server with 64GB of RAM, an Nvidia
+RTX 5090 32GB VRAM, and 512GB of SSD storage. ManimCE 0.19.0 and Python 3.12.12 were used for rendering
+and data analysis. The code used for the experiments is available as open-source on GitHub 1.
+3.5.2
+Evaluation Metrics
+This study employed various evaluation metrics to assess both the generated code and the resulting video from functional
+and semantic perspectives. For code evaluation, CodeBLEU [12], CodeBERT Similarity [13], N-gram Match, Syntax
+Match, and Abstract Syntax Tree (AST) Distance were utilised. Using these metrics, the generated code is compared
+with the expected reference code in the dataset. For video evaluation, Structural Similarity (SSIM) [14] and the Visual
+Semantic Similarity using CLIP embeddings, as described in Section 3.2.2, were employed. Similarly, in the code
+evaluation, the resulting video from the generated code is compared with the resulting video of the expected reference
+code.
+However, to analyse the results more effectively, the above-mentioned metrics were combined into three key metrics:
+Visual Similarity (VS), CodeBERTBLEU (CBB), and Manim Render Success Rate (RSR). The VS and CBB are
+computed identically to RV and RT as described in Section 3.2. Manim RSR represents the fraction of generated code
+that successfully produces a Manim video.
+4
+Results and Discussion
+4.1
+Overall effect of SFT and GRPO on performance under Vanilla Inferencing
+The study evaluated 17 open-source sub-30B models using three key metrics that collectively represent the LLMs’
+Manim Code Generation ability. The Table 1 shows that SFT and GRPO consistently improved the performance of
+LLMs in terms of the RSR and VS, demonstrating the benefit of both fine-tuning strategies. However, CBB remained
+relatively similar across all model families and sizes, except for the Ministral 3 family models. This behaviour suggests
+that the models learned to fix failing code rather than write new code under both SFT and GRPO with the given dataset.
+It is notable that, during vanilla inference, 8 models performed best with GRPO, whereas 9 models achieved their best
+at the SFT stage. However, the highest visual performance across all models was observed with the SeedCoder 8B
+model under GRPO with an RSR of 72%.
+The Figure 3 illustrates that improvements in CBB typically occur during the SFT stage, whereas enhancements in VS
+typically occur during the GRPO training cycle. This aligns with DeepSeek-R1 training observations [18]. However,
+the results also highlight the unpredictability of smaller models during training, where models such as LLaMA 3.2
+1The code is available in GitHub: https://github.com/SuienS/manim-trainer
+8
+
+[Page 9]
+Training and Agentic Inference Strategies for LLM-based Manim Animation Generation
+Rammuni Silva et al.
+Table 1: Evaluation summary of all the fine-tuned models under vanilla inferencing. The scores present the percentage
+visual and code similarity value under VS and CBB columns, and the percentage of generated samples successfully
+rendered under Render Success Rate.
+Model
+Visual Similarity
+CodeBERTBLEU
+Render Success Rate
+Base
+SFT
+GRPO
+Base
+SFT
+GRPO
+Base
+SFT
+GRPO
+Qwen 2.5 0.5B
+6.3
+10.9
+11.6
+36.4
+40.3
+41.3
+7.0
+12.0
+13.0
+LLaMA 3.2 1B
+6.4
+11.8
+8.7
+40.8
+44.6
+39.9
+7.0
+13.0
+10.0
+LLaMA 3.2 3B
+12.8
+16.1
+10.7
+52.5
+51.0
+51.0
+14.0
+18.0
+12.0
+Ministral 3 3B
+15.9
+19.4
+20.9
+52.9
+54.3
+53.6
+18.0
+22.0
+23.0
+Qwen 2.5 Coder 3B
+30.8
+35.8
+32.4
+54.5
+54.8
+54.4
+34.0
+39.0
+36.0
+Qwen 3 4B
+26.3
+28.4
+28.4
+54.3
+54.0
+53.9
+29.0
+31.0
+31.0
+Qwen 2.5 Coder 1.5B
+23.8
+24.1
+20.6
+50.6
+52.5
+52.7
+27.0
+27.0
+23.0
+Qwen 2.5 Coder 7B
+42.0
+50.8
+48.4
+55.2
+54.3
+55.5
+46.0
+55.0
+53.0
+Meta LLaMA 3.1 8B
+29.7
+30.0
+30.1
+54.4
+54.4
+54.3
+33.0
+33.0
+33.0
+Ministral 3 8B
+34.5
+40.8
+40.0
+51.4
+56.8
+56.7
+40.0
+44.0
+43.0
+Qwen 3 8B
+29.7
+34.4
+36.4
+56.4
+55.2
+54.4
+33.0
+38.0
+40.0
+SeedCoder 8B
+60.3
+62.3
+64.8
+57.7
+58.0
+57.8
+67.0
+69.0
+72.0
+Ministral 3 14B
+39.9
+42.7
+44.6
+47.7
+54.4
+54.5
+45.0
+46.0
+48.0
+Qwen 2.5 Coder 14B
+52.0
+54.8
+51.8
+56.9
+57.1
+57.1
+57.0
+60.0
+57.0
+Qwen 3 14B
+57.1
+58.3
+54.6
+56.2
+55.6
+56.6
+64.0
+65.0
+60.0
+Mistral Small 3.2 24B
+55.9
+54.9
+59.4
+55.2
+56.8
+56.7
+63.0
+59.0
+64.0
+Qwen 3 Coder 30B (A3B)
+59.2
+63.2
+61.7
+53.2
+54.5
+54.6
+66.0
+70.0
+68.0
+Qwen 3 Coder Next 80B
+63.7
+-
+-
+54.6
+-
+-
+72.0
+-
+-
+OpenAI GPT-4.1
+68.6
+-
+-
+55.9
+-
+-
+77.0
+-
+-
+0.1
+0.2
+0.3
+0.4
+0.5
+0.6
+Visual Similarity
+0.40
+0.45
+0.50
+0.55
+CodeBERTBLEU
+Qwen 2.5 0.5B
+LLaMA 3.2 1B
+LLaMA 3.2 3B
+Ministral 3 3B
+Qwen 2.5 Coder 3B
+Qwen 3 4B
+Qwen 2.5 Coder 1.5B
+Qwen 2.5 Coder 7B
+Meta LLaMA 3.1 8B
+Ministral 3 8B
+Qwen 3 8B
+Seed Coder 8B
+Ministral 3 14B
+Qwen 2.5 Coder 14B
+Qwen 3 14B
+Mistral Small 3.2 24B
+Qwen 3 Coder 30B
+Training
+Base
+SFT
+GRPO
+Figure 3: Behaviour of CodeBERTBLEU score against Visual Similarity during the training cycles.
+1B improved performance on both metrics, whereas the Qwen 2.5 0.5B model consistently improved its performance
+across the two training cycles.
+4.2
+Effect of Parameter Count on the Fine-tuning strategy
+The findings shown in Table 1 indicate that VS consistently improved with either SFT, GRPO, or both across all model
+sizes. However, the percentage improvement decreased as the parameter count increased. SeedCoder 8B performs
+the best in VS, as shown in Figure 4, despite having only 8B parameters. Under GRPO, the SeedCoder 8B model
+has surpassed even the newer Qwen 3 Coder Next 80B MoE model and is comparable to GPT-4.1, highlighting its
+efficiency and reliability. Other models with a parameter count range of 7B-8B demonstrate significant improvements
+with SFT and GRPO.
+9
+
+[Page 10]
+Training and Agentic Inference Strategies for LLM-based Manim Animation Generation
+Rammuni Silva et al.
+0
+10
+20
+30
+40
+50
+60
+70
+80
+Model Size (Billion Parameters)
+0.0
+0.1
+0.2
+0.3
+0.4
+0.5
+0.6
+0.7
+Visual Similarity
+R²=0.787
+R²=0.726
+R²=0.724
+Qwen 2.5 0.5B
+LLaMA 3.2 1B
+LLaMA 3.2 3B
+Ministral 3 3B
+Qwen 2.5 Coder 3B
+Qwen 3 4B
+Qwen 2.5 Coder 1.5B
+Qwen 2.5 Coder 7B
+Meta LLaMA 3.1 8B
+Ministral 3 8B
+Qwen 3 8B
+Seed Coder 8B
+Ministral 3 14B
+Qwen 2.5 Coder 14B
+Qwen 3 14B
+Mistral Small 3.2 24B
+Qwen 3 Coder 30B
+Qwen 3 Coder Next 80B
+Training
+Base
+SFT
+GRPO
+Figure 4: Scaling Behaviour of the Visual Similarity in the fine-tuned LLMs.
+Visual
+Similarity
+CodeBERTBLEU
+Render
+Success
+0.10.20.30.40.50.6
+Models 
+4B
+Base
+SFT
+GRPO
+Visual
+Similarity
+CodeBERTBLEU
+Render
+Success
+0.10.20.30.40.50.6
+Models 4B-8B
+Base
+SFT
+GRPO
+Visual
+Similarity
+CodeBERTBLEU
+Render
+Success
+0.10.20.30.40.50.6
+Models >8B
+Base
+SFT
+GRPO
+Figure 5: Radar plot of CodeBERTBLEU, Visual Similarity, and Render Success Rate of the models grouped by model
+size category. CBB remains relatively unchanged across groups, while VS and RSR regions expand.
+For example, Qwen 2.5 Coder 7B, Ministral 8B, and Qwen 3 8B models demonstrated notable improvements with either
+SFT or GRPO, respectively increasing their Base VS from 42.0, 34.5, and 29.7 to 50.8, 40.8, and 36.4. However, the
+performance gains of >14B models were comparatively lower. This observation is consistent with the findings of [42],
+which note that larger models require proportionally larger training datasets to improve. Across families, the 7B-8B
+range emerges as an efficiency sweet spot, achieving strong VS gains while maintaining comparable performances to
+larger models.
+Figure 5 shows that, regardless of the fine-tuning strategy, all models of different sizes display similar performance in
+CBB, while their performance is more notable and improves significantly in VS and RSR with higher parameter counts.
+The figure also indicates that SFT slightly outperforms GRPO for models with 4B parameters or fewer, whereas GRPO
+outperforms SFT for larger models.
+These trends suggest a capacity threshold for the RL training cycle. GRPO appears to benefit models that already
+possess sufficient task competence after SFT, whereas smaller models (≤4B) may struggle to generate informative
+samples during RL optimisation, thereby limiting GRPO’s influence relative to SFT.
+10
+
+[Page 11]
+Training and Agentic Inference Strategies for LLM-based Manim Animation Generation
+Rammuni Silva et al.
+Table 2: Evaluation summary of all the fine-tuned models under RITL inference
+Model (with RITL)
+Visual Similarity
+CodeBERTBLEU
+Render Success Rate
+Base
+SFT
+GRPO
+Base
+SFT
+GRPO
+Base
+SFT
+GRPO
+Qwen 2.5 0.5B
+8.1
+11.3
+12.4
+46.2
+45.1
+44.5
+9.0
+13.0
+14.0
+LLaMA 3.2 1B
+9.7
+10.8
+12.4
+49.3
+47.6
+47.7
+11.0
+12.0
+14.0
+LLaMA 3.2 3B
+14.3
+15.8
+17.2
+53.2
+53.6
+53.5
+16.0
+18.0
+19.0
+Ministral 3 3B
+21.2
+19.4
+24.4
+28.4
+53.4
+55.2
+24.0
+22.0
+27.0
+Qwen 2.5 Coder 3B
+34.0
+36.8
+35.5
+54.7
+53.9
+54.8
+38.0
+40.0
+39.0
+Qwen 3 4B
+33.5
+35.8
+29.8
+54.6
+54.8
+53.7
+37.0
+40.0
+33.0
+Qwen 2.5 Coder 1.5B
+24.0
+22.8
+25.2
+51.4
+51.3
+52.2
+27.0
+26.0
+29.0
+Qwen 2.5 Coder 7B
+61.0
+58.0
+58.8
+54.6
+55.6
+54.9
+66.0
+63.0
+64.0
+Meta LLaMA 3.1 8B
+34.1
+31.3
+39.8
+54.5
+55.0
+54.7
+39.0
+37.0
+45.0
+Ministral 3 8B
+45.9
+47.3
+48.0
+52.0
+56.9
+56.1
+53.0
+51.0
+52.0
+Qwen 3 8B
+37.0
+40.4
+47.3
+56.2
+55.9
+56.6
+41.0
+44.0
+53.0
+SeedCoder 8B
+66.4
+68.4
+69.2
+57.5
+57.9
+57.8
+74.0
+76.0
+77.0
+Ministral 3 14B
+49.9
+55.9
+57.8
+52.2
+55.8
+55.9
+56.0
+61.0
+63.0
+Qwen 2.5 Coder 14B
+65.2
+69.0
+66.1
+57.0
+57.1
+56.8
+72.0
+77.0
+72.0
+Qwen 3 14B
+67.8
+62.7
+64.0
+56.3
+55.8
+55.4
+76.0
+69.0
+71.0
+Mistral Small 3.2 24B
+63.1
+60.4
+63.4
+55.1
+57.2
+56.4
+71.0
+65.0
+68.0
+Qwen 3 Coder 30B (A3B)
+74.5
+82.2
+80.6
+53.3
+54.8
+54.1
+83.0
+90.0
+89.0
+Qwen 3 Coder Next 80B
+72.6
+-
+-
+53.9
+-
+-
+82.0
+-
+-
+OpenAI GPT-4.1
+76.9
+-
+-
+56.2
+-
+-
+86.0
+-
+-
+Table 3: Evaluation summary of all the fine-tuned models under RITL-DOC inference
+Model (RITL-DOC)
+Visual Similarity
+CodeBERTBLEU
+Render Success Rate
+Base
+SFT
+GRPO
+Base
+SFT
+GRPO
+Base
+SFT
+GRPO
+Qwen 2.5 0.5B
+8.8
+7.2
+8.8
+49.5
+48.4
+50.0
+10.0
+8.0
+10.0
+LLaMA 3.2 1B
+10.0
+9.2
+10.0
+48.7
+47.7
+45.8
+11.0
+10.0
+11.0
+LLaMA 3.2 3B
+14.3
+12.6
+20.5
+51.5
+52.3
+51.2
+16.0
+14.0
+23.0
+Ministral 3 3B
+20.7
+31.4
+30.5
+47.6
+56.0
+55.4
+24.0
+35.0
+34.0
+Qwen 2.5 Coder 3B
+36.2
+40.1
+30.6
+54.4
+54.5
+54.7
+40.0
+44.0
+34.0
+Qwen 3 4B
+25.2
+31.9
+30.2
+55.0
+54.3
+54.1
+28.0
+35.0
+33.0
+Qwen 2.5 Coder 1.5B
+23.0
+24.7
+20.4
+51.6
+50.8
+51.7
+26.0
+28.0
+23.0
+Qwen 2.5 Coder 7B
+60.6
+63.5
+64.9
+54.8
+55.0
+55.1
+66.0
+69.0
+71.0
+Meta LLaMA 3.1 8B
+38.9
+40.2
+41.2
+54.5
+54.3
+54.3
+44.0
+45.0
+46.0
+Ministral 3 8B
+50.2
+55.4
+54.6
+52.3
+57.2
+56.9
+58.0
+60.0
+59.0
+Qwen 3 8B
+51.4
+41.5
+47.4
+56.5
+55.4
+55.7
+58.0
+47.0
+52.0
+SeedCoder 8B
+65.6
+69.2
+69.2
+57.3
+57.5
+57.4
+73.0
+77.0
+77.0
+Ministral 3 14B
+56.8
+59.7
+59.6
+52.5
+55.9
+56.2
+64.0
+65.0
+65.0
+Qwen 2.5 Coder 14B
+66.0
+66.4
+67.1
+56.6
+56.9
+56.9
+73.0
+73.0
+74.0
+Qwen 3 14B
+63.6
+68.7
+71.0
+56.5
+55.7
+55.9
+71.0
+76.0
+79.0
+Mistral Small 3.2 24B
+68.4
+63.2
+64.5
+55.3
+57.3
+56.6
+77.0
+69.0
+70.0
+Qwen 3 Coder 30B (A3B)
+77.7
+80.8
+83.0
+53.5
+54.4
+53.7
+87.0
+89.0
+92.0
+Qwen 3 Coder 30B (A3B) (@3)
+79.2
+82.6
+85.7
+53.1
+53.7
+54.2
+89.0
+92.0
+94.0
+Qwen 3 Coder Next 80B
+73.9
+-
+-
+54.1
+-
+-
+85.0
+-
+-
+OpenAI GPT-4.1
+81.9
+-
+-
+56.6
+-
+-
+92.0
+-
+-
+OpenAI GPT-4.1 (@3)
+82.8
+-
+-
+56.1
+-
+-
+94.0
+-
+-
+4.3
+Overall effect of RITL and RITL-DOC on the Model Performance
+Investigating the effect of inference-time strategies, RITL and RITL-DOC techniques were introduced as explained in
+Sections 3.4.1 and 3.4.2 at inference time for all 17 models across their Base, SFT, and GRPO variants. As shown in
+Table 2, RITL consistently enhanced both VS and RSR for most models. Qwen 3 8B increased its baseline VS by more
+than 10 percentage points, while the significantly larger Qwen 3 Coder 30B model scored 82.2% under SFT, up from
+74.5% VS under Base, making it the best performing model in the table, even surpassing the much larger Qwen 3 Coder
+Next 80B model and GPT-4.1.
+Table 3 presents the performance evaluations under RITL-DOC, which integrates the RITL loop with relevant API
+documentation. Under RITL-DOC, models with more than 7B parameters generally demonstrate further improvements
+over the baseline models, whereas smaller models tend to perform better with SFT than with GRPO. Qwen 3 8B and
+Mistral Small 3.2 24B models experienced a performance reduction during SFT and GRPO training cycles under
+RITL-DOC, although their performance remained higher than under RITL. For smaller models with less than 4B
+parameters, RITL occasionally outperformed RITL-DOC. However, Qwen 3 Coder 30B performed best overall across
+all models and strategies, with GRPO under RITL-DOC, achieving approximately 86% of VS and 94% of RSR after
+three RITL attempts. Notably, the RITL-DOC Qwen 3 Coder 30B model, with only 3B active parameters out of 30B
+total, surpassed OpenAI’s GPT-4.1.
+The mean values in the Table 4 suggest a monotonic progression: Vanilla Base, SFT, and GRPO to RITL Base, SFT,
+and GRPO to RITL-DOC Base, SFT, and GRPO. The results show that, overall, inference-level strategies deliver
+11
+
+[Page 12]
+Training and Agentic Inference Strategies for LLM-based Manim Animation Generation
+Rammuni Silva et al.
+Table 4: Comparison of the mean Visual Similarity score of all fine-tuned models across all combinations of training
+and inference strategy
+Model
+Base
+SFT
+GRPO
+Base
+RITL
+SFT
+RITL
+GRPO
+RITL
+Base
+RITL-D.
+SFT
+RITL-D.
+GRPO
+RITL-D.
+[Mean]
+34.3
+37.6
+36.8
+41.7
+42.8
+44.2
+43.4
+45.0
+45.5
+Base
+SFT
+GRPO
+Base
+SFT
+GRPO
+Base
+SFT
+GRPO
+Training Method
+Qwen 2.5 0.5B
+LLaMA 3.2 1B
+LLaMA 3.2 3B
+Ministral 3 3B
+Qwen 2.5 Coder 3B
+Qwen 3 4B
+Qwen 2.5 Coder 1.5B
+Qwen 2.5 Coder 7B
+Meta LLaMA 3.1 8B
+Ministral 3 8B
+Qwen 3 8B
+Seed Coder 8B
+Ministral 3 14B
+Qwen 2.5 Coder 14B
+Qwen 3 14B
+Mistral Small 3.2 24B
+Qwen 3 Coder 30B
+Mean
+Model
+0.0
+73.8
+84.2
+0.0
+40.3
+53.6
+0.0
+-18.1
+0.0
+0.0
+85.3
+36.2
+0.0
+11.0
+27.4
+0.0
+-8.2
+0.4
+0.0
+25.5
+-16.4
+0.0
+10.2
+19.8
+0.0
+-11.7
+43.3
+0.0
+21.8
+31.3
+0.0
+-8.8
+14.8
+0.0
+51.2
+47.2
+0.0
+16.2
+5.5
+0.0
+8.2
+4.5
+0.0
+10.7
+-15.7
+0.0
+7.8
+7.9
+0.0
+6.9
+-11.1
+0.0
+26.9
+20.0
+0.0
+1.6
+-13.4
+0.0
+-5.0
+5.3
+0.0
+7.5
+-11.4
+0.0
+21.0
+15.2
+0.0
+-4.9
+-3.7
+0.0
+4.8
+7.1
+0.0
+1.0
+1.4
+0.0
+-8.2
+16.7
+0.0
+3.4
+6.0
+0.0
+18.2
+15.8
+0.0
+2.9
+4.5
+0.0
+10.3
+8.7
+0.0
+15.7
+22.7
+0.0
+9.5
+27.9
+0.0
+-19.2
+-7.7
+0.0
+3.4
+7.5
+0.0
+2.9
+4.3
+0.0
+5.5
+5.5
+0.0
+6.9
+11.6
+0.0
+12.0
+16.0
+0.0
+5.1
+4.9
+0.0
+5.5
+-0.3
+0.0
+5.7
+1.4
+0.0
+0.7
+1.7
+0.0
+2.0
+-4.4
+0.0
+-7.4
+-5.5
+0.0
+8.1
+11.7
+0.0
+-1.8
+6.2
+0.0
+-4.3
+0.4
+0.0
+-7.7
+-5.7
+0.0
+6.7
+4.2
+0.0
+10.4
+8.3
+0.0
+3.9
+6.8
+0.0
+18.3
+12.7
+0.0
+4.8
+10.9
+0.0
+4.3
+7.2
+Vanilla Inference
+Renderer in the loop (RITL)
+RITL-DOC
+0
+20
+40
+60
+80
+% Improvement over Group Baseline
+Figure 6: Ablation experiment results conducted to investigate the effect of training strategy on the visual similarity
+performance of the fine-tuned LLMs. The percentage improvement is presented, grouped by inference strategy, relative
+to the base model in each group.
+greater performance gains than fine-tuning alone. Additionally, RITL-DOC with GRPO emerges as the most effective
+combination of inference and training strategies throughout the table.
+4.3.1
+Interaction between Training and Inference Strategies
+To distinguish the individual and combined effects of the two training and inference strategies, ablation experiments
+were conducted, grouped by the two strategies.
+Figure 6 illustrates the effects of different training strategies categorised by inference approach. The figure indicates that
+the impact of the training strategy is particularly significant for smaller models across all inference methods. Based on
+the average percentage improvements, the influence of these strategies is more pronounced under the vanilla inference
+approach compared to RITL and RITL-DOC.
+Figure 7 provides a complementary view to Figure 6, demonstrating how the inference strategy affects different training
+methods. The figure shows that the RITL and RITL-DOC inference strategies have a stronger impact on models trained
+with Base and GRPO, but are less pronounced for SFT models compared to their respective baselines. Additionally,
+the figure indicates that smaller models decline in performance with RITL and RITL-DOC under SFT, whereas they
+perform better under RITL and RITL-DOC under GRPO, for example, the LLaMA 3.2 3B model. A likely explanation
+is context saturation since RITL-DOC can consume most of the available context length with dense API information
+overwhelming the smaller models.
+Figure 8 reveals a pattern where, overall, SFT slightly outperforms GRPO under vanilla inference, but GRPO improves
+and surpasses SFT under RITL and RITL-DOC. This pattern indicates that GRPO-trained models perform best with
+inference-time strategies such as RITL and RITL-DOC and are more receptive to iterative self-correction. This finding
+aligns with the nature of GRPO training, in which the model is trained to satisfy an external validation that closely
+matches the functioning of the feedback loop in RITL.
+12
+
+[Page 13]
+Training and Agentic Inference Strategies for LLM-based Manim Animation Generation
+Rammuni Silva et al.
+Vanilla
+RITL
+RITL-DOC
+Vanilla
+RITL
+RITL-DOC
+Vanilla
+RITL
+RITL-DOC
+Inference Strategy
+Qwen 2.5 0.5B
+LLaMA 3.2 1B
+LLaMA 3.2 3B
+Ministral 3 3B
+Qwen 2.5 Coder 3B
+Qwen 3 4B
+Qwen 2.5 Coder 1.5B
+Qwen 2.5 Coder 7B
+Meta LLaMA 3.1 8B
+Ministral 3 8B
+Qwen 3 8B
+Seed Coder 8B
+Ministral 3 14B
+Qwen 2.5 Coder 14B
+Qwen 3 14B
+Mistral Small 3.2 24B
+Qwen 3 Coder 30B
+Mean
+Model
+0.0
+28.9
+41.0
+0.0
+4.0
+-33.6
+0.0
+7.4
+-23.5
+0.0
+52.4
+56.4
+0.0
+-8.7
+-22.5
+0.0
+42.5
+15.3
+0.0
+11.4
+11.4
+0.0
+-2.1
+-21.5
+0.0
+59.7
+90.9
+0.0
+33.5
+30.4
+0.0
+0.0
+61.8
+0.0
+16.7
+46.1
+0.0
+10.4
+17.7
+0.0
+2.8
+12.1
+0.0
+9.4
+-5.9
+0.0
+27.5
+-4.4
+0.0
+26.5
+12.6
+0.0
+5.1
+6.3
+0.0
+0.8
+-3.1
+0.0
+-5.7
+2.5
+0.0
+22.7
+-0.8
+0.0
+45.2
+44.3
+0.0
+14.1
+24.9
+0.0
+21.5
+34.1
+0.0
+14.9
+31.0
+0.0
+4.5
+34.2
+0.0
+32.3
+37.0
+0.0
+33.0
+45.3
+0.0
+15.8
+35.6
+0.0
+20.1
+36.4
+0.0
+24.5
+73.0
+0.0
+17.8
+20.8
+0.0
+29.7
+30.1
+0.0
+10.2
+8.9
+0.0
+9.7
+11.1
+0.0
+6.9
+6.8
+0.0
+24.9
+42.2
+0.0
+30.9
+39.8
+0.0
+29.8
+33.7
+0.0
+25.5
+26.9
+0.0
+25.8
+21.2
+0.0
+27.7
+29.5
+0.0
+18.6
+11.3
+0.0
+7.7
+17.9
+0.0
+17.3
+30.1
+0.0
+12.9
+22.4
+0.0
+10.0
+15.0
+0.0
+6.7
+8.6
+0.0
+25.8
+31.3
+0.0
+30.0
+27.8
+0.0
+30.7
+34.6
+0.0
+23.5
+28.6
+0.0
+10.8
+15.3
+0.0
+22.7
+24.1
+Base Models
+SFT Models
+GRPO Models
+20
+0
+20
+40
+60
+80
+% Improvement over Training Baseline
+Figure 7: Ablation experiment results conducted to investigate the effect of inference strategy on visual similarity
+performance of the fine-tuned LLMs. The percentage improvement is presented, grouped by training strategy, relative
+to the vanilla inference strategy in each group.
+Vanilla
+RITL
+RITL-DOC
+Inference Strategy
+0.34
+0.36
+0.38
+0.40
+0.42
+0.44
+0.46
+Mean Visual Similarity
+0.343
+0.417
+0.434
+0.368
+0.442
+0.455
+0.376
+0.428
+0.450
+<- GRPO overtakes SFT
+Training Method
+Base
+GRPO
+SFT
+Figure 8: Variation of mean Visual Similarity of the fine-tuned models across the inference strategies.
+4.3.2
+Effect of Additional RITL Loops
+Throughout the experiments, only one iteration was used with RITL and RITL-DOC, giving the model a single
+opportunity to self-correct and focusing more on the model’s ability to generate Manim code rather than on repairing
+faulty Manim code.
+However, to evaluate the benefits of additional self-correction attempts, the overall top-performing model, Qwen 3
+Coder 30B, was tested under RITL-DOC with three correction attempts. As shown in Figure 9, the additional correction
+13
+
+[Page 14]
+Training and Agentic Inference Strategies for LLM-based Manim Animation Generation
+Rammuni Silva et al.
+Base
+SFT
+GRPO
+70.0
+72.5
+75.0
+77.5
+80.0
+82.5
+85.0
+87.5
+90.0
+Score (%)
+77.7
+80.8
+83.0
+79.2
+82.6
+85.7
++1.4pp
++1.8pp
++2.7pp
+Visual Similarity
+Feedback Iterations
+RITL-DOC@1
+RITL-DOC@3
+Base
+SFT
+GRPO
+46
+48
+50
+52
+54
+56
+58
+60
+53.5
+54.4
+53.7
+53.1
+53.7
+54.2
+-0.4pp
+-0.6pp
++0.5pp
+CodeBERTBLEU
+Base
+SFT
+GRPO
+80.0
+82.5
+85.0
+87.5
+90.0
+92.5
+95.0
+97.5
+100.0
+87.0
+89.0
+92.0
+89.0
+92.0
+94.0
++2.0pp
++3.0pp
++2.0pp
+Render Success
+Figure 9: Comparison of performance between RITL-DOC@1 and RITL-DOC@3
+attempts consistently improved VS and RSR across all three training strategies, with greater gains seen with GRPO,
+confirming its role in self-correction ability, as also discussed in Section 4.3.1.
+However, Figure 9 also shows that with Base and SFT model variants, the additional correction loops tend to lower the
+CodeBERTBLEU, indicating that they encourage the model to add fixes to the initial code, which may not be the most
+ideal way to generate that particular code for the provided prompt. GRPO models show a more balanced trend, with
+less CBB degradation under additional iterations.
+4.4
+Correlation between Code and Visual Metrics
+Figure 10 shows a Spearman rank correlation heatmap for the seven different evaluation metrics utilised in the previously
+mentioned experiments. Overall, within each metric category (code metrics and visual metrics), the correlation is
+stronger, as anticipated. For instance, although computed using two different algorithms, the Visual Semantic Score
+and the SSIM score are highly correlated. Similarly, CodeBLEU and CodeBERT Similarity exhibit high correlation.
+CodeBLEU exhibits moderate correlations with all other metrics, except AST Distance.
+Nevertheless, the cross-family correlations between code and visual metrics are relatively weaker. This indicates that
+models may generate code that produces a video similar to the reference video while using structurally different code,
+or conversely, generate structurally similar code that ultimately fails to render. The figure also indicates no correlation
+of the AST distance with any other metric, implying that it is unreliable for the Manim code generation evaluation.
+One plausible reason could be Manim’s object-oriented scene structure, which remains relatively consistent across all
+Manim scripts.
+4.4.1
+Agreement of VS and CBB across Training and Inference Strategies
+To investigate the connection between VS and CBB, Table 5 presents the rank correlations between the two composite
+metrics, grouped by combinations of training and inference strategies.
+When analysing each strategy individually, the strongest correlation is observed for GRPO with Vanilla inference, with
+a Spearman’s ρ of 0.919 and Kendall’s τ of 0.809. However, a notable trend appears when inference-time strategies are
+introduced, resulting in consistently lower correlation scores. This trend is also evident when grouping by the inference
+strategy, where vanilla inference shows the highest correlation regardless of the training strategy. When grouping by the
+training strategy, SFT has the highest correlation under Spearman’s ρ by a narrow margin, and GRPO demonstrates the
+highest correlation under Kendall’s τ.
+These results highlight a notable practical phenomenon that while the generated code quality better aligns with the
+visual quality under SFT and GRPO, the enhancements made at the inference level prevent that correlation from holding.
+Instead, they produce code that differs from the expected but still results in videos that look similar to the anticipated
+output. This can also be seen as the models attempting to fix broken code with innovative but sub-optimal methods,
+which could lead to increasingly high-quality videos that closely resemble the expected video.
+14
+
+[Page 15]
+Training and Agentic Inference Strategies for LLM-based Manim Animation Generation
+Rammuni Silva et al.
+Code
+BLEU
+CodeBERT
+Sim.
+SSIM
+Visual
+Semantic
+N-gram
+Match
+Syntax
+Match
+AST
+Distance
+Code
+BLEU
+CodeBERT
+Sim.
+SSIM
+Visual
+Semantic
+N-gram
+Match
+Syntax
+Match
+AST
+Distance
+1.00
+0.78
+1.00
+0.75
+0.50
+1.00
+0.75
+0.49
+1.00
+1.00
+0.75
+0.84
+0.32
+0.31
+1.00
+0.91
+0.57
+0.86
+0.87
+0.50
+1.00
+-0.40
+-0.32
+-0.19
+-0.18
+-0.51
+-0.29
+1.00
+0.4
+0.2
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+Figure 10: Spearman Rank Correlation Between Evaluation Metrics calculated for each model under all combinations
+of inference and training strategies.
+Table 5: Rank correlations between Visual Similarity and CodeBERTBLEU, grouped by training and inference strategies.
+n denotes the number of model observations. n=17 for individual strategy combinations and n=51 (17*3) for grouped
+analyses
+Grouping
+Category
+Spearman’s ρ
+Kendall’s τ
+n
+Training × Inference Strategy
+Base
+0.689
+0.559
+17
+SFT
+0.833
+0.676
+17
+GRPO
+0.919
+0.809
+17
+Base+RITL
+0.696
+0.544
+17
+SFT+RITL
+0.799
+0.603
+17
+GRPO+RITL
+0.713
+0.559
+17
+Base+RITL-DOC
+0.743
+0.559
+17
+SFT+RITL-DOC
+0.694
+0.544
+17
+GRPO+RITL-DOC
+0.701
+0.574
+17
+Training Strategy
+Base
+0.703
+0.527
+51
+SFT
+0.791
+0.605
+51
+GRPO
+0.772
+0.619
+51
+Inference Strategy
+Vanilla
+0.817
+0.648
+51
+RITL
+0.729
+0.553
+51
+RITL-DOC
+0.706
+0.534
+51
+4.4.2
+Qualitative Case Studies: Agreement of quantitative metrics and perceived quality
+Best Cases
+Figure 11 shows two examples where GRPO fine-tuning improved the generated Manim code. The Qwen
+3 Coder 30B example in Figure 11 illustrates that the base model hallucinated API parameters, whereas GRPO guided
+the model to keep the default parameter value, as in the expected code. Similarly, in the Ministral 3 8B example, the
+base model hallucinates a built-in function when it is not even needed to create the scene described by the prompt. The
+GRPO model recognises this and produces code very similar to the reference code.
+Worst Cases
+Figure 12 illustrates failure cases where GRPO has caused the degradation of the performance of a
+base model. One similarity between these two examples is that both are from much smaller models with less than 8B
+parameters. The examples show that the increased spatial awareness of GRPO models has led them to hallucinate
+functions and API parameters that position visual elements in the required positions.
+15
+
+[Page 16]
+Training and Agentic Inference Strategies for LLM-based Manim Animation Generation
+Rammuni Silva et al.
+BASE: Qwen 3 Coder 30B
+Visual Similarity: 0.0 
+CodeBERTBLEU: 0.477
+Render: FAIL
+from manim import *
+class DodecahedronScene(Scene):
+    def construct(self):
+        # Create a 3D dodecahedron
+        dodecahedron = Dodecahedron(
+            fill_opacity=0.8,
+            fill_color=BLUE,
+            stroke_width=2,
+            stroke_color=WHITE
+        )
+        
+        # Position the dodecahedron at the center of the scene
+        dodecahedron.move_to(ORIGIN)
+        
+        # Set camera angles
+        self.camera.angle_z = 30 * DEGREES
+        self.camera.angle_y = 75 * DEGREES
+        
+        # Add the dodecahedron to the scene
+        self.add(dodecahedron)
+        
+        # Hold the view
+        self.wait(1)
+TypeError: Polyhedron.__init__() got an unexpected keyword argument 
+'fill_opacity'
+GRPO: Qwen 3 Coder 30B
+from manim import *
+class DodecahedronScene(ThreeDScene):
+    def construct(self):
+        # Set camera angles
+        self.set_camera_orientation(phi=75 * DEGREES, theta=30 * DEGREES)
+        # Create a dodecahedron
+        dodecahedron = Dodecahedron()
+        # Add the dodecahedron to the scene
+        self.add(dodecahedron)
+        # Optional: Add a background plane for better visualization
+        # background_plane = NumberPlane()
+        # self.add(background_plane)
+Prompt: Display a 3D dodecahedron—a twelve-faced polyhedron—centered in
+the scene. The camera is angled at 75° vertically and 30° horizontally to provide a
+clear, tilted view of the shape, showcasing its three-dimensional structure.
+Reference Code
+from manim import *
+class DodecahedronScene(ThreeDScene):
+    def construct(self):
+        self.set_camera_orientation(phi=75 * DEGREES, theta=30 * DEGREES)
+        obj = Dodecahedron()
+        self.add(obj)
+Visual Similarity: 1.0 
+CodeBERTBLEU: 0.792
+Render: PASS
+(a) GRPO outperforming the base version of the Qwen
+3 Coder 30B model.
+BASE: Ministral 3 8B
+Visual Similarity: 0.0 
+CodeBERTBLEU: 0.526
+Render: FAIL
+from manim import *
+import numpy as np
+class Torus3DScene(ThreeDScene):
+    def construct(self):
+        # Set up the 3D camera
+        self.set_camera_orientation(phi=75 * DEGREES, theta=30 * DEGREES)
+        self.enable_camera_zoom(False)
+        # Create coordinate axes
+        axes = ThreeDAxes(
+            x_length=5,
+            y_length=5,
+            z_length=5,
+            color=WHITE,
+            x_axis_config={"color": RED},
+            y_axis_config={"color": GREEN},
+            z_axis_config={"color": BLUE}
+        )
+        self.add(axes)
+        # Create a torus (doughnut shape)
+        theta = np.linspace(0, 2 * np.pi, 100)
+        phi = np.linspace(0, 2 * np.pi, 100)
+        theta, phi = np.meshgrid(theta, phi)
+        # Parametric equations for a torus
+        R = 2.5  # Major radius
+        r = 1.0   # Minor radius
+        x = # ... (28 more lines)
+AttributeError: 'Torus3DScene' object has no attribute 
+'enable_camera_zoom'
+GRPO: Ministral 3 8B
+from manim import *
+class Torus3D(ThreeDScene):
+    def construct(self):
+        axes = ThreeDAxes()
+        torus = Torus()
+        self.add(axes, torus)
+        self.set_camera_orientation(phi=75 * DEGREES, theta=30 * DEGREES)
+Prompt: Display a 3D scene with a coordinate axis system and a torus (doughnut-
+shaped surface) centered in the scene. The camera is angled from above and
+slightly to the side to provide a clear view of the torus's circular structure.
+Visual Similarity: 1.0 
+CodeBERTBLEU: 0.903
+Render: PASS
+Reference Code
+from manim import *
+class ExampleTorus(ThreeDScene):
+    def construct(self):
+        axes = ThreeDAxes()
+        torus = Torus()
+        self.set_camera_orientation(phi=75 * DEGREES, theta=30 * DEGREES)
+        self.add(axes, torus)
+(b) GRPO outperforming the base version of the
+Ministral 3 8B model.
+Figure 11: Best Case: Fine-tuned model surpasses the base model.
+BASE: LLaMA 3.2 3B
+from manim import *
+class RedText(Scene):
+    def construct(self):
+        text = Text("RED COLOR", color=RED)
+        self.add(text.center())
+GRPO: LLaMA 3.2 3B
+from manim import *
+class RedText(Scene):
+    def construct(self):
+        text = Text("RED COLOR", color=RED)
+        self.add(text.centered())
+Visual Similarity: 0.0 
+CodeBERTBLEU: 0.810
+Render: FAIL
+Reference Code
+from manim import *
+class SimpleColor(Scene):
+    def construct(self):
+        col = Text("RED COLOR", color=RED)
+        self.add(col)
+AttributeError: Text object has no attribute 'centered'
+Visual Similarity: 1.0 
+CodeBERTBLEU: 0.810
+Render: PASS
+Prompt: Display the text "RED COLOR" in red at the center of the screen.
+(a) GRPO underperforming the base version of the
+LLaMA 3.2 3B model.
+BASE: Qwen 2.5 Coder 7B
+from manim import *
+class RedTextScene(Scene):
+    def construct(self):
+        text = Text("RED COLOR", color=RED)
+        self.add(text)
+        self.wait(2)
+GRPO: Qwen 2.5 Coder 7B
+from manim import *
+class DisplayRedText(Scene):
+    def construct(self):
+        text = Text("RED COLOR", color=RED)
+        text.to_center()
+        self.add(text)
+        self.wait(2)
+Prompt: Display the text "RED COLOR" in red at the center of the screen.
+Visual Similarity: 0.0 
+CodeBERTBLEU: 0.797
+Render: FAIL
+Reference Code
+from manim import *
+class SimpleColor(Scene):
+    def construct(self):
+        col = Text("RED COLOR", color=RED)
+        self.add(col)
+AttributeError: Text object has no attribute 'to_center'
+Visual Similarity: 1.0 
+CodeBERTBLEU: 0.812
+Render: PASS
+(b) GRPO underperforming the base version of the
+Qwen 2.5 Coder 7B model.
+Figure 12: Worst Case: Base model surpasses fine-tuned model
+16
+
+[Page 17]
+Training and Agentic Inference Strategies for LLM-based Manim Animation Generation
+Rammuni Silva et al.
+Vanilla SFT: Qwen Coder 30B
+from manim import *
+class HelloWorld(Scene):
+    def construct(self):
+        text = Text("Hello world", size=144)
+        self.add(text)
+RITL-DOC: Qwen Coder 30B
+from manim import *
+class HelloWorld(Scene):
+    def construct(self):
+        text = Text("Hello world", font_size=144)
+        self.add(text)
+Visual Similarity: 1.0
+CodeBERTBLEU: 1.000
+Render: PASS
+Reference Code
+from manim import *
+class HelloWorld(Scene):
+    def construct(self):
+        text = Text("Hello world", font_size=144)
+        self.add(text)
+Visual Similarity: 0.0 
+CodeBERTBLEU: 0.964
+Render: FAIL
+Prompt: Display the text “Hello world” in large font (size 144) centered on the
+screen.
+TypeError: Mobject.__init__() got an unexpected keyword argument 'size'
+(a) RITL inferencing outperforming Vanilla
+inferencing on SFT Qwen 3 Coder 30B model.
+Vanilla SFT: Qwen 3 Coder 30B
+Visual Similarity: 0.0 
+CodeBERTBLEU: 0.639
+Render: FAIL
+from manim import *
+class DodecahedronScene(ThreeDScene):
+    def construct(self):
+        self.set_camera_orientation(phi=75 * DEGREES, theta=30 * DEGREES)
+        dodecahedron = Polyhedron(
+            vertices=[
+                [1, 1, 1], [1, 1, -1], [1, -1, 1], [1, -1, -1],
+                [-1, 1, 1], [-1, 1, -1], [-1, -1, 1], [-1, -1, -1],
+                [0, 1.618, 0.618], [0, 1.618, -0.618], 
+[0, -1.618, 0.618], [0, -1.618, -0.618]
+            ],
+            faces=[
+                [0, 1, 3, 2], [4, 5, 7, 6], [0, 4, 6, 2],
+                [1, 5, 7, 3], [0, 4, 5, 1], [2, 3, 7, 6]
+            ],
+            face_colors=[BLUE]
+        )
+        self.add(dodecahedron)
+        self.begin_ambient_camera_rotation(rate=0.1)
+TypeError: Polyhedron.__init__() got an unexpected keyword argument 
+'vertices'
+RITL-DOC: Qwen 3 Coder 30B
+from manim import *
+class DodecahedronScene(ThreeDScene):
+    def construct(self):
+        self.set_camera_orientation(phi=75 * DEGREES, theta=30 * DEGREES)
+        dodecahedron = Dodecahedron()
+        self.add(dodecahedron)
+        self.begin_ambient_camera_rotation(rate=0.1)
+Prompt: Display a 3D dodecahedron—a twelve-faced polyhedron—centered in
+the scene. The camera is angled at 75° vertically and 30° horizontally to provide a
+clear, tilted view of the shape, showcasing its three-dimensional structure.
+Reference Code
+from manim import *
+class DodecahedronScene(ThreeDScene):
+    def construct(self):
+        self.set_camera_orientation(phi=75 * DEGREES, theta=30 * DEGREES)
+        obj = Dodecahedron()
+        self.add(obj)
+Visual Similarity: 1.0 
+CodeBERTBLEU: 0.903
+Render: PASS
+(b) RITL inferencing outperforming Vanilla
+inferencing on SFT Qwen 3 Coder 30B model.
+Figure 13: Rescue Case: Inference strategy outperforming vanilla inference.
+Rescue Cases.
+Examples in Figure 13 demonstrate cases where inference-level strategies corrected erroneous code.
+The figure illustrates an instance of RITL-DOC fixing a hallucinated API parameter with the correct one using Qwen
+3 Coder 30B. The right figure depicts the same model learning to correctly utilise the Manim API by employing the
+visual shapes available out of the box rather than attempting to recreate them.
+Outlier Cases.
+Figure 14 shows an outlier where a smaller Ministral 3 8B SFT model successfully generated an
+error-free Manim code when the much larger Mistral Small 3.2 24B model failed. However, as seen in the figure, this is
+because the model tried to be precise about the visual object’s parameters with hallucinated API parameters.
+Visual Examples.
+Figure 15 shows a few selected visual examples where the training iterations have increased the
+visual quality and the accuracy of the generated videos.
+4.5
+Limitations: Threats to Validity
+Internal Validity
+Hyperparameter selection for both training strategies was conducted empirically and kept consistent
+across all models. Further hyperparameter optimisation tailored to individual models may produce different outcomes.
+Additionally, all models utilised LoRA adapters, which could introduce quantisation effects varying across models and
+model families.
+External Validity
+The experiments in this study mainly use ManimBench. While ManimBench covers the entire
+Manim API, it does not include samples that generate longer, script-based videos. Therefore, it is only suitable to
+draw conclusions about the fundamental capabilities of LLMs in Manim code generation, which could naturally extend
+to creating longer Manim videos. Additionally, the findings are specific to Manim Community Edition 0.19.0 and
+may not apply to other types of programmatic animation. Moreover, for all models, the study uses an Unsloth 4-bit
+quantised version due to resource limitations and because the focus was on evaluating compact models for Manim code
+generation. Full-precision models might theoretically achieve better performance but would require increased compute.
+Construct Validity
+The metrics used in the study aim to provide a holistic interpretation of a given LLM’s capabilities
+for Manim code generation. However, the scores are based on the reference code, which is expert-written and from
+Manim’s official documentation. This may penalise generated videos that are visually relevant to the provided textual
+17
+
+[Page 18]
+Training and Agentic Inference Strategies for LLM-based Manim Animation Generation
+Rammuni Silva et al.
+SFT: Ministral 3 8B
+from manim import *
+class Torus3D(ThreeDScene):
+    def construct(self):
+        axes = ThreeDAxes()
+        torus = Torus()
+        self.add(axes, torus)
+        self.set_camera_orientation(phi=75 * DEGREES, theta=30 * DEGREES)
+SFT: Mistral Small 3.2 24B
+from manim import *
+class Torus3D(ThreeDScene):
+    def construct(self):
+        axes = ThreeDAxes()
+        torus = Torus(r1=1, r2=0.3)
+        self.set_camera_orientation(phi=75 * DEGREES, theta=30 * DEGREES)
+        self.add(axes, torus)
+        self.wait()
+Prompt:  Display a 3D scene with a coordinate axis system and a torus
+(doughnut-shaped surface) centered in the scene. The camera is angled from
+above and slightly to the side to provide a clear view of the torus's circular
+structure
+Visual Similarity: 0.0 
+CodeBERTBLEU: 0.857
+Render: FAIL
+Reference Code
+from manim import *
+class ExampleTorus(ThreeDScene):
+    def construct(self):
+        axes = ThreeDAxes()
+        torus = Torus()
+        self.set_camera_orientation(phi=75 * DEGREES, theta=30 * DEGREES)
+        self.add(axes, torus)
+TypeError: Mobject.__init__() got an unexpected keyword argument 'r1'
+Visual Similarity: 1.0 
+CodeBERTBLEU: 0.903
+Render: PASS
+Figure 14: Outlier Case: An example of a smaller Ministral 8B SFT model outperforming Mistral Small 3.2 24B SFT
+model.
+description and high-quality, but differ from the reference code and video. Also, in error logs utilised in RITL, were
+truncated to the last 10 lines to reduce noise in the model context. While practically the last line of the error log contains
+the core reason for the error, it may occasionally truncate relevant diagnostic information.
+5
+Conclusion and Future Work
+The paper presents ManimTrainer and ManimAgent, which together offer an end-to-end framework for training and
+deploying sub-30B LLMs to generate Manim programmatic animations. It provides the first comprehensive analysis of
+the interaction between training strategies and inference strategies for this task, using 17 open-source LLMs ranging
+from 0.5B to 30B parameters.
+The results showed that both SFT and GRPO fine-tuning consistently improved the LLMs’ Manim code generation
+ability, with SFT primarily enhancing code-level metrics and GRPO increasing the visual quality of the rendered videos,
+demonstrating their complementary roles. LLMs with around 8B parameters demonstrated well-balanced performance
+in terms of accuracy and efficiency, with the SeedCoder 8B model, trained with GRPO, outperforming the much larger
+Qwen 3 Coder Next 80B base model under vanilla inference. The model also performed comparably well to GPT-4.1.
+Inference-time enhancement strategies achieved even greater performance gains than mere fine-tuning. Notably, GRPO
+models outperformed SFT and base models on RITL and RITL-DOC. The top overall results of 85.7% VS and 94%
+RSR were achieved by the Qwen 3 Coder 30B model with GRPO under RITL-DOC, utilising three RITL loops, and
+even surpassed the baseline GPT-4.1 model by +3.8 pp in VS and +2 pp in RSR. These findings confirm the hypothesis
+formulated at the beginning of this study that combining SFT with GRPO-based reinforcement learning and agentic
+inference strategies yields better performance in the LLM-based text-to-code-to-video process.
+Analysis in this study indicates that code and visual metrics exhibit a relatively weak overall correlation, suggesting
+different coding approaches can produce similar visual outputs. Additionally, the evaluation results indicate that under
+vanilla inference, the code-visual metric correlation increased as the training pipeline progressed from the base to SFT,
+then from SFT to GRPO, while it consistently decreased when inference-level enhancements were introduced.
+Future Work
+This work can be expanded in several directions. First, the frameworks presented can be used without
+modification to train much larger models in a multi-GPU setup, thereby validating these findings as parameter counts
+increase. Second, integrating a multimodal critic that offers natural-language feedback on the rendered videos could
+further address visual defects and inconsistencies. Third, the rule-based API retrieval in RITL-DOC can be improved
+18
+
+[Page 19]
+Training and Agentic Inference Strategies for LLM-based Manim Animation Generation
+Rammuni Silva et al.
+BASE
+Display two vertically arranged groups side by side: on the left, a red label "CounterclockwiseTransform" with the numbers 3.141 and 1.618 stacked above it; on the
+right, a blue label "Transform" with the numbers 1.618 and 3.141 stacked above it. First, the top number in the left group transforms into the bottom number using a
+counterclockwise spinning motion. Then, the top number in the right group transforms into the bottom number with a direct, straight morphing animation.
+Prompt
+82.15 %
+Visual Similarity
+52.55 %
+CodeBERTBLEU
+Mistral Small 3.2 24B
+SFT
+95.14 %
+Visual Similarity
+55.26 %
+CodeBERTBLEU
+GRPO
+95.66 %
+Visual Similarity
+54.06 %
+CodeBERTBLEU
+Reference
+100 %
+Visual Similarity
+100 %
+CodeBERTBLEU
+BASE
+Display the text “Flash the dot below:” at the top of the screen with a yellow dot positioned below it. Then animate a flashing effect around the dot to draw
+attention to it.
+Prompt
+87.58 %
+Visual Similarity
+39.53 %
+CodeBERTBLEU
+Mistral Small 3.2 24B
+SFT
+88.61 %
+Visual Similarity
+37.96 %
+CodeBERTBLEU
+GRPO
+88.79 %
+Visual Similarity
+39.18 %
+CodeBERTBLEU
+Reference
+100 %
+Visual Similarity
+100 %
+CodeBERTBLEU
+BASE
+Display a set of axes with a blue line representing the function \( y = x \). At the point where \( x = 4 \), a vertical dashed line and a horizontal dashed line
+intersect the graph, forming a "T" shape. A label reading "x-value" is placed near this intersection to indicate the corresponding point on the graph.
+Prompt
+85.15 %
+Visual Similarity
+55.72 %
+CodeBERTBLEU
+Seed Coder 8B
+SFT
+88.56 %
+Visual Similarity
+59.51 %
+CodeBERTBLEU
+GRPO
+88.73 %
+Visual Similarity
+56.36 %
+CodeBERTBLEU
+Reference
+100 %
+Visual Similarity
+100 %
+CodeBERTBLEU
+Figure 15: Examples from the top performing models. The top example shows that the GRPO has fixed the issue of text
+being out of the viewing area, while the middle example shows the GRPO fixing overlapping visual elements. The
+bottom example shows a case where the training cycles become increasingly similar to the reference video.
+by employing a learned retriever model to extract relevant API information, benefiting smaller models that currently
+find it difficult to handle longer, noisier contexts. Fourth, the efficiency of incorporating ManimAgent into a multimodal
+content generation system could be tested and assessed by human users. Finally, the ManimTrainer and ManimAgent
+frameworks could be adapted to other programmatic animation-generation domains, such as HTML/CSS, SVG-based
+animations, TikZ, and XML-based diagram generation, as they provide a highly efficient and precise alternative to
+image-generation models.
+19
+
+[Page 20]
+Training and Agentic Inference Strategies for LLM-based Manim Animation Generation
+Rammuni Silva et al.
+References
+[1] The Manim Community Developers. Manim – Mathematical Animation Framework, 2026.
+[2] Mark Chen, Tworek, et al. Evaluating Large Language Models Trained on Code, 2021. Version Number: 2.
+[3] Binyuan Hui, Jian Yang, Zeyu Cui, Jiaxi Yang, Dayiheng Liu, Lei Zhang, Tianyu Liu, Jiajun Zhang, Bowen
+Yu, Keming Lu, Kai Dang, Yang Fan, Yichang Zhang, An Yang, Rui Men, Fei Huang, Bo Zheng, Yibo Miao,
+Shanghaoran Quan, Yunlong Feng, Xingzhang Ren, Xuancheng Ren, Jingren Zhou, and Junyang Lin. Qwen2.5-
+Coder Technical Report, 2024. Version Number: 3.
+[4] ByteDance Seed, Yuyu Zhang, Jing Su, Yifan Sun, Chenguang Xi, Xia Xiao, Shen Zheng, Anxiang Zhang, Kaibo
+Liu, Daoguang Zan, Tao Sun, Jinhua Zhu, Shulin Xin, Dong Huang, Yetao Bai, Lixin Dong, Chao Li, Jianchong
+Chen, Hanzhi Zhou, Yifan Huang, Guanghan Ning, Xierui Song, Jiaze Chen, Siyao Liu, Kai Shen, Liang Xiang,
+and Yonghui Wu. Seed-Coder: Let the Code Model Curate Data for Itself, 2025. Version Number: 2.
+[5] Ravidu Suien Rammuni Silva, Ahmad Lotfi, Isibor Kennedy Ihianle, Golnaz Shahtahmassebi, and Jordan J. Bird.
+Large Language Model Approaches to Educational Video Generation Using Manim. In Emma Hart, Tomas
+Horvath, Zhiyuan Tan, and Sarah Thomson, editors, Advances in Computational Intelligence Systems, volume
+1468, pages 306–317. Springer Nature Switzerland, Cham, 2026. Series Title: Advances in Intelligent Systems
+and Computing.
+[6] Edward J. Hu, Yelong Shen, Phillip Wallis, Zeyuan Allen-Zhu, Yuanzhi Li, Shean Wang, Lu Wang, and Weizhu
+Chen. LoRA: Low-Rank Adaptation of Large Language Models, 2021. Version Number: 2.
+[7] Tim Dettmers, Artidoro Pagnoni, Ari Holtzman, and Luke Zettlemoyer. Qlora: efficient finetuning of quantized
+llms. In Proceedings of the 37th International Conference on Neural Information Processing Systems, NIPS ’23,
+Red Hook, NY, USA, 2023. Curran Associates Inc.
+[8] Zhihong Shao, Peiyi Wang, Qihao Zhu, Runxin Xu, Junxiao Song, Xiao Bi, Haowei Zhang, Mingchuan Zhang,
+Y. K. Li, Y. Wu, and Daya Guo. DeepSeekMath: Pushing the Limits of Mathematical Reasoning in Open Language
+Models, 2024. Version Number: 3.
+[9] Xinyun Chen, Maxwell Lin, Nathanael Schaerli, and Denny Zhou. Teaching Large Language Models to Self-
+Debug. In B. Kim, Y. Yue, S. Chaudhuri, K. Fragkiadaki, M. Khan, and Y. Sun, editors, International Conference
+on Learning Representations, volume 2024, pages 8746–8825, 2024.
+[10] Patrick Lewis, Ethan Perez, Aleksandra Piktus, Fabio Petroni, Vladimir Karpukhin, Naman Goyal, Heinrich
+Küttler, Mike Lewis, Wen-tau Yih, Tim Rocktäschel, Sebastian Riedel, and Douwe Kiela. Retrieval-augmented
+generation for knowledge-intensive NLP tasks. In Proceedings of the 34th International Conference on Neural
+Information Processing Systems, NIPS ’20, Red Hook, NY, USA, 2020. Curran Associates Inc. event-place:
+Vancouver, BC, Canada.
+[11] Zora Zhiruo Wang, Akari Asai, Xinyan Velocity Yu, Frank F. Xu, Yiqing Xie, Graham Neubig, and Daniel Fried.
+CodeRAG-Bench: Can Retrieval Augment Code Generation?, 2024. Version Number: 2.
+[12] Shuo Ren, Daya Guo, Shuai Lu, Long Zhou, Shujie Liu, Duyu Tang, Neel Sundaresan, Ming Zhou, Ambrosio
+Blanco, and Shuai Ma. CodeBLEU: a Method for Automatic Evaluation of Code Synthesis, 2020. Version
+Number: 2.
+[13] Zhangyin Feng, Daya Guo, Duyu Tang, Nan Duan, Xiaocheng Feng, Ming Gong, Linjun Shou, Bing Qin, Ting
+Liu, Daxin Jiang, and Ming Zhou. CodeBERT: A Pre-Trained Model for Programming and Natural Languages,
+2020. Version Number: 4.
+[14] Peter Ndajah, Hisakazu Kikuchi, Masahiro Yukawa, Hidenori Watanabe, and Shogo Muramatsu. SSIM image
+quality metric for denoised images. In Proceedings of the 3rd WSEAS international conference on Visualization,
+imaging and simulation, pages 53–57, 2010.
+[15] Alec Radford, Jong Wook Kim, Chris Hallacy, Aditya Ramesh, Gabriel Goh, Sandhini Agarwal, Girish Sastry,
+Amanda Askell, Pamela Mishkin, Jack Clark, Gretchen Krueger, and Ilya Sutskever. Learning Transferable Visual
+Models From Natural Language Supervision, 2021. Version Number: 1.
+[16] Terry Yue Zhuo, Minh Chien Vu, Jenny Chim, Han Hu, Wenhao Yu, Ratnadira Widyasari, Imam Nur Bani
+Yusuf, Haolan Zhan, Junda He, Indraneil Paul, Simon Brunner, Chen Gong, Thong Hoang, Armel Randy Zebaze,
+Xiaoheng Hong, Wen-Ding Li, Jean Kaddour, Ming Xu, Zhihan Zhang, Prateek Yadav, Naman Jain, Alex Gu,
+Zhoujun Cheng, Jiawei Liu, Qian Liu, Zijian Wang, Binyuan Hui, Niklas Muennighoff, David Lo, Daniel Fried,
+Xiaoning Du, Harm de Vries, and Leandro Von Werra. BigCodeBench: Benchmarking Code Generation with
+Diverse Function Calls and Complex Instructions, 2024. Version Number: 4.
+20
+
+[Page 21]
+Training and Agentic Inference Strategies for LLM-based Manim Animation Generation
+Rammuni Silva et al.
+[17] Qiushi Sun, Jingyang Gong, Yang Liu, Qiaosheng Chen, Lei Li, Kai Chen, Qipeng Guo, Ben Kao, and Fei Yuan.
+JanusCoder: Towards a Foundational Visual-Programmatic Interface for Code Intelligence, 2025. Version Number:
+1.
+[18] Daya Guo, Dejian Yang, and Zhang and others. DeepSeek-R1 incentivizes reasoning in LLMs through reinforce-
+ment learning. Nature, 645(8081):633–638, September 2025.
+[19] Long Ouyang, Jeffrey Wu, Xu Jiang, Diogo Almeida, Carroll Wainwright, Pamela Mishkin, Chong Zhang,
+Sandhini Agarwal, Katarina Slama, Alex Ray, John Schulman, Jacob Hilton, Fraser Kelton, Luke Miller, Maddie
+Simens, Amanda Askell, Peter Welinder, Paul F Christiano, Jan Leike, and Ryan Lowe. Training language models
+to follow instructions with human feedback. In S. Koyejo, S. Mohamed, A. Agarwal, D. Belgrave, K. Cho, and
+A. Oh, editors, Advances in Neural Information Processing Systems, volume 35, pages 27730–27744, 2022.
+[20] Rafael Rafailov, Archit Sharma, Eric Mitchell, Christopher D Manning, Stefano Ermon, and Chelsea Finn. Direct
+Preference Optimization: Your Language Model is Secretly a Reward Model. In A. Oh, T. Naumann, A. Globerson,
+K. Saenko, M. Hardt, and S. Levine, editors, Advances in Neural Information Processing Systems, volume 36,
+pages 53728–53741, 2023.
+[21] Noah Shinn, Federico Cassano, Ashwin Gopinath, Karthik Narasimhan, and Shunyu Yao. Reflexion: language
+agents with verbal reinforcement learning. In A. Oh, T. Naumann, A. Globerson, K. Saenko, M. Hardt, and
+S. Levine, editors, Advances in Neural Information Processing Systems, volume 36, pages 8634–8652, 2023.
+[22] Aman Madaan, Niket Tandon, Prakhar Gupta, Skyler Hallinan, Luyu Gao, Sarah Wiegreffe, Uri Alon, Nouha
+Dziri, Shrimai Prabhumoye, Yiming Yang, Shashank Gupta, Bodhisattwa Prasad Majumder, Katherine Hermann,
+Sean Welleck, Amir Yazdanbakhsh, and Peter Clark. Self-Refine: Iterative Refinement with Self-Feedback. In
+A. Oh, T. Naumann, A. Globerson, K. Saenko, M. Hardt, and S. Levine, editors, Advances in Neural Information
+Processing Systems, volume 36, pages 46534–46594, 2023.
+[23] Ryo Kamoi, Yusen Zhang, Nan Zhang, Jiawei Han, and Rui Zhang. When Can LLMs Actually Correct Their Own
+Mistakes? A Critical Survey of Self-Correction of LLMs. Transactions of the Association for Computational
+Linguistics, 12:1417–1440, November 2024.
+[24] Guiyao Tie, Zenghui Yuan, Zeli Zhao, Chaoran Hu, Tianhe Gu, Ruihang Zhang, Sizhe Zhang, Junran Wu, Xiaoyue
+Tu, Ming Jin, Qingsong Wen, Lixing Chen, Pan Zhou, and Lichao Sun. Can LLMs Correct Themselves? A
+Benchmark of Self-Correction in LLMs, 2025. Version Number: 2.
+[25] Hung Le, Yue Wang, Akhilesh Deepak Gotmare, Silvio Savarese, and Steven C.H. Hoi. CodeRL: mastering code
+generation through pretrained models and deep reinforcement learning. In Proceedings of the 36th International
+Conference on Neural Information Processing Systems, NIPS ’22, Red Hook, NY, USA, 2022. event-place: New
+Orleans, LA, USA.
+[26] John Yang, Akshara Prabhakar, Karthik Narasimhan, and Shunyu Yao. InterCode: standardizing and benchmarking
+interactive coding with execution feedback. In Proceedings of the 37th International Conference on Neural
+Information Processing Systems, NIPS ’23, Red Hook, NY, USA, 2023. Curran Associates Inc. event-place: New
+Orleans, LA, USA.
+[27] John Yang, Carlos E. Jimenez, Alexander Wettig, Kilian Lieret, Shunyu Yao, Karthik Narasimhan, and Ofir
+Press. SWE-agent: agent-computer interfaces enable automated software engineering. In Proceedings of the
+38th International Conference on Neural Information Processing Systems, NIPS ’24, Red Hook, NY, USA, 2024.
+Curran Associates Inc. event-place: Vancouver, BC, Canada.
+[28] Yuhang Li, Chenchen Zhang, Ruilin Lv, Ao Liu, Ken Deng, Yuanxing Zhang, Jiaheng Liu, Wiggin Zhou, and
+Bo Zhou. ReLook: Vision-Grounded RL with a Multimodal LLM Critic for Agentic Web Coding, 2025. Version
+Number: 1.
+[29] Tiffany Tseng, Ruijia Cheng, and Jeffrey Nichols. Keyframer: Empowering Animation Design using Large
+Language Models, 2024.
+[30] Xuanle Zhao, Deyang Jiang, Zhixiong Zeng, Lei Chen, Haibo Qiu, Jing Huang, Yufeng Zhong, Liming Zheng,
+Yilin Cao, and Lin Ma. VinciCoder: Unifying Multimodal Code Generation via Coarse-to-fine Visual Reinforce-
+ment Learning, 2025. Version Number: 2.
+[31] Vivian Liu, Rubaiat Habib Kazi, Li-Yi Wei, Matthew Fisher, Timothy Langlois, Seth Walker, and Lydia Chilton.
+LogoMotion: Visually-Grounded Code Synthesis for Creating and Editing Animation. In Proceedings of the 2025
+CHI Conference on Human Factors in Computing Systems, CHI ’25, New York, NY, USA, 2025. Association for
+Computing Machinery.
+[32] Samarth P, Vyoman Jain, Shiva Golugula, and Motamarri Sai Sathvik. Manimator: Transforming Research Papers
+into Visual Explanations, 2025. Version Number: 1.
+21
+
+[Page 22]
+Training and Agentic Inference Strategies for LLM-based Manim Animation Generation
+Rammuni Silva et al.
+[33] Max Ku, Cheuk Hei Chong, Jonathan Leung, Krish Shah, Alvin Yu, and Wenhu Chen. TheoremExplainAgent:
+Towards video-based multimodal explanations for llm theorem understanding. In Proceedings of the 63rd Annual
+Meeting of the Association for Computational Linguistics (Volume 1: Long Papers), pages 6663–6684, 2025.
+[34] Yanzhe Chen, Kevin Qinghong Lin, and Mike Zheng Shou. Code2Video: A Code-centric Paradigm for Educational
+Video Generation, 2025. Version Number: 1.
+[35] Zhou Wang, A.C. Bovik, H.R. Sheikh, and E.P. Simoncelli. Image quality assessment: from error visibility to
+structural similarity. IEEE Transactions on Image Processing, 13(4):600–612, 2004.
+[36] Stan Salvador and Philip Chan. Toward accurate dynamic time warping in linear time and space. Intell. Data
+Anal., 11(5):561–580, October 2007.
+[37] Zichen Liu, Changyu Chen, and Li and others. Understanding R1-Zero-Like Training: A Critical Perspective,
+2025.
+[38] Michael Han Daniel Han and Unsloth team. Unsloth, 2023.
+[39] An Yang, Anfeng Li, Baosong Yang, Beichen Zhang, Binyuan Hui, Bo Zheng, Bowen Yu, Chang Gao, Chengen
+Huang, Chenxu Lv, Chujie Zheng, Dayiheng Liu, Fan Zhou, Fei Huang, Feng Hu, Hao Ge, Haoran Wei, Huan
+Lin, Jialong Tang, Jian Yang, Jianhong Tu, Jianwei Zhang, Jianxin Yang, Jiaxi Yang, Jing Zhou, Jingren Zhou,
+Junyang Lin, Kai Dang, Keqin Bao, Kexin Yang, Le Yu, Lianghao Deng, Mei Li, Mingfeng Xue, Mingze Li, Pei
+Zhang, Peng Wang, Qin Zhu, Rui Men, Ruize Gao, Shixuan Liu, Shuang Luo, Tianhao Li, Tianyi Tang, Wenbiao
+Yin, Xingzhang Ren, Xinyu Wang, Xinyu Zhang, Xuancheng Ren, Yang Fan, Yang Su, Yichang Zhang, Yinger
+Zhang, Yu Wan, Yuqiong Liu, Zekun Wang, Zeyu Cui, Zhenru Zhang, Zhipeng Zhou, and Zihan Qiu. Qwen3
+Technical Report, 2025. Version Number: 1.
+[40] Aaron Grattafiori and Dubey and others. The Llama 3 Herd of Models, 2024. Version Number: 3.
+[41] Alexander H. Liu and Khandelwal and others. Ministral 3, 2026. Version Number: 1.
+[42] Jordan Hoffmann, Sebastian Borgeaud, Arthur Mensch, Elena Buchatskaya, Trevor Cai, Eliza Rutherford, Diego
+de Las Casas, Lisa Anne Hendricks, Johannes Welbl, Aidan Clark, Tom Hennigan, Eric Noland, Katie Millican,
+George van den Driessche, Bogdan Damoc, Aurelia Guy, Simon Osindero, Karen Simonyan, Erich Elsen, Oriol
+Vinyals, Jack W. Rae, and Laurent Sifre. Training compute-optimal large language models. In Proceedings of the
+36th International Conference on Neural Information Processing Systems, NIPS ’22, Red Hook, NY, USA, 2022.
+Curran Associates Inc.
+22

@@ -1,0 +1,72 @@
+{
+  "paper_id": "2604.16911v1",
+  "title": "Skilldex: A Package Manager and Registry for Agent Skill Packages with Hierarchical Scope-Based Distribution",
+  "organization": "Anthropic",
+  "publish_date": "2026-04-18",
+  "theme": "AI Agent",
+  "source_name": "Anthropic arXiv query",
+  "source_url": "https://arxiv.org/abs/2604.16911v1",
+  "paper_url": "https://arxiv.org/pdf/2604.16911v1",
+  "summary": "Large Language Model (LLM) agents are increasingly extended at runtime via skill packages, structured natural-language instruction bundles loaded from a well-known directory. Community install tooling and registries exist, but two gaps p...",
+  "priority": 949,
+  "total_chars": 39733,
+  "chunk_count": 9,
+  "image_paths": [],
+  "notes": [],
+  "chunks": [
+    {
+      "index": 1,
+      "heading": "Section 1",
+      "text_len": 4880,
+      "text_preview": "[Page 1]\nSkilldex: A Package Manager and Registry for\nAgent Skill Packages with Hierarchical\nScope-Based Distribution\nSampriti Saha, Pranav Hemanth\nPandemonium Research\n{sampritisaha, pranavhemanth}@p"
+    },
+    {
+      "index": 2,
+      "heading": "Section 2",
+      "text_len": 4847,
+      "text_preview": "[Page 2]\ngrowing range of LLM agents from multiple providers [1],\n[13]. A skill is a directory containing a SKILL.md file with a\nstandardized YAML frontmatter block followed by Markdown\ncontent:\n---\nn"
+    },
+    {
+      "index": 3,
+      "heading": "Section 3",
+      "text_len": 3445,
+      "text_preview": "[Page 3]\nCLI\nskillpm / spm\nMCP Server\nstdio\nInstaller\nScope Resolver\nValidator\nManifest I/O\nSuggest Agent\nRegistry Client\nRegistry API\n(Hono/Vercel)\nSupabase\n(PostgreSQL)\nGitHub Fetch\nCLI / MCP: inter"
+    },
+    {
+      "index": 4,
+      "heading": "Section 4",
+      "text_len": 4541,
+      "text_preview": "[Page 4]\ngeneric, or poorly worded, the agent’s context-based skill\nselection will not surface it at the right moment.\nFormat conformance scoring provides a measurable, objec-\ntive proxy for one of th"
+    },
+    {
+      "index": 5,
+      "heading": "Section 5",
+      "text_len": 3740,
+      "text_preview": "[Page 5]\nTABLE I\nSKILL FORMAT CONFORMANCE CHECKS\nCheck\nPts\nRationale\nYAML frontmatter parseable\n25\nFatal if missing; no further checks run\nname field present\n10\nRequired for registry and manifest\ndesc"
+    },
+    {
+      "index": 6,
+      "heading": "Section 6",
+      "text_len": 4108,
+      "text_preview": "[Page 6]\nTABLE II\nREGISTRY API ENDPOINTS\nMethod\nPath\nPurpose\nGET\n/skills\nSearch/list with filters\nGET\n/skills/:name\nFetch single skill\nGET\n/skills/:name/install\nFetch install info + count\nPOST\n/skills"
+    },
+    {
+      "index": 7,
+      "heading": "Section 7",
+      "text_len": 4123,
+      "text_preview": "[Page 7]\nSKILL.md\n<- references ../\nassets/\nscripts/parse-git-log.sh\nassets/changelog-template.md\npr-description/\nSKILL.md\nassets/pr-template.md\ntest-writer/\nSKILL.md\nreferences/testing-patterns.md\nsc"
+    },
+    {
+      "index": 8,
+      "heading": "Section 8",
+      "text_len": 4041,
+      "text_preview": "[Page 8]\nTABLE III\nSKILLSET FORMAT CONFORMANCE CHECKS\nCheck\nPts\nRationale\nYAML frontmatter parseable\n25\nFatal if missing\nname field present\n10\nRequired for registry\ndescription present\n10\nDiscovery si"
+    },
+    {
+      "index": 9,
+      "heading": "Section 9",
+      "text_len": 5992,
+      "text_preview": "[Page 9]\nTABLE V\nTECHNOLOGY STACK\nComponent\nTechnology\nCLI runtime\nNode.js 20+, TypeScript (ESM)\nCLI framework\nCommander 13\nGit operations\nsimple-git 3\nMCP server\n@modelcontextprotocol/sdk 1.10\nSchema"
+    }
+  ]
+}
