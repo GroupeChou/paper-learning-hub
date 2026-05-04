@@ -9,6 +9,15 @@ from bs4 import BeautifulSoup
 from .models import ParsedChunk, ParsedDocument
 from .utils import chunk_paragraphs, ensure_dir
 
+# Regex to find page markers like [Page 1], [Page 12]
+_PAGE_MARKER_RE = re.compile(r"\[Page (\d+)\]")
+
+
+def _parse_page_refs(text: str) -> list[int]:
+    """Extract unique PDF page numbers from chunk text containing [Page N] markers."""
+    pages = sorted({int(m) for m in _PAGE_MARKER_RE.findall(text)})
+    return pages if pages else [1]
+
 
 def _chunk_text(text: str, max_chars: int) -> list[ParsedChunk]:
     raw_chunks = chunk_paragraphs(text, max_chars=max_chars)
@@ -19,8 +28,17 @@ def _chunk_text(text: str, max_chars: int) -> list[ParsedChunk]:
         if len(first_line) < 90 and re.match(r"^([A-Z][A-Za-z0-9 .:-]+|\d+(\.\d+)*)$", first_line):
             heading = first_line
         needs_review = len(chunk) < 120 or chunk.count("\n") < 2
+        page_refs = _parse_page_refs(chunk)
         parsed_chunks.append(
-            ParsedChunk(index=index, heading=heading, text=chunk, page_start=index, page_end=index, needs_review=needs_review)
+            ParsedChunk(
+                index=index,
+                heading=heading,
+                text=chunk,
+                page_start=page_refs[0] if page_refs else 1,
+                page_end=page_refs[-1] if page_refs else 1,
+                needs_review=needs_review,
+                page_refs=page_refs,
+            )
         )
     return parsed_chunks
 
@@ -29,17 +47,23 @@ def _parse_pdf(raw_path: Path, assets_dir: Path, max_chars: int, max_images: int
     doc = fitz.open(raw_path)
     ensure_dir(assets_dir)
     notes: list[str] = []
-    image_paths: list[str] = []
+    all_image_paths: list[str] = []
     page_texts: list[str] = []
     image_count = 0
+
+    # Map page_number -> list of extracted image paths on that page
+    page_images: dict[int, list[str]] = {}
 
     for page_number, page in enumerate(doc, start=1):
         page_text = page.get_text("text").strip()
         if page_text:
             page_texts.append(f"[Page {page_number}]\n{page_text}")
+
+        page_imgs: list[str] = []
         for image_index, image in enumerate(page.get_images(full=True), start=1):
             if image_count >= max_images:
-                notes.append(f"图片数量超过上限，仅保留前 {max_images} 张。")
+                if image_count == max_images:
+                    notes.append(f"图片数量超过上限，仅保留前 {max_images} 张。")
                 break
             xref = image[0]
             extracted = doc.extract_image(xref)
@@ -47,19 +71,30 @@ def _parse_pdf(raw_path: Path, assets_dir: Path, max_chars: int, max_images: int
             image_name = f"page-{page_number:03d}-img-{image_index:02d}.{ext}"
             image_path = assets_dir / image_name
             image_path.write_bytes(extracted["image"])
-            image_paths.append(f"assets/{image_name}")
+            rel_path = f"assets/{image_name}"
+            all_image_paths.append(rel_path)
+            page_imgs.append(str(image_path))
             image_count += 1
+        if page_imgs:
+            page_images[page_number] = page_imgs
 
     text = "\n\n".join(page_texts).strip()
     if not text:
         notes.append("PDF 文本提取结果为空，需要人工复核。")
+    chunks = _chunk_text(text, max_chars=max_chars)
+
+    # Attach page-specific images to each chunk
+    for chunk in chunks:
+        chunk.page_refs = _parse_page_refs(chunk.text)
+
     return ParsedDocument(
         source_type="pdf",
         title=raw_path.stem,
         text=text,
-        chunks=_chunk_text(text, max_chars=max_chars),
-        image_paths=image_paths,
+        chunks=chunks,
+        image_paths=all_image_paths,
         notes=notes,
+        page_images=page_images,  # pass through to translator
     )
 
 
@@ -75,6 +110,7 @@ def _parse_html(raw_path: Path, max_chars: int) -> ParsedDocument:
         chunks=_chunk_text(text, max_chars=max_chars),
         image_paths=[],
         notes=["HTML 模式暂不下载远端图片，仅保留文本结构。"],
+        page_images={},
     )
 
 
@@ -83,4 +119,3 @@ def parse_document(raw_path: Path, translated_dir: Path, max_chars: int, max_ima
     if raw_path.suffix.lower() == ".pdf":
         return _parse_pdf(raw_path, assets_dir, max_chars, max_images)
     return _parse_html(raw_path, max_chars)
-

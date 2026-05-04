@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import base64
 import os
 from pathlib import Path
 
@@ -10,6 +11,19 @@ from .parser import parse_document
 from .utils import ensure_dir, relative_posix, shorten_text
 
 
+def _image_to_base64(image_path: str) -> str:
+    """Read an image file and return a data URI string."""
+    path = Path(image_path)
+    if not path.exists():
+        return ""
+    suffix = path.suffix.lower()
+    mime_map = {".png": "image/png", ".jpg": "image/jpeg", ".jpeg": "image/jpeg", ".gif": "image/gif", ".webp": "image/webp"}
+    mime = mime_map.get(suffix, "image/png")
+    raw = path.read_bytes()
+    b64 = base64.b64encode(raw).decode("ascii")
+    return f"data:{mime};base64,{b64}"
+
+
 class TranslatorBase:
     def translate_chunk(
         self,
@@ -17,6 +31,7 @@ class TranslatorBase:
         chunk_heading: str,
         chunk_text: str,
         parse_notes: list[str],
+        image_data_uris: list[str] | None = None,
     ) -> TranslationChunk:
         raise NotImplementedError
 
@@ -28,6 +43,7 @@ class MockTranslator(TranslatorBase):
         chunk_heading: str,
         chunk_text: str,
         parse_notes: list[str],
+        image_data_uris: list[str] | None = None,
     ) -> TranslationChunk:
         summary = shorten_text(chunk_text, limit=500)
         content = f"""### 中文翻译
@@ -45,8 +61,7 @@ class MockTranslator(TranslatorBase):
 
 ### 关键 takeaway
 - 先完成可跑流水线，确保原文、状态库、站点和后续人工复核链路全部就位。
-- 当前片段需要在接入真实模型后重新生成。
-"""
+- 当前片段需要在接入真实模型后重新生成。"""
         return TranslationChunk(heading=chunk_heading, content=content, needs_review=True)
 
 
@@ -64,8 +79,10 @@ class OpenAICompatibleTranslator(TranslatorBase):
         chunk_heading: str,
         chunk_text: str,
         parse_notes: list[str],
+        image_data_uris: list[str] | None = None,
     ) -> TranslationChunk:
-        user_prompt = f"""
+        # Build user message content — text + optional images
+        user_text = f"""
 论文标题：{paper.title}
 主题：{paper.theme}
 机构：{paper.organization}
@@ -75,11 +92,12 @@ class OpenAICompatibleTranslator(TranslatorBase):
 请对以下原文片段进行**逐字逐句的中文全翻译和扩展解读**。
 
 ### 核心要求
-1. **逐句翻译**：每一句话都翻译为中文，不遗漏任何句子
+1. **逐句翻译**：每一句话都翻译为中文，不遗漏任何句子，包括脚注和附录
 2. **内容扩展**：在翻译基础上添加逻辑衔接说明、背景补充、作者意图分析
-3. **图片/表格完整保留**：遇到 Figure/Table 必须用 `![描述](assets/图片名)` 引用，并附详细中文图解
-4. **公式保留+解释**：LaTeX 公式原样保留，后附变量含义和直觉解释
-5. **输出量要求**：中文字数应 ≥ 原文字数的 1.5 倍
+3. **图片/表格完整保留**：以下附带了本章节对应的论文原图。请仔细观察每张图片的内容（图表、截图、示意图等），在翻译到相关段落时引用并详细描述这些图片
+4. **公式保留+解释**：原文中的公式可能因PDF解析而残缺，请根据上下文和你的知识**还原正确的 LaTeX 公式**，并标注`（根据上下文还原）`，然后附变量含义和直觉解释
+5. **表格还原**：原文中的表格可能已丢失行列结构，请根据上下文尽可能还原为 Markdown 表格格式
+6. **输出量要求**：中文字数应 ≥ 原文字数的 1.5 倍
 
 ### 输出格式（严格使用以下四个三级标题）
 ### 中文翻译
@@ -93,6 +111,21 @@ class OpenAICompatibleTranslator(TranslatorBase):
 ## 原文片段（请逐句翻译，不要省略任何内容）
 {chunk_text}
 """.strip()
+
+        # Build message content array
+        content_parts: list[dict] = [{"type": "text", "text": user_text}]
+
+        # Attach images as vision input (max 6 per chunk to avoid token blowup)
+        if image_data_uris:
+            for uri in image_data_uris[:6]:
+                if uri:
+                    content_parts.append({"type": "image_url", "image_url": {"url": uri}})
+
+        messages = [
+            {"role": "system", "content": self.settings.system_prompt},
+            {"role": "user", "content": content_parts},
+        ]
+
         response = requests.post(
             f"{self.settings.base_url.rstrip('/')}/chat/completions",
             headers={
@@ -102,10 +135,8 @@ class OpenAICompatibleTranslator(TranslatorBase):
             json={
                 "model": self.settings.model,
                 "temperature": 0.2,
-                "messages": [
-                    {"role": "system", "content": self.settings.system_prompt},
-                    {"role": "user", "content": user_prompt},
-                ],
+                "messages": messages,
+                "max_tokens": 16384,
             },
             timeout=self.settings.timeout_seconds,
         )
@@ -176,10 +207,32 @@ def translate_paper(config: AppConfig, paper: CandidatePaper, raw_path: Path) ->
     parsed = parse_document(raw_path, zh_dir, config.translator.chunk_chars, config.translator.max_images_per_paper)
     sections = []
     needs_review = bool(parsed.notes)
+
+    # Build a lookup: page_number -> [data URIs]
+    page_image_uris: dict[int, list[str]] = {}
+    for page_num, img_paths in parsed.page_images.items():
+        uris = [_image_to_base64(p) for p in img_paths]
+        page_image_uris[page_num] = [u for u in uris if u]
+
     for chunk in parsed.chunks:
-        translated = translator.translate_chunk(paper, chunk.heading, chunk.text, parsed.notes)
+        # Collect images from all pages this chunk spans
+        chunk_images: list[str] = []
+        seen: set[str] = set()
+        for page_num in chunk.page_refs:
+            for uri in page_image_uris.get(page_num, []):
+                if uri not in seen:
+                    chunk_images.append(uri)
+                    seen.add(uri)
+
+        translated = translator.translate_chunk(
+            paper, chunk.heading, chunk.text, parsed.notes, image_data_uris=chunk_images or None
+        )
         needs_review = needs_review or translated.needs_review or chunk.needs_review
-        review_block = "> 待复核：该片段的文本提取或翻译结果置信度偏低。\n\n" if translated.needs_review or chunk.needs_review else ""
+        review_block = (
+            "> 待复核：该片段的文本提取或翻译结果置信度偏低。\n\n"
+            if translated.needs_review or chunk.needs_review
+            else ""
+        )
         sections.append(f"## {chunk.heading}\n\n{review_block}{translated.content.strip()}\n")
 
     header = _paper_header(paper, parsed, zh_dir / "assets", config.zh_dir)
@@ -189,4 +242,3 @@ def translate_paper(config: AppConfig, paper: CandidatePaper, raw_path: Path) ->
     output_path = zh_dir / "paper_zh.md"
     output_path.write_text(header + "\n".join(sections) + footer, encoding="utf-8")
     return output_path
-

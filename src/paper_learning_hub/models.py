@@ -137,6 +137,7 @@ class ParsedChunk:
     page_start: int
     page_end: int
     needs_review: bool = False
+    page_refs: list[int] = field(default_factory=list)  # PDF pages this chunk spans
 
 
 @dataclass(slots=True)
@@ -147,6 +148,7 @@ class ParsedDocument:
     chunks: list[ParsedChunk]
     image_paths: list[str]
     notes: list[str]
+    page_images: dict[int, list[str]] = field(default_factory=dict)  # page_number -> [absolute_image_paths]
 
 
 @dataclass(slots=True)
