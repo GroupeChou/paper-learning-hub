@@ -22,11 +22,11 @@ site:
   mkdocs_file: site/mkdocs.yml
 
 translator:
-  backend: openai_compatible
+  backend: mock
   base_url: https://api.openai.com/v1
   model: gpt-4.1-mini
   api_key_env: OPENAI_API_KEY
-  timeout_seconds: 180
+  timeout_seconds: 30
   chunk_chars: 5000
   max_images_per_paper: 12
   system_prompt: |
