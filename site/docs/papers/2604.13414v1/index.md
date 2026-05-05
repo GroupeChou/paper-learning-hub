@@ -1,10 +1,35 @@
-# 马尔可夫依赖下多数投票集成的最小最大最优性与谱路由
+# paper
 
-## Minimax Optimality and Spectral Routing for Majority-Vote Ensembles under Markov Dependence
+<!-- 论文元数据卡片 -->
+<div class="paper-meta">
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">机构</span>
+    <span class="paper-meta-value org-"></span>
+  </div>
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">方向</span>
+    <span class="paper-meta-value"></span>
+  </div>
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">日期</span>
+    <span class="paper-meta-value"></span>
+  </div>
+</div>
 
-Ibne Farabi Shihab\*†¹, Sanjeda Akter\*¹, Anuj Sharma²
+!!! info ""
+    <span class="paper-tag paper-tag-translated">✅ 已完成精读</span>
 
-¹爱荷华州立大学计算机科学系  ²爱荷华州立大学土木建筑与环境工程系
+- **来源**：[]()
+- **论文链接**：[]()
+- **状态**：已生成
+
+## 摘要
+
+
+
+
+
+---
 
 ---
 

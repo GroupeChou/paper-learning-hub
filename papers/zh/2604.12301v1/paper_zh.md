@@ -1,10 +1,35 @@
-# Local-Splitter：七种云端 LLM 令牌节省策略在编码Agent工作负载上的测量研究
+# paper
 
-## Local-Splitter: A Measurement Study of Seven Tactics for Reducing Cloud LLM Token Usage on Coding-Agent Workloads
+<!-- 论文元数据卡片 -->
+<div class="paper-meta">
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">机构</span>
+    <span class="paper-meta-value org-"></span>
+  </div>
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">方向</span>
+    <span class="paper-meta-value"></span>
+  </div>
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">日期</span>
+    <span class="paper-meta-value"></span>
+  </div>
+</div>
 
-Justice Owusu Agyemang¹,²,³\*, Jerry John Kponyo³†, Elliot Amponsah³‡, Godfred Manu Addo Boakye³§, Kwame Opuni-Boachie Obour Agyekum²¶
+!!! info ""
+    <span class="paper-tag paper-tag-translated">✅ 已完成精读</span>
 
-¹Sperix Labs  ²KNUST VIA网络安全实验室  ³KNUST量子与辅助技术实验室
+- **来源**：[]()
+- **论文链接**：[]()
+- **状态**：已生成
+
+## 摘要
+
+
+
+
+
+---
 
 ---
 

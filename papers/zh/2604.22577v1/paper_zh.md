@@ -1,14 +1,62 @@
-# QuantClaw：OpenClaw 的按需精度路由
+# paper
 
-**技术报告**
+<!-- 论文元数据卡片 -->
+<div class="paper-meta">
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">机构</span>
+    <span class="paper-meta-value org-"></span>
+  </div>
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">方向</span>
+    <span class="paper-meta-value"></span>
+  </div>
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">日期</span>
+    <span class="paper-meta-value"></span>
+  </div>
+</div>
 
-张曼怡¹, 李继富¹\*, 孙中奥¹, 刘晓浩², 董振华¹, 余先治¹, 白浩利¹, 夏晓波³
+!!! info ""
+    <span class="paper-tag paper-tag-translated">✅ 已完成精读</span>
 
-¹华为技术有限公司 ²新加坡国立大学 ³中国科学技术大学
+- **来源**：[]()
+- **论文链接**：[]()
+- **状态**：待复核
 
-{zhangmanyi6@huawei.com, lijifu4@huawei.com, xiaoboxia@ustc.edu.cn}
+## 摘要
 
-\*通讯作者
+
+
+## 解析备注
+
+- 图片数量超过上限，仅保留前 20 张。
+- 图片数量超过上限，仅保留前 20 张。
+
+## 图表资源
+- ![](assets/page-001-img-01.png)
+- ![](assets/page-001-img-02.png)
+- ![](assets/page-001-img-03.png)
+- ![](assets/page-001-img-04.png)
+- ![](assets/page-004-img-01.png)
+- ![](assets/page-006-img-01.jpeg)
+- ![](assets/page-006-img-02.jpeg)
+- ![](assets/page-006-img-03.png)
+- ![](assets/page-006-img-04.png)
+- ![](assets/page-006-img-05.png)
+- ![](assets/page-006-img-06.png)
+- ![](assets/page-006-img-07.png)
+- ![](assets/page-006-img-08.png)
+- ![](assets/page-006-img-09.png)
+- ![](assets/page-006-img-10.png)
+- ![](assets/page-006-img-11.jpeg)
+- ![](assets/page-006-img-12.png)
+- ![](assets/page-006-img-13.jpeg)
+- ![](assets/page-006-img-14.jpeg)
+- ![](assets/page-006-img-15.png)
+
+
+
+---
 
 ---
 

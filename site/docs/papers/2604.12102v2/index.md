@@ -1,41 +1,33 @@
-# Spatial Atlas: 面向空间感知研究Agent基准的计算锚定推理
+# paper
 
 <!-- 论文元数据卡片 -->
 <div class="paper-meta">
   <div class="paper-meta-item">
     <span class="paper-meta-label">机构</span>
-    <span class="paper-meta-value org-OpenAI">OpenAI</span>
+    <span class="paper-meta-value org-"></span>
   </div>
   <div class="paper-meta-item">
     <span class="paper-meta-label">方向</span>
-    <span class="paper-meta-value">AI Agent</span>
+    <span class="paper-meta-value"></span>
   </div>
   <div class="paper-meta-item">
     <span class="paper-meta-label">日期</span>
-    <span class="paper-meta-value">2026-04-13</span>
+    <span class="paper-meta-value"></span>
   </div>
-  </div>
+</div>
 
 !!! info ""
     <span class="paper-tag paper-tag-translated">✅ 已完成精读</span>
 
-- **来源**：[OpenAI arXiv query](https://arxiv.org/abs/2604.12102v2)
-- **论文链接**：[arXiv:2604.12102v2](https://arxiv.org/pdf/2604.12102v2)
+- **来源**：[]()
+- **论文链接**：[]()
+- **状态**：已生成
 
 ## 摘要
 
-### 中文翻译
 
-我们提出了**计算锚定推理（Compute-Grounded Reasoning, CGR）**，这是一种面向空间感知研究智能体的设计范式。在该范式中，每一个可回答的子问题都在要求语言模型生成答案之前，先通过确定性计算来解决。**Spatial Atlas** 将 CGR 实例化为一个单一的 **Agent-to-Agent（A2A）协议服务器**，该服务器能够处理两个极具挑战性的基准测试：
 
-1. **FieldWorkArena**：一个多模态空间问答基准，涵盖工厂、仓库和零售环境
-2. **MLE-Bench**：包含75个Kaggle机器学习竞赛的套件，需要端到端的机器学习工程能力
 
-系统中的结构化**空间场景图引擎**从视觉模型描述中提取实体和关系，以确定性方式计算距离和安全违规，然后将计算得到的事实喂给大语言模型（LLM），从而避免空间推理中的幻觉问题。
-
-**熵引导的动作选择**机制最大化每一步的信息增益，并在三层前沿模型栈（OpenAI + Anthropic）之间进行查询路由。具有策略感知能力的代码生成、分数驱动的迭代优化循环以及基于提示的泄漏审计注册表构成了自愈式ML流水线的完整闭环。我们在两个基准上进行了评估，结果表明：CGR 在保持竞争力的准确率的同时，通过结构化中间表示和确定性空间计算实现了可解释性。
-
-`[扩展]` 这篇论文的核心洞察是：当前VLM在空间推理上的缺陷主要不在于"推理能力"本身，而在于"感知不可靠"。作者提出的解决方案不是训练更强的VLM，而是将空间感知完全剥离出来——用视觉模型做描述、用检测模型做定位、用确定性算法做计算，最后才让LLM基于已经验证过的事实来做最终推理。这种"能算的不让模型猜"的思路，对任何涉及物理世界交互的AI Agent都有借鉴意义。
 
 ---
 
@@ -160,9 +152,7 @@ Google的 **Agent-to-Agent (A2A) 协议** `[8]` 定义了Agent间通信的标准
 
 Spatial Atlas 作为一个空间感知研究智能体运行，通过双域A2A服务器对外提供服务。它通过标准化协议接收任务请求，并将它们路由到适当的处理流水线。**Figure 1** 展示了整体系统设计。
 
-![Figure 1: Spatial Atlas系统架构](assets/architecture.png)
 
-*Figure 1: Spatial Atlas系统架构图。A2A服务器通过分类器将传入任务路由到特定域的处理器。两个域共享LLM路由、成本追踪和熵引导推理基础设施。*
 
 **域分类（Domain Classification）：** 域分类器根据任务元数据和附件类型运作。FieldWorkArena任务通过其结构化的目标格式识别——该格式包含显式的问题文本、图片引用和评分元数据。MLE-Bench任务则附带包含竞赛数据集和描述文件的tar.gz压缩包。这种分类是确定性的，不需要调用LLM，确保了路由阶段的零额外延迟和零额外成本。
 

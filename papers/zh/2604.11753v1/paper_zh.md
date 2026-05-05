@@ -1,10 +1,40 @@
-# AggAgent：面向长程智能体任务并行扩展的智能体式聚合
+# paper
 
-## Agentic Aggregation for Parallel Scaling of Long-Horizon Agentic Tasks
+<!-- 论文元数据卡片 -->
+<div class="paper-meta">
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">机构</span>
+    <span class="paper-meta-value org-"></span>
+  </div>
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">方向</span>
+    <span class="paper-meta-value"></span>
+  </div>
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">日期</span>
+    <span class="paper-meta-value"></span>
+  </div>
+</div>
 
-Yoonsang Lee, Howard Yen, Xi Ye, Danqi Chen
+!!! info ""
+    <span class="paper-tag paper-tag-translated">✅ 已完成精读</span>
 
-普林斯顿大学 普林斯顿语言与智能实验室
+- **来源**：[]()
+- **论文链接**：[]()
+- **状态**：已生成
+
+## 摘要
+
+
+
+## 图表资源
+- ![](assets/page-001-img-01.png)
+- ![](assets/page-001-img-02.png)
+- ![](assets/page-002-img-01.png)
+
+
+
+---
 
 ---
 

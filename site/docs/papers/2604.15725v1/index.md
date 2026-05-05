@@ -1,26 +1,27 @@
-# 针对大型推理模型的推理目标越狱攻击：基于语义触发与心理框架
+# paper
 
 <!-- 论文元数据卡片 -->
 <div class="paper-meta">
   <div class="paper-meta-item">
     <span class="paper-meta-label">机构</span>
-    <span class="paper-meta-value org-TianjinUniversity">天津大学 / 上海数据科学重点实验室</span>
+    <span class="paper-meta-value org-"></span>
   </div>
   <div class="paper-meta-item">
     <span class="paper-meta-label">方向</span>
-    <span class="paper-meta-value">AI安全 / LLM越狱攻击</span>
+    <span class="paper-meta-value"></span>
   </div>
   <div class="paper-meta-item">
     <span class="paper-meta-label">日期</span>
-    <span class="paper-meta-value">2026-04-17</span>
+    <span class="paper-meta-value"></span>
   </div>
-  </div>
+</div>
 
 !!! info ""
     <span class="paper-tag paper-tag-translated">✅ 已完成精读</span>
 
-- **来源**：[arXiv](https://arxiv.org/abs/2604.15725v1)
-- **论文链接**：[arXiv:2604.15725v1](https://arxiv.org/pdf/2604.15725v1)
+- **来源**：[]()
+- **论文链接**：[]()
+- **状态**：已生成
 
 ## 摘要
 
@@ -39,6 +40,33 @@
 在五个问答数据集上的大量实验表明，PRJA 对多个商业 LRM（包括 DeepSeek R1、Qwen2.5-Max 和 OpenAI o4-mini）达到了 **83.6% 的平均攻击成功率**。
 
 `[扩展]` 这篇论文的核心发现令人警醒：**当前LRM的安全防护几乎完全集中在"最终答案是否无害"，而完全忽略了"推理过程是否有毒"。** 作者证明，即使最终答案是正确的（如选B），中间的推理步骤可以被注入极其有害的内容（如"如何利用数学公式进行未授权访问"或"如何用狗鼻子做数据窃取"）。这种攻击对医疗诊断、法律辅助等高风险领域尤其致命——因为用户往往依赖推理路径来判断模型的可靠性。83.6%的平均ASR意味着当前主流商用LRM在这方面几乎是"裸奔"状态。
+
+
+
+
+## 图表资源
+
+- ![](assets/page-006-img-01.jpeg)
+- ![](assets/page-006-img-02.png)
+- ![](assets/page-006-img-03.jpeg)
+- ![](assets/page-006-img-04.jpeg)
+- ![](assets/page-006-img-05.jpeg)
+- ![](assets/page-006-img-06.jpeg)
+- ![](assets/page-006-img-07.jpeg)
+- ![](assets/page-007-img-01.jpeg)
+- ![](assets/page-007-img-02.jpeg)
+- ![](assets/page-007-img-03.png)
+- ![](assets/page-007-img-04.jpeg)
+- ![](assets/page-007-img-05.jpeg)
+- ![](assets/page-007-img-06.png)
+- ![](assets/page-007-img-07.png)
+- ![](assets/page-007-img-08.jpeg)
+- ![](assets/page-007-img-09.jpeg)
+- ![](assets/page-007-img-10.jpeg)
+- ![](assets/page-007-img-11.png)
+- ![](assets/page-007-img-12.jpeg)
+
+
 
 ---
 

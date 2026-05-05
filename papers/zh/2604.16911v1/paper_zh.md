@@ -1,10 +1,35 @@
-# Skilldex：具有分层作用域分布的智能体技能包管理器与注册中心
+# paper
 
-## Skilldex: A Package Manager and Registry for Agent Skill Packages with Hierarchical Scope-Based Distribution
+<!-- 论文元数据卡片 -->
+<div class="paper-meta">
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">机构</span>
+    <span class="paper-meta-value org-"></span>
+  </div>
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">方向</span>
+    <span class="paper-meta-value"></span>
+  </div>
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">日期</span>
+    <span class="paper-meta-value"></span>
+  </div>
+</div>
 
-Sampriti Saha, Pranav Hemanth
+!!! info ""
+    <span class="paper-tag paper-tag-translated">✅ 已完成精读</span>
 
-Pandemonium Research
+- **来源**：[]()
+- **论文链接**：[]()
+- **状态**：已生成
+
+## 摘要
+
+
+
+
+
+---
 
 ---
 

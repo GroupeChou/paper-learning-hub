@@ -1,10 +1,35 @@
-# Owner-Harm：AI Agent 安全中缺失的威胁模型
+# paper
 
-## Owner-Harm: A Missing Threat Model for AI Agent Safety
+<!-- 论文元数据卡片 -->
+<div class="paper-meta">
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">机构</span>
+    <span class="paper-meta-value org-"></span>
+  </div>
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">方向</span>
+    <span class="paper-meta-value"></span>
+  </div>
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">日期</span>
+    <span class="paper-meta-value"></span>
+  </div>
+</div>
 
-张东晨\*, 蒋艺青†
+!!! info ""
+    <span class="paper-tag paper-tag-translated">✅ 已完成精读</span>
 
-\*蓝色光标  †同济大学
+- **来源**：[]()
+- **论文链接**：[]()
+- **状态**：已生成
+
+## 摘要
+
+
+
+
+
+---
 
 ---
 

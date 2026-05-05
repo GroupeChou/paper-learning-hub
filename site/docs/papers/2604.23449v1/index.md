@@ -1,32 +1,33 @@
-# ArguAgent：AI支持的STEM论证分组
+# paper
 
 <!-- 论文元数据卡片 -->
 <div class="paper-meta">
   <div class="paper-meta-item">
     <span class="paper-meta-label">机构</span>
-    <span class="paper-meta-value org-other">Stanford University / University of Pittsburgh</span>
+    <span class="paper-meta-value org-"></span>
   </div>
   <div class="paper-meta-item">
     <span class="paper-meta-label">方向</span>
-    <span class="paper-meta-value">智能体 / 教育AI</span>
+    <span class="paper-meta-value"></span>
   </div>
   <div class="paper-meta-item">
     <span class="paper-meta-label">日期</span>
-    <span class="paper-meta-value">2026-04-28</span>
+    <span class="paper-meta-value"></span>
   </div>
 </div>
 
 !!! info ""
     <span class="paper-tag paper-tag-translated">✅ 已完成精读</span>
 
-- **来源**：[arXiv](https://arxiv.org/abs/2604.23449)
-- **论文链接**：[2604.23449v1](https://arxiv.org/abs/2604.23449)
+- **来源**：[]()
+- **论文链接**：[]()
+- **状态**：已生成
 
 ## 摘要
 
-本文提出了 **ArguAgent**，一个利用大语言模型（LLM）自动评估学生科学论证质量并据此形成异质讨论组的系统。该系统结合了自动化评分与立场聚类，旨在为协作式科学论证构建最优分组。实验结果表明，经过校准的LLM评分与人工评分达到**实质性一致**（Quadratic Weighted Kappa = 0.708），其中提示工程贡献了89%的性能提升，而模型升级仅贡献11%。立场检测与人工判断的一致性达85%（Cohen's κ = 0.690）。蒙特卡洛模拟测试显示，分组算法使95.4%的组同时满足两个设计标准（能力同质+立场异质），相比随机分配提升3.2倍。
 
-[扩展] 这篇论文的核心价值在于揭示了LLM在教育评估场景中一个反直觉的发现：精心设计的提示词比更强的模型更重要。这对资源受限的学校具有重大实践意义——使用便宜的GPT-4o-mini加上校准后的提示，就能获得接近GPT-5.2的评分效果。
+
+
 
 ---
 
@@ -125,9 +126,7 @@ ArguAgent系统由三个核心模块组成：
 | Deterministic optimization algorithm | 确定性优化算法 | 相同输入必产相同输出的算法 | 保证可复现 |
 
 ### 图表/公式说明
-![ArguAgent系统架构](assets/architecture.png)
 
-*图1：ArguAgent三模块系统架构流程图。学生回应 → LLM评分 → LLM立场聚类 → 优化算法 → 最终分组。*
 
 ### 关键 takeaway
 - **要点1**："LLM理解 + 规则优化"的混合架构是该系统设计的核心理念

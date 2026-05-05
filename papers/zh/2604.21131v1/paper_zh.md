@@ -1,10 +1,45 @@
-# AI Agent 中的跨会话威胁：基准、评估与算法
+# paper
 
-## Cross-Session Threats in AI Agents: Benchmark, Evaluation, and Algorithms
+<!-- 论文元数据卡片 -->
+<div class="paper-meta">
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">机构</span>
+    <span class="paper-meta-value org-"></span>
+  </div>
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">方向</span>
+    <span class="paper-meta-value"></span>
+  </div>
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">日期</span>
+    <span class="paper-meta-value"></span>
+  </div>
+</div>
 
-Ari Azarafrooz\*
+!!! info ""
+    <span class="paper-tag paper-tag-translated">✅ 已完成精读</span>
 
-Intrinsec AI
+- **来源**：[]()
+- **论文链接**：[]()
+- **状态**：已生成
+
+## 摘要
+
+
+
+## 图表资源
+- ![](assets/page-003-img-01.png)
+- ![](assets/page-005-img-01.png)
+- ![](assets/page-006-img-01.png)
+- ![](assets/page-011-img-01.png)
+- ![](assets/page-013-img-01.png)
+- ![](assets/page-015-img-01.png)
+- ![](assets/page-016-img-01.png)
+- ![](assets/page-017-img-01.png)
+
+
+
+---
 
 ---
 

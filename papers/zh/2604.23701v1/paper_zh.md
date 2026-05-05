@@ -1,16 +1,63 @@
-# Agri-CPJ：基于 Caption-Prompt-Judge 的无训练可解释农业害虫诊断框架
+# paper
 
-## Agri-CPJ: A Training-Free Explainable Framework for Agricultural Pest Diagnosis Using Caption-Prompt-Judge and LLM-as-a-Judge
+<!-- 论文元数据卡片 -->
+<div class="paper-meta">
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">机构</span>
+    <span class="paper-meta-value org-"></span>
+  </div>
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">方向</span>
+    <span class="paper-meta-value"></span>
+  </div>
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">日期</span>
+    <span class="paper-meta-value"></span>
+  </div>
+</div>
 
-Wentao Zhang¹, Qi Zhang², Mingkun Xu³, Mu You⁴, Henghua Shen⁴, Zhongzhi He⁴, Keyan Jin⁴, Derek F. Wong⁵, **Tao Fang⁴\***
+!!! info ""
+    <span class="paper-tag paper-tag-translated">✅ 已完成精读</span>
 
-¹山东理工大学商学院 ²澳门城市大学数据科学学院 ³珠海广东智能科技研究院 ⁴澳门千人大学 ⁵澳门大学计算机与信息科学系
+- **来源**：[]()
+- **论文链接**：[]()
+- **状态**：待复核
 
-\*通讯作者: taofang@mmc.edu.mo
+## 摘要
 
-**关键词**: 农业VQA、作物病害诊断、可解释AI、视觉语言模型、LLM-as-a-Judge
 
-> 本文是 Zhang et al. (ICASSP 2026) 的显著扩展版本，从4页扩展到20+页，提出了结构化和原则性的框架、广泛的实验和更深入的洞见。
+
+## 解析备注
+
+- 图片数量超过上限，仅保留前 20 张。
+- 图片数量超过上限，仅保留前 20 张。
+- 图片数量超过上限，仅保留前 20 张。
+
+## 图表资源
+- ![](assets/page-002-img-01.jpeg)
+- ![](assets/page-002-img-02.jpeg)
+- ![](assets/page-002-img-03.jpeg)
+- ![](assets/page-002-img-04.jpeg)
+- ![](assets/page-002-img-05.jpeg)
+- ![](assets/page-002-img-06.jpeg)
+- ![](assets/page-002-img-07.jpeg)
+- ![](assets/page-002-img-08.jpeg)
+- ![](assets/page-002-img-09.jpeg)
+- ![](assets/page-002-img-10.jpeg)
+- ![](assets/page-002-img-11.jpeg)
+- ![](assets/page-002-img-12.jpeg)
+- ![](assets/page-002-img-13.jpeg)
+- ![](assets/page-002-img-14.jpeg)
+- ![](assets/page-002-img-15.jpeg)
+- ![](assets/page-002-img-16.jpeg)
+- ![](assets/page-003-img-01.jpeg)
+- ![](assets/page-003-img-02.jpeg)
+- ![](assets/page-003-img-03.jpeg)
+- ![](assets/page-003-img-04.jpeg)
+
+
+
+---
 
 ---
 

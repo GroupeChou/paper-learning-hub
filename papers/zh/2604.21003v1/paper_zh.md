@@ -1,26 +1,26 @@
-# The Last Harness You'll Ever Build
+# paper
 
 <!-- 论文元数据卡片 -->
 <div class="paper-meta">
   <div class="paper-meta-item">
     <span class="paper-meta-label">机构</span>
-    <span class="paper-meta-value org-Meta FAIR">Meta FAIR</span>
+    <span class="paper-meta-value org-"></span>
   </div>
   <div class="paper-meta-item">
     <span class="paper-meta-label">方向</span>
-    <span class="paper-meta-value">AI Agent</span>
+    <span class="paper-meta-value"></span>
   </div>
   <div class="paper-meta-item">
     <span class="paper-meta-label">日期</span>
-    <span class="paper-meta-value">2026-04-22</span>
+    <span class="paper-meta-value"></span>
   </div>
 </div>
 
 !!! info ""
     <span class="paper-tag paper-tag-translated">✅ 已完成精读</span>
 
-- **来源**：arXiv
-- **论文链接**：[https://arxiv.org/abs/2604.21003v1](https://arxiv.org/abs/2604.21003v1)
+- **来源**：[]()
+- **论文链接**：[]()
 - **状态**：已生成
 
 ## 摘要
@@ -31,11 +31,19 @@ AI 智能体正越来越多地部署在复杂、领域特定的工作流上—�
 
 在第二层，**元进化循环（Meta-Evolution Loop）** 跨不同的任务优化进化协议 Λ = (W_H, H^(0), V, E) 本身，学习一个最优协议 Λ^best，使得在任何新任务上都能快速收敛 harness——这样将智能体适配到新领域完全不需要人工 harness 工程。我们将该框架形式化为元学习的对应结构，并给出了两个算法。该框架将**人工 harness 工程**转变为**自动化 harness 工程**，并更进一步——**自动化了自动化本身的设计**。
 
+
+
+
+## 图表资源
+
+- ![](assets/assets)
+- ![](assets/page-002-img-01.png)
+
+
+
 ---
 
-## 1 引言
-
-### 中文翻译
+## 中文翻译
 
 近期关于 harness 工程的研究表明，精心设计的脚手架（scaffolding）——执行环境、反馈循环、评估标准和上下文管理——可以极大地增强智能体的能力（Lopopolo, 2026; Rajasekaran, 2026）。
 

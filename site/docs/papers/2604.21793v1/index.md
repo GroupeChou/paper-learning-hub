@@ -1,10 +1,40 @@
-# 从带时间戳数据推断高层事件：复杂度与医学应用
+# paper
 
-## Inferring High-Level Events from Timestamped Data: Complexity and Medical Applications
+<!-- 论文元数据卡片 -->
+<div class="paper-meta">
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">机构</span>
+    <span class="paper-meta-value org-"></span>
+  </div>
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">方向</span>
+    <span class="paper-meta-value"></span>
+  </div>
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">日期</span>
+    <span class="paper-meta-value"></span>
+  </div>
+</div>
 
-Yvon K. Awuklu¹,²,³, Meghyn Bienvenu¹, Katsumi Inoue⁴, Vianney Jouhet²,³, Fleur Mougin³
+!!! info ""
+    <span class="paper-tag paper-tag-translated">✅ 已完成精读</span>
 
-¹波尔多大学 ²波尔多大学医院 ³波尔多大学/INSERM ⁴日本国立信息学研究所
+- **来源**：[]()
+- **论文链接**：[]()
+- **状态**：已生成
+
+## 摘要
+
+
+
+## 图表资源
+- ![](assets/page-004-img-01.png)
+- ![](assets/page-005-img-01.png)
+- ![](assets/page-017-img-01.png)
+
+
+
+---
 
 ---
 

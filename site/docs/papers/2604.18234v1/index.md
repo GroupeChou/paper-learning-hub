@@ -1,33 +1,33 @@
-# 评估RAG系统中的多跳推理：基于LLM的检索器评估策略对比
+# paper
 
 <!-- 论文元数据卡片 -->
 <div class="paper-meta">
   <div class="paper-meta-item">
     <span class="paper-meta-label">机构</span>
-    <span class="paper-meta-value org-other">Universität Innsbruck（因斯布鲁克大学）</span>
+    <span class="paper-meta-value org-"></span>
   </div>
   <div class="paper-meta-item">
     <span class="paper-meta-label">方向</span>
-    <span class="paper-meta-value">RAG / 信息检索 / LLM评估</span>
+    <span class="paper-meta-value"></span>
   </div>
   <div class="paper-meta-item">
     <span class="paper-meta-label">日期</span>
-    <span class="paper-meta-value">2026-04-20</span>
+    <span class="paper-meta-value"></span>
   </div>
 </div>
 
 !!! info ""
     <span class="paper-tag paper-tag-translated">✅ 已完成精读</span>
 
-- **来源**：[arXiv](https://arxiv.org/abs/2604.18234)（ECIR 2026 SynIRgy Workshop）
-- **论文链接**：[2604.18234v1](https://arxiv.org/abs/2604.18234)
-- **代码**：[github.com/lorenzbrehme/CARE](https://github.com/lorenzbrehme/CARE)
+- **来源**：[]()
+- **论文链接**：[]()
+- **状态**：已生成
 
 ## 摘要
 
-检索增强生成（RAG）通过外部知识增强大语言模型（LLM），以更准确地回答问题。然而，关于评估RAG系统——特别是**检索器组件**的研究仍然有限，因为大多数现有工作聚焦于单上下文检索而非**多跳查询**（multi-hop queries）。在多跳查询中，单个上下文在孤立看时可能无关紧要，但组合后却至关重要。本研究使用HotPotQA、MuSiQue和SQuAD数据集模拟RAG系统，比较了三种LLM-as-judge评估策略，包括我们提出的**上下文感知检索器评估（CARE）**方法。实验表明，CARE在评估RAG系统中的多跳推理时持续优于现有方法。性能提升在参数量更大、上下文窗口更长的模型中最为显著，而**单跳查询对上下文感知评估的敏感度极低**。结果凸显了上下文感知评估在提升RAG系统可靠性和准确性方面的关键作用，特别是在复杂查询场景中。
 
-[扩展] 这篇论文的核心洞察是：传统检索器评估方法将每个检索到的文档**孤立评判**，但在多跳推理场景下，单个文档可能只包含"拼图的一块"——只有看到完整的上下文列表才能判断其价值。CARE通过将完整上下文列表纳入评估输入来解决这个问题。
+
+
 
 ---
 
@@ -154,9 +154,7 @@
 2. **直接评估方法**——基于ARES框架
 3. **我们提出的上下文感知检索器评估（CARE）**方法
 
-![Figure 1: 三种评估策略示意图](assets/evaluation-strategies.png)
 
-*图1：(a) 间接方法——用单个上下文生成答案再与标准答案比对；(b) 直接方法——LLM直接判断上下文是否相关；(c) CARE方法——在完整上下文列表背景下判断单个上下文是否关键*
 
 给定查询q，检索器R返回上下文文档列表 $L = \{\ell_1, \ell_2, ..., \ell_n\}$，其中 $\ell_i \in L$ 表示单个检索到的上下文。令 $a^*$ 表示与q关联的真实答案。每种评估方法输出**二进制相关性标签** $y_i \in \{0, 1\}$，其中 $y_i = 1$ 表示上下文$\ell_i$相对于查询q相关，$y_i = 0$表示不相关。
 

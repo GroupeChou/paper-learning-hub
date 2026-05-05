@@ -1,32 +1,49 @@
-# 超越注意力稳定性边界：Agent自我合成推理协议
+# paper
 
 <!-- 论文元数据卡片 -->
 <div class="paper-meta">
   <div class="paper-meta-item">
     <span class="paper-meta-label">机构</span>
-    <span class="paper-meta-value org-other">University of Waterloo（滑铁卢大学）</span>
+    <span class="paper-meta-value org-"></span>
   </div>
   <div class="paper-meta-item">
     <span class="paper-meta-label">方向</span>
-    <span class="paper-meta-value">智能体 / 注意力机制 / 元认知</span>
+    <span class="paper-meta-value"></span>
   </div>
   <div class="paper-meta-item">
     <span class="paper-meta-label">日期</span>
-    <span class="paper-meta-value">2026-04-27</span>
+    <span class="paper-meta-value"></span>
   </div>
 </div>
 
 !!! info ""
     <span class="paper-tag paper-tag-translated">✅ 已完成精读</span>
 
-- **来源**：[arXiv](https://arxiv.org/abs/2604.24512)
-- **论文链接**：[2604.24512v1](https://arxiv.org/abs/2604.24512)
+- **来源**：[]()
+- **论文链接**：[]()
+- **状态**：已生成
 
 ## 摘要
 
 随着大语言模型（LLM）智能体向**自主数字同事**转变，在非线性多轮对话中维持**确定性的目标导向性**已成为架构瓶颈。我们识别并形式化了一种系统性失败模式，称为**注意力锁存（Attention Latch）**——这是仅解码器自回归Transformer模型中的现象。作为**信息过压缩（Information Over-squashing）**的行为表现，它发生在历史上下文的累积概率权重覆盖任务中途更新时，导致智能体尽管收到明确的矛盾指令仍保持锚定于过时约束。我们提出**自我合成推理协议（SSRP）**——一个实现高层架构规划（Architect）与逐步程序执行（Executive）之间离散分离的元认知框架。我们在9K条轨迹上使用MultiWOZ 2.2数据集和**聚合转向准确率（APA）**评估SSRP——这是一个新指标，通过将其分数映射到U型"Lost in the Middle"注意力曲线来验证。我们呈现三层实验：浅层基于近因的检索试点、高熵SOP、以及语义劫持3跳多事实综合任务。我们的结果实证定位了**注意力稳定性边界（ASB）**，其中无状态Vanilla ReAct基线在GPT 5.4上崩溃至0.1%成功率，而SSRP实现了**715×相对韧性提升（Lr）**。我们在Gemini 3.1 Pro、Claude Sonnet 4.6和DeepSeek V3.2上证明了统计显著的增益。全面审计通过递归反思基线（100%成功）证明注意力失效；通过等距压力测试（90%准确率）将锁存与位置偏倚解耦；并通过信息瓶颈原理和粒度消融形式化SSRP。最后，**程序完整性审计（98.8%遵从率）**揭示了一个**基础悖论（Grounding Paradox）**：高稳定性模型因拒绝在检索-推理污染下产生幻觉而失败。
 
 [扩展] 这篇论文的核心贡献是识别了一个全新的架构级失败模式——Attention Latch。在多轮对话中，早期指令的"权重"会"锁住"模型的注意力，使其无法响应后续更新。作者提出的解决方案是将"思考"（Architect）与"行动"（Executive）分离，用新鲜合成的SOP协议替代被污染的历史上下文。
+
+
+
+
+## 图表资源
+
+- ![](assets/page-003-img-01.png)
+- ![](assets/page-004-img-01.png)
+- ![](assets/page-005-img-01.png)
+- ![](assets/page-005-img-02.png)
+- ![](assets/page-005-img-03.png)
+- ![](assets/page-008-img-01.png)
+- ![](assets/page-008-img-02.png)
+- ![](assets/page-009-img-01.png)
+
+
 
 ---
 
@@ -132,9 +149,7 @@ SSRP框架实现了一种**离散架构分离**，模仿Architect（反思性）
 
 **• Executive（执行官）**：高吞吐量模型（即工具），逐字遵循合成的SOP。它作为**确定性工作者**，被Architect的脚手架屏蔽了嘈杂的对话历史并维持**高程序完整性**。
 
-![Figure 2: SSRP Framework](assets/ssrp-framework.png)
 
-*图2：SSRP框架总览——Architect检测到矛盾后合成新SOP，Executive按SOP执行*
 
 **3.2 理论框架：脚手架中的信息瓶颈（IB）**
 

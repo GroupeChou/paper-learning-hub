@@ -1,12 +1,42 @@
-# LLM 会"游戏化"形式化吗？评估逻辑推理中的忠实性
+# paper
 
-## Do LLMs Game Formalization? Evaluating Faithfulness in Logical Reasoning
+<!-- 论文元数据卡片 -->
+<div class="paper-meta">
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">机构</span>
+    <span class="paper-meta-value org-"></span>
+  </div>
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">方向</span>
+    <span class="paper-meta-value"></span>
+  </div>
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">日期</span>
+    <span class="paper-meta-value"></span>
+  </div>
+</div>
 
-**VerifAI-2 Workshop, ICLR 2026**
+!!! info ""
+    <span class="paper-tag paper-tag-translated">✅ 已完成精读</span>
 
-Kyuhee Kim, Auguste Poiroux, Antoine Bosselut
+- **来源**：[]()
+- **论文链接**：[]()
+- **状态**：已生成
 
-EPFL
+## 摘要
+
+
+
+## 图表资源
+- ![](assets/page-006-img-01.png)
+- ![](assets/page-024-img-01.png)
+- ![](assets/page-024-img-02.png)
+- ![](assets/page-024-img-03.png)
+- ![](assets/page-024-img-04.png)
+
+
+
+---
 
 ---
 

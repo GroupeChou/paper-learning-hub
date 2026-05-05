@@ -1,563 +1,1100 @@
-# When Agents Look the Same: 量化工具使用行为中的蒸馏诱导相似性
+# When Agents Look the Same: Quantifying Distillation-Induced Behavioral Homogenization in LLM-Based Agents
 
 <!-- 论文元数据卡片 -->
 <div class="paper-meta">
   <div class="paper-meta-item">
     <span class="paper-meta-label">机构</span>
-    <span class="paper-meta-value org-USTC">中国科学技术大学 (USTC)</span>
+    <span class="paper-meta-value org-"></span>
   </div>
   <div class="paper-meta-item">
     <span class="paper-meta-label">方向</span>
-    <span class="paper-meta-value">AI Agent / 模型蒸馏检测</span>
+    <span class="paper-meta-value"></span>
   </div>
-  <div class="paper-meta-label">日期</span>
-    <span class="paper-meta-value">2026-04-23</span>
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">日期</span>
+    <span class="paper-meta-value"></span>
   </div>
+</div>
 
 !!! info ""
     <span class="paper-tag paper-tag-translated">✅ 已完成精读</span>
 
-- **来源**：[arXiv](https://arxiv.org/abs/2604.21255v1)
-- **论文链接**：[arXiv:2604.21255v1](https://arxiv.org/pdf/2604.21255v1)
-- **代码开源**：[https://github.com/Syuchin/AgentEcho](https://github.com/Syuchin/AgentEcho)
+- **来源**：[arXiv:2604.21255v1](https://arxiv.org/abs/2604.21255v1)
+- **论文链接**：[https://arxiv.org/abs/2604.21255v1](https://arxiv.org/abs/2604.21255v1)
+- **状态**：待复核
 
 ## 摘要
 
-### 中文翻译
+模型蒸馏是推动LLM智能体快速进步的主要驱动力，但它常常导致行为同质化。许多新兴智能体共享几乎相同的推理步骤和失败模式，暗示它们可能只是少数主导教师模型的蒸馏回声。然而，现有指标无法区分任务成功所需的**强制性行为**和反映模型自主偏好的**非强制性模式**。我们提出两个互补性指标来分离非强制性行为模式：**响应模式相似度（RPS）**用于衡量语言对齐，**动作图相似度（AGS）**用于衡量建模为有向图的工具使用习惯。我们在τ-Bench和τ²-Bench上对来自8个提供商的18个模型进行了评估，以Claude Sonnet 4.5（thinking）为参照，发现家族内模型对的AGS比跨家族对高出5.9个百分点，且Kimi-K2（thinking）的Snode达到82.6%、Sdep达到94.7%，超过了Anthropic自家的Opus 4.1。一项受控蒸馏实验进一步证实，AGS能够区分面向教师模型的特定趋同与一般性改进。RPS和AGS捕捉了不同的行为维度（Pearson r = 0.491），为智能体生态系统中的行为趋同提供了互补的诊断信号。我们的代码已开源：https://github.com/Syuchin/AgentEcho。
 
-模型蒸馏是推动LLM Agent快速进步的主要驱动力，但它往往导致**行为同质化（behavioral homogenization）**。许多新兴的Agent共享几乎相同的推理步骤和失败模式——这表明它们可能只是少数几个主导教师模型的"蒸馏回声"。
+## 解析备注
 
-然而，现有的度量指标无法区分：**任务成功所必需的强制性行为**与**反映模型自主偏好的非强制性模式**。
+- 图片数量超过上限，仅保留前 20 张。
+- 图片数量超过上限，仅保留前 20 张。
+- 图片数量超过上限，仅保留前 20 张。
+- 图片数量超过上限，仅保留前 20 张。
 
-我们提出两个互补指标来隔离非强制性行为模式：
-- **Response Pattern Similarity (RPS)**：用于衡量语言层面的对齐
-- **Action Graph Similarity (AGS)**：用于衡量被建模为有向图的工具使用习惯
-
-在 τ-Bench 和 τ²-Bench 上评估来自8个提供商的18个模型（以 Claude Sonnet 4.5 (thinking) 为参考），我们发现：
-- **同家族模型对的 AGS 分数比跨家族模型对高 5.9 个百分点**
-- **Kimi-K2 (thinking) 的 Snode 达到 82.6%，Sdep 达到 94.7%，超过了 Anthropic 自家的 Opus 4.1**
-- 一个受控蒸馏实验进一步证实：**AGS 能够区分针对教师的特异性收敛和一般性改进**
-
-RPS 和 AGS 捕获了不同的行为维度（Pearson r = 0.491），为Agent生态中的行为收敛提供了互补的诊断信号。
-
-`[扩展]` 这篇论文的核心洞察极其犀利：当前LLM Agent生态正在经历一种隐性的"行为坍缩"——不同公司的模型看起来在做独立创新，实际上可能只是在模仿少数几个头部模型的输出。作者不是空谈这个现象，而是设计了可量化的检测框架。最震撼的发现是 Kimi-K2 在行为模式上比 Anthropic 自家的 Opus 4.1 更像 Claude Sonnet 4.5——这已经不是暗示，而是近乎实锤的证据。这项工作对于理解当前LLM生态的真实多样性和识别潜在的知识产权问题有重大意义。
-
----
-
-## Section 1 — 引言
-
-### 中文翻译
-
-当前高性能LLM Agent的"寒武纪大爆发"往往伴随着一种挥之不去的**既视感（déjà vu）**。尽管起源各异，许多新兴Agent表现出显著**对齐的行为**：它们共享几乎相同的推理步骤、冗余的工具调用习惯、甚至完全相同的失败模式 `(Song et al., 2024; Lyu et al., 2025; Kang et al., 2025)`。
-
-> 这暗示着：这些模型并非独立的突破，而可能是少数几个主导教师模型的**蒸馏回声（distilled echoes）**。
-
-![Figure 1: 行为相似性示例](assets/figure1.png)
-
-*Figure 1: 与 Claude Sonnet 4.5 (thinking) 的行为相似性。(a) 展示了 Kimi-K2、Claude 和 GPT-5 在一个商品交换任务上的示例轨迹。Kimi-K2 和 Claude 共享相似的响应措辞和可选工具选择风格，而 GPT-5 采用了不同的方式。(b) 绘制了所有非Anthropic模型的 RPS vs AGS 散点图。Kimi-K2 (thinking) 占据右上角，最接近参考模型。*
-
-这种普遍的**模仿（mimicry）**导致了理论上独立模型之间"坏习惯"的汇聚 `(Peng et al., 2025; Chen et al., 2025)`。例如，许多Agent不是优化效率，而是镜像教师模型**冗余的推理和冗余的工具调用模式**——比如对所有可用工具进行试错（trial-and-error），即使解决方案显而易见 `(Lu et al., 2025; Xiong et al., 2025)`。
-
-这种集体的对齐意味着**生态系统缺乏真正的鲁棒性**：不同模型不再提供独立的验证，而是以**完全相同的方式失败** `(Guo et al., 2024; Shumailov et al., 2024)`。
-
-量化这种**蒸馏诱导的对齐**对于确保生态系统透明度至关重要，但现有方法在复杂的多步Agent场景下力不从心：
-
-1. 当前指标主要关注**静态对话中的响应级相似性**，无法捕捉工具使用轨迹（tool-use trajectories）的动态特性
-2. 更关键的是，它们**无法区分**：
-   - **强制性行为（mandatory behaviors）**：任务成功严格要求的动作
-   - **非强制性行为（non-mandatory behaviors）**：反映模型自主偏好的模式
-
-如果不隔离这些**"行为自由度"**，就不可能判断两个模型收敛是因为只有一条正确路径，还是因为其中一个在盲目地影射另一个。
-
-为弥合这一差距，我们提出了一个系统化的框架来**量化Agent蒸馏**，核心思路是**隔离非强制性的行为模式**。我们的方法引入两个互补指标：
-
-**Response Pattern Similarity (RPS)** 通过将轨迹分段为五个标准阶段（认证、信息收集、执行、验证、通知），并沿风格、结构和对齐维度评分，来衡量语言层面的相似性。
-
-**Action Graph Similarity (AGS)** 通过三个子指标衡量动作层面的相似性：
-- **Snode**：可选工具的一致性（如航班取消任务中，所有模型必须调用 cancel_reservation，但有些会额外调用 get_reservation_details 进行二次确认）
-- **Sseq**：顺序习惯（如写后验证、修改前确认、错误重试模式）
-- **Sdep**：依赖模式（如输出复用率和工具链深度）
-
-通过从任务决定的动作中隔离这些非强制性行为，我们的指标揭示了否则会被共享正确性掩盖的风格性和结构性对齐。
-
-我们在 τ-Bench 和 τ²-Bench 上评估了来自8个主要提供商的18个模型，使用 Claude Sonnet 4.5 (thinking) 作为参考"预言机（oracle）"。实验揭示几个关键发现：
-
-1. **Anthropic 模型展现出强大的内部一致性**，RPS分数均高于3.8
-2. **Kimi-K2 (thinking) 在两个指标上均表现出异常高的相似度**，在非Anthropic模型中AGS最高达82.7%，其中 Snode=82.6%、Sdep=94.7%
-3. **RPS 和 AGS 捕获不同的行为维度**（Pearson r = 0.491），提供互补的诊断信号
-4. **受控蒸馏实验表明**：AGS 向教师方向上升、向非教师对照组下降，而基线指标向两者都上升
-
-我们的发现为最初的既视感提供了实证基础。虽然某些模型保持了高行为多样性，但其他模型在**言语和结构维度上**都与参考模型表现出升高的相似性——即使在存在多种替代路径的场景中也是如此。
-
-### 主要贡献
-
-- 提出了首个**工具使用Agent蒸馏量化框架**，解耦了工具使用轨迹中的强制性和非强性行为
-- 引入了 RPS 和 AGS，提供了用于语言层面和动作层面行为相似性的**可解释指标**
-- 评估了来自8个提供商的18个模型，分析了当前Agent生态中的**行为收敛模式**
-
-`[扩展]` 引言部分的叙事策略非常高明：先用直觉（"为什么这么多Agent看起来差不多？"）抓住读者注意力，再用具体案例（试错式工具调用、相同失败模式）给出证据，最后引出方法论贡献。特别值得注意的是"mandatory vs non-mandatory behavior"这一关键区分——这是整篇论文最重要的理论贡献之一。没有这个区分，任何相似性度量都无法回答"它们是真的在互相模仿，还是只是在做同一道题所以答案相似？"这个根本性问题。
-
-### 术语解释
-
-| 英文术语 | 中文译名 | 一句话解释 | 应用场景 |
-|---------|---------|-----------|---------|
-| Behavioral Homogenization | 行为同质化 | 不同模型因蒸馏导致的行为模式趋同现象 | Agent生态系统多样性下降的根本原因 |
-| Distilled Echoes | 蒸馏回声 | 学生模型复制教师模型行为的形象比喻 | 形象描述蒸馏导致的非原创性 |
-| Mandatory Behavior | 强制性行为 | 任务成功所必需的动作（如调用cancel_reservation取消订单） | 需要从相似性计算中排除的部分 |
-| Non-Mandatory Behavior | 非强性行为 | 反映模型自主偏好的可选动作（如额外调用get_details做二次确认） | 蒸馏检测的核心信号来源 |
-| Tool-Use Trajectory | 工具使用轨迹 | Agent完成一个任务过程中的完整工具调用序列 | AGS分析的基本单位 |
-| Response Pattern Similarity (RPS) | 响应模式相似度 | 衡量两模型在语言表达层面的行为相似性 | 从文本风格角度检测蒸馏 |
-| Action Graph Similarity (AGS) | 动作图相似度 | 衡量两模型在工具使用行为层面的相似性 | 从动作序列角度检测蒸馏 |
-
-### 图表/公式说明
-
-**Figure 1 — 行为相似性直观展示**
-
-(a) 子图展示了三个模型在同一任务上的对话轨迹对比：Kimi-K2 和 Claude 不仅使用了相同的可选工具(find_user_id_by_email)，连回复措辞("Perfect!"、"Excellent!")都非常相似；而 GPT-5 选择了不同的工具路径和更简洁的表达风格。
-
-(b) 子图是一个散点图，横轴为RPS（言语相似）、纵轴为AGS（动作相似）。Kimi-K2 (thinking) 位于右上角最接近参考原点的位置，说明它在两个维度上都最像 Claude。图中还用颜色编码标注了各模型的"高/低蒸馏"程度。
-
-设计意图：用具体案例让读者立即感知"模型之间确实存在可见的行为克隆"。
-
-### 关键 takeaway
-
-- **要点1（核心问题）**：LLM Agent生态中存在广泛的"行为同质化"，不同模型以相同方式失败意味着缺乏真正的独立验证能力
-- **要点2（方法论创新）**："强制性vs非强性行为"的二分法是解决"相似性≠抄袭"难题的关键理论工具
-- **要点3（最大发现预览）**：Kimi-K2 (thinking) 比 Anthropic 自家 Opus 4.1 更像 Claude Sonnet 4.5 —— 这是全文最具爆炸性的结论
+## 图表资源
+- ![](assets/page-001-img-01.jpeg)
+- ![](assets/page-001-img-02.jpeg)
+- ![](assets/page-001-img-03.jpeg)
+- ![](assets/page-001-img-04.jpeg)
+- ![](assets/page-001-img-05.jpeg)
+- ![](assets/page-001-img-06.jpeg)
+- ![](assets/page-001-img-07.jpeg)
+- ![](assets/page-001-img-08.jpeg)
+- ![](assets/page-001-img-09.jpeg)
+- ![](assets/page-001-img-10.jpeg)
+- ![](assets/page-001-img-11.jpeg)
+- ![](assets/page-001-img-12.jpeg)
+- ![](assets/page-001-img-13.jpeg)
+- ![](assets/page-001-img-14.jpeg)
+- ![](assets/page-004-img-01.jpeg)
+- ![](assets/page-004-img-02.jpeg)
+- ![](assets/page-004-img-03.jpeg)
+- ![](assets/page-004-img-04.jpeg)
+- ![](assets/page-004-img-05.jpeg)
+- ![](assets/page-004-img-06.jpeg)
 
 ---
 
-## Section 2 — 相关工作
+## 逐块精读翻译
 
-### 中文翻译
+### 块1：标题、摘要与引言
 
-#### LLM的知识蒸馏
+#### 原文（第1页）
 
-知识蒸馏将知识从大教师模型迁移到小学生模型 `(Hinton et al., 2015)`，已被广泛应用于预训练模型的压缩，如 BERT `(Sanh et al., 2019)`。对于大语言模型，通常分为**白盒蒸馏** `(Kim et al., 2024)` 和**黑盒蒸馏** `(Taori et al., 2023; Chiang et al., 2023)` 两类。白盒方法需要访问中间层或logits `(Jiao et al., 2020; Wang et al., 2020)`；黑盒方法使用教师生成的序列 `(Agarwal et al., 2023; Zhao et al., 2024; Hsieh et al., 2023)`，允许从专有API或任意架构进行蒸馏。然而，**实证研究表明蒸馏可能导致LLM的同质化问题** `(Lee et al., 2025)`。
+[Page 1]
+When Agents Look the Same: Quantifying Distillation-Induced Similarity in Tool-Use Behaviors
+Chenghao Yang¹,², Yuning Zhang¹,², Zhoufutu Wen³,†, Tao Gong¹,²,†, Jiaheng Liu⁴, Qi Chu¹,², Nenghai Yu¹,²
+¹中国科学技术大学网络空间安全学院，²安徽省数字安全重点实验室，³M-A-P，⁴南京大学
+yangchenghao@mail.ustc.edu.cn, tgong@ustc.edu.cn, wzft123@outlook.com
 
-#### 数据污染
+摘要
+Model distillation is a primary driver behind the rapid progress of LLM agents, yet it often leads to behavioral homogenization. Many emerging agents share nearly identical reasoning steps and failure modes, suggesting they may be distilled echoes of a few dominant teachers. Existing metrics, however, fail to distinguish mandatory behaviors required for task success from non-mandatory patterns that reflect a model's autonomous preferences. We propose two complementary metrics to isolate non-mandatory behavioral patterns: Response Pattern Similarity (RPS) for verbal alignment and Action Graph Similarity (AGS) for tool-use habits modeled as directed graphs. Evaluating 18 models from 8 providers on τ-Bench and τ²-Bench against Claude Sonnet 4.5 (thinking), we find that within-family model pairs score 5.9 pp higher in AGS than cross-family pairs, and that Kimi-K2 (thinking) reaches 82.6% Snode and 94.7% Sdep, exceeding Anthropic's own Opus 4.1. A controlled distillation experiment further confirms that AGS distinguishes teacher-specific convergence from general improvement. RPS and AGS capture distinct behavioral dimensions (Pearson r = 0.491), providing complementary diagnostic signals for behavioral convergence in the agent ecosystem. Our code is available at https://github.com/Syuchin/AgentEcho.
 
-数据污染或基准泄漏 `(Magar and Schwartz, 2022; Xu et al., 2024)` 指的是测试和基准数据意外包含在训练语料库中，给可靠的LLM评估带来挑战 `(Sainz et al., 2023)`。这种重叠会虚增性能并破坏公平比较 `(Magar and Schwartz, 2022)`。解决方案包括污染检测 `(Golchin and Surdeanu, 2025; Dekoninck et al., 2024)` 和动态评估 `(Yu et al., 2024)`。近期方法包括基于语义相关n-gram的任务gram语言模型的分布记忆化 `(Wang et al., 2025)` 和嵌入核相似度矩阵的核分歧得分 `(Choi et al., 2025)`。
+1 引言
+The current "Cambrian explosion" of high-performing LLM agents often carries a persistent sense of déjà vu. Despite their diverse origins, many emerging agents exhibit a considerably aligned behavior: they share nearly identical reasoning steps, redundant tool-calling habits, and even the same failure modes (Song et al., 2024; Lyu et al., 2025; Kang et al., 2025). This suggests that instead of independent breakthroughs, these models may be distilled echoes of a few dominant teachers.
 
-#### 工具使用基准
+† Corresponding authors.
+[对话轨迹示例和图表说明]
 
-工具使用是LLM Agent的关键能力，催生了多个评估基准。早期基准如 API-Bank `(Li et al., 2023)` 和 Gorilla `(Patil et al., 2024)` 针对大规模工具集中的工具选择和真实API调用。ToolBench `(Qin et al., 2024)` 将其扩展到多步交互。BFCL `(Patil et al., 2025)` 专注于跨域函数调用准确性。TRAJECT-Bench `(He et al., 2025)` 引入了轨迹感知的评估指标，涵盖选择、参数化、排序和依赖关系。领域特定基准也已出现，包括金融 `(Hu et al., 2025)` 和医学 `(Jiang et al., 2025)`。在**对话Agent设置**中，τ-Bench `(Yao et al., 2024)` 和 τ²-Bench `(Barres et al., 2025)` 模拟了Agent-用户工具的协作使用，强调真实的交互式评估。
+图1（见上方图表资源）：与Claude Sonnet 4.5 (thinking)的行为相似度。(a)展示了Kimi-K2、Claude和GPT-5在商品换货任务上的示例轨迹。Kimi-K2和Claude共享相似的回复措辞和可选工具选择，而GPT-5采用了不同的风格。(b)绘制了所有非Anthropic模型在RPS与AGS上的分布。Kimi-K2 (thinking)位于右上角，最接近参照模型。
 
-`[扩展]` 相关工作部分的组织逻辑清晰：先讲蒸馏方法→再讲数据污染问题→最后聚焦到本文使用的工具使用基准。值得注意的是，作者明确区分了"蒸馏导致同质化"和"数据污染导致虚假高分"这两个不同的问题——前者是关于行为模式的趋同，后者是关于评测分数的膨胀。本文关注前者，且特别强调是在多步骤工具使用场景下的行为趋同检测。
+#### 中文翻译
 
-### 术语解释
+**当智能体看起来一样：量化蒸馏导致的工具使用行为同质化**
 
-| 英文术语 | 中文译名 | 一句话解释 | 应用场景 |
-|---------|---------|-----------|---------|
-| White-box Distillation | 白盒蒸馏 | 可访问教师模型内部状态（中间层/logits）的蒸馏 | 同架构师生之间的高效知识传递 |
-| Black-box Distillation | 黑盒蒸馏 | 仅使用教师模型输出的文本序列进行蒸馏 | 跨提供商/跨架构的通用蒸馏方案 |
-| Benchmark Leakage | 基准泄漏 | 测试数据意外混入训练数据导致评估失真 | LLM排行榜公信力的主要威胁 |
-| Distributional Memorization | 分布记忆化 | 通过n-gram分布变化检测模型是否记住了特定内容 | 数据污染检测的新兴方法 |
+陈浩杨¹,², 张宇宁¹,², 温周赴途³,†, 龚涛¹,²,†, 刘嘉恒⁴, 初琪¹,², 俞能海¹,²
+¹中国科学技术大学网络空间安全学院，²安徽省数字安全重点实验室，³M-A-P，⁴南京大学
+yangchenghao@mail.ustc.edu.cn, tgong@ustc.edu.cn, wzft123@outlook.com
 
-### 图表/公式说明
+**摘要**
+模型蒸馏是推动LLM智能体快速进步的主要驱动力，但它常常导致行为同质化。许多新兴智能体共享几乎相同的推理步骤和失败模式，暗示它们可能只是少数主导教师模型的蒸馏回声。然而，现有指标无法区分任务成功所需的**强制性行为**和反映模型自主偏好的**非强制性模式**。我们提出两个互补性指标来分离非强制性行为模式：**响应模式相似度（RPS）**用于衡量语言对齐，**动作图相似度（AGS）**用于衡量建模为有向图的工具使用习惯。我们在τ-Bench和τ²-Bench上对来自8个提供商的18个模型进行了评估，以Claude Sonnet 4.5（thinking）为参照，发现家族内模型对的AGS比跨家族对高出5.9个百分点，且Kimi-K2（thinking）的Snode达到82.6%、Sdep达到94.7%，超过了Anthropic自家的Opus 4.1。一项受控蒸馏实验进一步证实，AGS能够区分面向教师模型的特定趋同与一般性改进。RPS和AGS捕捉了不同的行为维度（Pearson r = 0.491），为智能体生态系统中的行为趋同提供了互补的诊断信号。我们的代码已开源：https://github.com/Syuchin/AgentEcho。
 
-本片段无图表/公式
+**1 引言**
+当前高性能LLM智能体的"寒武纪大爆发"常常伴随着一种挥之不去的既视感。尽管来源各不相同，许多新兴智能体表现出高度一致的行为：它们共享几乎相同的推理步骤、冗余的工具调用习惯，甚至相同的失败模式（Song et al., 2024; Lyu et al., 2025; Kang et al., 2025）。这表明，这些模型并非独立突破的产物，而可能是少数主导教师模型的蒸馏回声。
 
-### 关键 takeaway
+†通讯作者。
+[对话轨迹示例]
 
-- **要点1（问题定位）**：本文关注的不是"数据污染"（测试题泄露到训练集），而是"行为同质化"（模型间的决策模式趋同）——这是两个正交但同样重要的问题
-- **要点2（基准选择理由）**：选择τ-Bench和τ²-Bench是因为它们模拟了真实的Agent-用户多轮交互，而非简单的单轮工具调用——这正是行为模式差异最容易显现的场景
+用户：我需要换货...
+助手：我来帮忙...请提供您的邮箱...
+用户：您好，我想换几件最近买的商品。
+助手：我来帮您处理换货！...能提供您的邮箱吗？
+用户：好的，请查收并确认换货详情...
+助手：换货已成功处理！
+用户：还有其他需要帮忙的吗？
+助手：我来帮您处理换货！...请提供您的邮箱...
+用户：太好了！您的换货已成功处理。换货摘要...
+用户：还有其他需要帮忙的吗？
 
----
+工具调用图
+可选工具
+可选工具
+工具调用图
+高相似度
+低相似度
 
-## Section 3 — 方法
+(a) 商品换货任务上的示例轨迹。
 
-### 中文翻译
+Qwen3 235B Thinking
+Gemini 2.5 Pro
+GPT-5 high
+Doubao 1.6 high
+Gemini 3 Pro
+DeepSeek R1
+DeepSeek V3
+GLM-4.6
+Kimi K2 (thinking)
+高蒸馏
+低蒸馏
 
-### 3.1 轨迹表示
+(b) 非Anthropic模型的RPS与AGS分布。
 
-给定一组模型 $\mathcal{M} = \{M_1, ..., M_k\}$ 和一个工具使用任务集 $\mathcal{T}$，我们为每个模型在 $\mathcal{T}$ 上收集执行轨迹 $\{\tau_1, \tau_2, ...\}$。每条轨迹 $\tau$ 由多轮对话组成。每一轮包含一个用户输入和一个模型输出，其中模型输出包括：(i) 用户可见的回复，(ii) 工具调用，(iii) 工具相关消息（如中间输出或执行跟踪）。
+**图1（见上方图表资源）：** 与Claude Sonnet 4.5 (thinking)的行为相似度。(a)展示了Kimi-K2、Claude和GPT-5在商品换货任务上的示例轨迹。Kimi-K2和Claude共享相似的回复措辞和可选工具选择，而GPT-5采用了不同的风格。(b)绘制了所有非Anthropic模型在RPS与AGS上的分布。Kimi-K2 (thinking)位于右上角，最接近参照模型。
 
-**Figure 2** 展示了整体框架。基于轨迹表示，我们设计了两个互补指标，分别针对轨迹内的两种不同信息流：
+#### 术语解释
 
-- **RPS（响应模式相似度）**：捕获模型如何组织回复措辞、构建解释和表达推理的语言指纹
-- **AGS（动作图相似度）**：捕获模型如何选择工具、排序操作和复用输出的行为指纹
+| 术语 | 英文 | 解释 |
+|------|------|------|
+| 模型蒸馏 | Model Distillation | 将大型教师模型的知识迁移到小型学生模型的技术 |
+| 行为同质化 | Behavioral Homogenization | 不同模型表现出越来越相似的行为模式的现象 |
+| 强制性行为 | Mandatory Behaviors | 完成任务所必须执行的行为步骤 |
+| 非强制性模式 | Non-mandatory Patterns | 反映模型自主偏好、非任务必需的行为模式 |
+| 响应模式相似度 | Response Pattern Similarity (RPS) | 衡量模型在语言表达层面相似度的指标 |
+| 动作图相似度 | Action Graph Similarity (AGS) | 衡量模型在工具调用行为层面相似度的指标 |
 
-两个指标捕获模型行为的不同方面：模型可能共享语言模式但工具使用不同，反之亦然。
+#### 图表/公式说明
 
-![Figure 2: 蒸馏量化框架总览](assets/figure2.png)
+**图1（见上方图表资源）：** 论文核心可视化图，包含两部分：(a)三个模型（Kimi-K2、Claude、GPT-5）在商品换货任务上的轨迹对比，展示了Kimi-K2和Claude在措辞和可选工具选择上的相似性；(b)所有非Anthropic模型的RPS-AGS散点图，Kimi-K2 (thinking)位于右上角，表明其与Claude Sonnet 4.5 (thinking)的行为最相似。
 
-*Figure 2: 我们的蒸馏量化框架总览。左侧：参考模型和测试模型在一个航班取消任务上的示例轨迹。右上方：RPS流水线，将轨迹分段为标准阶段并通过LLM评判器评分语言相似性。右下方：AGS流水线，从工具调用序列构建Action Flow Graph并基于节点集、顺序边和依赖边计算行为指标。*
+#### 关键Takeaway
 
-### 3.2 响应模式相似度 (RPS)
-
-RPS 沿三个维度量化两个模型之间的语言相似性：
-- **Style（风格）**：衡量措辞习惯和词汇偏好
-- **Structure（结构）**：衡量句子模式和回复模板
-- **Alignment（对齐）**：衡量两个模型是否展现相似的推理到行动模式
-
-工具使用Agent轨迹通常跨越数十轮，不同模型完成同一任务的轮次也不同。直接比较完整轨迹或逐轮对齐会匹配不相关的内容，导致不可靠的分数。因此我们设计了一个**两阶段流水线**：
-
-**阶段标注（Stage Annotation）：**为实现不同长度轨迹之间的语义级对齐，我们定义五个**标准阶段（canonical stages）** 来表征Agent-用户交互：
-
-1. **Authentication（认证）**：涉及识别用户、验证身份或处理验证失败后的重试
-2. **Elicitation（信息收集）**：在认证上下文之外，请求用户缺失参数以推进任务
-3. **Execution（执行）**：调用领域特定工具执行查询或修改操作
-4. **Verification（验证）**：在执行关键写操作前寻求明确的用户确认
-5. **Notification（通知）**：向用户报告工具执行结果或当前状态
-
-这五个阶段来源于对工具使用基准中常见交互模式的分析，覆盖了典型的Agent工作流。给定一条轨迹 $\tau$，我们使用LLM将每个回复和工具相关消息标注到对应阶段。
-
-**相似性评分（Similarity Scoring）：** 阶段标注后，RPS 仅比较**两个模型共享的阶段**。仅出现在一条轨迹中的阶段被排除，因为我们的目标是衡量相似性而非覆盖率。对于每个共享阶段，我们将回复、工具相关消息和相关工具调用内容输入LLM评判器。评判器沿 Style、Structure 和 Alignment 维度评分，以及综合 Overall 分数。分数范围1–5，5表示高相似度，3表示中等重叠，1表示无显著相似性。最终RPS分数是所有共享阶段Overall分数的均值。
-
-### 3.3 动作图相似度 (AGS)
-
-AGS 分析工具调用序列中的结构模式，在工具调用层面表征行为相似性。与 RPS 不同，**AGS 直接作用于工具调用序列，不需要阶段标注**，使其适用于任何Agent与工具交互的领域。
-
-**图构建（Graph Construction）：** 给定对话轨迹 $\tau$，我们基于工具调用序列构建有向图 $G = (V, E_s, E_d)$。
-
-**定义1（工具节点 Tool Node）：** 每个节点 $v \in V$ 代表一次工具调用，具有属性：
-$$v = (\text{name}, \text{args}, \text{result})$$
-其中 name 是工具名称，args 是输入参数，result 是返回值。
-
-**定义2（顺序边 Sequential Edge）：** 顺序边 $(u, v) \in E_s$ 根据 $\tau$ 中的执行顺序连接时间相邻的工具调用。
-
-**定义3（依赖边 Dependency Edge）：** 当 $v$ 的某个参数值源自 $u$ 的结果时，建立依赖边 $(u, v) \in E_d$。由于简单的字符串匹配会产生过多误报（如常见标识符或日期的偶然出现），我们使用**LLM评判器验证语义有效性**。当连续节点之间存在依赖边时，省略顺序边以避免冗余编码。
-
-**行为指标（Behavioral Metrics）：** 基于构建的图 $G$，AGS 沿三个维度表征行为相似性：
-
-#### 可选工具一致性 Snode
-
-Snode 衡量两个模型之间**可选工具选择**的一致性。完成同一任务时，模型既调用完成任务所需的**强制性工具**，也调用辅助目的的**可选工具**。强制性工具由正确的执行路径决定，因此所有成功模型必然调用它们。将这些共享调用纳入相似性计算会**虚增分数并掩盖模型特定的工具偏好**。
-
-为区分这两类，我们分析同一任务上多个模型的成功轨迹。设 $\text{Tools}(M, t)$ 表示模型 $M$ 在任务 $t$ 上调用的工具集合，$\mathcal{M}^*_t$ 表示成功完成任务 $t$ 的模型集合。**强制性工具**是所有成功模型工具集的交集：
-$$F^{\text{mandatory}}_t = \bigcap_{M \in \mathcal{M}^*_t} \text{Tools}(M, t)$$
-
-**可选工具**是出现在部分但非全部成功轨迹中的工具。Snode 计算所有任务上可选工具的一致率（agreement rate），一致意味着两个模型要么都使用、要么都跳过同一个可选工具。
-
-#### 顺序模式相似度 Sseq
-
-Sseq 衡量两个模型是否在相邻工具调用间表现出相似的局部执行习惯。我们基于顺序边 $E_s$ 提取三个特征：
-1. **写后验证率（post-write verification rate）**：写操作后调用读操作进行验证的倾向
-2. **写前确认率（pre-write confirmation rate）**：写操作前查询的倾向
-3. **错误重试率（error retry rate）**：出错后重试同一工具的依赖性
-
-每条轨迹表示为一个三维特征向量。对于每个任务，计算两个模型特征向量之间的**余弦相似度**，然后在所有任务上平均得到 Sseq。
-
-#### 依赖模式相似度 Sdep
-
-Sdep 衡量两个模型是否在复用工具输出时表现出相似的模式。我们基于依赖边 $E_d$ 提取三个特征：
-1. **输出复用率（output reuse rate）**：复用前置调用输出的工具调用比例
-2. **最长依赖链长度（longest dependency chain length）**：链式规划的深度
-3. **输出扇出率（output fan-out rate）**：被多次后续调用复用的工具输出比例
-
-类似 Sseq，计算每个任务的余弦相似度并平均得到 Sdep。
-
-`[扩展]` 方法论部分的设计极其精细。RPS的五阶段标注方案巧妙解决了"不同模型用不同轮数完成同一任务"的对齐难题——不再逐轮比较，而是先映射到语义阶段再比较。AGS的三层图结构（工具节点+顺序边+依赖边）更是精妙：顺序边捕捉"做了什么先后顺序"，依赖边捕捉"数据怎么流转"，两者结合能完整刻画一个Agent的决策风格。特别是Snode的"强制性/可选工具分离"设计——如果不排除所有成功模型都会调用的那些"必选工具"，那么任何两个好模型都会显得很相似，这会淹没真正的行为克隆信号。
-
-### 术语解释
-
-| 英文术语 | 中文译名 | 一句话解释 | 应用场景 |
-|---------|---------|-----------|---------|
-| Canonical Stage | 标准阶段 | 将复杂的多轮对话抽象为固定语义阶段的标准化方案 | 解决不同长度轨迹之间的对齐问题 |
-| LLM Judge | LLM评判器 | 使用LLM作为评分员来判断两段文本的相似性 | RPS评分的核心组件 |
-| Action Flow Graph (AFG) | 动作流图 | 编码工具调用序列的有向图（含顺序边+依赖边） | AGS分析的数据结构 |
-| Optional Tool Agreement | 可选工具一致性 | 两模型在非必需工具选择上的一致程度 | Snode子指标的核心概念 |
-| Dependency Edge | 依赖边 | 连接"数据提供者"和"数据消费者"工具调用的边 | 捕获Agent的信息流模式 |
-| Agreement Rate | 一致率 | 两个模型做出相同可选选择的占比 | Snode的计算公式 |
-
-### 图表/公式说明
-
-**Figure 2 — 框架总览图**
-
-该图清晰地展示了双轨并行结构：
-
-- **左半部分（RPS路径）**：轨迹 → LLM标注器(五阶段) → 共享阶段匹配 → LLM Judge(Style/Structure/Alignment) → RPS分数(1-5)
-- **右半部分（AGS路径）**：轨迹 → AFG构建(节点+顺序边+依赖边) → 三维行为指标(Snode/Sseq/Sdep) → AGS分数(0-1)
-
-中间展示了参考模型和测试模型在同一航班取消任务上的对比轨迹实例。
-
-**定义1-3（图的形式化定义）**
-
-三个定义构成了完整的AFG数学框架：节点=工具调用、顺序边=时序关系、依赖边=数据流关系。这种"双层边"设计使得同一个图可以同时支持顺序分析和依赖分析。
-
-### 关键 takeaway
-
-- **要点1（RPS核心设计）**：五阶段标注 + 仅比较共享阶段 = 解决了不同模型轮次不一致时的语义级对齐问题，使方差降低44-55%
-- **要点2（AGS核心设计）**：强制性/可选工具分离是Snode有效性的前提——不做这个分离，非家族模型的Snode会被虚增12.2个百分点
-- **要点3（双轨互补）**：RPS看"怎么说"，AGS看"怎么做"——两者相关但不重叠(Pearson r=0.491)
+本节提出了论文的核心问题——蒸馏导致的行为同质化，以及两个核心度量指标RPS和AGS。关键发现是Kimi-K2 (thinking)与Claude Sonnet 4.5 (thinking)的行为相似度异常高，甚至超过了Anthropic家族内部的模型。
 
 ---
 
-## Section 4 — 实验
+### 块2：蒸馏问题的背景与相关工作
 
-### 中文翻译
+#### 原文（第2页）
 
-### 4.1 实验设置
+[Page 2]
+Such pervasive mimicry leads to a convergence of "bad habits" across theoretically independent models (Peng et al., 2025; Chen et al., 2025). For instance, rather than optimizing for efficiency, many agents mirror the teacher model's verbose reasoning and redundant tool-calling patterns, such as trial-and-error with every available tool, even when the solution is obvious (Lu et al., 2025; Xiong et al., 2025). This collective alignment means that the ecosystem lacks actual robustness; different models no longer provide independent verification but instead fail in the exact same way (Guo et al., 2024; Shumailov et al., 2024).
 
-**模型家族：** 我们评估了来自8个主要提供商的18个模型：
+Quantifying this distillation-induced alignment is essential for ensuring ecosystem transparency, but existing methods fall short in the complex, multi-step agent landscape. Current metrics primarily focus on response-level similarity in static dialogues, which fails to capture the dynamic nature of tool-use trajectories (Lee et al., 2025). More critically, they struggle to distinguish between mandatory behaviors related to actions strictly required for task success and non-mandatory behaviors, which reflect a model's autonomous preferences. Without isolating these "behavioral degrees of freedom," it is impossible to determine whether two models converge because there is only one correct path, or because one is blindly shadowing the other.
 
-| 家族 | 模型 |
-|------|------|
-| **Anthropic** | Claude Sonnet 4.5, Claude Opus 4.1 |
-| **OpenAI** | GPT-4.1, GPT-5 |
-| **DeepSeek** | R1, V3.1 (thinking), V3.1 (no-think), V3-0324 |
-| **Moonshot** | Kimi-K2, Kimi-K2 (thinking) |
-| **ByteDance** | Doubao 1.6 (high/medium/low) |
-| **Google** | Gemini 2.5 Pro, Gemini 3 Pro |
-| **Qwen** | Qwen3-30B (thinking), Qwen3-235B (thinking) |
-| **Zhipu** | GLM-4.6 |
+To bridge this gap, we propose a systematic framework to quantify agent distillation by isolating non-mandatory behavioral patterns. Our approach introduces two complementary metrics: Response Pattern Similarity (RPS) and Action Graph Similarity (AGS). RPS measures verbal similarity by segmenting trajectories into five canonical stages (authentication, elicitation, execution, verification, notification) and scoring similarity along style, structure, and alignment dimensions. AGS measures action-level similarity through three sub-metrics. Snode captures optional tool agreement: for a flight cancellation task, all models must call cancel_reservation, but some additionally call get_reservation_details to double-check. When two models share such optional choices, they likely share training signals. Sseq captures sequential habits such as post-write verification, pre-modification confirmation, and error retry patterns. Sdep captures dependency patterns such as output reuse rate and tool-chaining depth. By isolating these non-mandatory behaviors from task-dictated actions, our metrics reveal stylistic and structural alignment that would otherwise be masked by shared correctness.
 
-所有模型通过官方API访问并使用默认超参数。我们使用 **Claude Sonnet 4.5 (thinking)** 作为参考模型，计算每个模型与其的行为相似性。
+We evaluate 18 models from 8 major providers on τ-Bench and τ²-Bench, using Claude Sonnet 4.5 (thinking) as the reference "oracle". Our experiments reveal several key findings. (1) Anthropic models exhibit strong internal consistency with RPS scores above 3.8, consistent with shared training pipelines. (2) Kimi-K2 (thinking) shows elevated similarity on both metrics, achieving the highest AGS at 82.7% among non-Anthropic models, with Snode at 82.6% and Sdep at 94.7%. (3) RPS and AGS capture distinct behavioral dimensions, providing complementary signals for distillation. (4) A controlled distillation experiment shows that AGS rises toward the teacher and drops toward a non-teacher control, while baseline metrics rise toward both.
 
-**工具使用基准：** 我们使用 **τ-Bench** `(Yao et al., 2024)` 和 **τ²-Bench** `(Barres et al., 2025)` 作为评估基准，包含跨越三个领域的真实世界Agent任务：航空和零售（来自τ-Bench）、电信（来自τ²-Bench）。我们从每个领域采样50个任务，覆盖身份验证、信息检索和订单修改等典型场景。
+Our findings provide empirical grounding for the initial déjà vu. While some models maintain high behavioral diversity, others exhibit elevated similarity with the reference model across both verbal and structural dimensions, even in scenarios where multiple alternative paths exist.
 
-**基线指标：** 我们与两类基线进行比较：
-- **语义基线**：RSE `(Lee et al., 2025)`、2-gram overlap ratio、BERTScore `(Zhang et al., 2020)`
-- **图结构基线**：GED `(Sanfeliu and Fu, 1983)`，相似度为 $1 - d_{GED}/(|V_1|+|V_2|+|E_1|+|E_2|)$
+Our main contributions are summarized as follows.
+• We propose the first framework for tool-use agent distillation quantification, disentangling mandatory and non-mandatory behaviors in tool-use trajectories.
+• We introduce RPS and AGS, providing interpretable metrics for verbal and action-level behavioral similarity.
+• We evaluate 18 models from 8 providers, analyzing behavioral convergence patterns in the current agent ecosystem.
 
-### 4.2 主要结果
+2 Related Work
+Knowledge Distillation for LLM. Knowledge distillation transfers knowledge from a large teacher model to a smaller student model (Hinton et al., 2015) and has been widely applied to compress pre-trained models, such as BERT (Sanh et al., 2019). For large language models, it is typically categorized into white-box (Kim et al., 2024) and black-box distillation (Taori et al., 2023; Chiang et al., 2023). White-box methods require access to intermediate layers or logits (Jiao et al., 2020; Wang et al., 2020), whereas black-box approaches use teacher-generated sequences (Agarwal et al., 2023; Zhao et al., 2024; Hsieh et al., 2023), allowing for distillation from proprietary APIs or arbitrary architectures. However, empirical studies show that distillation can cause homogenization problems in LLMs (Lee et al., 2025).
 
-**Table 1** 展示了每个模型与 Claude Sonnet 4.5 (thinking) 之间的行为相似性。
+#### 中文翻译
 
-| Family | Model | Baseline (GED/RSE/N-gram/BERT) | AGS (Snode/Sseq/Sdep/Avg) | RPS (Sty./Str./Ali./Overall) |
-|--------|-------|-------------------------------|--------------------------|---------------------------|
-| **ANTHROPIC** | Sonnet 4.5 (no-think) | 82.6 / 3.14 / 0.371 / 0.951 | 79.1 / 79.9 / **94.0** / **84.3** | 4.07 / 3.89 / 3.66 / **3.87** |
-| | Opus 4.1 (thinking) | 79.7 / 3.25 / 0.355 / 0.946 | 81.0 / 74.4 / **93.7** / **83.0** | 4.02 / 3.80 / 3.72 / **3.85** |
-| **OPENAI** | GPT-4.1 | 75.2 / 2.45 / 0.306 / 0.936 | 75.9 / 74.6 / 88.0 / 79.5 | 3.07 / 2.92 / 3.45 / 3.15 |
-| | GPT-5 | 68.3 / 2.26 / 0.230 / 0.889 | 71.3 / 69.4 / 87.7 / 76.1 | 2.50 / 2.43 / 3.17 / 2.70 |
-| **DEEPSEEK** | R1 | 70.8 / 2.44 / 0.259 / 0.925 | 78.3 / 72.5 / 85.0 / 78.6 | 2.99 / 2.87 / 3.29 / 3.05 |
-| | V3.1 (thinking) | 72.6 / 2.56 / 0.307 / 0.932 | 78.1 / 63.5 / 91.2 / 77.6 | 3.24 / 2.91 / 3.43 / 3.19 |
-| | V3.1 (no-think) | 69.2 / 2.29 / 0.312 / 0.931 | 72.4 / 65.3 / 87.5 / 75.1 | 3.55 / 3.27 / 3.38 / 3.40 |
-| | V3-0324 | 59.1 / 1.87 / 0.270 / 0.917 | 77.5 / 62.7 / 74.5 / 71.5 | 2.84 / 2.66 / 3.13 / 2.87 |
-| **MOONSHOT** | **Kimi-K2 (thinking)** | 78.1 / 2.81 / 0.343 / **0.938** | **82.6** / 70.8 / **94.7** / **82.7** | **3.86** / **3.57** / **3.51** / **3.65** |
-| | Kimi-K2 | 74.8 / 2.79 / 0.318 / 0.925 | 70.2 / 73.3 / 90.4 / 77.9 | 3.67 / 3.33 / 3.38 / 3.46 |
-| **BYTEDANCE** | Doubao 1.6 (high) | 70.3 / 2.32 / 0.287 / 0.930 | 68.5 / 69.5 / 88.1 / 75.4 | 2.69 / 2.57 / 3.36 / 2.87 |
-| | Doubao 1.6 (medium) | 72.9 / 2.24 / 0.276 / 0.931 | 76.9 / 67.3 / 88.3 / 77.5 | 2.71 / 2.56 / 3.38 / 2.88 |
-| | Doubao 1.6 (low) | 71.8 / 2.07 / 0.274 / 0.928 | 76.7 / 68.0 / 88.8 / 77.8 | 2.59 / 2.47 / 3.33 / 2.80 |
-| **GOOGLE** | Gemini 3 Pro | 77.5 / 2.20 / 0.294 / 0.924 | 71.9 / 71.2 / **92.3** / 78.5 | 2.68 / 2.31 / 2.81 / 2.60 |
-| | Gemini 2.5 Pro | 70.1 / 2.24 / 0.281 / 0.922 | 71.7 / 64.6 / 80.5 / 72.3 | 2.65 / 2.42 / 3.18 / 2.75 |
-| **QWEN** | Qwen3-30B (thinking) | 65.8 / 2.51 / 0.250 / 0.895 | 77.9 / 62.4 / 89.9 / 76.7 | 2.65 / 2.42 / 2.76 / 2.42 |
-| | Qwen3-235B (thinking) | 65.6 / 2.05 / 0.245 / 0.897 | 68.1 / 67.2 / **92.4** / 75.9 | 2.62 / 2.43 / 2.77 / 2.40 |
-| **ZHIPU** | GLM-4.6 | 75.9 / 2.71 / 0.306 / 0.925 | 80.4 / 71.9 / 88.7 / 80.3 | 3.45 / 3.26 / 3.54 / 3.42 |
+这种普遍的模仿行为导致理论上独立的模型之间出现"坏习惯"的趋同（Peng et al., 2025; Chen et al., 2025）。例如，许多智能体并未优化效率，而是模仿教师模型的冗长推理和冗余的工具调用模式，比如即使在解决方案显而易见的情况下，也要对所有可用工具进行试错（Lu et al., 2025; Xiong et al., 2025）。这种集体对齐意味着生态系统缺乏真正的鲁棒性；不同模型不再提供独立验证，而是以完全相同的方式失败（Guo et al., 2024; Shumailov et al., 2024）。
 
-*Table 1: 18个模型与Claude Sonnet 4.5 (thinking)的行为相似性。Anthropic模型（阴影）作为同家族基线。非Anthropic模型中：**粗体**=第1，*斜体*=第2，<u>下划线</u>=第3。*
+量化这种由蒸馏引起的对齐对于确保生态系统的透明度至关重要，但现有方法在复杂、多步骤的智能体场景中力不从心。当前的指标主要集中在静态对话中的响应级相似度，无法捕捉工具使用轨迹的动态特性（Lee et al., 2025）。更关键的是，它们难以区分任务成功所严格要求的**强制性行为**和反映模型自主偏好的**非强制性行为**。如果不能分离这些"行为自由度"，就无法确定两个模型的趋同是因为只有一条正确的路径，还是因为一个模型盲目地跟从另一个模型。
 
-**Anthropic模型展现强内部一致性：** 两个Anthropic模型的RPS分数均超过3.8（Sonnet 4.5 no-think: 3.87, Opus 4.1 thinking: 3.85），比所有非Anthropic模型至少高出0.20分。两个模型的Sdep分别为94.0%和93.7%，表明高度相似的工具调用偏好。这种**同家族一致性**符合共享训练管道的预期，作为解释跨家族相似性的基线。
+为填补这一空白，我们提出了一个通过分离非强制性行为模式来量化智能体蒸馏的系统性框架。我们的方法引入了两个互补性指标：**响应模式相似度（RPS）**和**动作图相似度（AGS）**。RPS通过将轨迹分割为五个规范阶段（身份验证、信息收集、执行、确认、通知），并从风格、结构和对齐三个维度评分来测量语言相似度。AGS通过三个子指标测量动作级相似度。**Snode**捕捉可选工具的一致性：在航班取消任务中，所有模型都必须调用cancel_reservation，但有些模型还会额外调用get_reservation_details进行复核。当两个模型共享这种可选选择时，它们可能共享训练信号。**Sseq**捕捉序列习惯，如写后验证、修改前确认和错误重试模式。**Sdep**捕捉依赖模式，如输出复用率和工具链深度。通过将这些非强制性行为与任务规定的动作分离开来，我们的指标揭示了原本会被共享的正确性所掩盖的风格和结构上的对齐。
 
-**Kimi-K2 (thinking) 表现出异常高的相似度：** 在非Anthropic模型中，Kimi-K2 (thinking) 取得最高的 **AGS 82.7%** 和最高的 **RPS 3.65**。值得注意的是，其 **Snode 达到 82.6%、Sdep 达到 94.7%，均超过Anthropic基线**（Opus 4.1 的81.0%和93.7%）。这意味着 **Kimi-K2 (thinking) 与参考模型共享的可选工具选择和工具调用偏好，甚至多于同提供商家族的模型**。
+我们在τ-Bench和τ²-Bench上评估了来自8个主要提供商的18个模型，使用Claude Sonnet 4.5（thinking）作为参照"神谕"。我们的实验揭示了几个关键发现：（1）Anthropic模型表现出强烈的内部一致性，RPS得分超过3.8，与共享训练管线一致。（2）Kimi-K2（thinking）在两个指标上都表现出较高的相似度，在非Anthropic模型中实现了最高的AGS（82.7%），其中Snode为82.6%，Sdep为94.7%。（3）RPS和AGS捕捉了不同的行为维度，为蒸馏提供了互补信号。（4）一项受控蒸馏实验表明，AGS趋向于教师模型上升，而趋向于非教师对照组下降，而基线指标则趋向两者都上升。
 
-当我们使用 GPT-5 作为替代参考模型重复分析时，Kimi-K2 对 Claude 的相似度始终高于其对 GPT-5 的相似度，证实这一模式反映的是**方向性行为继承**而非所有模型在基准上的普遍收敛。
+我们的发现为最初的既视感提供了经验基础。虽然一些模型保持了较高的行为多样性，但其他模型在语言和结构两个维度上都表现出与参照模型较高的相似度，即使在存在多种替代路径的场景中也是如此。
 
-**子指标捕获不同的行为维度：** 三个AGS子指标衡量工具使用行为的不同侧面。Snode衡量可选工具选择偏好，Kimi-K2 (thinking) 在此达到最高的 **82.6%** 相似度。Sseq捕获局部执行习惯如写后验证、写前确认和持久化模式。Sdep衡量依赖拓扑如输出复用率、依赖链深度和输出扇出率。**Kimi-K2 (thinking) 也展现出最高的 Sdep 相似度 94.7%**，表明其工具依赖模式紧密镜像参考模型。
+我们的主要贡献总结如下：
+• 我们提出了首个面向工具型智能体蒸馏量化的框架，将工具使用轨迹中的强制性与非强制性行为分离开来。
+• 我们引入了RPS和AGS，为语言级和动作级的行为相似度提供了可解释的度量指标。
+• 我们对来自8个提供商的18个模型进行了评估，分析了当前智能体生态系统中的行为趋同模式。
 
-`[扩展]` Table 1 是全文最核心的结果表。Kimi-K2 (thinking) 的数据几乎无可辩驳：Sdep=94.7% 意味着它和 Claude 在"如何将前一个工具的输出传给下一个工具"这件事上有94.7%的重叠——这不是"碰巧做对了同一道题"能解释的。更有说服力的对照是：Anthropic 自家的 Opus 4.1 在 Sdep 上才 93.7%，也就是说 Kimi-K2 在依赖模式上比 Claude "亲兄弟"更像 Claude。换参考模型实验（Kimi-K2离Claude更近、离GPT-5更远）进一步排除了"大家都在收敛到一个通用最优解"的解释。
+**2 相关工作**
 
-### 术语解释
+**LLM的知识蒸馏。** 知识蒸馏将知识从大型教师模型迁移到较小的学生模型（Hinton et al., 2015），并已被广泛应用于压缩预训练模型，如BERT（Sanh et al., 2019）。对于大语言模型，知识蒸馏通常分为白盒蒸馏（Kim et al., 2024）和黑盒蒸馏（Taori et al., 2023; Chiang et al., 2023）。白盒方法需要访问中间层或logits（Jiao et al., 2020; Wang et al., 2020），而黑盒方法使用教师生成的序列（Agarwal et al., 2023; Zhao et al., 2024; Hsieh et al., 2023），可以从专有API或任意架构中进行蒸馏。然而，实证研究表明，蒸馏可能导致LLM的同质化问题（Lee et al., 2025）。
 
-| 英文术语 | 中文译名 | 一句话解释 | 应用场景 |
-|---------|---------|-----------|---------|
-| Within-family Consistency | 同家族一致性 | 来自同一提供商的模型之间天然存在的较高行为相似度 | 作为解释跨家族相似度的参照基线 |
-| Directional Behavioral Inheritance | 方向性行为继承 | 模型A更像模型B而非模型C，暗示A从B继承了行为 | 排除"普遍收敛"替代解释的关键实验 |
-| Oracle Model | 预言机模型 | 用作参考标准的"金标准"模型 | 本文中指 Claude Sonnet 4.5 (thinking) |
-| Sub-metric Decomposition | 子指标分解 | 将复合指标拆分为更细粒度的组成部分 | 揭示AGS中哪个维度贡献最大的蒸馏信号 |
+#### 术语解释
 
-### 图表/公式说明
+| 术语 | 英文 | 解释 |
+|------|------|------|
+| 白盒蒸馏 | White-box Distillation | 需要访问教师模型内部参数或中间层输出的蒸馏方法 |
+| 黑盒蒸馏 | Black-box Distillation | 仅通过教师模型输出进行蒸馏，无需内部参数访问 |
+| 可选工具一致性 | Optional Tool Agreement (Snode) | 衡量两个模型在可选工具选择上的一致程度 |
+| 序列模式相似度 | Sequential Pattern Similarity (Sseq) | 衡量模型在工具调用顺序习惯上的相似度 |
+| 依赖模式相似度 | Dependency Pattern Similarity (Sdep) | 衡量模型在工具输出复用模式上的相似度 |
+| 行为自由度 | Behavioral Degrees of Freedom | 非任务强制性的、可由模型自主决定的行为选择空间 |
 
-**Table 1 — 完整结果表**
+#### 图表/公式说明
 
-这是论文最重要的表格，包含了全部18个模型在11个指标上的完整数据。阅读要点：
-- **横向对比**：同一行内比较AGS vs RPS，可以看出"动作相似"和"言语相似"不一定同步
-- **纵向对比**：Anthropic家族（阴影行）作为"合理相似"的上界
-- **粗体标记**：非Anthropic模型中的最优值——Kimi-K2 (thinking) 几乎包揽了所有粗体
+本节没有新的图表，但详细阐述了RPS和AGS三个子指标（Snode、Sseq、Sdep）的定义和设计动机。
 
-### 关键 takeaway
+#### 关键Takeaway
 
-- **要点1（核心发现）**：Kimi-K2 (thinking) 的 Snode(82.6%) > Opus 4.1(81.0%), Sdep(94.7%) > Opus 4.1(93.7%) —— 一个外部模型比Anthropic自家模型更像Claude
-- **要点2（基线合理性）**：Anthropic内部RPS>3.8证明指标能有效检测已知的共享训练信号
-- **要点3（子指标差异化价值）**：Snode/Sseq/Sdep各自捕获不同维度的行为信息，不能互相替代
+本节阐述了蒸馏导致行为同质化的问题严重性，指出现有指标无法区分"唯一正确答案导致的趋同"和"模仿导致的趋同"。论文的核心贡献是提出了两个互补指标RPS和AGS，通过分离非强制性行为模式来解决这一问题。初步实验发现Kimi-K2 (thinking)与Claude Sonnet 4.5 (thinking)的相似度异常高。
 
 ---
 
-## Section 5 — 讨论
+### 块3：方法概览与RPS详细设计
 
-### 中文翻译
+#### 原文（第3页）
 
-### 5.1 AGS和RPS检测行为相似性模式
+[Page 3]
+...arbitrary architectures. However, empirical studies show that distillation can cause homogenization problems in LLMs (Lee et al., 2025).
 
-**同家族相似性基线：** 来自同一提供商的模型共享训练管道，预期应表现出比跨家族对更高的行为相似性。当跨家族对达到可比的相似度时，表明存在**超出独立开发范围的行为继承**。
+Data Contamination. Data contamination, or benchmark leakage (Magar and Schwartz, 2022; Xu et al., 2024), refers to unintentional inclusion of test and benchmark data in training corpora, posing challenges to reliable LLM evaluation (Sainz et al., 2023). Such overlaps inflate performance and undermine fair comparisons (Magar and Schwartz, 2022). Solutions include contamination detection (Golchin and Surdeanu, 2025; Dekoninck et al., 2024) and dynamic evaluation (Yu et al., 2024). Recent methods include distributional memorization (Wang et al., 2025) using task-gram language models on semantically related n-grams, and kernel divergence score from embedding kernel similarity matrices (Choi et al., 2025).
 
-我们随机采样50个基准任务进行分析。**同家族对的AGS比跨家族对高5.9个百分点**：
+Tool-use Benchmark. Tool use is a key capability of LLM agents, spurring multiple benchmarks for evaluation. Early benchmarks like API-Bank (Li et al., 2023) and Gorilla (Patil et al., 2024) target tool selection and real API calling in large-scale tool sets. ToolBench (Qin et al., 2024) extends this to multi-step interactions. BFCL (Patil et al., 2025) focuses on cross-domain function-calling accuracy. TRAJECT-Bench (He et al., 2025) introduces trajectory-aware metrics evaluating selection, parameterization, ordering, and dependencies. Domain-specific benchmarks have also emerged, including finance (Hu et al., 2025) and medicine (Jiang et al., 2025). In conversational agent settings, τ-Bench (Yao et al., 2024) and τ²-Bench (Barres et al., 2025) simulate the collaborative use of agent-user tools, emphasizing realistic interactive evaluation.
+
+3 Method
+
+3.1 Trajectory Representation
+
+Given a set of models M = {M₁, ..., Mₖ} and a tool-use task set T, we collect execution trajectories {τ₁, τ₂, ...} for each model on T. Each trajectory τ consists of multiple dialogue turns. Each turn comprises a user input and a model output, where the model output includes (i) user-visible replies, (ii) tool calls, and (iii) tool-related messages such as intermediate outputs or execution traces. Figure 2 presents the overall framework.
+
+Based on trajectory representation, we design two complementary metrics targeting two distinct information streams within a trajectory. Response Pattern Similarity (RPS) captures verbal fingerprints in how models phrase responses, structure explanations, and express reasoning. Action Graph Similarity (AGS) captures behavioral fingerprints in how models select tools, sequence operations, and reuse outputs. The two metrics capture different aspects of model behavior: models may share verbal patterns but differ in tool usage, or vice versa.
+
+3.2 Response Pattern Similarity
+
+Response Pattern Similarity (RPS) quantifies verbal similarity between two models along three dimensions. Style measures wording habits and vocabulary preferences. Structure measures sentence patterns and response templates. Alignment measures whether both models exhibit similar reasoning-to-action patterns. Detailed definitions are provided in Appendix A.
+
+Tool-use agent trajectories often span dozens of turns, and different models complete the same task in varying numbers of turns. Directly comparing full trajectories or aligning them turn by turn would match unrelated content, leading to unreliable scores. We therefore design a two-stage pipeline as illustrated in Figure 2.
+
+Stage Annotation. To achieve semantic-level alignment across trajectories of different lengths, we define five canonical stages that characterize agent-user interactions: (i) Authentication involves identifying the user, verifying identity, or handling a retry after verification failure. (ii) Elicitation requests missing parameters from the user to proceed with the task, outside of authentication contexts. (iii) Execution invokes domain-specific tools to perform query or modification operations. (iv) Verification seeks explicit user confirmation before executing critical write operations. (v) Notification reports tool execution results or current status to the user. These five stages are derived from analyzing common interaction patterns in tool-use benchmarks and cover the typical agent workflow.
+
+Given a trajectory τ, we use an LLM to annotate each response and tool-related message to its corresponding stage. The annotation prompt and stage definitions are provided in Appendix A.1. The scoring procedure is independent of this specific taxonomy; adapting RPS to a new domain requires only replacing the stage definitions.
+
+Similarity Scoring. After stage annotation, RPS compares only the stages shared by both models. Stages appearing in only one trajectory are excluded, as our goal is to measure similarity rather than coverage. For each shared stage, we input the responses, tool-related messages, and associated tool call contents into an LLM judge. The judge scores similarity along the Style, Structure, and Alignment dimensions, as well as a holistic Overall score. Scores range from 1 to 5, where 5 indicates high similarity, 3 indicates moderate overlap, and 1 indicates no discernible similarity. The final RPS score is the mean of the Overall scores across all shared stages. The scoring prompt and detailed rubric are provided in Appendix A.3.
+
+#### 中文翻译
+
+...然而，实证研究表明，蒸馏可能导致LLM的同质化问题（Lee et al., 2025）。
+
+**数据污染。** 数据污染，或称基准测试泄露（Magar and Schwartz, 2022; Xu et al., 2024），是指测试数据和基准数据被无意中纳入训练语料库，对可靠的LLM评估构成挑战（Sainz et al., 2023）。这种重叠会夸大性能并破坏公平比较（Magar and Schwartz, 2022）。解决方案包括污染检测（Golchin and Surdeanu, 2025; Dekoninck et al., 2024）和动态评估（Yu et al., 2024）。最近的方法包括使用基于语义相关n-gram的任务语法语言模型的分布记忆（Wang et al., 2025），以及基于嵌入核相似度矩阵的核散度评分（Choi et al., 2025）。
+
+**工具使用基准。** 工具使用是LLM智能体的关键能力，催生了多个评估基准。早期基准如API-Bank（Li et al., 2023）和Gorilla（Patil et al., 2024）针对大规模工具集中的工具选择和真实API调用。ToolBench（Qin et al., 2024）将其扩展到了多步骤交互。BFCL（Patil et al., 2025）关注跨域函数调用准确性。TRAJECT-Bench（He et al., 2025）引入了轨迹感知指标，评估选择、参数化、排序和依赖关系。特定领域的基准也已出现，包括金融（Hu et al., 2025）和医疗（Jiang et al., 2025）。在对话智能体场景中，τ-Bench（Yao et al., 2024）和τ²-Bench（Barres et al., 2025）模拟了智能体-用户工具的协作使用，强调真实的交互评估。
+
+**3 方法**
+
+**3.1 轨迹表示**
+
+给定一组模型 M = {M₁, ..., Mₖ} 和一个工具使用任务集 T，我们收集每个模型在 T 上的执行轨迹 {τ₁, τ₂, ...}。每条轨迹 τ 由多个对话轮次组成。每个轮次包含一个用户输入和一个模型输出，其中模型输出包括（i）用户可见的回复、（ii）工具调用，以及（iii）工具相关消息，如中间输出或执行追踪。图2（见上方图表资源）展示了整体框架。
+
+基于轨迹表示，我们设计了两个互补性指标，针对轨迹中的两个不同信息流。**响应模式相似度（RPS）**捕捉模型在措辞方式、解释结构和推理表达方面的语言指纹。**动作图相似度（AGS）**捕捉模型在工具选择、操作排序和输出复用方面的行为指纹。这两个指标捕捉了模型行为的不同方面：模型可能共享语言模式但工具使用不同，反之亦然。
+
+**3.2 响应模式相似度（RPS）**
+
+响应模式相似度（RPS）从三个维度量化两个模型之间的语言相似度。**风格**衡量措辞习惯和词汇偏好。**结构**衡量句式模式和回复模板。**对齐**衡量两个模型是否表现出相似的推理到动作的模式。详细定义见附录A。
+
+工具使用智能体的轨迹通常跨越数十个轮次，不同模型完成同一任务所需的轮次数量也不同。直接比较完整轨迹或逐轮对齐会导致不相关内容被匹配，产生不可靠的得分。因此，我们设计了一个两阶段流水线，如图2（见上方图表资源）所示。
+
+**阶段标注。** 为了实现不同长度轨迹的语义级对齐，我们定义了五个规范阶段来刻画智能体-用户交互：（i）**身份验证**：识别用户、验证身份或在验证失败后处理重试。（ii）**信息收集**：在非身份验证场景下，向用户请求完成任务所需的缺失参数。（iii）**执行**：调用特定领域工具执行查询或修改操作。（iv）**确认**：在执行关键写操作前寻求用户的明确确认。（v）**通知**：向用户报告工具执行结果或当前状态。这五个阶段源于对工具使用基准中常见交互模式的分析，涵盖了典型的智能体工作流程。
+
+给定一条轨迹 τ，我们使用LLM将每个回复和工具相关消息标注到其对应的阶段。标注提示和阶段定义见附录A.1。评分过程独立于这个特定的分类体系；将RPS适配到新领域只需要替换阶段定义。
+
+**相似度评分。** 阶段标注完成后，RPS仅比较两个模型共享的阶段。仅出现在一条轨迹中的阶段被排除在外，因为我们的目标是衡量相似度而非覆盖率。对于每个共享阶段，我们将回复、工具相关消息和关联的工具调用内容输入给LLM评审器。评审器在风格、结构和对齐三个维度上评分，同时给出一个综合的整体得分。得分范围为1到5，其中5表示高度相似，3表示中等重叠，1表示无明显相似性。最终的RPS得分是所有共享阶段整体得分的平均值。评分提示和详细评分标准见附录A.3。
+
+#### 术语解释
+
+| 术语 | 英文 | 解释 |
+|------|------|------|
+| 轨迹表示 | Trajectory Representation | 将模型执行任务的完整过程表示为一系列对话轮次 |
+| 阶段标注 | Stage Annotation | 使用LLM将模型输出分类到预定义的规范阶段 |
+| 数据污染 | Data Contamination | 测试数据被无意纳入训练集，导致评估不准确 |
+| 规范阶段 | Canonical Stages | RPS定义的五个通用交互阶段：身份验证、信息收集、执行、确认、通知 |
+
+#### 图表/公式说明
+
+**图2（见上方图表资源）：** 论文的蒸馏量化框架总览图。左侧展示了参考模型和测试模型在航班取消任务上的示例轨迹。右上方是RPS流水线，将轨迹分割为规范阶段并通过LLM评审器进行语言相似度评分。右下方是AGS流水线，从工具调用序列构建动作流图并计算行为指标。
+
+#### 关键Takeaway
+
+本节详细介绍了RPS的核心设计：通过五个规范阶段实现跨模型轨迹的语义级对齐，然后使用LLM评审器从风格、结构、对齐三个维度对共享阶段进行评分。这种设计解决了不同模型完成同一任务时轮次数量不同的问题。
+
+---
+
+### 块4：动作图相似度（AGS）详细设计
+
+#### 原文（第4页）
+
+[Page 4]
+[图2展示及阶段标注说明]
+...cluded, as our goal is to measure similarity rather than coverage. For each shared stage, we input the responses, tool-related messages, and associated tool call contents into an LLM judge. The judge scores similarity along the Style, Structure, and Alignment dimensions, as well as a holistic Overall score. Scores range from 1 to 5, where 5 indicates high similarity, 3 indicates moderate overlap, and 1 indicates no discernible similarity. The final RPS score is the mean of the Overall scores across all shared stages. The scoring prompt and detailed rubric are provided in Appendix A.3.
+
+3.3 Action Graph Similarity
+
+Action Graph Similarity (AGS) analyzes structural patterns in tool call sequences to characterize behavioral similarity at the level of tool invocation. Unlike RPS, AGS operates directly on tool call sequences without requiring stage annotation, making it applicable to any domain where agents interact with tools.
+
+Graph Construction. Given a dialogue trajectory τ, we construct a directed graph G = (V, Eₛ, E_d) based on the tool call sequence.
+
+Definition 1 (Tool Node). Each node v ∈ V represents a tool call, with attributes: v = (name, args, result) where name is the tool name, args is the input arguments, and result is the return value.
+
+Definition 2 (Sequential Edge). A sequential edge (u, v) ∈ Eₛ connects temporally adjacent tool calls according to their execution order in τ.
+
+Definition 3 (Dependency Edge). A dependency edge (u, v) ∈ E_d is established when an argument value of v is derived from the result of u. Since simple string matching produces excessive false positives (e.g., common identifiers or dates appearing coincidentally), we use an LLM judge to verify semantic validity. For each candidate edge identified by string overlap, the LLM determines whether the matched value is actually obtained from the source tool's result or is known beforehand (e.g., from user input). We validate the accuracy of this judge on manually annotated edges in Appendix D.3. When a dependency edge exists between consecutive nodes, the sequential edge is omitted to avoid redundant encoding.
+
+Behavioral Metrics. Based on the constructed graph G, AGS characterizes behavioral similarity...
+
+#### 中文翻译
+
+...排除仅出现在一条轨迹中的阶段，因为我们的目标是衡量相似度而非覆盖率。对于每个共享阶段，我们将回复、工具相关消息和关联的工具调用内容输入给LLM评审器。评审器在风格、结构和对齐三个维度上评分，同时给出一个综合的整体得分。得分范围为1到5，其中5表示高度相似，3表示中等重叠，1表示无明显相似性。最终的RPS得分是所有共享阶段整体得分的平均值。评分提示和详细评分标准见附录A.3。
+
+**3.3 动作图相似度（AGS）**
+
+动作图相似度（AGS）分析工具调用序列中的结构化模式，以在工具调用层面刻画行为相似度。与RPS不同，AGS直接对工具调用序列进行操作，无需阶段标注，因此适用于任何智能体与工具交互的领域。
+
+**图构建。** 给定一条对话轨迹 τ，我们基于工具调用序列构建一个有向图 G = (V, Eₛ, E_d)。
+
+**定义1（工具节点）。** 每个节点 v ∈ V 表示一次工具调用，具有属性：v = (name, args, result)，其中 name 是工具名称，args 是输入参数，result 是返回值。
+
+**定义2（序列边）。** 序列边 (u, v) ∈ Eₛ 根据 τ 中的执行顺序连接时间上相邻的工具调用。
+
+**定义3（依赖边）。** 当 v 的某个参数值来源于 u 的结果时，建立依赖边 (u, v) ∈ E_d。由于简单的字符串匹配会产生过多的误报（例如，常见的标识符或日期偶然出现），我们使用LLM评审器来验证语义有效性。对于每个通过字符串重叠识别出的候选边，LLM判断匹配值是否确实来自源工具的结果，或者是否事先已知（例如来自用户输入）。我们在附录D.3中手动标注的边上验证了该评审器的准确性。当依赖边存在于连续节点之间时，省略序列边以避免冗余编码。
+
+**行为指标。** 基于构建的图 G，AGS从三个维度刻画行为相似度...
+
+#### 术语解释
+
+| 术语 | 英文 | 解释 |
+|------|------|------|
+| 动作流图 | Action Flow Graph (AFG) | 从工具调用序列构建的有向图，包含节点、序列边和依赖边 |
+| 工具节点 | Tool Node | 表示单次工具调用，包含名称、参数和返回值 |
+| 序列边 | Sequential Edge (Eₛ) | 连接时间相邻的工具调用 |
+| 依赖边 | Dependency Edge (E_d) | 表示一个工具的输出被另一个工具用作输入 |
+| 误报 | False Positive | 字符串匹配误将巧合认为是有意义的依赖关系 |
+
+#### 图表/公式说明
+
+**图2（见上方图表资源）**的右下方展示了AGS的完整流程：从工具调用序列构建动作流图，然后计算三个行为指标（可选工具一致性Snode、序列模式相似度Sseq、依赖模式相似度Sdep）。
+
+#### 关键Takeaway
+
+AGS的核心创新在于将工具调用序列建模为带有序列边和依赖边的有向图，这使得能够从三个不同维度分析工具使用行为。特别重要的是依赖边的检测使用LLM进行语义验证而非简单的字符串匹配，有效减少了误报。
+
+---
+
+### 块5：AGS三个子指标的详细定义
+
+#### 原文（第5页）
+
+[Page 5]
+...along three dimensions. For sequential and dependency patterns, we design three heuristic features, each based on its interpretability.
+
+Optional Tool Agreement Snode measures the consistency of optional tool choices between two models. When completing the same task, models invoke both mandatory tools required for task completion and optional tools for auxiliary purposes. Mandatory tools are dictated by the correct execution path, so all successful models necessarily invoke them. Including these shared invocations in similarity computation inflates scores and obscures model-specific tool preferences. To distinguish these two categories, we analyze successful trajectories from multiple models on the same task. Let Tools(M, t) denote the set of tools invoked by model M on task t, and M*_t denote the set of models that successfully complete task t. Mandatory tools are the intersection of tool sets across all successful models:
+
+F_mandatory_t = ∩_{M ∈ M*_t} Tools(M, t)
+
+Optional tools are those appearing in some but not all successful trajectories. Snode computes the agreement rate on optional tools across all tasks, where agreement means both models either use or skip the same optional tool.
+
+Sequential Pattern Similarity Sseq measures whether two models exhibit similar local execution habits between adjacent tool calls. We extract three features based on sequential edges Eₛ: (i) post-write verification rate, measuring the tendency to invoke a read operation after a write for verification; (ii) pre-write confirmation rate, measuring the tendency to query before executing a write; (iii) error retry rate, measuring the tendency to retry the same tool after an error. Each trajectory is represented as a three-dimensional feature vector. For each task, we compute the cosine similarity between the two models' feature vectors, then average across all tasks to obtain Sseq.
+
+Dependency Pattern Similarity Sdep measures whether two models exhibit similar patterns in reusing tool outputs. We extract three features based on dependency edges E_d: (i) output reuse rate, measuring the proportion of tool calls that reuse outputs from preceding calls; (ii) longest dependency chain length, measuring the depth of chained planning; (iii) output fan-out rate, measuring the proportion of tool outputs reused by multiple subsequent calls. Similar to Sseq, we compute per-task cosine similarity and average across tasks. Detailed definitions and computation methods for the three sub-metrics are provided in Appendix B.
+
+4 Experiments
+
+4.1 Experiment Settings
+
+Model Families. We evaluate 18 models from 8 major providers: Anthropic (Claude Sonnet 4.5, Claude Opus 4.1), OpenAI (GPT-4.1, GPT-5), DeepSeek (R1, V3.1, V3-0324), Moonshot (Kimi-K2), ByteDance (Doubao 1.6), Google (Gemini 2.5 Pro, Gemini 3 Pro), Qwen (Qwen3-30B, Qwen3-235B), and Zhipu (GLM-4.6). All models are accessed via official APIs with default hyperparameters. We verify that temperature-induced AGS variation across runs remains substantially smaller than cross-model differences (Appendix D.5). We use Claude Sonnet 4.5 (thinking) as the reference model and compute behavioral similarity between each model and the reference.
+
+Tool-use Benchmark. We use τ-Bench and τ²-Bench, which contains real-world agent tasks across three domains: airline and retail from τ-Bench, and telecom from τ²-Bench. We sample 50 tasks from each domain.
+
+RPS Evaluation. For RPS annotation and scoring, we use Gemini-2.5-flash-thinking as the LLM annotator and judge with default temperature. Model-level rankings remain stable across temperature settings (Appendix D.4).
+
+Baseline metrics. We compare against two categories of baselines. Semantic baselines include (i) RSE, (ii) n-gram overlap with n=2, and (iii) BERTScore. For graph structure, we use (iv) GED, with similarity 1 - d_GED/(|V₁|+|V₂|+|E₁|+|E₂|).
+
+#### 中文翻译
+
+...从三个维度刻画行为相似度。对于序列模式和依赖模式，我们设计了三个启发式特征，每个特征都基于其可解释性。
+
+**可选工具一致性（Snode）**衡量两个模型之间可选工具选择的一致性。完成同一任务时，模型既会调用完成任务所需的**强制性工具**，也会调用用于辅助目的的**可选工具**。强制性工具由正确的执行路径决定，因此所有成功的模型必然调用它们。将这些共享的调用纳入相似度计算会夸大得分并掩盖模型特定的工具偏好。为了区分这两类工具，我们分析多个模型在同一任务上的成功轨迹。令 Tools(M, t) 表示模型 M 在任务 t 上调用的工具集合，M*_t 表示成功完成任务 t 的模型集合。强制性工具是所有成功模型工具集合的交集：
+
+F_mandatory_t = ∩_{M ∈ M*_t} Tools(M, t)
+
+可选工具是出现在部分（而非全部）成功轨迹中的工具。Snode计算所有任务上的可选工具一致率，其中一致意味着两个模型要么都使用、要么都跳过同一个可选工具。
+
+**序列模式相似度（Sseq）**衡量两个模型在相邻工具调用之间是否表现出相似的局部执行习惯。我们基于序列边 Eₛ 提取三个特征：（i）写后验证率：衡量写操作后调用读操作进行验证的倾向；（ii）写前确认率：衡量执行写操作前进行查询的倾向；（iii）错误重试率：衡量出错后重试同一工具的倾向。每条轨迹表示为一个三维特征向量。对于每个任务，我们计算两个模型特征向量之间的余弦相似度，然后对所有任务取平均得到 Sseq。
+
+**依赖模式相似度（Sdep）**衡量两个模型在复用工具输出方面是否表现出相似的模式。我们基于依赖边 E_d 提取三个特征：（i）输出复用率：衡量复用前序调用输出的工具调用比例；（ii）最长依赖链长度：衡量链式规划的深度；（iii）输出扇出率：衡量被多个后续调用复用的工具输出比例。与 Sseq 类似，我们计算每个任务的余弦相似度并取平均。三个子指标的详细定义和计算方法见附录B。
+
+**4 实验**
+
+**4.1 实验设置**
+
+**模型家族。** 我们评估了来自8个主要提供商的18个模型：Anthropic（Claude Sonnet 4.5、Claude Opus 4.1）、OpenAI（GPT-4.1、GPT-5）、DeepSeek（R1、V3.1、V3-0324）、Moonshot（Kimi-K2）、字节跳动（Doubao 1.6）、Google（Gemini 2.5 Pro、Gemini 3 Pro）、Qwen（Qwen3-30B、Qwen3-235B）和智谱（GLM-4.6）。所有模型均通过官方API访问，使用默认超参数。我们验证了温度变化导致的AGS跨运行差异远小于跨模型差异（附录D.5）。我们使用Claude Sonnet 4.5（thinking）作为参照模型，计算每个模型与参照之间的行为相似度。
+
+**工具使用基准。** 我们使用τ-Bench和τ²-Bench，包含三个领域的真实智能体任务：τ-Bench的航空和零售领域，τ²-Bench的电信领域。我们从每个领域采样50个任务。
+
+**RPS评估。** 对于RPS标注和评分，我们使用Gemini-2.5-flash-thinking作为LLM标注器和评审器，使用默认温度。模型级排名在不同温度设置下保持稳定（附录D.4）。
+
+**基线指标。** 我们与两类基线进行比较。语义基线包括（i）RSE、（ii）n=2的n-gram重叠率，以及（iii）BERTScore。对于图结构，我们使用（iv）GED，相似度计算公式为 1 − d_GED/(|V₁|+|V₂|+|E₁|+|E₂|)。
+
+#### 术语解释
+
+| 术语 | 英文 | 解释 |
+|------|------|------|
+| 强制性工具 | Mandatory Tools | 所有成功模型都必定调用的、任务必需的工具 |
+| 可选工具 | Optional Tools | 部分模型选择调用、非任务必需的工具 |
+| 写后验证率 | Post-write Verification Rate | 写操作后立即进行读操作的频率 |
+| 错误重试率 | Error Retry Rate | 工具调用出错后重试同一工具的频率 |
+| 输出扇出率 | Output Fan-out Rate | 被多个后续调用复用的工具输出比例 |
+
+#### 图表/公式说明
+
+**公式（根据上下文还原）：**
+- 强制性工具集合：F_mandatory_t = ∩_{M ∈ M*_t} Tools(M, t)
+- GED相似度：1 − d_GED/(|V₁|+|V₂|+|E₁|+|E₂|)
+
+#### 关键Takeaway
+
+AGS的三个子指标各自捕捉了工具使用行为的不同方面：Snode关注"选什么工具"（选择性偏好），Sseq关注"按什么顺序执行"（程序性习惯），Sdep关注"如何复用输出"（规划深度）。这种三维度设计使得AGS能够提供细粒度的行为诊断信息。
+
+---
+
+### 块6：实验结果——主表与关键发现
+
+#### 原文（第6页）
+
+[Page 6]
+表1：18个模型相对于Claude Sonnet 4.5（thinking）的行为相似度。
+
+[表1内容]
+
+4.2 Main Results
+
+Table 1 presents the behavioral similarity between each model and Claude Sonnet 4.5 (thinking). AGS measures action-level patterns, while RPS measures verbal patterns.
+
+Anthropic models exhibit strong internal consistency. Both Anthropic models achieve RPS scores above 3.8, with Sonnet 4.5 (no-think) at 3.87 and Opus 4.1 (thinking) at 3.85. These scores exceed those of all non-Anthropic models by at least 0.20 points. The two models also achieve Sdep scores of 94.0% and 93.7% respectively, indicating highly similar tool invocation preferences. This within-family consistency aligns with expectations for models sharing training pipelines and serves as a baseline for interpreting cross-family similarity (Section 5.1).
+
+Kimi-K2 (thinking) exhibits exceptionally high similarity to the reference model. Among non-Anthropic models, Kimi-K2 (thinking) achieves the highest AGS at 82.7% and the highest RPS at 3.65. Notably, its Snode reaches 82.6% and Sdep reaches 94.7%, both exceeding the Anthropic baseline (Opus 4.1 at 81.0% and 93.7%). This means Kimi-K2 (thinking) shares more optional tool choices and tool invocation preferences with the reference model than models from the same provider family.
+
+When we repeat the analysis using GPT-5 as an alternative reference, Kimi-K2's similarity to Claude remains consistently higher than its similarity to GPT-5, confirming that this pattern reflects directional behavioral inheritance rather than benchmark-induced convergence across all models (Appendix D.2).
+
+Sub-metrics capture different behavioral dimensions. The three AGS sub-metrics measure distinct aspects of tool-use behavior. Snode measures optional tool selection preferences, where Kimi-K2 (thinking) exhibits the highest similarity to the reference model at 82.6%. Sensitivity analysis shows Snode remains stable across different model subsets (Appendix D.1). Without mandatory/optional separation, Snode inflates by 12.2 pp on average for non-family models (Appendix C.2). Sseq captures local execution habits such as post-write verification, pre-write confirmation, and error persistence patterns. Sdep measures dependency topology such as output reuse rate, dependency chain depth, and output fan-out rate. Kimi-K2 (thinking) also exhibits the highest Sdep similarity at 94.7%, suggesting that its tool dependency patterns closely mirror those of the reference model. Stage alignment reduces within-case RPS scoring variance by 44–55% compared to full-trajectory comparison (Appendix C.1).
+
+#### 中文翻译
+
+**表1：** 18个模型相对于Claude Sonnet 4.5（thinking）的行为相似度，涵盖四个基线指标、三个AGS子指标和三个RPS维度。Anthropic模型（灰色阴影）作为家族内基线。非Anthropic模型中：**粗体**=第1名，*斜体*=第2名，<u>下划线</u>=第3名。Sty.=风格，Str.=结构，Ali.=对齐。
+
+| 家族 | 模型 | 基线指标 | | | | AGS (%) | | | | RPS | | | |
+|------|------|---------|---|---|---|---------|---|---|---|-----|---|---|---|
+| | | GED | RSE | N-gram | BERT | Snode | Sseq | Sdep | 平均 | 风格 | 结构 | 对齐 | 总体 |
+| **ANTHROPIC** | Sonnet 4.5 (no-think) | 82.6 | 3.14 | 0.371 | 0.951 | 79.1 | 79.9 | 94.0 | 84.3 | 4.07 | 3.89 | 3.66 | **3.87** |
+| | Opus 4.1 (thinking) | 79.7 | 3.25 | 0.355 | 0.946 | 81.0 | 74.4 | 93.7 | 83.0 | 4.02 | 3.80 | 3.72 | **3.85** |
+| **OPENAI** | GPT-4.1 | 75.2 | 2.45 | 0.306 | 0.936 | 75.9 | 74.6 | 88.0 | 79.5 | 3.07 | 2.92 | 3.45 | 3.15 |
+| | GPT-5 | 68.3 | 2.26 | 0.230 | 0.889 | 71.3 | 69.4 | 87.7 | 76.1 | 2.50 | 2.43 | 3.17 | 2.70 |
+| **DEEPSEEK** | R1 | 70.8 | 2.44 | 0.259 | 0.925 | 78.3 | 72.5 | 85.0 | 78.6 | 2.99 | 2.87 | 3.29 | 3.05 |
+| | V3.1 (thinking) | 72.6 | 2.56 | 0.307 | 0.932 | 78.1 | 63.5 | 91.2 | 77.6 | 3.24 | 2.91 | 3.43 | 3.19 |
+| | V3.1 (no-think) | 69.2 | 2.29 | 0.312 | 0.931 | 72.4 | 65.3 | 87.5 | 75.1 | 3.55 | 3.27 | 3.38 | 3.40 |
+| | V3-0324 | 59.1 | 1.87 | 0.270 | 0.917 | 77.5 | 62.7 | 74.5 | 71.5 | 2.84 | 2.66 | 3.13 | 2.87 |
+| **MOONSHOT** | Kimi-K2 (thinking) | 78.1 | 2.81 | 0.343 | 0.938 | **82.6** | 70.8 | **94.7** | **82.7** | ***3.86*** | ***3.57*** | ***3.51*** | ***3.65*** |
+| | Kimi-K2 | 74.8 | 2.79 | 0.318 | 0.925 | 70.2 | 73.3 | 90.4 | 77.9 | 3.67 | 3.33 | 3.38 | 3.46 |
+| **BYTEDANCE** | Doubao 1.6 (high) | 70.3 | 2.32 | 0.287 | 0.930 | 68.5 | 69.5 | 88.1 | 75.4 | 2.69 | 2.57 | 3.36 | 2.87 |
+| | Doubao 1.6 (medium) | 72.9 | 2.24 | 0.276 | 0.931 | 76.9 | 67.3 | 88.3 | 77.5 | 2.71 | 2.56 | 3.38 | 2.88 |
+| | Doubao 1.6 (low) | 71.8 | 2.07 | 0.274 | 0.928 | 76.7 | 68.0 | 88.8 | 77.8 | 2.59 | 2.47 | 3.33 | 2.80 |
+| **GOOGLE** | Gemini 3 Pro | 77.5 | 2.20 | 0.294 | 0.924 | 71.9 | 71.2 | 92.3 | 78.5 | 2.68 | 2.31 | 2.81 | 2.60 |
+| | Gemini 2.5 Pro | 70.1 | 2.24 | 0.281 | 0.922 | 71.7 | 64.6 | 80.5 | 72.3 | 2.65 | 2.42 | 3.18 | 2.75 |
+| **QWEN** | Qwen3-30B (thinking) | 65.8 | 2.51 | 0.250 | 0.895 | 77.9 | 62.4 | 89.9 | 76.7 | 2.65 | 2.42 | 2.76 | 2.42 |
+| | Qwen3-235B (thinking) | 65.6 | 2.05 | 0.245 | 0.897 | 68.1 | 67.2 | 92.4 | 75.9 | 2.62 | 2.43 | 2.77 | 2.40 |
+| **ZHIPU** | GLM-4.6 | 75.9 | 2.71 | 0.306 | 0.925 | 80.4 | 71.9 | 88.7 | 80.3 | 3.45 | 3.26 | 3.54 | 3.42 |
+
+**4.2 主要结果**
+
+表1展示了每个模型与Claude Sonnet 4.5（thinking）之间的行为相似度。AGS衡量动作级模式，而RPS衡量语言模式。
+
+**Anthropic模型表现出强烈的内部一致性。** 两个Anthropic模型的RPS得分均超过3.8，Sonnet 4.5（no-think）为3.87，Opus 4.1（thinking）为3.85。这些得分比所有非Anthropic模型至少高出0.20分。两个模型的Sdep得分分别为94.0%和93.7%，表明工具调用偏好高度相似。这种家族内一致性与共享训练管线的预期一致，并为解释跨家族相似度提供了基线（第5.1节）。
+
+**Kimi-K2（thinking）表现出与参照模型异常高的相似度。** 在非Anthropic模型中，Kimi-K2（thinking）的AGS最高（82.7%），RPS也最高（3.65）。值得注意的是，其Snode达到82.6%、Sdep达到94.7%，均超过了Anthropic基线（Opus 4.1为81.0%和93.7%）。这意味着Kimi-K2（thinking）在可选工具选择和工具调用偏好上与参照模型的共享程度超过了Anthropic同族模型。
+
+当使用GPT-5作为替代参照重复分析时，Kimi-K2与Claude的相似度始终高于与GPT-5的相似度，证实了这一模式反映的是方向性的行为继承，而非基准测试引发的所有模型的趋同（附录D.2）。
+
+**子指标捕捉了不同的行为维度。** 三个AGS子指标衡量了工具使用行为的不同方面。Snode衡量可选工具选择偏好，Kimi-K2（thinking）与参照模型的相似度最高（82.6%）。敏感性分析显示Snode在不同模型子集上保持稳定（附录D.1）。如果不进行强制/可选分离，非家族模型的Snode平均膨胀12.2个百分点（附录C.2）。Sseq捕捉局部执行习惯，如写后验证、写前确认和错误持续性模式。Sdep衡量依赖拓扑结构，如输出复用率、依赖链深度和输出扇出率。Kimi-K2（thinking）的Sdep相似度也最高（94.7%），表明其工具依赖模式与参照模型高度一致。与完整轨迹比较相比，阶段对齐将RPS评分方差降低了44–55%（附录C.1）。
+
+#### 术语解释
+
+| 术语 | 英文 | 解释 |
+|------|------|------|
+| 家族内一致性 | Within-family Consistency | 同属一个供应商/组织的模型之间的行为相似度 |
+| 跨家族相似度 | Cross-family Similarity | 不同供应商的模型之间的行为相似度 |
+| 方向性行为继承 | Directional Behavioral Inheritance | 模型行为向特定教师模型而非通用方向趋同 |
+| 阶段对齐 | Stage Alignment | RPS中通过规范阶段对齐不同长度轨迹的方法 |
+
+#### 图表/公式说明
+
+**表1（见上方图表资源）：** 论文核心结果表，展示了18个模型在4个基线指标、3个AGS子指标和3个RPS维度上的详细得分。Kimi-K2（thinking）在非Anthropic模型中表现最突出。
+
+#### 关键Takeaway
+
+这是论文最关键的实验结果表。Kimi-K2（thinking）在非Anthropic模型中在所有指标上排名最高，其Snode（82.6%）和Sdep（94.7%）甚至超过了Anthropic族内的Opus 4.1。这强烈暗示Kimi-K2可能从Claude进行了蒸馏。
+
+---
+
+### 块7：讨论——行为相似度检测与受控蒸馏验证
+
+#### 原文（第7页）
+
+[Page 7]
+[图3展示及表2、表3内容]
+
+5 Discussion
+
+5.1 AGS and RPS Detect Behavioral Similarity Patterns
+
+Models with confirmed distillation relationships, such as the DeepSeek-R1-Distill-Qwen series, are distilled exclusively for reasoning and achieve low success rates on τ-Bench and τ²-Bench, precluding trajectory-level analysis. To obtain ground-truth validation, we first compare within-family and cross-family model pairs to establish a behavioral baseline, then conduct a controlled distillation experiment with a known teacher-student pair.
+
+We first examine within-family similarity as a baseline. Models from the same provider share training pipelines and are expected to exhibit higher behavioral similarity than cross-family pairs. When a cross-family pair reaches comparable similarity, it suggests behavioral inheritance beyond independent development. We randomly sample 50 tasks from the benchmark for this analysis.
+
+Within-family pairs achieve 5.9 pp higher AGS than cross-family pairs. As shown in Table 2, Claude Opus 4.1 and Claude Sonnet 4.5 achieve 87.2% AGS and 4.18 RPS within the Anthropic family. Similarly, DeepSeek-R1 and DeepSeek-V3.1 (thinking) achieve 86.7% AGS and 3.76 RPS within the DeepSeek family. By contrast, the cross-family pair DeepSeek-R1 versus Claude Sonnet 4.5 achieves only 81.1% AGS and 3.48 RPS. This 5.9 pp gap confirms that our metrics capture behavioral inheritance, establishing a baseline for interpreting cross-family similarity in the following analysis.
+
+Controlled distillation produces a directional signal in AGS. To further validate our metrics under known ground truth, we fine-tune Qwen2.5-14B-Instruct on 200 τ-bench trajectories generated by Claude Sonnet 4.5 via LoRA, with DeepSeek R1 as a non-teacher control (training details in Appendix C.4). As shown in Table 3, AGS toward the teacher increases by +0.13 while AGS toward the control decreases by −0.05. In contrast, GED increases by +0.23 and +0.20 toward the teacher and control respectively, with a gap of only 0.03. Sub-metric decomposition and RPS analysis are provided in Appendix C.3.
+
+#### 中文翻译
+
+[图3（见上方图表资源）展示：RPS电信客服任务案例研究。左：Kimi-K2（thinking）轨迹。中：Claude Sonnet 4.5（thinking）作为参照。右：GPT-5轨迹。每个面板底部显示了LLM评审器的风格评分。]
+
+**表2：** 家族内和跨家族模型对的AGS和RPS（50个随机采样任务）。家族内对的AGS比跨家族对高5.9个百分点。
 
 | 类型 | 模型对 | AGS (%) | RPS |
 |------|--------|---------|-----|
-| **同家族** | Opus 4.1 – Sonnet 4.5 | **87.2** | **4.18** |
-| | DeepSeek-R1 – V3.1 (thinking) | **86.7** | 3.76 |
-| **跨家族** | DeepSeek-R1 – Sonnet 4.5 | 81.1 | 3.48 |
+| 家族内 | Opus 4.1 – Sonnet 4.5 | 87.2 | 4.18 |
+| 家族内 | DeepSeek-R1 – V3.1 (thinking) | 86.7 | 3.76 |
+| 跨家族 | DeepSeek-R1 – Sonnet 4.5 | 81.1 | 3.48 |
 
-*Table 2: 同家族与跨家族模型对的AGS和RPS对比*
+**表3：** 受控蒸馏验证。Qwen2.5-14B-Instruct通过LoRA在200条Claude Sonnet 4.5轨迹上微调。分别测量向教师模型（Claude）和非教师对照组（DeepSeek R1）的相似度。
 
-这 **5.9 个百分点的差距** 确认了我们的指标能够捕获行为继承，建立了后续分析中解释跨家族相似性的基线。
-
-**受控蒸馏产生AGS的方向性信号：** 为进一步在已知真实验证我们的指标，我们对 **Qwen2.5-14B-Instruct** 在200条Claude Sonnet 4.5生成的 τ-bench 轨迹上进行LoRA微调，以 DeepSeek R1 作为非教师对照组：
-
-| 方向 | 指标 | 基线 | 蒸馏后 | Δ |
+| 方向 | 指标 | 基线 | 蒸馏后 | ∆ |
 |------|------|------|--------|---|
-| **→Teacher (Claude)** | AGS | 0.59 | 0.72 | **+0.13** |
+| →教师（Claude） | AGS | 0.59 | 0.72 | +0.13 |
 | | GED | 0.42 | 0.65 | +0.23 |
-| **→Control (R1)** | AGS | 0.64 | 0.59 | **−0.05** |
+| →对照（R1） | AGS | 0.64 | 0.59 | −0.05 |
 | | GED | 0.39 | 0.59 | +0.20 |
 
-*Table 3: 受控蒸馏验证实验*
+**5 讨论**
 
-**AGS 向教师方向增加(+0.13)而向对照组下降(-0.05)，而GED向两个方向均上升（差距仅0.03）。** 这证明了AGS能够区分教师特异性收敛和一般性改进。
+**5.1 AGS和RPS能检测行为相似度模式**
 
-### 5.2 Kimi-K2展现类Claude行为模式
+具有确证蒸馏关系的模型，如DeepSeek-R1-Distill-Qwen系列，仅针对推理进行了蒸馏，在τ-Bench和τ²-Bench上的成功率较低，无法进行轨迹级分析。为获得真实标注验证，我们首先比较家族内和跨家族模型对以建立行为基线，然后使用已知的教师-学生对进行受控蒸馏实验。
 
-上述基线揭示了一个意外的模式：**Kimi-K2 (thinking) 以82.7% AGS和3.65 RPS与Claude Sonnet 4.5 (thinking)对齐，在所有非Anthropic模型中最高。** 值得注意的是，**这种跨家族相似度甚至超过某些同家族Anthropic对**，引发了Kimi-K2是否从Claude继承了行为模式的疑问。
+我们首先将家族内相似度作为基线。来自同一提供商的模型共享训练管线，预计比跨家族对表现出更高的行为相似度。当跨家族对达到可比的相似度时，表明存在超越独立开发的行为继承。我们为此分析随机采样了50个任务。
 
-#### 言语风格案例研究
+**家族内对的AGS比跨家族对高5.9个百分点。** 如表2所示，在Anthropic家族内，Claude Opus 4.1和Claude Sonnet 4.5实现了87.2%的AGS和4.18的RPS。类似地，在DeepSeek家族内，DeepSeek-R1和DeepSeek-V3.1（thinking）实现了86.7%的AGS和3.76的RPS。相比之下，跨家族对DeepSeek-R1与Claude Sonnet 4.5仅达到81.1%的AGS和3.48的RPS。这5.9个百分点的差距证实了我们的指标能够捕捉行为继承，为后续分析中解读跨家族相似度建立了基线。
 
-Kimi-K2 和 Claude 共享 GPT-5 不具备的对话风格模式。**Figure 3** 比较了客服场景中的响应轨迹。不同于GPT-5生成简短、程序导向的回复，**Claude Sonnet 4.5 和 Kimi-K2 一致采用非正式措辞和热情肯定词如 "Excellent!" 和 "Perfect!"**。即使在系统提示中没有显式指令的情况下，两个模型都**主动确认当前状态、预期后续步骤并提供情感支持**。GPT-5不具备的这种共享的用户参与倾向表明，它是**继承的对话启发式规则**而非任务特定适应。
+**受控蒸馏在AGS中产生了方向性信号。** 为了在已知真实标注下进一步验证我们的指标，我们使用LoRA在200条由Claude Sonnet 4.5生成的τ-bench轨迹上微调Qwen2.5-14B-Instruct，以DeepSeek R1作为非教师对照（训练细节见附录C.4）。如表3所示，向教师模型的AGS增加了+0.13，而向对照模型的AGS减少了−0.05。相比之下，GED向教师和对照分别增加了+0.23和+0.20，差距仅为0.03。子指标分解和RPS分析见附录C.3。
 
-![Figure 3: RPS案例研究](assets/figure3.png)
+#### 术语解释
 
-*Figure 3: 电信客服任务上的RPS案例研究。左：Kimi-K2 (thinking) 轨迹。中：Claude Sonnet 4.5 (thinking) 作为参考。右：GPT-5 轨迹。底部显示LLM评判器的Style分数。*
+| 术语 | 英文 | 解释 |
+|------|------|------|
+| 受控蒸馏 | Controlled Distillation | 在已知教师模型条件下进行的蒸馏实验，用于验证指标有效性 |
+| 非教师对照 | Non-teacher Control | 未被用作训练数据的模型，用于证明指标的方向性 |
+| 方向性信号 | Directional Signal | 指标能区分蒸馏方向（向教师趋同而非通用改进） |
 
-#### 可选工具偏好案例研究
+#### 图表/公式说明
 
-Kimi-K2 和 Claude 共享 GPT-5 不具备的可选工具偏好。**Figure 4** 展示了一个具体案例：在交换请求任务中，**Claude 和 Kimi-K2 都首先调用可选的 find_user_id_by_email，而GPT-5跳过此步骤直接调用 find_user_id_by_name_zip**。邮件验证对任务完成并非必需；然而Claude和Kimi-K2共享对**冗余验证的偏好**。
+**图3（见上方图表资源）：** RPS电信客服任务案例。Kimi-K2和Claude都使用热情肯定的措辞（如"Excellent!"、"Perfect!"），GPT-5则使用更简洁的程序化回复。LLM评审器对Kimi-K2和Claude的风格评分为4.67，对GPT-5的评分为2.75。
 
-![Figure 4: Action Flow Graph对比](assets/figure4.png)
+**表2和表3（见上方）：** 表2建立了基线——家族内模型对的AGS显著高于跨家族对。表3是关键验证结果：AGS能区分教师模型和对照模型（向教师+0.13，向对照−0.05），而GED无法区分（均为正增长）。
 
-*Figure 4: 商品交换任务上的AFG对比。三个模型都成功完成任务。Claude Sonnet 4.5 (thinking) 和 Kimi-K2 首先调用可选的find_user_id_by_email（红框节点），而GPT-5跳过此步骤直接调用find_user_id_by_name_zip。虚线箭头=顺序边；实线箭头=依赖边。*
+#### 关键Takeaway
 
-如表4所示，在both-correct设置中 **Kimi–Claude 对的 Snode = 0.661**，是 **GPT–Claude 对 (0.196) 的3.4倍**。这种模式在 both-wrong 和 mixed 设置中保持稳定，表明相似性反映了**内在的决策启发式规则**而非任务特定策略。
+本节通过两个实验验证了指标的有效性：（1）家族内模型对的AGS比跨家族对高5.9个百分点，说明AGS能捕捉到训练共享的信号；（2）受控蒸馏实验中，AGS只向教师模型趋同而非向对照模型，而GED向两者均趋同，说明AGS具有方向性鉴别能力。
+
+---
+
+### 块8：Kimi-K2的Claude-like行为模式分析
+
+#### 原文（第8页）
+
+[Page 8]
+[图4展示及表4内容]
+
+5.2 Kimi-K2 Exhibits Claude-like Behavioral Patterns
+
+The baseline established above reveals an unexpected pattern. Kimi-K2 (thinking) achieves 82.7% AGS and 3.65 RPS with Claude Sonnet 4.5 (thinking), the highest among all non-Anthropic models. Notably, this cross-family similarity exceeds some within-family Anthropic pairs, raising the question of whether Kimi-K2 has inherited behavioral patterns from Claude. We investigate this hypothesis through case studies on both response style and tool invocation.
+
+Kimi-K2 and Claude share conversational style patterns that GPT-5 does not exhibit. Figure 3 compares response trajectories in a customer service scenario. Unlike GPT-5, which produces brief, procedurally oriented responses, both Claude Sonnet 4.5 (thinking) and Kimi-K2 consistently employ informal phrasing with enthusiastic affirmatives such as "Excellent!" and "Perfect!". Even without explicit directives in the system prompt, both models proactively acknowledge the current state, anticipate subsequent steps, and provide emotional support. This shared tendency toward user engagement, absent in GPT-5, suggests that it is inherited conversational heuristics rather than task-specific adaptation.
+
+Kimi-K2 and Claude share optional tool preferences that GPT-5 does not exhibit. Figure 4 illustrates a concrete case. In an exchange request task, both Claude and Kimi-K2 first invoke the optional find_user_id_by_email, while GPT-5 skips this step and directly calls find_user_id_by_name_zip. Email verification is not required for task completion; however, Claude and Kimi-K2 share a preference for redundant verification. As shown in Table 4, the Kimi–Claude pair achieves Snode of 0.661 in the both-correct setting, 3.4× higher than 0.196 for the GPT–Claude pair. This pattern remains stable across "both-wrong" and mixed settings, suggesting that the similarity reflects inherent decision-making heuristics rather than task-specific strategies. Detailed analysis of Sseq and Sdep is provided in Appendix E.2.
+
+Taken together, Kimi-K2 exhibits high similarity to Claude across both verbal expression (RPS 3.65) and tool invocation (AGS 82.7%), reaching levels comparable to within-family pairs on several sub-metrics. The two metrics capture largely independent signals (Pearson r = 0.491, p = 0.054 across 16 non-Anthropic models), confirming that this convergence spans distinct behavioral dimensions. Correlation analysis with baseline metrics and additional ablation studies are provided in Appendix D.6.
+
+#### 中文翻译
+
+[图4（见上方图表资源）展示：商品换货任务的动作流图比较。三个模型均成功完成任务。Claude Sonnet 4.5（thinking）和Kimi-K2首先调用可选工具find_user_id_by_email（红色节点），而GPT-5跳过此步骤直接调用find_user_id_by_name_zip。虚线箭头表示序列边，实线箭头表示依赖边。]
+
+**表4：** 三个模型对在不同任务结果设置下的AGS子指标和GED。Claude = Claude Sonnet 4.5（thinking），Kimi = Kimi-K2（thinking），GPT = GPT-5。**粗体**标记每列在每种设置下的最高值。
 
 | 设置 | 模型对 | GED | Snode | Sseq | Sdep |
 |------|--------|-----|-------|------|------|
-| **Both-correct** | Kimi – Claude | 0.814 | **0.661** | 0.892 | **0.993** |
+| 都正确 | Kimi – Claude | 0.814 | **0.661** | 0.892 | **0.993** |
 | | GPT – Claude | 0.705 | 0.196 | 0.904 | 0.879 |
 | | Kimi – GPT | 0.737 | 0.143 | 0.912 | 0.882 |
-| **Both-wrong** | Kimi – Claude | 0.558 | 0.355 | 0.829 | **0.953** |
+| 都错误 | Kimi – Claude | 0.558 | 0.355 | **0.829** | **0.953** |
 | | GPT – Claude | 0.522 | 0.258 | 0.680 | 0.899 |
-| | Kimi – GPT | 0.594 | 0.387 | 0.583 | 0.888 |
-| **Mixed** | Kimi – Claude | 0.718 | 0.414 | 0.572 | **0.917** |
+| | Kimi – GPT | 0.594 | **0.387** | 0.583 | 0.888 |
+| 混合 | Kimi – Claude | **0.718** | **0.414** | 0.572 | **0.917** |
 | | GPT – Claude | 0.599 | 0.279 | 0.562 | 0.873 |
-| | Kimi – GPT | 0.620 | 0.307 | 0.633 | 0.829 |
+| | Kimi – GPT | 0.620 | 0.307 | **0.633** | 0.829 |
 
-*Table 4: 三种任务结果设置下的AGS子指标和GED*
+**5.2 Kimi-K2表现出类似Claude的行为模式**
 
-**综上所述，Kimi-K2 在言语表达(RPS 3.65)和工具调用(AGS 82.7%)两个维度上均表现出与Claude的高相似度，在若干子指标上达到与同家族对相当的水平。** 两个指标捕获**很大程度上独立的信号**（Pearson r = 0.491, p = 0.054，16个非Anthropic模型），确认这种收敛跨越了不同的行为维度。
+上述建立的基线揭示了一个意想不到的模式。Kimi-K2（thinking）与Claude Sonnet 4.5（thinking）的AGS为82.7%，RPS为3.65，在所有非Anthropic模型中最高。值得注意的是，这种跨家族相似度超过了某些Anthropic家族内对，提出了Kimi-K2是否从Claude继承了行为模式的问题。我们通过回复风格和工具调用两方面的案例研究来探究这一假设。
 
-`[扩展]` 讨论部分通过三层递进的证据链支撑核心主张：(1) 同家族vs跨家族的5.9pp差距建立了"什么是正常相似度"的基线；(2) 受控蒸馏实验证明AGS能区分"向老师靠近"和"变好了"；(3) Kimi-K2的具体案例分析（言语风格+工具偏好+跨设置稳定性）给出了令人信服的行为克隆证据。特别是Table 4的"三种设置"设计非常严谨——不管两个模型是对是错还是一错一对，Kimi-Claude的Sdep始终最高，这说明它们的相似性不是"恰好都做对了"，而是真的在做同样的决策。
+**Kimi-K2和Claude共享GPT-5未表现出的对话风格模式。** 图3（见上方图表资源）比较了客服场景中的回复轨迹。与生成简洁、程序化导向回复的GPT-5不同，Claude Sonnet 4.5（thinking）和Kimi-K2始终使用非正式措辞，伴有"Excellent!"和"Perfect!"等热情的肯定语。即使在系统提示中没有明确指令的情况下，两个模型都会主动确认当前状态、预判后续步骤并提供情感支持。这种对用户互动参与的共同倾向在GPT-5中不存在，表明这是继承而来的对话启发式策略，而非任务特定的适应行为。
 
-### 术语解释
+**Kimi-K2和Claude共享GPT-5未表现出的可选工具偏好。** 图4（见上方图表资源）展示了一个具体案例。在换货请求任务中，Claude和Kimi-K2都首先调用可选工具find_user_id_by_email，而GPT-5跳过此步骤直接调用find_user_id_by_name_zip。邮件验证并非完成任务所必需，但Claude和Kimi-K2共享了对冗余验证的偏好。如表4所示，在"都正确"设置下，Kimi–Claude对的Snode为0.661，是GPT–Claude对（0.196）的3.4倍。这一模式在"都错误"和"混合"设置下保持稳定，表明相似度反映了内在决策启发式策略而非任务特定的策略。Sseq和Sdep的详细分析见附录E.2。
 
-| 英文术语 | 中文译名 | 一句话解释 | 应用场景 |
-|---------|---------|-----------|---------|
-| Directional Signal | 方向性信号 | 指向特定目标（教师模型）而非泛化提升的变化模式 | 区分"学到了老师的特色"还是"整体变强了" |
-| Conversational Heuristic | 对话启发式规则 | 模型在对话中自发采用的风格策略（如热情肯定） | RPS检测到的行为克隆的具体表现形式 |
-| Inherent Decision Heuristic | 内在决策启发式规则 | 模型内置的、不受任务结果影响的决策倾向 | 解释跨不同正确性设置仍保持相似的原因 |
+综合来看，Kimi-K2在语言表达（RPS 3.65）和工具调用（AGS 82.7%）两方面都表现出与Claude的高度相似性，在多个子指标上达到了与家族内对相当的水平。这两个指标捕捉的 largely 是独立的信号（16个非Anthropic模型上Pearson r = 0.491，p = 0.054），证实了这种趋同跨越了不同的行为维度。与基线指标的相关性分析和额外的消融研究见附录D.6。
 
-### 图表/公式说明
+#### 术语解释
 
-**Figure 3 — RPS风格对比案例**
+| 术语 | 英文 | 解释 |
+|------|------|------|
+| 对话启发式策略 | Conversational Heuristics | 模型在对话中自发采用的表达习惯和交互策略 |
+| 冗余验证 | Redundant Verification | 即使非任务必需，也进行额外验证的行为偏好 |
+| 都正确 / 都错误 / 混合 | Both-correct / Both-wrong / Mixed | 按任务结果分组的三种设置，用于消解任务难度对相似度的影响 |
 
-清晰展示了三模型在电信客服任务中的回复风格差异：
-- **Claude/Kimi**：长句、情感词汇("Perfect!"、"Excellent!")、主动状态确认
-- **GPT-5**：短句、程序化表达、纯事务处理
-- 底部的Style分数（4.67 vs 2.75）量化了这种主观感受
+#### 图表/公式说明
 
-**Figure 4 — AFG对比案例**
+**图3（见上方图表资源）：** 展示了Kimi-K2和Claude在客服场景中共享的非正式、热情的表达风格（如"Excellent!"、"Perfect!"），与GPT-5的简洁风格形成鲜明对比。
 
-可视化展示了可选工具选择差异：
-- **Claude/Kmi**：多了红色的可选节点 `find_user_id_by_email`
-- **GPT-5**：直接走另一条路径
-- 虚线(顺序边)和实线(依赖边)的双重编码清晰展示了信息流向
+**图4（见上方图表资源）：** 展示了Kimi-K2和Claude共享的可选工具选择偏好——先调用find_user_id_by_email进行额外验证，而GPT-5直接调用find_user_id_by_name_zip。
 
-**Table 4 — 多设置稳健性检验**
+**表4（见上方）：** 通过"都正确/都错误/混合"三种设置，系统性地比较了三个模型对在不同情况下的行为相似度。Kimi-Claude对在大多数指标上领先。
 
-这是论证严密性的关键表格：在三种设置(都对/都错/混合)下Kimi-Claude的Sdep始终最高，排除了"只是碰巧都做对了"的解释。
+#### 关键Takeaway
 
-### 关键 takeaway
-
-- **要点1（受控实验价值）**：AGS向教师+0.13/向对照-0.05的双向变化是其优于GED的决定性证据（GED双向都涨）
-- **要点2（案例说服力）**：Kimi-K2不仅"数字上像Claude"，连"说话方式和工具使用癖好"都高度一致——"Perfect!"/"Excellent!"这类情感词汇的使用尤其难以用巧合解释
-- **要点3（稳健性）**：跨三种任务结果设置的稳定性(Sdep始终>0.91)说明这是深层行为特征而非表面巧合
+本节通过具体案例深入分析了Kimi-K2与Claude的相似性来源：语言风格上共享热情肯定的措辞习惯，工具使用上共享冗余验证偏好。这种相似性超越了表面层次，横跨语言和行为两个独立维度。RPS和AGS的低相关性（r=0.491）说明两者捕捉的是互补的行为信号，进一步加强了Kimi-K2从Claude进行蒸馏的证据。
 
 ---
 
-## Section 6 — 结论
+### 块9：结论、局限性与参考文献（部分）
 
-### 中文翻译
+#### 原文（第9页）
 
-我们提出了一个通过两个互补指标 **RPS 和 AGS** 解耦强制性任务行为和非强制性模式来量化LLM Agent行为相似性的框架。评估来自8个提供商的18个模型，我们发现**同家族模型对始终比跨家族对得分更高**。在跨家族对中，**Kimi-K2 (thinking) 以 Snode=82.6% 和 Sdep=94.7% 脱颖而出，均超过Anthropic自家的Opus 4.1**。
+[Page 9]
+...this convergence spans distinct behavioral dimensions. Correlation analysis with baseline metrics and additional ablation studies are provided in Appendix D.6.
 
-受控蒸馏实验验证了指标的有效性：**AGS向已知教师增加而向对照组减少，而GED在两个方向上都上升且无法区分两者。**
+6 Conclusion
 
-我们开源代码以支持Agent生态系统中行为诊断的进一步研究：**https://github.com/Syuchin/AgentEcho**
+We present a framework for quantifying behavioral similarity in LLM agents by disentangling mandatory task behaviors from non-mandatory patterns through two complementary metrics, RPS and AGS. Evaluating 18 models from 8 providers, we find that within-family model pairs consistently score higher than cross-family pairs. Among cross-family pairs, Kimi-K2 (thinking) stands out with Snode at 82.6% and Sdep at 94.7%, both exceeding Anthropic's own Opus 4.1. A controlled distillation experiment validates the metrics: AGS increases toward the known teacher while decreasing toward a control, whereas GED rises in both directions without distinguishing the two. We release our code to support further work on behavioral diagnostics in the agent ecosystem.
 
-### 局限性
+Acknowledgements
+This work was supported by the National Natural Science Foundation of China (No. 62121002) and the advanced computing resources provided by the Supercomputing Center of the USTC.
 
-1. **成对分析范围**：我们的框架可以构建完整的成对相似性矩阵，但由于计算成本，报告的是相对于单一参考模型的结果
-2. **基准覆盖**：我们在τ-Bench和τ²-Bench上评估，涵盖三个英文客服领域（航空、零售、电信），在其他领域、任务类型或语言上的普适性待验证
-3. **适用范围**：RPS和AGS专为具有可观察工具调用的工具使用Agent设计；扩展到代码生成或多Agent协作等非工具使用范式需要进一步方法论工作
-4. **验证**：我们通过同家族比较和受控蒸馏实验验证了指标；在已部署模型（有 confirmed 蒸馏关系的）上的公开验证仍有待开展
+Limitations
+Pairwise Analysis Scope. Our framework can construct a full pairwise similarity matrix, but we report results relative to a single reference model due to computational cost. Complete pairwise analysis across 18 models would require 153 comparisons.
+Benchmark Coverage. We evaluate on τ-Bench and τ²-Bench, covering three English-language customer service domains (airline, retail, telecom). Generalizability to other domains, task types, or languages remains to be validated.
+Scope of Applicability. RPS and AGS are designed for tool-use agents with observable tool invocations. AGS operates on tool-call sequences and applies wherever tools are used. RPS depends on a domain-specific stage taxonomy; adapting it to domains with different interaction patterns (e.g., coding agents with iterative self-reflection) requires new stage definitions. Extending the framework to non-tool-use paradigms such as code generation or multi-agent collaboration would require further methodological work.
+Validation. We validate our metrics through within-family comparison and a controlled distillation experiment. Validation on publicly deployed models with confirmed distillation relationships remains open, as such models currently lack sufficient tool-use capabilities for trajectory-level analysis. Additionally, framework choice can affect behavioral similarity; we use a generic ReAct framework to avoid masking distillation signals (Appendix D.7).
 
-`[扩展]` 结论简洁有力，四个局限性坦诚透明。特别是第四条——在"已经知道谁蒸馏了谁"的公开模型上验证——是目前最大的开放问题。如果能在DeepSeek-V3（公认蒸馏自GPT系列）或Qwen（公认蒸馏自LLaMA+GPT混合）这类有公认定论的模型上验证，这篇论文的说服力会更上一层楼。
+References
+[参考文献列表]
 
-### 术语解释
+#### 中文翻译
 
-| 英文术语 | 中文译名 | 一句话解释 | 应用场景 |
-|---------|---------|-----------|---------|
-| Pairwise Similarity Matrix | 成对相似性矩阵 | N×N矩阵，每个元素是一对模型间的相似度 | 完整的生态系统行为多样性全景视图 |
-| Behavioral Diagnostic | 行为诊断 | 使用量化指标识别Agent行为模式和异常的系统 | 检测蒸馏、评估多样性、审计合规性的应用 |
+...这种趋同跨越了不同的行为维度。与基线指标的相关性分析和额外的消融研究见附录D.6。
 
-### 图表/公式说明
+**6 结论**
 
-本片段无图表/公式
+我们提出了一个通过两个互补指标RPS和AGS将强制性任务行为与非强制性模式分离开来、量化LLM智能体行为相似度的框架。通过对来自8个提供商的18个模型进行评估，我们发现家族内模型对的得分始终高于跨家族对。在跨家族对中，Kimi-K2（thinking）表现突出，Snode达到82.6%、Sdep达到94.7%，均超过了Anthropic自家的Opus 4.1。受控蒸馏实验验证了指标的有效性：AGS向已知教师模型增加，向对照模型减少，而GED向两个方向都增加，无法区分二者。我们开源了代码，以支持智能体生态系统中行为诊断的进一步研究。
 
-### 关键 takeaway
+**致谢**
+本研究得到了国家自然科学基金（No. 62121002）以及中国科学技术大学超算中心提供的高级计算资源的支持。
 
-- **要点1（方法普适性）**：RPS+AGS双轨框架可推广到任何工具使用Agent领域（只需替换阶段定义即可适配新域）
-- **要点2（实际影响）**：开源代码使任何研究者都能自行检测模型间的行为克隆，对LLM生态的透明度建设有实质性贡献
-- **要点3（遗留问题）**：在有confirmed蒸馏关系的公开部署模型上进一步验证是未来最重要的发展方向
+**局限性**
+
+**成对分析范围。** 我们的框架可以构建完整的成对相似度矩阵，但由于计算成本，我们仅报告了相对于单个参照模型的结果。18个模型的完整成对分析需要153次比较。
+
+**基准覆盖范围。** 我们在τ-Bench和τ²-Bench上进行了评估，覆盖了三个英语客服领域（航空、零售、电信）。对其他领域、任务类型或语言的泛化能力仍有待验证。
+
+**适用范围。** RPS和AGS是为具有可观察工具调用的工具型智能体设计的。AGS直接操作工具调用序列，适用于任何使用工具的场合。RPS依赖于特定领域的阶段分类体系；将其适配到具有不同交互模式的领域（例如，具有迭代自反思的编码智能体）需要新的阶段定义。将框架扩展到非工具使用范式（如代码生成或多智能体协作）需要进一步的方法论工作。
+
+**验证。** 我们通过家族内比较和受控蒸馏实验验证了指标。在具有确证蒸馏关系的公开部署模型上的验证仍然需要进一步研究，因为这类模型目前缺乏足够的工具使用能力以进行轨迹级分析。此外，框架选择可能影响行为相似度；我们使用通用的ReAct框架来避免掩盖蒸馏信号（附录D.7）。
+
+**参考文献**
+[参考文献列表已略去——均为标准学术引用，共约60篇]
+
+#### 术语解释
+
+| 术语 | 英文 | 解释 |
+|------|------|------|
+| 成对分析 | Pairwise Analysis | 对所有模型两两之间的相似度进行计算和分析 |
+| ReAct框架 | ReAct Framework | 一种通用的智能体推理-行动框架，不施加过多行为约束 |
+| 自反思 | Self-reflection | 模型在执行过程中对自身输出进行检查和修正的能力 |
+
+#### 关键Takeaway
+
+本节总结了论文的核心贡献：提出了能够区分蒸馏导致的行为趋同与通用改进的指标AGS。关键局限包括：（1）仅使用单一参照模型而非完整的成对矩阵；（2）仅覆盖三个客服领域；（3）RPS依赖于领域特定的阶段定义，迁移需要重新设计。
 
 ---
 
-## 参考文献
+### 块10-14：附录——RPS详细流程和提示词
 
-（详见原文 References 部分，共引用47篇参考文献，涵盖蒸馏、数据污染、工具使用基准、Agent框架等方向）
+这些块（块10-14）是附录A的内容，包含RPS的完整实现细节、阶段标注提示词和LLM评审器的评分标准。由于是附录材料，翻译将保持简洁但完整。
+
+#### 原文（第11-15页）
+
+附录A详细描述了RPS的三个步骤：阶段标注、轨迹对齐和相似度评分。附录A.1给出了五阶段定义（身份验证、信息收集、执行、确认、通知）和用于阶段标注的LLM系统提示词。附录A.2描述了轨迹对齐方法。附录A.3给出了LLM评审器的完整系统提示词，包括风格、结构和对齐三个评分维度的详细标准。
+
+#### 中文翻译
+
+**附录A：响应模式相似度（RPS）——流水线与提示词**
+
+RPS按三个步骤进行：阶段标注、轨迹对齐和阶段级相似度评分。
+
+**A.1 阶段标注**
+
+LLM将每个模型输出分配到一个任务阶段。以下展示标注提示词模板。五个阶段覆盖了被评估工具使用基准中的典型交互结构。评分流水线独立于这一特定分类体系；将RPS应用到不同领域只需要替换阶段定义和标注提示词。
+
+- **身份验证（Authentication）**：识别用户、验证身份或在验证失败后处理重试。
+- **信息收集（Elicitation）**：在非验证阶段，向用户请求完成任务所需的缺失参数。
+- **执行（Execution）**：调用特定业务工具执行查询或修改操作。
+- **确认（Verification）**：在执行关键的写操作前寻求用户的明确确认。
+- **通知（Notification）**：向用户报告工具执行结果或当前状态。
+
+[阶段标注的系统提示词——详见论文附录A.1，定义LLM的角色为"智能体轨迹语义标注专家"，需要将每个思考/回复标注为五个意图类别之一。标注原则包括：（1）主要意图优先；（2）身份验证优先；（3）基于事实。输出格式为JSON，包含reason字段和intent字段。]
+
+**A.2 轨迹对齐**
+
+对于每条轨迹，所有思考/回复项按其标注的意图标签进行分组。每个组内的项附加相邻工具调用上下文，并合并为一个块。对于两个轨迹共享的每个意图标签，两个块一起发送给LLM评审器作为一个评分单元。仅出现在一条轨迹中的标签被排除。
+
+**A.3 相似度评估**
+
+每个共享阶段随后由LLM评审器在风格、结构和对齐三个维度上进行评分。
+
+[LLM评审器的完整系统提示词——详见论文附录A.3，定义了评审器的角色为"智能体行为对齐分析专家"，任务是比较两个模型在同一任务阶段上的表达模式，识别潜在的蒸馏信号。评分维度包括：
+
+**风格（Style）**：衡量措辞习惯和词汇偏好。关注开场和结束语句的措辞、信息组织形式、常用词汇和短语、语气特征。
+
+**结构（Structure）**：衡量句子结构和回复模板。关注段落组织方式、信息粒度、推理呈现方式、模板使用情况。
+
+**对齐（Alignment）**：衡量思考-执行一致性。关注对齐模式类型是否相同、思考到执行的过渡风格、工具调用的时机和决策模式、错误恢复策略。
+
+评分标准：5分（非常相似）→ 1分（非常不相似）。输出格式为JSON，包含analysis、scores（style/structure/alignment）、reason和overall字段。]
+
+#### 关键Takeaway
+
+附录A提供了RPS指标的完整工程实现细节。核心设计是使用LLM作为标注器和评审器，通过规范阶段实现跨模型轨迹的语义级对齐。评分关注的是"非指令要求的自发趋同"，这意味着如果两个模型都采用了系统提示未要求的相同表达方式，这被认为是更强的蒸馏信号。
 
 ---
 
-## 附录摘要
+### 块15-16：附录B——AGS详细构建与子指标
 
-### 附录A — RPS详细定义
+#### 中文翻译
 
-包含完整的阶段标注提示词、LLM Judge提示词和评分细则。核心要素：
-- 五个标准阶段的精确定义
-- 评分维度（Style/Structure/Alignment）的操作化定义
-- 1-5分制评分量表及判定准则
+**附录B：动作图相似度（AGS）——构建与子指标**
 
-### 附录B — AGS详细定义
+AGS从一个从工具轨迹构建的动作流图开始，然后从该图中提取三个子指标。
 
-包含图构建算法、依赖边检测LLM提示词、三个子指标的精确计算公式以及工具读/写分类表。
+**B.1 图构建**
 
-### 附录C — 消融实验
+给定一个对话轨迹 τ，我们基于工具调用序列构建动作流图 G = (V, Eₛ, E_d)。每个节点 v ∈ V 表示一个工具调用，具有属性 v = (name, args, result)。
 
-- **C.1 阶段对齐消融**：有对齐 vs 无对齐的标准差降低44-55%
-- **C.2 强制/可选分离消融**：不分离则非家族模型Snode虚增12.2pp
-- **C.3 受控蒸馏子指标分解**：Sdep转移最强(+0.27)，Snode最弱(+0.05)
-- **C.4 训练细节**：LoRA微调超参数
+**依赖边检测。** 当目标工具 v 的某个参数值来源于源工具 u 的结果时，建立依赖边 (u, v) ∈ E_d。检测分两阶段进行：首先，从目标工具的参数中递归提取叶值，并与之前工具的结果进行匹配。长度小于3个字符的值、空值以及非信息性标记的黑名单（如布尔标记、状态词、占位符）被丢弃。然后，由LLM评审器对存活的匹配进行语义有效性验证。
 
-### 附录D — 鲁棒性与敏感性分析
+[依赖边检测的LLM提示词模板——详见论文附录B.1，要求LLM判断候选依赖边中匹配值是否确实来源于源工具的结果。判断标准：如果匹配值首次通过源工具的结果变得可用，且目标工具将此值用作在源调用之前无法知晓的输入，则为真依赖。]
 
-- **D.1 Snode敏感性**：CV 1.5%-2.8%，排名稳定
-- **D.2 多参考分析**：所有模型离Claude更近，证明方向性
-- **D.3 依赖边检测准确率**：96%（DeepSeek-V3 judge）
-- **D.4 RPS评判器一致性**：Cohen's κ=0.70，±1一致率94%
-- **D.5 温度敏感性**：模型内AGS变异(0.053) << 模型间差距(13pp)
-- **D.6 基线相关性**：AGS-RS相关性(r=0.491)低于GED-AGS(r=0.806)
-- **D.7 框架选择**：OpenHands约束主要影响Snode(+0.55)，对Sseq/Sdep影响小
+**序列边构建。** 序列边 (u, v) ∈ Eₛ 连接时间上相邻的工具调用。仅当目标节点没有入度依赖边时才添加序列边，确保数据依赖优先于时间顺序。
 
-### 附录E — 补充案例研究
+**B.2 可选工具一致性（Snode）**
 
-- **E.1 RPS补充案例**：结构收敛(航空预订模板化格式) + 对齐模式(GPT-5幻觉工具指令 vs Claude/Kimi的正确设备指导)
-- **E.2 AGS补充案例**：Sseq在失败场景中更具判别性(Kimi-Claude 0.829 >> GPT-Claude 0.680)；Sdep在所有设置中Kimi-Claude均最高(>0.91)
+Snode衡量两个模型之间可选工具选择的一致性。
+
+**工具分类。** 对于每个任务 t，令 M*_t 表示成功完成任务的模型集合。强制性工具是所有成功模型调用的工具的交集：
+F_mandatory_t = ∩_{M ∈ M*_t} Tools(M, t)
+可选工具是出现在部分（而非全部）成功轨迹中的工具：
+F_opt_t = ∪_{M ∈ M*_t} Tools(M, t) \ F_mandatory_t
+
+**一致性计算。** 对于每个任务 t，计算两个模型对每个可选工具做出相同决策（都调用或都跳过）的数量，除以可选工具总数。Snode是所有任务上该比率的平均值。F_opt_t = ∅ 的任务被排除。
+
+**B.3 序列模式相似度（Sseq）**
+
+Sseq衡量两个模型在相邻工具调用之间是否表现出相似的局部执行习惯。
+
+**工具类型分类。** 根据副作用将工具分类为读操作和写操作。读操作查询信息但不修改系统状态；写操作执行修改。分类遵循τ-bench和τ²-bench的官方工具定义（见表5）。
+
+**特征定义。** 令 n_w 为轨迹中写操作的数量，n_err 为返回错误的工具调用数量。三个特征为：
+- **写后验证率** r_verify = n_{w→r}/n_w，其中 n_{w→r} 是写操作后立即跟随读操作的次数。
+- **写前确认率** r_confirm = n_{r→w}/n_w，其中 n_{r→w} 是写操作前紧邻读操作的次数。
+- **错误重试率** r_retry = n_retry/n_err，其中 n_retry 是错误响应后重试同一工具的次数。错误通过关键词匹配工具结果文本进行检测。
+
+**相似度计算。** 每条轨迹产生一个三维特征向量 (r_verify, r_confirm, r_retry)。对于每个任务，计算两个模型向量之间的余弦相似度，然后对所有任务取平均得到 Sseq。当两个向量在同一任务上均为零时（例如，两条轨迹都不包含写操作），余弦相似度未定义，我们将其设为1.0。当恰好一个向量为零时，将相似度设为0.0。
+
+**B.4 依赖模式相似度（Sdep）**
+
+Sdep衡量两个模型在复用工具输出方面是否表现出相似的模式。
+
+**特征定义。** 令 n_in 为至少有一条入度依赖边的节点数，n_out 为至少有一条出度依赖边的节点数，n_fan 有两条或以上出度依赖边的节点数。三个特征为：
+- **输出复用率** r_reuse = n_in/(|V| − 1)，工具调用（除第一个外）中其输入来自前序调用输出的比例。
+- **最长依赖链** d_max，有向图 (V, E_d) 中最长有向路径的长度。
+- **输出扇出率** r_fanout = n_fan/n_out，被两个或以上后续调用复用的工具输出比例。
+
+**相似度计算。** 与Sseq相同：每条轨迹产生三维特征向量 (r_reuse, d_max, r_fanout)，最终得分是每个任务的余弦相似度的平均值。
+
+**B.5 基准工具定义**
+
+表5（见上方图表资源）列出了τ-bench和τ²-bench中航空、零售和电信领域工具的读/写/通用分类，用于计算Sseq。
+
+#### 关键Takeaway
+
+附录B提供了AGS三个子指标的完整数学定义和计算细节。关键设计要点包括：（1）强制/可选工具的分离通过跨模型交集实现；（2）Sseq和Sdep都使用三维特征向量加余弦相似度；（3）依赖边检测使用LLM进行语义验证以避免字符串匹配的误报。
+
+---
+
+### 块17：附录C——消融研究
+
+#### 中文翻译
+
+**附录C：消融研究**
+
+我们对两个设计选择进行消融（RPS中的阶段对齐和AGS中的强制/可选工具分离），并报告第5.1节受控蒸馏实验的完整子指标分解。
+
+**C.1 阶段对齐消融**
+
+我们以Claude Sonnet 4.5（thinking）为参照模型，比较了有和没有阶段对齐的RPS。对于每个模型，评估15个τ-bench任务，每个案例运行评审器3次，然后报告案例内RPS得分标准差（σ_within）。
+
+**表6：** 有和没有阶段对齐的案例内RPS得分标准差（σ_within），三个模型相对于Claude Sonnet 4.5（thinking），15个τ-bench任务，每个案例3次评审器运行。
+
+| 模型 | 有对齐 | 无对齐 | 降幅 |
+|------|--------|--------|------|
+| GPT-4.1 | 0.248 | 0.446 | −44% |
+| Kimi-K2 (thinking) | 0.233 | 0.458 | −49% |
+| DeepSeek-R1 | 0.255 | 0.563 | −55% |
+
+没有阶段对齐时，σ_within从0.23–0.26增加到0.45–0.56。对齐带来的降幅为44%至55%。
+
+**C.2 强制/可选工具分离消融**
+
+我们以Claude Sonnet 4.5（thinking）为参照模型，比较了仅使用可选工具与使用所有工具计算的Snode。
+
+**表7：** 仅使用可选工具与使用所有工具计算的Snode，以Claude Sonnet 4.5（thinking）为参照模型。
+
+| 模型 | 仅可选 | 所有工具 | ∆ |
+|------|--------|---------|---|
+| Gemini 3 Pro | 66.7% | 82.5% | +15.8 pp |
+| DeepSeek-R1 | 69.4% | 79.7% | +10.4 pp |
+| DeepSeek-V3-0324 | 75.6% | 86.0% | +10.4 pp |
+| Claude Opus 4.1 (thinking) | 87.5% | 87.5% | 0.0 pp |
+
+使用所有工具使非家族模型平均提高了12.2个百分点。Gemini 3 Pro与Claude Opus 4.1（thinking）之间的差距从20.8个百分点降至5.0个百分点。Claude Opus 4.1（thinking）未发生变化，因此其较高的相似度确实来自可选工具选择而非强制性重叠。
+
+**C.3 受控蒸馏：子指标分析**
+
+**表8：** Qwen2.5-14B-Instruct在Claude Sonnet 4.5（thinking）生成的轨迹上进行LoRA微调的完整受控蒸馏结果。
+
+| 指标 | 基线→Claude | 蒸馏→Claude | ∆(教师) | 基线→R1 | 蒸馏→R1 | ∆(对照) |
+|------|------------|-------------|---------|---------|----------|---------|
+| Snode | 0.55 | 0.60 | +0.05 | 0.58 | 0.41 | −0.17 |
+| Sseq | 0.50 | 0.58 | +0.08 | 0.63 | 0.49 | −0.14 |
+| Sdep | 0.73 | 0.99 | +0.27 | 0.71 | 0.87 | +0.16 |
+| AGS | 0.59 | 0.72 | +0.13 | 0.64 | 0.59 | −0.05 |
+| RPS | 2.03 | 3.39 | +1.36 | 2.00 | 2.81 | +0.81 |
+| GED | 0.42 | 0.65 | +0.23 | 0.39 | 0.59 | +0.20 |
+
+传递在不同行为维度上不均匀。Sdep上升到0.99（+0.27），几乎复制了所有教师依赖模式。Snode仅增加了+0.05，Sseq适度增加了+0.08。
+
+RPS向教师增加（+1.36）和向对照增加（+0.81）均有上升。在高质量轨迹数据上微调能普遍提高回复流畅度，这使得RPS对两个参照都上升。教师-对照差距仍为+0.55。
+
+GED向教师增加+0.23，向对照增加+0.20。GED的教师-对照差距仅为0.03，而AGS为0.18。
+
+**C.4 受控蒸馏：训练细节**
+
+我们使用LoRA在200条由Claude Sonnet 4.5（thinking）生成的τ-bench轨迹上微调Qwen2.5-14B-Instruct。轨迹覆盖了两个τ-Bench领域（航空和零售）。训练超参数：10个epoch，学习率2e-5，LoRA秩16。DeepSeek R1作为非教师对照，训练中未使用R1轨迹。
+
+#### 关键Takeaway
+
+消融研究验证了论文两个核心设计选择的有效性：（1）阶段对齐将RPS评分方差降低44-55%；（2）强制/可选工具分离防止了因共享正确性而膨胀的相似度得分。受控蒸馏实验的子指标分解显示，依赖模式（Sdep）是最容易被蒸馏复制的行为维度。
+
+---
+
+### 块18-19：附录D——鲁棒性与敏感性分析
+
+#### 中文翻译
+
+**附录D：鲁棒性与敏感性分析**
+
+我们测试了指标在模型池、参照模型和采样设置变化下的稳定性。
+
+**D.1 Snode的敏感性分析**
+
+强制/可选工具的划分取决于分析中包含的模型集合。我们在第5.1节使用的同一50任务子集上测试其稳定性，通过采样100个子集（每个子集移除参照模型和目标模型以外的两个模型）并重新计算Snode。
+
+**表9：** Snode在50任务血统子集上的敏感性分析，以Claude Sonnet 4.5（thinking）为参照模型，使用100个重采样模型池（移除两个非参照、非目标模型）。CV表示变异系数。
+
+| 模型 | 完整Snode | 均值±标准差 | CV |
+|------|----------|------------|-----|
+| Kimi-K2 (thinking) | 82.6% | 80.8% ± 1.2% | 1.5% |
+| GLM-4.6 | 79.9% | 78.4% ± 1.2% | 1.6% |
+| Kimi-K2 | 73.8% | 72.1% ± 1.8% | 2.5% |
+| DeepSeek-V3.1 (thinking) | 72.2% | 70.6% ± 1.5% | 2.2% |
+| DeepSeek-R1 | 71.0% | 69.6% ± 1.3% | 1.9% |
+| GPT-5 | 69.4% | 67.9% ± 1.9% | 2.7% |
+| Gemini-2.5-Pro | 68.2% | 66.1% ± 1.9% | 2.8% |
+| Doubao-1.6 (high) | 63.0% | 61.0% ± 1.0% | 1.6% |
+
+各模型对的CV范围为1.5%到2.8%。排名在重采样的模型池中保持稳定。
+
+**D.2 多参照分析**
+
+我们测试指标是否捕捉方向性相似度而非基准级趋同。在相同的50任务子集上计算AGS，分别以GPT-5和Claude Sonnet 4.5（thinking）为参照模型。
+
+**表10：** 50任务血统子集上的AGS，分别使用Claude Sonnet 4.5（thinking）或GPT-5作为参照模型。正∆表示对Claude的相似度更高。
+
+| 模型 | 对照Claude | 对照GPT-5 | ∆ |
+|------|-----------|----------|---|
+| Kimi-K2 (thinking) | 81.9% | 76.1% | +5.8% |
+| DeepSeek-R1 | 77.9% | 70.1% | +7.7% |
+| GLM-4.6 | 79.6% | 76.5% | +3.1% |
+| DeepSeek-V3.1 (thinking) | 75.9% | 73.9% | +2.0% |
+| Kimi-K2 | 75.9% | 74.9% | +1.0% |
+| Doubao-1.6 (high) | 72.0% | 67.5% | +4.5% |
+| Gemini-2.5-Pro | 71.2% | 67.9% | +3.3% |
+| Claude-Opus-4.1 (thinking) | 82.1% | 73.5% | +8.6% |
+
+所有评估模型对Claude的AGS均高于对GPT-5。Kimi-K2（thinking）对照Claude高5.8%，而Claude Opus 4.1（thinking）的差距最大（8.6%）。因此，该指标随参照模型变化，而非坍缩为基准测试特定的相似度基线。
+
+**D.3 依赖边检测准确性**
+
+我们随机采样50条由LLM评审器识别为依赖的边，并与人工标注进行比较。
+
+DeepSeek-V3在该样本上达到96%的准确率。主要错误来源是可能来源于用户输入或先前工具结果的歧义值。
+
+**D.4 RPS评审器一致性**
+
+我们在同一组50个航空领域阶段比较（Claude Sonnet 4.5（thinking）对Kimi-K2（thinking））上衡量了两个评审器Gemini-2.5-Flash-Thinking和DeepSeek-V3之间的一致性。
+
+**表11：** Gemini-2.5-Flash-Thinking和DeepSeek-V3之间在50个航空领域阶段比较上的RPS评分评分者间一致性。
+
+| 指标 | 值 |
+|------|-----|
+| 样本量 | 50 |
+| Cohen's Kappa（二次加权） | 0.70 |
+| 精确一致 | 46% |
+| 接近一致（±1） | 94% |
+
+**评分者间温度下的排名稳定性。** 我们将Gemini-2.5-Flash-Thinking的温度在t=0.0、0.7和1.0之间变化，对100个随机采样的零售领域意图块进行评估，衡量三个模型对与Claude Sonnet 4.5（thinking）的相似度。
+
+**表12：** Gemini-2.5-Flash-Thinking在三个评审器温度下对100个随机采样的零售领域意图块的RPS得分。
+
+| 模型 | t=0.0 | t=0.7 | t=1.0 | 范围 |
+|------|-------|-------|-------|------|
+| Kimi-K2 (thinking) | 3.708 | 3.433 | 3.505 | 0.275 |
+| GPT-4.1 | 3.351 | 3.273 | 3.144 | 0.207 |
+| DeepSeek-V3-0324 | 2.978 | 2.840 | 2.876 | 0.138 |
+
+排名Kimi-K2 > GPT-4.1 > DeepSeek-V3-0324在所有三个温度下保持不变。绝对得分范围在0.138–0.275之间，而所有成对差距保持正值。
+
+**重测信度。** 我们在每个温度下对相同的100个意图块（Kimi-K2（thinking）对Claude Sonnet 4.5（thinking））重复运行相同的评审器两次。
+
+**表13：** Gemini-2.5-Flash-Thinking在不同评审器温度下对100个意图块的重测信度。
+
+| 温度 | Pearson r | 精确一致 | ±1一致 |
+|------|-----------|---------|--------|
+| 0.0 | 0.852 | 79.3% | 94.6% |
+| 0.7 | 0.727 | 53.8% | 93.5% |
+| 1.0 | 0.590 | 39.8% | 88.2% |
+
+所有三个信度指标随评审器温度单调下降。在默认设置（t=0.7）下，精确一致降至53.8%，而±1一致仍为93.5%。
+
+**D.5 温度敏感性**
+
+我们在保持Claude Sonnet 4.5（thinking）为参照模型的情况下，改变被比较模型的采样温度。
+
+**表14：** Kimi-K2（thinking）和DeepSeek-V3-0324在不同模型采样温度下的AGS，50个随机采样的τ-bench任务，每个温度3次运行，以Claude Sonnet 4.5（thinking）为参照模型。
+
+| 模型 | 温度 | AGS | Snode | Sseq | Sdep |
+|------|------|-----|-------|------|------|
+| Kimi-K2 (thinking) | 0.3 | 0.862±0.049 | 0.880 | 0.754 | 0.996 |
+| | 0.7 | 0.836±0.010 | 0.846 | 0.746 | 0.954 |
+| | 1.0 | 0.809±0.026 | 0.835 | 0.729 | 0.932 |
+| | 范围 | 0.053 | 0.045 | 0.025 | 0.064 |
+| DeepSeek-V3-0324 | 0.3 | 0.675±0.043 | 0.720 | 0.529 | 0.764 |
+| | 0.7 | 0.649±0.025 | 0.693 | 0.540 | 0.734 |
+| | 1.0 | 0.687±0.051 | 0.706 | 0.536 | 0.750 |
+| | 范围 | 0.038 | 0.027 | 0.011 | 0.030 |
+
+模型内AGS变异：Kimi-K2（thinking）为0.053，DeepSeek-V3-0324为0.038。在所有温度设置下，Kimi-K2（thinking）保持AGS≈0.81–0.86，而DeepSeek-V3-0324保持AGS≈0.65–0.69。即使在最具对抗性的比较下（Kimi在t=1.0 vs. DeepSeek在t=0.3），模型间差距（0.134）也超过最大模型内范围的2.5倍。温度引起的变异也小于蒸馏信号幅度的一半（13个百分点，表3）。
+
+**D.6 与基线指标的相关性**
+
+我们在16个非Anthropic模型上计算成对相关性，以Claude Sonnet 4.5（thinking）为参照模型在τ-bench上进行评估。
+
+**表15：** 16个非Anthropic模型在τ-bench上以Claude Sonnet 4.5（thinking）为参照的GED、AGS、RSE和RPS之间的成对相关性。
+
+| 指标对 | Pearson r | p值 | Spearman ρ | p值 |
+|--------|-----------|-----|------------|-----|
+| GED vs AGS | 0.806 | <0.001 | 0.844 | <0.001 |
+| RSE vs RPS | 0.682 | 0.004 | 0.701 | 0.003 |
+| AGS vs RPS | 0.491 | 0.054 | 0.484 | 0.057 |
+
+GED–AGS和RSE–RPS显示出中到高的相关性。AGS–RPS较低（r=0.491，p=0.054），与两个指标针对不同行为流的预期一致。
+
+**测量分辨率。** RSE将16个模型中的12个置于0.51分宽的波段内（2.05–2.56，1–5分制），而RPS跨度1.25分（2.40–3.65），并增加了风格、结构和对齐子分数。
+
+**可解释性。** GED是一个单一标量。对于Kimi-K2（thinking），GED = 78.1，而AGS将相似度分解为Sdep = 94.7%、Snode = 82.6%和Sseq = 70.8%，将依赖复用与序列习惯分离开来。
+
+**D.7 框架选择分析**
+
+作为初步分析，我们考察智能体框架是否影响行为相似度。我们比较了具有最小行为约束的通用ReAct框架和OpenHands（后者添加了"组合多个动作"和"使用高效工具"等显式指令）。
+
+**表16：** GPT-5和Claude Sonnet 4.5（thinking）在基线ReAct框架和OpenHands下的AGS（初步，14个任务）。
+
+| 子指标 | 基线 | OpenHands | ∆ |
+|--------|------|-----------|-----|
+| Snode | 0.21 | 0.76 | +0.55 |
+| Sseq | 0.76 | 0.89 | +0.13 |
+| Sdep | 0.99 | 1.00 | +0.01 |
+
+Snode在OpenHands下上升了+0.55，而Sseq和Sdep仅变化了+0.13和+0.01。因此，框架约束对工具选择的影响大于对执行顺序或数据流复用的影响。这就是为什么我们在主实验中使用具有最小约束的通用ReAct框架。
+
+#### 关键Takeaway
+
+附录D全面验证了指标的鲁棒性：Snode在不同模型池中保持稳定（CV<3%）；AGS对参照模型的选择有方向性反应；依赖边检测达96%准确率；RPS评审器评分在合理温度范围内排名稳定；温度引起的模型内变异远小于模型间差距。这些实验共同建立了指标的可信度。
+
+---
+
+### 块20：附录E——补充案例研究
+
+#### 中文翻译
+
+**附录E：补充案例研究**
+
+**E.1 RPS案例研究**
+
+我们为RPS的结构和对齐维度提供补充案例研究。
+
+**结构趋同可以成为跨模型的区分性特征。** 图5（见上方图表资源）展示了航空预订任务中的案例。Claude Sonnet 4.5（thinking）和Kimi-K2在回复结构上自发趋同。当初始搜索失败时，两个模型采用几乎相同的措辞描述回退策略。在最终回复阶段，两者转向高度组织化、模板化的格式，使用粗体标题和列表式呈现，而用户请求或系统提示均未要求如此。这些结构上的相似性促使RPS得分更高。GPT-5则使用更直接紧凑的结构，格式有限，导致RPS得分较低。
+
+**对齐模式相似性突显交互中的幻觉。** 在电信领域，模型在解释工具边界方面存在差异，揭示出作为行为相似性指标的对齐模式。在图6（见上方图表资源）中，GPT-5指示用户调用智能体端的模拟工具，错误地假设用户可以访问这些功能。Claude Sonnet 4.5（thinking）和Kimi-K2则认识到这一限制，提供了针对真实设备操作的分步说明。它们的措辞不同，但故障排除策略是一致的。这使得RPS得分更高（约3.75），而GPT-5因工具引导幻觉得分为1.50。即使在表层措辞不同的情况下，对齐子指标仍然会放大由输出幻觉引起的差异。
+
+**E.2 AGS案例研究**
+
+我们提供了Sseq和Sdep子指标的详细分析。
+
+**序列模式相似度捕捉工具调用顺序的一致性。** 在"都正确"设置下（表4），所有三个对的Sseq值都高且相似：Kimi–GPT为0.912，GPT–Claude为0.904，Kimi–Claude为0.892。当所有模型都成功时，它们往往遵循相似的正确答案路径，因此序列相似度区分度较低。然而在"都错误"设置下，Kimi–Claude对达到0.829，而GPT–Claude为0.680，Kimi–GPT为0.583。一旦任务失败，重试顺序和恢复策略成为模型特定的决策。Kimi和Claude在此设置下的高相似度表明共享的错误处理模式。值得注意的是，GED在"都错误"设置下将Kimi–GPT对排名最高（0.594），而Kimi–Claude对仅为0.558。Sseq捕捉到了GED遗漏的序列级趋同。
+
+**依赖模式相似度捕捉工具间参数依赖的一致性。** 在所有三种设置下，Kimi–Claude对的Sdep最高，在混合设置下为0.917，在"都正确"设置下高达0.993，而其他两对保持在0.90以下。差距在"都正确"设置下最大，次高对仅达到0.882。因此，Kimi和Claude不仅在工具选择上对齐，而且在工具输出如何馈入后续调用方面也对齐。与Sseq类似，GED在"都错误"设置下将Kimi–GPT对排名最高，而Sdep将Kimi–Claude对排名最高。因此，Sdep捕捉了GED遗漏的依赖级一致性。
+
+#### 关键Takeaway
+
+附录E的案例研究直观展示了RPS和AGS指标的诊断能力。特别值得注意的是"都错误"场景下的分析：当所有模型都失败时，AGS的子指标（尤其是Sseq和Sdep）能揭示出GED等现有指标无法捕捉的、模型间的错误模式相似性。Kimi-K2和Claude在错误处理模式上的高度一致是蒸馏的有力证据。
+
+---
+
+### 块21：图5和图6——RPS结构和对齐维度案例可视化
+
+（这两个图已在块20的翻译中详细描述。以下是补充说明。）
+
+图5（见上方图表资源）展示了Kimi-K2（thinking）和Claude Sonnet 4.5（thinking）在航空预订任务回复结构上的趋同。当初始航班搜索无结果时，两者都使用几乎相同的措辞描述替代方案搜索策略。在最终确认阶段，两者都使用粗体标题+列表的模板化格式。GPT-5则使用更紧凑的指令式风格，结构评分较低（3.00 vs 4.00）。
+
+图6（见上方图表资源）展示了电信故障排除任务中的对齐模式差异。GPT-5产生工具幻觉，指示用户使用智能体端工具（如reseat_sim_card、toggle_airplane_mode），错误假设用户能访问这些功能。Claude和Kimi-K2则认识到这一限制，提供真实的设备操作指导（如检查飞行模式、重新插拔SIM卡）。尽管措辞不同，两者的故障排除策略一致，对齐评分较高（3.50 vs 2.75）。
+
+---
+
+## 复核建议
+
+### 1. 已确认的内容
+
+- **论文核心问题**：量化LLM智能体蒸馏导致的行为同质化，区分"唯一正确路径导致的趋同"和"模仿导致的趋同"。
+- **核心方法**：提出两个互补指标——RPS（响应模式相似度，基于语言风格、结构和对齐）和AGS（动作图相似度，基于工具选择、序列模式和依赖模式）。
+- **关键发现**：Kimi-K2 (thinking)与Claude Sonnet 4.5 (thinking)在所有非Anthropic模型中行为相似度最高（AGS 82.7%, RPS 3.65），Snode（82.6%）和Sdep（94.7%）甚至超过Anthropic族内模型Opus 4.1。
+- **实验验证**：受控蒸馏实验证实AGS能区分面向教师模型的特定趋同（+0.13）与通用改进（向对照−0.05），而GED无法区分（向两者均为正增长）。
+
+### 2. 需要复核的重点
+
+- **公式还原**：附录B中的数学公式（余弦相似度、强制/可选工具集合运算）已根据上下文还原，建议对照原文PDF核实。
+- **表格格式**：表1（18个模型完整结果表）为Markdown表格，建议核对数值与原文是否一致。
+- **温度敏感性数据**：表14中的AGS标准差数据（如0.862±0.049）建议对照原文核实。
+- **图片引用**：翻译中使用了"图X（见上方图表资源）"的引用方式，未使用![]()标记。建议确认图表资源画廊中的20张图片与论文中Figure 1-6的对应关系。
+- **附录提示词**：附录A.1和A.3的LLM提示词内容为摘要性翻译，详细原文请参见论文PDF的第11-15页。
+
+### 3. 潜在问题
+
+- **图片文件名**：assets/目录中的图片文件名为page-001-img-01.jpeg至page-001-img-14.jpeg和page-004-img-01.jpeg至page-004-img-06.jpeg，共计20张。论文正文中引用的是Figure 1-6编号，两者之间的映射关系需要人工确认。
+- **术语统一性**：翻译中使用了"智能体"对应"Agent"、"蒸馏"对应"Distillation"，建议全文保持统一。
+- **附录内容**：附录A-C的提示词和JSON格式内容较多，当前翻译为摘要性概述，如需完整翻译请参考原文PDF。

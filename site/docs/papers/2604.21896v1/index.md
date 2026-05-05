@@ -1,26 +1,27 @@
-# Nemobot Games：利用大语言模型构建交互式学习的战略性AI游戏智能体
+# paper
 
 <!-- 论文元数据卡片 -->
 <div class="paper-meta">
   <div class="paper-meta-item">
     <span class="paper-meta-label">机构</span>
-    <span class="paper-meta-value org-MiniMax">MiniMax</span>
+    <span class="paper-meta-value org-"></span>
   </div>
   <div class="paper-meta-item">
     <span class="paper-meta-label">方向</span>
-    <span class="paper-meta-value">AI Agent</span>
+    <span class="paper-meta-value"></span>
   </div>
   <div class="paper-meta-item">
     <span class="paper-meta-label">日期</span>
-    <span class="paper-meta-value">2026-04-23</span>
+    <span class="paper-meta-value"></span>
   </div>
 </div>
 
 !!! info ""
     <span class="paper-tag paper-tag-translated">✅ 已完成精读</span>
 
-- **来源**：[MiniMax arXiv query](https://arxiv.org/abs/2604.21896v1)
-- **论文链接**：[2604.21896v1](https://arxiv.org/pdf/2604.21896v1)
+- **来源**：[]()
+- **论文链接**：[]()
+- **状态**：待复核
 
 ## 摘要
 
@@ -38,6 +39,31 @@
 Nemobot 通过提供一个**可编程环境**进一步放大了这一框架——用户可以在其中实验工具增强的生成（tool-augmented generation）和战略性游戏智能体的微调（fine-tuning）。从战略游戏到角色扮演游戏，Nemobot 展示了 AI 智能体如何通过整合众包学习（crowdsourced learning）和人类创造力来实现一种形式的**自编程（self-programming）**，迭代地优化其自身逻辑。这代表了向**自编程 AI（self-programming AI）**长期目标迈出的一步。
 
 [扩展] 本文的核心创新在于将 Shannon 1950 年代提出的经典游戏机器分类法与现代 LLM 能力相结合，构建了一个既具有教育价值又具备研究深度的编程框架。它不是简单地用 LLM 来玩游戏，而是让 LLM 成为"游戏编程"的一部分，从而实现了从"用 AI 玩游戏"到"用 AI 教人做游戏 AI"的范式跃迁。
+
+
+## 图表资源
+- ![](assets/page-001-img-01.png)
+- ![](assets/page-001-img-02.png)
+- ![](assets/page-001-img-03.png)
+- ![](assets/page-001-img-04.png)
+- ![](assets/page-001-img-05.png)
+- ![](assets/page-002-img-01.png)
+- ![](assets/page-002-img-02.png)
+- ![](assets/page-002-img-03.png)
+- ![](assets/page-002-img-04.png)
+- ![](assets/page-002-img-05.png)
+- ![](assets/page-002-img-06.png)
+- ![](assets/page-002-img-07.png)
+- ![](assets/page-002-img-08.png)
+- ![](assets/page-002-img-09.png)
+- ![](assets/page-005-img-01.png)
+- ![](assets/page-005-img-02.png)
+- ![](assets/page-006-img-01.png)
+- ![](assets/page-006-img-02.png)
+- ![](assets/page-006-img-03.png)
+- ![](assets/page-006-img-04.png)
+
+
 
 ---
 

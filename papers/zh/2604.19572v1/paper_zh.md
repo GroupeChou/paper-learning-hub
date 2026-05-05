@@ -1,10 +1,53 @@
-# TACO：通过观察上下文压缩实现终端Agent的自演化框架
+# paper
 
-## TACO: A Self-Evolving Framework for Efficient Terminal Agents via Observational Context Compression
+<!-- 论文元数据卡片 -->
+<div class="paper-meta">
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">机构</span>
+    <span class="paper-meta-value org-"></span>
+  </div>
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">方向</span>
+    <span class="paper-meta-value"></span>
+  </div>
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">日期</span>
+    <span class="paper-meta-value"></span>
+  </div>
+</div>
 
-任金成¹\*, 吴思伟¹\*†, 李宜之¹\*, 朱康², 徐舒³, 冯博宇², 袁瑞彬⁴, 张伟⁵, Batista-Navarro Riza¹, 杨健⁵‡, 林成华¹‡
+!!! info ""
+    <span class="paper-tag paper-tag-translated">✅ 已完成精读</span>
 
-¹曼彻斯特大学  ²MAP  ³港科大(广州)  ⁴港科大  ⁵北京航空航天大学
+- **来源**：[]()
+- **论文链接**：[]()
+- **状态**：已生成
+
+## 摘要
+
+
+
+## 图表资源
+- ![](assets/page-002-img-01.png)
+- ![](assets/page-002-img-02.png)
+- ![](assets/page-004-img-01.png)
+- ![](assets/page-004-img-02.png)
+- ![](assets/page-004-img-03.jpeg)
+- ![](assets/page-004-img-04.png)
+- ![](assets/page-004-img-05.png)
+- ![](assets/page-004-img-06.jpeg)
+- ![](assets/page-004-img-07.jpeg)
+- ![](assets/page-004-img-08.png)
+- ![](assets/page-004-img-09.png)
+- ![](assets/page-004-img-10.png)
+- ![](assets/page-004-img-11.png)
+- ![](assets/page-004-img-12.jpeg)
+- ![](assets/page-004-img-13.png)
+- ![](assets/page-004-img-14.png)
+
+
+
+---
 
 ---
 

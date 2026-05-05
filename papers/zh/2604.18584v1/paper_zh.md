@@ -1,15 +1,67 @@
-# MathNet：数学推理与检索的国际多模态基准
+# paper
 
-## MathNet: A Global Multimodal Benchmark for Mathematical Reasoning and Retrieval
+<!-- 论文元数据卡片 -->
+<div class="paper-meta">
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">机构</span>
+    <span class="paper-meta-value org-"></span>
+  </div>
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">方向</span>
+    <span class="paper-meta-value"></span>
+  </div>
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">日期</span>
+    <span class="paper-meta-value"></span>
+  </div>
+</div>
 
-**ICLR 2026 会议论文**
+!!! info ""
+    <span class="paper-tag paper-tag-translated">✅ 已完成精读</span>
 
-Shaden Alshammari¹\*, Kevin Wen¹\*, Abrar Zainal³\*, Mark Hamilton¹, Navid Safaei⁴, Sultan Albarakati², William T. Freeman¹†, Antonio Torralba¹†
+- **来源**：[]()
+- **论文链接**：[]()
+- **状态**：待复核
 
-¹MIT  ²KAUST  ³HUMAIN  ⁴独立研究者
-\*† 同等贡献
+## 摘要
 
-网站：mathnet.mit.edu
+
+
+## 解析备注
+
+- 图片数量超过上限，仅保留前 20 张。
+- 图片数量超过上限，仅保留前 20 张。
+- 图片数量超过上限，仅保留前 20 张。
+- 图片数量超过上限，仅保留前 20 张。
+- 图片数量超过上限，仅保留前 20 张。
+- 图片数量超过上限，仅保留前 20 张。
+- 图片数量超过上限，仅保留前 20 张。
+
+## 图表资源
+- ![](assets/page-001-img-01.png)
+- ![](assets/page-001-img-02.png)
+- ![](assets/page-001-img-03.jpeg)
+- ![](assets/page-001-img-04.jpeg)
+- ![](assets/page-001-img-05.jpeg)
+- ![](assets/page-001-img-06.png)
+- ![](assets/page-001-img-07.png)
+- ![](assets/page-001-img-08.png)
+- ![](assets/page-001-img-09.png)
+- ![](assets/page-001-img-10.png)
+- ![](assets/page-001-img-11.png)
+- ![](assets/page-001-img-12.png)
+- ![](assets/page-001-img-13.jpeg)
+- ![](assets/page-001-img-14.png)
+- ![](assets/page-001-img-15.png)
+- ![](assets/page-001-img-16.png)
+- ![](assets/page-001-img-17.png)
+- ![](assets/page-001-img-18.png)
+- ![](assets/page-001-img-19.png)
+- ![](assets/page-001-img-20.png)
+
+
+
+---
 
 ---
 

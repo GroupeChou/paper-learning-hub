@@ -1,16 +1,40 @@
-# 首先不造成伤害（使用大语言模型）：通过智能体工作流缓解种族偏见
+# paper
 
-**First, Do No Harm (with LLMs): Mitigating Racial Bias via Agentic Workflows**
+<!-- 论文元数据卡片 -->
+<div class="paper-meta">
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">机构</span>
+    <span class="paper-meta-value org-"></span>
+  </div>
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">方向</span>
+    <span class="paper-meta-value"></span>
+  </div>
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">日期</span>
+    <span class="paper-meta-value"></span>
+  </div>
+</div>
+
+!!! info ""
+    <span class="paper-tag paper-tag-translated">✅ 已完成精读</span>
+
+- **来源**：[]()
+- **论文链接**：[]()
+- **状态**：已生成
+
+## 摘要
+
+
+
+## 图表资源
+- ![](assets/page-004-img-01.png)
+- ![](assets/page-006-img-01.png)
+- ![](assets/page-007-img-01.png)
+
+
 
 ---
-
-| 元信息 | 内容 |
-|--------|------|
-| **作者** | Sihao Xing（都柏林理工大学，企业计算与数字转型学院）、Zaur Gouliev（都柏林大学学院，信息与传播研究学院） |
-| **发表时间** | 2025年12月（预印本） |
-| **arXiv ID** | 2604.18038v1 |
-| **领域** | AI安全 · LLM偏见评估 · 医疗AI · 智能体工作流 |
-| **关键词** | Racial Bias（种族偏见）, LLM in Healthcare（医疗LLM）, Agentic Workflows（智能体工作流）, EU AI Act（欧盟AI法案）, Differential Diagnosis（鉴别诊断） |
 
 ---
 
@@ -239,7 +263,6 @@ Zack等人[13]引入了一个系统性框架，用于评估医疗相关LLM应用
 
 ### 4.1 实验设计概览
 
-![图1: 实验流程](../assets/2604.18038v1_fig1_pipeline.png)
 *图1：整体实验流程——从多模型比较到种族偏见评估，再到智能体工作流实现，最后重新评估*
 
 **整体实验流程**遵循以下阶段：
@@ -335,7 +358,6 @@ Zack等人[13]引入了一个系统性框架，用于评估医疗相关LLM应用
 
 #### 4.2.3 实验II：AI智能体工作流
 
-![图2: 智能体工作流流程](../assets/2604.18038v1_fig2_agentic.png)
 *图2：智能体工作流架构——Start → Search Agent → RAG Agent → Final DDx*
 
 **工作流模块详解：**

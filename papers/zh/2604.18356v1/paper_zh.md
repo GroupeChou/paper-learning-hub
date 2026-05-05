@@ -1,10 +1,57 @@
-# ComPASS：工具增强陪伴面向个性化智能体社交支持
+# paper
 
-## ComPASS: Towards Personalized Agentic Social Support via Tool-Augmented Companionship
+<!-- 论文元数据卡片 -->
+<div class="paper-meta">
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">机构</span>
+    <span class="paper-meta-value org-"></span>
+  </div>
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">方向</span>
+    <span class="paper-meta-value"></span>
+  </div>
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">日期</span>
+    <span class="paper-meta-value"></span>
+  </div>
+</div>
 
-黄兆沛\*, 贾燕峰\*, 赵嘉懿\*, 张欣洁, 王文宣, 金琴†
+!!! info ""
+    <span class="paper-tag paper-tag-translated">✅ 已完成精读</span>
 
-中国人民大学  北京航空航天大学
+- **来源**：[]()
+- **论文链接**：[]()
+- **状态**：已生成
+
+## 摘要
+
+
+
+## 图表资源
+- ![](assets/page-002-img-01.png)
+- ![](assets/page-002-img-02.png)
+- ![](assets/page-002-img-03.png)
+- ![](assets/page-002-img-04.png)
+- ![](assets/page-002-img-05.png)
+- ![](assets/page-005-img-01.png)
+- ![](assets/page-005-img-02.png)
+- ![](assets/page-005-img-03.png)
+- ![](assets/page-005-img-04.png)
+- ![](assets/page-005-img-05.png)
+- ![](assets/page-005-img-06.png)
+- ![](assets/page-005-img-07.png)
+- ![](assets/page-005-img-08.png)
+- ![](assets/page-005-img-09.png)
+- ![](assets/page-005-img-10.png)
+- ![](assets/page-008-img-01.png)
+- ![](assets/page-008-img-02.png)
+- ![](assets/page-008-img-03.png)
+- ![](assets/page-017-img-01.png)
+- ![](assets/page-017-img-02.png)
+
+
+
+---
 
 ---
 

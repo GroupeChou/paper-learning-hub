@@ -1,26 +1,27 @@
-# M2-PALE：通过过程挖掘和大语言模型解释多智能体 MCTS-Minimax 混合框架
+# paper
 
 <!-- 论文元数据卡片 -->
 <div class="paper-meta">
   <div class="paper-meta-item">
     <span class="paper-meta-label">机构</span>
-    <span class="paper-meta-value org-MiniMax">MiniMax</span>
+    <span class="paper-meta-value org-"></span>
   </div>
   <div class="paper-meta-item">
     <span class="paper-meta-label">方向</span>
-    <span class="paper-meta-value">AI Agent</span>
+    <span class="paper-meta-value"></span>
   </div>
   <div class="paper-meta-item">
     <span class="paper-meta-label">日期</span>
-    <span class="paper-meta-value">2026-04-16</span>
+    <span class="paper-meta-value"></span>
   </div>
 </div>
 
 !!! info ""
     <span class="paper-tag paper-tag-translated">✅ 已完成精读</span>
 
-- **来源**：[MiniMax arXiv query](https://arxiv.org/abs/2604.14687v1)
-- **论文链接**：[2604.14687v1](https://arxiv.org/pdf/2604.14687v1)
+- **来源**：[]()
+- **论文链接**：[]()
+- **状态**：待复核
 
 ## 摘要
 
@@ -31,6 +32,31 @@
 此外，为揭示由此产生的决策逻辑，我们引入 **M2-PALE（MCTS–Minimax Process-Aided Linguistic Explanations / MCTS-Minimax 过程辅助语言解释）**框架。该框架采用**过程挖掘（Process Mining）技术**——具体是 Alpha Miner、iDHM 和 Inductive Miner 算法——从智能体执行轨迹中提取底层行为工作流。这些过程模型随后由 LLM 综合生成人类可读的**因果解释和远端解释（distal explanations）**。我们在小规模跳棋（checkers）环境中展示了该方法的有效性，为在日益复杂的战略领域中解释混合智能体建立了可扩展的基础。
 
 [扩展] 本文的核心洞察是将两个看似不相关的领域结合起来：(1) 游戏搜索算法的可解释性（XRL），(2) 商业流程分析的过程挖掘（Process Mining）。作者发现 MCTS-Minimax 混合智能体的决策轨迹可以被视为"事件日志"，然后用成熟的过程挖掘工具来发现其中的行为模式，最后用 LLM 将形式化的过程模型翻译成人类能理解的策略叙述。这是一个跨学科方法创新的典型案例。
+
+
+## 图表资源
+- ![](assets/page-005-img-01.png)
+- ![](assets/page-006-img-01.png)
+- ![](assets/page-007-img-01.png)
+- ![](assets/page-013-img-01.png)
+- ![](assets/page-013-img-02.png)
+- ![](assets/page-013-img-03.png)
+- ![](assets/page-024-img-01.png)
+- ![](assets/page-025-img-01.png)
+- ![](assets/page-026-img-01.png)
+- ![](assets/page-027-img-01.png)
+- ![](assets/page-027-img-02.png)
+- ![](assets/page-028-img-01.png)
+- ![](assets/page-029-img-01.png)
+- ![](assets/page-030-img-01.png)
+- ![](assets/page-031-img-01.png)
+- ![](assets/page-031-img-02.png)
+- ![](assets/page-032-img-01.png)
+- ![](assets/page-033-img-01.png)
+- ![](assets/page-033-img-02.png)
+- ![](assets/page-034-img-01.png)
+
+
 
 ---
 
@@ -630,3 +656,384 @@ M2-PALE 是首个专门针对 **MCTS-Minimax 混合智能体**的可解释性框
 - **游戏 AI 开发者**：MCTS-Minimax 混合模型的可解释性方案
 - **过程挖掘从业者**：将应用领域从业务流程扩展到 AI 决策的新案例
 - **LLM 工程师**：结构化提示词模板（Listing 1.1）可直接参考使用
+
+---
+
+## 附录 A — 基于试验 1、2、3 评估过程模型（Evaluate Process Models Based on Trial 1, Trial 2, Trial 3）
+
+### 中文翻译
+
+本附录详细记录了三个试验中所有过程模型的评估结果。
+
+### A.1 试验 1：可变迭代次数（Variable Iteration Times）
+
+**迭代次数 = 1000：**
+- **红方智能体**：图 8 展示了 iDHM 算法生成的 C-net，图 9 展示了 Inductive Miner 产生的 Petri-net。Model 5（Alpha Miner）和 Model 6（Inductive Miner）分别汇总了红方智能体的全局统计。Alpha Miner 生成的 Petri-net 的 trace fitness 为 0.10，move-model fitness 为 0.77，move-log fitness 为 0.10。由于所有指标均低于 1.0 阈值，被归类为非适配模型。相比之下，Inductive Miner 产生了完美适配模型，所有 fitness 值均达到 1.0。
+- **白方智能体**：图 10（C-net）和图 11（Petri-net）展示了白方智能体的结果。Model 7 和 Model 8 提供对应统计。Alpha Miner 和 Inductive Miner 在所有 fitness 指标上均取得完美分数（1.0），表明是适配模型。
+
+**迭代次数 = 2000：**
+- **红方智能体**：发现的模型如图 12 和图 13 所示。Model 9 和 Model 10 的统计显示两种算法均产生了适配模型，三项评估指标均完美（1.0）。
+- **白方智能体**：参考图 10 和图 11，Model 11 和 Model 12 表明两种算法均保持了完美一致性，产生适配模型。
+
+**迭代次数 = 3000：**
+- **红方智能体**：如图 16 和图 17 所示，Model 13 和 Model 14 评估红方智能体的过程。两种模型均达到完美 fitness，符合适配模型条件。
+- **白方智能体**：结果如图 18 和图 19 所示。在 Model 15（Alpha Miner）中，trace fitness（0.12）、move-model fitness（0.94）和 move-log fitness（0.11）表明其为非适配模型。但 Model 16（Inductive Miner）仍是适配模型，分数完美。
+
+**完美 Fitness 模型（6–12, 14, 16）**：这些模型展示了与事件日志的理想一致性。Trace、Move-Model 和 Move-Log 指标的最大 fitness 值（1.0）表明这些过程模型精确捕获了 3v3 跳棋领域内活动的顺序流动和单个转移。
+
+**非完美 Fitness 模型（5, 13, 15）**：Model 5 表现出最显著偏差，所有指标得分极低，表明未能表示实际过程逻辑。Model 13 显示出差异——Move-Model fitness 高（0.91）表明单个转移被捕获，但低 Trace Fitness（0.15）揭示了整体活动序列表示不佳。同样，Model 15 反映了高转移精度（0.94），但未能与日志中的全局执行序列对齐。
+
+### A.2 试验 2：固定迭代次数、固定 Minimax 搜索深度、可变模拟深度
+
+**模拟深度 = 10：**
+- 红方智能体（Model 17, 18）和白方智能体（Model 19, 20）使用两种算法均实现了完美一致性。图 20 至图 23 可视化了这些适配模型。
+
+**模拟深度 = 20：**
+- **红方智能体**：Model 21 和 22 显示两种算法均为完美 fitness。
+- **白方智能体**：在 Model 23（Alpha Miner）中，虽然 move-model fitness 达到 1.0，但 trace fitness（0.14）和 move-log fitness（0.12）显著较低，归类为非适配。Model 24（Inductive Miner）保持了完美 fitness。
+
+**模拟深度 = 30：**
+- **红方智能体**：Model 25（Alpha Miner）为非适配模型，move-model fitness 为 0.82，trace/move-log fitness 为 0.12。Model 26（Inductive Miner）保持完美适配。
+- **白方智能体**：Model 27 和 28 均显示完美一致性。
+
+**一致性高 Fitness**：大多数模型（17, 18, 20–22, 24, 26–28）与实验数据完美对齐（1.0）。这种一致性表明发现的模型在表示可变模拟深度下智能体决策过程方面高度鲁棒。
+
+**性能异常**：Model 19, 23, 25 观察到显著偏差。在 Model 19 和 23 中，尽管 Move-Model fitness 完美，但 Move-Log fitness 急剧下降，表明模型结构理论上合理但与日志中观察到的执行频率不一致。Model 25 代表了更严重的不对齐——结构表示和日志重放均存在缺陷。有趣的是，Trace Fitness 在大多数模型中持续保持 1.00，表明模型的追踪方面不受其他波动影响。
+
+### A.3 试验 3：固定模拟深度、固定迭代次数、可变 Minimax 搜索深度
+
+**Minimax 搜索深度 = 1：**
+- **红方智能体**：Model 29（Alpha Miner）为非适配（Trace: 0.94, Move-Model: 0.09）。Model 30（Inductive Miner）完美适配。
+- **白方智能体**：Model 31 和 32 均显示完美一致性。
+
+**Minimax 搜索深度 = 2：**
+- **红方智能体**：Model 33 和 34 均展示完美适配。
+- **白方智能体**：Model 35（Alpha Miner）为非适配（Trace: 0.15, Move-Log: 0.13），而 Model 36（Inductive Miner）完美适配。
+
+**Minimax 搜索深度 = 3：**
+- **红方智能体**：Model 37 和 38 均保持完美一致性。
+- **白方智能体**：Model 39（Alpha Miner）的 move-model fitness 为 0.99，但 trace（0.21）和 move-log（0.19）较低。Model 40（Inductive Miner）保持完美适配。
+
+**完美模型一致性**：Model 29, 30, 32–34, 36–38, 40 表现出色，fitness 值为 1.00。这表明模型准确追踪实时智能体数据，转移序列与观察到的游戏日志完全一致。
+
+**非适配模型与逻辑分歧**：Model 31, 35, 39 作为异常值突出。Model 31 中 Trace 和 Move-Log fitness 的显著下降表明模型映射到经验数据的精度较低。在 Model 39 中，高 Move-Model fitness（0.99）与低 Trace fitness（0.21）并存，揭示了逻辑分歧——虽然单个动作被捕获，但较深 Minimax 搜索产生的聚合序列与标准期望产生显著偏差。
+
+### 术语解释
+
+| 英文术语 | 中文译名 | 一句话解释 | 应用场景 |
+|----------|----------|-----------|----------|
+| Perfect Conformance | 完美一致性 | 模型与日志在所有指标上完全匹配（fitness=1.0） | Inductive Miner 的标准表现 |
+| Non-fitting Model | 非适配模型 | 至少一项 fitness 指标低于 1.0 的模型 | Alpha Miner 在低数据量下的常见结果 |
+| Structural Misalignment | 结构错位 | 模型拓扑与实际执行轨迹之间的不一致 | Model 25 的核心问题 |
+| Logical Divergence | 逻辑分歧 | 个体动作捕获正确但聚合序列偏离预期 | Model 39 的典型现象 |
+| Performance Outlier | 性能异常值 | 在多数正常结果中表现显著偏差的模型 | Trial 2 中的 Model 19/23/25 |
+
+### 图表/公式说明
+
+本附录所有图均为过程模型可视化结果，展示不同试验配置下各种算法生成的 C-net 和 Petri-net。核心观察：
+- **Inductive Miner 始终产出完美适配模型**，即使在小数据量或浅 Minimax 深度下
+- **Alpha Miner 的局限性**：在迭代次数不足或模拟深度约束下频繁产出非适配模型
+- **C-net（iDHM）无法定量评估**：只有 Petri-net 可通过 ProM 计算 fitness 指标
+
+---
+
+## 附录 B — 扩展讨论（Discussion Extended）
+
+### B.1 红方智能体转移数据（参考 Figure 6）
+
+红方智能体 Petri-net 的层次化转移层结构如下：
+
+**第一层转移**：
+- `((-1, "0"), (2, ("left", "down")), 0)`
+- `((-1, "0"), (2, ("left", "up")), 0)`
+- `((-1, "0"), (3, ("left", "down")), 0)`
+
+**第二层转移**：
+- `((3, ("right", "up")), (1, ("left", "up")), 7)`
+- `((1, ("left", "down")), (2, ("left", "up")), 7)`
+- `((3, ("right", "down")), (2, ("left", "down")), 0)`
+- `((1, ("right", "down")), (3, ("right", "up")), 0)`
+
+**第三层转移**：
+- `((2, ("left", "down")), (1, ("left", "up")), 7)`
+- `((1, ("left", "up")), (1, ("left", "down")), 0)`
+
+### B.2 白方智能体转移数据（参考 Figure 7）
+
+**第一层转移**：
+- `((2, ("left", "down")), (2, ("right", "up")), 0)`
+
+**第二层转移**：
+- `((2, ("left", "up")), (3, ("right", "down")), 0)`
+- `((2, ("right", "up")), (3, ("left", "down")), 0)`
+- `((3, ("left", "down")), (1, ("right", "up")), 0)`
+- `((3, ("left", "down")), (2, ("right", "up")), 7)`
+
+### B.3 GPT-5 生成的战略解释报告
+
+#### 1. 红方智能体战略分析（参考 Figure 6）
+
+以下洞见源自红方智能体 Petri-net 的层次化转移层：
+
+| 解释类型 | 详细内容 |
+|----------|----------|
+| **因果选择（Q1）** | 推荐选择棋子 1（left, up）或棋子 2（left, up）是由**即时奖励优化**驱动的——这些转移产生 7 奖励点，直接关联高价值结果，如捕获敌方棋子或达成升王。 |
+| **因果拒绝（Q3）** | 替代动作 `(2, ("left", "down"))` 和 `(3, ("right", "up"))` 被排除——模型将这些识别为**非生产性转移**（0 分），在当前战术窗口中无法改善智能体的物质地位。 |
+| **远端策略（Q2）** | 模型展示了"向前看"推理能力。虽然选择棋子 2（left, down）应对对手的 right-down 移动仅获 0 即时奖励，但它被归类为**审慎动作（provident action）**。如第三层转移 `((2, ("left", "down")), (1, ("left", "up")), 7)` 所示，这条路径是后续获取 7 分的关键前驱。 |
+
+#### 2. 白方智能体战略分析（参考 Figure 7）
+
+白方智能体程序模式的解释总结如下：
+
+| 解释类型 | 详细内容 |
+|----------|----------|
+| **因果选择（Q1）** | 当红方智能体移动棋子 3（left, down）时，系统推荐白方棋子 2（right, up）——此选择由其触发捕获或升王事件的潜力证明，在第二转移层中被识别为 7 分奖励路径。 |
+| **因果拒绝（Q3）** | 转移 `(3, ("right", "down"))` 和 `(1, ("right", "up"))` 被拒绝。Petri-net 将这些归类为**次优分支**——不会导致即时得分获取（0 分）。 |
+| **远端策略（Q2）** | 在未来红方推进棋子 3 的场景中，智能体推荐选择白方棋子 2（left, up）作为锁定 7 奖励分的**审慎走法**。对于复杂分支（如红方移动棋子 2），系统建议选择棋子 3，并进行**远端搜索进入第三和第四层**以确定哪条轨迹最早出现奖励涌现。 |
+
+### 术语解释
+
+| 英文术语 | 中文译名 | 一句话解释 |
+|----------|----------|-----------|
+| Hierarchical Transition Layer | 层次化转移层 | Petri-net 中按决策顺序组织的转移结构层级 |
+| Non-productive Transition | 非生产性转移 | 在当前状态下不产生即时奖励的决策路径 |
+| Provident Action | 审慎动作 | 当前无即时收益但为未来奖励创造条件的战略性选择 |
+| Reward Emergence | 奖励涌现 | 延迟多个步骤后奖励才显现出来的现象 |
+| Tactical Window | 战术窗口 | 当前对局中可采取有效动作的有限时间/机会范围 |
+| Look-ahead Reasoning | 向前看推理 | 基于未来多步结果的推理能力 |
+
+### 图表/公式说明
+
+**转移格式**：`((前一棋子状态), (当前移动), 奖励)`。例如 `((3, ("right", "up")), (1, ("left", "up")), 7)` 表示：前一步是棋子 3 向右上移动，当前步是棋子 1 向左上移动，获得 7 分奖励。
+
+---
+
+## 附录 C — MCTS 剪枝操作（MCTS Pruning Operation）
+
+### 中文翻译
+
+在 MCTS 中，每个节点存储一个游戏状态，每个可用动作充当一个分支因子。这种架构意味着扩展阶段需要导航巨大的状态空间。如果没有有效的剪枝来消除冗余分支因子，有限次迭代可能无法在严格时间约束下完全扩展选定节点。如果计算预算耗尽时节点尚未完全扩展，则 UCT 算法无法正确应用于选择最优分支因子。
+
+为解决此问题，我们提出一种利用**哈希表（hashtable）**的剪枝策略——一种支持快速映射的高效数据结构。在单次 MCTS 迭代中，一旦选定节点进行扩展，就使用辅助奖励机制为每个潜在动作评分。例如，如果检索到 12 个动作（A, B, C, D, E, F, G, H, I, J, K, L），该机制分配分数如下：动作 A, B, C 得 10 分；D, E 得 6 分；F, G, H 得 4 分；I, J, K, L 得 0 分。我们将奖励分数定义为键（key），将相应动作列表定义为哈希表中的值（value）。图 5 和表 4 说明了此剪枝方法。
+
+**表 4: 奖励哈希表**
+
+| 奖励分数 | 动作 |
+|----------|------|
+| 10 | A, B, C |
+| 6 | D, E |
+| 4 | F, G, H |
+| 0 | I, J, K, L |
+
+通过仅返回与最高奖励分数关联的动作列表，我们有效地剪除了次优分支。哈希表的主要优势在于其支持近乎即时的插入、搜索和删除操作。由于这些操作的平均时间和空间复杂度为常数 O(1)，对 MCTS 模型实现哈希表剪枝不会引入显著的计算开销。
+
+![Figure 5: 剪枝操作](assets/page-024-img-01.png)
+
+*Figure 5: 剪枝操作。[扩展] 此图展示了哈希表剪枝的流程——从 12 个动作中根据奖励分数分组，仅保留最高分值组的动作（A, B, C），其余 9 个动作被剪除。时间复杂度 O(1)。*
+
+### 术语解释
+
+| 英文术语 | 中文译名 | 一句话解释 | 应用场景 |
+|----------|----------|-----------|----------|
+| Pruning Operation | 剪枝操作 | 在搜索树扩展中消除冗余分支以提升效率的策略 | MCTS 扩展阶段的关键优化 |
+| Hashtable (Hashmap) | 哈希表（哈希映射） | 基于键-值对实现快速数据存取的数据结构 | 本附录中的奖励分组和快速剪枝 |
+| Branching Factor | 分支因子 | 一个状态节点可扩展的子节点数量 | 影响搜索树的宽度和复杂度 |
+| Auxiliary Reward Mechanism | 辅助奖励机制 | 为扩展阶段每个动作分配启发式分数的评估函数 | 作为哈希表剪枝的评分依据 |
+| UCT (Upper Confidence Tree) | 上限置信区间树 | MCTS 选择步骤的标准算法，平衡探索与利用 | 需要节点完全扩展才能正确应用 |
+
+### 关键 Takeaway
+
+- **要点 1：哈希表剪枝是高性价比的优化**。O(1) 的时间复杂度意味着几乎不增加计算开销，却能显著减少需要评估的动作数量。对于扩展到更大棋盘（如 12v12）具有实际意义。
+- **要点 2：剪枝策略的启发式性质**。辅助奖励机制是人为定义的（10/6/4/0 分组），并非学习得到。这既是优势（简单可解释）也是局限（可能错过最优动作）。
+- **要点 3：剪枝在 M2-PALE 框架中的定位**。剪枝操作不是 M2-PALE 的核心创新，而是为了提升 MCTS-Minimax 混合智能体在更大搜索空间中的性能而引入的工程优化。
+
+---
+
+## 附录 D — 过程模型图目录（Process Models Figures）
+
+### 中文翻译
+
+以下图 6–43 展示了三个试验中所有生成的过程模型。这些图在 ProM 框架中可视化生成。
+
+**图 6**：简化版红方智能体 Petri-net（10 个 episodes），由 Inductive Miner 算法生成（固定模拟深度、固定 Minimax 搜索深度、迭代次数 = 3000）
+
+**图 7**：简化版白方智能体 Petri-net（10 个 episodes），由 Inductive Miner 算法生成（固定模拟深度、固定 Minimax 搜索深度、迭代次数 = 3000）
+
+**图 8**：红方智能体 C-net，由 iDHM 生成（固定模拟深度、固定 Minimax 搜索深度、迭代次数 = 1000）
+
+**图 9**：红方智能体 Petri-net，由 Inductive Miner 算法生成（固定模拟深度、固定 Minimax 搜索深度、迭代次数 = 1000）
+
+**图 10**：白方智能体 C-net，由 iDHM 生成（固定模拟深度、固定 Minimax 搜索深度、迭代次数 = 1000）
+
+**图 11**：白方智能体 Petri-net，由 Inductive Miner 算法生成（固定模拟深度、固定 Minimax 搜索深度、迭代次数 = 1000）
+
+**图 12**：红方智能体 C-net，由 iDHM 生成（固定模拟深度、固定 Minimax 搜索深度、迭代次数 = 2000）
+
+**图 13**：红方智能体 Petri-net，由 Inductive Miner 算法生成（固定模拟深度、固定 Minimax 搜索深度、迭代次数 = 2000）
+
+**图 14**：白方智能体 C-net，由 iDHM 生成（固定模拟深度、固定 Minimax 搜索深度、迭代次数 = 2000）
+
+**图 15**：白方智能体 Petri-net，由 Inductive Miner 算法生成（固定模拟深度、固定 Minimax 搜索深度、迭代次数 = 2000）
+
+**图 16**：红方智能体 C-net，由 iDHM 生成（固定模拟深度、固定 Minimax 搜索深度、迭代次数 = 3000）
+
+**图 17**：红方智能体 Petri-net，由 Inductive Miner 算法生成（固定模拟深度、固定 Minimax 搜索深度、迭代次数 = 3000）
+
+**图 18**：白方智能体 C-net，由 iDHM 生成（固定模拟深度、固定 Minimax 搜索深度、迭代次数 = 3000）
+
+**图 19**：白方智能体 Petri-net，由 Inductive Miner 算法生成（固定模拟深度、固定 Minimax 搜索深度、迭代次数 = 3000）
+
+**图 20**：红方智能体 C-net，由 iDHM 生成（固定迭代次数、固定 Minimax 搜索深度、模拟深度 = 10）
+
+**图 21**：红方智能体 Petri-net，由 Inductive Miner 算法生成（固定迭代次数、固定 Minimax 搜索深度、模拟深度 = 10）
+
+**图 22**：白方智能体 C-net，由 iDHM 生成（固定迭代次数、固定 Minimax 搜索深度、模拟深度 = 10）
+
+**图 23**：白方智能体 Petri-net，由 Inductive Miner 算法生成（固定迭代次数、固定 Minimax 搜索深度、模拟深度 = 10）
+
+**图 24**：红方智能体 C-net，由 iDHM 生成（固定迭代次数、固定 Minimax 搜索深度、模拟深度 = 20）
+
+**图 25**：红方智能体 Petri-net，由 Inductive Miner 算法生成（固定迭代次数、固定 Minimax 搜索深度、模拟深度 = 20）
+
+**图 26**：白方智能体 C-net，由 iDHM 生成（固定迭代次数、固定 Minimax 搜索深度、模拟深度 = 20）
+
+**图 27**：白方智能体 Petri-net，由 Inductive Miner 算法生成（固定迭代次数、固定 Minimax 搜索深度、模拟深度 = 20）
+
+**图 28**：红方智能体 C-net，由 iDHM 生成（固定迭代次数、固定 Minimax 搜索深度、模拟深度 = 30）
+
+**图 29**：红方智能体 Petri-net，由 Inductive Miner 算法生成（固定迭代次数、固定 Minimax 搜索深度、模拟深度 = 30）
+
+**图 30**：白方智能体 C-net，由 iDHM 生成（固定迭代次数、固定 Minimax 搜索深度、模拟深度 = 30）
+
+**图 31**：白方智能体 Petri-net，由 Inductive Miner 算法生成（固定迭代次数、固定 Minimax 搜索深度、模拟深度 = 30）
+
+**图 32**：红方智能体 C-net，由 iDHM 生成（固定模拟深度、固定迭代次数、Minimax 搜索深度 = 1）
+
+**图 33**：红方智能体 Petri-net，由 Inductive Miner 算法生成（固定模拟深度、固定迭代次数、Minimax 搜索深度 = 1）
+
+**图 34**：白方智能体 C-net，由 iDHM 生成（固定模拟深度、固定迭代次数、Minimax 搜索深度 = 1）
+
+**图 35**：白方智能体 Petri-net，由 Inductive Miner 算法生成（固定模拟深度、固定迭代次数、Minimax 搜索深度 = 1）
+
+**图 36**：红方智能体 C-net，由 iDHM 生成（固定模拟深度、固定迭代次数、Minimax 搜索深度 = 2）
+
+**图 37**：红方智能体 Petri-net，由 Inductive Miner 算法生成（固定模拟深度、固定迭代次数、Minimax 搜索深度 = 2）
+
+**图 38**：白方智能体 C-net，由 iDHM 生成（固定模拟深度、固定迭代次数、Minimax 搜索深度 = 2）
+
+**图 39**：白方智能体 Petri-net，由 Inductive Miner 算法生成（固定模拟深度、固定迭代次数、Minimax 搜索深度 = 2）
+
+**图 40**：红方智能体 C-net，由 iDHM 生成（固定模拟深度、固定迭代次数、Minimax 搜索深度 = 3）
+
+**图 41**：红方智能体 Petri-net，由 Inductive Miner 算法生成（固定模拟深度、固定迭代次数、Minimax 搜索深度 = 3）
+
+**图 42**：白方智能体 C-net，由 iDHM 生成（固定模拟深度、固定迭代次数、Minimax 搜索深度 = 3）
+
+**图 43**：白方智能体 Petri-net，由 Inductive Miner 算法生成（固定模拟深度、固定迭代次数、Minimax 搜索深度 = 3）
+
+### 术语解释
+
+| 英文术语 | 中文译名 | 解释 |
+|----------|----------|------|
+| C-net (Causal Net) | 因果网 | iDHM 算法输出的过程模型格式，基于输入/输出关系 |
+| Petri-net | 彼得里网 | Inductive Miner 和 Alpha Miner 输出的经典过程模型格式 |
+| iDHM (Interactive Discovery of Hybrid Models) | 交互式混合模型发现 | 允许人工交互引导的过程发现算法 |
+
+---
+
+## 参考文献（References）
+
+以下为本文引用的 27 篇参考文献：
+
+1. **Van der Aalst, W., Adriansyah, A., van Dongen, B.**：Replaying history on process models for conformance checking and performance analysis. *Wiley Interdisciplinary Reviews: Data Mining and Knowledge Discovery* 2(2), 182–192 (2012)
+   — 提出了在过程模型上重放历史以进行一致性检查和性能分析的方法。
+
+2. **van der Aalst, W.M.**：Mediating between modeled and observed behavior: The quest for the "right" process: keynote. 载于：*IEEE 7th International Conference on Research Challenges in Information Science (RCIS)*, pp. 1–12. IEEE (2013)
+   — 探讨建模行为与观察行为之间的协调，寻找"正确"过程。
+
+3. **An, Z., Baier, H., Dubey, A., Mukhopadhyay, A., Ma, M.**：Enabling MCTS explainability for sequential planning through computation tree logic. *arXiv preprint arXiv:2407.10820* (2024)
+   — 利用计算树逻辑（CTL）实现 MCTS 的顺序规划可解释性。
+
+4. **Arrieta, A.B., 等**：Explainable artificial intelligence (XAI): Concepts, taxonomies, opportunities and challenges toward responsible AI. *Information Fusion* 58, 82–115 (2020)
+   — 可解释 AI 的综合综述，涵盖概念、分类法、机遇与挑战。
+
+5. **Baier, H., Winands, M.H.**：MCTS-minimax hybrids. *IEEE Transactions on Computational Intelligence and AI in Games* 7(2), 167–179 (2014)
+   — 首次系统研究 MCTS 与 Minimax 的混合方法，本文的核心参考之一。
+
+6. **Beazley, D.**：Understanding the Python GIL. 载于：*PyCON Python Conference*. Atlanta, Georgia (2010)
+   — Python 全局解释器锁（GIL）的原理解析。
+
+7. **Bhatt, U., 等**：Explainable machine learning in deployment. 载于：*Proceedings of the 2020 Conference on Fairness, Accountability, and Transparency*, pp. 648–657 (2020)
+   — 探讨机器学习模型部署中的可解释性实际问题。
+
+8. **Bilal, A., Ebert, D., Lin, B.**：LLMs for explainable AI: A comprehensive survey. *arXiv preprint arXiv:2504.00125* (2025)
+   — 大语言模型用于可解释 AI 的全面综述。
+
+9. **Browne, C.B., 等**：A survey of Monte Carlo tree search methods. *IEEE Transactions on Computational Intelligence and AI in Games* 4(1), 1–43 (2012)
+   — MCTS 方法的全面综述，涵盖多种变体和应用。
+
+10. **Buijs, J.C., van Dongen, B.F., van der Aalst, W.M.**：Quality dimensions in process discovery: The importance of fitness, precision, generalization and simplicity. *International Journal of Cooperative Information Systems* 23(01), 1440001 (2014)
+    — 定义了过程发现的四个质量维度，本文评估方法论的基础。
+
+11. **Bustin, R., Goldman, C.V.**：Structure and reduction of MCTS for explainable-AI. *arXiv preprint arXiv:2408.05488* (2024)
+    — 通过结构简化和缩减增强 MCTS 的可解释性。
+
+12. **Chaslot, G., Bakkes, S., Szita, I., Spronck, P.**：Monte-Carlo tree search: A new framework for game AI. 载于：*Proceedings of the AAAI Conference on Artificial Intelligence and Interactive Digital Entertainment*, vol. 4, pp. 216–217 (2008)
+    — 将 MCTS 引入游戏 AI 领域的开创性工作。
+
+13. **Cheng, Z., Yu, J., Xing, X.**：A survey on explainable deep reinforcement learning. *arXiv preprint arXiv:2502.06869* (2025)
+    — 可解释深度强化学习的最新综述。
+
+14. **Gao, Z., 等**：Interpretable contrastive Monte Carlo tree search reasoning. *arXiv preprint arXiv:2410.01707* (2024)
+    — 提出可解释的对比性 MCTS 推理方法。
+
+15. **Gerlach, Y., Seeliger, A., Nolle, T., Mühlhäuser, M.**：Inferring a multi-perspective likelihood graph from black-box next event predictors. 载于：*International Conference on Advanced Information Systems Engineering*, pp. 19–35. Springer (2022)
+    — 使用过程挖掘评估下一事件预测器（NEP）的精度和适配度。
+
+16. **Ghawi, R.**：Process discovery using inductive miner and decomposition. *arXiv preprint arXiv:1610.07989* (2016)
+    — 介绍 Inductive Miner 和分解方法的过程发现技术。
+
+17. **Khan, N., Shahid, M.A., Rasool, S.**：Leveraging AI in accounting and finance... *International Journal of Advanced Engineering Technologies and Innovations* 10(2), 603931 (2024)
+    — AI 在会计和金融中的应用。
+
+18. **Kocsis, L., Szepesvári, C.**：Bandit based Monte-Carlo planning. 载于：*Machine Learning: ECML 2006*, pp. 282–293. Springer (2006)
+    — 提出了 UCT（UCB 应用于树搜索）算法，MCTS 选择策略的基础。
+
+19. **Madumal, P., Miller, T., Sonenberg, L., Vetere, F.**：Distal explanations for model-free explainable reinforcement learning. *arXiv preprint arXiv:2001.10284* (2020)
+    — 提出了无模型可解释强化学习中的远端解释概念。
+
+20. **Miller, T.**：Explanation in artificial intelligence: Insights from the social sciences. *Artificial Intelligence* 267, 1–38 (2019)
+    — 从社会科学视角探讨 AI 中的解释问题，M2-PALE 解释分类的理论基础。
+
+21. **Miller, T.**：Contrastive explanation: A structural-model approach. *The Knowledge Engineering Review* 36 (2021)
+    — 对比性解释的结构模型方法。
+
+22. **Samuel, A.L.**：Some studies in machine learning using the game of checkers. *IBM Journal of Research and Development* 3(3), 210–229 (1959)
+    — 跳棋游戏的机器学习经典工作。
+
+23. **Strong, G.**：The minimax algorithm. *Trinity College Dublin* (2011)
+    — Minimax 算法的教学性介绍。
+
+24. **Van Dongen, B.F., 等**：The ProM framework: A new era in process mining tool support. 载于：*International Conference on Application and Theory of Petri Nets*, pp. 444–454. Springer (2005)
+    — ProM 框架——本文使用的过程挖掘工具平台。
+
+25. **Verenich, I., Dumas, M., La Rosa, M., Nguyen, H.**：Predicting process performance: A white-box approach based on process models. *Journal of Software: Evolution and Process* 31(6), e2170 (2019)
+    — 基于过程模型的过程性能白箱预测方法。
+
+26. **Wegner, P.**：Concepts and paradigms of object-oriented programming. *ACM Sigplan Oops Messenger* 1(1), 7–87 (1990)
+    — 面向对象编程的概念和范式。
+
+27. **Ziyan, A., 等**：Combining LLMs with a logic-based framework to explain MCTS (2025)
+    — 结合 LLM 和基于逻辑的框架来解释 MCTS。
+
+### 术语解释
+
+| 英文术语 | 中文译名 | 重要性 |
+|----------|----------|--------|
+| UCT (Upper Confidence Bounds for Trees) | 上限置信区间树 | MCTS 标准选择策略，参考文献 18 |
+| ProM Framework | ProM 框架 | 开源过程挖掘平台，参考文献 24 |
+| α–β Pruning | α–β 剪枝 | Minimax 算法的标准优化技术，参考文献 23 |
+| Distal Explanation | 远端解释 | 关注未来策略的解释类型，参考文献 19 |
+| Contrastive Explanation | 对比性解释 | 回答"为什么选 A 而非 B"的解释，参考文献 21、27 |
+| Event Log | 事件日志 | 过程挖掘的输入数据格式，参考文献 1、10 |
+| Replay Fitness | 回放适配度 | 最重要的过程模型质量维度，参考文献 2、10 |

@@ -1,16 +1,45 @@
-# 重访遥感变化VQA：结构化与原生多模态Qwen模型
+# paper
 
-**Revisiting Change VQA in Remote Sensing with Structured and Native Multimodal Qwen Models**
+<!-- 论文元数据卡片 -->
+<div class="paper-meta">
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">机构</span>
+    <span class="paper-meta-value org-"></span>
+  </div>
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">方向</span>
+    <span class="paper-meta-value"></span>
+  </div>
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">日期</span>
+    <span class="paper-meta-value"></span>
+  </div>
+</div>
+
+!!! info ""
+    <span class="paper-tag paper-tag-translated">✅ 已完成精读</span>
+
+- **来源**：[]()
+- **论文链接**：[]()
+- **状态**：已生成
+
+## 摘要
+
+
+
+## 图表资源
+- ![](assets/page-003-img-01.png)
+- ![](assets/page-003-img-02.png)
+- ![](assets/page-003-img-03.png)
+- ![](assets/page-003-img-04.png)
+- ![](assets/page-004-img-01.png)
+- ![](assets/page-004-img-02.png)
+- ![](assets/page-004-img-03.png)
+- ![](assets/page-004-img-04.png)
+
+
 
 ---
-
-| 元信息 | 内容 |
-|--------|------|
-| **作者** | （见原文） |
-| **发表时间** | 2026年4月 |
-| **arXiv ID** | 2604.18429v1 |
-| **领域** | 遥感 · 变化检测 · 视觉问答(VQA) · 多模态学习 |
-| **关键词** | Remote Sensing, Change Detection, Visual Question Answering, Multimodal Models |
 
 ---
 

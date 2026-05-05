@@ -1,28 +1,27 @@
-# Less Languages, Less Tokens: An Efficient Unified Logic Cross-lingual Chain-of-Thought Reasoning Framework
-
-（更少语言、更少Token：一种高效的统一逻辑跨语言链式思维推理框架）
+# paper
 
 <!-- 论文元数据卡片 -->
 <div class="paper-meta">
   <div class="paper-meta-item">
     <span class="paper-meta-label">机构</span>
-    <span class="paper-meta-value org-deepseek">DeepSeek</span>
+    <span class="paper-meta-value org-"></span>
   </div>
   <div class="paper-meta-item">
     <span class="paper-meta-label">方向</span>
-    <span class="paper-meta-value">AI Agent / 多语言推理</span>
+    <span class="paper-meta-value"></span>
   </div>
-  <div class="paper-meta-label">日期</span>
-    <span class="paper-meta-value">2026-04-22</span>
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">日期</span>
+    <span class="paper-meta-value"></span>
   </div>
 </div>
 
 !!! info ""
     <span class="paper-tag paper-tag-translated">✅ 已完成精读</span>
 
-- **来源**：[arXiv](https://arxiv.org/abs/2604.20090v1)
-- **论文链接**：[PDF](https://arxiv.org/pdf/2604.20090v1)
-- **代码开源**：https://github.com/chenyuanTKCY/UL-XCoT
+- **来源**：[]()
+- **论文链接**：[]()
+- **状态**：待复核
 
 ## 摘要
 
@@ -34,39 +33,30 @@
 
 在 PolyMath 基准测试的 18 种语言和 MMLU-ProX-Lite 的 29 种语言上，使用 DeepSeek-R1-Distill-Qwen-7B 模型的实验表明：UL-XCoT 在保持竞争力的准确率的同时，相比先前的采样基线方法，**解码 Token 成本锐减超过 50%**。此外，UL-XCoT 在低资源语言上展现出更加稳定和显著的增益效果，这凸显了其在标准 XCoT 自一致性方法失效的场景下具有持续且优越的鲁棒性。
 
-### 术语解释
 
-| 英文术语 | 中文译名 | 一句话解释 | 应用场景 |
-|----------|----------|------------|----------|
-| XCoT (Cross-lingual CoT) | 跨语言链式思维 | 输入和中间推理步骤使用不同语言的推理范式 | 多语言推理任务 |
-| Self-consistency | 自一致性 | 通过采样多条推理路径并投票来提升答案一致性的技术 | 测试时扩展（Test-time Scaling） |
-| MLLM (Multilingual LLM) | 多语言大语言模型 | 支持多种语言理解和生成的 LLM | 多语言 NLP 任务 |
-| Unified Logic Space | 统一逻辑空间 | 消除语言表面差异、保留任务相关推理结构的共享表征空间 | 跨语言特征对齐 |
-| Candidate Language Selection (CLS) | 候选语言选择 | 在统一逻辑空间中预筛选最相关的候选语言子集 | 减少不必要的多语言采样 |
-| Dynamic CoT Pruning (DCP) | 动态 CoT 剪枝 | 在解码过程中实时监控并裁剪低质量推理路径 | 减少 Token 和延迟 |
-| DW-ACC | 难度加权准确率 | 按难度级别加权的综合准确率指标 | 数学推理基准评估 |
-| Hidden State | 隐状态 | Transformer 各层编码的内部向量表示 | 模型可解释性和监控 |
-| Warm-up Phase | 预热阶段 | 解码初期禁用剪枝以避免过早丢弃路径的阶段 | DCP 的安全机制 |
+## 图表资源
+- ![](assets/page-001-img-01.png)
+- ![](assets/page-001-img-02.png)
+- ![](assets/page-001-img-03.png)
+- ![](assets/page-001-img-04.png)
+- ![](assets/page-001-img-05.png)
+- ![](assets/page-001-img-06.png)
+- ![](assets/page-001-img-07.png)
+- ![](assets/page-001-img-08.png)
+- ![](assets/page-003-img-01.png)
+- ![](assets/page-003-img-02.png)
+- ![](assets/page-003-img-03.png)
+- ![](assets/page-003-img-04.png)
+- ![](assets/page-003-img-05.png)
+- ![](assets/page-003-img-06.png)
+- ![](assets/page-003-img-07.png)
+- ![](assets/page-003-img-08.jpeg)
+- ![](assets/page-003-img-09.jpeg)
+- ![](assets/page-003-img-10.png)
+- ![](assets/page-003-img-11.png)
+- ![](assets/page-003-img-12.png)
 
-### 图表/公式说明
 
-**Figure 1 — 传统 XCoT 与 UL-XCoT 架构对比图**
-
-![Figure 1: 传统XCoT vs UL-XCoT架构对比](assets/page-001-img-04.png)
-
-此图为论文的核心架构对比示意图，包含两个子图：
-
-- **(a) 传统跨语言 CoT 采样框架**：展示了一个输入查询（如数学问题）被翻译为多种语言（中文、英文、德文、法文、泰文），然后每种语言都生成完整的推理轨迹（67-68 步），最终消耗 **6623 个 Token**，延迟 **43 秒**。
-- **(b) UL-XCoT 高效采样框架**：展示了通过"统一逻辑空间投影→候选语言选择→动态 CoT 剪枝"三阶段处理后，仅保留少量高质量语言路径（如法文、德文、中文），最终仅需 **3824 个 Token**，延迟降至 **28 秒**。
-
-**设计意图分析**：此图直观呈现了论文的核心价值主张——通过减少参与推理的语言数量和每条路径的 Token 数量，在保持推理质量的同时大幅降低计算成本。
-
-### 关键 Takeaway
-
-- **核心问题（作者主张）**：现有 XCoT 方法的两大缺陷是"全语言采样"和"全轨迹推理"，导致冗余计算随语言数线性增长
-- **解决方案（作者主张）**：UL-XCoT 通过统一逻辑机制（ULM）+ 候选语言选择（CLS）+ 动态 CoT 剪枝（DCP）三模块协同工作
-- **效率数据（客观事实）**：相比 AutoCap 降低 50%+ Token 成本，相比 SC 降低 65%+；延迟从 43s 降至 28s
-- **鲁棒性发现（客观事实）**：在低资源语言子集上增益更强更稳定，标准 XCoT 自一致性失效时仍有效
 
 ---
 
@@ -298,13 +288,9 @@ $$S(x_\ell) = \text{Top-k'}_{\ell' \in L_{par}(x_\ell)} \text{LQS}(S_t|x_\ell, \
 
 #### 3.2.1 卓越的效率（The Superior Efficiency）
 
-![Figure 3: PolyMath平均解码Token成本](assets/page-005-img-01.png)
+Figure 3 — PolyMath 各语言平均解码 Token 成本柱状图**：横轴为 18 种语言（ar/bn/de/en/es/fr/id/it/ja/ko/ms/pt/ru/sw/te/th/vi/zh）+ AVG，纵轴为 Token 数（0-70k）。UL-XCoT（蓝色）在几乎所有语言上都显著低于 CLSP（橙色）、AutoCap（绿色）和 SC（红色）。
 
-**Figure 3 — PolyMath 各语言平均解码 Token 成本柱状图**：横轴为 18 种语言（ar/bn/de/en/es/fr/id/it/ja/ko/ms/pt/ru/sw/te/th/vi/zh）+ AVG，纵轴为 Token 数（0-70k）。UL-XCoT（蓝色）在几乎所有语言上都显著低于 CLSP（橙色）、AutoCap（绿色）和 SC（红色）。
-
-![Figure 4: PolyMath平均端到端延迟](assets/page-005-img-02.png)
-
-**Figure 4 — PolyMath 各语言平均端到端延迟柱状图**：纵轴为延迟秒数（0-250s）。UL-XCoT 同样在绝大多数语言上取得最低延迟。
+Figure 4 — PolyMath 各语言平均端到端延迟柱状图**：纵轴为延迟秒数（0-250s）。UL-XCoT 同样在绝大多数语言上取得最低延迟。
 
 图 3 和图 4 比较了各语言的平均解码成本和端到端延迟。UL-XCoT 可以实现显著的效率提升。如图 3 所示，UL-XCoT 在所有语言上一致地使用最少的 Token，相比 AutoCap 实现最低平均 Token 数（降低超过 50%），相比 SC 降低超过 65%。这种效率优势在延迟指标上也得到镜像反映（图 4），UL-XCoT 在大多数语言上也表现出最低延迟。
 
@@ -350,9 +336,7 @@ UL-XCoT 实现了有竞争力的准确率。在同一评估设置下，UL-XCoT �
 
 **Table 3 — MMLU-ProX-Lite 29 种语言结果**（精简版）：UL-XCoT 将平均准确率从 CLSP 的 **40.5 提升到 43.6**，在 29 种语言中的 **19 种**上优于 CLSP，2 种打平。增益还延伸到了多个低资源语言，表明该方法能够泛化到跨语言推理任务。
 
-![Figure 5: MMLU-ProX-Lite效率对比](assets/page-007-img-01.png)
-
-**Figure 5 — MMLU-ProX-Lite 上的 Token 成本和延迟**：UL-XCoT 将平均 Token 使用从 27,679.3 降至 10,543.6，平均延迟从 134.2s 降至 93.7s。这与我们的主要发现一致：候选语言选择和动态剪枝避免了不必要的多语言采样，即使在不同任务上也比 CLSP 产生更好的成本-质量权衡。
+Figure 5 — MMLU-ProX-Lite 上的 Token 成本和延迟**：UL-XCoT 将平均 Token 使用从 27,679.3 降至 10,543.6，平均延迟从 134.2s 降至 93.7s。这与我们的主要发现一致：候选语言选择和动态剪枝避免了不必要的多语言采样，即使在不同任务上也比 CLSP 产生更好的成本-质量权衡。
 
 ### 3.3 分析（Analysis）
 
@@ -366,9 +350,7 @@ UL-XCoT 实现了有竞争力的准确率。在同一评估设置下，UL-XCoT �
 
 **DCP 通过在线剪枝低质量轨迹来节省计算**。DCP 通过**早期截断（Early Truncation）**进一步减少计算：它在线监控轨迹质量并停止显示明确低效用迹象的路径，使其不会继续消耗完整的解码预算。这种策略在推理时早期缩小活跃集，将计算集中在剩余的有竞争力候选上。从 Table 2 可知，移除 DCP 显著增加了 Token 使用量和和延迟，而在最终性能上仅有有限增益。这表明没有 DCP 时生成的许多额外步骤**大部分是冗余的**，很少转化为更好的最终投票结果。
 
-![Figure 6: PCA投影可视化](assets/page-007-img-02.png)
-
-**Figure 6 — 18 种语言同一查询嵌入表示的 PCA 投影**：圆圈表示原始表示，叉号表示 ULM 变换后的统一逻辑空间表示。原始表示分散在各处（标注"Original Presentation"），而 ULM 变换后紧密聚集（标注"ULM Presentation"），右下角标注"Low Logical Quality"区域和"9 Languages Here"显示聚类效果。PC1 解释 43.99% 方差，PC2 解释 12.92% 方差。
+Figure 6 — 18 种语言同一查询嵌入表示的 PCA 投影**：圆圈表示原始表示，叉号表示 ULM 变换后的统一逻辑空间表示。原始表示分散在各处（标注"Original Presentation"），而 ULM 变换后紧密聚集（标注"ULM Presentation"），右下角标注"Low Logical Quality"区域和"9 Languages Here"显示聚类效果。PC1 解释 43.99% 方差，PC2 解释 12.92% 方差。
 
 #### 3.3.2 ULM 能有效统一跨逻辑表征
 
@@ -376,31 +358,23 @@ UL-XCoT 实现了有竞争力的准确率。在同一评估设置下，UL-XCoT �
 
 **ULM 能对齐动态推理轨迹**。除了静态对齐外，Figure 7 追踪了在不同语言回答同一查询时隐状态几何如何跨层演化。有 ULM 时，轨迹显示出跨语言的一致分布，反映了逻辑空间中的**共享演化模式（Shared Evolution Patterns）**。无 ULM 时，轨迹显著发散，因语言差异而产生更大的敏感性和几何间隙。因此，ULM 移除了表面变异，使 DCP 能够通过统一逻辑空间中的可靠几何信号进行链式思维剪枝。
 
-![Figure 7: 逐层L2距离和角度距离演变](assets/page-008-img-01.png)
-
-**Figure 7 — 解码嵌入的逐层演变**：包含 4 个子图——Instance L2 Distance（实例 L2 距离）、Cumulative L2 Distance（累计 L2 距离）、Instance Angular（实例角度距离）、Cumulative Angular（累计角度距离）。横轴为 Transformer 层数（Layer 3/9/15/21），紫色曲线表示有 ULM 的模型，蓝色表示无 ULM 的模型。有 ULM 的模型跨语言变化范围更小更稳定。
+Figure 7 — 解码嵌入的逐层演变**：包含 4 个子图——Instance L2 Distance（实例 L2 距离）、Cumulative L2 Distance（累计 L2 距离）、Instance Angular（实例角度距离）、Cumulative Angular（累计角度距离）。横轴为 Transformer 层数（Layer 3/9/15/21），紫色曲线表示有 ULM 的模型，蓝色表示无 ULM 的模型。有 ULM 的模型跨语言变化范围更小更稳定。
 
 #### 3.3.3 CLS 能无偏见地自适应选择合适语言
 
-![Figure 8: CLS语言选择分布](assets/page-008-img-02.png)
-
-**Figure 8 — CLS 选择的语言频率分布**：条形图显示 18 种语言在 CLS 选中集中的出现频率。葡萄牙语(pt)最高(7.7%)，中文(zh)最低(3.7%)，平均值约 5.6%。所有语言均有非 trivial 的选中比例。
+Figure 8 — CLS 选择的语言频率分布**：条形图显示 18 种语言在 CLS 选中集中的出现频率。葡萄牙语(pt)最高(7.7%)，中文(zh)最低(3.7%)，平均值约 5.6%。所有语言均有非 trivial 的选中比例。
 
 如图 8 所示，我们统计了每种语言在完整评估套件中被 CLS 选中出现在 $L_{par}(x)$ 中的频率。CLS **不会坍缩到单一语言**：每种语言贡献大约 3.7%~7.7% 的所有选择（均值 ≈ 5.6%），表明**广泛覆盖而无主导偏见**。虽然少数语言（如 pt/ms/ru/it/id）被选中略频繁，但 CLS 仍然始终为非平凡部分的输入包含较低频语言（如 bn/ar/te/zh），反映了**查询自适应选择**而非固定或启发式的语言列表。
 
 #### 3.3.4 DCP 实现感知质量的剪枝以提升效率
 
-![Figure 9: 剪枝比率ρ的影响](assets/page-009-img-01.png)
-
-**Figure 9 — 剪枝比率 ρ 对准确率（左）、延迟（中）、生成 Token 数（右）的影响**：横轴为 ρ（0.25/0.40/0.55/0.70/0.85）。准确率从 81.8% 缓降至 63.2%；延迟从 22.9s 降至 13.7s；Token 数从 3849 降至 1312。
+Figure 9 — 剪枝比率 ρ 对准确率（左）、延迟（中）、生成 Token 数（右）的影响**：横轴为 ρ（0.25/0.40/0.55/0.70/0.85）。准确率从 81.8% 缓降至 63.2%；延迟从 22.9s 降至 13.7s；Token 数从 3849 降至 1312。
 
 **DCP 能有效平衡性能和效率**：如图 9 所示，对于 $\rho < 0.85$，更高的 ρ 轻微降低准确率但带来几乎线性的延迟和 Token 使用减少，表明 DCP 移除了低置信度路径且质量损失极小。总体而言，中等 ρ（**0.55–0.70**）提供了最佳权衡，在大幅保持性能的同时实现 substantial 效率增益。
 
 **DCP 真正在剪枝低质量路径**：为了验证 DCP 的剪枝质量，我们分析了 Pruned XCoT 和 Full XCoT 都表现良好的高性能子集。如图 10 所示，我们使用 **LLM-as-a-Judge** 对轨迹在 5 个维度上打分（0-100）：Step Validity（步骤有效性）、Faithfulness（忠实性）、Completeness（完整性）、Conciseness（简洁性）、Compliance（合规性）。被剪枝的轨迹始终得分更低，在**步骤有效性和完整性上下降最大**，表明较弱的逻辑连贯性和更多的缺失中间推理。
 
-![Figure 10: 剪枝vs保留轨迹质量对比](assets/page-009-img-02.png)
-
-**Figure 10 — DCP 剪枝轨迹(Pruned XCoT) 与保留轨迹(Full XCoT) 的质量对比雷达/柱状图**：Full XCoT 在所有 5 个维度上均显著高于 Pruned XCoT，尤其在 Step Validity 和 Completeness 上差距最为明显。
+Figure 10 — DCP 剪枝轨迹(Pruned XCoT) 与保留轨迹(Full XCoT) 的质量对比雷达/柱状图**：Full XCoT 在所有 5 个维度上均显著高于 Pruned XCoT，尤其在 Step Validity 和 Completeness 上差距最为明显。
 
 ### 术语解释
 

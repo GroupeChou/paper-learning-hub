@@ -1,12 +1,35 @@
-# 策略性异构多智能体架构：面向成本高效的代码漏洞检测
+# paper
 
-## Strategic Heterogeneous Multi-Agent Architecture for Cost-Effective Code Vulnerability Detection
+<!-- 论文元数据卡片 -->
+<div class="paper-meta">
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">机构</span>
+    <span class="paper-meta-value org-"></span>
+  </div>
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">方向</span>
+    <span class="paper-meta-value"></span>
+  </div>
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">日期</span>
+    <span class="paper-meta-value"></span>
+  </div>
+</div>
 
-Zhaohui Geoffrey Wang
+!!! info ""
+    <span class="paper-tag paper-tag-translated">✅ 已完成精读</span>
 
-南加州大学
+- **来源**：[]()
+- **论文链接**：[]()
+- **状态**：已生成
 
-AAMAS 2026
+## 摘要
+
+
+
+
+
+---
 
 ---
 

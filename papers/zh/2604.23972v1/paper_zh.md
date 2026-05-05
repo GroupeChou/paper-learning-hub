@@ -1,22 +1,39 @@
-# 量子知识图谱：建模上下文依赖的三元组有效性
+# paper
 
-**Quantum Knowledge Graph: Modeling Context-Dependent Triplet Validity**
+<!-- 论文元数据卡片 -->
+<div class="paper-meta">
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">机构</span>
+    <span class="paper-meta-value org-"></span>
+  </div>
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">方向</span>
+    <span class="paper-meta-value"></span>
+  </div>
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">日期</span>
+    <span class="paper-meta-value"></span>
+  </div>
+</div>
 
-王尧¹², 耿子旭³, 严俊¹\*
+!!! info ""
+    <span class="paper-tag paper-tag-translated">✅ 已完成精读</span>
 
-¹香港城市大学 HKAI-Sci  ²清华大学自动化系  ³杜克大学普拉特工程学院
+- **来源**：[]()
+- **论文链接**：[]()
+- **状态**：已生成
 
-{ywan75@cityu.edu.hk, zg73@duke.edu, yan.jun@cityu.hk}
+## 摘要
 
-\*通讯作者
 
-2026年4月28日
 
-**关键词**: 量子知识图谱、上下文依赖的三元组有效性、适用性条件、推理器-验证器流水线、患者上下文推理
+## 图表资源
+- ![](assets/page-002-img-01.png)
+- ![](assets/page-010-img-01.jpeg)
+
+
 
 ---
-
-> **图形摘要**：量子知识图谱中的上下文依赖三元组有效性。
 
 ---
 

@@ -1,10 +1,66 @@
-# AeSlides：通过可验证奖励激励基于LLM的幻灯片生成中的美学布局
+# paper
 
-## AeSlides: Incentivizing Aesthetic Layout in LLM-Based Slide Generation via Verifiable Rewards
+<!-- 论文元数据卡片 -->
+<div class="paper-meta">
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">机构</span>
+    <span class="paper-meta-value org-"></span>
+  </div>
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">方向</span>
+    <span class="paper-meta-value"></span>
+  </div>
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">日期</span>
+    <span class="paper-meta-value"></span>
+  </div>
+</div>
 
-潘一鸣¹\*, 胡程伟², 黄宣程²†, 黄灿², 赵明明², 毕悦安², 张晓涵², 曾傲寒², 胡琳梅¹†
+!!! info ""
+    <span class="paper-tag paper-tag-translated">✅ 已完成精读</span>
 
-¹北京理工大学  ²智谱AI
+- **来源**：[]()
+- **论文链接**：[]()
+- **状态**：待复核
+
+## 摘要
+
+
+
+## 解析备注
+
+- 图片数量超过上限，仅保留前 20 张。
+- 图片数量超过上限，仅保留前 20 张。
+- 图片数量超过上限，仅保留前 20 张。
+- 图片数量超过上限，仅保留前 20 张。
+- 图片数量超过上限，仅保留前 20 张。
+- 图片数量超过上限，仅保留前 20 张。
+
+## 图表资源
+- ![](assets/page-001-img-01.jpeg)
+- ![](assets/page-001-img-02.png)
+- ![](assets/page-001-img-03.jpeg)
+- ![](assets/page-001-img-04.png)
+- ![](assets/page-001-img-05.jpeg)
+- ![](assets/page-001-img-06.jpeg)
+- ![](assets/page-001-img-07.png)
+- ![](assets/page-001-img-08.png)
+- ![](assets/page-001-img-09.jpeg)
+- ![](assets/page-001-img-10.jpeg)
+- ![](assets/page-001-img-11.png)
+- ![](assets/page-001-img-12.png)
+- ![](assets/page-001-img-13.jpeg)
+- ![](assets/page-001-img-14.png)
+- ![](assets/page-001-img-15.png)
+- ![](assets/page-001-img-16.jpeg)
+- ![](assets/page-003-img-01.png)
+- ![](assets/page-003-img-02.jpeg)
+- ![](assets/page-003-img-03.jpeg)
+- ![](assets/page-008-img-01.png)
+
+
+
+---
 
 ---
 

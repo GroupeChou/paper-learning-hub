@@ -1,10 +1,39 @@
-# FairQE：缓解翻译质量估计中性别偏见的多智能体框架
+# paper
 
-## FairQE: Multi-Agent Framework for Mitigating Gender Bias in Translation Quality Estimation
+<!-- 论文元数据卡片 -->
+<div class="paper-meta">
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">机构</span>
+    <span class="paper-meta-value org-"></span>
+  </div>
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">方向</span>
+    <span class="paper-meta-value"></span>
+  </div>
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">日期</span>
+    <span class="paper-meta-value"></span>
+  </div>
+</div>
 
-Jinhee Jang¹, Juhwan Choi²†, Dongjin Lee¹†, Seunguk Yu¹, Youngbin Kim¹
+!!! info ""
+    <span class="paper-tag paper-tag-translated">✅ 已完成精读</span>
 
-¹中央大学（韩国）  ²AITRICS
+- **来源**：[]()
+- **论文链接**：[]()
+- **状态**：已生成
+
+## 摘要
+
+
+
+## 图表资源
+- ![](assets/page-001-img-01.png)
+- ![](assets/page-003-img-01.png)
+
+
+
+---
 
 ---
 

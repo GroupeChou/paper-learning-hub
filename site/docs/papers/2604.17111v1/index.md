@@ -1,40 +1,33 @@
-# HiveMind: OS-Inspired Scheduling for Concurrent LLM Agent Workloads
+# paper
 
 <!-- 论文元数据卡片 -->
 <div class="paper-meta">
   <div class="paper-meta-item">
     <span class="paper-meta-label">机构</span>
-    <span class="paper-meta-value org-OpenAI">OpenAI</span>
+    <span class="paper-meta-value org-"></span>
   </div>
   <div class="paper-meta-item">
     <span class="paper-meta-label">方向</span>
-    <span class="paper-meta-value">AI Agent 调度</span>
+    <span class="paper-meta-value"></span>
   </div>
   <div class="paper-meta-item">
     <span class="paper-meta-label">日期</span>
-    <span class="paper-meta-value">2026-04-18</span>
-  </div>
-  <div class="paper-meta-item">
-    <span class="paper-meta-label">优先级</span>
-    <span class="paper-meta-value">⭐⭐⭐⭐⭐</span>
-  </div>
-  <div class="paper-meta-item">
-    <span class="paper-meta-label">阅读难度</span>
-    <span class="paper-meta-value">中</span>
+    <span class="paper-meta-value"></span>
   </div>
 </div>
 
 !!! info ""
-    <span class="paper-tag paper-tag-translated">✅ 已完成精读</span> · AI Agent 路线第 3 篇精读
+    <span class="paper-tag paper-tag-translated">✅ 已完成精读</span>
 
-> **📍 学习路线**：🧠 AI Agent 路线 → 工程实践 → 第 3 篇
-- **来源**：[OpenAI arXiv query](https://arxiv.org/abs/2604.17111v1)
-- **论文链接**：[https://arxiv.org/pdf/2604.17111v1](https://arxiv.org/pdf/2604.17111v1)
+- **来源**：[]()
+- **论文链接**：[]()
 - **状态**：已生成
 
 ## 摘要
 
-当多个 LLM 编码 Agent 共享一个限速 API 端点时，它们表现出类似于未调度的操作系统进程竞争 CPU、内存和 I/O 的资源争用模式。在一个实际事件中，11 个并行 Agent 中有 3 个因连接重置（ECONNRESET）和 HTTP 502 错误而"死亡"——尽管 API 总容量足以按顺序服务全部 11 个 Agent。本文提出 **HiveMind**，一个透明的 HTTP 代理，应用五种受 OS 启发的调度原语——准入控制、速率限制追踪、AIMD 背压+熔断、Token 预算管理、优先级队列——来消除无协调并行执行导致的故障模式。该代理无需修改现有 Agent 代码，支持 Anthropic/OpenAI/本地模型 API（通过自动检测的 Provider Profile）。在七种场景（5-50 并发 Agent）下的评估表明：无协调 Agent 在争用下以 72-100% 的速率失败，而 HiveMind 将失败率降至 0-18%，并消除了 48-100% 的浪费计算量。
+
+
+
 
 ---
 
@@ -276,9 +269,7 @@ Table 3 对比了主流 Agent 编排框架的调度能力：
 
 > [扩展] "透明代理"是一个关键的架构决策。这意味着 Agent 完全不知道 HiveMind 的存在——它们以为自己在直接跟 API 通信。这带来了四个优势：(1) 零代码修改——适用于任何框架/SDK/语言；(2) Provider 无关——同一个代理服务 Anthropic/OpenAI/Ollama；(3) 可观测——所有流量流经单一测量点；(4) 可组合——可与其他代理链式使用。
 
-![Figure 1: HiveMind 架构图](assets/page-003-img-01.png)
-
-**Figure 1 解读**：架构图展示了五层调度管线：
+Figure 1 解读**：架构图展示了五层调度管线：
 ```
 Agent 1/Agent 2/.../Agent N
         ↓
@@ -364,7 +355,6 @@ Result: 更新的并发度 ct, 熔断状态
 - **Open（打开）**：错误率超过阈值 τ（默认50%），快速返回 503 + Retry-After
 - **Half-Open（半开）**：冷却期 Tcool（默认10s）过后，允许一个探测请求；成功则关闭，失败则重新打开
 
-![Figure 2: 熔断器状态机](assets/page-005-img-01.png)
 
 #### 3.4 Token 预算管理（Token Budget Management）
 
@@ -550,13 +540,9 @@ Mock Agent 进行 N 次顺序 API 调用，模拟多轮编程会话。每个 Age
 
 **Wall-time 权衡**：HiveMind 的绝对耗时更长（因为它串行化了请求），但 Direct 模式的"快"只是因为大部分 Agent 立即失败。按**完成的工**作衡量，HiveMind 的吞吐量严格更高。
 
-![Figure 3: 各场景失败率](assets/page-008-img-01.png)
+Figure 3 解读**：柱状图直观展示了 Direct 模式（红）在 10+ Agent 时接近 100% 失败，HiveMind（绿）始终保持在 0-18%。micro-5 两种模式持平（无争用）。
 
-**Figure 3 解读**：柱状图直观展示了 Direct 模式（红）在 10+ Agent 时接近 100% 失败，HiveMind（绿）始终保持在 0-18%。micro-5 两种模式持平（无争用）。
-
-![Figure 4: 扩展性行为](assets/page-008-img-02.png)
-
-**Figure 4 解读**：
+Figure 4 解读**：
 - 左图：成功完成的 Agent 数 vs 并发数。Direct 模式在 5 个以上时归零；HiveMind 线性增长
 - 右图：有效吞吐量（tasks/min）。Direct 模式在 5+ 后降为零；HiveMind 持续增长
 

@@ -1,14 +1,45 @@
-# 长上下文感知的Upcycling：混合LLM缩放的新前沿
+# paper
 
-**Long-Context Aware Upcycling: A New Frontier for Hybrid LLM Scaling**
+<!-- 论文元数据卡片 -->
+<div class="paper-meta">
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">机构</span>
+    <span class="paper-meta-value org-"></span>
+  </div>
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">方向</span>
+    <span class="paper-meta-value"></span>
+  </div>
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">日期</span>
+    <span class="paper-meta-value"></span>
+  </div>
+</div>
 
-Parsa Ashrafi Fashi\*, Utkarsh Saxena\*, Mehdi Rezagholizadeh, Aref Jafari, Akash Haridas, Mingyu Yang, Vansh Bhatia, Guihong Li, Vikram Appia, Emad Barsoum
+!!! info ""
+    <span class="paper-tag paper-tag-translated">✅ 已完成精读</span>
 
-AMD
+- **来源**：[]()
+- **论文链接**：[]()
+- **状态**：已生成
 
-\*共同第一作者（随机顺序）
+## 摘要
 
-{parsa.fashi, utkarsh.saxena, mehdi.rezagholizadeh, aref.jafari}@amd.com
+
+
+## 图表资源
+- ![](assets/page-001-img-01.png)
+- ![](assets/page-002-img-01.png)
+- ![](assets/page-002-img-02.png)
+- ![](assets/page-002-img-03.png)
+- ![](assets/page-002-img-04.png)
+- ![](assets/page-002-img-05.png)
+- ![](assets/page-009-img-01.png)
+- ![](assets/page-016-img-01.png)
+
+
+
+---
 
 ---
 

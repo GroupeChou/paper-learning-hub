@@ -1,10 +1,65 @@
-# 基于 LLM 的 Manim 动画生成的训练与智能体推理策略
+# paper
 
-## Training and Agentic Inference Strategies for LLM-Based Manim Animation Generation
+<!-- 论文元数据卡片 -->
+<div class="paper-meta">
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">机构</span>
+    <span class="paper-meta-value org-"></span>
+  </div>
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">方向</span>
+    <span class="paper-meta-value"></span>
+  </div>
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">日期</span>
+    <span class="paper-meta-value"></span>
+  </div>
+</div>
 
-Ravidu Suien Rammuni Silva¹, Ahmad Lotfi¹, Isibor Kennedy Ihianle¹, Golnaz Shahtahmassebi², Jordan J. Bird¹
+!!! info ""
+    <span class="paper-tag paper-tag-translated">✅ 已完成精读</span>
 
-¹诺丁汉特伦特大学计算机科学系  ²诺丁汉特伦特大学物理与数学系
+- **来源**：[]()
+- **论文链接**：[]()
+- **状态**：待复核
+
+## 摘要
+
+
+
+## 解析备注
+
+- 图片数量超过上限，仅保留前 20 张。
+- 图片数量超过上限，仅保留前 20 张。
+- 图片数量超过上限，仅保留前 20 张。
+- 图片数量超过上限，仅保留前 20 张。
+- 图片数量超过上限，仅保留前 20 张。
+
+## 图表资源
+- ![](assets/page-004-img-01.png)
+- ![](assets/page-004-img-02.png)
+- ![](assets/page-004-img-03.png)
+- ![](assets/page-004-img-04.png)
+- ![](assets/page-004-img-05.png)
+- ![](assets/page-004-img-06.png)
+- ![](assets/page-004-img-07.png)
+- ![](assets/page-004-img-08.png)
+- ![](assets/page-004-img-09.png)
+- ![](assets/page-004-img-10.png)
+- ![](assets/page-004-img-11.png)
+- ![](assets/page-004-img-12.png)
+- ![](assets/page-004-img-13.png)
+- ![](assets/page-004-img-14.png)
+- ![](assets/page-007-img-01.png)
+- ![](assets/page-007-img-02.png)
+- ![](assets/page-007-img-03.png)
+- ![](assets/page-007-img-04.png)
+- ![](assets/page-007-img-05.png)
+- ![](assets/page-007-img-06.png)
+
+
+
+---
 
 ---
 

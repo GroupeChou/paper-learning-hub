@@ -1,32 +1,43 @@
-# ATBench-Claw/CodeX：OpenClaw和Codex中的轨迹安全评估与诊断基准
+# paper
 
 <!-- 论文元数据卡片 -->
 <div class="paper-meta">
   <div class="paper-meta-item">
     <span class="paper-meta-label">机构</span>
-    <span class="paper-meta-value org-other">Shanghai AI Lab</span>
+    <span class="paper-meta-value org-"></span>
   </div>
   <div class="paper-meta-item">
     <span class="paper-meta-label">方向</span>
-    <span class="paper-meta-value">智能体安全 / 基准测试</span>
+    <span class="paper-meta-value"></span>
   </div>
   <div class="paper-meta-item">
     <span class="paper-meta-label">日期</span>
-    <span class="paper-meta-value">2026-04-16</span>
+    <span class="paper-meta-value"></span>
   </div>
 </div>
 
 !!! info ""
     <span class="paper-tag paper-tag-translated">✅ 已完成精读</span>
 
-- **来源**：[arXiv](https://arxiv.org/abs/2604.14858)
-- **论文链接**：[2604.14858v1](https://arxiv.org/abs/2604.14858)
+- **来源**：[]()
+- **论文链接**：[]()
+- **状态**：已生成
 
 ## 摘要
 
 随着智能体系统进入日益多样化的执行环境，**轨迹级（trajectory-level）安全评估与诊断**需要随之演进的基准。ATBench是一个用于安全评估和诊断的多样化且真实的智能体轨迹基准。本文提出了 **ATBench-Claw** 和 **ATBench-CodeX** 两个领域定制化扩展，将ATBench带入OpenClaw和OpenAI Codex/Codex-runtime执行环境。关键适配机制是分析每个新环境、在风险源、失败模式和现实世界伤害三个维度上定制三维安全分类法（Safety Taxonomy），然后用该定制分类法定义基准规范供共享的ATBench构建管道消费。这种可扩展性之所以重要，是因为即使智能体框架在架构层面保持相对稳定，其具体执行环境、工具生态系统和产品能力仍在快速演进。具体而言，ATBench-Claw针对OpenClaw中跨工具、技能、会话和外部动作的敏感执行链；ATBench-CodeX针对Codex环境中跨代码仓库、Shell命令、补丁、依赖、审批工作流和运行时策略边界的轨迹。因此，我们强调的是**分类法定制**、**领域特定风险覆盖**和共享ATBench生成框架下的**基准设计**。
 
 [扩展] 这篇论文的核心贡献是展示了一个"框架+插件"的基准设计范式——核心ATBengines不变，通过定制三维Safety Taxonomy即可适配全新的Agent执行环境。对Agent安全研究者而言，这提供了一种系统化的方法来评估不同Agent平台的安全特性。
+
+
+
+
+## 图表资源
+
+- ![](assets/page-001-img-01.png)
+- ![](assets/page-001-img-02.png)
+
+
 
 ---
 
@@ -114,9 +125,7 @@ ATBench是一个围绕**可复用构建框架**构建的轨迹级基准。其两
 
 本报告分析了这种可扩展性在两种新智能体执行环境下的表现。不是提出另一个独立的基准，而是展示了ATBench构建框架如何通过为每个环境定制三维分类法而带入OpenClaw和CodeX。**共享的轨迹级任务和诊断原语保持固定**，而相关的敏感动作、执行上下文和评估切片在分类法层面变得显式。
 
-![Figure 1: 三维智能体安全分类法](assets/taxonomy.png)
 
-*图1：原始ATBench三维智能体安全分类法作为跨越风险源、失败模式和现实世界伤害的统一共享框架。OpenClaw和CodeX的领域特定适配被叠加在此统一分类法上，突出显示不同执行环境如何强调或重新解读特定区域而不改变底层结构。NEW标记表示新引入的子类别，KEY标记表示继承分类法中加强或场景重解读的概念。*
 
 快速演进的智能体执行环境使这种定制成为必要。**OpenClaw**运行于工具、技能、会话和外部服务之上，因此其最高风险区域聚集在有状态执行、审批和跨工具协调周围。**CodeX**运行于代码仓库、Shell命令、补丁、依赖和MCP服务器之上，因此其风险表面转向以仓库为中心的执行、破坏性变异和策略约束的运行时动作。这些不是表层的接口差异；它们实质性地改变了哪些安全失败主导轨迹，以及基准必须覆盖什么。
 

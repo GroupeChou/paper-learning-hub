@@ -1,12 +1,39 @@
-# 学会进化：基于文本参数图优化的多智能体系统自改进框架
+# paper
 
-## Learning to Evolve: A Self-Improving Framework for Multi-Agent Systems via Textual Parameter Graph Optimization
+<!-- 论文元数据卡片 -->
+<div class="paper-meta">
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">机构</span>
+    <span class="paper-meta-value org-"></span>
+  </div>
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">方向</span>
+    <span class="paper-meta-value"></span>
+  </div>
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">日期</span>
+    <span class="paper-meta-value"></span>
+  </div>
+</div>
 
-何山\*, 王润泽\*, 杜卓云, 白慧宇, 曹邹颖, 程宇, 郑波†
+!!! info ""
+    <span class="paper-tag paper-tag-translated">✅ 已完成精读</span>
 
-阿里巴巴未来人居实验室
+- **来源**：[]()
+- **论文链接**：[]()
+- **状态**：已生成
 
-\*共同第一作者  †通讯作者
+## 摘要
+
+
+
+## 图表资源
+- ![](assets/page-001-img-01.png)
+- ![](assets/page-004-img-01.png)
+
+
+
+---
 
 ---
 

@@ -1,27 +1,27 @@
-# ReflectMT: Internalizing Reflection for Efficient and High-Quality Machine Translation
-
-（ReflectMT：将反思内化以实现高效高质量机器翻译）
+# paper
 
 <!-- 论文元数据卡片 -->
 <div class="paper-meta">
   <div class="paper-meta-item">
     <span class="paper-meta-label">机构</span>
-    <span class="paper-meta-value org-deepseek">DeepSeek / 厦门大学 / 腾讯微信AI</span>
+    <span class="paper-meta-value org-"></span>
   </div>
-  <div class="paper-meta-label">方向</span>
-    <span class="paper-meta-value">AI Agent / 机器翻译 / 推理模型</span>
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">方向</span>
+    <span class="paper-meta-value"></span>
   </div>
   <div class="paper-meta-item">
     <span class="paper-meta-label">日期</span>
-    <span class="paper-meta-value">2026-04-21</span>
+    <span class="paper-meta-value"></span>
   </div>
 </div>
 
 !!! info ""
     <span class="paper-tag paper-tag-translated">✅ 已完成精读</span>
 
-- **来源**：[arXiv](https://arxiv.org/abs/2604.19144v1)
-- **论文链接**：[PDF](https://arxiv.org/pdf/2604.19144v1)
+- **来源**：[]()
+- **论文链接**：[]()
+- **状态**：已生成
 
 ## 摘要
 
@@ -38,37 +38,20 @@
 
 在 WMT24 等数据集上的实验表明，我们模型推理时的**首遍翻译（First-pass Translation）** 在自动指标和基于 GPT 的评估中均优于 DeepSeek-R1 等多步推理 LRM，在 GPT 翻译质量评估上提升 **2.16 分**的同时减少 Token 消耗 **94.33%**。
 
-### 术语解释
 
-| 英文术语 | 中文译名 | 一句话解释 | 应用场景 |
-|----------|----------|------------|----------|
-| Large Reasoning Model (LRM) | 大型推理模型 | 具备长链式思维推理能力的大语言模型 | 数学、编程、逻辑等复杂任务 |
-| think-first-then-translate | 先思考后翻译 | 先进行显式CoT推理再生成翻译的范式 | 现有LRM+MT方法的共同特征 |
-| translate-first-think-later | 先翻译后思考后反思 | 先生成初译再进行反思优化的范式 | ReflectMT的核心创新 |
-| Reflection Internalization | 反思内化 | 将显式反思过程转化为隐式直觉能力的关键机制 | 从"新手"到"专家"的技能迁移 |
-| First-pass Translation | 首遍/首次翻译 | 模型第一次直接生成的翻译结果（不经反思） | ReflectMT推理时的输出 |
-| Multi-agent Collaboration | 多智能体协作 | 通过多个专门化Agent协作生成训练数据的方法 | 构建反思翻译数据集 |
-| GRPO (Generalized Relative Policy Optimization) | 广义相对策略优化 | 一种不需要价值模型的强化学习算法 | ReflectMT的训练核心算法 |
-| Early Stopping Strategy | 早停策略 | 检测到特定Token时立即终止生成的推理优化技术 | 消除推理时计算开销 |
 
-### 图表/公式说明
 
-**Figure 1 — ReflectMT 训练 vs 推理范式对比图**
+## 图表资源
 
-![Figure 1: 训练与推理范式](assets/page-002-img-01.png)
+- ![](assets/page-003-img-01.jpeg)
+- ![](assets/page-003-img-02.jpeg)
+- ![](assets/page-003-img-03.jpeg)
+- ![](assets/page-003-img-04.png)
+- ![](assets/page-003-img-05.png)
+- ![](assets/page-003-img-06.png)
+- ![](assets/page-003-img-07.jpeg)
 
-此图直观展示了 ReflectMT 的核心理念——训练时做完整反思链，推理时只输出初译：
-- **上半部分（Training）**：展示一个完整示例——源句关于公司订阅模式的商业文本。模型依次输出：`<answer>` 初译（黑色）→ `<reflection>` 多维度反思分析 → `<need_revision>` 是否需要修改 → `<final_answer>` 最终译文（灰色）
-- **下半部分（Inference）**：仅保留 `<answer>` 部分作为输出，通过早停策略跳过后续所有反思步骤
 
-**设计意图**：此图是论文最关键的可视化，清晰传达了"训练时学反思、推理时隐式执行"的核心思想。
-
-### 关键 Takeaway
-
-- **核心矛盾（作者主张）**：现有 LRM+MT 方法的翻译质量高但推理成本极高（长CoT导致大量冗余Token和延迟）
-- **解决思路（作者主张）**：将反思从"推理时动作"转变为"训练时学习目标"，实现从"显式反思"到"隐式能力"的转化
-- **效率数据（客观事实）**：GPT评分 +2.16 分，Token 减少 94.33%（相比执行完整反思的版本）
-- **直觉类比（作者主张）**：如同专业翻译员——新手需要反复修改，专家能一次性产出高质量译文
 
 ---
 
@@ -161,9 +144,7 @@
 
 框架的最终目标是利用训练期间的显式反思步骤来建立认知能力，随后将其**内化**，使模型能在推理时的单次前向传播中生成高质量翻译而无需推理开销。
 
-![Figure 2: 反思内化框架总览](assets/page-003-img-01.png)
-
-**Figure 2 — 反思内化框架总览图**：
+Figure 2 — 反思内化框架总览图**：
 - **(a) 数据构建（Data Construction）**：左侧展示多智能体系统的迭代优化循环——Translator 生成初译 → Reflector 进行多维度反思打分（Translation Quality Analysis + Score）→ Translator 根据反馈修改 → 循环直到分数达标或达到最大迭代次数。图中展示了一个具体例子：源句 "Local fall-outs turning into shop thy neighbour" 经过 Round1（Score:30）→ RoundN（Score:92）的迭代。
 - **(b) 强化学习策略（Reinforcement Learning Strategy）**：右侧展示训练流水线——Qwen2.5-7b-instruct 经 Cold Start SFT → Stage 1 GRPO Train（反思优化能力建立）→ Stage 2 GRPO Train（反思内化）。注意最终产物 ReflectMT-SFT/Stage1/Stage2 都是同一个模型在不同训练阶段的状态。
 
@@ -363,9 +344,7 @@ $$r_{stage2}^{trans} = \frac{s_{init}}{100} \quad (8)$$
 
 ### 3.4 反思内化分析
 
-![Figure 3: 训练动态](assets/page-006-img-01.png)
-
-**Figure 3 — 训练动态分析**（含 4 个子图）：
+Figure 3 — 训练动态分析**（含 4 个子图）：
 - **(a) 修改次数**：随训练步数增加，显式修改次数从 578（28.9%）单调下降至 14（0.7%）
 - **(b) GRF 准确率**：波动上升趋势，从 79.73% 升至 82.55%
 - **(c) 初译-终译分数差（Divergence）**：波动下降趋势，从 0.78 降至接近 0.00
