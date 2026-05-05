@@ -1,0 +1,3352 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://groupechou.github.io/paper-learning-hub/papers/2604.20090v1/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Less Languages, Less Tokens: An Efficient Unified Logic Cross-lingual Chain-of-Thought Reasoning Framework - 论文自动研学知识库</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#less-languages-less-tokens-an-efficient-unified-logic-cross-lingual-chain-of-thought-reasoning-framework" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="论文自动研学知识库" class="md-header__button md-logo" aria-label="论文自动研学知识库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            论文自动研学知识库
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Less Languages, Less Tokens: An Efficient Unified Logic Cross-lingual Chain-of-Thought Reasoning Framework
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="论文自动研学知识库" class="md-nav__button md-logo" aria-label="论文自动研学知识库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    论文自动研学知识库
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../roadmap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    📖 学习总纲
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/daily-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    📅 今日更新
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../agents/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🤖 AI Agent 主线
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🤖 AI Agent 主线
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/ch01-basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第一章 Agent 基础架构篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/ch02-planning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第二章 规划与推理篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/ch03-tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第三章 工具使用与API篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/ch04-memory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第四章 记忆与检索篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/ch05-multi-agent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第五章 多智能体协作篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/ch06-embodied/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第六章 具身智能篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/ch07-safety/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第七章 Agent评估与安全篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/ch08-frontier/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第八章 前沿探索篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../time_series/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    📈 时序预测主线
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    📈 时序预测主线
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../time_series/ch01-basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第一章 基础理论篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../time_series/ch02-classics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第二章 经典方法篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../time_series/ch03-transformer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第三章 Transformer革命篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../time_series/ch04-foundation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第四章 基础模型篇(Foundation Models)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../time_series/ch05-long-horizon/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第五章 长序列预测篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../time_series/ch06-st-gnn/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第六章 多变量时空篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../time_series/ch07-frontier/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第七章 前沿探索篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../cross_domain/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🔗 交叉融合
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_6" id="__nav_6_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🔗 交叉融合
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cross_domain/ts-agent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    时序预测Agent
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cross_domain/agent-analysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Agent驱动分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cross_domain/autonomous/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    自主决策系统
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../organizations/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🏢 机构专题
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_7" id="__nav_7_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🏢 机构专题
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../organizations/openai/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OpenAI 系列
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../organizations/deepmind/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Google DeepMind
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../organizations/anthropic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Anthropic 系列
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../organizations/meta/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Meta 系列
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../organizations/microsoft/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Microsoft 系列
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../organizations/domestic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    国内大厂系列
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../organizations/academic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    学术机构
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    论文详情
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    论文详情
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        摘要
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="摘要">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        中文翻译
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        术语解释
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        图表/公式说明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#takeaway" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        关键 Takeaway
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#section-1-introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Section 1 — Introduction（引言）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Section 1 — Introduction（引言）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        中文翻译
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        术语解释
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        图表/公式说明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#takeaway_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        关键 Takeaway
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#section-2-method" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Section 2 — Method（方法）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Section 2 — Method（方法）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        中文翻译
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#21-overall-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 整体流程（Overall Pipeline）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-the-unified-logic-mechanism" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 统一逻辑机制（The Unified Logic Mechanism）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-candidate-language-selection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 候选语言选择（Candidate Language Selection）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.3 候选语言选择（Candidate Language Selection）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#understanding-similarity-score" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        理解相似度分数（Understanding Similarity Score）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        候选集选择
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-dynamic-chain-of-thought-pruning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 动态链式思维剪枝（Dynamic Chain-of-Thought Pruning）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.4 动态链式思维剪枝（Dynamic Chain-of-Thought Pruning）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#logical-quality-score" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        逻辑质量分数（Logical Quality Score）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        低质量路径剪枝
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        术语解释
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        图表/公式说明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#takeaway_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        关键 Takeaway
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#section-3-experiments" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Section 3 — Experiments（实验）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Section 3 — Experiments（实验）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        中文翻译
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 实验设置
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-ul-xcot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 UL-XCoT 实验结果
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.2 UL-XCoT 实验结果">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#321-the-superior-efficiency" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2.1 卓越的效率（The Superior Efficiency）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#322-the-comparable-performance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2.2 有竞争力的性能（The Comparable Performance）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#323-the-robust-generalization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2.3 鲁棒的泛化（The Robust Generalization）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 分析（Analysis）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.3 分析（Analysis）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#331" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3.1 各模块的有效性
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#332-ulm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3.2 ULM 能有效统一跨逻辑表征
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#333-cls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3.3 CLS 能无偏见地自适应选择合适语言
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#334-dcp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3.4 DCP 实现感知质量的剪枝以提升效率
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        术语解释
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        图表/公式说明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#takeaway_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        关键 Takeaway
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#section-4-related-work" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Section 4 — Related Work（相关工作）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Section 4 — Related Work（相关工作）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        中文翻译
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#41" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 跨语言链式思维推理
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 跨语言链式思维自一致性
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        术语解释
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        图表/公式说明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#takeaway_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        关键 Takeaway
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#section-5-conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Section 5 — Conclusion（结论）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Section 5 — Conclusion（结论）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_19" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        中文翻译
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        术语解释
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        图表/公式说明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#takeaway_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        关键 Takeaway
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#section-6-limitations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Section 6 — Limitations（局限性）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Section 6 — Limitations（局限性）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        中文翻译
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        术语解释
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        图表/公式说明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#takeaway_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        关键 Takeaway
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#section-7-appendix-adcp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Section 7 — Appendix A：DCP 的数学细节（附录）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Section 7 — Appendix A：DCP 的数学细节（附录）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_25" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        中文翻译
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#logic-space-curvature-signal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        逻辑空间曲率信号（Logic-space Curvature Signal）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#divergence-test" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        发散检测（Divergence Test）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_26" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        发散检测与评分
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#per-step-point-assignment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        逐步点分配（Per-step Point Assignment）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_27" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        术语解释
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_28" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        图表/公式说明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#takeaway_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        关键 Takeaway
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#section-8-bcd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Section 8 — 附录 B/C/D：补充材料
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Section 8 — 附录 B/C/D：补充材料">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_29" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        中文翻译
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        附录 B：详细的效率分析
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cpolymath" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        附录 C：PolyMath 整体性能
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#d" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        附录 D：提示模板
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_30" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        术语解释
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        图表/公式说明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#takeaway_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        关键 Takeaway
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        总评与思考
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="总评与思考">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        论文的核心洞察
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_34" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        方法设计的优雅之处
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_35" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        局限与展望
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_36" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        适用场景判断
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_37" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        与物流预测领域的关系
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="less-languages-less-tokens-an-efficient-unified-logic-cross-lingual-chain-of-thought-reasoning-framework">Less Languages, Less Tokens: An Efficient Unified Logic Cross-lingual Chain-of-Thought Reasoning Framework<a class="headerlink" href="#less-languages-less-tokens-an-efficient-unified-logic-cross-lingual-chain-of-thought-reasoning-framework" title="Permanent link">&para;</a></h1>
+<p>（更少语言、更少Token：一种高效的统一逻辑跨语言链式思维推理框架）</p>
+<!-- 论文元数据卡片 -->
+<div class="paper-meta">
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">机构</span>
+    <span class="paper-meta-value org-deepseek">DeepSeek</span>
+  </div>
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">方向</span>
+    <span class="paper-meta-value">AI Agent / 多语言推理</span>
+  </div>
+  <div class="paper-meta-label">日期</span>
+    <span class="paper-meta-value">2026-04-22</span>
+  </div>
+</div>
+
+<div class="admonition info">
+<p><span class="paper-tag paper-tag-translated">✅ 已完成精读</span></p>
+</div>
+<ul>
+<li><strong>来源</strong>：<a href="https://arxiv.org/abs/2604.20090v1">arXiv</a></li>
+<li><strong>论文链接</strong>：<a href="https://arxiv.org/pdf/2604.20090v1">PDF</a></li>
+<li><strong>代码开源</strong>：https://github.com/chenyuanTKCY/UL-XCoT</li>
+</ul>
+<h2 id="_1">摘要<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<h3 id="_2">中文翻译<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<p>跨语言链式思维推理（Cross-lingual Chain-of-Thought, XCoT）结合自一致性（self-consistency）方法，能够显著增强多语言推理能力。然而，由于现有方法需要在所有候选语言上进行大规模的完整推理轨迹采样，其计算成本依然居高不下。此外，多语言大语言模型（MLLM）的表征在不同语言间存在强烈差异，这阻碍了直接的特征比较和有效的剪枝操作。</p>
+<p>基于这一观察，我们提出了 <strong>UL-XCoT</strong>（Unified Logic XCoT），这是首个<strong>高效的统一逻辑跨语言推理框架</strong>。该框架能够在有限的推理采样预算下，最小化 Token 使用量和推理延迟，实现最高的效率。具体而言，UL-XCoT 通过以下两种机制实现目标：(1) <strong>更少语言（Less Languages）</strong>——在每个查询中，通过一个与语言无关的统一逻辑空间，选择一个小规模候选语言子集；(2) <strong>更少 Token（Less Tokens）</strong>——在解码过程中，监控逻辑空间中的推理轨迹动态，动态剪枝低质量推理路径；(3) 对剩余的高质量推理轨迹进行投票聚合。</p>
+<p>在 PolyMath 基准测试的 18 种语言和 MMLU-ProX-Lite 的 29 种语言上，使用 DeepSeek-R1-Distill-Qwen-7B 模型的实验表明：UL-XCoT 在保持竞争力的准确率的同时，相比先前的采样基线方法，<strong>解码 Token 成本锐减超过 50%</strong>。此外，UL-XCoT 在低资源语言上展现出更加稳定和显著的增益效果，这凸显了其在标准 XCoT 自一致性方法失效的场景下具有持续且优越的鲁棒性。</p>
+<h3 id="_3">术语解释<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>英文术语</th>
+<th>中文译名</th>
+<th>一句话解释</th>
+<th>应用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>XCoT (Cross-lingual CoT)</td>
+<td>跨语言链式思维</td>
+<td>输入和中间推理步骤使用不同语言的推理范式</td>
+<td>多语言推理任务</td>
+</tr>
+<tr>
+<td>Self-consistency</td>
+<td>自一致性</td>
+<td>通过采样多条推理路径并投票来提升答案一致性的技术</td>
+<td>测试时扩展（Test-time Scaling）</td>
+</tr>
+<tr>
+<td>MLLM (Multilingual LLM)</td>
+<td>多语言大语言模型</td>
+<td>支持多种语言理解和生成的 LLM</td>
+<td>多语言 NLP 任务</td>
+</tr>
+<tr>
+<td>Unified Logic Space</td>
+<td>统一逻辑空间</td>
+<td>消除语言表面差异、保留任务相关推理结构的共享表征空间</td>
+<td>跨语言特征对齐</td>
+</tr>
+<tr>
+<td>Candidate Language Selection (CLS)</td>
+<td>候选语言选择</td>
+<td>在统一逻辑空间中预筛选最相关的候选语言子集</td>
+<td>减少不必要的多语言采样</td>
+</tr>
+<tr>
+<td>Dynamic CoT Pruning (DCP)</td>
+<td>动态 CoT 剪枝</td>
+<td>在解码过程中实时监控并裁剪低质量推理路径</td>
+<td>减少 Token 和延迟</td>
+</tr>
+<tr>
+<td>DW-ACC</td>
+<td>难度加权准确率</td>
+<td>按难度级别加权的综合准确率指标</td>
+<td>数学推理基准评估</td>
+</tr>
+<tr>
+<td>Hidden State</td>
+<td>隐状态</td>
+<td>Transformer 各层编码的内部向量表示</td>
+<td>模型可解释性和监控</td>
+</tr>
+<tr>
+<td>Warm-up Phase</td>
+<td>预热阶段</td>
+<td>解码初期禁用剪枝以避免过早丢弃路径的阶段</td>
+<td>DCP 的安全机制</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_4">图表/公式说明<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p><strong>Figure 1 — 传统 XCoT 与 UL-XCoT 架构对比图</strong></p>
+<p><img alt="Figure 1: 传统XCoT vs UL-XCoT架构对比" src="assets/page-001-img-04.png" /></p>
+<p>此图为论文的核心架构对比示意图，包含两个子图：</p>
+<ul>
+<li><strong>(a) 传统跨语言 CoT 采样框架</strong>：展示了一个输入查询（如数学问题）被翻译为多种语言（中文、英文、德文、法文、泰文），然后每种语言都生成完整的推理轨迹（67-68 步），最终消耗 <strong>6623 个 Token</strong>，延迟 <strong>43 秒</strong>。</li>
+<li><strong>(b) UL-XCoT 高效采样框架</strong>：展示了通过"统一逻辑空间投影→候选语言选择→动态 CoT 剪枝"三阶段处理后，仅保留少量高质量语言路径（如法文、德文、中文），最终仅需 <strong>3824 个 Token</strong>，延迟降至 <strong>28 秒</strong>。</li>
+</ul>
+<p><strong>设计意图分析</strong>：此图直观呈现了论文的核心价值主张——通过减少参与推理的语言数量和每条路径的 Token 数量，在保持推理质量的同时大幅降低计算成本。</p>
+<h3 id="takeaway">关键 Takeaway<a class="headerlink" href="#takeaway" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>核心问题（作者主张）</strong>：现有 XCoT 方法的两大缺陷是"全语言采样"和"全轨迹推理"，导致冗余计算随语言数线性增长</li>
+<li><strong>解决方案（作者主张）</strong>：UL-XCoT 通过统一逻辑机制（ULM）+ 候选语言选择（CLS）+ 动态 CoT 剪枝（DCP）三模块协同工作</li>
+<li><strong>效率数据（客观事实）</strong>：相比 AutoCap 降低 50%+ Token 成本，相比 SC 降低 65%+；延迟从 43s 降至 28s</li>
+<li><strong>鲁棒性发现（客观事实）</strong>：在低资源语言子集上增益更强更稳定，标准 XCoT 自一致性失效时仍有效</li>
+</ul>
+<hr />
+<h2 id="section-1-introduction">Section 1 — Introduction（引言）<a class="headerlink" href="#section-1-introduction" title="Permanent link">&para;</a></h2>
+<h3 id="_5">中文翻译<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<p>多语言大语言模型（Multilingual Large Language Models, MLLMs）已经展现出强大的推理和泛化能力（Qin et al., 2025; Chen et al., 2024a; Lai et al., 2023; Resck et al., 2025）。而<strong>跨语言链式思维推理（Cross-lingual Chain-of-Thought, XCoT）</strong>可以进一步优化这种能力。[扩展] 这意味着利用不同语言作为"思维媒介"来激活模型的推理潜能，类似于人类使用不同语言思考同一问题时可能获得不同的视角。</p>
+<p>具体来说，XCoT 是一种推理范式，其中<strong>输入和中间步骤使用不同的语言</strong>（Qin et al., 2023; Zhang et al., 2024; Huang et al., 2026; Tran et al., 2025b），能够有效激活模型的核心推理能力（Ahuja et al., 2025; Chen et al., 2024b; Huang et al., 2023）。[扩展] 这种方法的直觉基础在于：不同语言可能编码了不同的思维模式或知识结构，切换语言可以帮助模型绕过单语言下的推理瓶颈。</p>
+<p>随着多语言推理研究的推进，XCoT 因其在<strong>测试时扩展（test-time scaling）</strong>方面的潜力而受到日益关注——即通过自一致性（self-consistency）采样多条完整推理轨迹并聚合输出来提升性能（Tran et al., 2025a; Khairi et al., 2025; Ghosh et al., 2025; Zhang et al., 2025b）。具体来说：
+- <strong>Qin et al. (2023)</strong>：通过多条 XCoT 轨迹间的投票来利用跨语言互补性
+- <strong>Zhang et al. (2024)</strong>：优化指令以选择匹配的语言，并在聚合时分配语言特定的投票权重
+- <strong>Ranaldi et al. (2024)</strong>：提示模型模拟多语言专家，生成多样化的推理轨迹，并通过交叉引用推导答案
+- <strong>Khairi et al. (2025)</strong>：应用温度缩放（temperature scaling）和贝叶斯风险（Bayesian risk）来采样和选择高质量的 XCoT 轨迹</p>
+<p>然而，尽管现有的 XCoT 测试时扩展策略已经改善了推理的一致性和性能，它们仍然受限于<strong>计算效率低下</strong>的问题。如图 1(a) 所示，大多数先前方法存在两个缺点：
+1. <strong>全语言采样（Full-language Sampling）</strong>：需要生成所有候选语言的推理过程
+2. <strong>全轨迹推理（Full-trace Reasoning）</strong>：需要在推理期间生成所有完整的推理路径</p>
+<p>这些问题导致在无效语言或相似的推理轨迹上产生冗余计算，使得推理成本随语言数量线性增长，并产生大量冗余 Token。</p>
+<blockquote>
+<p>[扩展] 作者在此处的论证逻辑非常清晰：现有方法隐含地假设"每个语言的推理过程都同等重要且必须完整生成"，这是一个未被验证的强假设。实际上，对于给定查询，大多数语言要么理解偏差较大（不适合用于推理），要么生成的内容与其他语言高度重复（冗余）。</p>
+</blockquote>
+<p>基于以上动机，我们提出了<strong>统一逻辑跨语言链式思维（Unified Logic Cross-lingual Chain-of-Thought, UL-XCoT）自一致性框架</strong>，它通过两个核心模块增强 XCoT 效率：<strong>候选语言选择（Candidate Language Selection, CLS）</strong>和<strong>动态 CoT 剪枝（Dynamic CoT Pruning, DCP）</strong>。</p>
+<p>如图 1(b) 所示，UL-XCoT 首先利用<strong>统一逻辑机制（Unified Logic Mechanism, ULM）</strong>建立一个统一的逻辑表征空间，以便在共享尺度上比较和过滤跨语言的推理过程。然后应用 CLS 在该空间中评估候选语言，选择与输入查询最相关的一个小子集（<strong>更少语言</strong>），从而减少来自无关语言的计算开销。接下来，在推理过程中，DCP 追踪每种语言的 CoT 演化，并动态剪除逻辑不一致的冗余路径（<strong>更少 Token</strong>）。最后，对剩余的高质量跨语言推理路径进行投票，在不损失推理质量的前提下削减成本。</p>
+<p>实验结果表明，在 PolyMath（18 种语言）和 MMLU-ProX-Lite（29 种语言）上使用 DeepSeek-R1-Distill-Qwen-7B 模型，UL-XCoT 展现出明显的<strong>准确率-效率权衡优势</strong>：
+- 在 PolyMath 上：获得有竞争力的<strong>难度加权准确率（DW-ACC）</strong>，同时在所有语言上始终需要最少的生成 Token 和最低延迟，相比 AutoCap 平均减少超过 50% 的 Token 数量，相比 SC 减少超过 65%
+- 在 MMLU-ProX-Lite 上：泛化良好，在提升平均准确率的同时保留了 Token 使用和延迟方面的明显效率优势
+- 在低资源语言子集上：产生更强且更稳定的增益，表明当标准提示和采样信号较弱时具有更大的鲁棒性</p>
+<h3 id="_6">术语解释<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>英文术语</th>
+<th>中文译名</th>
+<th>一句话解释</th>
+<th>应用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Test-time Scaling</td>
+<td>测试时扩展</td>
+<td>推理时通过增加采样/计算量而非训练来提升性能的策略</td>
+<td>推理优化</td>
+</tr>
+<tr>
+<td>Voting / Aggregation</td>
+<td>投票聚合</td>
+<td>从多条推理路径中选出最一致答案的方法</td>
+<td>自一致性推理</td>
+</tr>
+<tr>
+<td>Temperature Scaling</td>
+<td>温度缩放</td>
+<td>调整采样随机性的参数控制技术</td>
+<td>多样性采样</td>
+</tr>
+<tr>
+<td>Bayesian Risk</td>
+<td>贝叶斯风险</td>
+<td>结合概率分布和决策损失的采样评估框架</td>
+<td>高质量样本筛选</td>
+</tr>
+<tr>
+<td>Cross-lingual Complementarity</td>
+<td>跨语言互补性</td>
+<td>不同语言提供互补推理信息的特性</td>
+<td>多语言推理的理论基础</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_7">图表/公式说明<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<p>本片段核心图表为 <strong>Figure 1</strong>（已在摘要部分详细说明）。此处补充 Figure 1 中出现的具体示例：</p>
+<p><strong>Figure 1 中的多语言查询示例</strong>：图中展示了一个相同的数学问题被翻译为德语、日语、韩语和西班牙语四种版本，内容为"铅笔2美元，笔记本5美元，买3支铅笔2个笔记本共多少钱"。这个直观例子说明了传统 XCoT 需要对每个语言版本都执行完整推理。</p>
+<h3 id="takeaway_1">关键 Takeaway<a class="headerlink" href="#takeaway_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>XCoT 的核心直觉（作者主张）</strong>：不同语言可以作为"推理载体"，激活模型的不同推理模式，类似人类的多语种思维方式</li>
+<li><strong>现有方法的致命缺陷（作者主张）</strong>："全语言 + 全轨迹"假设导致 O(语言数 × 轨迹长度) 的线性成本增长</li>
+<li><strong>UL-XCoT 的两步减法策略（作者主张）</strong>：先减少语言数（CLS），再减少每条路径 Token 数（DCP）</li>
+<li><strong>实验覆盖范围（客观事实）</strong>：两个基准（PolyMath 18语 + MMLU-ProX-Lite 29语）、一个模型（DeepSeek-R1-Distill-Qwen-7B）</li>
+<li><strong>论文贡献总结（作者主张）</strong>：(1) 首次指出全语言枚举范式的固有效率缺陷 (2) 提出 UL-XCoT 双维度优化框架 (3) 低资源语言增益尤其显著</li>
+</ul>
+<hr />
+<h2 id="section-2-method">Section 2 — Method（方法）<a class="headerlink" href="#section-2-method" title="Permanent link">&para;</a></h2>
+<h3 id="_8">中文翻译<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<p>本节详细阐述 UL-XCoT 方法。如图 2 所示，给定一个用语言 ℓ 编写的输入查询 x，UL-XCoT 引入<strong>统一逻辑机制（Unified Logic Mechanism, ULM）</strong>，使不同语言之间的推理状态变得可比较和可度量。</p>
+<p><img alt="Figure 2: UL-XCoT整体框架" src="assets/page-003-img-01.png" /></p>
+<p><strong>Figure 2 — UL-XCoT 整体框架图</strong>：包含三大模块：(i) 统一逻辑机制（语言投影 → 语言中心表征） (ii) 候选语言选择（理解相似度打分 → Top-K 选择） (iii) 动态链式思维剪枝（逻辑质量评分 → 低质量路径裁剪）。底部展示了同一个数学问题的德语、日语、韩语、西班牙语四个版本作为输入示例。</p>
+<h3 id="21-overall-pipeline">2.1 整体流程（Overall Pipeline）<a class="headerlink" href="#21-overall-pipeline" title="Permanent link">&para;</a></h3>
+<p>形式化定义如下：设 <span class="arithmatex">\(L = \{\ell_1, \ldots, \ell_M\}\)</span> 表示所有语言的集合，<span class="arithmatex">\(f_\theta\)</span> 表示一个多语言 LLM，<span class="arithmatex">\(A\)</span> 表示答案空间。整个推理过程输出 <span class="arithmatex">\(\hat{a} = \text{UL-XCOT}_\theta(x|f_\theta) \in A\)</span>。具体而言，该过程包含四个阶段：</p>
+<p><strong>第一阶段 —— 构建统一逻辑机制</strong>：为了在统一逻辑空间中实现推理状态的跨语言可比性，我们通过在第 m 层共享的<strong>投影算子（Projection Operator）<span class="arithmatex">\(P^{(m)}\)</span></strong> 来构建统一逻辑机制。</p>
+<p><strong>第二阶段 —— 候选语言选择</strong>：我们根据统一逻辑机制下的<strong>理解相似度分数（Understanding Similarity Score）</strong>，选择候选语言集合 <span class="arithmatex">\(L_{par}(x)\)</span>，从而实现<strong>更少语言</strong>。</p>
+<p><strong>第三阶段 —— 动态剪枝解码</strong>：对于每个 <span class="arithmatex">\(\ell \in L_{par}(x)\)</span>，我们使用 <span class="arithmatex">\(f_\theta\)</span> 执行 XCoT 解码，逐 token 并行生成轨迹 <span class="arithmatex">\(x_\ell\)</span>。在解码过程中，一个<strong>时间演化的置信度信号（time-evolving confidence signal）</strong>动态剪枝低质量路径，得到保留的语言子集 <span class="arithmatex">\(S(x) \subseteq L_{par}(x)\)</span>。剩余轨迹记为 <span class="arithmatex">\(S^*(x) = \{x_\ell : \ell \in S(x)\}\)</span>。这样，我们可以在解码过程中实现<strong>更少 Token</strong>。</p>
+<p><strong>第四阶段 —— 投票聚合</strong>：我们从每条存活的轨迹中提取答案 <span class="arithmatex">\(a_\ell\)</span>，并通过<strong>投票算子（Voting Operator）V</strong> 进行聚合：
+$<span class="arithmatex">\(\hat{a} = V(\{a_\ell : \ell \in S(x)\}) \quad (1)\)</span>$</p>
+<blockquote>
+<p>[扩展] 这个四阶段流水线的设计哲学是"层层过滤"：先用 ULM 建立公平的比较基准（消除语言偏差），再用 CLS 过滤不相关的语言（减少并行分支数），接着用 DCP 过滤每条分支中的低质量段落（减少每条分支长度），最后投票得出最终答案。每一层过滤都有明确的信号依据，而非盲目截断。</p>
+</blockquote>
+<h3 id="22-the-unified-logic-mechanism">2.2 统一逻辑机制（The Unified Logic Mechanism）<a class="headerlink" href="#22-the-unified-logic-mechanism" title="Permanent link">&para;</a></h3>
+<p>为了公平地比较跨语言的推理行为，我们需要一个<strong>统一的表征空间</strong>，它能够抑制语言特定的表面变异，同时保留任务相关的推理结构。因此我们构建了一个统一逻辑空间，其中的信号将作为 CLS（第 2.3 节）和 DCP（第 2.4 节）的决策准则。</p>
+<blockquote>
+<p>[扩展] 这是整个方法的理论基石。直觉是：虽然不同语言的表达形式差异巨大（如"铅笔"vs "pencil"vs "Bleistift"），但底层的"理解状态"应该是可比的——如果模型真正理解了一个数学问题，那么无论用什么语言表达，其内部表征应该在某个抽象层面上趋于一致。</p>
+</blockquote>
+<p>基于潜在表征同时编码<strong>语言结构</strong>和<strong>推理相关信号</strong>的证据（Zhao et al., 2025; Hao et al., 2024; Feng et al., 2024），我们使用嵌入变换来构建统一逻辑机制。设 <span class="arithmatex">\(H_m(x_\ell) \in \mathbb{R}^d\)</span> 表示 Transformer 第 m 层对于用语言 <span class="arithmatex">\(\ell \in L\)</span> 表达的样本 <span class="arithmatex">\(x_\ell\)</span> 的<strong>隐状态（Hidden State）</strong>。</p>
+<p>为了刻画系统性的<strong>语言依赖偏移（Language-dependent Shifts）</strong>，我们使用固定的验证集 <span class="arithmatex">\(X_{val} = \{x_i^{\ell_i}\}_{i=1}^N\)</span> 并为每种语言 <span class="arithmatex">\(\ell\)</span> 获取相同内容的语言特定实例（例如通过翻译或一致的提示）。然后我们在第 m 层定义<strong>语言中心（Language Center）</strong>为：
+$<span class="arithmatex">\(\mu_\ell^{(m)} := \frac{1}{|X_{val}|} \sum_{x_i^\ell \in X_{val}} H_m(x_i^\ell) \quad (2)\)</span>$</p>
+<p>堆叠各语言的中心，得到一个<strong>多语言偏移矩阵（Multilingual Shift Matrix）</strong>：
+$<span class="arithmatex">\(M^{(m)} = [\mu_{\ell_1}^{(m)}, \mu_{\ell_2}^{(m)}, \ldots, \mu_{\ell_{|L|}}^{(m)}] \in \mathbb{R}^{d \times |L|} \quad (3)\)</span>$</p>
+<p>遵循"<strong>跨语言变异集中在低维子空间</strong>"的直觉，我们通过 SVD 分解提取其主要方向：
+$<span class="arithmatex">\(M^{(m)} = U^{(m)} \Sigma^{(m)} {V^{(m)}}^\top \quad (4)\)</span>$</p>
+<p>设 r 为超参数。我们取前 r 个左奇异向量作为<strong>语言变异子空间（Language-Variation Subspace）</strong>的标准正交基：
+$<span class="arithmatex">\(B_{lang}^{(m)} = U^{(m)}_{:,1:r} \quad (5)\)</span>$</p>
+<p>其<strong>正交补（Orthogonal Complement）</strong>定义了跨语言共享子空间，对应的投影算子为：
+$<span class="arithmatex">\(P_{shared}^{(m)} = I - \lambda B_{lang}^{(m)} {B_{lang}^{(m)}}^\top \quad (6)\)</span>$</p>
+<p>其中 <span class="arithmatex">\(\lambda\)</span> 是控制去除程度的超参数（实验中设为 0.4）。对于任何输入，我们通过投影获得其<strong>统一逻辑空间表征</strong>：
+$<span class="arithmatex">\(\tilde{H}_m(x_\ell) = P_{shared}^{(m)} h^{(m)}(x_\ell) \quad (7)\)</span>$</p>
+<blockquote>
+<p>[扩展] 这里的数学操作本质上是"去语言化"：SVD 找到不同语言之间变异最大的方向（这些方向编码的是语言本身的差异，而非推理内容的差异），然后将这些方向上的分量去掉，剩下的就是"语言无关的纯逻辑信息"。<span class="arithmatex">\(\lambda\)</span> 参数控制去除的激进程度，0.4 意味着保留部分语言信息以防过度去除。</p>
+</blockquote>
+<h3 id="23-candidate-language-selection">2.3 候选语言选择（Candidate Language Selection）<a class="headerlink" href="#23-candidate-language-selection" title="Permanent link">&para;</a></h3>
+<p><strong>候选语言选择（CLS）</strong>在统一逻辑空间中对跨语言输入进行<strong>预筛选（Pre-screening）</strong>。由于它不需要任何生成操作，该空间中的隐状态捕获了对输入的<strong>统一理解（Unified Understanding）</strong>。我们为每种语言计算一个<strong>理解相似度分数（Understanding Similarity Score, USS）</strong>，并选择 top-k 种语言作为筛选候选。</p>
+<h4 id="understanding-similarity-score">理解相似度分数（Understanding Similarity Score）<a class="headerlink" href="#understanding-similarity-score" title="Permanent link">&para;</a></h4>
+<p>为了量化跨语言理解的一致性，我们在统一逻辑空间中定义理解相似度分数。对于源语言 ℓ 中的输入查询 <span class="arithmatex">\(x_\ell\)</span> 和每个候选目标语言 <span class="arithmatex">\(\ell' \in L\)</span>，我们构建语义等价的表述 <span class="arithmatex">\(x_{\ell'}\)</span>。在分析层 <span class="arithmatex">\(m = a\)</span> 处，我们提取统一逻辑空间中最后token的投影表示 <span class="arithmatex">\(\tilde{H}_a(x_\ell)\)</span> 和 <span class="arithmatex">\(\tilde{H}_a(x_{\ell'})\)</span> 作为模型的理解状态。我们将<strong>理解相似度分数（USS）</strong>定义为：
+$<span class="arithmatex">\(\text{USS}(x_\ell, x_{\ell'}) \triangleq \frac{\langle \tilde{H}_a(x_\ell), \tilde{H}_a(x_{\ell'}) \rangle}{\|\tilde{H}_a(x_\ell)\|_2 \|\tilde{H}_a(x_{\ell'})\|_2} \quad (8)\)</span>$</p>
+<p>该指标量化了跨语言相同理解状态的保持程度。[扩展] 简而言之，如果源语言查询和目标语言查询在统一逻辑空间中的表示高度相似（余弦值接近1），说明模型对两者的"理解"是一致的，该目标语言适合用于跨语言推理协作。</p>
+<h4 id="_9">候选集选择<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h4>
+<p>我们按照此分数选择 top-k 种语言：
+$<span class="arithmatex">\(L_{par}(x_\ell) = \text{Top-k}_{\ell' \in L} \text{ USS}(x_\ell, x_{\ell'}) \quad (9)\)</span>$</p>
+<p>该方法仅在 <span class="arithmatex">\(L_{par}(x_\ell)\)</span> 上执行并行 XCoT 采样。通过在统一逻辑空间中启用直接的跨语言比较，这个预过滤步骤是<strong>查询自适应（Query-adaptive）</strong>的，并在推理过程中减少了冗余 Token 的生成，同时保持了有效的跨语言协作。</p>
+<blockquote>
+<p>[扩展] CLS 的关键创新在于"零生成成本预筛选"——仅通过比较隐状态的余弦相似度就能判断哪些语言适合当前查询，无需实际生成任何推理内容。实验中 k 设为 9-12（从全部18种语言中选择约一半）。</p>
+</blockquote>
+<h3 id="24-dynamic-chain-of-thought-pruning">2.4 动态链式思维剪枝（Dynamic Chain-of-Thought Pruning）<a class="headerlink" href="#24-dynamic-chain-of-thought-pruning" title="Permanent link">&para;</a></h3>
+<p><strong>动态链式思维剪枝（DCP）</strong>在统一逻辑空间中监控 XCoT 解码期间的推理过程，并<strong>在线（Online）</strong>剪枝低质量路径。这消除了来自不一致或漂移轨迹的冗余生成，将计算集中在连贯的高质量路径上。</p>
+<h4 id="logical-quality-score">逻辑质量分数（Logical Quality Score）<a class="headerlink" href="#logical-quality-score" title="Permanent link">&para;</a></h4>
+<p>我们引入一个长度为 <span class="arithmatex">\(T_{warm}\)</span> 的<strong>预热阶段（Warm-up Phase）</strong>，在此期间禁用剪枝以避免过早丢弃路径。预热结束后，令 <span class="arithmatex">\(S_t\)</span> 表示从第 0 步到第 t 步的推理路径。对于 <span class="arithmatex">\(S_t\)</span> 中每条语言为 ℓ 的路径，我们在长度为 <span class="arithmatex">\(\tau\)</span> 的窗口上追踪其轨迹，并计算从第 <span class="arithmatex">\(t_0\)</span> 步开始的<strong>群体得分（Cohort Score）</strong> "score<span class="arithmatex">\((t)(\cdot|\ell)\)</span>"。<strong>逻辑质量分数（LQS）</strong>定义为：
+$<span class="arithmatex">\(\text{LQS}(S_t|x_\ell, \ell') \triangleq \sum_{t=t_0}^{t_0+\tau} \text{score}(S_t|x_\ell, \ell') \quad (10)\)</span>$</p>
+<blockquote>
+<p>[扩展] LQS 本质上是在一个滑动窗口内累加路径的质量得分，得分越高说明该路径在这段时间内的推理越稳定和合理。预热阶段（<span class="arithmatex">\(T_{warm}=10\)</span> 步）确保路径有机会"展开"其推理思路后再进行判断。</p>
+</blockquote>
+<h4 id="_10">低质量路径剪枝<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h4>
+<p>在监控窗口结束时（<span class="arithmatex">\(T_E = T_{warm} + \tau + 1\)</span>），我们通过保留按 LQS(ℓ) 排名的 top-<span class="arithmatex">\(k'\)</span> 条路径来收集轨迹集 S：
+$<span class="arithmatex">\(S(x_\ell) = \text{Top-k'}_{\ell' \in L_{par}(x_\ell)} \text{LQS}(S_t|x_\ell, \ell') \quad (11)\)</span>$</p>
+<p>其中 <span class="arithmatex">\(k'\)</span> 遵循剪枝比率 <span class="arithmatex">\(\rho\)</span>。其余路径提前终止，而保留的路径继续解码并通过投票聚合。这种自适应方式将计算分配给连贯的路径，减少了冗余并确保了鲁棒性。实验中 <span class="arithmatex">\(\rho\)</span> 在 20%-60% 之间动态调整。</p>
+<h3 id="_11">术语解释<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>英文术语</th>
+<th>中文译名</th>
+<th>一句话解释</th>
+<th>应用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Projection Operator</td>
+<td>投影算子</td>
+<td>将高维向量映射到低维子空间的线性变换</td>
+<td>统一逻辑空间构建</td>
+</tr>
+<tr>
+<td>Language Center</td>
+<td>语言中心</td>
+<td>特定语言隐状态在验证集上的均值向量</td>
+<td>刻画语言特异性偏移</td>
+</tr>
+<tr>
+<td>Multilingual Shift Matrix</td>
+<td>多语言偏移矩阵</td>
+<td>所有语言中心向量拼接成的矩阵</td>
+<td>SVD 分解的基础</td>
+</tr>
+<tr>
+<td>SVD (Singular Value Decomposition)</td>
+<td>奇异值分解</td>
+<td>将矩阵分解为左/右奇异向量和奇异值</td>
+<td>提取语言变异主方向</td>
+</tr>
+<tr>
+<td>Orthogonal Complement</td>
+<td>正交补</td>
+<td>与给定子空间正交的补空间</td>
+<td>定义跨语言共享子空间</td>
+</tr>
+<tr>
+<td>Understanding Similarity Score (USS)</td>
+<td>理解相似度分数</td>
+<td>衡量不同语言表达同一问题时模型理解一致性的余弦相似度</td>
+<td>CLS 的核心信号</td>
+</tr>
+<tr>
+<td>Pre-screening</td>
+<td>预筛选</td>
+<td>在正式处理前进行的初步过滤</td>
+<td>CLS 的定位</td>
+</tr>
+<tr>
+<td>Query-adaptive</td>
+<td>查询自适应的</td>
+<td>根据具体查询内容动态调整选择策略</td>
+<td>区别于固定语言列表</td>
+</tr>
+<tr>
+<td>Cohort Score</td>
+<td>群体得分</td>
+<td>路径在同类路径中的相对质量度量</td>
+<td>DCP 的路径排序依据</td>
+</tr>
+<tr>
+<td>Warm-up Phase</td>
+<td>预热阶段</td>
+<td>解码初期不执行剪枝的保护期</td>
+<td>DCP 的安全机制</td>
+</tr>
+<tr>
+<td>Pruning Ratio</td>
+<td>剪枝比率</td>
+<td>控制剪枝激进程度的参数（0-1之间）</td>
+<td>DCP 的效率-精度权衡旋钮</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_12">图表/公式说明<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
+<p><strong>Figure 2 — UL-XCoT 整体框架图</strong></p>
+<p>此图是方法部分的核心架构图，详细展示了三阶段的完整数据流：</p>
+<ol>
+<li><strong>左侧 — 统一逻辑机制</strong>：原始查询经 Language Projection 后进入 Characterize Language Center，产出 Unified Logic Representation (<span class="arithmatex">\(P_{shared}^{(m)}\)</span>)。图中标注了"Pruning Useless Language with Different Understanding!!"（剔除理解不一致的无用语言）。</li>
+<li><strong>中间 — 候选语言选择</strong>：通过 Understanding Similarity Score 对所有候选语言打分，执行 Candidate Set Selection，输出 Top-k High Score 的语言子集。图中示例显示德语(Ru)、中文(Zh)、韩语(Ko)、西班牙语(Sp)入选，而英语(En)和日语(Ja)被标记为"Low Score!!"淘汰。</li>
+<li><strong>右侧 — 动态 CoT 剪枝</strong>：对入选语言的推理轨迹计算 Logical Quality Score，执行 Low Quality Path Pruning，最终保留 Top-k High Score 的轨迹进行投票。</li>
+</ol>
+<p><strong>设计意图</strong>：此图采用左到右的数据流布局，清晰展示了从"全部语言"到"候选语言子集"再到"高质量路径子集"的两级过滤过程。</p>
+<p><strong>公式汇总</strong>：
+- 公式 (1)：投票聚合算子
+- 公式 (2)：语言中心定义
+- 公式 (3)：多语言偏移矩阵
+- 公式 (4)-(5)：SVD 分解提取语言变异方向
+- 公式 (6)：共享子空间投影算子（含 <span class="arithmatex">\(\lambda\)</span> 参数）
+- 公式 (7)：统一逻辑空间投影结果
+- 公式 (8)：理解相似度分数（余弦相似度）
+- 公式 (9)：候选语言 Top-K 选择
+- 公式 (10)：逻辑质量分数（滑动窗口求和）
+- 公式 (11)：路径剪枝 Top-K' 选择</p>
+<h3 id="takeaway_2">关键 Takeaway<a class="headerlink" href="#takeaway_2" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>ULM 的理论根基（作者主张）</strong>：语言差异集中在低维子空间，去除后剩下的是"纯逻辑信息"——这是所有后续操作的基石</li>
+<li><strong>CLS 的工程巧思（作者主张）</strong>：仅通过隐状态余弦相似度（零生成成本）即可判断语言适配性，查询自适应而非固定列表</li>
+<li><strong>DCP 的安全设计（作者主张）</strong>：预热期 + 滑动窗口 + 质量累积分，避免过早误判</li>
+<li><strong>超参数配置（客观事实）</strong>：<span class="arithmatex">\(\lambda=0.4\)</span>, layer m=13, <span class="arithmatex">\(|L_{par}|\)</span>=9-12, <span class="arithmatex">\(T_{warm}\)</span>=10, <span class="arithmatex">\(\tau\)</span>=3c, <span class="arithmatex">\(\rho\)</span>=20%-60%</li>
+<li><strong>四阶段流水线的设计哲学（作者主张）</strong>：建立基准 → 选语言 → 剪路径 → 投票，层层递进，每一步都有明确的数学信号支撑</li>
+</ul>
+<hr />
+<h2 id="section-3-experiments">Section 3 — Experiments（实验）<a class="headerlink" href="#section-3-experiments" title="Permanent link">&para;</a></h2>
+<h3 id="_13">中文翻译<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
+<h3 id="31">3.1 实验设置<a class="headerlink" href="#31" title="Permanent link">&para;</a></h3>
+<p><strong>基准测试（Benchmark）</strong>：我们主要在 <strong>PolyMath</strong>（Wang et al., 2025d）上进行评估，这是一个包含 18 个平行语言和 4 个难度级别的多语言数学推理基准。</p>
+<p>为了测试泛化能力，我们还选择了 <strong>MMLU-ProX-Lite</strong>（Xuan et al., 2025）作为补充基准，这是一个涵盖更广泛知识和推理类别的多语言多项选择题基准。</p>
+<p><strong>评估协议（Evaluation Protocol）</strong>：我们同时评估有效性和效率两个方面：
+1. <strong>准确率</strong>：所有方法使用相同的骨干模型和解码约束；对于 SC 和 AUTOCAP，我们将采样预算控制在 UL-XCoT 的最坏情况水平。我们遵循 PolyMath 的做法报告 DW-ACC（难度加权准确率）
+2. <strong>效率</strong>：我们在相同条件下通过生成 Token 数量和端到端延迟（Wall-clock Latency）来衡量推理成本</p>
+<p><strong>实验设置</strong>：所有实验使用 <strong>DeepSeek-R1-Distill-Qwen-7B</strong>（Guo et al., 2025）模型执行。所有运行在 NVIDIA RTX A6000 GPU（48GB）上执行。我们根据 PolyMath 难度和性能稳定性，将最大生成长度设置在 2048–10240 之间。对于提示（Prompting），我们对方法和基线使用<strong>简洁推理模板（Concise-reasoning Template）</strong>。</p>
+<p><strong>UL-XCoT 配置</strong>：设定 <span class="arithmatex">\(\lambda = 0.4\)</span>，使用第 m=13 层的逻辑空间表征（第 2.3 节），<span class="arithmatex">\(|L_{par}(x)|\)</span> = 9–12，使用 <span class="arithmatex">\(T_{warm}\)</span> = 10 的预热阶段。预热后，在滑动窗口 <span class="arithmatex">\(\tau\)</span> = 3c 内计算轨迹信号，并在解码期间将剪枝比率 <span class="arithmatex">\(\rho\)</span> 在 20%–60% 之间调整。</p>
+<p><strong>基线方法（Baselines）</strong>：我们将 UL-XCoT 与代表性的推理策略进行比较，包括单路径提示和基于采样的测试时扩展方法：
+1. <strong>CLP/CLSP</strong>（Qin et al., 2023）：利用多语言信号提高推理鲁棒性的跨语言提示框架
+2. <strong>CoT</strong>（Wei et al., 2022）：标准的单轨迹链式思维提示
+3. <strong>SC</strong>（Wang et al., 2022）：自一致性——采样多样化 CoT 轨迹并通过多数投票聚合答案
+4. <strong>AUTOCAP</strong>（Zhang et al., 2024）：SC 的自适应变体——选择语言并为聚合分配权重
+5. <strong>ST-BoN</strong>（Wang et al., 2025c）：一种高效的基于采样的方法，在固定预算下改善单语言推理的测试时扩展
+6. <strong>UL-CoT</strong>：UL-XCoT 的单语言对照变体——具有相同的 DCP 模块但仅在查询语言内采样聚合</p>
+<h3 id="32-ul-xcot">3.2 UL-XCoT 实验结果<a class="headerlink" href="#32-ul-xcot" title="Permanent link">&para;</a></h3>
+<h4 id="321-the-superior-efficiency">3.2.1 卓越的效率（The Superior Efficiency）<a class="headerlink" href="#321-the-superior-efficiency" title="Permanent link">&para;</a></h4>
+<p><img alt="Figure 3: PolyMath平均解码Token成本" src="assets/page-005-img-01.png" /></p>
+<p><strong>Figure 3 — PolyMath 各语言平均解码 Token 成本柱状图</strong>：横轴为 18 种语言（ar/bn/de/en/es/fr/id/it/ja/ko/ms/pt/ru/sw/te/th/vi/zh）+ AVG，纵轴为 Token 数（0-70k）。UL-XCoT（蓝色）在几乎所有语言上都显著低于 CLSP（橙色）、AutoCap（绿色）和 SC（红色）。</p>
+<p><img alt="Figure 4: PolyMath平均端到端延迟" src="assets/page-005-img-02.png" /></p>
+<p><strong>Figure 4 — PolyMath 各语言平均端到端延迟柱状图</strong>：纵轴为延迟秒数（0-250s）。UL-XCoT 同样在绝大多数语言上取得最低延迟。</p>
+<p>图 3 和图 4 比较了各语言的平均解码成本和端到端延迟。UL-XCoT 可以实现显著的效率提升。如图 3 所示，UL-XCoT 在所有语言上一致地使用最少的 Token，相比 AutoCap 实现最低平均 Token 数（降低超过 50%），相比 SC 降低超过 65%。这种效率优势在延迟指标上也得到镜像反映（图 4），UL-XCoT 在大多数语言上也表现出最低延迟。</p>
+<p><strong>UL-XCoT 还能减少高资源语言的"过度思考"（Overthinking）</strong>。如图 3 所示，某些基线（特别是 SC）在高资源语言如英语和中文上表现出明显的 Token 消耗尖峰，表明偶尔出现过度长的推理轨迹导致的过度思考。UL-XCoT 很大程度上避免了此类极端异常值，提供了更稳定的推理时行为，并为多语言部署提供了显著的节省措施。</p>
+<h4 id="322-the-comparable-performance">3.2.2 有竞争力的性能（The Comparable Performance）<a class="headerlink" href="#322-the-comparable-performance" title="Permanent link">&para;</a></h4>
+<p><strong>Table 1 — PolyMath 18 种语言 × 4 个难度级别的完整性能表</strong>：</p>
+<p>| 方法 | ar | bn | de | en | es | fr | id | it | ja | ko | ms | pt | ru | sw | te | th | vi | zh | AVG |
+|------|----|----|----|----|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|------|
+| <strong>PolyMath-Low</strong> ||||||||||||||||||||||
+| CoT | 52.0 | 42.4 | 56.0 | 83.2 | 72.8 | 56.8 | 59.2 | 68.0 | 41.6 | 42.4 | 55.2 | 67.2 | 71.2 | 4.0 | 13.6 | 49.6 | 59.2 | 76.8 | 54.0 |
+| CLP | 39.2 | 32.8 | 45.6 | 58.4 | 48.0 | 47.2 | 38.4 | 46.4 | 40.8 | 32.8 | 47.2 | 52.0 | 36.0 | 40.8 | 32.8 | 45.6 | 40.8 | 40.8 | 42.5 |
+| SC | 68.8 | 59.2 | 68.8 | 88.8 | 77.6 | 76.8 | 73.6 | 78.4 | 64.8 | 64.0 | 72.0 | 73.6 | 79.2 | 12.0 | 26.4 | 66.4 | 70.4 | 81.6 | 66.8 |
+| <strong>CLSP</strong> | 77.6 | 83.2 | 81.6 | 81.6 | 80.8 | 84.8 | 82.4 | 81.6 | 82.4 | 80.8 | 78.4 | 81.6 | 80.0 | 80.8 | 83.2 | 84.0 | 80.0 | 81.4 | <strong>81.4</strong> |
+| AutoCap | 80.0 | 81.6 | 81.6 | 76.8 | 84.0 | 81.6 | 80.8 | 79.2 | 81.6 | 74.4 | 84.8 | 83.2 | 81.6 | 84.0 | 80.8 | 78.4 | 83.2 | 79.2 | 80.9 |
+| ST-BoN | 60.0 | 62.4 | 65.6 | 69.6 | 64.8 | 72.0 | 64.0 | 63.2 | 61.6 | 61.6 | 63.2 | 62.4 | 64.8 | 60.0 | 63.2 | 59.2 | 61.6 | 63.2 | 63.5 |
+| UL-CoT | 68.0 | 55.2 | 68.0 | 86.4 | 79.2 | 76.0 | 71.2 | 79.2 | 63.2 | 62.4 | 73.6 | 75.2 | 73.6 | 9.6 | 24.0 | 61.6 | 72.0 | 80.0 | 65.5 |
+| <strong>UL-XCoT</strong> | <strong>81.6</strong> | <strong>83.2</strong> | <strong>84.0</strong> | <strong>84.8</strong> | <strong>82.4</strong> | <strong>84.0</strong> | <strong>85.6</strong> | <strong>83.2</strong> | <strong>84.8</strong> | <strong>84.0</strong> | <strong>85.6</strong> | <strong>83.2</strong> | <strong>85.6</strong> | <strong>83.2</strong> | <strong>84.0</strong> | <strong>84.0</strong> | <strong>83.2</strong> | <strong>82.4</strong> | <strong>83.8</strong> |</p>
+<blockquote>
+<p>[表格说明] 由于篇幅限制，此处仅展示 PolyMath-Low 难度的完整数据。Medium/High/Top 三个难度级别遵循类似格式。UL-XCoT 在 Low 难度上以 <strong>83.8%</strong> 的平均准确率排名第一，超越 CLSP（81.4%）和 AutoCap（80.9%）。</p>
+</blockquote>
+<p><strong>Table 2 — PolyMath-Low 上的消融实验</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>变体</th>
+<th>ACC (%)</th>
+<th>Latency (s)</th>
+<th>Tokens (#)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>UL-XCoT w/o CLS</td>
+<td>84.4</td>
+<td>36.2</td>
+<td>5560</td>
+</tr>
+<tr>
+<td>UL-XCoT w/o DCP</td>
+<td>81.4</td>
+<td>30.7</td>
+<td>3893</td>
+</tr>
+<tr>
+<td>UL-XCoT w/o ULM</td>
+<td>79.8</td>
+<td>25.4</td>
+<td>3098</td>
+</tr>
+<tr>
+<td>UL-XCoT w/o all modules</td>
+<td>85.2</td>
+<td>35.9</td>
+<td>7518</td>
+</tr>
+<tr>
+<td><strong>UL-XCoT（完整版）</strong></td>
+<td><strong>83.8</strong></td>
+<td><strong>24.6</strong></td>
+<td><strong>3092</strong></td>
+</tr>
+</tbody>
+</table>
+<p>UL-XCoT 实现了有竞争力的准确率。在同一评估设置下，UL-XCoT 在所有语言和四个难度级别上始终表现强劲，平均排名位居前列或第一。Table 4（见附录）显示了在 PolyMath-Full 所有难度上有竞争力的 DW-ACC，确认了在挑战性问题上的有效性。总体而言，UL-XCoT 在先前的跨语言数学推理基线上提供了稳健的增益。</p>
+<p><strong>UL-XCoT 在低资源语言上也展现出鲁棒性</strong>。我们在数据驱动的<strong>低资源语言子集</strong>上评估鲁棒性（Bandarkar et al., 2024），定义为 CoT 和 SC 的 DW-ACC 均低于所有语言均值的语言。在这个挑战性集合上，UL-XCoT 仍然保持始终强劲的性能，表明在语言资源有限的情况下具有更稳定可靠的跨语言推理能力。</p>
+<p><strong>多语言增益不会退化为单纯的剪枝效果</strong>。为了分离多语言协作带来的增益与剪枝带来的增益，我们引入了<strong>单语言对照变体 UL-CoT</strong>。该变体保持与 UL-XCoT 相同的统一逻辑表征和动态剪枝信号，但仅在查询语言内采样和聚合推理轨迹。如表 1 所示，UL-XCoT 在所有四个 PolyMath 难度级别上<strong>始终优于 UL-CoT</strong>，表明 UL-XCoT 的收益不仅仅来自更高效的剪枝；<strong>多语言交互本身贡献了实质性的性能增益</strong>，尤其在低资源语言上更为明显。</p>
+<h4 id="323-the-robust-generalization">3.2.3 鲁棒的泛化（The Robust Generalization）<a class="headerlink" href="#323-the-robust-generalization" title="Permanent link">&para;</a></h4>
+<p><strong>UL-XCoT 能够迁移到 PolyMath 以外的场景</strong>。为了补充主要的 PolyMath 评估，我们在 MMLU-ProX-Lite 上以相同评估协议比较 UL-XCoT 和 CLSP。该基准涵盖了更广泛的多语言知识和推理多项选择题，提供了不同于多语言数学推理的任务设置。</p>
+<p><strong>Table 3 — MMLU-ProX-Lite 29 种语言结果</strong>（精简版）：UL-XCoT 将平均准确率从 CLSP 的 <strong>40.5 提升到 43.6</strong>，在 29 种语言中的 <strong>19 种</strong>上优于 CLSP，2 种打平。增益还延伸到了多个低资源语言，表明该方法能够泛化到跨语言推理任务。</p>
+<p><img alt="Figure 5: MMLU-ProX-Lite效率对比" src="assets/page-007-img-01.png" /></p>
+<p><strong>Figure 5 — MMLU-ProX-Lite 上的 Token 成本和延迟</strong>：UL-XCoT 将平均 Token 使用从 27,679.3 降至 10,543.6，平均延迟从 134.2s 降至 93.7s。这与我们的主要发现一致：候选语言选择和动态剪枝避免了不必要的多语言采样，即使在不同任务上也比 CLSP 产生更好的成本-质量权衡。</p>
+<h3 id="33-analysis">3.3 分析（Analysis）<a class="headerlink" href="#33-analysis" title="Permanent link">&para;</a></h3>
+<h4 id="331">3.3.1 各模块的有效性<a class="headerlink" href="#331" title="Permanent link">&para;</a></h4>
+<p>为了量化每个模块的贡献，我们在 PolyMath-Low 上进行消融研究（Table 2），每次移除一个模块。</p>
+<p><strong>ULM 是匹配计算预算下的主要准确性贡献者</strong>。Table 2 的一个关键观察是：UL-XCoT 和 UL-XCoT w/o ULM 在几乎相同的计算预算下运行（24.6s/3092 tokens vs. 25.4s/3098 tokens）。因此，移除 ULM 后的准确率下降反映的是<strong>真正的算法增益</strong>，而非增加采样或更长解码的人为产物。机制上，ULM 将特定语言的链映射到一个统一的、可比较的逻辑空间，使可靠的跨语言置信度累积和连贯的轨迹选择成为可能，且不增加 Token 和延迟。</p>
+<p><strong>CLS 主要通过缩小搜索空间来提高效率</strong>。CLS 主要通过主动将候选语言集缩小为少数几个逻辑相关的参与者来提高效率。如表 2 所示，移除 CLS 扩大了活跃集并导致更高的延迟和更多 Token，表明 CLS 通过早期避免低价值的多语言轨迹来节省计算。</p>
+<p><strong>DCP 通过在线剪枝低质量轨迹来节省计算</strong>。DCP 通过<strong>早期截断（Early Truncation）</strong>进一步减少计算：它在线监控轨迹质量并停止显示明确低效用迹象的路径，使其不会继续消耗完整的解码预算。这种策略在推理时早期缩小活跃集，将计算集中在剩余的有竞争力候选上。从 Table 2 可知，移除 DCP 显著增加了 Token 使用量和和延迟，而在最终性能上仅有有限增益。这表明没有 DCP 时生成的许多额外步骤<strong>大部分是冗余的</strong>，很少转化为更好的最终投票结果。</p>
+<p><img alt="Figure 6: PCA投影可视化" src="assets/page-007-img-02.png" /></p>
+<p><strong>Figure 6 — 18 种语言同一查询嵌入表示的 PCA 投影</strong>：圆圈表示原始表示，叉号表示 ULM 变换后的统一逻辑空间表示。原始表示分散在各处（标注"Original Presentation"），而 ULM 变换后紧密聚集（标注"ULM Presentation"），右下角标注"Low Logical Quality"区域和"9 Languages Here"显示聚类效果。PC1 解释 43.99% 方差，PC2 解释 12.92% 方差。</p>
+<h4 id="332-ulm">3.3.2 ULM 能有效统一跨逻辑表征<a class="headerlink" href="#332-ulm" title="Permanent link">&para;</a></h4>
+<p><strong>ULM 解耦静态语言特异性变异</strong>。为了可视化静态对齐，我们在固定解码步骤提取 18 种语言同一查询的逻辑空间嵌入，并用 PCA 投影到二维。Figure 6 显示 UL-XCoT 的 ULM 解耦了<strong>表面形式变异（Surface-form Variation）</strong>，产生了跨语言可比的、语言不变的表征。移除语言特定成分后，嵌入表现出更大的不变性：跨语言样本紧密聚集且最近邻一致。这表明保留的子空间编码的是<strong>共享的逻辑状态</strong>，而非表面差异。</p>
+<p><strong>ULM 能对齐动态推理轨迹</strong>。除了静态对齐外，Figure 7 追踪了在不同语言回答同一查询时隐状态几何如何跨层演化。有 ULM 时，轨迹显示出跨语言的一致分布，反映了逻辑空间中的<strong>共享演化模式（Shared Evolution Patterns）</strong>。无 ULM 时，轨迹显著发散，因语言差异而产生更大的敏感性和几何间隙。因此，ULM 移除了表面变异，使 DCP 能够通过统一逻辑空间中的可靠几何信号进行链式思维剪枝。</p>
+<p><img alt="Figure 7: 逐层L2距离和角度距离演变" src="assets/page-008-img-01.png" /></p>
+<p><strong>Figure 7 — 解码嵌入的逐层演变</strong>：包含 4 个子图——Instance L2 Distance（实例 L2 距离）、Cumulative L2 Distance（累计 L2 距离）、Instance Angular（实例角度距离）、Cumulative Angular（累计角度距离）。横轴为 Transformer 层数（Layer 3/9/15/21），紫色曲线表示有 ULM 的模型，蓝色表示无 ULM 的模型。有 ULM 的模型跨语言变化范围更小更稳定。</p>
+<h4 id="333-cls">3.3.3 CLS 能无偏见地自适应选择合适语言<a class="headerlink" href="#333-cls" title="Permanent link">&para;</a></h4>
+<p><img alt="Figure 8: CLS语言选择分布" src="assets/page-008-img-02.png" /></p>
+<p><strong>Figure 8 — CLS 选择的语言频率分布</strong>：条形图显示 18 种语言在 CLS 选中集中的出现频率。葡萄牙语(pt)最高(7.7%)，中文(zh)最低(3.7%)，平均值约 5.6%。所有语言均有非 trivial 的选中比例。</p>
+<p>如图 8 所示，我们统计了每种语言在完整评估套件中被 CLS 选中出现在 <span class="arithmatex">\(L_{par}(x)\)</span> 中的频率。CLS <strong>不会坍缩到单一语言</strong>：每种语言贡献大约 3.7%~7.7% 的所有选择（均值 ≈ 5.6%），表明<strong>广泛覆盖而无主导偏见</strong>。虽然少数语言（如 pt/ms/ru/it/id）被选中略频繁，但 CLS 仍然始终为非平凡部分的输入包含较低频语言（如 bn/ar/te/zh），反映了<strong>查询自适应选择</strong>而非固定或启发式的语言列表。</p>
+<h4 id="334-dcp">3.3.4 DCP 实现感知质量的剪枝以提升效率<a class="headerlink" href="#334-dcp" title="Permanent link">&para;</a></h4>
+<p><img alt="Figure 9: 剪枝比率ρ的影响" src="assets/page-009-img-01.png" /></p>
+<p><strong>Figure 9 — 剪枝比率 ρ 对准确率（左）、延迟（中）、生成 Token 数（右）的影响</strong>：横轴为 ρ（0.25/0.40/0.55/0.70/0.85）。准确率从 81.8% 缓降至 63.2%；延迟从 22.9s 降至 13.7s；Token 数从 3849 降至 1312。</p>
+<p><strong>DCP 能有效平衡性能和效率</strong>：如图 9 所示，对于 <span class="arithmatex">\(\rho &lt; 0.85\)</span>，更高的 ρ 轻微降低准确率但带来几乎线性的延迟和 Token 使用减少，表明 DCP 移除了低置信度路径且质量损失极小。总体而言，中等 ρ（<strong>0.55–0.70</strong>）提供了最佳权衡，在大幅保持性能的同时实现 substantial 效率增益。</p>
+<p><strong>DCP 真正在剪枝低质量路径</strong>：为了验证 DCP 的剪枝质量，我们分析了 Pruned XCoT 和 Full XCoT 都表现良好的高性能子集。如图 10 所示，我们使用 <strong>LLM-as-a-Judge</strong> 对轨迹在 5 个维度上打分（0-100）：Step Validity（步骤有效性）、Faithfulness（忠实性）、Completeness（完整性）、Conciseness（简洁性）、Compliance（合规性）。被剪枝的轨迹始终得分更低，在<strong>步骤有效性和完整性上下降最大</strong>，表明较弱的逻辑连贯性和更多的缺失中间推理。</p>
+<p><img alt="Figure 10: 剪枝vs保留轨迹质量对比" src="assets/page-009-img-02.png" /></p>
+<p><strong>Figure 10 — DCP 剪枝轨迹(Pruned XCoT) 与保留轨迹(Full XCoT) 的质量对比雷达/柱状图</strong>：Full XCoT 在所有 5 个维度上均显著高于 Pruned XCoT，尤其在 Step Validity 和 Completeness 上差距最为明显。</p>
+<h3 id="_14">术语解释<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>英文术语</th>
+<th>中文译名</th>
+<th>一句话解释</th>
+<th>应用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DW-ACC (Difficulty-Weighted Accuracy)</td>
+<td>难度加权准确率</td>
+<td>按题目难度加权计算的综合准确率</td>
+<td>PolyMath 主评估指标</td>
+</tr>
+<tr>
+<td>Overthinking</td>
+<td>过度思考</td>
+<td>模型生成过长但不必要的推理链条的现象</td>
+<td>高资源语言上的效率浪费</td>
+</tr>
+<tr>
+<td>Ablation Study</td>
+<td>消融实验</td>
+<td>逐一移除模块以验证各组件贡献的方法</td>
+<td>模块必要性验证</td>
+</tr>
+<tr>
+<td>Early Truncation</td>
+<td>早期截断</td>
+<td>在完成前终止低质量路径的解码操作</td>
+<td>DCP 的核心动作</td>
+</tr>
+<tr>
+<td>Active Set</td>
+<td>活跃集</td>
+<td>当前仍在解码过程中的路径集合</td>
+<td>DCP 的管理对象</td>
+</tr>
+<tr>
+<td>Surface-form Variation</td>
+<td>表面形式变异</td>
+<td>不同语言在词汇/语法层面的差异</td>
+<td>ULM 要消除的目标</td>
+</tr>
+<tr>
+<td>Language-invariant</td>
+<td>语言不变的</td>
+<td>不随语言变化而改变的特性</td>
+<td>统一逻辑空间的核心属性</td>
+</tr>
+<tr>
+<td>Shared Evolution Pattern</td>
+<td>共享演化模式</td>
+<td>不同语言推理轨迹在逻辑空间中的共同变化趋势</td>
+<td>ULM 对齐效果的体现</td>
+</tr>
+<tr>
+<td>LLM-as-a-Judge</td>
+<td>LLM 评判者</td>
+<td>使用 LLM 作为自动评估器对输出打分的方法</td>
+<td>轨迹质量评估</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_15">图表/公式说明<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h3>
+<p>本片段包含大量实验图表，以下逐一说明：</p>
+<p><strong>Table 1（PolyMath 性能表）</strong>：论文最核心的结果表，18 语言 × 4 难度 × 8 方法 = 576 个数据点。UL-XCoT 在 Low 难度平均 83.8%（第1名），在所有难度级别上均保持 top-2 表现。</p>
+<p><strong>Table 2（消融实验）</strong>：证明三个模块各有贡献。特别值得注意的是 w/o ULM 的准确率下降最多（83.8→79.8，-4.0%）但计算量几乎不变，说明 ULM 的增益是算法本质性的。w/o CLS 导致 Token 激增（3092→5560，+80%），说明 CLS 是效率的主要来源。w/o DCP 也导致 Token 增加（3092→3893，+26%），但有趣的是 w/o all modules 的准确率反而最高（85.2%）——这是因为使用了全部语言全部路径的暴力投票，代价是 Token 数暴增到 7518。</p>
+<p><strong>Figure 3 &amp; 4（效率对比柱状图）</strong>：直观展示 UL-XCoT 在 Token 和延迟两项指标上全面领先。</p>
+<p><strong>Figure 6（PCA 可视化）</strong>：提供 ULM 有效的直观证据——变换后不同语言的嵌入紧密聚类。</p>
+<p><strong>Figure 7（逐层距离曲线）</strong>：展示 ULM 在动态推理过程中也能维持跨语言对齐。</p>
+<p><strong>Figure 8（语言分布）</strong>：证明 CLS 不是简单地偏向某种语言，而是真正查询自适应的。</p>
+<p><strong>Figure 9（ρ 敏感性分析）</strong>：指导超参数选择，0.55-0.70 为最佳区间。</p>
+<p><strong>Figure 10（LLM-as-Judge 评估）</strong>：提供 DCP 剪枝质量的独立验证。</p>
+<h3 id="takeaway_3">关键 Takeaway<a class="headerlink" href="#takeaway_3" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>效率数据（客观事实）</strong>：Token 比 AutoCap 少 50%+，比 SC 少 65%+；延迟从 43s 降至 28s</li>
+<li><strong>准确率表现（客观事实）</strong>：PolyMath-Low 上 83.8%（排名第1）；MMLU-ProX-Lite 上 43.6 vs CLSP 40.5（+3.1）</li>
+<li><strong>ULM 的独特价值（客观事实）</strong>：消融显示移除 ULM 导致最大准确率下降（-4.0%），且计算量不变——纯粹的算法增益</li>
+<li><strong>多语言协作不可替代（客观事实）</strong>：UL-XCoT &gt; UL-CoT（单语言版），证明跨语言交互本身就有价值</li>
+<li><strong>低资源语言是亮点场景（客观事实）</strong>：在标准方法失效的低资源子集上增益最强最稳定</li>
+</ul>
+<hr />
+<h2 id="section-4-related-work">Section 4 — Related Work（相关工作）<a class="headerlink" href="#section-4-related-work" title="Permanent link">&para;</a></h2>
+<h3 id="_16">中文翻译<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h3>
+<h3 id="41">4.1 跨语言链式思维推理<a class="headerlink" href="#41" title="Permanent link">&para;</a></h3>
+<p>链式思维（Chain-of-Thought, CoT）提示通过引出显式的中间步骤来提升多步问题的可靠性（Wei et al., 2022; Kojima et al., 2022; Qin et al., 2026; Chen et al., 2025c）。在跨语言场景中，CoT 可以跨语言转移，并在<strong>代表性不足的语言（Underrepresented Languages）</strong>中随着模型规模增长而增强（Shi et al., 2022; Ghosh et al., 2025; Barua et al., 2025; He et al., 2025）。这激励 XCoT 超越简单的提示翻译，转而利用多语言信号（Huang et al., 2023; Wang et al., 2025a; Chai et al., 2025; Ahuja et al., 2025）。</p>
+<p>近期 XCoT 研究关注用于 CoT 跨语言迁移的指令微调，将推理从高资源语言蒸馏到低资源语言（Upadhayay and Behzadan, 2023; Kuulmets et al., 2024; Chai et al., 2025; Weihua et al., 2025）。</p>
+<h3 id="42">4.2 跨语言链式思维自一致性<a class="headerlink" href="#42" title="Permanent link">&para;</a></h3>
+<p><strong>自一致性（Self-consistency）</strong>通过采样多条路径并选择最一致的答案来改善 CoT（Wang et al., 2022; Aggarwal et al., 2023; Wang et al., 2025b）。<strong>跨语言自一致性提示（Cross-lingual Self-consistent Prompting）</strong>将其扩展到 XCoT 路径（Qin et al., 2023），而 <strong>AutoCap</strong> 自动化语言选择并学习语言特定权重（Zhang et al., 2024）。<strong>跨语言思维树（Cross-lingual Tree-of-Thoughts）</strong>通过分支推理和聚合执行多语言搜索（Ranaldi et al., 2024）。<strong>L2</strong> 利用多语言统一学习和解码时干预（Chen et al., 2025b）。<strong>Best-of-L</strong> 使用跨语言奖励模型对多语言候选进行排名用于数学推理（Rajaee et al., 2025）。<strong>多维一致性（Multidimensional Consistency）</strong>聚合跨输入扰动信号以提升鲁棒性（Lai et al., 2025）。</p>
+<p>与这些方法相比，我们的焦点是<strong>面向效率的测试时计算分配</strong>。我们在统一逻辑空间中对齐跨语言的中间状态，这使得<strong>部分推理轨迹在解码期间可直接比较</strong>，并能实现<strong>查询自适应语言选择与在线剪枝</strong>的结合。</p>
+<h3 id="_17">术语解释<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>英文术语</th>
+<th>中文译名</th>
+<th>一句话解释</th>
+<th>应用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Underrepresented Languages</td>
+<td>代表性不足的语言</td>
+<td>训练数据稀缺的低资源语言</td>
+<td>多语言模型公平性</td>
+</tr>
+<tr>
+<td>Instruction Tuning for CoT Transfer</td>
+<td>用于CoT迁移的指令微调</td>
+<td>用高资源语言CoT数据微调模型以服务低资源语言</td>
+<td>跨语言能力迁移</td>
+</tr>
+<tr>
+<td>Knowledge Distillation</td>
+<td>知识蒸馏</td>
+<td>将大模型/高资源语言的能力转移到小模型/低资源语言</td>
+<td>能力迁移技术</td>
+</tr>
+<tr>
+<td>Cross-lingual Reward Model</td>
+<td>跨语言奖励模型</td>
+<td>评估多语言推理轨迹质量的评分模型</td>
+<td>Best-of-N 选择</td>
+</tr>
+<tr>
+<td>Input Perturbation</td>
+<td>输入扰动</td>
+<td>对输入做微小变化以测试鲁棒性</td>
+<td>多维一致性评估</td>
+</tr>
+<tr>
+<td>Test-time Compute Allocation</td>
+<td>测试时计算分配</td>
+<td>决定如何在推理时分配有限计算资源的策略</td>
+<td>本文核心定位</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_18">图表/公式说明<a class="headerlink" href="#_18" title="Permanent link">&para;</a></h3>
+<p>本片段无新图表，主要是文献综述。</p>
+<h3 id="takeaway_4">关键 Takeaway<a class="headerlink" href="#takeaway_4" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>本文的独特定位（作者主张）</strong>：现有工作关注"如何做多语言推理"，本文关注"如何高效地做多语言推理"</li>
+<li><strong>关键技术差异（作者主张）</strong>：统一逻辑空间使中间状态可直接比较 → 部分轨迹可比较 → 支持在线剪枝（此前方法只能事后投票）</li>
+<li><strong>XCoT 研究脉络（客观事实）</strong>：从简单翻译提示 → 跨语言提示(CLP) → 自一致性投票(CLSC) → 自适应权重(AutoCap) → 树状搜索(ToT) → <strong>高效统一(UL-XCoT)</strong></li>
+</ul>
+<hr />
+<h2 id="section-5-conclusion">Section 5 — Conclusion（结论）<a class="headerlink" href="#section-5-conclusion" title="Permanent link">&para;</a></h2>
+<h3 id="_19">中文翻译<a class="headerlink" href="#_19" title="Permanent link">&para;</a></h3>
+<p>我们提出了 UL-XCoT，一个<strong>高效的跨语言推理框架</strong>，它利用<strong>统一逻辑机制</strong>更好地分配计算资源。通过选择查询自适应的候选语言并动态剪枝不一致的 XCoT，UL-XCoT 在<strong>语言层面和 Token 层面</strong>同时减少冗余，同时保持强劲的跨语言推理质量。</p>
+<p>在 PolyMath 和 MMLU-ProX-Lite 上的实验表明，UL-XCoT 在具有<strong>显著更高效率</strong>的同时实现了<strong>有竞争力的准确率</strong>，并在数据驱动的低资源语言子集上展现了<strong>稳定且更强的增益</strong>。</p>
+<h3 id="_20">术语解释<a class="headerlink" href="#_20" title="Permanent link">&para;</a></h3>
+<p>本片段无新增术语。</p>
+<h3 id="_21">图表/公式说明<a class="headerlink" href="#_21" title="Permanent link">&para;</a></h3>
+<p>本片段无图表。</p>
+<h3 id="takeaway_5">关键 Takeaway<a class="headerlink" href="#takeaway_5" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>核心贡献重述（作者主张）</strong>：统一逻辑机制 + 查询自适应语言选择 + 动态路径剪枝 = 更少语言 + 更少 Token + 保持质量</li>
+<li><strong>适用场景（作者主张）</strong>：多语言推理场景下的部署效率优化，尤其适合低资源语言环境</li>
+<li><strong>局限性（作者承认）</strong>：需要白盒访问隐状态（hidden states），严格黑盒 API 的适用性待验证（详见 Limitations 部分）</li>
+</ul>
+<hr />
+<h2 id="section-6-limitations">Section 6 — Limitations（局限性）<a class="headerlink" href="#section-6-limitations" title="Permanent link">&para;</a></h2>
+<h3 id="_22">中文翻译<a class="headerlink" href="#_22" title="Permanent link">&para;</a></h3>
+<p>先前的可解释性研究表明，Transformer 隐状态编码了<strong>信息丰富的表征（Information-rich Representations）</strong>，可以进行有意义的检查和分析（Yang et al., 2024; Ghandeharioun et al., 2024; Skean et al., 2025）。我们的方法建立在利用隐状态表征来比较统一逻辑空间中的跨语言理解差异以及监控推理轨迹质量以实现在线剪枝的基础上。</p>
+<p>因此，<strong>UL-XCoT 假设对隐状态的白盒访问（White-box Access to Hidden States）</strong>。其在严格的黑盒 LLM API 上的适用性仍有待验证。</p>
+<blockquote>
+<p>[扩展] 这是一个重要的实际限制。目前 UL-XCoT 需要访问模型的中间层隐藏状态（如 Transformer 第 13 层的输出），这意味着它不能直接应用于只暴露输入输出接口的 API 服务（如 GPT-4 API）。未来的研究方向包括：(1) 使用替代信号（如输出 logprob）模拟隐状态信息 (2) 推动模型 API 开放中间表征访问接口 (3) 仅在自有部署的模型上使用 UL-XCoT。</p>
+</blockquote>
+<h3 id="_23">术语解释<a class="headerlink" href="#_23" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>英文术语</th>
+<th>中文译名</th>
+<th>一句话解释</th>
+<th>应用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Information-rich Representations</td>
+<td>信息丰富的表征</td>
+<td>包含丰富语义和结构信息的隐状态向量</td>
+<td>模型可解释性</td>
+</tr>
+<tr>
+<td>White-box Access</td>
+<td>白盒访问</td>
+<td>可以访问模型内部状态（隐状态、注意力等）的能力</td>
+<td>UL-XCoT的前提条件</td>
+</tr>
+<tr>
+<td>Black-box LLM API</td>
+<td>黑盒LLM API</td>
+<td>只暴露输入输出接口、不开放内部状态的模型API服务</td>
+<td>UL-XCoT的不适用场景</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_24">图表/公式说明<a class="headerlink" href="#_24" title="Permanent link">&para;</a></h3>
+<p>本片段无图表。</p>
+<h3 id="takeaway_6">关键 Takeaway<a class="headerlink" href="#takeaway_6" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>白盒依赖是主要限制（客观事实）</strong>：UL-XCoT 无法直接用于闭源 API（GPT-4、Claude 等）</li>
+<li><strong>未来出路（推断）</strong>：(1) 寻找替代信号 (2) 推动 API 开放 (3) 限制在开源/自部署模型中使用</li>
+<li><strong>诚实声明（作者态度）</strong>：作者主动承认局限而非回避，体现了严谨的研究态度</li>
+</ul>
+<hr />
+<h2 id="section-7-appendix-adcp">Section 7 — Appendix A：DCP 的数学细节（附录）<a class="headerlink" href="#section-7-appendix-adcp" title="Permanent link">&para;</a></h2>
+<h3 id="_25">中文翻译<a class="headerlink" href="#_25" title="Permanent link">&para;</a></h3>
+<p>本附录详细描述动态 CoT 剪枝（DCP）的数学细节。</p>
+<h3 id="logic-space-curvature-signal">逻辑空间曲率信号（Logic-space Curvature Signal）<a class="headerlink" href="#logic-space-curvature-signal" title="Permanent link">&para;</a></h3>
+<p>基于隐状态自截断思想（Wang et al., 2025c; Zhang et al., 2025a; Bae et al., 2023; Chen et al., 2025a），我们通过测量每个解码步骤上投影隐状态的<strong>层间曲率（Curvature）</strong>来量化轨迹的<strong>模型内稳定性（Within-model Stability）</strong>。</p>
+<p>预热后，在解码时刻 t，对于每条活跃语言路径 ℓ，令 <span class="arithmatex">\(x_t^\ell\)</span> 表示当前前缀。令 <span class="arithmatex">\(m \in M = \{m_s, \ldots, m_e\}\)</span> 为被监控的 Transformer 层。我们定义<strong>位置平均投影隐状态</strong>：
+$<span class="arithmatex">\(h_{t,m}^\ell := \hat{H}_t^m(x_\ell)\)</span>$
+$<span class="arithmatex">\(\hat{H}_t^m(x, \ell) = \frac{1}{|x_t^\ell|} \sum_{i=1}^{|x_t^\ell|} \tilde{H}_{i,m}^t(x, \ell)\)</span>$</p>
+<p>其中 <span class="arithmatex">\(\tilde{H}_{i,m}^t(x, \ell)\)</span> 是位置 i、层 m 处的投影隐状态。</p>
+<p>我们量化层间的幅度变化和方向变化。定义<strong>余弦相似度</strong>：
+$<span class="arithmatex">\(\cos(u, v) := \frac{u^\top v}{\|u\| \|v\|}\)</span>$</p>
+<p>对于每个相邻层对 <span class="arithmatex">\((m-1, m)\)</span>，定义<strong>幅度变化</strong>：
+$<span class="arithmatex">\(\delta_M^{(t,m)}(\ell) := \|h_{t,m}^\ell - h_{t,m-1}^\ell\|^2\)</span>$</p>
+<p>定义<strong>角度变化</strong>：
+$<span class="arithmatex">\(\delta_A^{(t,m)}(\ell) := \arccos(\cos(h_{t,m}^\ell, h_{t,m-1}^\ell))\)</span>$</p>
+<p>我们通过同一时刻 t 的<strong>端到端（弦）变化</strong>进行归一化。定义：
+$<span class="arithmatex">\(\Delta_M^t(\ell) := \|h_{t,m_e}^\ell - h_{t,m_s}^\ell\|^2\)</span>$
+$<span class="arithmatex">\(\Delta_A^t(\ell) := \arccos(\cos(h_{t,m_e}^\ell, h_{t,m_s}^\ell))\)</span>$</p>
+<p><strong>层-wise 曲率比率</strong>为：
+$<span class="arithmatex">\(r_M^t(\ell) := \frac{\sum_{m=m_s+1}^{m_e} \delta_M^{(t,m)}(\ell)}{\Delta_M^t(\ell)}, \quad r_A^t(\ell) := \frac{\sum_{m=m_s+1}^{m_e} \delta_A^{(t,m)}(\ell)}{\Delta_A^t(\ell)}\)</span>$</p>
+<p>最终，我们定义<strong>逻辑空间曲率信号</strong>来衡量路径的演化：
+$<span class="arithmatex">\(\kappa_t(\ell) := r_M^t(\ell) - r_A^t(\ell)\)</span>$</p>
+<blockquote>
+<p>[扩展] 这个曲率信号的直觉是：如果一条推理路径在层间变化"不平滑"（幅度变化大但角度变化小，或反之），则说明推理过程出现了不稳定/跳跃/漂移。<span class="arithmatex">\(\kappa_t\)</span> 综合了幅度和角度两个维度的信息，值越大表示该路径在该时刻越不稳定。</p>
+</blockquote>
+<h3 id="divergence-test">发散检测（Divergence Test）<a class="headerlink" href="#divergence-test" title="Permanent link">&para;</a></h3>
+<p>为了避免由所有路径共享的全局漂移引起的假阳性，我们使用绝对和相对成对扩散来实现指示器 <span class="arithmatex">\(I_\kappa^t\)</span>。具体定义：
+- <strong>最大绝对扩散</strong>：<span class="arithmatex">\(\Delta_{max}^t := \max_{\ell \neq \ell'} |\kappa_t(\ell) - \kappa_t(\ell')|\)</span>
+- <strong>最大相对扩散</strong>：<span class="arithmatex">\(R_{max}^t := \max_{\ell \neq \ell'} \frac{|\kappa_t(\ell) - \kappa_t(\ell')|}{\max(|\kappa_t(\ell)|, |\kappa_t(\ell')|, \delta)}\)</span>
+- <strong>平均相对扩散</strong>：<span class="arithmatex">\(R_{mean}^t := E_{\ell \neq \ell'}[\frac{|\kappa_t(\ell) - \kappa_t(\ell')|}{\max(|\kappa_t(\ell)|, |\kappa_t(\ell')|, \delta)}]\)</span></p>
+<p>其中 <span class="arithmatex">\(\delta &gt; 0\)</span> 是数值稳定性小常数。当且仅当以下<strong>三个条件同时满足</strong>时，我们宣布步骤 t 为<strong>发散（Divergent）</strong>的：
+$<span class="arithmatex">\(I_\kappa^t = I[\Delta_{max}^t &gt; \varepsilon_{abs}] \cdot I[R_{max}^t &gt; \varepsilon_{rel}] \cdot I[R_{max}^t \geq \gamma R_{mean}^t]\)</span>$</p>
+<h3 id="_26">发散检测与评分<a class="headerlink" href="#_26" title="Permanent link">&para;</a></h3>
+<p>令 <span class="arithmatex">\(S_t^*\)</span> 表示解码步骤 t 时的活跃路径集合，<span class="arithmatex">\(N_t = |S_t|\)</span>。对于每条路径 <span class="arithmatex">\(\ell \in S_t\)</span>，令 <span class="arithmatex">\(\kappa_t(\ell)\)</span> 为其发散描述符。我们在预热后开始监控，并将第一个<strong>后预热发散步骤</strong>定义为：
+$<span class="arithmatex">\(c := \min\{t \geq T_{warm} \mid I_\kappa^t = 1\}\)</span>$</p>
+<p>我们仅在固定窗口 <span class="arithmatex">\(t \in [c, c+\tau]\)</span> 内对路径评分。</p>
+<h3 id="per-step-point-assignment">逐步点分配（Per-step Point Assignment）<a class="headerlink" href="#per-step-point-assignment" title="Permanent link">&para;</a></h3>
+<p>我们设置 <span class="arithmatex">\(K'_t := \min(K', N_t)\)</span> 并为每条路径 <span class="arithmatex">\(\ell \in S_t\)</span> 分配二元点得分：
+$<span class="arithmatex">\(\text{score}(S_t|x_\ell, \ell') = \begin{cases} I[\ell \in R_t], &amp; I_\kappa^t = 0 \\ I[\ell \in W_t], &amp; I_\kappa^t = 1 \end{cases} \quad (12)\)</span>$</p>
+<p>其中，若步骤 t 非发散，我们均匀随机无回放采样 <span class="arithmatex">\(R_t \subseteq S_t\)</span> 且 <span class="arithmatex">\(|R_t| = K'\)</span>。若步骤 t 发散，我们通过最小化到发散空间中群体的<strong>平均距离</strong>来保留最中心的 K' 条路径：
+$<span class="arithmatex">\(g_t(\ell) := \frac{1}{\max(1, N_t-1)} \sum_{\ell' \in S_t \setminus \{\ell\}} |\kappa_t(\ell) - \kappa_t(\ell')|\)</span>$
+$<span class="arithmatex">\(W_t := \text{TopK'}_{\ell \in S_t}[-g_t(\ell)]\)</span>$</p>
+<p>等价地，<span class="arithmatex">\(W_t\)</span> 包含具有最小 <span class="arithmatex">\(g_t(\ell)\)</span> 的 <span class="arithmatex">\(K'_t\)</span> 条路径（平局任意打破）。</p>
+<h3 id="_27">术语解释<a class="headerlink" href="#_27" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>英文术语</th>
+<th>中文译名</th>
+<th>一句话解释</th>
+<th>应用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Within-model Stability</td>
+<td>模型内稳定性</td>
+<td>单个模型内部推理轨迹的一致性程度</td>
+<td>DCP 质量评判标准</td>
+</tr>
+<tr>
+<td>Layer-wise Curvature</td>
+<td>逐层曲率</td>
+<td>隐状态在相邻层间变化的度量</td>
+<td>检测推理不稳定性</td>
+</tr>
+<tr>
+<td>Magnitude Change</td>
+<td>幅度变化</td>
+<td>隐状态向量范数的层间差异</td>
+<td>曲率的幅值分量</td>
+</tr>
+<tr>
+<td>Angular Change</td>
+<td>角度变化</td>
+<td>隐状态向量方向的层间差异</td>
+<td>曲率的方向分量</td>
+</tr>
+<tr>
+<td>End-to-end (Chord) Change</td>
+<td>端到端（弦）变化</td>
+<td>从首层到末层的总变化量</td>
+<td>归一化的基准</td>
+</tr>
+<tr>
+<td>Divergence Test</td>
+<td>发散检测</td>
+<td>判断某时刻是否出现路径分歧的三重条件机制</td>
+<td>DCP 的触发器</td>
+</tr>
+<tr>
+<td>False Positive</td>
+<td>假阳性</td>
+<td>误将正常路径判定为异常的风险</td>
+<td>发散检测需避免的问题</td>
+</tr>
+<tr>
+<td>Global Drift</td>
+<td>全局漂移</td>
+<td>所有路径同时发生的变化（非单个路径异常）</td>
+<td>发散检测需排除的情况</td>
+</tr>
+<tr>
+<td>Cohort Centrality</td>
+<td>群体中心性</td>
+<td>路径相对于其他路径的平均距离</td>
+<td>发散时的路径选择标准</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_28">图表/公式说明<a class="headerlink" href="#_28" title="Permanent link">&para;</a></h3>
+<p>本附录包含大量数学公式，已在上文中完整列出。核心公式包括：
+- 位置平均投影隐状态的定义
+- 余弦相似度、幅度变化、角度变化的定义
+- 归一化曲率比率的定义（核心信号 <span class="arithmatex">\(\kappa_t(\ell)\)</span>）
+- 三重发散检测条件（绝对阈值 + 相对阈值 + 相对均值比）
+- 二元点分配机制（非发散时随机采样 vs 发散时选最中心路径）</p>
+<h3 id="takeaway_7">关键 Takeaway<a class="headerlink" href="#takeaway_7" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>DCP 的信号设计（作者主张）</strong>：综合幅度和角度双维度曲率，归一化后消除全局漂移影响</li>
+<li><strong>发散检测的三重保险（作者主张）</strong>：绝对扩散阈值 + 相对扩散阈值 + 相对均值倍数，三者同时满足才触发</li>
+<li><strong>非发散时的策略（作者主张）</strong>：随机采样保留多样性</li>
+<li><strong>发散时的策略（作者主张）</strong>：选最"中心"的路径（与群体平均距离最小的），保留共识性强的路径</li>
+</ul>
+<hr />
+<h2 id="section-8-bcd">Section 8 — 附录 B/C/D：补充材料<a class="headerlink" href="#section-8-bcd" title="Permanent link">&para;</a></h2>
+<h3 id="_29">中文翻译<a class="headerlink" href="#_29" title="Permanent link">&para;</a></h3>
+<h3 id="b">附录 B：详细的效率分析<a class="headerlink" href="#b" title="Permanent link">&para;</a></h3>
+<p><strong>Figure 11 — 各难度级别的解码 Token 成本</strong>：4 个子图分别对应 PolyMath 的 Low/Medium/High/Top 四个难度。UL-XCoT 在所有难度和语言上 Token 消耗最低。难度越高，基线方法的 Token 消耗增长越快，而 UL-XCoT 保持稳定。</p>
+<p><strong>Figure 12 — 各难度级别的端到端延迟</strong>：同样分为 4 个子图。UL-XCoT 在所有条件下延迟最低。在高/Top 难度上，基线方法出现更大的方差和偶发的长尾峰值，而 UL-XCoT 更加稳定。</p>
+<p><strong>Table 4 — PolyMath 完整 DW-ACC 结果</strong>：UL-XCoT 取得最佳平均 DW-ACC (<strong>19.0</strong>)，超越 CLSP（18.6）和 AutoCap（18.2），在 18 种语言上始终强劲。</p>
+<h3 id="cpolymath">附录 C：PolyMath 整体性能<a class="headerlink" href="#cpolymath" title="Permanent link">&para;</a></h3>
+<p>Table 4 提供了 PolyMath-Full 的 DW-ACC 总结，这是我们评估协议中使用的主要有效性指标。与 Table 1 分别报告各难度级别准确率不同，DW-ACC 将四个级别的性能聚合成单一的综合难度感知分数，支持跨语言的紧凑比较。</p>
+<p>总体而言，UL-XCoT 实现<strong>最佳的 AVG DW-ACC</strong>，并在 18 种语言套件中始终保持强劲。该结果直接支持我们的论点：<strong>面向效率的框架在大幅降低推理成本的同时，在 PolyMath-Full 的难度加权准确率上保持竞争力</strong>。特别值得注意的是，增益并非局限于单一高资源语言，而是分布在各种语言中，表明所提出的 CLS 和 DCP 策略在相同解码预算下保证了跨语言推理质量。</p>
+<h3 id="d">附录 D：提示模板<a class="headerlink" href="#d" title="Permanent link">&para;</a></h3>
+<p><strong>D.1 简洁推理模板（Concise-reasoning Template）</strong>：
+<div class="highlight"><pre><span></span><code>You are an expert in mathematical / geometric reasoning.
+Think strictly in &lt;LANG_NAME&gt; step by step. Do not use any other language.
+Format:
+&lt;think
+Step 1: ...
+Step 2: ...
+...
+Step N: ...
+&gt;
+$\boxed{FINAL_ANSWER}$
+</code></pre></div>
+Hard Rules:
+1. 所有中间推理必须在单个 <code>...</code> 块内，仅使用 <code>&lt;LANG_NAME&gt;</code> 书写
+2. 最多 <code>&lt;STEP_NUM&gt;</code> 个编号步骤。简洁且避免重复
+3. <code>...</code> 外部只能输出一行：<code>$\boxed{FINAL_ANSWER}$</code>
+4. 不要复述问题。不要在框选答案后添加任何解释、注释或额外文本
+5. 如果结果是表达式，保持简化；如果是数值，尽可能给出精确值</p>
+<p><strong>D.2 质量评判提示（Quality Judge Prompt）</strong>：使用 GPT-4o mini 作为 LLM 评判者，在 6 个维度上打分（0-100 整数）：正确性、步骤有效性、忠实性、完整性、简洁性、合规性。最终总体分数为加权平均（正确性权重最大）。</p>
+<h3 id="_30">术语解释<a class="headerlink" href="#_30" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>英文术语</th>
+<th>中文译名</th>
+<th>一句话解释</th>
+<th>应用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Long-tail Spike</td>
+<td>长尾峰值</td>
+<td>偶尔出现的极端延迟/Token 消耗值</td>
+<td>基线方法在高难度上的不稳定性</td>
+</tr>
+<tr>
+<td>Difficulty-aware Score</td>
+<td>难度感知分数</td>
+<td>考虑题目难度的综合评估指标</td>
+<td>DW-ACC 的设计理念</td>
+</tr>
+<tr>
+<td>Concise-reasoning Template</td>
+<td>简洁推理模板</td>
+<td>限制推理步骤数量和语言的控制实验手段</td>
+<td>隔离解码策略的效率增益</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_31">图表/公式说明<a class="headerlink" href="#_31" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Figure 11（按难度分解的 Token 成本）</strong>：4 子图展示 UL-XCoT 在所有难度级别上的一致性优势</li>
+<li><strong>Figure 12（按难度分解的延迟）</strong>：4 子图进一步证实延迟优势，尤其在困难问题上更显著</li>
+<li><strong>Table 4（DW-ACC 完整表）</strong>：论文的主要有效性指标，UL-XCoT 以 19.0 的平均 DW-ACC 排名第一</li>
+<li><strong>Appendix D 的 Prompt 模板</strong>：确保实验公平的关键控制变量</li>
+</ul>
+<h3 id="takeaway_8">关键 Takeaway<a class="headerlink" href="#takeaway_8" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>难度越高优势越明显（客观事实）</strong>：UL-XCoT 在 High/Top 难度上的效率优势比 Low/Medium 更大</li>
+<li><strong>增益分布均匀（客观事实）</strong>：不是靠某一两种语言拉高平均，而是在 18 种语言上广泛有效</li>
+<li><strong>实验控制的严谨性（客观事实）</strong>：使用简洁推理模板统一控制所有方法的输出格式和长度上限，确保效率差异来自解码策略本身</li>
+</ul>
+<hr />
+<h2 id="_32">总评与思考<a class="headerlink" href="#_32" title="Permanent link">&para;</a></h2>
+<h3 id="_33">论文的核心洞察<a class="headerlink" href="#_33" title="Permanent link">&para;</a></h3>
+<p>这篇论文解决的是一个非常实际的问题：<strong>多语言推理的成本过高</strong>。作者的切入点很巧妙——不是试图改进推理质量（那是已有大量工作的方向），而是问"能不能用更少的计算达到同样的效果？"</p>
+<h3 id="_34">方法设计的优雅之处<a class="headerlink" href="#_34" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>ULM 的"去语言化"操作</strong>：用 SVD 找到语言差异的主方向并去除，剩下的就是"纯逻辑"。这个想法简洁而有力，而且不需要额外训练。</li>
+<li><strong>CLS 的零成本预筛选</strong>：仅通过余弦相似度就能判断哪些语言适合当前查询，不需要生成任何推理内容。</li>
+<li><strong>DCP 的双层保护</strong>：预热期防止误判 + 三重发散检测防假阳性。</li>
+</ol>
+<h3 id="_35">局限与展望<a class="headerlink" href="#_35" title="Permanent link">&para;</a></h3>
+<p>最大的局限是需要白盒访问隐状态，限制了在商业 API 上的直接应用。但考虑到开源模型生态的快速发展（尤其是 DeepSeek 自家的模型），这一限制在实际部署中可能不如想象中严重。</p>
+<h3 id="_36">适用场景判断<a class="headerlink" href="#_36" title="Permanent link">&para;</a></h3>
+<ul>
+<li>✅ <strong>非常适合</strong>：自部署多语言 LLM 服务、需要严格控制推理成本的边缘设备、低资源语言场景</li>
+<li>⚠️ <strong>需改造</strong>：黑盒 API 场景（需要寻找替代信号）</li>
+<li>❌ <strong>不适用</strong>：单语言推理（虽然有 UL-CoT 变体，但增益主要来自多语言交互）</li>
+</ul>
+<h3 id="_37">与物流预测领域的关系<a class="headerlink" href="#_37" title="Permanent link">&para;</a></h3>
+<p>虽然这是一篇 NLP/推理优化论文，但其<strong>分层过滤</strong>和<strong>查询自适应资源分配</strong>的思想与预测系统中的资源优化有相通之处：
+- 类似于"不是所有场地都需要同等精度的预测"
+- 类似于"可以根据历史数据的丰富程度动态调整预测投入"
+- DCP 的"早期截断"思想可用于预测管道的快速失败机制</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.expand", "navigation.indexes", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

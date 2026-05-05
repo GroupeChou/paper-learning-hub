@@ -1,0 +1,3208 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://groupechou.github.io/paper-learning-hub/papers/2604.21896v1/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Nemobot Games：利用大语言模型构建交互式学习的战略性AI游戏智能体 - 论文自动研学知识库</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#nemobot-gamesai" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="论文自动研学知识库" class="md-header__button md-logo" aria-label="论文自动研学知识库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            论文自动研学知识库
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Nemobot Games：利用大语言模型构建交互式学习的战略性AI游戏智能体
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="论文自动研学知识库" class="md-nav__button md-logo" aria-label="论文自动研学知识库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    论文自动研学知识库
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../roadmap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    📖 学习总纲
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/daily-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    📅 今日更新
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../agents/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🤖 AI Agent 主线
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🤖 AI Agent 主线
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/ch01-basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第一章 Agent 基础架构篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/ch02-planning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第二章 规划与推理篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/ch03-tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第三章 工具使用与API篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/ch04-memory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第四章 记忆与检索篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/ch05-multi-agent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第五章 多智能体协作篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/ch06-embodied/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第六章 具身智能篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/ch07-safety/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第七章 Agent评估与安全篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/ch08-frontier/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第八章 前沿探索篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../time_series/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    📈 时序预测主线
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    📈 时序预测主线
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../time_series/ch01-basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第一章 基础理论篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../time_series/ch02-classics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第二章 经典方法篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../time_series/ch03-transformer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第三章 Transformer革命篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../time_series/ch04-foundation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第四章 基础模型篇(Foundation Models)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../time_series/ch05-long-horizon/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第五章 长序列预测篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../time_series/ch06-st-gnn/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第六章 多变量时空篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../time_series/ch07-frontier/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第七章 前沿探索篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../cross_domain/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🔗 交叉融合
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_6" id="__nav_6_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🔗 交叉融合
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cross_domain/ts-agent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    时序预测Agent
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cross_domain/agent-analysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Agent驱动分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cross_domain/autonomous/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    自主决策系统
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../organizations/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🏢 机构专题
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_7" id="__nav_7_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🏢 机构专题
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../organizations/openai/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OpenAI 系列
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../organizations/deepmind/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Google DeepMind
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../organizations/anthropic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Anthropic 系列
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../organizations/meta/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Meta 系列
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../organizations/microsoft/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Microsoft 系列
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../organizations/domestic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    国内大厂系列
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../organizations/academic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    学术机构
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    论文详情
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    论文详情
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        摘要
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#section-1-introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Section 1 — 引言（Introduction）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Section 1 — 引言（Introduction）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        中文翻译
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        术语解释
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        图表/公式说明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#takeaway" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        关键 Takeaway
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#section-2-game-playing-with-large-language-models" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Section 2 — 大语言模型下的游戏博弈（Game Playing with Large Language Models）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Section 2 — 大语言模型下的游戏博弈（Game Playing with Large Language Models）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        中文翻译
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a-shannon-llm-ai" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A. 基于 Shannon 分类的 LLM AI 游戏
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b-llm-programmable-prompts-via-llm-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        B. 通过 LLM 函数的可编程提示（Programmable Prompts via LLM Functions）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c-collaborative-prompt-engineering" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        C. 协作提示工程（Collaborative Prompt Engineering）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#d-ai-ai-game-programming-agent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        D. AI 游戏编程智能体（AI Game Programming Agent）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        术语解释
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        图表/公式说明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#takeaway_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        关键 Takeaway
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#section-3-nemobot-nemobot-game-programming" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Section 3 — Nemobot 游戏编程（Nemobot Game Programming）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Section 3 — Nemobot 游戏编程（Nemobot Game Programming）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        中文翻译
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a-nemobot-overview-of-nemobot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A. Nemobot 概览（Overview of Nemobot）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b-system-architecture-and-implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        B. 系统架构与实现（System Architecture and Implementation）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c-ai-interactive-ai-training" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        C. 交互式 AI 训练（Interactive AI Training）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#d-tiered-curriculum" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        D. 分层课程体系（Tiered Curriculum）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        术语解释
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        图表/公式说明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#takeaway_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        关键 Takeaway
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#section-4-nemobot-games-evaluation-of-nemobot-games" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Section 4 — Nemobot Games 评估（Evaluation of Nemobot Games）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Section 4 — Nemobot Games 评估（Evaluation of Nemobot Games）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        中文翻译
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a-tic-tac-toe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A. 字典型游戏：井字棋（Tic Tac Toe）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b-nim" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        B. 使用严谨数学公式的机器：Nim 游戏
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c-mancala" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        C. 应用一般博弈原则的机器：Mancala 游戏
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#d-learning-machines-by-reinforcement-learning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        D. 通过强化学习的学习机器（Learning Machines by Reinforcement Learning）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        术语解释
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        图表/公式说明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#takeaway_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        关键 Takeaway
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#section-5-further-discussions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Section 5 — 进一步讨论（Further Discussions）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Section 5 — 进一步讨论（Further Discussions）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        中文翻译
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a-implications-and-positioning-in-the-literature" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A. 文献定位与影响（Implications and Positioning in the Literature）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b-open-issues-and-future-directions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        B. 开放问题与未来方向（Open Issues and Future Directions）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        术语解释
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        图表/公式说明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#takeaway_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        关键 Takeaway
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#section-6-conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Section 6 — 结论（Conclusion）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Section 6 — 结论（Conclusion）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        中文翻译
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        术语解释
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_19" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        图表/公式说明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#takeaway_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        关键 Takeaway
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        参考文献
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        全文总结
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="全文总结">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心贡献
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        方法论创新
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        局限性与未来方向
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_25" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        适用读者
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="nemobot-gamesai">Nemobot Games：利用大语言模型构建交互式学习的战略性AI游戏智能体<a class="headerlink" href="#nemobot-gamesai" title="Permanent link">&para;</a></h1>
+<!-- 论文元数据卡片 -->
+<div class="paper-meta">
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">机构</span>
+    <span class="paper-meta-value org-MiniMax">MiniMax</span>
+  </div>
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">方向</span>
+    <span class="paper-meta-value">AI Agent</span>
+  </div>
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">日期</span>
+    <span class="paper-meta-value">2026-04-23</span>
+  </div>
+</div>
+
+<div class="admonition info">
+<p><span class="paper-tag paper-tag-translated">✅ 已完成精读</span></p>
+</div>
+<ul>
+<li><strong>来源</strong>：<a href="https://arxiv.org/abs/2604.21896v1">MiniMax arXiv query</a></li>
+<li><strong>论文链接</strong>：<a href="https://arxiv.org/pdf/2604.21896v1">2604.21896v1</a></li>
+</ul>
+<h2 id="_1">摘要<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>本文提出了一种全新的 <strong>AI 游戏编程范式（paradigm）</strong>，利用大语言模型（LLMs）来扩展和操作化 Claude Shannon 的游戏博弈机器分类法。该范式的核心是 <strong>Nemobot</strong>——一个交互式智能体工程环境（interactive agentic engineering environment），它允许用户创建、定制和部署由 LLM 驱动的游戏智能体（game agents），同时主动与 AI 驱动的策略进行交互。</p>
+<p>集成在 Nemobot 中的基于 LLM 的聊天机器人（chatbot），展示了其在 <strong>四类不同游戏</strong> 上的能力：</p>
+<table>
+<thead>
+<tr>
+<th>游戏类别</th>
+<th>LLM 的角色与能力</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>字典型游戏</strong></td>
+<td>将状态-动作映射压缩为高效、泛化的模型以实现快速适应</td>
+</tr>
+<tr>
+<td><strong>严格可解游戏</strong></td>
+<td>运用数学推理计算最优策略，并生成人类可读的决策解释</td>
+</tr>
+<tr>
+<td><strong>启发式游戏</strong></td>
+<td>综合经典极小极大算法（minimax）的见解与众包数据来合成策略</td>
+</tr>
+<tr>
+<td><strong>学习型游戏</strong></td>
+<td>利用带人类反馈的强化学习（RLHF）和自我批评（self-critique），通过试错学习和模仿学习迭代优化策略</td>
+</tr>
+</tbody>
+</table>
+<p>Nemobot 通过提供一个<strong>可编程环境</strong>进一步放大了这一框架——用户可以在其中实验工具增强的生成（tool-augmented generation）和战略性游戏智能体的微调（fine-tuning）。从战略游戏到角色扮演游戏，Nemobot 展示了 AI 智能体如何通过整合众包学习（crowdsourced learning）和人类创造力来实现一种形式的<strong>自编程（self-programming）</strong>，迭代地优化其自身逻辑。这代表了向<strong>自编程 AI（self-programming AI）</strong>长期目标迈出的一步。</p>
+<p>[扩展] 本文的核心创新在于将 Shannon 1950 年代提出的经典游戏机器分类法与现代 LLM 能力相结合，构建了一个既具有教育价值又具备研究深度的编程框架。它不是简单地用 LLM 来玩游戏，而是让 LLM 成为"游戏编程"的一部分，从而实现了从"用 AI 玩游戏"到"用 AI 教人做游戏 AI"的范式跃迁。</p>
+<hr />
+<h2 id="section-1-introduction">Section 1 — 引言（Introduction）<a class="headerlink" href="#section-1-introduction" title="Permanent link">&para;</a></h2>
+<h3 id="_2">中文翻译<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<p>人工智能先驱 <strong>Claude Shannon</strong> 在其开创性著作 [2] 中提出了一个发人深省的问题：</p>
+<blockquote>
+<p>"我们能否对数字计算机进行编程，使得（最终）它遵循的指令中有 99% 是由计算机自己编写的，而不是当前程序中那百分之几？"</p>
+</blockquote>
+<p>这个问题概括了<strong>自编程系统（self-programming systems）</strong>的愿景，这一概念至今仍是 AI 研究的核心挑战。</p>
+<p>同样，Marvin Minsky 在 [3] 中论证道：<strong>编程的结构化规则不是限制，而是用于提炼和阐明理解不清晰想法的工具</strong>——类似于艺术家和作曲家如何利用形式约束来表达创造力。</p>
+<p>Shannon 关于计算机自主生成自身指令的愿景在<strong>智能体工程（agentic engineering）</strong>中变得日益相关，如今大语言模型（LLMs）产生大量代码，驱动着自演化 AI 系统和游戏等交互式应用的发展。</p>
+<p><img alt="Figure 1: 游戏博弈 AI 中的众包与策略优化" src="assets/page-001-img-01.png" /></p>
+<p><em>Figure 1: 游戏博弈 AI 中的众包与策略优化。LLM 为游戏博弈智能体生成优化策略，而来自人类玩家交互的游戏状态和结果被反馈回来训练 LLM，通过众包创建了一个自我强化的改进循环。[扩展] 这张图揭示了 Nemobot 的核心闭环架构：LLM 不是一次性生成策略就结束了，而是通过与人类玩家的持续交互不断获得反馈数据，形成类似"飞轮效应"的正向循环。</em></p>
+<p>最近的综述如 [4]、[5] 探索了利用 LLMs 提升战略 AI 游戏智能体适应性和推理能力的进展。针对特定应用的研究——如在《外交》（Diplomacy）游戏中结合语言模型与战略推理 [6]，以及使用 LLMs 作为测试员测量游戏难度 [7]——证明了 LLMs 在不完美信息游戏中的多样性。像 ChessGPT [8] 和 AlphaStar [9] 这样的方法架起了策略学习与语言建模之间的桥梁，强调了协同强化学习与自然语言处理的重要性。Suspicion-Agent [10] 等系统的开发进一步将心智理论感知推理（theory-of-mind-aware reasoning）与 OpenAI 的 GPT-4 相集成，扩展了不完美信息设置下多智能体交互的视野。</p>
+<p><strong>游戏棋盘作为微观世界</strong>：离散、可观的世界状态为研究 LLM 中世界模型的表征学习提供了结构化、可控的测试床。当在游戏对局记录和规则上训练时，LLM 可以学习隐式表征（implicit representations），不仅编码合法走法，还编码时间依赖性、隐藏状态和概率化的对手策略。例如，[11] 表明国际象棋对弈使 LLM 能够跟踪棋盘状态并预测走法，证明了战略环境可以诱导游戏动态的有意义的内部表征。这与 [12] 的发现一致——他们表明在合成序列预测任务上训练的 Transformer 会自发形成捕获潜在环境动力学的内部世界模型，而无需显式监督。</p>
+<p>为了严格评估这些学习表征的保真度（fidelity），[13] 提出了系统性方法来探测生成模型是否对未观测变量保持一致的信念并遵守转移规则。综合而言，这些研究表明<strong>游戏对弈可以驱动 LLM 中世界模型的表征学习</strong>，尽管这些表征通常仍是近似的且缺乏显式落地（grounding）。</p>
+<p>[扩展] 这段论述揭示了一个深刻的洞察：游戏之所以适合作为 LLM 世界模型研究的测试床，是因为它们提供了"干净的"环境——状态空间有限、规则明确、反馈即时。这与开放域的自然语言处理形成鲜明对比，后者充满歧义和噪声。作者暗示，如果 LLM 能在游戏中学会形成良好的内部表征，这种能力可能迁移到更复杂的现实世界任务中。</p>
+<p>为了提炼和利用这些表征，<strong>AI 游戏编程提供了一种强大的结构化世界模型学习范式</strong>。通过设计游戏模拟器和编程接口，我们可以创建这样的环境：LLM 智能体必须学习显式的、可验证的表征才能成功。例如，可以设计一个智能体工程框架，通过结构化 API 与游戏引擎交互，强制 LLM 显式表示棋盘状态、动作空间和对手模型以生成有效的函数调用。这种方法使用<strong>可编程的反馈循环</strong>将抽象内部表征落地：LLM 的预测立即被游戏引擎验证或纠正，实现其世界模型的错误驱动精化（error-driven refinement）。通过与这些编程接口的反复交互，AI 智能体可以学习更一致、准确且可泛化的表征，有效地将对弈转化为一种<strong>自监督表征学习</strong>形式。</p>
+<p>这些可编程方法产生的世界模型不仅更具可解释性（interpretable），而且对下游战略推理更具可操作性（actionable），从而缩小了涌现内部表征与外部可验证游戏语义之间的差距。这种下游战略推理可以通过改进语言模型推理的已有方法进一步增强：<strong>自一致性（Self-consistency）</strong>[14] 通过结构化推理链精化决策质量，而 <strong>ReAct</strong> [15] 和 <strong>思维图（Graph of Thoughts）</strong> [16] 等框架为复杂环境中的推理和规划提供了形式化机制。此外，检索增强的战略博弈（retrieval-augmented strategic play）[17] 展示了语言模型如何动态融合外部知识来引导探索并通过基于 LLM 的智能体改善游戏表现。</p>
+<p>最近 <strong>AI 辅助编程</strong>的进展正在改变复杂游戏 AI 智能体的开发。像 OpenAI GPT 这样的基础模型利用先进的 NLP 和 LLM 能力来解释人类指令并生成功能代码 [18]。这使得 GitHub Copilot [19]、Xcode Copilot [20], [21]、OpenAI Codex [22] 和 Claude Code [23] 等工具能够支持程序员快速原型设计、调试和优化智能体逻辑，从而加速了游戏 AI 的推理循环设计、工具集成和战略模块开发。公开可用 LLM 系统（如 OpenAI GPT [24] 和 Google Gemini [25]）不断演进的<strong>多模态能力</strong>进一步扩展了这一潜力，加强了 AI 辅助编程、战略推理和交互式游戏之间的协同效应。像 CAMP [26], [21] 这样使用基于上下文的 RAG 方法的最新框架展示了本地-云架构（local-cloud architectures）和检索机制如何进一步增强 AI 辅助编程和软件测试的可靠性和上下文感知能力。</p>
+<p>这些发展使我们能够通过<strong>智能体工程的新编程范式</strong>重新审视 Shannon 的问题——其中学习到的表征被程序化地利用（而非依赖完整世界模型）来创建混合的人机解决方案。</p>
+<p>[扩展] 这里作者提出了一个关键区分："程序化地利用学习到的表征" vs "依赖完整世界模型"。前者承认 LLM 的表征是不完美的（approximate），但通过编程接口将其约束和落地；后者则要求系统拥有完美的世界模型——这在实践中几乎不可能。这种务实的折中是 Nemobot 设计哲学的核心。</p>
+<p>一个自然的问题是：<strong>如果现代 LLM 已经能在直接提示下玩井字棋或 Nim 这样的游戏，专用编程框架的价值何在？</strong></p>
+<p>区别在于<strong>智能（intelligence）与编程（programming）的差异</strong>：
+- 提示 LLM 玩游戏产生的是<strong>非确定性的、往往不可复现的行为</strong>，对用户来说是不透明的，难以系统地调试或改进
+- Shannon 的分类法 [2], [27] 是在游戏博弈智能力主要基于确定性算法的时代开发的；然而当前的 LLM 系统本质上是<strong>非确定性的</strong>
+- 缺乏的是一种<strong>结构化编程范式</strong>，它在可复现的、可教育的、可扩展的框架中利用 LLM 能力</p>
+<p><strong>Nemobot 弥补了这一差距</strong>，提供了一个可编程环境，其中 LLM 函数被视为<strong>模块化的、可检查的组件</strong>（类似于子例程/subroutine），用户可以设计、测试、精炼和共享。Nemobot 不仅仅是编排 LLM API 调用，而是通过<strong>可编程提示工程（programmable prompt engineering）、众包策略精炼（crowdsourced strategy refinement）和分层课程体系（tiered curriculum）</strong>操作化了 Shannon 的分类法——这个课程体系将学习从简单的字典型游戏脚手架式地支撑到高级强化学习智能体。</p>
+<p>这将贡献定位为不是对 LLM 服务的包装，而是<strong>一个研究框架</strong>，调查经典游戏博弈范式如何能被系统地用 LLM 扩展以服务于 AI 研究和教育。IEEE Transactions on Games 中的最新工作进一步激励了这一方向：Phillips 等 [28] 使用 LLM 实现了目标导向的 NPC 交互；Bassanelli 等 [29] 强调了有原则的游戏化设计（principled gamification design）对有效学习成果的重要性。</p>
+<p>本文<strong>重新审视 Shannon 的游戏博弈机器分类法</strong> [2], [27] 并使用现代 LLM 能力对其进行扩展，引入了战略游戏开发的编程范式。Shannon 的四类如图 2 所示：</p>
+<p><img alt="Figure 2: Shannon 的四种游戏博弈机器类型及其典型应用示例" src="assets/page-001-img-02.png" /></p>
+<p><em>Figure 2: Shannon 的四种游戏博弈机器类型及其典型应用示例。[扩展] 这个分类法是整个 Nemobot 框架的理论基石。从左到右复杂度递增：Type 1 最简单（查表即可），Type 2 有数学公式保证最优解，Type 3 需要启发式搜索，Type 4 则是最具野心的"能自己学习的机器"。Nemobot 的核心贡献就是展示 LLM 如何增强每一类的表达能力。</em></p>
+<ol>
+<li><strong>Type 1 - 字典型机器</strong>：预存解决方案的系统</li>
+<li><strong>Type 2 - 使用公式的机器</strong>：数学严格可解游戏的系统</li>
+<li><strong>Type 3 - 应用原理的机器</strong>：复杂场景下的启发式驱动系统</li>
+<li><strong>Type 4 - 学习机器</strong>：通过经验适应的系统</li>
+</ol>
+<p>LLMs 从以下方面增强了这些类别：
+- 字典型游戏 → <strong>压缩状态-动作映射</strong>
+- 严格可解游戏 → <strong>应用符号推理</strong>
+- 启发式游戏 → <strong>集成极小极大算法与众包数据</strong>
+- 学习型游戏 → <strong>采用带人类反馈的强化学习</strong></p>
+<p>本探索的核心是 <strong>Nemobot</strong>——一个体现这些原则的游戏博弈聊天机器人和交互式编程环境。Nemobot 赋能用户设计和部署游戏博弈智能体，利用 LLM 扩展 Shannon 分类法。通过井字棋、Nim 和 Mancala 等游戏，它展示了 LLM 驱动的 AI 游戏编程进展，集成了自然语言理解和生成能力。</p>
+<p><strong>本文贡献总结：</strong></p>
+<table>
+<thead>
+<tr>
+<th>贡献编号</th>
+<th>内容描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>①</strong></td>
+<td>提出 <strong>Nemobot Games</strong> AI 游戏编程框架，整合语言模型与 Shannon 的游戏博弈机器基础概念。通过 LLM 函数（推理、决策生成、神经化记忆化/nneuralized memoization），智能体高效存储和精炼策略，实现带人类反馈的试错学习</td>
+</tr>
+<tr>
+<td><strong>②</strong></td>
+<td>设计了通过<strong>众包（crowdsourcing）进行协作提示工程的系统性方法</strong>，支持可编程的游戏策略，并在人类反馈下培养 AI 游戏开发中的创造力</td>
+</tr>
+<tr>
+<td><strong>③</strong></td>
+<td>在<strong>远程学习环境中评估了 Nemobot 框架</strong>，突出了其在游戏化 AI 教育中的有效性。通过协作提示工程促进互动学习，帮助学生掌握 AI 基础概念</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_3">术语解释<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>英文术语</th>
+<th>中文译名</th>
+<th>一句话解释</th>
+<th>应用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Self-programming AI</td>
+<td>自编程 AI</td>
+<td>AI 能够自主编写或修改自身大部分运行指令的能力</td>
+<td>Shannon 提出的长期愿景</td>
+</tr>
+<tr>
+<td>Agentic Engineering</td>
+<td>智能体工程</td>
+<td>将 LLM 作为自主智能体而非被动工具进行系统化设计和编排的方法论</td>
+<td>Nemobot 框架的设计哲学</td>
+</tr>
+<tr>
+<td>World Model</td>
+<td>世界模型</td>
+<td>AI 内部对环境动力学（状态转移、因果关系）的隐性或显式表征</td>
+<td>游戏对弈驱动 LLM 学习世界模型</td>
+</tr>
+<tr>
+<td>Crowdsourced Strategy Refinement</td>
+<td>众包策略精炼</td>
+<td>利用大量人类玩家的对局数据和反馈来改进 AI 策略的过程</td>
+<td>Mancala 游戏中的排行榜机制</td>
+</tr>
+<tr>
+<td>Neuralized Memoization</td>
+<td>神经化记忆化</td>
+<td>将传统的缓存/记忆化概念推广到神经网络领域——LLM 的参数充当"压缩的查找表"</td>
+<td>LLM 替代字典型游戏中的大字典</td>
+</tr>
+<tr>
+<td>Programmable Prompt Engineering</td>
+<td>可编程提示工程</td>
+<td>将提示词视为代码组件，可版本控制、测试、共享和组合的开发方法</td>
+<td>Nemobot 的核心方法论</td>
+</tr>
+<tr>
+<td>Shannon's Taxonomy</td>
+<td>Shannon 分类法</td>
+<td>Claude Shannon 于1950年代提出的游戏博弈机器四分类体系</td>
+<td>Nemobot 框架的理论基础</td>
+</tr>
+<tr>
+<td>Grounding</td>
+<td>落地/锚定</td>
+<td>将抽象的内部表征与具体的、可验证的外部信号关联起来的过程</td>
+<td>游戏引擎对 LLM 预测的即时验证</td>
+</tr>
+<tr>
+<td>Heuristic</td>
+<td>启发式函数</td>
+<td>在无法穷举搜索时用于指导决策的经验法则或近似评估函数</td>
+<td>Mancala 等复杂游戏中的策略指导</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_4">图表/公式说明<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p><strong>Figure 1 - 众包与策略优化循环图</strong>：
+- <strong>内容描述</strong>：展示了 LLM、游戏博弈智能体、人类玩家三者之间的闭环关系。LLM 生成优化策略→智能体与人类玩家对弈→收集游戏状态/玩家走法/结果数据→反馈给 LLM 训练。
+- <strong>设计意图分析</strong>：这张图的核心理念是"数据飞轮"——每一步人类与 AI 的交互都在为下一步的策略改进积累数据。它暗示了为什么 Nemobot 不只是单次使用工具，而是一个持续进化的系统。</p>
+<p><strong>Figure 2 - Shannon 四类游戏机器</strong>：
+- <strong>内容描述</strong>：金字塔形层级结构，底层 Type 1（字典型，如井字棋）最简单，顶层 Type 4（学习机器）最复杂。每层配有典型游戏示例。
+- <strong>设计意图分析</strong>：使用视觉化的递进方式帮助读者理解复杂度阶梯，同时暗示 Nemobot 的分层课程设计与此对应。</p>
+<h3 id="takeaway">关键 Takeaway<a class="headerlink" href="#takeaway" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p><strong>要点 1：智能 vs 编程的本质差异</strong>。直接 prompt LLM 玩游戏得到的是黑箱行为，不可调试、不可复现。Nemobot 的核心洞察是将 LLM 能力封装为<strong>可检查、可编程的模块化组件</strong>，这是从"AI 玩游戏"到"AI 帮人做游戏 AI"的关键跨越。</p>
+</li>
+<li>
+<p><strong>要点 2：游戏作为世界模型的训练场</strong>。游戏棋盘是离散、可观、规则清晰的微观世界（microworld），为 LLM 学习内部表征提供了理想测试床。作者引用的多项研究表明，Transformer 可以自发形成世界模型的内部表征——这对理解 LLM 的"理解"本质具有重要意义。</p>
+</li>
+<li>
+<p><strong>要点 3：Shannon 四类法的现代化扩展</strong>。本文不是简单回顾历史，而是将 Shannon 1950 年代的分类法逐一对应到 LLM 能力的具体增强方式（压缩、符号推理、众包+minimax、RLHF），形成了完整的理论映射。</p>
+</li>
+<li>
+<p><strong>要点 4：众包作为 AI 训练的数据源</strong>。 Kasparov vs "全世界"（1999）的对局被用作众包决策的原型案例。众包不仅是收集数据，更是让 LLM 暴露于多样化的推理风格和创造性策略——这比单纯的自博弈（self-play）更能提升鲁棒性。</p>
+</li>
+</ul>
+<hr />
+<h2 id="section-2-game-playing-with-large-language-models">Section 2 — 大语言模型下的游戏博弈（Game Playing with Large Language Models）<a class="headerlink" href="#section-2-game-playing-with-large-language-models" title="Permanent link">&para;</a></h2>
+<h3 id="_5">中文翻译<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<h3 id="a-shannon-llm-ai">A. 基于 Shannon 分类的 LLM AI 游戏<a class="headerlink" href="#a-shannon-llm-ai" title="Permanent link">&para;</a></h3>
+<p><strong>Type 1 - 字典型机器（Dictionary-based Machines）</strong>：</p>
+<p>Shannon 描述了预定义每种可能的游戏局面并将对应的走法存储在"字典"或函数表中的系统 [2]。传统实现需要大量内存资源，限制了其实用性仅适用于井字棋等简单游戏。在此基础上，我们提出可以利用<strong>语言模型通过从游戏数据中学习模式来增强这种方法</strong>。我们假设这有效地将字典<strong>压缩为一个更小、泛化的模型</strong>，允许系统推断先前未见位置的动作而无需穷举存储。</p>
+<p>[扩展] 这里的"压缩"比喻非常精确：传统字典型方法需要存储每个状态的响应（如井字棋的 19,683 种配置各自的最优走法），而 LLM 通过训练学到了状态空间的内在模式，相当于用一个参数化的函数近似了这个巨大的查找表。这本质上是一种<strong>有损但有意义的压缩</strong>——损失了极端情况的精度，但换来了泛化能力和存储效率。</p>
+<p>这种方法为新程序员提供了一种实用的学习 AI 游戏编程的方式——通过实时编辑预定义走法，获得 LLM 函数的动手经验，决定何时使用 LLM 或本地内存，并理解交互环境中的战略决策。</p>
+<p><strong>Type 2 - 使用严谨数学公式的机器（Machines using Rigorous Mathematical Formulas）</strong>：</p>
+<p>Shannon 概述了能够在 Nim 等数学可解游戏中完美博弈的系统 [27]。在所提出的框架中，<strong>LLM 充当交互式副驾驶（copilot）的角色</strong>，负责用自然语言解释最优走法背后的推理。此设计的目的是让这些系统对 programmer 有价值——programmer 受益于模型表达 Nim 等游戏中最优走法背后逻辑的能力。通过集成 LLM，这些游戏不仅能提供解决方案，还能通过将复杂计算分解为逐步洞察来<strong>提供实时的编程辅助</strong> [30]。这在算法执行与策略制定之间架起了桥梁，使 AI 游戏中以数学证明的策略更加易于理解。</p>
+<p>此外，<strong>AI 辅助编程的概念</strong> [31], [32] 和现有 LLM 代码生成能力可用于为这些游戏背后的数学策略创建代码。举例说明，在 1969 年的《欧几里得游戏》（The Game of Euclid）[33] 中，玩家轮流从较大堆中移除较小堆的倍数，目标是把一堆减至零。该游戏有一个与<strong>最大公约数（GCD）计算</strong>相关的最优博弈策略。我们证明 LLM 可以超越分析游戏本身——它能<strong>生成代码来实现最高效的 GCD 算法</strong>，如经典欧几里得算法或其优化变体。例如，给定两堆石头 a 和 b（a &gt; b），LLM 可以生成代码来迭代计算 <code>a mod b</code>，识别减少 a 的最优 m（m × b），并确保高效计算同时避免输棋配置。</p>
+<p>[扩展] 这个例子非常巧妙地展示了 LLM 在 Type 2 场景中的双重角色：既是策略的解释者（告诉玩家为什么这么走），又是策略的实现者（写出高效算法代码）。这种"解释+实现"的双重能力是纯数学公式所不具备的——传统方法只能给出答案，不能教你怎么得出答案。</p>
+<p><strong>Type 3 - 应用一般博弈原则的机器（Machines employing General Principles of Play）</strong>：</p>
+<p>这类机器处理象棋、扑克和桥牌等<strong>不存在精确解但启发式策略指导决策</strong>的游戏 [1]。语言模型可以综合广泛的游戏相关知识、人类策略和专家见解，为各种场景生成<strong>上下文感知的策略</strong>。通过融入蒙特卡洛树搜索等技术并利用自博弈（self-play）（如 AlphaGo [34], [35] 所演示的），LLM 通过在人类和 AI 生成的对局上进行训练来精炼策略。它们的<strong>思维链推理</strong> [36], [14] 允许它们将复杂问题分解为逐步解决方案，建议最优路径的启发式并推荐高效的搜索算法——从而将路径规划和战略探索等计算外包给高效算法。这不仅简化了决策过程以提高游戏性能，还促进了 LLM 与可以测试策略的人类玩家之间的交互 [32]。在编程这些策略游戏时，LLM 可以模拟不同技能水平并通过自博弈解释决策，提高概率推理的效率 [35]。</p>
+<p><strong>Type 4 - 学习机器（Learning Machines）</strong>：</p>
+<p>作为 Shannon 分类法的巅峰，学习机器与现代数据驱动方法紧密契合。Shannon 设想的是通过<strong>试错学习</strong>增强策略的机器，基于大量经验持续精炼其方法 [1]。同样，LLM 可以作为<strong>自适应工具</strong>集成，协助通过试错来进行编程和精炼 [37]。LLM 可以通过解释反馈循环和训练数据在学习中的作用，指导<strong>自我改进的 AI 对手</strong>的开发。它们加速了强化学习——特别是 Michie 的 Boxes 算法 [38], [39]，这是一个随机的、试错系统，学习在未知环境中避免失败，是现代强化学习 [37] 的直接知识祖先。通过生成走法、评估结果和精炼策略，LLM 充当<strong>AI 教练</strong>——模拟熟练对手、提供游戏反馈、模仿奖励模型，同时其自然语言洞见促进了<strong>可解释的战略游戏博弈</strong>。</p>
+<h3 id="b-llm-programmable-prompts-via-llm-functions">B. 通过 LLM 函数的可编程提示（Programmable Prompts via LLM Functions）<a class="headerlink" href="#b-llm-programmable-prompts-via-llm-functions" title="Permanent link">&para;</a></h3>
+<p>大语言模型具有从海量（原始无标签）数据集中综合知识的能力，使其成为<strong>自主学习和决策的强大工具</strong> [18]。我们可以设计<strong>不仅仅遵循预编程规则的 LLM 智能体</strong>——它们可以根据遇到的上下文生成策略、响应和解决方案。这与 Shannon 关于机器逐渐编写更多自身指令的愿景一致。</p>
+<p>例如，在游戏博弈系统中，不再局限于预定义策略或僵化算法，可以向不同的 LLM 发出查询以<strong>生成可行策略</strong>，以最少的人工输入迭代改进游戏学习性能。</p>
+<p><strong>可编程提示工程</strong>通过允许开发者使用 LLM 函数实现逻辑响应行为进一步增强了这种能力。与其编写详尽的代码覆盖每种可能的情况，<strong>提示工程允许程序通过上下文相关的指令在实时动态理解和响应各种情况</strong>。这提供了一种灵活、可扩展的问题解决方法——机器通过基于提示的指导"编写"自身的指令。LLM 函数因此用于在游戏中生成战略决策，根据先前的结果调整行为，并通过反馈循环精炼策略。</p>
+<p>[扩展] 这段话的核心论点是将"提示词"升级为"一等公民（first-class citizen）"的编程构件。传统编程中，if-else 逻辑硬编码在代码里；而在 Nemobot 中，部分逻辑被委托给 LLM 函数——这些函数通过提示词定义，可以被版本控制、测试和共享。这是一种元编程（meta-programming）思想的应用。</p>
+<p>因此，不再仅依赖预编程策略，<strong>AI 游戏引擎可以通过解释提示并根据实时反馈自动调整其玩法来自主生成新策略</strong>。这种通过对话数据的机器学习实现的更大自主性的转变 [40] 不仅是一项最新的技术成就，也反映了我们与机器交互方式的深层<strong>哲学转变</strong>——从直接指示它们转向以一种允许它们通过自然语言生成和理解来"编写"自身程序的方式引导它们。</p>
+<p>Michie 同时代的 <strong>"memo functions"（记忆函数）或 memoization</strong> [41], [42], [37] 如今被理解为一种<strong>加速学习（speedup learning）形式</strong>——存储和重用之前计算的结果，减少冗余并提高效率。因此，LLM 函数可被视为一种<strong>神经化记忆化（neuralized memoization）</strong>形式，提供更动态、上下文感知的响应。</p>
+<p>[扩展] "神经化记忆化"是本文最具洞察力的概念之一。传统 memoization 用 <code>(input, output)</code> 键值对缓存结果；LLM 则用其数十亿参数"缓存"了训练数据中的模式——当输入与训练分布中的某个模式相似时，LLM 能"回忆起"相应的输出。这不是精确匹配，而是语义层面的模糊匹配。</p>
+<p>事实上，Michie 的 memo 函数 [41], [42] 在大语言模型使用的 <strong>KV 缓存</strong>中找到了直接的现代实例——KV 缓存存储先前计算的注意力键和值以将生成复杂度从二次降低到线性。除了这种性能优化，该概念还可以在三个方向上扩展：</p>
+<table>
+<thead>
+<tr>
+<th>扩展方向</th>
+<th>核心思想</th>
+<th>类比</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>语义记忆化（Semantic Memoization）</strong></td>
+<td>通过嵌入相似性而非精确输入匹配进行缓存</td>
+<td>LLM 对"意思相同但表述不同"的查询返回相同响应</td>
+</tr>
+<tr>
+<td><strong>程序记忆化（Procedural Memoization）</strong></td>
+<td>不仅缓存结果，还跨智能体工作流缓存成功策略或工具使用序列</td>
+<td>学会的不只是答案，而是解题方法</td>
+</tr>
+<tr>
+<td><strong>分布式记忆化（Distributed Memoization）</strong></td>
+<td>在多个智能体间共享缓存知识</td>
+<td>多个 Agent 共享"经验"，集体加速学习</td>
+</tr>
+</tbody>
+</table>
+<p>因此，将计算视为可学习的资源，从符号缓存扩展到神经化记忆化和多智能体学习，通过启用自适应学习连接到强化学习——过去的交互精炼游戏策略并改善协作问题解决 [37]。</p>
+<h3 id="c-collaborative-prompt-engineering">C. 协作提示工程（Collaborative Prompt Engineering）<a class="headerlink" href="#c-collaborative-prompt-engineering" title="Permanent link">&para;</a></h3>
+<p>有效的提示工程是利用 LLMs 完成游戏博弈等专门任务的关键，但往往需要<strong>实验经验和专业知识</strong> [43], [18]。<strong>众包（Crowd-sourcing）可能提供一种可扩展的解决方案</strong>，利用集体智慧来创建和精炼优化的 LLM 提示以用于战略游戏任务 [44], [45]。确实，1999 年 Garry Kasparov 与"全世界"的国际象棋比赛就是大规模众包的典范——全球参与者结合了人类直觉、计算机引擎和专家建议 [46]。Kasparov 经过 62 步后的险胜凸显了<strong>人机协作中集体决策的潜力和局限性</strong>。众包通过利用多样化参与者视角来精炼响应 [40], [45]，提供了一种可扩展的方式来改善自然语言理解。众包将在智能体工程中发挥重要作用——提供<strong>可扩展的人类监督和自主智能体自身无法生成的多样化训练数据</strong>。</p>
+<p>[扩展] Kasparov vs The World (1999) 是计算机科学史上著名的案例。全球互联网用户投票决定走法，配合多台计算机引擎的分析，最终 Kasparov 以微弱优势获胜。这个案例说明了两个关键点：(1) 集体智慧有时可以匹敌甚至超越单个天才；(2) 但协调成本和意见分歧也是巨大挑战。Nemobot 的众包设计正是试图保留前者的优势同时缓解后者的困难。</p>
+<p>在战略游戏编程中，众包通过<strong>改进强化学习模型和简化评估</strong>来增强 LLM 微调。它为策略、走法解释、对手模拟和多样化的游戏风格生成提示，提升 AI 适应性。这个协作过程聚合了全面的数据集，发掘了高性能模式，并培养了创新。通过将这些洞见整合到 LLM 智能体（如第三节中的 Nemobot）中，它<strong>规模化人类创造力</strong>，增强人机增强（human-AI augmentation），推动战略 AI 游戏开发中的新编程范式，如图 1 所示。</p>
+<p>复杂 AI 游戏的学习过程将涉及大量的试错，但<strong>众包可以通过聚合多样化反馈和人类洞见来减少开销</strong>。可编程提示通过提供一个结构化框架来编码、精炼和评估集体人类专业知识的方式放大了众包效果。通过 LLM 函数，这些提示使智能体能够动态模拟战略决策和问题解决。来自多样化社区的众包将 LLM 智能体暴露于广泛的推理风格和创造性策略，与 Michie 的神经化记忆化相一致。这种方法允许<strong>迭代改进</strong>，结合学习到的策略与可编程模块以随时间提升性能。</p>
+<h3 id="d-ai-ai-game-programming-agent">D. AI 游戏编程智能体（AI Game Programming Agent）<a class="headerlink" href="#d-ai-ai-game-programming-agent" title="Permanent link">&para;</a></h3>
+<p>为了充分利用 LLM 能力，必须开发具有以下特征的工具：</p>
+<p><strong>特征一：优化计算效率和战略有效性</strong>
+- 融合<strong>思维链推理（chain-of-thought reasoning）</strong>，允许开发者探索 AI 智能体的内部工作机制和决策过程
+- 促进对策略如何生成和精炼的更深理解——因为 LLM 可以解释最优走法的逻辑并提供试错学习的洞见</p>
+<p><strong>特征二：促进协作和可扩展开发</strong>
+- 利用 LLM 函数<strong>生成代码并辅助调试</strong>
+- 支持开发者就策略制定和游戏设计进行协作，同时支持多种方法
+- 这种可扩展性也鼓励团队改进和迭代策略精炼</p>
+<p><strong>特征三：为不同专长的开发者提供可访问性</strong>
+- 提供<strong>自适应框架</strong>供动手探索，配备简化实验的 LLM 驱动工具
+- 工具的<strong>分层分类</strong>（基于 Shannon 分类法）结合 LLM 驱动的代码生成，兼顾新手和高级程序员
+- 通过促进与 LLM 的动态协作，系统能够实现策略的高效实时生成、优化和适应</p>
+<p>最终目标是实现<strong>可扩展的神经化 memoization</strong>，提高算法效率并赋能开发者无缝创新和精炼解决方案。</p>
+<p><img alt="Figure 3: Nemobot 系统流程" src="assets/page-002-img-03.png" /></p>
+<p><em>Figure 3: Nemobot 系统流程。学生编程战略游戏，使用给定启发式构建 AI，并进行数据驱动的 AI 训练。[扩展] 这张图展示了 Nemobot 的完整工作流程：左侧 Coding Pad 定义游戏逻辑和 AI 启发式 → Chat Playground 进行交互式对弈和数据采集 → Analysis Portal 分析性能并更新启发式 → 形成闭环。注意图中"众包学习"和"数据驱动学习"两条路径的并行关系。</em></p>
+<h3 id="_6">术语解释<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>英文术语</th>
+<th>中文译名</th>
+<th>一句话解释</th>
+<th>应用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Copilot / Copiloting</td>
+<td>副驾驶模式</td>
+<td>LLM 作为辅助者而非替代者，解释推理过程并提供编程辅助</td>
+<td>Type 2 可解游戏中 LLM 解释 Nim 策略</td>
+</tr>
+<tr>
+<td>Speedup Learning</td>
+<td>加速学习</td>
+<td>通过缓存中间计算结果来加速后续任务的机器学习子领域</td>
+<td>Memoization 被归类为加速学习的一种</td>
+</tr>
+<tr>
+<td>KV Caching</td>
+<td>KV 缓存</td>
+<td>大语言模型推理时缓存注意力机制的键-值对以避免重复计算的技术</td>
+<td>神经化 memoization 在 Transformer 中的直接实例</td>
+</tr>
+<tr>
+<td>Semantic Memoization</td>
+<td>语义记忆化</td>
+<td>基于嵌入向量相似性（而非精确字符串匹配）的记忆化扩展</td>
+<td>LLM 对语义等价的不同查询返回同一响应</td>
+</tr>
+<tr>
+<td>Procedural Memoization</td>
+<td>程序记忆化</td>
+<td>不仅缓存最终结果，还缓存达成结果的步骤序列（策略/计划）</td>
+<td>Agent 复用成功的工具调用链</td>
+</tr>
+<tr>
+<td>Collaborative Prompt Engineering</td>
+<td>协作提示工程</td>
+<td>多人参与创建、测试和优化提示词集合的系统性方法</td>
+<td>Nemobot 利用众包改进游戏策略提示词</td>
+</tr>
+<tr>
+<td>Trial-and-error Learning</td>
+<td>试错学习</td>
+<td>通过尝试行动、观察结果、调整策略的循环来学习的方式</td>
+<td>Michie's Boxes 算法和强化学习的共同基础</td>
+</tr>
+<tr>
+<td>GCD / Greatest Common Divisor</td>
+<td>最大公约数</td>
+<td>两个整数共有的最大正整数约数，《欧几里得游戏》最优策略的核心数学概念</td>
+<td>Type 2 数学可解游戏的典型案例</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_7">图表/公式说明<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<p><strong>Figure 3 - Nemobot 系统流程图</strong>：
+- <strong>内容描述</strong>：展示了三大模块（Coding Pad、Chat Playground、Analysis Portal）之间的数据流动，以及 LLM Functions 如何贯穿始终。特别标注了"定义启发式 H"、"启发式更新"、"生成训练数据"等关键步骤。
+- <strong>设计意图分析</strong>：这张图采用了"左→右"的时间顺序布局，清晰地展示了从编程→对弈→分析的完整循环。虚线框标注的"Collaborative Learning"区域暗示了众包数据如何注入系统。"heuristic updates (Hk) → (Hk+1)"明确显示了迭代改进的机制。</p>
+<p><strong>Figure 2（续）— Shannon 分类法详细解读</strong>：
+- <strong>内容描述</strong>：四种类型从左到右排列，复杂度递增。Type 1 示例为井字棋（tic-tac-toe），Type 2 为 Nim 和 Mini Mancala，Type 3 指向"更复杂的游戏"，Type 4 为学习机器。
+- <strong>设计意图分析</strong>：使用渐进式的视觉隐喻暗示学习路径——初学者从 Type 1 入手，逐步推进到 Type 4。这也对应后文的 Tiered Curriculum 设计。</p>
+<h3 id="takeaway_1">关键 Takeaway<a class="headerlink" href="#takeaway_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p><strong>要点 1：LLM 对 Shannon 四类法的逐类增强</strong>。Type 1 用"压缩"代替穷举存储；Type 2 增加"解释层"使数学策略可理解；Type 3 融合众包数据弥补启发式的不足；Type 4 用 RLHF 加速试错学习。每种的增强方式都精准命中了该类别的痛点。</p>
+</li>
+<li>
+<p><strong>要点 2："神经化 memoization"的深刻类比</strong>。将 LLM 的参数化知识视为一种"模糊缓存"，进而引申出语义记忆化、程序记忆化和分布式记忆化三种扩展方向。这个概念框架将传统的缓存优化思想与最前沿的大模型技术联系起来，具有很强的启发性。</p>
+</li>
+<li>
+<p><strong>要点 3：众包的双重价值</strong>。众包不仅提供训练数据（量），更重要的是提供<strong>多样化的推理风格和创造性策略（质）</strong>。Kasparov vs The World 的例子生动地说明了集体智慧的潜力与局限——这也是 Nemobot 众包设计需要权衡的核心张力。</p>
+</li>
+<li>
+<p><strong>要点 4：AI 游戏编程工具的三维需求</strong>。计算效率×战略有效性（深度）、协作可扩展性（广度）、可访问性（易用性）——这三个维度构成了评价此类工具的完整坐标系。</p>
+</li>
+</ul>
+<hr />
+<h2 id="section-3-nemobot-nemobot-game-programming">Section 3 — Nemobot 游戏编程（Nemobot Game Programming）<a class="headerlink" href="#section-3-nemobot-nemobot-game-programming" title="Permanent link">&para;</a></h2>
+<h3 id="_8">中文翻译<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<p>我们提出 <strong>Nemobot</strong>——一个用于在 Facebook Messenger 和 Telegram 等平台上创建、训练和测试 AI 游戏智能体的编程框架。在本节中，我们提供系统架构概述，详细介绍交互式训练工作流，并描述旨在支持不同专长开发者的<strong>分层课程体系（Tiered Curriculum）</strong>。</p>
+<h3 id="a-nemobot-overview-of-nemobot">A. Nemobot 概览（Overview of Nemobot）<a class="headerlink" href="#a-nemobot-overview-of-nemobot" title="Permanent link">&para;</a></h3>
+<p>Nemobot 提供了一个动态且直观的环境，开发者可以在其中为战略游戏设计和训练 AI 智能体，深入了解 AI 的底层机制。如图 3 所示，该平台包含：</p>
+<ol>
+<li><strong>编程面板（Coding Pad）</strong>：用于编写游戏逻辑和 AI 推理启发式</li>
+<li><strong>聊天游乐场（Chat Playground）</strong>：与 AI 交互以生成和测试数据</li>
+<li><strong>分析门户（Analysis Portal）</strong>：评估 AI 性能并精炼启发式</li>
+</ol>
+<p>流程从用户设计<strong>双人战略游戏</strong>开始——玩家轮流行动、累积奖励直到游戏结束。系统提供了一个<strong>基于 NodeJS 的模板</strong>来简化此过程，包含可自定义函数来定义：
+- 初始状态 <span class="arithmatex">\(S_0\)</span>
+- 转移函数 <span class="arithmatex">\(f(S_{i+1}|S_i, a_i)\)</span>（其中 <span class="arithmatex">\(a_i\)</span> 表示玩家在状态 <span class="arithmatex">\(S_i\)</span> 下的动作）
+- 终止状态 <span class="arithmatex">\(S_e\)</span></p>
+<p>然后用户通过定义<strong>启发式函数 <span class="arithmatex">\(H_0(a_i|S_i)\)</span></strong> 来编程 AI 智能体——该函数规定了智能体在各种场景中的决策方式。</p>
+<p>[扩展] 这个设计的关键在于"启发式"的通用性——它可以是简单的规则（如"随机选择"）、确定性公式（如 Nim-sum 计算），甚至是 LLM 函数调用。这种统一抽象使得同一框架能支持 Shannon 全部四类游戏。</p>
+<p>Nemobot 还赋能用户通过利用 <strong>LLM 函数</strong>来融合高级算法设计。用户可以通过在平台内用自然语言指定高级逻辑（如描述和示例）来绕过复杂的编程挑战。这些 LLM 函数（如图 4(c) 部分）无缝集成到主游戏流程中，利用 LLM 的自然语言理解和代码生成能力。这一特性确保了不同编程背景的开发者的可访问性，同时保持了 AI 游戏开发的健壮编程范式。</p>
+<p><img alt="Figure 4: Nemobot 用户界面" src="assets/page-002-img-04.png" /></p>
+<p><em>Figure 4: Nemobot UI。(a) &amp; (b) 编程面板上编写的程序同步执行并渲染到聊天游乐场。(c) LLM 函数由主游戏流程定义和调用。[扩展] 这张截图展示了 Nemobot 的实际操作界面——左侧是代码编辑器（Coding Pad），右侧是聊天界面（Chat Playground），底部是 LLM 函数定义区。这种"左代码右对话"的布局类似于现代 IDE + 聊天机器人的结合体。</em></p>
+<p><strong>编程面板使用户能够将其程序作为聊天机器人驱动的游戏执行</strong>，即时部署在聊天游乐场中。这种集成促进了实时实验而无需切换平台。游戏数据随后在分析门户中被分析和可视化，提供对 AI 智能体性能的洞见并确定启发式精炼的区域。这种编程、测试和分析的迭代循环为<strong>数据驱动的 AI 训练</strong>建立了坚实基础。此外，程序和训练数据都是<strong>可共享的</strong>，促进了大规模的协作开发环境。</p>
+<p>为了解决与生成式 AI 工具相关的潜在问题，Nemobot 在用户和 LLM 之间采用了一个<strong>门控接口（gated interface）</strong>。用户不是直接交互，而是在平台内定义 LLM 逻辑，Nemobot 使用超命令（hyper-commands）传输提示以确保逻辑和适当的响应。这种设计减轻了对生成式 AI 的过度依赖，同时保持了 AI 编程的安全结构化环境。</p>
+<h3 id="b-system-architecture-and-implementation">B. 系统架构与实现（System Architecture and Implementation）<a class="headerlink" href="#b-system-architecture-and-implementation" title="Permanent link">&para;</a></h3>
+<p>Nemobot 系统架构的设计注重模块化、低延迟和可扩展性。系统包含三个核心层：</p>
+<table>
+<thead>
+<tr>
+<th>核心层</th>
+<th>设计原则</th>
+<th>具体实现</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>模型无关的 AI 集成</strong></td>
+<td>平台架构独立于任何特定 LLM</td>
+<td>采用<strong>"自带密钥"（BYOK / Bring Your Own Key）</strong>原则，允许用户通过 API 连接各种模型（如 GPT-4、GPT-3.5）</td>
+</tr>
+<tr>
+<td><strong>状态管理与延迟</strong></td>
+<td>确保响应迅速的游戏体验</td>
+<td>游戏逻辑和状态管理在本地执行环境中处理；活跃游戏期间状态存储在内存中；<strong>仅当用户显式触发"LLM函数"时才查询 LLM</strong></td>
+</tr>
+<tr>
+<td><strong>数据持久化与众包</strong></td>
+<td>不中断实时交互</td>
+<td>单个游戏状态是瞬时的；性能指标和训练结果批量异步同步到云端数据库；聚合众包数据（胜率、成功启发式等）</td>
+</tr>
+</tbody>
+</table>
+<p>[扩展] "仅当触发 LLM 函数时才查询 LLM"这个设计决策至关重要。游戏循环本身不需要 LLM 参与——这保证了核心玩法不受 LLM 推理延迟的影响。LLM 只在需要"思考"的时刻被调用（如计算最优走法或解释策略），这是一种精心设计的"懒加载"策略。</p>
+<h3 id="c-ai-interactive-ai-training">C. 交互式 AI 训练（Interactive AI Training）<a class="headerlink" href="#c-ai-interactive-ai-training" title="Permanent link">&para;</a></h3>
+<p>AI 智能体的核心工作流涉及基于已定义策略的感知、处理和决策。该策略可以是预编程的确定性规则，也可以通过强化学习等方法迭代学习。为了支持游戏博弈 AI 智能体的开发，Nemobot 提供了一个交互式框架，用户可以从头构建和训练 AI 系统，如算法 1 所述。</p>
+<p><strong>Algorithm 1: 使用 Nemobot 进行交互式 AI 训练</strong></p>
+<div class="highlight"><pre><span></span><code>输入: 初始启发式 H₀, 测试数据集 D, 损失阈值 τ
+输出: 训练后的启发式 Hₖ
+
+1: H₀ ← 初始启发式, k ← 1, R ← ∅
+2: while true do
+3:   for i in [1, count(Dₖ)] do
+4:     R.add(Rᵢ ← reward(Dₖᵢ))    // 对每个测试用例计算奖励
+5:   end for
+6:   if loss(R) ≤ τ then           // 如果损失低于阈值则停止
+7:     break
+8:   end if
+9:   Hₖ ← update(Hₖ₋₁, R)         // 基于奖励更新启发式
+10:  k ← (k + 1)
+11:  record &lt;Hₖ, R&gt;                 // 记录本轮的启发式和奖励
+12:  R ← ∅                          // 清空奖励集
+13: end while
+14: return Hₖ
+</code></pre></div>
+<p>算法 1 展示了一个迭代过程，其中 AI 的决策启发式被优化以提高其性能。在每次迭代中，启发式针对测试用例数据集 D 进行评估，产生指导后续迭代调整的奖励 <span class="arithmatex">\(R_i\)</span>。该循环持续进行，直到 AI 满足预定义的性能阈值 <span class="arithmatex">\(\tau\)</span>。</p>
+<p>[扩展] 这个算法的通用性值得注意——<code>update()</code> 函数在不同场景下可以有不同的实现：在自动机器学习中可能是基于梯度的优化；在基于规则的 AI 系统中可能代表对决策规则的手动调整；如果启发式是静态的，则完全跳过训练循环。这种灵活性使得 Nemobot 能适应 Shannon 四类游戏的不同需求。</p>
+<p><strong>实际示例 - Nim 游戏启发式</strong>：</p>
+<p>用户首先定义一个初始启发式 <span class="arithmatex">\(H_0\)</span>，指定 AI 在给定状态下的动作及相应奖励。例如在 Nim 游戏中，<span class="arithmatex">\(H_0\)</span> 可能定义 AI 的走法为：</p>
+<div class="arithmatex">\[n_{\text{AI}} = \max(r, 3 - n_{\text{user}})\]</div>
+<p>其中 <span class="arithmatex">\(r\)</span> 是剩余物品数量，<span class="arithmatex">\(n_{\text{user}}\)</span> 是对手的上一步动作。Nemobot 利用 <strong>LLM 驱动的代码生成</strong>简化此过程——允许用户用伪代码或自然语言而非可执行代码来描述启发式。这种抽象降低了入门门槛，使用户专注于<strong>逻辑推理而非语法</strong>。</p>
+<p>一旦定义了启发式，用户就可以在聊天游乐场中进行测试——动态游戏和数据生成同时发生。AI 以聊天机器人界面部署，从初始状态 <span class="arithmatex">\(s_0\)</span> 开始，用户与智能体交互，观察其对状态 <span class="arithmatex">\(s_i\)</span> 的响应动作 <span class="arithmatex">\(a_i\)</span>。最终奖励 <span class="arithmatex">\(R_k\)</span> 被记录用于分析。为加速测试，Nemobot 支持<strong>自动化游戏博弈</strong>——通过随机动作生成（模拟"众包训练"）或基于启发式的响应（类似"由另一个 AI 训练"）。</p>
+<p>启发式更新由性能分析引导。用户利用 LLM 功能迭代精炼 H，调整策略或定义新动作。启发式范围可从确定性动作的精确公式到表示高层策略的抽象规则。此外，Nemobot 支持将<strong>历史训练数据融入 AI 的状态表征</strong>，实现更复杂的决策并与现代自学习方法论保持一致。</p>
+<h3 id="d-tiered-curriculum">D. 分层课程体系（Tiered Curriculum）<a class="headerlink" href="#d-tiered-curriculum" title="Permanent link">&para;</a></h3>
+<p>Nemobot 通过提供结构化路径来支持不同专长的开发者，灵感来源于 Claude E. Shannon 的游戏博弈机器分类法 [2]：</p>
+<table>
+<thead>
+<tr>
+<th>课程层级</th>
+<th>对应 Shannon 类型</th>
+<th>内容描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>基础开发（Foundational Development）</strong></td>
+<td>Type 1 - 字典型机器</td>
+<td>为预定义游戏构建字典型 AI 智能体，为每个状态 <span class="arithmatex">\(s_i\)</span> 定义动作 <span class="arithmatex">\(a_i\)</span></td>
+</tr>
+<tr>
+<td><strong>中级规则系统（Intermediate Rule-Based Systems）</strong></td>
+<td>Type 2 - 公式型机器</td>
+<td>使用 NodeJS 模板创建自定义游戏，构建遵循决策算法 $f(a_i</td>
+</tr>
+<tr>
+<td><strong>高级数据驱动 AI（Advanced Data-Driven AI）</strong></td>
+<td>Type 3/4 - 启发式/学习型机器</td>
+<td>利用 LLM 函数设计复杂自适应 AI 系统，过渡到构建具备自我改进能力的学习型 AI</td>
+</tr>
+</tbody>
+</table>
+<p>[扩展] 这种分层设计的核心教学理念是<strong>脚手架式学习（scaffolded learning）</strong>——学生不是一开始就面对最复杂的强化学习任务，而是从最简单的查表法开始，逐步建立直觉后再引入更抽象的概念。每一步都建立在前一步的理解之上。</p>
+<p>这种结构化进阶以<strong>启发式驱动决策为基础</strong>，逐渐融入数据驱动方法论。通过简化初始开发并强调迭代增强，Nemobot 确保平滑过渡到高级 AI 训练技术。通过智能体工程——自主 LLM 智能体规划、执行和精炼学习策略——系统可以<strong>动态适应个别学习者的轨迹</strong>，选择适当的任务和反馈机制而无需持续的人类监督。</p>
+<h3 id="_9">术语解释<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>英文术语</th>
+<th>中文译名</th>
+<th>一句话解释</th>
+<th>应用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Heuristic Function</td>
+<td>启发式函数</td>
+<td>在缺乏完整信息时用于估计动作优劣的评分函数</td>
+<td>Nemobot 中 $H(a_i</td>
+</tr>
+<tr>
+<td>BYOK (Bring Your Own Key)</td>
+<td>自带密钥</td>
+<td>用户自行提供 API 密钥接入不同 LLM 服务商的模式</td>
+<td>Nemobot 的模型无关架构设计</td>
+</tr>
+<tr>
+<td>Gated Interface</td>
+<td>门控接口</td>
+<td>在用户和 LLM 之间设置中间层以控制和安全地传递请求</td>
+<td>防止用户过度依赖或误用生成式 AI</td>
+</tr>
+<tr>
+<td>Tiered Curriculum</td>
+<td>分层课程体系</td>
+<td>从简单到复杂组织学习内容的渐进式教学方法</td>
+<td>对应 Shannon 四类游戏的脚手架式学习路径</td>
+</tr>
+<tr>
+<td>Transfer Function</td>
+<td>转移函数</td>
+<td>定义游戏状态如何在动作作用下演化的数学函数</td>
+<td><span class="arithmatex">\(f(S_{i+1}\|S_i, a_i)\)</span> 描述游戏动力学</td>
+</tr>
+<tr>
+<td>NodeJS Template</td>
+<td>NodeJS 模板</td>
+<td>预配置的 Node.js 代码骨架，开发者只需填入特定函数即可创建游戏</td>
+<td>降低 Nemobot 游戏开发的入门门槛</td>
+</tr>
+<tr>
+<td>Lazy Loading of LLM</td>
+<td>LLM 懒加载</td>
+<td>仅在必要时（如策略推理）才调用 LLM API 的设计模式</td>
+<td>保证游戏循环不受推理延迟影响</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_10">图表/公式说明<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
+<p><strong>Figure 4 - Nemobot UI 截图</strong>：
+- <strong>内容描述</strong>：(a) Coding Pad 显示 JavaScript 代码；(b) Chat Playground 显示与 AI 的井字棋对弈对话；(c)-1 和 (c)-2 分别展示 LLM 函数的定义和具体函数代码。
+- <strong>设计意图分析</strong>：这张图的核心信息是"代码即游戏"——左侧写的代码立即在右侧变成可玩的游戏。这种即时反馈循环对于教育场景至关重要，让学生能看到编程结果的直接体现。</p>
+<p><strong>Algorithm 1 伪代码</strong>：
+- <strong>变量含义</strong>：<span class="arithmatex">\(H_k\)</span> = 第 k 轮的启发式函数；<span class="arithmatex">\(D_k\)</span> = 第 k 轮的测试数据集；<span class="arithmatex">\(R\)</span> = 奖励集合；<span class="arithmatex">\(\tau\)</span> = 收敛阈值；<span class="arithmatex">\(\text{loss}(R)\)</span> = 基于奖励计算的损失值
+- <strong>直觉解释</strong>：这是一个通用的"试错-改进"循环框架。每次循环 = 用当前策略玩一批游戏 → 根据胜负结果算奖励 → 如果还不够好就更新策略 → 重复。本质上是强化学习的简化版。</p>
+<p><strong>Nim 启发式公式</strong>：<span class="arithmatex">\(n_{\text{AI}} = \max(r, 3 - n_{\text{user}})\)</span>
+- <strong>变量含义</strong>：<span class="arithmatex">\(n_{\text{AI}}\)</span> = AI 本轮应取走的物品数；<span class="arithmatex">\(r\)</span> = 剩余总数；<span class="arithmatex">\(n_{\text{user}}\)</span> = 对手上轮取走的数
+- <strong>直觉解释</strong>：这个启发式试图保证每轮后剩余物品数是 4 的倍数（因为每次最多取 3 个），这是 Nim 变体的经典获胜策略</p>
+<h3 id="takeaway_2">关键 Takeaway<a class="headerlink" href="#takeaway_2" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p><strong>要点 1：Nemobot 的三大模块协同</strong>。Coding Pad（写代码）→ Chat Playground（玩游戏、收集数据）→ Analysis Portal（分析表现、精炼策略）形成闭环。关键创新是"代码即时变为游戏"——无需编译-部署-运行的漫长周期。</p>
+</li>
+<li>
+<p><strong>要点 2："门控接口"的安全考量</strong>。作者明确意识到生成式 AI 工具的风险，设计了中间层来管理用户与 LLM 的交互。这反映了负责任的 AI 设计理念——不是禁止使用，而是通过结构化方式安全使用。</p>
+</li>
+<li>
+<p><strong>要点 3：分层课程对应 Shannon 四类法</strong>。基础（Type 1 字典）→ 中级（Type 2 公式）→ 高级（Type 3/4 启发式+学习）。这种映射使理论分类直接转化为教学路径，体现了"做中学"的教育哲学。</p>
+</li>
+<li>
+<p><strong>要点 4：BYOK 架构的前瞻性</strong>。不绑定特定 LLM 供应商，让用户自带 API 密钥。这使得框架能在快速演进的大模型生态中长期存活——即使某个模型过时了，换一个就行。</p>
+</li>
+</ul>
+<hr />
+<h2 id="section-4-nemobot-games-evaluation-of-nemobot-games">Section 4 — Nemobot Games 评估（Evaluation of Nemobot Games）<a class="headerlink" href="#section-4-nemobot-games-evaluation-of-nemobot-games" title="Permanent link">&para;</a></h2>
+<h3 id="_11">中文翻译<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
+<p>Nemobot 使用<strong>可编程提示作为模块化、自适应的游戏博弈智能体</strong>——它能根据用户输入、游戏上下文或学习目标调整策略或模式。例如，在学习游戏中，Nemobot 可能解释其决策过程；而在启发式游戏中，它综合众包策略以实现最优游戏体验。众包提示按使用场景分类（如决策制定、策略解释、错误纠正），作为模块化组件集成到 Nemobot 中以便于执行和测试。用户可以实验、精炼并为提示库做出贡献，创建一个不断演进的增强库以提高 Nemebot 的有效性和多样性。基于 Web 的编程平台演示地址：https://nemobot-neue-experiment.vercel.app</p>
+<p><strong>Nemobot Games 已在以下教育环境中进行了评估</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>教育机构</th>
+<th>时间</th>
+<th>学生人数</th>
+<th>使用的工具</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>香港城市大学（City University of Hong Kong）</td>
+<td>2020–2021</td>
+<td>251 名学生</td>
+<td>OpenAI Playground、Codex</td>
+</tr>
+<tr>
+<td>南洋理工大学（Nanyang Technological University）</td>
+<td>2022–2023</td>
+<td>80+名学生</td>
+<td>ChatGPT、OpenAI API</td>
+</tr>
+<tr>
+<td>普林斯顿大学远程实习项目</td>
+<td>2021–2022</td>
+<td>约30名本科生</td>
+<td>OpenAI Codex → ChatGPT</td>
+</tr>
+</tbody>
+</table>
+<p>超过十周的时间，学生学习在 Nemobot 中编程战略游戏——这些游戏可部署在 Facebook Messenger 和 Telegram 等平台。部分学生项目的详细信息见表 I。</p>
+<h3 id="a-tic-tac-toe">A. 字典型游戏：井字棋（Tic Tac Toe）<a class="headerlink" href="#a-tic-tac-toe" title="Permanent link">&para;</a></h3>
+<p>井字棋是 Shannon 第一类游戏博弈机器的理想示例——使用存储所有可能游戏状态<strong>预计算解决方案的字典型系统</strong>。其状态空间可控（19,683 种配置），每个状态配对一个最优走法。这种确定性方法确保每个游戏状态都有明确定义的最优响应（如最大化获胜机会或强制平局）。虽然有效，但这种方法可能在基于规则的 AI 游戏中内存密集且实现复杂。</p>
+<p>[扩展] 19,683 = <span class="arithmatex">\(3^9\)</span>（9 个格子，每个格子可以是 X、O 或空）。虽然数字看起来不大，但手动编码每种状态的最优响应既枯燥又容易出错。这正是 LLM "压缩字典"的价值所在——不需要穷举存储，而是学到了"占据中心""阻止对手连线"等高阶模式。</p>
+<p>为了解决这些限制，我们采用 <strong>LLM 游戏智能体</strong>——它在无需显式存储大量状态-动作对或创建复杂的嵌套条件循环的情况下复制了字典型系统的行为。用户通过与 Nemobot 交互来进行走法，LLM 作为对手响应，维持字典型系统的<strong>确定性特征</strong>。为便于交互，3×3 棋盘用 0-8 数字标记单元格，对应棋盘位置。用户通过指定想要放置标记的单元格来输入走法（如"0"表示左上角，"4"表示中心）。</p>
+<p><strong>与 LLM 智能体通信时，游戏状态被序列化为结构化文本格式</strong>——捕获 X、O 和空单元的位置。这种结构化输入有效地以智能体可处理和响应的方式描述了游戏的当前状态。例如，假设 LLM 智能体已经知道其在 Nemobot 配置中嵌入的角色和规则，给定状态的提示词可以这样写：</p>
+<p><strong>示例提示词：井字棋策略</strong>
+<div class="highlight"><pre><span></span><code>当前配置：单元格 0（左上角）被 &#39;X&#39; 占据。
+          单元格 4（中心）被 &#39;O&#39; 占据。
+          其余所有单元格为空。
+目标：分析棋盘状态并执行玩家 &#39;O&#39; 的最优走法以防止失败或确保胜利。
+</code></pre></div></p>
+<p>[扩展] 这种结构化提示词设计非常关键——它将视觉化的棋盘状态转换为 LLM 能理解的文本描述。注意提示词不仅包含事实信息（哪些格子被占了），还包含指令（"分析...并执行最优走法"），这引导 LLM 进入"推理模式"而非单纯的"识别模式"。</p>
+<p><strong>不是预计算所有可能的走法并将它们存储在字典中，LLM 游戏智能体利用其预训练知识和上下文理解来动态生成最优走法</strong>。后端通过 API 将此查询发送给 LLM，LLM 根据当前配置响应最具战略性的走法。这种动态查询过程消除了穷举存储的需求，有效地将"字典"压缩进了 LLM 游戏智能体的推理能力中。对于任何给定游戏状态，Nemobot 确保智能体的响应是一致且确定性的，遵守传统字典型机器的基础原则。</p>
+<p>尽管 LLM 游戏智能体动态生成响应，但这些响应<strong>与井字棋的既定最优策略一致</strong>——其决策建立在预训练知识之上。这种设计确保了选择最优走法所需的基础知识<strong>一次性嵌入 LLM</strong>，使其甚至能推断出先前未见位置的最佳走法。与传统方法相比，该方法显著减少了内存使用和计算开销——传统方法依赖穷举搜索或对每个决策评估嵌套条件循环。通过利用 LLM 游戏智能体的泛化和解释游戏规则的能力，Nemobot 实现了<strong>增强的可扩展性和适应性</strong>，在无需重复基于规则评估的情况下提供高效准确的游戏体验。</p>
+<h3 id="b-nim">B. 使用严谨数学公式的机器：Nim 游戏<a class="headerlink" href="#b-nim" title="Permanent link">&para;</a></h3>
+<p>Nim 是经典的组合博弈游戏，属于 Shannon 第二类游戏博弈机器——<strong>使用数学公式的系统</strong>。其最优策略基于 <strong>Nim-sum（尼姆和）</strong>——通过异或运算判断必胜/必败位置。在 Nemobot 中，被迫取走最后一个物品的玩家<strong>输</strong>。AI 在每一回合计算 Nim-sum，使用公式确定最佳走法：非零 Nim-sum 表示必胜位置，零 Nim-sum 表示必败位置。LLM 将 Nim-sum 计算翻译成自然语言，提供关于最优走法的洞见，使游戏更具教育性和可访问性。</p>
+<p>[扩展] 这里采用了"取最后一个输"的变体（misère play），比标准版（取最后一个赢）更复杂但更有趣。LLM 的角色不仅是计算 Nim-sum，更是将数学概念翻译成人类语言——这是纯算法无法做到的。</p>
+<p>游戏逻辑将棋盘当前状态序列化为结构化文本格式，详细说明剩余石子数量以及轮到谁走。序列化状态随后传给 LLM——LLM 利用其预训练的 Nim 游戏数学解法知识来确定最优走法并以自然语言呈现数学策略。例如，假设剩余 8 个石子，LLM 可能收到以下提示：</p>
+<p><strong>示例提示词：Nim 游戏逻辑</strong>
+<div class="highlight"><pre><span></span><code>游戏状态：只剩一堆，包含 8 个石子。
+约束：你被允许移除 1、2 或 3 个石子。取走最后一个石子导致失败。
+任务：应用获胜数学策略（Nim-sum 分析）精确计算本回合应移除的石子数。
+      为你的决定提供简要理由。
+</code></pre></div></p>
+<h3 id="c-mancala">C. 应用一般博弈原则的机器：Mancala 游戏<a class="headerlink" href="#c-mancala" title="Permanent link">&para;</a></h3>
+<p>Mancala 是一个双人策略游戏，代表了 Shannon 第三类游戏博弈机器——<strong>依赖一般博弈原则的系统</strong>。其复杂的决策空间使得<strong>预计算最优走法不切实际</strong>，需要启发式策略和博弈树来引导决策。然而，由于不断扩大的决策空间，这种方法资源消耗大。Nemobot 通过使用 <strong>LLM 函数动态查询建议</strong>来解决这些挑战——在不替换博弈树的情况下增强博弈树策略。LLM 分析当前游戏状态以检索相关策略，减少计算和内存需求，同时保留博弈树作为决策基础。</p>
+<p>[扩展] Mancala（非洲宝石棋）的决策空间远大于井字棋和 Nim——每步有 6 种合法选择，且游戏长度可达 40-50 回合。完整的博弈树搜索在此不现实。Nemobot 的方案是不抛弃博弈树，而是用它作为"骨架"，用 LLM 提供"肌肉"——即对节点的智能评估。</p>
+<p>游戏逻辑首先将当前棋盘状态转换为结构化文本，详细说明每个坑（pit）中的种子数、商店（store）值和活跃玩家。Mancala 棋盘按数字标记：
+- 底行坑 0-5（从左到右）
+- 顶行坑 7-12（从右到左）
+- 商店分别在位置 6（底行）和 13（顶行）</p>
+<p><strong>示例提示词：Mancala 博弈树分析</strong>
+<div class="highlight"><pre><span></span><code>状态表示：
+对手（底行）：坑0有4颗种子，坑1有1颗种子，坑2有3颗种子。商店：8。
+智能体（顶行）：坑7有2颗种子，坑8有0颗种子，坑9有4颗种子。商店：6。
+指令：利用博弈树分析确定从此位置获得最高战略优势的走法。
+</code></pre></div></p>
+<p><img alt="Figure 5: Mancala 游戏的聊天机器人界面" src="assets/page-005-img-01.png" /></p>
+<p><em>Figure 5: Mancala 游戏的聊天机器人界面。[扩展] 这张图展示了 Mancala 游戏在 Messenger/Telegram 等 IM 平台上的实际运行效果——棋盘用 emoji 或文字渲染，玩家通过发送消息来选择走法。这种"聊天即游戏"的交互形式大大降低了玩家的使用门槛。</em></p>
+<p>Nemobot 利用 LLM 函数在<strong>预计算的博弈树中查询最优路径</strong>——根据当前游戏状态动态检索策略。例如在 Mancala 中，如果底行玩家在坑 0 有 3 颗种子、坑 1 有 2 颗、坑 2 有 4 颗，而顶行玩家在坑 7 有 1 颗、坑 8 有 0 颗、坑 9 有 5 颗，LLM 会识别最佳走法（如从坑 2 下子以获得额外一回合）。程序员可以获得 <strong>LLM 从相似场景中概括出的不同走法选择</strong>——这与传统的运行极小极大算法加博弈树的方法 [1] 不同。</p>
+<h3 id="d-learning-machines-by-reinforcement-learning">D. 通过强化学习的学习机器（Learning Machines by Reinforcement Learning）<a class="headerlink" href="#d-learning-machines-by-reinforcement-learning" title="Permanent link">&para;</a></h3>
+<p>Shannon 的第四类——<strong>学习机器</strong>——通过经验改进策略，使用试错、强化学习和自我改进。在 Nim 和 Mancala 等游戏中，这些系统超越预定义规则，利用自适应算法和对弈数据。有效的模拟对于收集高质量训练数据至关重要——包括所需试验次数的洞察和数据准确性保障。<strong>用此数据微调 LLM 函数增强了决策制定</strong>，使 AI 更高效和更具适应性。</p>
+<p><strong>Nim 案例</strong>：开发了基于 Web 的浏览器模拟来生成广泛的对弈数据。模拟允许玩家与各种初始设置交互（不同的堆大小和每回合可移除的石子数规则）。利用此平台，AI 收集最优策略和走法序列数据。收集到的对弈数据随后通过提示工程用于<strong>微调 LLM 函数</strong>。例如，AI 学会推荐基于最大化获胜概率的走法，通过对策略的微调理解动态适应游戏场景。Web 模拟演示地址：<strong>Nim Simulation</strong>。</p>
+<p>LLM 游戏智能体通过<strong>双重途径</strong>增强 Mancala 等复杂游戏：</p>
+<p><img alt="Figure 6: Nim 游戏的训练过程" src="assets/page-006-img-01.png" /></p>
+<p><em>Figure 6: Nim 游戏智能体通过 Michie 算法的单次模拟运行掌握熟练策略所需的试验次数。[扩展] 该图展示了随着初始堆大小 N 和每步最大取子数 K 的变化，训练所需的回合数 L 如何增长。趋势符合直觉：问题规模越大，需要的试错次数越多。</em></p>
+<p><strong>表 II：Nim 游戏模拟在不同配置下的性能</strong></p>
+<table>
+<thead>
+<tr>
+<th>N（初始堆大小）</th>
+<th>5</th>
+<th>9</th>
+<th>13</th>
+<th>17</th>
+<th>21</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>K=2 (L)</td>
+<td>5</td>
+<td>13</td>
+<td>21</td>
+<td>29</td>
+<td>37</td>
+</tr>
+<tr>
+<td>K=3 (L)</td>
+<td>3</td>
+<td>3</td>
+<td>3</td>
+<td>3</td>
+<td>3</td>
+</tr>
+<tr>
+<td>K=5 (L)</td>
+<td>2</td>
+<td>4</td>
+<td>5</td>
+<td>6</td>
+<td>—</td>
+</tr>
+<tr>
+<td>K=10 (L)</td>
+<td>—</td>
+<td>8</td>
+<td>39</td>
+<td>62</td>
+<td>90</td>
+</tr>
+</tbody>
+</table>
+<p><em>其中 N = 初始堆大小，K = 每回合最大可取石子数，L = 训练所需回合数</em></p>
+<p><strong>途径一：Michie's Boxes 算法（自博弈）</strong>
+模拟利用 Donald Michie 的 Boxes 算法 [38] 通过自博弈进行。走法基于当前状态的"盒子"概率性地选择——<strong>获胜走法增加重选概率，失败走法降低概率</strong>。经过多次迭代，这个试错过程在多样化场景中发现最优策略，且无需专家示例。</p>
+<p>[扩展] Michie's Boxes（1968）是强化学习的鼻祖之一。每个状态是一个"盒子"，盒子里的每个可选动作有一个计数器（或概率）。选了之后赢了就加分（更可能再选），输了就扣分（更不可能再选）。这本质上就是 Q-learning 的前身——只是用频率计数代替了价值函数估计。</p>
+<p><strong>途径二：众包（Crowdsourcing）</strong>
+人类玩家通过与使用 Shannon 经典极小极大算法 [1] 的智能体对弈来贡献多样化的走法。这将 LLM 智能体暴露于更广泛的战术和策略，提高其对不同游戏风格的适应性。此外，LLM 智能体充当<strong>教练（instructor）</strong>——分析对弈、对错误提供实时反馈、建议最优策略。这通过突出次优走法和引导探索更好的替代方案来加速学习，培养更具战略性、长期的决策制定。</p>
+<p><strong>评估方法——众包排行榜（Leaderboard）</strong>：</p>
+<p>为实现上述方法的性能评估，我们实施了<strong>众包排行榜</strong>——人类玩家在此与 Nemobot 竞争。排行榜地址：<strong>Mancala Leaderboard</strong>。该排行榜捕获人机对弈数据——AI 使用经典极小极大算法配合三种不同树深度（对应简单、中等、困难难度级别）。收集的数据随后供 LLM 用于精炼其决策（确定最优走法或生成自博弈算法）。排行榜记录玩家分数并提供关于人类玩家所用策略的有价值洞见。这种多样化输入确保 LLM 在 LLM 函数编程中整合了广泛的提示词，最终增强其适应性和性能。</p>
+<p><strong>示例提示词：战略批评与响应</strong>
+<div class="highlight"><pre><span></span><code>状态分析：
+玩家（底部）：坑0和坑1各含2颗种子。商店：0。
+AI（顶部）：坑2和坑3各含2颗种子。商店：0。
+任务是AI的回合。识别最优走法序列。此外，批评一个潜在次优走法以展示战略错误。
+
+示例响应：
+建议：从坑2开始下子。
+策略：此动作将种子分发给坑3和坑0，落入商店触发&quot;免费回合&quot;机制。
+      在下一回合，AI应从坑3下子，从而俘获坑0中对手的种子。
+批评：立即从坑3开始是劣质的——它放弃了免费回合且未能利用俘获机会。
+     优先考虑延长回合序列的动作对于最大化得分至关重要。
+</code></pre></div></p>
+<h3 id="_12">术语解释<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>英文术语</th>
+<th>中文译名</th>
+<th>一句话解释</th>
+<th>应用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Nim-sum</td>
+<td>尼姆和</td>
+<td>将所有堆的大小进行按位异或（XOR）运算的结果，用于判断 Nim 游戏的必胜/必败位置</td>
+<td>Type 2 数学可解游戏（Nim）的核心算法</td>
+</tr>
+<tr>
+<td>Misère Play</td>
+<td>反常玩法</td>
+<td>取最后一个物品者<strong>输</strong>（而非赢）的博弈变体</td>
+<td>Nemobot 采用的 Nim 规则变种</td>
+</tr>
+<tr>
+<td>Mancala / 宝石棋</td>
+<td>曼卡拉/非洲宝石棋</td>
+<td>一种起源于非洲的"播种"类双人策略棋类游戏</td>
+<td>Type 3 启发式游戏的主要案例</td>
+</tr>
+<tr>
+<td>Game Tree</td>
+<td>博弈树</td>
+<td>从当前状态出发，枚举所有可能的走法序列形成的树状结构</td>
+<td>Mancala 等复杂游戏的决策基础</td>
+</tr>
+<tr>
+<td>Michie's Boxes Algorithm</td>
+<td>Michie 盒子算法</td>
+<td>1968年提出的基于频率计数的试错学习算法，强化学习的先驱</td>
+<td>Nim 学习型智能体的核心算法</td>
+</tr>
+<tr>
+<td>Leaderboard</td>
+<td>排行榜</td>
+<td>记录玩家成绩排名的公开榜单</td>
+<td>众包数据采集和激励机制</td>
+</tr>
+<tr>
+<td>State Serialization</td>
+<td>状态序列化</td>
+<td>将游戏内部状态转换为可传输的文本/JSON 格式的过程</td>
+<td>LLM 与游戏引擎之间的通信协议</td>
+</tr>
+<tr>
+<td>Pit and Store</td>
+<td>坑和商店</td>
+<td>Mancala 棋盘上的两种基本容器——坑用于播种和俘获，商店用于收集最终得分</td>
+<td>Mancala 游戏的状态表示基本单位</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_13">图表/公式说明<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
+<p><strong>Figure 5 - Mancala 聊天机器人界面</strong>：
+- <strong>内容描述</strong>：展示 Mancala 游戏在即时通讯平台中的实际运行效果——棋盘以文字形式渲染，玩家通过发送消息选择走法
+- <strong>设计意图分析</strong>：证明 Nemobot 的游戏可以被部署到 Facebook Messenger / Telegram 等主流 IM 平台，大大降低了分发门槛</p>
+<p><strong>Figure 6 - Nim 训练过程可视化</strong>：
+- <strong>内容描述</strong>：柱状图展示不同 (N, K) 配置下训练所需回合数 L
+- <strong>设计意图分析</strong>：数据表明 K=3 时 L 恒为 3（最优策略简单），而 K=2 时 L 与 N 基本呈线性关系。这说明问题参数对学习难度有显著影响——为课程设计提供了量化参考</p>
+<p><strong>表 II - Nim 模拟性能数据</strong>：
+- <strong>内容描述</strong>：系统性地记录了不同初始堆大小 N 和最大取子数 K 下所需的训练回合数 L
+- <strong>直觉解释</strong>：K=3 是特殊情况——因为每轮最多取 3 个时策略最简（保持 4 的倍数），所以只需 3 轮即可学会；K=10 时小 N 就需要大量回合因为搜索空间爆炸</p>
+<h3 id="takeaway_3">关键 Takeaway<a class="headerlink" href="#takeaway_3" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p><strong>要点 1：四类游戏的完整实现路径</strong>。从井字棋的字典压缩 → Nim 的数学推理+代码生成 → Mancala 的博弈树+LLM查询 → 强化学习双重途径（Michie Boxes + 众包）。每一类都有具体的提示词示例和部署方案。</p>
+</li>
+<li>
+<p><strong>要点 2："战略批评与响应"模式的教育价值</strong>。LLM 不仅给出最佳走法，还<strong>主动批评次优选择并解释原因</strong>。这种"正例+反例"的教学方式比单纯给答案有效得多。</p>
+</li>
+<li>
+<p><strong>要点 3：众包排行榜的双重作用</strong>。既是激励机制（玩家想上榜），又是数据源（收集人类策略多样性）。这巧妙地将"游戏乐趣"与"AI 训练需求"对齐。</p>
+</li>
+<li>
+<p><strong>要点 4：真实教育场景的规模化验证</strong>。251+80+30 = 360+ 名学生跨越三所顶尖大学、三年时间、从 Codex 到 ChatGPT 的工具演进——这是罕见的长时间、大规模教育实验。</p>
+</li>
+</ul>
+<hr />
+<h2 id="section-5-further-discussions">Section 5 — 进一步讨论（Further Discussions）<a class="headerlink" href="#section-5-further-discussions" title="Permanent link">&para;</a></h2>
+<h3 id="_14">中文翻译<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
+<h3 id="a-implications-and-positioning-in-the-literature">A. 文献定位与影响（Implications and Positioning in the Literature）<a class="headerlink" href="#a-implications-and-positioning-in-the-literature" title="Permanent link">&para;</a></h3>
+<p>为了将本工作置于基于 LLM 的游戏 AI 更广阔图景中进行比较性定位，将 Nemobot 与几个著名系统进行比较是有益的：</p>
+<table>
+<thead>
+<tr>
+<th>对比系统</th>
+<th>核心特点</th>
+<th>与 Nemobot 的区别</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Voyager</strong> [48]</td>
+<td>使用 GPT-4 在 Minecraft 中自主探索和获取技能的开端具身智能体</td>
+<td>完全自主但无机制让人类程序员检查/修改/分享其发现的策略</td>
+</tr>
+<tr>
+<td><strong>ChessGPT</strong> [8]</td>
+<td>架起国际象棋的策略学习与语言建模桥梁</td>
+<td>专用于单一领域，不暴露可编程接口供教育使用</td>
+</tr>
+<tr>
+<td><strong>Generative Agents</strong> [49]</td>
+<td>通过 LLM 驱动的记忆和反射模拟可信的人类行为</td>
+<td>关注社会模拟而非战略游戏编程</td>
+</tr>
+<tr>
+<td><strong>Suspicion-Agent</strong> [10]</td>
+<td>将心智理论推理与 GPT-4 集成用于不完美信息游戏</td>
+<td>展示了复杂的多智能体交互但没有教育或编程导向框架</td>
+</tr>
+</tbody>
+</table>
+<p>[扩展] 这个对比表格非常清晰地界定了 Nemobot 的独特定位——它不是最强的游戏 AI（不如 Voyager 自主），不是最深的专业系统（不如 ChessGPT 在国际象棋领域精深），但它是一个<strong>可编程、可教育、可检查的框架</strong>。这个定位与 GitHub Copilot 在编程领域的定位类似——不是替代程序员，而是赋能程序员。</p>
+<p><strong>相比之下，Nemobot 占据了一个独特的细分市场</strong>：它是一个<strong>可编程的、教育性的框架</strong>，在 Shannon 分类法中将 LLM 函数作为透明、模块化的组件暴露出来。用户不仅消费 AI 生成的游戏玩法——他们通过<strong>协作提示工程和众包反馈主动设计、测试和精炼游戏博弈策略</strong>。这种可编程性将 Nemobot 与那些将 LLM 视为黑箱玩家的系统区分开来，并与<strong>AI 辅助编程</strong> [31], [26], [21] 的更广阔愿景保持一致——其中人类监督和迭代精炼是开发过程的中心。</p>
+<p>通过将其设计建立在 Shannon 经典框架的基础上并用现代 LLM 能力进行扩展，Nemobot 架起了<strong>基础 AI 理论与当代实践之间的桥梁</strong>，既提供研究价值也提供教育效用。</p>
+<p>最后，本文的算法框架自然延伸到游戏博弈之外——延伸到教育 AI 中的<strong>知识追踪（Knowledge Tracing）和学习如何学习（Learning-to-Learn）</strong> [50]。在知识追踪中，试错机制（如 Michie's Boxes 算法）可以建模学生对概念的逐渐掌握程度：
+- 每个知识组件成为一个"盒子"
+- 学生的响应（正确或错误）作为奖励或惩罚
+- 选择特定策略的概率相应更新
+- 这使得无需专家标记技能模型即可实时预测未来表现</p>
+<p>与此同时，众包与<strong>学习如何学习</strong>保持一致——通过聚合来自多样化学习者的解决方案策略，允许智能导学系统元学习（meta-learn）哪种教学方法最适合哪种学生类型。经过训练的 AI 智能体作为翻转课堂模型中的<strong>教练</strong>可以成为<strong>元学习顾问</strong>——它分析学生的错误模式，生成个性化练习题，建议替代解题途径 [51]。这确保了任务的复杂性有效地随学习者的熟练度扩展。这些机制共同可以将战略游戏博弈 AI 智能体转变为<strong>参与学习如何学习的自适应教育系统</strong>——通过与未知环境交互不断精炼其预测和战略教学方法，从而随着时间的推移获取关于每个个体如何学习的<strong>元知识（meta-knowledge）</strong>。</p>
+<p>[扩展] 这段论述将 Nemobot 的价值从"教人做游戏 AI"升华为"构建自适应教育系统的方法论"。知识追踪→个性化教学→元学习顾问——这条线展示了游戏作为教育载体的深层潜力。</p>
+<h3 id="b-open-issues-and-future-directions">B. 开放问题与未来方向（Open Issues and Future Directions）<a class="headerlink" href="#b-open-issues-and-future-directions" title="Permanent link">&para;</a></h3>
+<p>未来研究将把 Nemobot 扩展到多媒体生成和编程等多样化的 AI 任务，丰富 AI 教育。受 Michie 关于<strong>发现即协作（discovery as collaboration）</strong> [42] 思想的启发，未来工作可能开发<strong>游戏过程中实时策略精炼的工具</strong>，结合自适应半监督学习和微调来实现三方协作——LLM 驱动的副驾驶、人类程序员和 Turing 的儿童机器 [42]（即本地较弱的 LLM）。</p>
+<p>以下列出了开发 LLM 驱动的游戏博弈智能体和协作可编程提示工程中仍存在的几个开放问题：</p>
+<p><strong>① 长期策略 vs 短期决策</strong></p>
+<p>LLMs 擅长短期决策，但在国际象棋和 Mancala 等复杂游戏所需的长期策略方面面临挑战，需要<strong>记忆机制或外部模型</strong>。未来研究可以探索受 Shannon 层级 [2] 启发的<strong>分层系统</strong>——其中学习通过抽象推进。在最高层，编程副驾驶可以利用<strong>谓词逻辑（predicate logic）</strong>进行高级规划，使用归纳逻辑编程从示例和背景知识中推导出谓词 [52]。</p>
+<p><strong>② 泛化 vs 特化的平衡</strong></p>
+<p>虽然 LLM 在海量数据集上训练以有效泛化，但将其应用于特定游戏领域通常需要大量微调。开发<strong>能够根据游戏反馈进行实时调整的自适应微调方法</strong>，可以使 LLM 在不同游戏类型或环境之间无缝过渡。</p>
+<p><strong>③ 人类反馈的可扩展性问题</strong></p>
+<p>依赖人类反馈进行微调带来了可扩展性挑战。虽然众包反馈可以加速学习，但确保此输入的质量和一致性仍然是瓶颈。未来工作可以探索<strong>自动反馈系统</strong>或<strong>结合人类监督与 AI 生成评估的混合方法</strong>。</p>
+<p><strong>④ 对抗性机器人的伦理挑战</strong></p>
+<p>关于对抗性机器人 [53], [54] 的最新研究表明，虽然它们能够击败顶级围棋 AI（如 AlphaGo [9]），但其被训练来利用<strong>隐藏漏洞而非发展全面的策略</strong>。因此，<strong>平衡竞争性能与伦理设计</strong>是一个挑战。开发者必须确保机器人公平透明地参与博弈，避免利用人类弱点，培养具有挑战性但愉快的游戏体验。随着 AI 系统的进步，用大数据实现这种平衡至关重要——这对游戏中的人机交互提出了重要的伦理考量 [55]。</p>
+<p><strong>⑤ 计算效率 vs 可复现性的权衡</strong></p>
+<p>对于利用大数据的实时交互游戏而言，<strong>平衡计算效率和可复现性是一个关键挑战</strong>。LLM 高度资源密集，使其大规模部署的计算成本高昂。为此，研究<strong>轻量高效 LLM 架构和混合系统</strong>至关重要——这些系统可以将较简单的任务卸载到较小高效的模型，同时保留 LLM 的完整能力给需要更高复杂性的任务。实现这一平衡不仅可以增强可扩展性和降低成本，还能通过在各种应用中实现性能、资源利用和响应准确性的一致基准来确保可复现性 [55]。</p>
+<h3 id="_15">术语解释<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>英文术语</th>
+<th>中文译名</th>
+<th>一句话解释</th>
+<th>应用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Knowledge Tracing</td>
+<td>知识追踪</td>
+<td>建模学生随时间推移对各知识点的掌握程度的任务</td>
+<td>将试错学习机制泛化为教育场景</td>
+</tr>
+<tr>
+<td>Learning-to-Learn / Meta-Learning</td>
+<td>学习如何学习/元学习</td>
+<td>学习"如何学习"的能力——从过往学习经验中提取可迁移的学习策略</td>
+<td>从众包数据中提炼对不同学生类型有效的教学法</td>
+</tr>
+<tr>
+<td>Flipped Classroom Model</td>
+<td>翻转课堂模型</td>
+<td>学生先自学内容，课堂时间用于互动和深度理解的教学模式</td>
+<td>AI 教练在此模型中充当元学习顾问</td>
+</tr>
+<tr>
+<td>Predicate Logic</td>
+<td>谓词逻辑</td>
+<td>使用谓词和量词表达命题及其关系的形式逻辑系统</td>
+<td>提议用于分层系统的最高层规划</td>
+</tr>
+<tr>
+<td>Inductive Logic Programming</td>
+<td>归纳逻辑编程</td>
+<td>从示例和背景知识中归纳出逻辑程序（如 Prolog 规则）的机器学习方法</td>
+<td>从对弈示例中自动推导高层策略规则</td>
+</tr>
+<tr>
+<td>Adaptive Fine-tuning</td>
+<td>自适应微调</td>
+<td>根据运行时反馈动态调整模型参数的技术</td>
+<td>解决泛化与特化的平衡问题</td>
+</tr>
+<tr>
+<td>Adversarial Bots</td>
+<td>对抗性机器人</td>
+<td>专门针对特定 AI 系统弱点优化的对手程序</td>
+<td>引发关于竞争性能 vs 伦理设计的讨论</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_16">图表/公式说明<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h3>
+<p><strong>对比表格 — Nemobot vs 相关工作</strong>：
+- <strong>设计意图分析</strong>：通过四维对比（自主性、专业性、可编程性、教育性）清晰界定 Nemobot 的独特生态位。每个对比对象在某一方面强于 Nemobot，但没有一个同时具备"可编程+教育性+Shannon分类法支撑"三个特点。</p>
+<h3 id="takeaway_4">关键 Takeaway<a class="headerlink" href="#takeaway_4" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p><strong>要点 1：Nemobox 的独特生态位是"可编程教育框架"</strong>。不做最强游戏 AI（Voyager 更强），不做最深专业系统（ChessGPT更深），而是做"让人理解并改进游戏 AI 的工具"。这与 Copilot 在编程领域的定位异曲同工。</p>
+</li>
+<li>
+<p><strong>要点 2：从游戏到教育的泛化路径</strong>。知识追踪（建模学生掌握度）→ 元学习（发现什么方法对谁有效）→ 翻转课堂中的 AI 教练。这条路线图展示了游戏 AI 技术迁移到通用教育的可行性。</p>
+</li>
+<li>
+<p><strong>要点 3：五个开放问题的层次结构</strong>。技术层（长期记忆、泛化平衡、效率权衡）→ 数据层（反馈质量瓶颈）→ 伦理层（对抗性机器人的公平性）。这五个问题构成了该领域未来研究的完整议程。</p>
+</li>
+<li>
+<p><strong>要点 4："Turing's Child Machine"的未来愿景</strong>。三方协作：LLM副驾驶 + 人类程序员 + 本地弱LLM。这是一个非常前瞻性的架构设想——弱LLM充当"学生"，强LLM充当"老师"，人类充当"导师"。</p>
+</li>
+</ul>
+<hr />
+<h2 id="section-6-conclusion">Section 6 — 结论（Conclusion）<a class="headerlink" href="#section-6-conclusion" title="Permanent link">&para;</a></h2>
+<h3 id="_17">中文翻译<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h3>
+<p>总之，本文介绍了一种<strong>战略性 AI 游戏编程的新方法</strong>，灵感来自 Shannon 关于自编程自动化的愿景以及 Minsky 将编程视为精炼想法之工具的观点。其核心是 <strong>Nemobot</strong>——一个允许用户创建和部署游戏智能体的交互式平台。通过集成 LLMs，Nemobot 超越了静态指令——使 AI 智能体能够通过内在世界模型、众包洞见和迭代学习策略动态适应复杂的游戏玩法。</p>
+<p>这一编程范式展示了 Nemobot 中的游戏如何超越僵化的算法——在 AI 游戏中实现识别模式和演化策略的灵活性与创造性。通过<strong>自主精炼其指令并利用众包数据策选有效提示词</strong>，Nemobot 可以探索复杂的游戏挑战以进行竞争性和战略性博弈。我们的方法与 Shannon 关于<strong>通过学习精炼策略的自编程机器</strong>的愿景保持一致。Nemobot 架起了 AI 理论与 LLMs 之间的桥梁，提供<strong>教育价值和动态游戏设计的新可能性</strong>。</p>
+<h3 id="_18">术语解释<a class="headerlink" href="#_18" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>英文术语</th>
+<th>中文译名</th>
+<th>一句话解释</th>
+<th>应用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Self-programming Automation</td>
+<td>自编程自动化</td>
+<td>系统能够自主编写和修改大部分自身运行指令的自动化范式</td>
+<td>Shannon 的终极愿景，Nemobot 迈出的第一步</td>
+</tr>
+<tr>
+<td>Intrinsic World Model</td>
+<td>内在世界模型</td>
+<td>LLM 通过预训练获得的关于世界动力学（如游戏规则和状态转移）的内隐知识</td>
+<td>使 AI 能动态适应复杂游戏而无需硬编码全部规则</td>
+</tr>
+<tr>
+<td>Curate Effective Prompts</td>
+<td>策选有效提示词</td>
+<td>从大量候选提示词中选择或组合出对目标任务最有效的版本</td>
+<td>利用众包数据优化 LLM 函数的过程</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_19">图表/公式说明<a class="headerlink" href="#_19" title="Permanent link">&para;</a></h3>
+<p>本片段无独立图表。结论部分是对全文贡献的系统性回顾，核心信息流为：</p>
+<div class="highlight"><pre><span></span><code>Shannon 自编程愿景 × Minsky 编程观
+        ↓ 核心
+   Nemobot 交互平台
+        ↓ 机制
+   LLM + 世界模型 + 众包 + 迭代学习
+        ↓ 结果
+   灵活的、创造性的、自进化的游戏 AI
+        ↓ 意义
+   架起 AI 理论 ↔ LLM 实践的桥梁
+</code></pre></div>
+<h3 id="takeaway_5">关键 Takeaway<a class="headerlink" href="#takeaway_5" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p><strong>要点 1：Nemobot 的本质是"桥梁"</strong>。连接的经典理论与现代实践：Shannon 1950 年代的分类法 ↔ GPT-4 级别的 LLM 能力；Minsky 的编程哲学 ↔ 当前的 AI 辅助编程工具链。这不是取代任何一端，而是让两者对话。</p>
+</li>
+<li>
+<p><strong>要点 2：从"静态指令"到"动态适应"的范式转变</strong>。传统游戏 AI 的行为由固定代码决定；Nemobot 中的 AI 通过世界模型（内隐理解）、众包（外部数据）和迭代学习（自我改进）三者协同实现持续进化。</p>
+</li>
+<li>
+<p><strong>要点 3：教育价值与研究价值的统一</strong>。大多数论文只做其一——要么提出新方法，要么设计新课程。Nemobot 同时做到了两者：它是一个可用的教育平台（已在三所大学验证），也是一个推动 AI 自编程研究的研究框架（神经化 memoization、协作提示工程等概念都具有独立的研究价值）。</p>
+</li>
+<li>
+<p><strong>要点 4：开放性是长期生存的关键</strong>。BYOK 架构、开源代码、公开演示地址、共享的训练数据格式——这些设计选择使 Nemobot 不依赖于任何单一供应商或平台，具备长期演进的潜力。</p>
+</li>
+</ul>
+<hr />
+<h2 id="_20">参考文献<a class="headerlink" href="#_20" title="Permanent link">&para;</a></h2>
+<p>[1] C. E. Shannon, "Programming a computer for playing chess," Philosophical Magazine, vol. 41, pp. 256–275, March 1950.</p>
+<p>[2] ——, "Computers and automata," Proceedings of the IRE, vol. 41, pp. 1234–1241, 1953.</p>
+<p>[3] M. Minsky, "Why programming is a good medium for expressing poorly understood and sloppily-formulated ideas," in Design and Planning II: Computers in Design and Communication, 1967, pp. 120–128.</p>
+<p>[4] S. Hu et al., "A survey on large language model-based game agents," arXiv preprint arXiv:2404.02039, 2024.</p>
+<p>[5] Q. Huang et al., "Agent ai towards a holistic intelligence," arXiv preprint arXiv:2403.00833, 2024.</p>
+<p>[6] M. F. A. R. D. Team et al., "Human-level play in the game of diplomacy by combining language models with strategic reasoning," Science, vol. 378, pp. 1067–1074, 2022.</p>
+<p>[7] C. Xiao and B. Z. Yang, "LLMs may not human-level players, but they can be testers: Measuring game difficulty with LLM agents," arXiv preprint arXiv:2410.02829, 2024.</p>
+<p>[8] X. Feng et al., "ChessGPT: Bridging policy learning and language modeling," NeurIPS, vol. 36, 2023.</p>
+<p>[9] DeepMind, "Alphastar: Mastering the real-time strategy game starcraft ii," 2019.</p>
+<p>[10] J. Guo et al., "Suspicion-agent: Playing imperfect information games with theory of mind aware gpt-4," Conference on Logic and Machine Learning, 2024.</p>
+<p>[11] S. Toshniwal et al., "Chess as a testbed for language model state tracking," AAAI, vol. 36, 2022, pp. 11385–11393.</p>
+<p>[12] K. Li et al., "Emergent world representations: Exploring a sequence model trained on a synthetic task," ICLR, 2023.</p>
+<p>[13] K. Vafa et al., "Evaluating the world model implicit in a generative model," NeurIPS, vol. 37, 2024.</p>
+<p>[14] X. Wang et al., "Self-consistency improves chain-of-thought reasoning in language models," ICLR, 2023.</p>
+<p>[15] S. Yao et al., "ReAct: Synergizing reasoning and acting in language models," ICLR, 2023.</p>
+<p>[16] M. Besta et al., "Graph of thoughts: Solving elaborate problems with large language models," AAAI, vol. 38, no. 16, 2024, pp. 17682–17690.</p>
+<p>[17] Y. Wu et al., "SPRING: Studying the paper and reasoning to play games," NeurIPS, vol. 36, 2023.</p>
+<p>[18] M. Chen et al., "Evaluating large language models trained on code," arXiv preprint arXiv:2107.03374, 2021.</p>
+<p>[19] N. Friedman, "Introducing GitHub Copilot: Your AI pair programmer," 2021.</p>
+<p>[20] C. W. Tan et al., "Copilot for Xcode: Exploring AI-assisted programming by prompting cloud-based large language models," arXiv preprint arXiv:2307.14349, 2023.</p>
+<p>[21] Y. Wang, S. Guo, and C. W. Tan, "From code generation to software testing: AI copilot with context-based RAG," IEEE Software, vol. 42, no. 4, pp. 34–42, 2025.</p>
+<p>[22] OpenAI, "Codex: A coding agent that helps you build and ship with ai—powered by chatgpt," 2026.</p>
+<p>[23] Anthropic Claude, "Claude Code by Anthropic," 2025.</p>
+<p>[24] OpenAI et al., "GPT-4 technical report," arXiv preprint arXiv:2303.08774, 2023.</p>
+<p>[25] Gemini Team et al., "Gemini: A family of highly capable multimodal models," arXiv preprint arXiv:2312.11805, 2023.</p>
+<p>[26] Y. Wang, S. Guo, and C. W. Tan, "Contextual augmented multi-model programming (CAMP): A local-cloud copilot solution," IEEE CAI, 2025, pp. 675–681.</p>
+<p>[27] C. E. Shannon, "Game playing machines," Journal of the Franklin Institute, vol. 260, no. 6, pp. 447–453, December 1955.</p>
+<p>[28] A. Phillips, J. Lang, and D. Mould, "Goal-oriented interactions in games using LLMs," IEEE Transactions on Games, vol. 17, no. 2, pp. 510–521, June 2025.</p>
+<p>[29] S. Bassanelli, A. Bucchiarone, and F. Gini, "GamiDOC: The importance of designing gamification in a proper way," IEEE Transactions on Games, vol. 17, no. 1, pp. 13–31, March 2025.</p>
+<p>[30] Y. Wang, S. Guo, L. Ling, and C. W. Tan, "Nemobot: Crafting strategic gaming LLM agents for k-12 AI education," ACM Conference on Learning@ Scale, 2024, pp. 393–397.</p>
+<p>[31] M.-F. Wong et al., "Natural language generation and understanding of big code for AI-assisted programming: A review," Entropy, vol. 25, no. 6, p. 888, 2023.</p>
+<p>[32] M. F. Wong and C. W. Tan, "Aligning crowd-sourced human feedback for reinforcement learning on code generation by large language model," IEEE TBD, 2024.</p>
+<p>[33] A. J. Cole and A. J. T. Davie, "A game based on the euclidean algorithm and a winning strategy for it," Mathematical Gazette, vol. 53, no. 386, pp. 354–357, 1969.</p>
+<p>[34] D. Silver et al., "Mastering the game of go with deep neural networks and tree search," Nature, vol. 529, pp. 484–489, 2016.</p>
+<p>[35] D. Silver et al., "A general reinforcement learning algorithm that masters chess, shogi, and go through self-play," Science, vol. 362, no. 6419, pp. 1140–1144, 2018.</p>
+<p>[36] J. Wei et al., "Chain-of-thought prompting elicits reasoning in large language models," arXiv preprint arXiv:2201.11903, 2022.</p>
+<p>[37] A. G. Barto, "Reinforcement learning: Connections, surprises, challenges," AI Magazine, vol. 40, no. 1, pp. 3–15, 2019.</p>
+<p>[38] D. Michie and R. A. Chambers, "Boxes: An experiment in adaptive control," Machine Intelligence, vol. 2, no. 2, pp. 137–152, 1968.</p>
+<p>[39] D. Michie, "Machines and the theory of intelligence," Nature, vol. 241, no. 23.02, p. 1973.</p>
+<p>[40] S. Jafarpour and A. R. C. J. C. Burges, "Filter, rank, and transfer the knowledge: Learning to chat," NeurIPS Workshop, 2010.</p>
+<p>[41] D. Michie, "'Memo' functions and machine learning," Nature, vol. 218, pp. 19–22, 1968.</p>
+<p>[42] ——, "Discovery as collaboration: It takes two (at least) to tango," Electronic Transactions on AI, vol. 4, no. B, pp. 1–19, 2000.</p>
+<p>[43] P. F. Christiano et al., "Deep reinforcement learning from human preferences," NeurIPS, vol. 30, 2017.</p>
+<p>[44] R. Nakano et al., "WebGPT: Browser-assisted question-answering with human feedback," CoRR, vol. abs/2112.09332, 2021.</p>
+<p>[45] J. Li et al., "A chatbot-server framework for scalable machine learning education through crowdsourced data," ACM L@S '22, 2022.</p>
+<p>[46] G. Kasparov and D. King, Kasparov Against the World: The Story of the Greatest Online Challenge, 2000.</p>
+<p>[47] OpenAI, "Chatgpt: Optimizing language models for dialogue," Jan 2023.</p>
+<p>[48] G. Wang et al., "Voyager: An open-ended embodied agent with large language models," arXiv preprint arXiv:2305.16291, 2023.</p>
+<p>[49] J. S. Park et al., "Generative agents: Interactive simulacra of human behavior," UIST, 2023, pp. 1–22.</p>
+<p>[50] Y. Wang, P.-D. Yu, and C. W. Tan, "Future-proofing programmers: Optimal knowledge tracing for ai-assisted personalized education," IEEE Signal Processing Magazine, vol. 43, no. 1, pp. 69–82, 2026.</p>
+<p>[51] C. W. Tan, "Large language model-driven classroom flipping: Empowering student-centric peer questioning with flipped interaction," CoRR, vol. abs/2311.14708, 2023.</p>
+<p>[52] D. Michie, "Knowledge, learning and machine intelligence," Intelligent Systems, Springer, 1993, pp. 63–79.</p>
+<p>[53] T. Tseng et al., "Can go AIs be adversarially robust?" AAAI, vol. 39, no. 26, 2025, p. 34980.</p>
+<p>[54] T. T. Wang et al., "Adversarial policies beat superhuman go AIs," ICML, 2023, p. 202.</p>
+<p>[55] D. Donoho, "Data science at the singularity," Harvard Data Science Review, vol. 6, no. 1, 2024.</p>
+<hr />
+<h2 id="_21">全文总结<a class="headerlink" href="#_21" title="Permanent link">&para;</a></h2>
+<h3 id="_22">核心贡献<a class="headerlink" href="#_22" title="Permanent link">&para;</a></h3>
+<p>Nemobot Games 是一个<strong>将 Claude Shannon 经典游戏机器分类法与大语言模型能力相结合的 AI 游戏编程框架</strong>。它的核心创新在于：</p>
+<ol>
+<li><strong>理论层面</strong>：将 Shannon 四类游戏机器逐一映射到 LLM 的具体增强方式（压缩、符号推理、众包+minimax、RLHF）</li>
+<li><strong>系统层面</strong>：提供完整的 IDE 式环境（Coding Pad + Chat Playground + Analysis Portal）支持游戏 AI 的全生命周期开发</li>
+<li><strong>教育层面</strong>：设计了对应 Shannon 四类的分层课程体系，在三所大学完成规模化教学验证</li>
+<li><strong>概念层面</strong>：提出"神经化 memoization"等新概念，将经典缓存思想推广到 LLM 领域</li>
+</ol>
+<h3 id="_23">方法论创新<a class="headerlink" href="#_23" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>创新点</th>
+<th>传统做法</th>
+<th>Nemobot 做法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>字典存储</td>
+<td>穷举所有状态-动作对</td>
+<td>LLM 参数化压缩</td>
+</tr>
+<tr>
+<td>数学策略</td>
+<td>只给答案</td>
+<td>LLM 解释+代码生成</td>
+</tr>
+<tr>
+<td>启发式搜索</td>
+<td>纯算法</td>
+<td>LLM 查询增强博弈树</td>
+</tr>
+<tr>
+<td>试错学习</td>
+<td>单一自博弈</td>
+<td>Michie Boxes + 众包双轨</td>
+</tr>
+<tr>
+<td>提示词工程</td>
+<td>个人摸索</td>
+<td>协作众包+版本管理</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_24">局限性与未来方向<a class="headerlink" href="#_24" title="Permanent link">&para;</a></h3>
+<ul>
+<li>LLM 长期策略能力不足 → 需要分层系统和外部记忆</li>
+<li>泛化-特化矛盾 → 需要自适应微调</li>
+<li>人类反馈瓶颈 → 需要自动评估系统</li>
+<li>伦理风险（对抗性机器人）→ 需要公平性约束</li>
+<li>计算成本高 → 需要轻量混合架构</li>
+</ul>
+<h3 id="_25">适用读者<a class="headerlink" href="#_25" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>AI 研究者</strong>：神经化 memoization、协作提示工程等概念具有独立研究价值</li>
+<li><strong>教育工作者</strong>：可直接使用的游戏化 AI 教学框架和完整课程设计</li>
+<li><strong>游戏开发者</strong>：LLM 集成游戏 AI 的实用方法论和代码模板</li>
+<li><strong>LLM 工程师</strong>：BYOK 架构、门控接口、懒加载等工程设计参考</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.expand", "navigation.indexes", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

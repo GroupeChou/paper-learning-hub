@@ -1,0 +1,1987 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://groupechou.github.io/paper-learning-hub/papers/2604.20714v1/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>学会进化：基于文本参数图优化的多智能体系统自改进框架 - 论文自动研学知识库</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="论文自动研学知识库" class="md-header__button md-logo" aria-label="论文自动研学知识库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            论文自动研学知识库
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              学会进化：基于文本参数图优化的多智能体系统自改进框架
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="论文自动研学知识库" class="md-nav__button md-logo" aria-label="论文自动研学知识库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    论文自动研学知识库
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../roadmap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    📖 学习总纲
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/daily-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    📅 今日更新
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../agents/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🤖 AI Agent 主线
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🤖 AI Agent 主线
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/ch01-basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第一章 Agent 基础架构篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/ch02-planning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第二章 规划与推理篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/ch03-tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第三章 工具使用与API篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/ch04-memory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第四章 记忆与检索篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/ch05-multi-agent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第五章 多智能体协作篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/ch06-embodied/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第六章 具身智能篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/ch07-safety/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第七章 Agent评估与安全篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/ch08-frontier/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第八章 前沿探索篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../time_series/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    📈 时序预测主线
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    📈 时序预测主线
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../time_series/ch01-basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第一章 基础理论篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../time_series/ch02-classics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第二章 经典方法篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../time_series/ch03-transformer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第三章 Transformer革命篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../time_series/ch04-foundation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第四章 基础模型篇(Foundation Models)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../time_series/ch05-long-horizon/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第五章 长序列预测篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../time_series/ch06-st-gnn/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第六章 多变量时空篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../time_series/ch07-frontier/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第七章 前沿探索篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../cross_domain/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🔗 交叉融合
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_6" id="__nav_6_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🔗 交叉融合
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cross_domain/ts-agent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    时序预测Agent
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cross_domain/agent-analysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Agent驱动分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cross_domain/autonomous/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    自主决策系统
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../organizations/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🏢 机构专题
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_7" id="__nav_7_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🏢 机构专题
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../organizations/openai/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OpenAI 系列
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../organizations/deepmind/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Google DeepMind
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../organizations/anthropic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Anthropic 系列
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../organizations/meta/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Meta 系列
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../organizations/microsoft/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Microsoft 系列
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../organizations/domestic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    国内大厂系列
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../organizations/academic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    学术机构
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    论文详情
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    论文详情
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#learning-to-evolve-a-self-improving-framework-for-multi-agent-systems-via-textual-parameter-graph-optimization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Learning to Evolve: A Self-Improving Framework for Multi-Agent Systems via Textual Parameter Graph Optimization
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        摘要
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1 引言
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1 引言">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        现有方法的不足
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        本文贡献
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2 相关工作
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3 问题定义
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4 方法论
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4 方法论">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-tpgo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 TPGO 概览
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-tpg" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 文本参数图（TPG）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 梯度驱动进化
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44-grao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4 自进化优化（GRAO）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5 实验
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5 实验">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-mcp-universe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 MCP-Universe（探索性优化）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-gaia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 GAIA（模仿性优化）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 消融研究
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#54-grao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.4 优化稳定性（GRAO 效果）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#55" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.5 跨域泛化
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#56" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.6 成本效益分析
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6 案例研究：不完整约束验证修复
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7 结论
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        参考文献
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="_1">学会进化：基于文本参数图优化的多智能体系统自改进框架<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<h2 id="learning-to-evolve-a-self-improving-framework-for-multi-agent-systems-via-textual-parameter-graph-optimization">Learning to Evolve: A Self-Improving Framework for Multi-Agent Systems via Textual Parameter Graph Optimization<a class="headerlink" href="#learning-to-evolve-a-self-improving-framework-for-multi-agent-systems-via-textual-parameter-graph-optimization" title="Permanent link">&para;</a></h2>
+<p>何山*, 王润泽*, 杜卓云, 白慧宇, 曹邹颖, 程宇, 郑波†</p>
+<p>阿里巴巴未来人居实验室</p>
+<p>*共同第一作者  †通讯作者</p>
+<hr />
+<h2 id="_2">摘要<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p>设计和优化多智能体系统（MAS）是一个复杂、劳动密集的"<strong>智能体工程</strong>"过程。现有自动优化方法主要聚焦于<strong>平面化提示调优</strong>，缺乏对 MAS 中复杂交互网络的结构感知调试能力。更重要的是，这些优化器是<strong>静态的</strong>——它们不从经验中学习以改进自身的优化策略。</p>
+<p>为填补这些空白，我们提出<strong>文本参数图优化（TPGO）</strong>，一个使多智能体系统<strong>学会进化</strong>的框架。TPGO 首先将 MAS 建模为<strong>文本参数图（TPG）</strong>，其中智能体、工具和工作流被表示为模块化、可优化的节点。为引导进化，我们推导<strong>"文本梯度"</strong>——来自执行轨迹的结构化自然语言反馈——以精确定位失败并建议细粒度修改。框架核心是<strong>群体相对智能体优化（GRAO）</strong>，一种从历史优化经验中学习的新型元学习策略。</p>
+<p>在 <strong>GAIA</strong> 和 <strong>MCP-Universe</strong> 等复杂基准上的实验表明，TPGO 显著增强了最先进智能体框架的性能，通过自动化、自进化的优化实现了更高的成功率。</p>
+<hr />
+<h2 id="1">1 引言<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
+<p>大语言模型的快速进展催化了从被动式问答接口到自主智能体的范式转变。<strong>多智能体系统（MAS）</strong>在复杂问题求解中展现的远超单一 LLM 的能力。</p>
+<p>然而，MAS 的有效性<strong>关键依赖于</strong>其文本参数的精确配置。智能体工程师不仅要精心设计单个智能体的系统提示，还要设计工具描述、智能体间通信协议和整体工作流。这个过程——<strong>智能体工程</strong>——代表了一个高维度、非结构化的优化挑战。</p>
+<h3 id="_3">现有方法的不足<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>缺乏结构感知</strong>：现有自动提示优化（APO）方法聚焦于"平面"提示优化，无法处理多智能体架构中的复杂交互</li>
+<li><strong>静态无记忆</strong>：优化器不学习——它们执行搜索但缺乏从过去失败中学习以改进自身优化策略的机制</li>
+</ol>
+<h3 id="_4">本文贡献<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>TPGO 框架</strong>：首个将 MAS 优化视为<strong>图进化问题</strong>的框架，支持复杂 Agent 架构的结构和语义优化</li>
+<li><strong>文本参数图（TPG）</strong>：将单一文本配置分解为模块化、可单独优化的语义单元</li>
+<li><strong>群体相对智能体优化（GRAO）</strong>：一种自进化的元优化策略，利用历史经验持续改进优化提案质量</li>
+<li><strong>实验验证</strong>：在 MCP-Universe 和 GAIA 上显著增强 SOTA 智能体系统</li>
+</ol>
+<hr />
+<h2 id="2">2 相关工作<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
+<p><strong>语言智能体系统</strong>：从 ReAct（单智能体框架）到多智能体系统（MetaGPT、MaCTG）。MAS 引入大量设计选择——协作结构、通信协议、角色人格。</p>
+<p><strong>自动提示优化</strong>：搜索方法（PromptAgent + MCTS）、进化算法（EvoPrompt）、梯度方法（TextGrad）。共同限制：关注文本内容而非系统架构，无法修改交互结构。</p>
+<hr />
+<h2 id="3">3 问题定义<a class="headerlink" href="#3" title="Permanent link">&para;</a></h2>
+<p>MAS 配置由<strong>文本参数 Θ</strong> 定义（系统提示、工具描述、交互规则）。给定任务分布 T = {(q_k, a_k)}，系统 A(Θ) 产生输出 â_k 并生成执行轨迹 τ_k。</p>
+<p><strong>目标</strong>：找到最大化性能的最优文本参数集 Θ*</p>
+<div class="arithmatex">\[\Theta^* = \arg\max_{\Theta \in S} \mathbb{E}_{(q,a) \sim T} [R(A(\Theta, q), a)]\]</div>
+<p>其中 S 是巨大的离散非结构化文本配置空间。</p>
+<hr />
+<h2 id="4">4 方法论<a class="headerlink" href="#4" title="Permanent link">&para;</a></h2>
+<h3 id="41-tpgo">4.1 TPGO 概览<a class="headerlink" href="#41-tpgo" title="Permanent link">&para;</a></h3>
+<p>TPGO 在闭环循环中运行，包含三个核心阶段（图 2）：</p>
+<ol>
+<li><strong>图构建</strong>：将单一提示分解为透明的、模块化的 TPG</li>
+<li><strong>梯度驱动进化</strong>：从执行轨迹中派生"文本梯度"语义反馈信号</li>
+<li><strong>GRAO（群体相对智能体优化）</strong>：使优化器自身从经验中学习和改进的元优化层</li>
+</ol>
+<h3 id="42-tpg">4.2 文本参数图（TPG）<a class="headerlink" href="#42-tpg" title="Permanent link">&para;</a></h3>
+<p><strong>图结构 G = (V, E)</strong></p>
+<p>节点类型：
+- <strong>角色节点（Role Nodes）</strong>：Agent 的核心人格、高层目标、战略指令
+- <strong>逻辑节点（Logic Nodes）</strong>：具体推理协议、操作约束、思维链过程
+- <strong>工具节点（Tool Nodes）</strong>：功能描述、API 规格、使用示例</p>
+<p>边：建模依赖和逻辑流——智能体内流、工具集成、智能体间通信。</p>
+<p><strong>基于图的优化操作：</strong>
+- <code>REWRITE_NODE(v, new_content)</code>：修改节点内容
+- <code>PRUNE_EDGE(u, v)</code>：移除连接以禁用故障路径
+- <code>ADD_NODE(v_new, content)</code>：引入新技能或约束
+- <code>ADD_EDGE(u, v)</code>：建立新依赖或逻辑流</p>
+<h3 id="43">4.3 梯度驱动进化<a class="headerlink" href="#43" title="Permanent link">&para;</a></h3>
+<p><strong>文本梯度</strong>：结构化的自然语言批评和建议，通过三阶段过程指导图的进化。</p>
+<p><strong>步骤 1：轨迹诊断与梯度生成</strong>
+- 执行 MAS 以收集轨迹集 T = {τ₁, ..., τ_N}
+- 正梯度 δ⁺：从成功轨迹提取，归纳有效行为模式
+- 负梯度 δ⁻：从失败轨迹提取，精确定位错误并提出修正建议</p>
+<p><strong>步骤 2：梯度聚合（聚类）</strong>
+- 对负梯度进行语义聚类，识别系统性错误模式
+- 使用 DBSCAN 聚类，无需预设聚类数量</p>
+<p><strong>步骤 3：生成和应用优化提案</strong>
+- 对每个错误聚类，优化器 LLM 生成具体优化提案 ΔG
+- 提案包含具体的图编辑操作集合</p>
+<h3 id="44-grao">4.4 自进化优化（GRAO）<a class="headerlink" href="#44-grao" title="Permanent link">&para;</a></h3>
+<p>GRAO 使优化过程自身<strong>自进化</strong>——从过去优化的效果中学习以产生更好的提案。</p>
+<p><strong>验证与效果评分：</strong> 对每个提案 ΔG 在相关任务子集上验证，计算效果分数 E(ΔG) ∈ [0,1]</p>
+<p><strong>优化经验记忆：</strong> 每次优化尝试记录为 (问题上下文 C, 解决方案提案 ΔG, 结果 E)</p>
+<p><strong>自适应提案生成：</strong> 新错误出现时，从记忆中检索语义相似的历史经验，按效果排名后作为少样本示例注入优化器 LLM，使其生成更高质量的新提案。</p>
+<hr />
+<h2 id="5">5 实验<a class="headerlink" href="#5" title="Permanent link">&para;</a></h2>
+<h3 id="51-mcp-universe">5.1 MCP-Universe（探索性优化）<a class="headerlink" href="#51-mcp-universe" title="Permanent link">&para;</a></h3>
+<p><strong>表 1：MCP-Universe 上的性能（使用执行反馈自我修正，无黄金路径）</strong></p>
+<table>
+<thead>
+<tr>
+<th>模型</th>
+<th>Repo管理</th>
+<th>3D设计</th>
+<th>浏览器自动化</th>
+<th>网络搜索</th>
+<th>总体</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ReAct(GPT-4.1)</td>
+<td>36.70</td>
+<td>55.26</td>
+<td>26.41</td>
+<td>5.45</td>
+<td>30.96</td>
+</tr>
+<tr>
+<td>+TPGO(5轮)</td>
+<td><strong>41.21</strong></td>
+<td><strong>65.79</strong></td>
+<td><strong>33.74</strong></td>
+<td><strong>14.55</strong></td>
+<td><strong>38.82 (+25.4%)</strong></td>
+</tr>
+<tr>
+<td>ReAct(DS-V3.2)</td>
+<td>42.18</td>
+<td>60.03</td>
+<td>20.51</td>
+<td>16.36</td>
+<td>34.77</td>
+</tr>
+<tr>
+<td>+TPGO(5轮)</td>
+<td><strong>45.52</strong></td>
+<td><strong>63.16</strong></td>
+<td><strong>28.03</strong></td>
+<td><strong>30.73</strong></td>
+<td><strong>41.86 (+20.4%)</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="52-gaia">5.2 GAIA（模仿性优化）<a class="headerlink" href="#52-gaia" title="Permanent link">&para;</a></h3>
+<p><strong>表 2：GAIA 验证集上的性能（对齐到已知正确答案）</strong></p>
+<table>
+<thead>
+<tr>
+<th>模型</th>
+<th>Level 1</th>
+<th>Level 2</th>
+<th>Level 3</th>
+<th>总体</th>
+<th>平均时间(s)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MiroFlow (GPT-5)</td>
+<td>78.8</td>
+<td>77.5</td>
+<td>44.4</td>
+<td>73.8</td>
+<td>4014</td>
+</tr>
+<tr>
+<td>+TPGO(5轮)</td>
+<td><strong>90.6</strong></td>
+<td><strong>79.1</strong></td>
+<td><strong>63.6</strong></td>
+<td><strong>81.6 (+10.6%)</strong></td>
+<td><strong>1765 (-56.0%)</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="53">5.3 消融研究<a class="headerlink" href="#53" title="Permanent link">&para;</a></h3>
+<p><strong>表 3：关键组件消融（MCP-Universe 浏览器自动化）</strong></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>成功率</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TPGO (完整)</td>
+<td><strong>28.03</strong></td>
+</tr>
+<tr>
+<td>w/o 文本参数图</td>
+<td>25.13</td>
+</tr>
+<tr>
+<td>w/o 结构图编辑</td>
+<td>24.90</td>
+</tr>
+<tr>
+<td>w/o 聚类</td>
+<td>26.52</td>
+</tr>
+<tr>
+<td>w/ 随机聚类</td>
+<td>19.97</td>
+</tr>
+</tbody>
+</table>
+<h3 id="54-grao">5.4 优化稳定性（GRAO 效果）<a class="headerlink" href="#54-grao" title="Permanent link">&para;</a></h3>
+<p><strong>图 3</strong>：有/无 GRAO 的优化稳定性对比
+- <strong>有 GRAO</strong>：第 3 轮稳定提升至 33.74% 后保持稳定
+- <strong>无 GRAO</strong>：第 2 轮峰值 30.03%，第 4 轮骤降至 14.55%（灾难性遗忘）</p>
+<p>GRAO 通过缓解灾难性遗忘同时提高了最终性能和优化鲁棒性。</p>
+<h3 id="55">5.5 跨域泛化<a class="headerlink" href="#55" title="Permanent link">&para;</a></h3>
+<p>仅在浏览器自动化上优化后，在其他三个未见领域上评估：Web 搜索 +1.82、Repo 管理 +2.73、3D 设计 +3.13。表明 TPGO 学到的是<strong>通用改进</strong>而非领域特定修复。</p>
+<h3 id="56">5.6 成本效益分析<a class="headerlink" href="#56" title="Permanent link">&para;</a></h3>
+<p>一轮优化：1990万 tokens，1380秒（8路并发），每轨迹分摊 73.7K tokens/5.6秒。优化后 agent 执行时间从 4014 秒降至 1765 秒（-56%）。</p>
+<hr />
+<h2 id="6">6 案例研究：不完整约束验证修复<a class="headerlink" href="#6" title="Permanent link">&para;</a></h2>
+<p><strong>失败模式</strong>：Agent 识别了正确答案（Ollie Watkins）但仅验证了 4 个约束中的 2 个，过早得出结论。</p>
+<p><strong>TPGO 诊断</strong>：提取的负梯度——"Agent 在找到'足够好'的候选后停止调查的行为倾向"</p>
+<p><strong>图级修正</strong>：添加新角色节点"约束验证协议"，要求：
+1. 列出所有约束
+2. 创建验证清单
+3. 用具体证据验证每个约束
+4. 仅在所有约束验证通过后才提供最终答案</p>
+<p><strong>效果</strong>：修正可迁移到其他多约束问题，是一个<strong>任务无关的推理过程改进</strong>。</p>
+<hr />
+<h2 id="7">7 结论<a class="headerlink" href="#7" title="Permanent link">&para;</a></h2>
+<p>TPGO 通过<strong>结构化图进化</strong>而非平面提示调优来改进智能体系统。通过将 Agent 配置分解为模块化文本组件、使用执行导向的文本梯度信号精化它们、以及通过 GRAO 利用优化记忆，TPGO 实现了更稳定和更有效的 Agent 优化。</p>
+<p><strong>局限性</strong>：
+- 无形式化优化保证（文本梯度是启发式反馈而非解析梯度）
+- 优化循环成本较高（每提案需验证）
+- 依赖底层 LLM 的解析、诊断和提案生成能力
+- 当前限于文本参数优化，未考虑数值超参数或更大结构变化</p>
+<hr />
+<h2 id="_5">参考文献<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<p>（完整引用见原文，关键词选列：）
+- Guo et al. Large language model based multi-agents: A survey. IJCAI 2024.
+- Hong et al. MetaGPT. ICLR 2024.
+- Park et al. Generative agents. UIST 2023.
+- Yao et al. ReAct. ICLR 2023.
+- Yuksekgonul et al. TextGrad. arXiv:2406.07496, 2024.
+- Wang et al. PromptAgent. arXiv:2310.16427, 2023.
+- Luo et al. MCP-Universe. arXiv:2508.14704, 2025.
+- Mialon et al. GAIA. ICLR 2024.
+- Tong et al. EvoPrompt. COLING 2025.
+- Fang et al. Self-evolving AI agents survey. arXiv:2508.07407, 2025.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.expand", "navigation.indexes", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

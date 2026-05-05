@@ -22,6 +22,7 @@
 - ✅ **[MathNet: a Global Multimodal Benchmark for Mathematical Reasoning and Retrieval](../papers/2604.18584v1/index.md)** | DeepSeek | AI Agent | `已精读`
 - ✅ **[Owner-Harm: A Missing Threat Model for AI Agent Safety](../papers/2604.18658v1/index.md)** | Microsoft | AI Agent | `已精读`
 - ✅ **[Learning to Evolve: A Self-Improving Framework for Multi-Agent Systems via Textual Parameter Graph Optimization](../papers/2604.20714v1/index.md)** | Meta FAIR | AI Agent | `已精读`
+- ✅ **[SWE-Edit: Rethinking Code Editing for Efficient SWE-Agent](../papers/2604.26102v1/index.md)** | Microsoft | AI Agent | `已精读`
 - ✅ **[The Last Harness You'll Ever Build](../papers/2604.21003v1/index.md)** | Meta FAIR | AI Agent | `已精读`
 - ✅ **[Context Kubernetes: Declarative Orchestration of Enterprise Knowledge for Agentic AI Systems](../papers/2604.11623v3/index.md)** | Microsoft | AI Agent | `已精读`
 - ✅ **[FairQE: Multi-Agent Framework for Mitigating Gender Bias in Translation Quality Estimation](../papers/2604.21420v1/index.md)** | Meta FAIR | AI Agent | `已精读`

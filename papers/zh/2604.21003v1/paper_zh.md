@@ -316,4 +316,17 @@ return Λ^best
 ## 复核建议
 
 - 当前未发现明显的解析降级信号，仍建议抽样检查图表和公式。
+
+## 参考文献
+
+1. Anthropic. Claude code: Best practices for agentic coding. https://www.anthropic.com/engineering/claude-code-best-practices, 2025. Anthropic Engineering Blog.
+2. Yuyu Guo, Wenjie Yang, Siyuan Yang, Ziyang Liu, Cheng Chen, Yuan Wei, Yun Hu, Yang Huang, Guoliang Hao, Dongsheng Yuan, et al. OpAgent: Operator agent for web navigation. arXiv preprint arXiv:2602.13559, 2026.
+3. Ryan Lopopolo. Harness engineering: leveraging Codex in an agent-first world. https://openai.com/index/harness-engineering/, 2026. OpenAI Engineering Blog.
+4. OpenAI. Introducing Codex. https://openai.com/index/introducing-codex/, 2025. OpenAI Blog.
+5. Prithvi Rajasekaran. Harness design for long-running application development. https://www.anthropic.com/engineering/harness-design-long-running-apps, 2026. Anthropic Engineering Blog.
+6. SylphAI. AdaL: The self-evolving AI coding agent. https://sylph.ai/, 2026.
+7. Sebastian Thrun and Lorien Pratt. Learning to Learn. Springer Science & Business Media, 1998.
+8. Vivek Trivedy. The anatomy of an agent harness. https://www.langchain.com/blog/the-anatomy-of-an-agent-harness, 2026. LangChain Blog.
+9. Li Yin and Zhangyang Wang. LLM-AutoDiff: Auto-differentiate any LLM workflow, 2025.
+10. Shuyan Zhou, Frank F Xu, Hao Zhu, Xuhui Zhou, Robert Lo, Abishek Sridhar, Xianyi Cheng, Tianyue Ou, Yonatan Bisk, Daniel Fried, Uri Alon, and Graham Neubig. WebArena: A realistic web environment for building autonomous agents. In International Conference on Learning Representations (ICLR), 2024.
 - 特别关注 Algorithm 1 和 Algorithm 2 的伪代码在站点渲染中的可读性。

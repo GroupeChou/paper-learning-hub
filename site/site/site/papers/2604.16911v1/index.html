@@ -1,0 +1,2076 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://groupechou.github.io/paper-learning-hub/papers/2604.16911v1/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Skilldex：具有分层作用域分布的智能体技能包管理器与注册中心 - 论文自动研学知识库</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#skilldex" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="论文自动研学知识库" class="md-header__button md-logo" aria-label="论文自动研学知识库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            论文自动研学知识库
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Skilldex：具有分层作用域分布的智能体技能包管理器与注册中心
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="论文自动研学知识库" class="md-nav__button md-logo" aria-label="论文自动研学知识库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    论文自动研学知识库
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../roadmap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    📖 学习总纲
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/daily-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    📅 今日更新
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../agents/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🤖 AI Agent 主线
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🤖 AI Agent 主线
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/ch01-basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第一章 Agent 基础架构篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/ch02-planning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第二章 规划与推理篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/ch03-tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第三章 工具使用与API篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/ch04-memory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第四章 记忆与检索篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/ch05-multi-agent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第五章 多智能体协作篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/ch06-embodied/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第六章 具身智能篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/ch07-safety/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第七章 Agent评估与安全篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/ch08-frontier/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第八章 前沿探索篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../time_series/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    📈 时序预测主线
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    📈 时序预测主线
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../time_series/ch01-basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第一章 基础理论篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../time_series/ch02-classics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第二章 经典方法篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../time_series/ch03-transformer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第三章 Transformer革命篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../time_series/ch04-foundation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第四章 基础模型篇(Foundation Models)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../time_series/ch05-long-horizon/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第五章 长序列预测篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../time_series/ch06-st-gnn/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第六章 多变量时空篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../time_series/ch07-frontier/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第七章 前沿探索篇
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../cross_domain/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🔗 交叉融合
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_6" id="__nav_6_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🔗 交叉融合
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cross_domain/ts-agent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    时序预测Agent
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cross_domain/agent-analysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Agent驱动分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cross_domain/autonomous/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    自主决策系统
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../organizations/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🏢 机构专题
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_7" id="__nav_7_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🏢 机构专题
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../organizations/openai/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OpenAI 系列
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../organizations/deepmind/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Google DeepMind
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../organizations/anthropic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Anthropic 系列
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../organizations/meta/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Meta 系列
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../organizations/microsoft/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Microsoft 系列
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../organizations/domestic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    国内大厂系列
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../organizations/academic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    学术机构
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    论文详情
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    论文详情
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#skilldex-a-package-manager-and-registry-for-agent-skill-packages-with-hierarchical-scope-based-distribution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Skilldex: A Package Manager and Registry for Agent Skill Packages with Hierarchical Scope-Based Distribution
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        摘要
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#i" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        I. 引言
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ii" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        II. 背景与相关工作
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="II. 背景与相关工作">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-agent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A. Agent 技能包
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        B. 与相关系统的对比
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iii" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        III. 系统架构
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iv" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        IV. 分层作用域系统
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="IV. 分层作用域系统">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A. 三层层级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        B. 解析规则
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        C. 安装源
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        V. 格式符合性评分
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="V. 格式符合性评分">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A. 动机
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b-8-100" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        B. 评分检查（8 项，满分 100）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        C. 诊断输出
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vi-agent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        VI. Agent 建议循环
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vii" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        VII. 社区注册中心
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#viii" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        VIII. 技能集捆绑
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="VIII. 技能集捆绑">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A. 动机
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        B. 开发者技能集示例
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c-7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        C. 技能集验证评分（7 项）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ix-mcp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        IX. MCP 集成
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#x" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        X. 设计理念
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#xi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        XI. 局限与未来工作
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#xii" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        XII. 结论
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        参考文献
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="skilldex">Skilldex：具有分层作用域分布的智能体技能包管理器与注册中心<a class="headerlink" href="#skilldex" title="Permanent link">&para;</a></h1>
+<h2 id="skilldex-a-package-manager-and-registry-for-agent-skill-packages-with-hierarchical-scope-based-distribution">Skilldex: A Package Manager and Registry for Agent Skill Packages with Hierarchical Scope-Based Distribution<a class="headerlink" href="#skilldex-a-package-manager-and-registry-for-agent-skill-packages-with-hierarchical-scope-based-distribution" title="Permanent link">&para;</a></h2>
+<p>Sampriti Saha, Pranav Hemanth</p>
+<p>Pandemonium Research</p>
+<hr />
+<h2 id="_1">摘要<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>大语言模型（LLM）智能体越来越多地通过<strong>技能包</strong>（结构化自然语言指令包）在运行时进行扩展。社区安装工具和注册中心存在，但两个关键差距持续存在：</p>
+<ol>
+<li><strong>无符合性信号</strong>：没有公开工具根据 Anthropic 发布的格式规范对技能包进行评分</li>
+<li><strong>无技能集一致性机制</strong>：没有机制将相关技能与其所需的共享上下文捆绑以保持互一致性</li>
+</ol>
+<p>我们提出 <strong>Skilldex</strong>，一个智能体技能包的包管理器与注册中心，解决了上述两个差距。</p>
+<p><strong>两个新颖贡献：</strong>
+1. <strong>编译器风格格式符合性评分</strong>：针对 Anthropic 技能规范，产生 0-100 分评分，含行级诊断（描述特异性、前置元数据有效性、结构遵守性）
+2. <strong>技能集（Skillset）抽象</strong>：相关技能的捆绑集合，附共享资产（词汇文件、模板、参考文档），强制跨技能行为一致性</p>
+<p><strong>支持性基础设施：</strong>
+- <strong>三层分层作用域系统</strong>：全局/共享/项目
+- <strong>人在环路建议循环</strong>：Agent 开始工作前展示建议技能清单供审查
+- <strong>仅元数据社区注册中心</strong>：含符合性评分、全文搜索、信任层级
+- <strong>MCP 服务器</strong>：将所有操作原生暴露给智能体</p>
+<p>系统使用 TypeScript CLI（skillpm/spm）实现，后端为 Hono/Supabase 注册中心，开源发布。</p>
+<hr />
+<h2 id="i">I. 引言<a class="headerlink" href="#i" title="Permanent link">&para;</a></h2>
+<p>LLM 驱动的智能体越来越多地通过技能进行扩展——结构化自然语言文档，指导智能体采用特定行为。由 Anthropic 的 Claude Code 平台推广，技能形式化为 <strong>SKILL.md 文件</strong>（带 YAML frontmatter 的 Markdown）。</p>
+<p>技能包类似于软件库：封装可复用功能、有作者和版本、质量参差不齐、在可发现和可共享时价值最大。安装工具和社区注册中心已经存在，但：</p>
+<p><strong>两个关键差距的详细说明：</strong>
+1. <strong>无符合性评分</strong>：现有工具展示安装计数和发布者徽章，但没有一个工具根据 Anthropic 格式规范给技能评分。描述过短无法可靠触发，或 frontmatter 格式错误的技能，与格式正确的技能被同样对待
+2. <strong>无技能集机制</strong>：技能作为平面单元单独安装。没有抽象用于捆绑相关技能及其所需的共享约定文件和参考文档——独立安装相关技能使每个技能使用自己的隐式词汇，可能逐步偏离</p>
+<hr />
+<h2 id="ii">II. 背景与相关工作<a class="headerlink" href="#ii" title="Permanent link">&para;</a></h2>
+<h3 id="a-agent">A. Agent 技能包<a class="headerlink" href="#a-agent" title="Permanent link">&para;</a></h3>
+<p>SKILL.md 格式由 Anthropic 的 Claude Code 平台引入。技能是一个目录，包含标准化的 YAML frontmatter 区块后接 Markdown 内容：</p>
+<div class="highlight"><pre><span></span><code><span class="nn">---</span>
+<span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">forensics-memory-analysis</span>
+<span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Guides</span><span class="nv"> </span><span class="s">Claude</span><span class="nv"> </span><span class="s">through</span><span class="nv"> </span><span class="s">systematic</span><span class="nv"> </span><span class="s">memory</span><span class="nv"> </span><span class="s">dump</span><span class="nv"> </span><span class="s">analysis...&quot;</span>
+<span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;1.0.0&quot;</span>
+<span class="nt">tags</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">forensics</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">memory</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">volatility</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">incident-response</span><span class="p p-Indicator">]</span>
+<span class="nt">author</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;skilly&quot;</span>
+<span class="nt">spec_version</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;1.0&quot;</span>
+<span class="nn">---</span>
+</code></pre></div>
+<p>技能目录可选包含：scripts/（可执行辅助脚本）、references/（补充文档）、assets/（图像和数据文件）。</p>
+<h3 id="b">B. 与相关系统的对比<a class="headerlink" href="#b" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>系统</th>
+<th>定位</th>
+<th>与 Skilldex 的差异</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Smithery.ai / Glama.ai</strong></td>
+<td>MCP 服务器注册中心</td>
+<td>不同抽象层（MCP 暴露工具 vs 技能扩展行为）</td>
+</tr>
+<tr>
+<td><strong>LangChain Hub</strong></td>
+<td>LangChain 提示和链注册中心</td>
+<td>不同生态系统和抽象层</td>
+</tr>
+<tr>
+<td><strong>Anthropic 技能目录</strong></td>
+<td>官方技能仓库</td>
+<td>无 CLI 安装工具、无作用域模型</td>
+</tr>
+<tr>
+<td><strong>vercel-labs/skills</strong></td>
+<td>开放 Agent 技能 CLI</td>
+<td>无分层作用域安装、无符合性评分</td>
+</tr>
+<tr>
+<td><strong>CCPM / ClawdHub</strong></td>
+<td>技能安装工具</td>
+<td>无评分规则或无技能集抽象</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="iii">III. 系统架构<a class="headerlink" href="#iii" title="Permanent link">&para;</a></h2>
+<p>Skilldex 由三个独立组件构成：</p>
+<ol>
+<li><strong>Skilldex CLI</strong>（skilldex-cli）：Node.js 20+ npm 包，提供 <code>skillpm</code> 和 <code>spm</code> 命令。TypeScript + Commander + simple-git + Zod</li>
+<li><strong>Skilldex 注册中心</strong>（skilldex-registry）：Hono Web 应用部署在 Vercel，后端 Supabase（PostgreSQL）。存储技能和技能集元数据；处理认证、搜索和安装计数</li>
+<li><strong>Skilldex Web</strong>：Next.js 应用，提供注册中心浏览器 UI 和文档站点</li>
+</ol>
+<p>CLI 和 MCP 服务器共享相同的核心模块，两个接口调用相同的安装、验证、解析和清单函数。</p>
+<hr />
+<h2 id="iv">IV. 分层作用域系统<a class="headerlink" href="#iv" title="Permanent link">&para;</a></h2>
+<h3 id="a">A. 三层层级<a class="headerlink" href="#a" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>层级</th>
+<th>存储路径</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>global</strong></td>
+<td>~/.skilldex/global/</td>
+<td>所有项目可用：风格指南、通用调试方法</td>
+</tr>
+<tr>
+<td><strong>shared</strong></td>
+<td>~/.skilldex/shared/</td>
+<td>多个显式选择加入的项目可用：团队约定</td>
+</tr>
+<tr>
+<td><strong>project</strong></td>
+<td><project-root>/.skilldex/</td>
+<td>单个项目限定：项目特定配置</td>
+</tr>
+</tbody>
+</table>
+<h3 id="b_1">B. 解析规则<a class="headerlink" href="#b_1" title="Permanent link">&para;</a></h3>
+<p><strong>本地优先优先规则</strong>：较低作用域始终覆盖较高作用域的相同技能名。项目作用域的 <code>forensics-memory-analysis</code> 隐藏全局作用域的同一名称安装。</p>
+<h3 id="c">C. 安装源<a class="headerlink" href="#c" title="Permanent link">&para;</a></h3>
+<p>安装命令接受三种源形式：
+1. <strong>注册中心名称</strong>：<code>skillpm install forensics-memory-analysis</code>
+2. <strong>Git URL</strong>：<code>skillpm install git+https://github.com/user/repo/tree/main/skills/my-skill</code>
+3. <strong>本地路径</strong>：<code>skillpm install ./my-skill</code></p>
+<hr />
+<h2 id="v">V. 格式符合性评分<a class="headerlink" href="#v" title="Permanent link">&para;</a></h2>
+<h3 id="a_1">A. 动机<a class="headerlink" href="#a_1" title="Permanent link">&para;</a></h3>
+<p><strong>触发不足</strong>——智能体在应调用时未能调用技能——是记录的已知失败模式。主要原因：描述质量。格式符合性评分为发布者提供可测量的、客观的信号。</p>
+<h3 id="b-8-100">B. 评分检查（8 项，满分 100）<a class="headerlink" href="#b-8-100" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>检查项</th>
+<th>分值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>YAML frontmatter 可解析</td>
+<td>25</td>
+<td>缺失时致命，不执行后续检查</td>
+</tr>
+<tr>
+<td>name 字段存在</td>
+<td>10</td>
+<td>注册中心和清单所需</td>
+</tr>
+<tr>
+<td>description 存在</td>
+<td>10</td>
+<td>主要触发机制</td>
+</tr>
+<tr>
+<td>描述 ≥30 词</td>
+<td>10</td>
+<td>特异性阈值</td>
+</tr>
+<tr>
+<td>SKILL.md ≤500 行</td>
+<td>15</td>
+<td>令牌预算约束</td>
+</tr>
+<tr>
+<td>仅允许的子目录</td>
+<td>10</td>
+<td>强制执行 scripts/, references/, assets/</td>
+</tr>
+<tr>
+<td>引用的资源存在</td>
+<td>15</td>
+<td>无损坏的相对链接</td>
+</tr>
+<tr>
+<td>资源在正确的子目录中</td>
+<td>5</td>
+<td>脚本在 scripts/，文档在 references/</td>
+</tr>
+</tbody>
+</table>
+<h3 id="c_1">C. 诊断输出<a class="headerlink" href="#c_1" title="Permanent link">&para;</a></h3>
+<p>编译器风格格式，包含严重级别（pass/error/warning）、可选行号和人类可读消息：</p>
+<div class="highlight"><pre><span></span><code>pass    YAML frontmatter valid
+pass    name field present
+error   line 4: description too short (12 words, recommended: 30+)
+pass    SKILL.md line count OK (87 lines)
+warning Unknown subdirectory &quot;helpers&quot;
+pass    All referenced resources exist
+Format conformance score: 45/100
+</code></pre></div>
+<hr />
+<h2 id="vi-agent">VI. Agent 建议循环<a class="headerlink" href="#vi-agent" title="Permanent link">&para;</a></h2>
+<p><strong>动机</strong>：大多数 Agent 框架在没有任务前能力审查的情况下执行。Skilldex 插入了显式的人在环路检查点。</p>
+<p><strong>三阶段工作流：</strong></p>
+<p><strong>阶段 1：上下文收集</strong> — 读取 README.md、package.json、现有 Agent 配置和已安装技能清单。</p>
+<p><strong>阶段 2：提议生成</strong> — LLM（通过 Anthropic SDK）生成技能提议清单，含技能名、理由和建议作用域。</p>
+<p><strong>阶段 3：人类批准</strong> — CLI 交互式显示每个提议，用户批准/拒绝并可选覆盖作用域。</p>
+<div class="highlight"><pre><span></span><code>Proposed skills for this project:
+forensics-memory-analysis [community] [project scope]
+  Reason: project contains Volatility scripts
+  Approve? (Y/n/scope): y
+log-triage [verified] [project scope]
+  Reason: multiple log directories detected
+  Approve? (Y/n/scope): y
+</code></pre></div>
+<hr />
+<h2 id="vii">VII. 社区注册中心<a class="headerlink" href="#vii" title="Permanent link">&para;</a></h2>
+<p><strong>元数据优先</strong>：技能文件不上传到注册中心。<code>source_url</code> 指向 GitHub 仓库，安装直接从 GitHub 拉取。</p>
+<p><strong>信任层级模型：</strong>
+- <strong>verified（已验证）</strong>：保留给 Anthropic 官方发布的技能，手动分配
+- <strong>community（社区）</strong>：所有提交的默认等级，任何 GitHub 用户可发布</p>
+<p><strong>重要：信任层级从不阻止安装。</strong> 注册中心提供信息，不设门禁。</p>
+<p><strong>API 端点（REST，版本化）：</strong> 搜索、安装、发布、更新等核心操作。</p>
+<hr />
+<h2 id="viii">VIII. 技能集捆绑<a class="headerlink" href="#viii" title="Permanent link">&para;</a></h2>
+<h3 id="a_2">A. 动机<a class="headerlink" href="#a_2" title="Permanent link">&para;</a></h3>
+<p>Agent 用例很少由单个技能定义。独立安装相关技能产生行为漂移——如 Conventional Commits 和 changelog-gen 两个技能使用不同的提交类型词汇，工作流因此断裂。</p>
+<p><strong>技能集</strong>：可发布、可安装的单元，将相关技能与共享资产打包（约定文件、模板、参考文档），保证输出互一致性。</p>
+<h3 id="b_2">B. 开发者技能集示例<a class="headerlink" href="#b_2" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>developer/
+  SKILLSET.md
+  assets/commit-conventions.md          ← 2个技能共享
+  conventional-commit/SKILL.md          ← 引用 ../assets/
+  changelog-gen/SKILL.md                ← 引用 ../assets/
+  pr-description/SKILL.md
+  test-writer/SKILL.md
+</code></pre></div>
+<p><strong>关键保证</strong>：由 conventional-commit 写的提交消息保证被 changelog-gen 正确解析，因为两者在安装时绑定到相同的词汇文件。</p>
+<h3 id="c-7">C. 技能集验证评分（7 项）<a class="headerlink" href="#c-7" title="Permanent link">&para;</a></h3>
+<p>YAML 可解析(25)、name 字段(10)、description(10)、描述≥30词(10)、≥1个技能(20)、无未知顶级目录(10)、远程 URL 为 GitHub URL(15)。</p>
+<hr />
+<h2 id="ix-mcp">IX. MCP 集成<a class="headerlink" href="#ix-mcp" title="Permanent link">&para;</a></h2>
+<p>Skilldex 暴露完整 MCP 服务器（<code>skillpm mcp</code>），以长生命周期 stdio 进程运行，可在任何 MCP 兼容 Agent 中注册。</p>
+<p><strong>MCP 工具</strong>：skilldex_install、skilldex_uninstall、skilldex_validate、skilldex_list、skilldex_search、skilldex_suggest、skilldex_skillset_install 等。</p>
+<hr />
+<h2 id="x">X. 设计理念<a class="headerlink" href="#x" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>警告而非阻止</strong>：验证、信任层级检查信息告知但不阻止——12/100 分技能也可安装</li>
+<li><strong>规范所有权归属 Anthropic</strong>：Skilldex 跟踪和验证但不扩展或不解释规范</li>
+<li><strong>两个接口，一个核心</strong>：CLI 面向人类（丰富终端输出、交互提示）；MCP 面向 Agent（JSON 入/出，无提示）</li>
+</ol>
+<hr />
+<h2 id="xi">XI. 局限与未来工作<a class="headerlink" href="#xi" title="Permanent link">&para;</a></h2>
+<ol>
+<li>规范版本化：Anthropic 目前不发布显式版本化的技能格式</li>
+<li>语义描述质量：客观可评分格式符合性，但语义描述质量无法客观评分</li>
+<li>清单并发：并发调用下清单写入不是原子的</li>
+<li>层级深度：三级可能不够，复杂多项目结构可能需要任意嵌套</li>
+<li>团队治理：当前模型没有团队身份或基于角色的访问概念</li>
+<li>社区贡献冷启动</li>
+<li>建议循环不自动安装</li>
+</ol>
+<hr />
+<h2 id="xii">XII. 结论<a class="headerlink" href="#xii" title="Permanent link">&para;</a></h2>
+<p>Skilldex 填补了现有工具留下的两个空白：编译器风格格式符合性评分使发布者获得基于规范的反馈而非社交代理；技能集抽象使相关技能共享公共资产，保证行为一致性。完整开发者或研究 Agent 配置成为一流的可发布工件。</p>
+<p>开源地址：https://github.com/Pandemonium-Research/Skilldex</p>
+<hr />
+<h2 id="_2">参考文献<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Anthropic. Claude Code: Skills and Skill Packages. 2024.</li>
+<li>Vercel. vercel-labs/skills: The open agent skills tool. 2025.</li>
+<li>LangChain. LangChain Hub. 2023.</li>
+<li>Anthropic. Model Context Protocol (MCP) Specification. 2024.</li>
+<li>Cappos et al. A look in the mirror: Attacks on package managers. CCS 2008.</li>
+<li>Seshia et al. Towards verified artificial intelligence. arXiv:1606.08514, 2016.</li>
+<li>npm, pip, cargo, Homebrew package management systems.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.expand", "navigation.indexes", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
