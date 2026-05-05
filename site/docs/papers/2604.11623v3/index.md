@@ -93,29 +93,6 @@
 
 ### 2.2 声明式清单（YAML）
 
-```yaml
-apiVersion: context.ai/v1
-kind: ContextDeployment
-metadata:
-  name: logistics-forecast-kb
-  namespace: logistics
-spec:
-  sources:
-    - type: internal_wiki
-      path: "forecast/2026/"
-    - type: database
-      query: "SELECT * FROM rules_engine"
-  freshness:
-    ttl: 1h
-    reconciliation: true
-  permissions:
-    agents:
-      - name: forecast-agent
-        role: reader
-    humans:
-      - name: planner-team
-        role: editor
-```
 
 ### 2.3 协调循环
 
@@ -219,9 +196,3 @@ Context Kubernetes 提出了一个完整的声明式架构，用于企业 Agent 
 
 ## 参考文献
 
-- Mouzouni. Context Kubernetes. arXiv:2604.11623, 2026.
-- Kubernetes. Borg, Omega, and Kubernetes. ACM Queue, 2016.
-- Lamport. Specifying Systems. 2002 (TLA+).
-- Gartner. AI agents market projections. 2025.
-- Anthropic. Claude Code. 2024.
-- CNBC. Application software market value loss. 2026.

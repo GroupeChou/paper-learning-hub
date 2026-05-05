@@ -115,8 +115,3 @@ $$\inf_{f_{bag}} \sup_{P \in \mathcal{P}_{AR(1)}} \mathbb{E}[R(f_{bag}) - R^*] \
 
 ## 参考文献
 
-- Shihab et al. Minimax Majority-Vote. 2026.
-- Bickel & Bühlmann. Bagging for dependent data. 1999.
-- Breiman. Bagging predictors. Machine Learning, 1996.
-- Levin & Peres. Markov Chains and Mixing Times. 2017.
-- Fiedler. Algebraic connectivity of graphs. 1973.

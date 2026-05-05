@@ -38,7 +38,6 @@
 **标题**：HiveMind：面向并发 LLM Agent 工作负载的 OS 启发式调度系统
 
 **作者团队**：
-- Justice Owusu Agyemang（Sperix Labs / KNUST VIA Cybersecurity Lab / KNUST Quantum and Assistive Technologies Lab）
 - Jerry John Kponyo 等（均为 KNUST 相关机构）
 
 > [扩展] 作者均来自加纳库马西理工大学（KNUST）的相关实验室以及 Sperix Labs 公司，这是一篇产业界与学术界合作的论文。从作者背景来看，核心贡献在于将经典操作系统理论创新性地应用于新兴的 LLM Agent 场景。

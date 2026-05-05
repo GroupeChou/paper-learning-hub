@@ -1,4 +1,4 @@
-# paper
+# 
 
 <!-- 论文元数据卡片 -->
 <div class="paper-meta">
@@ -26,7 +26,6 @@
 ## 摘要
 
 
-
 ## 图表资源
 - ![](assets/page-002-img-01.png)
 - ![](assets/page-010-img-01.jpeg)
@@ -37,15 +36,7 @@
 
 ---
 
-## 摘要（Abstract）
 
-知识图谱（KG）越来越多地用于支持大语言模型（LLM）推理，但标准的三元组式 KG 将每个关系视为全局有效。在许多场景中，一个关系是否应被视为证据取决于上下文。因此，我们将三元组有效性形式化为上下文的**三元组特定函数**，并将这一形式化称为**量子知识图谱（QKG）**。
-
-我们在医学领域实例化 QKG，使用以糖尿病为中心的 PrimeKG 子图，其 **68,651 个上下文敏感关系**进一步标注了患者群体特定的约束。我们在一个推理器-验证器流水线中评估它，用于医学问答，使用 MedReason 中基于 KG 的子集（含 **2,788 个问题**）。以 Haiku-4.5 同时作为推理器和验证器时，基于 KG 的验证显著优于无验证器基线（**+0.61 pp**），而带上下文匹配的 QKG 取得了最大增益，优于无上下文匹配的 KG 验证（**+0.79 pp**）和无验证器基线（**+1.40 pp**；配对 McNemar 检验，所有 p < 0.05）。在更强的验证器（Qwen-3.6-Plus）下，QKG 在原始集上的增益从 +1.40 pp 增长到 **+5.96 pp**；上下文匹配差距在原始集上不显著（p = 0.73），但在调整知识泄露和可疑问题后变得**边界显著**（p = 0.05），这归因于基准金标准的天花板效应，而非 QKG 自身的局限。
-
-综合来看，结果支持一个观点：KG 在基于 LLM 的临床推理中的价值不仅在于存储医学相关事实，更在于**表示这些事实是否适用于特定患者上下文**。为支持可复现性和进一步研究，我们发布了整理好的 QKG 数据集和源代码。
-
----
 
 ## 1 引言（Introduction）
 
@@ -168,9 +159,6 @@ PrimeKG（Chandak et al., 2023）为本工作提供源生物医学 KG。处理�
 11:   else
 12:     status(c) ← NO_COVERAGE
 13:   end if
-14: end for
-15: report ← {(c, status(c)) | c ∈ claims}
-16: if any claim in report is CONTRADICTED then
 17:   A* ← Reasoner(Q, C, report)            ▷ 重新考虑
 18: else
 19:   A* ← A
@@ -368,26 +356,6 @@ QKG 的上下文效应在真实临床推理中应该最为重要，因为答案�
 
 （完整 20 篇参考文献，按文中出现顺序）
 
-- Anthropic. Introducing Claude Haiku 4.5, 2025.
-- Baichuan Intelligence. Baichuan-M2 Technical Blog, 2025.
-- Chandak et al. PrimeKG: A knowledge graph for precision medicine. *Scientific Data*, 2023.
-- Chen et al. Multi-granularity temporal question answering over knowledge graphs. *ACL 2023*.
-- Diao et al. The research of clinical temporal knowledge graph based on deep learning. *JIFS*, 2021.
-- Ding et al. Temporal fact reasoning over hyper-relational knowledge graphs. *EMNLP 2024 Findings*.
-- Dougrez-Lewis et al. Assessing the reasoning capabilities of LLMs in the context of evidence-based claim verification. *ACL 2025 Findings*.
-- Galkin et al. Message passing for hyper-relational knowledge graphs. *EMNLP 2020*.
-- Johnson et al. MIMIC-IV. *Scientific Data*, 2023.
-- Kolli et al. Hybrid fact-checking that integrates knowledge graphs, LLMs, and search-based retrieval agents. *Widening NLP Workshop*, 2025.
-- Li et al. A method to learn embedding of a probabilistic medical knowledge graph. *JMIR Medical Informatics*, 2020a.
-- Li et al. Real-world data medical knowledge graph: Construction and applications. *Artificial Intelligence in Medicine*, 2020b.
-- Parović et al. Generating domain-specific knowledge graphs from large language models. *ACL 2025 Findings*.
-- Qwen Team. Qwen3.6-Plus: Towards Real World Agents, 2026.
-- Saxena et al. Question answering over temporal knowledge graphs. *ACL 2021*.
-- Sui et al. Can knowledge graphs make large language models more trustworthy? *ACL 2025*.
-- Wornow et al. EHRSHOT: An EHR benchmark for few-shot evaluation of foundation models. *NeurIPS 2023*.
-- Wu et al. MedReason: Eliciting factual medical reasoning steps in LLMs via knowledge graphs. *arXiv:2504.00993*, 2025a.
-- Wu et al. Medical Graph RAG. *ACL 2025*.
-- Wu et al. Medical graph rag: Evidence-based medical large language model via graph retrieval-augmented generation. *ACL 2025*.
 
 ---
 

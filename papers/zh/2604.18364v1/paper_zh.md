@@ -21,11 +21,9 @@
 
 - **来源**：[]()
 - **论文链接**：[]()
-- **状态**：待复核
+- **状态**：已生成
 
 ## 摘要
-
-
 
 ## 解析备注
 
@@ -35,7 +33,10 @@
 - 图片数量超过上限，仅保留前 20 张。
 - 图片数量超过上限，仅保留前 20 张。
 
+
+
 ## 图表资源
+
 - ![](assets/page-004-img-01.png)
 - ![](assets/page-004-img-02.png)
 - ![](assets/page-004-img-03.png)
@@ -56,42 +57,29 @@
 - ![](assets/page-007-img-04.png)
 - ![](assets/page-007-img-05.png)
 - ![](assets/page-007-img-06.png)
+- ![](assets/page-007-img-07.png)
+- ![](assets/page-007-img-08.png)
+- ![](assets/page-007-img-09.png)
+- ![](assets/page-007-img-10.png)
+- ![](assets/page-012-img-01.png)
+- ![](assets/page-013-img-01.png)
+- ![](assets/page-015-img-01.png)
+- ![](assets/page-019-img-01.png)
+- ![](assets/page-019-img-02.png)
+- ![](assets/page-019-img-03.png)
+- ![](assets/page-019-img-04.png)
+- ![](assets/page-019-img-05.png)
+- ![](assets/page-019-img-06.png)
+- ![](assets/page-019-img-07.png)
+- ![](assets/page-019-img-08.png)
+- ![](assets/page-019-img-09.png)
+- ![](assets/page-019-img-10.png)
+- ![](assets/page-019-img-11.png)
+- ![](assets/page-019-img-12.png)
 
 
 
 ---
-
----
-
-## 摘要
-
-使用 Manim 等库生成编程式动画对 LLM 提出了独特挑战：需要空间推理、时间序列化和领域特定 API 知识——这些在通用预训练数据中代表性不足。
-
-本研究引入 **ManimTrainer**（训练流水线）和 **ManimAgent**（推理流水线）：
-
-**ManimTrainer：** 结合 SFT + GRPO 的流水线，使用融合代码和视觉评估信号的统一奖励信号。
-
-**ManimAgent：** 推理流水线，含两种策略：
-- **RITL（渲染器在环）**：生成代码→渲染→检查结果→自我修正循环
-- **RITL-DOC（API 文档增强 RITL）**：RITL + API 文档上下文增强
-
-评估 **17 个开源 <30B LLM**，使用 **9 种训练+推理策略组合**在 ManimBench 上。
-
-**关键结果：**
-- SFT 一般改善代码质量
-- GRPO 增强视觉输出，增加模型对推理时外部信号的响应能力
-- Qwen3-Coder-30B + GRPO + RITL-DOC：**94% 渲染成功率**、**85.7% 视觉相似度**，超出 GPT-4.1 基线 +3pp VS
-- 代码与视觉指标间的相关性随着 SFT 和 GRPO 增强，但随着推理时增强减弱
-
----
-
-## 1 引言
-
-编程式生成动画（如 Manim）相比扩散模型视频生成的**优势**：
-- **效率高**：文本→代码→视频，紧凑 LLM 远低于扩散模型的计算资源需求
-- **精度高**：生成的视频依赖于生成的代码，特别是数学动画（如绘图）
-
-**挑战**：Manim 代码需要 Python 句法流畅性 + 三维坐标系推理 + 动画时间序化 + Manim API 知识。
 
 ---
 

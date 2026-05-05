@@ -68,7 +68,3 @@
 
 ## 参考文献
 
-- Goto et al. Forecast Sports Outcomes. 2026.
-- Štrumbelj & Vračko. OO model for bookmaker odds. 2011.
-- Shin. Optimal betting odds. 1993.
-- Clarke & Clarke. Power model. 2010.

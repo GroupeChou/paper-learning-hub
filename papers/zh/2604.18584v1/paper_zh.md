@@ -21,11 +21,9 @@
 
 - **来源**：[]()
 - **论文链接**：[]()
-- **状态**：待复核
+- **状态**：已生成
 
 ## 摘要
-
-
 
 ## 解析备注
 
@@ -37,7 +35,10 @@
 - 图片数量超过上限，仅保留前 20 张。
 - 图片数量超过上限，仅保留前 20 张。
 
+
+
 ## 图表资源
+
 - ![](assets/page-001-img-01.png)
 - ![](assets/page-001-img-02.png)
 - ![](assets/page-001-img-03.jpeg)
@@ -58,42 +59,38 @@
 - ![](assets/page-001-img-18.png)
 - ![](assets/page-001-img-19.png)
 - ![](assets/page-001-img-20.png)
+- ![](assets/page-001-img-21.jpeg)
+- ![](assets/page-001-img-22.png)
+- ![](assets/page-001-img-23.jpeg)
+- ![](assets/page-004-img-01.png)
+- ![](assets/page-004-img-02.png)
+- ![](assets/page-004-img-03.png)
+- ![](assets/page-004-img-04.png)
+- ![](assets/page-004-img-05.png)
+- ![](assets/page-004-img-06.png)
+- ![](assets/page-004-img-07.png)
+- ![](assets/page-005-img-01.png)
+- ![](assets/page-023-img-01.png)
+- ![](assets/page-025-img-01.jpeg)
+- ![](assets/page-025-img-02.png)
+- ![](assets/page-025-img-03.png)
+- ![](assets/page-025-img-04.png)
+- ![](assets/page-026-img-01.png)
+- ![](assets/page-026-img-02.png)
+- ![](assets/page-026-img-03.png)
+- ![](assets/page-027-img-01.jpeg)
+- ![](assets/page-027-img-02.jpeg)
+- ![](assets/page-027-img-03.jpeg)
+- ![](assets/page-027-img-04.jpeg)
+- ![](assets/page-027-img-05.jpeg)
+- ![](assets/page-027-img-06.jpeg)
+- ![](assets/page-027-img-07.jpeg)
+- ![](assets/page-027-img-08.jpeg)
+- ![](assets/page-027-img-09.png)
 
 
 
 ---
-
----
-
-## 摘要
-
-数学问题求解仍然是 LLM 推理的挑战性测试。我们介绍 **MathNet**，一个大规模、多语言、多模态的数学基准，包含：
-
-- **30,676 个**奥赛级问题
-- 来自 **47 个国家**、**143 个竞赛**、跨越 **4 个十年**
-- **17 种语言**：英、中、葡、意、西、法、德、罗、韩、荷、俄、蒙、斯、马、塞、匈（含简体中文）
-- **68 种问题类型本体**
-- 人类专家编写的**详细多模态解答**
-- 已有数据集贡献：MathArena(162)、OlymMATH(200)、IMOBench(460)、IneqMath(1,552)、OlympicArena(3,233)、Omni-Math(4,428)、OlympiadBench(6,142)
-
-**三个评估任务：**
-1. **数学理解（Math Comprehension）**——求解标准数学问题
-2. **问题检索（Problem Retrieval）**——给定问题，查找语义相似的已解答问题
-3. **数学 RAG（Math RAG）**——给定问题+检索到的相关问题的解答，预测目标答案
-
----
-
-## 1 引言
-
-最近在数学推理方面的进展显著推动了 LLM 和 MLLM 在数学问题求解上的能力。然而现有基准在规模、语言多样性和任务覆盖方面存在局限。
-
-**主要差距：**
-- **语言多样性有限**：大多数数学基准仅支持英语
-- **问题类型本体缺失**：缺乏细粒度的数学问题类型分类
-- **缺乏检索基准**：**首个**数学问题检索基准
-- **多模态覆盖不足**：许多数学问题包含图像/图表
-
-**MathNet 的目标：** 提供一个全面、多语言、多模态的基准，推动数学推理和检索的基础研究。
 
 ---
 

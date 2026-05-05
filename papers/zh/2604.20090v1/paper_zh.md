@@ -21,7 +21,7 @@
 
 - **来源**：[]()
 - **论文链接**：[]()
-- **状态**：待复核
+- **状态**：已生成
 
 ## 摘要
 
@@ -34,7 +34,9 @@
 在 PolyMath 基准测试的 18 种语言和 MMLU-ProX-Lite 的 29 种语言上，使用 DeepSeek-R1-Distill-Qwen-7B 模型的实验表明：UL-XCoT 在保持竞争力的准确率的同时，相比先前的采样基线方法，**解码 Token 成本锐减超过 50%**。此外，UL-XCoT 在低资源语言上展现出更加稳定和显著的增益效果，这凸显了其在标准 XCoT 自一致性方法失效的场景下具有持续且优越的鲁棒性。
 
 
+
 ## 图表资源
+
 - ![](assets/page-001-img-01.png)
 - ![](assets/page-001-img-02.png)
 - ![](assets/page-001-img-03.png)
@@ -55,6 +57,8 @@
 - ![](assets/page-003-img-10.png)
 - ![](assets/page-003-img-11.png)
 - ![](assets/page-003-img-12.png)
+- ![](assets/page-003-img-13.png)
+- ![](assets/page-003-img-14.png)
 
 
 
@@ -631,19 +635,6 @@ Table 4 提供了 PolyMath-Full 的 DW-ACC 总结，这是我们评估协议中�
 ### 附录 D：提示模板
 
 **D.1 简洁推理模板（Concise-reasoning Template）**：
-```
-You are an expert in mathematical / geometric reasoning.
-Think strictly in <LANG_NAME> step by step. Do not use any other language.
-Format:
-<think
-Step 1: ...
-Step 2: ...
-...
-Step N: ...
->
-$\boxed{FINAL_ANSWER}$
-```
-Hard Rules:
 1. 所有中间推理必须在单个 `...` 块内，仅使用 `<LANG_NAME>` 书写
 2. 最多 `<STEP_NUM>` 个编号步骤。简洁且避免重复
 3. `...` 外部只能输出一行：`$\boxed{FINAL_ANSWER}$`

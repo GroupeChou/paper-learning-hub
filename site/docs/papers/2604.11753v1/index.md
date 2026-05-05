@@ -1,4 +1,4 @@
-# paper
+# 
 
 <!-- 论文元数据卡片 -->
 <div class="paper-meta">
@@ -26,7 +26,6 @@
 ## 摘要
 
 
-
 ## 图表资源
 - ![](assets/page-001-img-01.png)
 - ![](assets/page-001-img-02.png)
@@ -38,24 +37,7 @@
 
 ---
 
-## 摘要
 
-我们研究长程智能体任务（如智能体搜索和深度研究）的**并行测试时扩展**——并行生成多个轨迹并聚合为最终响应。
-
-虽然这种扩展在思维链推理中证明有效，但智能体任务带来独特挑战：
-- 轨迹长、多轮、工具增强
-- 输出往往是开放式的
-- 仅聚合最终答案**丢弃轨迹中的丰富信息**
-- 拼接所有轨迹**超出模型上下文窗口**
-
-我们提出 **AggAgent**，一个将并行轨迹视为**环境**的聚合智能体。它配备轻量级工具来检查候选解决方案并跨轨迹搜索，使其能按需导航和综合信息。
-
-**结果：** 跨6个基准和3个模型家族（**GLM-4.7**、**Qwen3.5**、**MiniMax-M2.5**），AggAgent 优于所有现有聚合方法：
-- 平均绝对提升 **+5.3%**
-- 两个深度研究任务上 **+10.3%**
-- 聚合成本仅相当于**单次智能体展开**
-
----
 
 ## 1 引言
 
@@ -143,11 +125,3 @@ AggAgent 将智能体式聚合确立为并行测试时扩展的有效且经济�
 
 ## 参考文献
 
-- Lee et al. AggAgent. 2026.
-- Snell et al. Scaling LLM test-time compute. 2025.
-- Muennighoff et al. Scaling test-time compute with search. 2025.
-- Wang et al. Self-consistency improves chain of thought reasoning. ICLR 2023.
-- Wei et al. Chain-of-thought prompting. NeurIPS 2022.
-- Bai et al. GLM-4.5. arXiv:2508.06471, 2025.
-- Qwen Team. Qwen3.5. 2026.
-- MiniMax. MiniMax-M2.5. 2025.

@@ -1,4 +1,4 @@
-# When Agents Look the Same: Quantifying Distillation-Induced Behavioral Homogenization in LLM-Based Agents
+# paper
 
 <!-- 论文元数据卡片 -->
 <div class="paper-meta">
@@ -19,22 +19,18 @@
 !!! info ""
     <span class="paper-tag paper-tag-translated">✅ 已完成精读</span>
 
-- **来源**：[arXiv:2604.21255v1](https://arxiv.org/abs/2604.21255v1)
-- **论文链接**：[https://arxiv.org/abs/2604.21255v1](https://arxiv.org/abs/2604.21255v1)
-- **状态**：待复核
+- **来源**：[]()
+- **论文链接**：[]()
+- **状态**：已生成
 
 ## 摘要
 
 模型蒸馏是推动LLM智能体快速进步的主要驱动力，但它常常导致行为同质化。许多新兴智能体共享几乎相同的推理步骤和失败模式，暗示它们可能只是少数主导教师模型的蒸馏回声。然而，现有指标无法区分任务成功所需的**强制性行为**和反映模型自主偏好的**非强制性模式**。我们提出两个互补性指标来分离非强制性行为模式：**响应模式相似度（RPS）**用于衡量语言对齐，**动作图相似度（AGS）**用于衡量建模为有向图的工具使用习惯。我们在τ-Bench和τ²-Bench上对来自8个提供商的18个模型进行了评估，以Claude Sonnet 4.5（thinking）为参照，发现家族内模型对的AGS比跨家族对高出5.9个百分点，且Kimi-K2（thinking）的Snode达到82.6%、Sdep达到94.7%，超过了Anthropic自家的Opus 4.1。一项受控蒸馏实验进一步证实，AGS能够区分面向教师模型的特定趋同与一般性改进。RPS和AGS捕捉了不同的行为维度（Pearson r = 0.491），为智能体生态系统中的行为趋同提供了互补的诊断信号。我们的代码已开源：https://github.com/Syuchin/AgentEcho。
 
-## 解析备注
 
-- 图片数量超过上限，仅保留前 20 张。
-- 图片数量超过上限，仅保留前 20 张。
-- 图片数量超过上限，仅保留前 20 张。
-- 图片数量超过上限，仅保留前 20 张。
 
 ## 图表资源
+
 - ![](assets/page-001-img-01.jpeg)
 - ![](assets/page-001-img-02.jpeg)
 - ![](assets/page-001-img-03.jpeg)
@@ -55,6 +51,35 @@
 - ![](assets/page-004-img-04.jpeg)
 - ![](assets/page-004-img-05.jpeg)
 - ![](assets/page-004-img-06.jpeg)
+- ![](assets/page-004-img-07.jpeg)
+- ![](assets/page-004-img-08.jpeg)
+- ![](assets/page-004-img-09.jpeg)
+- ![](assets/page-004-img-10.jpeg)
+- ![](assets/page-004-img-11.jpeg)
+- ![](assets/page-004-img-12.jpeg)
+- ![](assets/page-004-img-13.jpeg)
+- ![](assets/page-004-img-14.jpeg)
+- ![](assets/page-004-img-15.jpeg)
+- ![](assets/page-004-img-16.jpeg)
+- ![](assets/page-004-img-17.jpeg)
+- ![](assets/page-004-img-18.jpeg)
+- ![](assets/page-007-img-01.jpeg)
+- ![](assets/page-007-img-02.jpeg)
+- ![](assets/page-007-img-03.jpeg)
+- ![](assets/page-007-img-04.jpeg)
+- ![](assets/page-008-img-01.jpeg)
+- ![](assets/page-008-img-02.jpeg)
+- ![](assets/page-008-img-03.jpeg)
+- ![](assets/page-021-img-01.jpeg)
+- ![](assets/page-021-img-02.jpeg)
+- ![](assets/page-021-img-03.jpeg)
+- ![](assets/page-021-img-04.jpeg)
+- ![](assets/page-021-img-05.jpeg)
+- ![](assets/page-021-img-06.jpeg)
+- ![](assets/page-021-img-07.jpeg)
+- ![](assets/page-021-img-08.jpeg)
+
+
 
 ---
 
@@ -64,17 +89,13 @@
 
 #### 原文（第1页）
 
-[Page 1]
-When Agents Look the Same: Quantifying Distillation-Induced Similarity in Tool-Use Behaviors
 Chenghao Yang¹,², Yuning Zhang¹,², Zhoufutu Wen³,†, Tao Gong¹,²,†, Jiaheng Liu⁴, Qi Chu¹,², Nenghai Yu¹,²
 ¹中国科学技术大学网络空间安全学院，²安徽省数字安全重点实验室，³M-A-P，⁴南京大学
 yangchenghao@mail.ustc.edu.cn, tgong@ustc.edu.cn, wzft123@outlook.com
 
 摘要
-Model distillation is a primary driver behind the rapid progress of LLM agents, yet it often leads to behavioral homogenization. Many emerging agents share nearly identical reasoning steps and failure modes, suggesting they may be distilled echoes of a few dominant teachers. Existing metrics, however, fail to distinguish mandatory behaviors required for task success from non-mandatory patterns that reflect a model's autonomous preferences. We propose two complementary metrics to isolate non-mandatory behavioral patterns: Response Pattern Similarity (RPS) for verbal alignment and Action Graph Similarity (AGS) for tool-use habits modeled as directed graphs. Evaluating 18 models from 8 providers on τ-Bench and τ²-Bench against Claude Sonnet 4.5 (thinking), we find that within-family model pairs score 5.9 pp higher in AGS than cross-family pairs, and that Kimi-K2 (thinking) reaches 82.6% Snode and 94.7% Sdep, exceeding Anthropic's own Opus 4.1. A controlled distillation experiment further confirms that AGS distinguishes teacher-specific convergence from general improvement. RPS and AGS capture distinct behavioral dimensions (Pearson r = 0.491), providing complementary diagnostic signals for behavioral convergence in the agent ecosystem. Our code is available at https://github.com/Syuchin/AgentEcho.
 
 1 引言
-The current "Cambrian explosion" of high-performing LLM agents often carries a persistent sense of déjà vu. Despite their diverse origins, many emerging agents exhibit a considerably aligned behavior: they share nearly identical reasoning steps, redundant tool-calling habits, and even the same failure modes (Song et al., 2024; Lyu et al., 2025; Kang et al., 2025). This suggests that instead of independent breakthroughs, these models may be distilled echoes of a few dominant teachers.
 
 † Corresponding authors.
 [对话轨迹示例和图表说明]
@@ -118,15 +139,6 @@ yangchenghao@mail.ustc.edu.cn, tgong@ustc.edu.cn, wzft123@outlook.com
 
 (a) 商品换货任务上的示例轨迹。
 
-Qwen3 235B Thinking
-Gemini 2.5 Pro
-GPT-5 high
-Doubao 1.6 high
-Gemini 3 Pro
-DeepSeek R1
-DeepSeek V3
-GLM-4.6
-Kimi K2 (thinking)
 高蒸馏
 低蒸馏
 
@@ -159,24 +171,12 @@ Kimi K2 (thinking)
 
 #### 原文（第2页）
 
-[Page 2]
-Such pervasive mimicry leads to a convergence of "bad habits" across theoretically independent models (Peng et al., 2025; Chen et al., 2025). For instance, rather than optimizing for efficiency, many agents mirror the teacher model's verbose reasoning and redundant tool-calling patterns, such as trial-and-error with every available tool, even when the solution is obvious (Lu et al., 2025; Xiong et al., 2025). This collective alignment means that the ecosystem lacks actual robustness; different models no longer provide independent verification but instead fail in the exact same way (Guo et al., 2024; Shumailov et al., 2024).
 
-Quantifying this distillation-induced alignment is essential for ensuring ecosystem transparency, but existing methods fall short in the complex, multi-step agent landscape. Current metrics primarily focus on response-level similarity in static dialogues, which fails to capture the dynamic nature of tool-use trajectories (Lee et al., 2025). More critically, they struggle to distinguish between mandatory behaviors related to actions strictly required for task success and non-mandatory behaviors, which reflect a model's autonomous preferences. Without isolating these "behavioral degrees of freedom," it is impossible to determine whether two models converge because there is only one correct path, or because one is blindly shadowing the other.
 
-To bridge this gap, we propose a systematic framework to quantify agent distillation by isolating non-mandatory behavioral patterns. Our approach introduces two complementary metrics: Response Pattern Similarity (RPS) and Action Graph Similarity (AGS). RPS measures verbal similarity by segmenting trajectories into five canonical stages (authentication, elicitation, execution, verification, notification) and scoring similarity along style, structure, and alignment dimensions. AGS measures action-level similarity through three sub-metrics. Snode captures optional tool agreement: for a flight cancellation task, all models must call cancel_reservation, but some additionally call get_reservation_details to double-check. When two models share such optional choices, they likely share training signals. Sseq captures sequential habits such as post-write verification, pre-modification confirmation, and error retry patterns. Sdep captures dependency patterns such as output reuse rate and tool-chaining depth. By isolating these non-mandatory behaviors from task-dictated actions, our metrics reveal stylistic and structural alignment that would otherwise be masked by shared correctness.
 
-We evaluate 18 models from 8 major providers on τ-Bench and τ²-Bench, using Claude Sonnet 4.5 (thinking) as the reference "oracle". Our experiments reveal several key findings. (1) Anthropic models exhibit strong internal consistency with RPS scores above 3.8, consistent with shared training pipelines. (2) Kimi-K2 (thinking) shows elevated similarity on both metrics, achieving the highest AGS at 82.7% among non-Anthropic models, with Snode at 82.6% and Sdep at 94.7%. (3) RPS and AGS capture distinct behavioral dimensions, providing complementary signals for distillation. (4) A controlled distillation experiment shows that AGS rises toward the teacher and drops toward a non-teacher control, while baseline metrics rise toward both.
 
-Our findings provide empirical grounding for the initial déjà vu. While some models maintain high behavioral diversity, others exhibit elevated similarity with the reference model across both verbal and structural dimensions, even in scenarios where multiple alternative paths exist.
 
-Our main contributions are summarized as follows.
-• We propose the first framework for tool-use agent distillation quantification, disentangling mandatory and non-mandatory behaviors in tool-use trajectories.
-• We introduce RPS and AGS, providing interpretable metrics for verbal and action-level behavioral similarity.
-• We evaluate 18 models from 8 providers, analyzing behavioral convergence patterns in the current agent ecosystem.
 
-2 Related Work
-Knowledge Distillation for LLM. Knowledge distillation transfers knowledge from a large teacher model to a smaller student model (Hinton et al., 2015) and has been widely applied to compress pre-trained models, such as BERT (Sanh et al., 2019). For large language models, it is typically categorized into white-box (Kim et al., 2024) and black-box distillation (Taori et al., 2023; Chiang et al., 2023). White-box methods require access to intermediate layers or logits (Jiao et al., 2020; Wang et al., 2020), whereas black-box approaches use teacher-generated sequences (Agarwal et al., 2023; Zhao et al., 2024; Hsieh et al., 2023), allowing for distillation from proprietary APIs or arbitrary architectures. However, empirical studies show that distillation can cause homogenization problems in LLMs (Lee et al., 2025).
 
 #### 中文翻译
 
@@ -224,32 +224,21 @@ Knowledge Distillation for LLM. Knowledge distillation transfers knowledge from 
 
 #### 原文（第3页）
 
-[Page 3]
-...arbitrary architectures. However, empirical studies show that distillation can cause homogenization problems in LLMs (Lee et al., 2025).
 
-Data Contamination. Data contamination, or benchmark leakage (Magar and Schwartz, 2022; Xu et al., 2024), refers to unintentional inclusion of test and benchmark data in training corpora, posing challenges to reliable LLM evaluation (Sainz et al., 2023). Such overlaps inflate performance and undermine fair comparisons (Magar and Schwartz, 2022). Solutions include contamination detection (Golchin and Surdeanu, 2025; Dekoninck et al., 2024) and dynamic evaluation (Yu et al., 2024). Recent methods include distributional memorization (Wang et al., 2025) using task-gram language models on semantically related n-grams, and kernel divergence score from embedding kernel similarity matrices (Choi et al., 2025).
 
-Tool-use Benchmark. Tool use is a key capability of LLM agents, spurring multiple benchmarks for evaluation. Early benchmarks like API-Bank (Li et al., 2023) and Gorilla (Patil et al., 2024) target tool selection and real API calling in large-scale tool sets. ToolBench (Qin et al., 2024) extends this to multi-step interactions. BFCL (Patil et al., 2025) focuses on cross-domain function-calling accuracy. TRAJECT-Bench (He et al., 2025) introduces trajectory-aware metrics evaluating selection, parameterization, ordering, and dependencies. Domain-specific benchmarks have also emerged, including finance (Hu et al., 2025) and medicine (Jiang et al., 2025). In conversational agent settings, τ-Bench (Yao et al., 2024) and τ²-Bench (Barres et al., 2025) simulate the collaborative use of agent-user tools, emphasizing realistic interactive evaluation.
 
 3 Method
 
 3.1 Trajectory Representation
 
-Given a set of models M = {M₁, ..., Mₖ} and a tool-use task set T, we collect execution trajectories {τ₁, τ₂, ...} for each model on T. Each trajectory τ consists of multiple dialogue turns. Each turn comprises a user input and a model output, where the model output includes (i) user-visible replies, (ii) tool calls, and (iii) tool-related messages such as intermediate outputs or execution traces. Figure 2 presents the overall framework.
 
-Based on trajectory representation, we design two complementary metrics targeting two distinct information streams within a trajectory. Response Pattern Similarity (RPS) captures verbal fingerprints in how models phrase responses, structure explanations, and express reasoning. Action Graph Similarity (AGS) captures behavioral fingerprints in how models select tools, sequence operations, and reuse outputs. The two metrics capture different aspects of model behavior: models may share verbal patterns but differ in tool usage, or vice versa.
 
 3.2 Response Pattern Similarity
 
-Response Pattern Similarity (RPS) quantifies verbal similarity between two models along three dimensions. Style measures wording habits and vocabulary preferences. Structure measures sentence patterns and response templates. Alignment measures whether both models exhibit similar reasoning-to-action patterns. Detailed definitions are provided in Appendix A.
 
-Tool-use agent trajectories often span dozens of turns, and different models complete the same task in varying numbers of turns. Directly comparing full trajectories or aligning them turn by turn would match unrelated content, leading to unreliable scores. We therefore design a two-stage pipeline as illustrated in Figure 2.
 
-Stage Annotation. To achieve semantic-level alignment across trajectories of different lengths, we define five canonical stages that characterize agent-user interactions: (i) Authentication involves identifying the user, verifying identity, or handling a retry after verification failure. (ii) Elicitation requests missing parameters from the user to proceed with the task, outside of authentication contexts. (iii) Execution invokes domain-specific tools to perform query or modification operations. (iv) Verification seeks explicit user confirmation before executing critical write operations. (v) Notification reports tool execution results or current status to the user. These five stages are derived from analyzing common interaction patterns in tool-use benchmarks and cover the typical agent workflow.
 
-Given a trajectory τ, we use an LLM to annotate each response and tool-related message to its corresponding stage. The annotation prompt and stage definitions are provided in Appendix A.1. The scoring procedure is independent of this specific taxonomy; adapting RPS to a new domain requires only replacing the stage definitions.
 
-Similarity Scoring. After stage annotation, RPS compares only the stages shared by both models. Stages appearing in only one trajectory are excluded, as our goal is to measure similarity rather than coverage. For each shared stage, we input the responses, tool-related messages, and associated tool call contents into an LLM judge. The judge scores similarity along the Style, Structure, and Alignment dimensions, as well as a holistic Overall score. Scores range from 1 to 5, where 5 indicates high similarity, 3 indicates moderate overlap, and 1 indicates no discernible similarity. The final RPS score is the mean of the Overall scores across all shared stages. The scoring prompt and detailed rubric are provided in Appendix A.3.
 
 #### 中文翻译
 
@@ -302,23 +291,15 @@ Similarity Scoring. After stage annotation, RPS compares only the stages shared 
 
 #### 原文（第4页）
 
-[Page 4]
 [图2展示及阶段标注说明]
-...cluded, as our goal is to measure similarity rather than coverage. For each shared stage, we input the responses, tool-related messages, and associated tool call contents into an LLM judge. The judge scores similarity along the Style, Structure, and Alignment dimensions, as well as a holistic Overall score. Scores range from 1 to 5, where 5 indicates high similarity, 3 indicates moderate overlap, and 1 indicates no discernible similarity. The final RPS score is the mean of the Overall scores across all shared stages. The scoring prompt and detailed rubric are provided in Appendix A.3.
 
 3.3 Action Graph Similarity
 
-Action Graph Similarity (AGS) analyzes structural patterns in tool call sequences to characterize behavioral similarity at the level of tool invocation. Unlike RPS, AGS operates directly on tool call sequences without requiring stage annotation, making it applicable to any domain where agents interact with tools.
 
-Graph Construction. Given a dialogue trajectory τ, we construct a directed graph G = (V, Eₛ, E_d) based on the tool call sequence.
 
-Definition 1 (Tool Node). Each node v ∈ V represents a tool call, with attributes: v = (name, args, result) where name is the tool name, args is the input arguments, and result is the return value.
 
-Definition 2 (Sequential Edge). A sequential edge (u, v) ∈ Eₛ connects temporally adjacent tool calls according to their execution order in τ.
 
-Definition 3 (Dependency Edge). A dependency edge (u, v) ∈ E_d is established when an argument value of v is derived from the result of u. Since simple string matching produces excessive false positives (e.g., common identifiers or dates appearing coincidentally), we use an LLM judge to verify semantic validity. For each candidate edge identified by string overlap, the LLM determines whether the matched value is actually obtained from the source tool's result or is known beforehand (e.g., from user input). We validate the accuracy of this judge on manually annotated edges in Appendix D.3. When a dependency edge exists between consecutive nodes, the sequential edge is omitted to avoid redundant encoding.
 
-Behavioral Metrics. Based on the constructed graph G, AGS characterizes behavioral similarity...
 
 #### 中文翻译
 
@@ -362,30 +343,20 @@ AGS的核心创新在于将工具调用序列建模为带有序列边和依赖�
 
 #### 原文（第5页）
 
-[Page 5]
-...along three dimensions. For sequential and dependency patterns, we design three heuristic features, each based on its interpretability.
 
-Optional Tool Agreement Snode measures the consistency of optional tool choices between two models. When completing the same task, models invoke both mandatory tools required for task completion and optional tools for auxiliary purposes. Mandatory tools are dictated by the correct execution path, so all successful models necessarily invoke them. Including these shared invocations in similarity computation inflates scores and obscures model-specific tool preferences. To distinguish these two categories, we analyze successful trajectories from multiple models on the same task. Let Tools(M, t) denote the set of tools invoked by model M on task t, and M*_t denote the set of models that successfully complete task t. Mandatory tools are the intersection of tool sets across all successful models:
 
 F_mandatory_t = ∩_{M ∈ M*_t} Tools(M, t)
 
-Optional tools are those appearing in some but not all successful trajectories. Snode computes the agreement rate on optional tools across all tasks, where agreement means both models either use or skip the same optional tool.
 
-Sequential Pattern Similarity Sseq measures whether two models exhibit similar local execution habits between adjacent tool calls. We extract three features based on sequential edges Eₛ: (i) post-write verification rate, measuring the tendency to invoke a read operation after a write for verification; (ii) pre-write confirmation rate, measuring the tendency to query before executing a write; (iii) error retry rate, measuring the tendency to retry the same tool after an error. Each trajectory is represented as a three-dimensional feature vector. For each task, we compute the cosine similarity between the two models' feature vectors, then average across all tasks to obtain Sseq.
 
-Dependency Pattern Similarity Sdep measures whether two models exhibit similar patterns in reusing tool outputs. We extract three features based on dependency edges E_d: (i) output reuse rate, measuring the proportion of tool calls that reuse outputs from preceding calls; (ii) longest dependency chain length, measuring the depth of chained planning; (iii) output fan-out rate, measuring the proportion of tool outputs reused by multiple subsequent calls. Similar to Sseq, we compute per-task cosine similarity and average across tasks. Detailed definitions and computation methods for the three sub-metrics are provided in Appendix B.
 
 4 Experiments
 
 4.1 Experiment Settings
 
-Model Families. We evaluate 18 models from 8 major providers: Anthropic (Claude Sonnet 4.5, Claude Opus 4.1), OpenAI (GPT-4.1, GPT-5), DeepSeek (R1, V3.1, V3-0324), Moonshot (Kimi-K2), ByteDance (Doubao 1.6), Google (Gemini 2.5 Pro, Gemini 3 Pro), Qwen (Qwen3-30B, Qwen3-235B), and Zhipu (GLM-4.6). All models are accessed via official APIs with default hyperparameters. We verify that temperature-induced AGS variation across runs remains substantially smaller than cross-model differences (Appendix D.5). We use Claude Sonnet 4.5 (thinking) as the reference model and compute behavioral similarity between each model and the reference.
 
-Tool-use Benchmark. We use τ-Bench and τ²-Bench, which contains real-world agent tasks across three domains: airline and retail from τ-Bench, and telecom from τ²-Bench. We sample 50 tasks from each domain.
 
-RPS Evaluation. For RPS annotation and scoring, we use Gemini-2.5-flash-thinking as the LLM annotator and judge with default temperature. Model-level rankings remain stable across temperature settings (Appendix D.4).
 
-Baseline metrics. We compare against two categories of baselines. Semantic baselines include (i) RSE, (ii) n-gram overlap with n=2, and (iii) BERTScore. For graph structure, we use (iv) GED, with similarity 1 - d_GED/(|V₁|+|V₂|+|E₁|+|E₂|).
 
 #### 中文翻译
 
@@ -439,22 +410,16 @@ AGS的三个子指标各自捕捉了工具使用行为的不同方面：Snode关
 
 #### 原文（第6页）
 
-[Page 6]
 表1：18个模型相对于Claude Sonnet 4.5（thinking）的行为相似度。
 
 [表1内容]
 
 4.2 Main Results
 
-Table 1 presents the behavioral similarity between each model and Claude Sonnet 4.5 (thinking). AGS measures action-level patterns, while RPS measures verbal patterns.
 
-Anthropic models exhibit strong internal consistency. Both Anthropic models achieve RPS scores above 3.8, with Sonnet 4.5 (no-think) at 3.87 and Opus 4.1 (thinking) at 3.85. These scores exceed those of all non-Anthropic models by at least 0.20 points. The two models also achieve Sdep scores of 94.0% and 93.7% respectively, indicating highly similar tool invocation preferences. This within-family consistency aligns with expectations for models sharing training pipelines and serves as a baseline for interpreting cross-family similarity (Section 5.1).
 
-Kimi-K2 (thinking) exhibits exceptionally high similarity to the reference model. Among non-Anthropic models, Kimi-K2 (thinking) achieves the highest AGS at 82.7% and the highest RPS at 3.65. Notably, its Snode reaches 82.6% and Sdep reaches 94.7%, both exceeding the Anthropic baseline (Opus 4.1 at 81.0% and 93.7%). This means Kimi-K2 (thinking) shares more optional tool choices and tool invocation preferences with the reference model than models from the same provider family.
 
-When we repeat the analysis using GPT-5 as an alternative reference, Kimi-K2's similarity to Claude remains consistently higher than its similarity to GPT-5, confirming that this pattern reflects directional behavioral inheritance rather than benchmark-induced convergence across all models (Appendix D.2).
 
-Sub-metrics capture different behavioral dimensions. The three AGS sub-metrics measure distinct aspects of tool-use behavior. Snode measures optional tool selection preferences, where Kimi-K2 (thinking) exhibits the highest similarity to the reference model at 82.6%. Sensitivity analysis shows Snode remains stable across different model subsets (Appendix D.1). Without mandatory/optional separation, Snode inflates by 12.2 pp on average for non-family models (Appendix C.2). Sseq captures local execution habits such as post-write verification, pre-write confirmation, and error persistence patterns. Sdep measures dependency topology such as output reuse rate, dependency chain depth, and output fan-out rate. Kimi-K2 (thinking) also exhibits the highest Sdep similarity at 94.7%, suggesting that its tool dependency patterns closely mirror those of the reference model. Stage alignment reduces within-case RPS scoring variance by 44–55% compared to full-trajectory comparison (Appendix C.1).
 
 #### 中文翻译
 
@@ -517,20 +482,15 @@ Sub-metrics capture different behavioral dimensions. The three AGS sub-metrics m
 
 #### 原文（第7页）
 
-[Page 7]
 [图3展示及表2、表3内容]
 
 5 Discussion
 
 5.1 AGS and RPS Detect Behavioral Similarity Patterns
 
-Models with confirmed distillation relationships, such as the DeepSeek-R1-Distill-Qwen series, are distilled exclusively for reasoning and achieve low success rates on τ-Bench and τ²-Bench, precluding trajectory-level analysis. To obtain ground-truth validation, we first compare within-family and cross-family model pairs to establish a behavioral baseline, then conduct a controlled distillation experiment with a known teacher-student pair.
 
-We first examine within-family similarity as a baseline. Models from the same provider share training pipelines and are expected to exhibit higher behavioral similarity than cross-family pairs. When a cross-family pair reaches comparable similarity, it suggests behavioral inheritance beyond independent development. We randomly sample 50 tasks from the benchmark for this analysis.
 
-Within-family pairs achieve 5.9 pp higher AGS than cross-family pairs. As shown in Table 2, Claude Opus 4.1 and Claude Sonnet 4.5 achieve 87.2% AGS and 4.18 RPS within the Anthropic family. Similarly, DeepSeek-R1 and DeepSeek-V3.1 (thinking) achieve 86.7% AGS and 3.76 RPS within the DeepSeek family. By contrast, the cross-family pair DeepSeek-R1 versus Claude Sonnet 4.5 achieves only 81.1% AGS and 3.48 RPS. This 5.9 pp gap confirms that our metrics capture behavioral inheritance, establishing a baseline for interpreting cross-family similarity in the following analysis.
 
-Controlled distillation produces a directional signal in AGS. To further validate our metrics under known ground truth, we fine-tune Qwen2.5-14B-Instruct on 200 τ-bench trajectories generated by Claude Sonnet 4.5 via LoRA, with DeepSeek R1 as a non-teacher control (training details in Appendix C.4). As shown in Table 3, AGS toward the teacher increases by +0.13 while AGS toward the control decreases by −0.05. In contrast, GED increases by +0.23 and +0.20 toward the teacher and control respectively, with a gap of only 0.03. Sub-metric decomposition and RPS analysis are provided in Appendix C.3.
 
 #### 中文翻译
 
@@ -589,18 +549,13 @@ Controlled distillation produces a directional signal in AGS. To further validat
 
 #### 原文（第8页）
 
-[Page 8]
 [图4展示及表4内容]
 
 5.2 Kimi-K2 Exhibits Claude-like Behavioral Patterns
 
-The baseline established above reveals an unexpected pattern. Kimi-K2 (thinking) achieves 82.7% AGS and 3.65 RPS with Claude Sonnet 4.5 (thinking), the highest among all non-Anthropic models. Notably, this cross-family similarity exceeds some within-family Anthropic pairs, raising the question of whether Kimi-K2 has inherited behavioral patterns from Claude. We investigate this hypothesis through case studies on both response style and tool invocation.
 
-Kimi-K2 and Claude share conversational style patterns that GPT-5 does not exhibit. Figure 3 compares response trajectories in a customer service scenario. Unlike GPT-5, which produces brief, procedurally oriented responses, both Claude Sonnet 4.5 (thinking) and Kimi-K2 consistently employ informal phrasing with enthusiastic affirmatives such as "Excellent!" and "Perfect!". Even without explicit directives in the system prompt, both models proactively acknowledge the current state, anticipate subsequent steps, and provide emotional support. This shared tendency toward user engagement, absent in GPT-5, suggests that it is inherited conversational heuristics rather than task-specific adaptation.
 
-Kimi-K2 and Claude share optional tool preferences that GPT-5 does not exhibit. Figure 4 illustrates a concrete case. In an exchange request task, both Claude and Kimi-K2 first invoke the optional find_user_id_by_email, while GPT-5 skips this step and directly calls find_user_id_by_name_zip. Email verification is not required for task completion; however, Claude and Kimi-K2 share a preference for redundant verification. As shown in Table 4, the Kimi–Claude pair achieves Snode of 0.661 in the both-correct setting, 3.4× higher than 0.196 for the GPT–Claude pair. This pattern remains stable across "both-wrong" and mixed settings, suggesting that the similarity reflects inherent decision-making heuristics rather than task-specific strategies. Detailed analysis of Sseq and Sdep is provided in Appendix E.2.
 
-Taken together, Kimi-K2 exhibits high similarity to Claude across both verbal expression (RPS 3.65) and tool invocation (AGS 82.7%), reaching levels comparable to within-family pairs on several sub-metrics. The two metrics capture largely independent signals (Pearson r = 0.491, p = 0.054 across 16 non-Anthropic models), confirming that this convergence spans distinct behavioral dimensions. Correlation analysis with baseline metrics and additional ablation studies are provided in Appendix D.6.
 
 #### 中文翻译
 
@@ -656,21 +611,11 @@ Taken together, Kimi-K2 exhibits high similarity to Claude across both verbal ex
 
 #### 原文（第9页）
 
-[Page 9]
-...this convergence spans distinct behavioral dimensions. Correlation analysis with baseline metrics and additional ablation studies are provided in Appendix D.6.
 
 6 Conclusion
 
-We present a framework for quantifying behavioral similarity in LLM agents by disentangling mandatory task behaviors from non-mandatory patterns through two complementary metrics, RPS and AGS. Evaluating 18 models from 8 providers, we find that within-family model pairs consistently score higher than cross-family pairs. Among cross-family pairs, Kimi-K2 (thinking) stands out with Snode at 82.6% and Sdep at 94.7%, both exceeding Anthropic's own Opus 4.1. A controlled distillation experiment validates the metrics: AGS increases toward the known teacher while decreasing toward a control, whereas GED rises in both directions without distinguishing the two. We release our code to support further work on behavioral diagnostics in the agent ecosystem.
 
-Acknowledgements
-This work was supported by the National Natural Science Foundation of China (No. 62121002) and the advanced computing resources provided by the Supercomputing Center of the USTC.
 
-Limitations
-Pairwise Analysis Scope. Our framework can construct a full pairwise similarity matrix, but we report results relative to a single reference model due to computational cost. Complete pairwise analysis across 18 models would require 153 comparisons.
-Benchmark Coverage. We evaluate on τ-Bench and τ²-Bench, covering three English-language customer service domains (airline, retail, telecom). Generalizability to other domains, task types, or languages remains to be validated.
-Scope of Applicability. RPS and AGS are designed for tool-use agents with observable tool invocations. AGS operates on tool-call sequences and applies wherever tools are used. RPS depends on a domain-specific stage taxonomy; adapting it to domains with different interaction patterns (e.g., coding agents with iterative self-reflection) requires new stage definitions. Extending the framework to non-tool-use paradigms such as code generation or multi-agent collaboration would require further methodological work.
-Validation. We validate our metrics through within-family comparison and a controlled distillation experiment. Validation on publicly deployed models with confirmed distillation relationships remains open, as such models currently lack sufficient tool-use capabilities for trajectory-level analysis. Additionally, framework choice can affect behavioral similarity; we use a generic ReAct framework to avoid masking distillation signals (Appendix D.7).
 
 References
 [参考文献列表]

@@ -21,11 +21,9 @@
 
 - **来源**：[]()
 - **论文链接**：[]()
-- **状态**：待复核
+- **状态**：已生成
 
 ## 摘要
-
-
 
 ## 解析备注
 
@@ -33,7 +31,10 @@
 - 图片数量超过上限，仅保留前 20 张。
 - 图片数量超过上限，仅保留前 20 张。
 
+
+
 ## 图表资源
+
 - ![](assets/page-002-img-01.jpeg)
 - ![](assets/page-002-img-02.jpeg)
 - ![](assets/page-002-img-03.jpeg)
@@ -54,43 +55,27 @@
 - ![](assets/page-003-img-02.jpeg)
 - ![](assets/page-003-img-03.jpeg)
 - ![](assets/page-003-img-04.jpeg)
+- ![](assets/page-003-img-05.jpeg)
+- ![](assets/page-003-img-06.jpeg)
+- ![](assets/page-003-img-07.jpeg)
+- ![](assets/page-003-img-08.jpeg)
+- ![](assets/page-003-img-09.jpeg)
+- ![](assets/page-003-img-10.jpeg)
+- ![](assets/page-003-img-11.jpeg)
+- ![](assets/page-013-img-01.jpeg)
+- ![](assets/page-013-img-02.jpeg)
+- ![](assets/page-013-img-03.png)
+- ![](assets/page-016-img-01.jpeg)
+- ![](assets/page-016-img-02.jpeg)
+- ![](assets/page-016-img-03.jpeg)
+- ![](assets/page-016-img-04.jpeg)
+- ![](assets/page-016-img-05.jpeg)
+- ![](assets/page-016-img-06.jpeg)
+- ![](assets/page-016-img-07.jpeg)
 
 
 
 ---
-
----
-
-## 摘要（Abstract）
-
-从田间照片进行作物病害诊断面临两个反复出现的问题：基准测试中得分高的模型经常**幻觉植物种名**；即使预测正确，其推理通常对从业者不可访问。
-
-本文描述 **Agri-CPJ（Caption-Prompt-Judge）**，一个**无训练**、**少样本**的框架。大视觉语言模型首先生成结构化形态学描述，通过多维质量门控迭代优化，然后才回答诊断问题。然后从互补视角生成两个候选响应，一个LLM裁判根据领域特定标准选择更强的那个。
-
-**描述优化是影响最大的组件**：消融研究一致表明，跳过它会在两个测试模型上持续降低下游精度。
-
-**主要结果：**
-- **CDDMBench**：GPT-5-Nano + GPT-5-mini 生成的描述 → 病害分类 **+22.7 pp**，QA 得分 **+19.5 分**
-- **AgMMU-MCQs**（无修改评估）：GPT-5-Nano **77.84%**，Qwen-VL-Chat **64.54%** — 达到或超过大多数同等规模的开源模型
-- **人类验证研究**：LLM 裁判选择与植物病理学专家评估的 Cohen's **κ = 0.88**
-
-代码和数据已公开：https://github.com/CPJ-Agricultural/CPJ-Agricultural-Diagnosis
-
----
-
-## 1 引言（Introduction）
-
-精确的作物病害诊断需要两个大多数当前系统不能同时提供的性质：**正确识别病原体或状况**，以及**以从业者可评估的术语解释该识别**。
-
-当前主流方案严重依赖单模态视觉流水线（CNN分类器、YOLO检测器）。这些模型在训练基准上表现良好，但一旦稍微偏离分布（不同光照、新品种、不寻常生长阶段）就会崩溃，且不提供失败原因。对于权衡杀菌剂成本的农学家，或向小农户提供建议的推广官员，单个预测类别无法提供验证结论或调整建议到本地条件的依据。
-
-大视觉语言模型（Qwen-VL、GPT系列、LLaVA、Flamingo）代表了质变——它们接受自由形式诊断问题并在有利条件下阐述推理。农业VQA研究确认它们产生比纯标签流水线更丰富的输出。但一致性问题：没有机制强制模型在做出诊断前**描述可观察特征**。
-
-### 本文贡献
-
-1. **Agri-CPJ 流水线**：无训练少样本框架，视觉推理在回答任何诊断问题前被外部化为**迭代优化的描述**，使从业者能将结论追溯到支持它的具体图像观察
-2. **双视角候选生成**：VQA 阶段从互补诊断视角生成两个候选响应，描述提示有意隐藏作物/疾病名称以抑制过早标签承诺；多标准 LLM 裁判在候选之间选择并生成明确推理
-3. **受控实验**：在 CDDMBench 和 AgMMU-MCQs 上跨两个骨干架构，加上人类验证研究
 
 ---
 
@@ -311,8 +296,6 @@ Agri-CPJ 通过将诊断解耦为**描述 → 回答 → 判断**三步骤，实
 
 （主要，完整版参考原文 ~50篇）
 
-- Zhang et al. WDLM: Wheat disease diagnosis with step-by-step explanations, 2024.
-- Liu et al. CDDMBench: Crop disease diagnosis benchmark, 2024.
 - Gauba et al. AgMMU: Agricultural multimodal understanding, 2025.
 - Bai et al. Qwen-VL, 2023.
 - Achiam et al. GPT-4 Technical Report, 2023.
@@ -323,5 +306,3 @@ Agri-CPJ 通过将诊断解耦为**描述 → 回答 → 判断**三步骤，实
 - Hu et al. REVEAL, 2023.
 - Zhang et al. Multimodal-CoT, 2023.
 - Yin et al. Woodpecker, 2024.
-- Shi et al. Verbosity bias in LLM judges, 2025.
-- Zhang et al. Agri-CPJ (ICASSP 2026 short version), 2026.

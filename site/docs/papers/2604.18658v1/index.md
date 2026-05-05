@@ -208,16 +208,3 @@ Owner-Harm 是 AI Agent 安全中系统性研究中不足的威胁类别。现�
 
 ## 参考文献
 
-- Andriushchenko et al. AgentHarm. ICLR 2025.
-- Debenedetti et al. AgentDojo. NeurIPS 2024.
-- PromptArmor. Slack AI data exfiltration. 2024.
-- Zenity Research. M365 Copilot prompt injection. 2024.
-- Schiffer. Meta's AI agent incident. 2026.
-- Rehberger. Exfiltration via M365 Copilot. 2024.
-- Greshake et al. Indirect prompt injection. arXiv:2302.12173, 2023.
-- Ruan et al. ToolEmu. ICLR 2024.
-- Rebedea et al. NeMo Guardrails. 2023.
-- Inan et al. Llama Guard. 2023.
-- Palumbo et al. PCAS. arXiv:2602.16708, 2026.
-- Wang et al. AgentSpec. ICSE 2026.
-- Pearl. Causality. Cambridge University Press, 2009.

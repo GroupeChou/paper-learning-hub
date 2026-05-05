@@ -217,7 +217,6 @@ AI实现使用大语言模型对照量规分析每位学生的回应。提示词
 
 **组得分指标**：算法优化的综合得分为：
 
-$$\text{GroupScore} = \text{PositionScore} + \text{LevelScore}$$
 
 **LevelScore**强制±1级约束作为主要目标：
 - 等级差>1 → -100（硬约束违反）

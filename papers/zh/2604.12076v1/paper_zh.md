@@ -176,11 +176,3 @@ IVE 在 LLM 中普遍存在且对齐训练放大了它。标准推理策略（Co
 
 ## 参考文献
 
-- Raiyan. Narrative over Numbers. arXiv:2604.12076, 2026.
-- Small, Loewenstein & Slovic. Sympathy and callousness. 2007.
-- Kogut & Ritov. The identified victim effect. 2005.
-- Lee & Feeley. Meta-analysis of IVE. 2016.
-- Västfjäll et al. Compassion fade. 2014.
-- Kahneman. Thinking, Fast and Slow. 2011.
-- Slovic. If I look at the mass I will never act. 2007.
-- Nisbett & Ross. Human Inference. 1980.

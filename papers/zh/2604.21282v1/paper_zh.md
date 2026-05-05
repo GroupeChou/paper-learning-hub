@@ -239,12 +239,3 @@ NIST Juliet Test Suite v1.3，262 个函数级样本：
 
 ## 参考文献
 
-- Wang. Strategic Heterogeneous Multi-Agent Architecture. AAMAS 2026.
-- DeepSeek-AI. DeepSeek-V3 Technical Report. arXiv:2412.19437, 2024.
-- Qwen Team. Qwen3 Technical Report. arXiv:2505.09388, 2025.
-- NIST SAMATE. Juliet Test Suite v1.3.
-- Ding et al. Vulnerability Detection with Code Language Models: How Far Are We? ICSE 2025.
-- Widyasari et al. VulTrial. ICSE 2026.
-- Du et al. Improving Factuality and Reasoning through Multiagent Debate. ICML 2023.
-- Hao et al. Game-Theoretic Lens on LLM-based MAS. arXiv:2601.15047, 2026.
-- Nisan et al. Algorithmic Game Theory. Cambridge, 2007.

@@ -1,4 +1,4 @@
-# paper
+# 
 
 <!-- 论文元数据卡片 -->
 <div class="paper-meta">
@@ -26,7 +26,6 @@
 ## 摘要
 
 
-
 ## 图表资源
 - ![](assets/page-004-img-01.png)
 - ![](assets/page-006-img-01.png)
@@ -38,28 +37,7 @@
 
 ---
 
-## 摘要（Abstract）
 
-大语言模型（LLM）在临床环境中的使用日益增加，引发了人们对生成的医学文本和临床推理中**种族偏见**的担忧。现有研究已经识别了医疗LLM中的偏见，但许多研究聚焦于单一模型，对缓解措施的关注较少。
-
-本研究以**欧盟AI法案（EU AI Act）**作为治理视角，在两项任务上评估了五个广泛使用的LLM：
-1. **合成患者病例生成任务**
-2. **鉴别诊断排序任务**
-
-使用美国的**按种族分层的流行病学分布**和**专家鉴别诊断列表**作为基准，我们应用结构化提示模板和两部分评估设计来检验隐式和显式种族偏见：
-
-**主要发现：**
-- 在合成病例生成任务中，所有模型都偏离了观察到的种族分布，其中 **GPT-4.1 的总体偏差最小**。
-- 在鉴别诊断任务中，**DeepSeek V3 在报告的所有指标上表现最强**。
-- 当嵌入智能体工作流时，DeepSeek V3 相对于独立模型的平均p值提升了 **0.0348**，中位p值提升了 **0.1166**，平均差异降低了 **0.0949**——尽管并非每个指标都有改善。
-
-**结论：** 这些发现支持对医疗环境中使用的AI系统进行**多指标偏见评估**，并表明**基于检索的智能体工作流**可能减少基准诊断任务中的某些显式偏见形式。
-
-详细的提示模板、实验数据集和代码流水线可在我们的GitHub上获取。
-
-> 💡 **核心价值**：首次系统性比较5个主流LLM的种族偏见，并探索RAG+Search智能体工作流是否能缓解医疗场景下的偏见问题。
-
----
 
 ## 1 引言（Introduction）
 
@@ -279,9 +257,6 @@ Zack等人[13]引入了一个系统性框架，用于评估医疗相关LLM应用
 |------|----------|
 | ChatGPT-4.1 | Microsoft Azure AI Foundry [32] |
 | Llama 3.3 | Microsoft Azure AI Foundry [32] |
-| DeepSeek V3 | Microsoft Azure AI Foundry [32] |
-| Grok 3 | Microsoft Azure AI Foundry [32] |
-| Gemini 2.5 Pro | Google Cloud Vertex AI [31] |
 
 **模型选择标准**：可访问性、代表性以及在**以人为本评估**中的地位[27,28,29,30]
 
@@ -515,19 +490,14 @@ Zack等人[13]引入了一个系统性框架，用于评估医疗相关LLM应用
 
 **精选核心文献：**
 
-[1] Moglia et al. "Large language models in healthcare: from systematic review to comparative analysis." *AI Review*, 2024.
 
-[2] Montalmant & Ettinger. "The racial disparities in maternal mortality and impact of structural racism." *J Racial Ethnic Health Disparities*, 2024.
 
 [3] EU Parliament & Council. **Regulation (EU) 2024/1689 — AI Act**, 2024. （本研究的治理框架基础）
 
 [4] Ranjan et al. "A comprehensive survey of bias in LLMs." arXiv:2409.16430, 2024.
 
-[8] Kim et al. "Race, gender, and age biases in biomedical masked language models." *ACL Findings*, 2023.
 
-[9] Yang et al. "Unmasking and quantifying racial bias of LLMs in medical report generation." *Comms Medicine*, 2024.
 
-[12] Omar et al. "Sociodemographic biases in medical decision making by LLMs." *Nature Medicine*, 2025.
 
 [13] Zack et al. "Assessing potential of GPT-4 to perpetuate racial and gender biases in healthcare." *Lancet Digital Health*, 2024. （基准框架来源）
 

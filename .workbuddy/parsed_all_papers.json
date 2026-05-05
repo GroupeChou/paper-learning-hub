@@ -1485,8 +1485,8 @@
   {
     "pid": "2604.14687v1",
     "n_chunks": 21,
-    "n_images_extracted": 20,
-    "n_asset_files": 20,
+    "n_images_extracted": 45,
+    "n_asset_files": 45,
     "asset_files": [
       "page-005-img-01.png",
       "page-006-img-01.png",
@@ -1507,7 +1507,32 @@
       "page-032-img-01.png",
       "page-033-img-01.png",
       "page-033-img-02.png",
-      "page-034-img-01.png"
+      "page-034-img-01.png",
+      "page-035-img-01.png",
+      "page-036-img-01.png",
+      "page-036-img-02.png",
+      "page-037-img-01.png",
+      "page-038-img-01.png",
+      "page-039-img-01.png",
+      "page-040-img-01.png",
+      "page-040-img-02.png",
+      "page-041-img-01.png",
+      "page-041-img-02.png",
+      "page-042-img-01.png",
+      "page-042-img-02.png",
+      "page-043-img-01.png",
+      "page-044-img-01.png",
+      "page-045-img-01.png",
+      "page-045-img-02.png",
+      "page-046-img-01.png",
+      "page-047-img-01.png",
+      "page-048-img-01.png",
+      "page-048-img-02.png",
+      "page-049-img-01.png",
+      "page-050-img-01.png",
+      "page-050-img-02.png",
+      "page-051-img-01.png",
+      "page-051-img-02.png"
     ],
     "has_gallery_in_header": true,
     "chunks": [
@@ -1764,25 +1789,7 @@
       "assets/page-026-img-01.png",
       "assets/page-027-img-01.png"
     ],
-    "parse_notes": [
-      "图片数量超过上限，仅保留前 20 张。",
-      "图片数量超过上限，仅保留前 20 张。",
-      "图片数量超过上限，仅保留前 20 张。",
-      "图片数量超过上限，仅保留前 20 张。",
-      "图片数量超过上限，仅保留前 20 张。",
-      "图片数量超过上限，仅保留前 20 张。",
-      "图片数量超过上限，仅保留前 20 张。",
-      "图片数量超过上限，仅保留前 20 张。",
-      "图片数量超过上限，仅保留前 20 张。",
-      "图片数量超过上限，仅保留前 20 张。",
-      "图片数量超过上限，仅保留前 20 张。",
-      "图片数量超过上限，仅保留前 20 张。",
-      "图片数量超过上限，仅保留前 20 张。",
-      "图片数量超过上限，仅保留前 20 张。",
-      "图片数量超过上限，仅保留前 20 张。",
-      "图片数量超过上限，仅保留前 20 张。",
-      "图片数量超过上限，仅保留前 20 张。"
-    ]
+    "parse_notes": []
   },
   {
     "pid": "2604.14858v1",
@@ -3169,8 +3176,8 @@
   {
     "pid": "2604.18364v1",
     "n_chunks": 22,
-    "n_images_extracted": 20,
-    "n_asset_files": 20,
+    "n_images_extracted": 39,
+    "n_asset_files": 39,
     "asset_files": [
       "page-004-img-01.png",
       "page-004-img-02.png",
@@ -3191,7 +3198,26 @@
       "page-007-img-03.png",
       "page-007-img-04.png",
       "page-007-img-05.png",
-      "page-007-img-06.png"
+      "page-007-img-06.png",
+      "page-007-img-07.png",
+      "page-007-img-08.png",
+      "page-007-img-09.png",
+      "page-007-img-10.png",
+      "page-012-img-01.png",
+      "page-013-img-01.png",
+      "page-015-img-01.png",
+      "page-019-img-01.png",
+      "page-019-img-02.png",
+      "page-019-img-03.png",
+      "page-019-img-04.png",
+      "page-019-img-05.png",
+      "page-019-img-06.png",
+      "page-019-img-07.png",
+      "page-019-img-08.png",
+      "page-019-img-09.png",
+      "page-019-img-10.png",
+      "page-019-img-11.png",
+      "page-019-img-12.png"
     ],
     "has_gallery_in_header": true,
     "chunks": [
@@ -3429,13 +3455,7 @@
       "assets/page-004-img-09.png",
       "assets/page-004-img-10.png"
     ],
-    "parse_notes": [
-      "图片数量超过上限，仅保留前 20 张。",
-      "图片数量超过上限，仅保留前 20 张。",
-      "图片数量超过上限，仅保留前 20 张。",
-      "图片数量超过上限，仅保留前 20 张。",
-      "图片数量超过上限，仅保留前 20 张。"
-    ]
+    "parse_notes": []
   },
   {
     "pid": "2604.18429v1",
@@ -3520,8 +3540,8 @@
   {
     "pid": "2604.18584v1",
     "n_chunks": 27,
-    "n_images_extracted": 20,
-    "n_asset_files": 20,
+    "n_images_extracted": 48,
+    "n_asset_files": 48,
     "asset_files": [
       "page-001-img-01.png",
       "page-001-img-02.png",
@@ -3542,7 +3562,35 @@
       "page-001-img-17.png",
       "page-001-img-18.png",
       "page-001-img-19.png",
-      "page-001-img-20.png"
+      "page-001-img-20.png",
+      "page-001-img-21.jpeg",
+      "page-001-img-22.png",
+      "page-001-img-23.jpeg",
+      "page-004-img-01.png",
+      "page-004-img-02.png",
+      "page-004-img-03.png",
+      "page-004-img-04.png",
+      "page-004-img-05.png",
+      "page-004-img-06.png",
+      "page-004-img-07.png",
+      "page-005-img-01.png",
+      "page-023-img-01.png",
+      "page-025-img-01.jpeg",
+      "page-025-img-02.png",
+      "page-025-img-03.png",
+      "page-025-img-04.png",
+      "page-026-img-01.png",
+      "page-026-img-02.png",
+      "page-026-img-03.png",
+      "page-027-img-01.jpeg",
+      "page-027-img-02.jpeg",
+      "page-027-img-03.jpeg",
+      "page-027-img-04.jpeg",
+      "page-027-img-05.jpeg",
+      "page-027-img-06.jpeg",
+      "page-027-img-07.jpeg",
+      "page-027-img-08.jpeg",
+      "page-027-img-09.png"
     ],
     "has_gallery_in_header": true,
     "chunks": [
@@ -3834,15 +3882,7 @@
       "assets/page-001-img-09.png",
       "assets/page-001-img-10.png"
     ],
-    "parse_notes": [
-      "图片数量超过上限，仅保留前 20 张。",
-      "图片数量超过上限，仅保留前 20 张。",
-      "图片数量超过上限，仅保留前 20 张。",
-      "图片数量超过上限，仅保留前 20 张。",
-      "图片数量超过上限，仅保留前 20 张。",
-      "图片数量超过上限，仅保留前 20 张。",
-      "图片数量超过上限，仅保留前 20 张。"
-    ]
+    "parse_notes": []
   },
   {
     "pid": "2604.18658v1",
@@ -4667,8 +4707,8 @@
   {
     "pid": "2604.19638v1",
     "n_chunks": 21,
-    "n_images_extracted": 20,
-    "n_asset_files": 20,
+    "n_images_extracted": 23,
+    "n_asset_files": 23,
     "asset_files": [
       "page-002-img-01.jpeg",
       "page-002-img-02.jpeg",
@@ -4689,7 +4729,10 @@
       "page-013-img-01.png",
       "page-021-img-01.png",
       "page-021-img-02.png",
-      "page-021-img-03.png"
+      "page-021-img-03.png",
+      "page-021-img-04.png",
+      "page-021-img-05.png",
+      "page-021-img-06.png"
     ],
     "has_gallery_in_header": true,
     "chunks": [
@@ -4917,15 +4960,13 @@
       "assets/page-002-img-09.png",
       "assets/page-002-img-10.jpeg"
     ],
-    "parse_notes": [
-      "图片数量超过上限，仅保留前 20 张。"
-    ]
+    "parse_notes": []
   },
   {
     "pid": "2604.20090v1",
     "n_chunks": 16,
-    "n_images_extracted": 20,
-    "n_asset_files": 20,
+    "n_images_extracted": 22,
+    "n_asset_files": 22,
     "asset_files": [
       "page-001-img-01.png",
       "page-001-img-02.png",
@@ -4946,7 +4987,9 @@
       "page-003-img-09.jpeg",
       "page-003-img-10.png",
       "page-003-img-11.png",
-      "page-003-img-12.png"
+      "page-003-img-12.png",
+      "page-003-img-13.png",
+      "page-003-img-14.png"
     ],
     "has_gallery_in_header": true,
     "chunks": [
@@ -5125,9 +5168,7 @@
       "assets/page-003-img-01.png",
       "assets/page-003-img-02.png"
     ],
-    "parse_notes": [
-      "图片数量超过上限，仅保留前 20 张。"
-    ]
+    "parse_notes": []
   },
   {
     "pid": "2604.20714v1",
@@ -5867,8 +5908,8 @@
   {
     "pid": "2604.21255v1",
     "n_chunks": 21,
-    "n_images_extracted": 20,
-    "n_asset_files": 20,
+    "n_images_extracted": 47,
+    "n_asset_files": 47,
     "asset_files": [
       "page-001-img-01.jpeg",
       "page-001-img-02.jpeg",
@@ -5889,7 +5930,34 @@
       "page-004-img-03.jpeg",
       "page-004-img-04.jpeg",
       "page-004-img-05.jpeg",
-      "page-004-img-06.jpeg"
+      "page-004-img-06.jpeg",
+      "page-004-img-07.jpeg",
+      "page-004-img-08.jpeg",
+      "page-004-img-09.jpeg",
+      "page-004-img-10.jpeg",
+      "page-004-img-11.jpeg",
+      "page-004-img-12.jpeg",
+      "page-004-img-13.jpeg",
+      "page-004-img-14.jpeg",
+      "page-004-img-15.jpeg",
+      "page-004-img-16.jpeg",
+      "page-004-img-17.jpeg",
+      "page-004-img-18.jpeg",
+      "page-007-img-01.jpeg",
+      "page-007-img-02.jpeg",
+      "page-007-img-03.jpeg",
+      "page-007-img-04.jpeg",
+      "page-008-img-01.jpeg",
+      "page-008-img-02.jpeg",
+      "page-008-img-03.jpeg",
+      "page-021-img-01.jpeg",
+      "page-021-img-02.jpeg",
+      "page-021-img-03.jpeg",
+      "page-021-img-04.jpeg",
+      "page-021-img-05.jpeg",
+      "page-021-img-06.jpeg",
+      "page-021-img-07.jpeg",
+      "page-021-img-08.jpeg"
     ],
     "has_gallery_in_header": true,
     "chunks": [
@@ -6116,12 +6184,7 @@
       "assets/page-001-img-09.jpeg",
       "assets/page-001-img-10.jpeg"
     ],
-    "parse_notes": [
-      "图片数量超过上限，仅保留前 20 张。",
-      "图片数量超过上限，仅保留前 20 张。",
-      "图片数量超过上限，仅保留前 20 张。",
-      "图片数量超过上限，仅保留前 20 张。"
-    ]
+    "parse_notes": []
   },
   {
     "pid": "2604.21282v1",
@@ -6729,8 +6792,8 @@
   {
     "pid": "2604.21896v1",
     "n_chunks": 13,
-    "n_images_extracted": 20,
-    "n_asset_files": 20,
+    "n_images_extracted": 23,
+    "n_asset_files": 23,
     "asset_files": [
       "page-001-img-01.png",
       "page-001-img-02.png",
@@ -6751,7 +6814,10 @@
       "page-006-img-01.png",
       "page-006-img-02.png",
       "page-006-img-03.png",
-      "page-006-img-04.png"
+      "page-006-img-04.png",
+      "page-009-img-01.png",
+      "page-009-img-02.png",
+      "page-010-img-01.png"
     ],
     "has_gallery_in_header": true,
     "chunks": [
@@ -6898,16 +6964,13 @@
       "assets/page-002-img-04.png",
       "assets/page-002-img-05.png"
     ],
-    "parse_notes": [
-      "图片数量超过上限，仅保留前 20 张。",
-      "图片数量超过上限，仅保留前 20 张。"
-    ]
+    "parse_notes": []
   },
   {
     "pid": "2604.22577v1",
     "n_chunks": 12,
-    "n_images_extracted": 20,
-    "n_asset_files": 20,
+    "n_images_extracted": 34,
+    "n_asset_files": 34,
     "asset_files": [
       "page-001-img-01.png",
       "page-001-img-02.png",
@@ -6928,7 +6991,21 @@
       "page-006-img-12.png",
       "page-006-img-13.jpeg",
       "page-006-img-14.jpeg",
-      "page-006-img-15.png"
+      "page-006-img-15.png",
+      "page-006-img-16.png",
+      "page-006-img-17.png",
+      "page-006-img-18.png",
+      "page-006-img-19.png",
+      "page-006-img-20.png",
+      "page-006-img-21.png",
+      "page-006-img-22.png",
+      "page-006-img-23.jpeg",
+      "page-006-img-24.jpeg",
+      "page-006-img-25.png",
+      "page-007-img-01.png",
+      "page-007-img-02.png",
+      "page-007-img-03.png",
+      "page-007-img-04.png"
     ],
     "has_gallery_in_header": true,
     "chunks": [
@@ -7066,16 +7143,13 @@
       "assets/page-006-img-04.png",
       "assets/page-006-img-05.png"
     ],
-    "parse_notes": [
-      "图片数量超过上限，仅保留前 20 张。",
-      "图片数量超过上限，仅保留前 20 张。"
-    ]
+    "parse_notes": []
   },
   {
     "pid": "2604.22840v1",
     "n_chunks": 20,
-    "n_images_extracted": 20,
-    "n_asset_files": 20,
+    "n_images_extracted": 97,
+    "n_asset_files": 97,
     "asset_files": [
       "page-001-img-01.jpeg",
       "page-001-img-02.png",
@@ -7096,7 +7170,84 @@
       "page-003-img-01.png",
       "page-003-img-02.jpeg",
       "page-003-img-03.jpeg",
-      "page-008-img-01.png"
+      "page-008-img-01.png",
+      "page-008-img-02.png",
+      "page-008-img-03.png",
+      "page-008-img-04.png",
+      "page-008-img-05.jpeg",
+      "page-008-img-06.png",
+      "page-008-img-07.png",
+      "page-008-img-08.jpeg",
+      "page-008-img-09.png",
+      "page-008-img-10.jpeg",
+      "page-008-img-11.jpeg",
+      "page-008-img-12.png",
+      "page-008-img-13.png",
+      "page-008-img-14.png",
+      "page-008-img-15.jpeg",
+      "page-008-img-16.jpeg",
+      "page-008-img-17.png",
+      "page-008-img-18.jpeg",
+      "page-008-img-19.jpeg",
+      "page-008-img-20.jpeg",
+      "page-008-img-21.jpeg",
+      "page-008-img-22.jpeg",
+      "page-008-img-23.jpeg",
+      "page-008-img-24.jpeg",
+      "page-008-img-25.jpeg",
+      "page-010-img-01.png",
+      "page-010-img-02.png",
+      "page-010-img-03.png",
+      "page-012-img-01.png",
+      "page-012-img-02.png",
+      "page-016-img-01.png",
+      "page-016-img-02.png",
+      "page-016-img-03.png",
+      "page-016-img-04.png",
+      "page-017-img-01.png",
+      "page-017-img-02.png",
+      "page-017-img-03.jpeg",
+      "page-017-img-04.png",
+      "page-017-img-05.jpeg",
+      "page-017-img-06.jpeg",
+      "page-017-img-07.png",
+      "page-017-img-08.jpeg",
+      "page-017-img-09.jpeg",
+      "page-017-img-10.jpeg",
+      "page-017-img-11.jpeg",
+      "page-017-img-12.jpeg",
+      "page-017-img-13.jpeg",
+      "page-017-img-14.jpeg",
+      "page-017-img-15.jpeg",
+      "page-017-img-16.jpeg",
+      "page-017-img-17.png",
+      "page-017-img-18.jpeg",
+      "page-017-img-19.jpeg",
+      "page-017-img-20.png",
+      "page-017-img-21.jpeg",
+      "page-017-img-22.jpeg",
+      "page-017-img-23.jpeg",
+      "page-017-img-24.jpeg",
+      "page-018-img-01.jpeg",
+      "page-018-img-02.jpeg",
+      "page-018-img-03.png",
+      "page-018-img-04.jpeg",
+      "page-018-img-05.jpeg",
+      "page-018-img-06.jpeg",
+      "page-018-img-07.jpeg",
+      "page-018-img-08.jpeg",
+      "page-018-img-09.jpeg",
+      "page-018-img-10.jpeg",
+      "page-018-img-11.jpeg",
+      "page-018-img-12.jpeg",
+      "page-018-img-13.jpeg",
+      "page-018-img-14.jpeg",
+      "page-018-img-15.jpeg",
+      "page-018-img-16.jpeg",
+      "page-018-img-17.jpeg",
+      "page-018-img-18.jpeg",
+      "page-018-img-19.jpeg",
+      "page-018-img-20.jpeg"
     ],
     "has_gallery_in_header": true,
     "chunks": [
@@ -7315,14 +7466,7 @@
       "assets/page-001-img-09.jpeg",
       "assets/page-001-img-10.jpeg"
     ],
-    "parse_notes": [
-      "图片数量超过上限，仅保留前 20 张。",
-      "图片数量超过上限，仅保留前 20 张。",
-      "图片数量超过上限，仅保留前 20 张。",
-      "图片数量超过上限，仅保留前 20 张。",
-      "图片数量超过上限，仅保留前 20 张。",
-      "图片数量超过上限，仅保留前 20 张。"
-    ]
+    "parse_notes": []
   },
   {
     "pid": "2604.23449v1",
@@ -7489,8 +7633,8 @@
   {
     "pid": "2604.23701v1",
     "n_chunks": 24,
-    "n_images_extracted": 20,
-    "n_asset_files": 20,
+    "n_images_extracted": 37,
+    "n_asset_files": 37,
     "asset_files": [
       "page-002-img-01.jpeg",
       "page-002-img-02.jpeg",
@@ -7511,7 +7655,24 @@
       "page-003-img-01.jpeg",
       "page-003-img-02.jpeg",
       "page-003-img-03.jpeg",
-      "page-003-img-04.jpeg"
+      "page-003-img-04.jpeg",
+      "page-003-img-05.jpeg",
+      "page-003-img-06.jpeg",
+      "page-003-img-07.jpeg",
+      "page-003-img-08.jpeg",
+      "page-003-img-09.jpeg",
+      "page-003-img-10.jpeg",
+      "page-003-img-11.jpeg",
+      "page-013-img-01.jpeg",
+      "page-013-img-02.jpeg",
+      "page-013-img-03.png",
+      "page-016-img-01.jpeg",
+      "page-016-img-02.jpeg",
+      "page-016-img-03.jpeg",
+      "page-016-img-04.jpeg",
+      "page-016-img-05.jpeg",
+      "page-016-img-06.jpeg",
+      "page-016-img-07.jpeg"
     ],
     "has_gallery_in_header": true,
     "chunks": [
@@ -7769,11 +7930,7 @@
       "assets/page-002-img-09.jpeg",
       "assets/page-002-img-10.jpeg"
     ],
-    "parse_notes": [
-      "图片数量超过上限，仅保留前 20 张。",
-      "图片数量超过上限，仅保留前 20 张。",
-      "图片数量超过上限，仅保留前 20 张。"
-    ]
+    "parse_notes": []
   },
   {
     "pid": "2604.23972v1",

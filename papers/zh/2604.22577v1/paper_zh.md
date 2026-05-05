@@ -21,18 +21,19 @@
 
 - **来源**：[]()
 - **论文链接**：[]()
-- **状态**：待复核
+- **状态**：已生成
 
 ## 摘要
-
-
 
 ## 解析备注
 
 - 图片数量超过上限，仅保留前 20 张。
 - 图片数量超过上限，仅保留前 20 张。
 
+
+
 ## 图表资源
+
 - ![](assets/page-001-img-01.png)
 - ![](assets/page-001-img-02.png)
 - ![](assets/page-001-img-03.png)
@@ -53,44 +54,24 @@
 - ![](assets/page-006-img-13.jpeg)
 - ![](assets/page-006-img-14.jpeg)
 - ![](assets/page-006-img-15.png)
+- ![](assets/page-006-img-16.png)
+- ![](assets/page-006-img-17.png)
+- ![](assets/page-006-img-18.png)
+- ![](assets/page-006-img-19.png)
+- ![](assets/page-006-img-20.png)
+- ![](assets/page-006-img-21.png)
+- ![](assets/page-006-img-22.png)
+- ![](assets/page-006-img-23.jpeg)
+- ![](assets/page-006-img-24.jpeg)
+- ![](assets/page-006-img-25.png)
+- ![](assets/page-007-img-01.png)
+- ![](assets/page-007-img-02.png)
+- ![](assets/page-007-img-03.png)
+- ![](assets/page-007-img-04.png)
 
 
 
 ---
-
----
-
-## 摘要（Abstract）
-
-自主智能体系统（如 OpenClaw）由于长上下文输入和多轮推理，带来了显著的计算效率挑战，导致实际开发中计算和金钱成本高昂。虽然量化是降低成本和延迟的标准方法，但它在真实场景中对智能体性能的影响尚不明确。本文分析了 OpenClaw 上多种复杂工作流对量化的敏感性，发现精度需求高度依赖任务类型。基于这一观察，我们提出 **QuantClaw**，一个即插即用的精度路由插件，根据任务特征动态分配精度。QuantClaw 将轻量级任务路由到低成本配置，同时为高要求工作负载保留高精度，在不增加用户复杂度的前提下节省成本并加速推理。实验表明，QuantClaw 在保持或提升任务性能的同时，降低了延迟和计算成本。在一系列智能体任务中，它在 GLM-5（FP8 基线）上实现了高达 **21.4% 的成本节约**和 **15.7% 的延迟降低**。这些结果突显了在智能体系统中将精度视为动态资源的价值。
-
-- **博客**: https://sparkengineai.github.io/QuantClaw
-- **GitHub**: https://github.com/SparkEngineAI/QuantClaw-plugin
-- **ClawHub**: https://clawhub.ai/plugins/@sparkengineai/quantclaw
-
----
-
-## 1 引言（Introduction）
-
-近年来，大语言模型的进展使得能够执行复杂多步工作流的自主智能体在真实环境中涌现 [1–12]。OpenClaw [13]、Hermes [14] 和 Claude Code [15] 等系统将语言模型扩展到静态文本生成之外，赋予其工具使用、环境交互和迭代推理能力。这些系统作为通用智能体框架运行，模型不仅负责输出，还负责规划、执行和跨异构任务协调操作。
-
-### 1.1 核心挑战：Agent 系统的计算瓶颈
-
-然而，这种向智能体系统的转变引入了新的计算挑战。与传统推理工作负载不同，智能体执行通常涉及长上下文累积、工具输出存储和多步交互，导致延迟和成本显著增加 [16–19]，在实际部署中很快变得高昂。例如，单次用户会话可能累积超过 **234K 令牌** 的上下文（OpenClaw [20]）。因此，即使是一个常规的后续查询也需要将完整历史状态传输给模型，极大地增加了每次交互的成本。在现行实践中，这些系统通常以固定精度或模型配置运行，而不考虑任务复杂度。这导致资源分配与实际任务需求之间存在系统性不匹配，使得 OpenClaw 式系统天然存在成本效率问题。
-
-### 1.2 量化：机遇与未知
-
-量化 [21–26] 通过减少内存占用和加速推理，为提高效率提供了有希望的方向。然而，其对智能体性能的影响仍然知之甚少，尤其是在复杂的多轮协作场景中 [27]。特别是，虽然量化在标准 NLP 基准测试中已被广泛研究 [28–31]，但在真实世界智能体场景——任务在推理深度、工具使用和交互模式上差异巨大——中的影响尚未被系统性地刻画。
-
-### 1.3 本文贡献
-
-本文研究了量化如何影响 OpenClaw 中不同类别的智能体任务。我们首先构建了一个基准驱动分析 [32]（包含 **24 种任务类型、104 个任务、6 个模型**，规模从 9B 到 744B），评估不同工作负载下的量化敏感性，揭示精度降低的影响高度依赖任务类型。基于这些发现，我们提取了一套关于何时何地需要高精度的实用见解。基于这些见解，我们提出 **QuantClaw**，一个即插即用的精度路由插件。QuantClaw 根据任务特征动态分配精度，将轻量级任务路由到低成本配置，为高要求工作负载保留高精度。这一设计实现了更具成本效益且更快速的服务，同时不增加终端用户的复杂度。
-
-**经验结果表明**，QuantClaw 通过任务自适应精度路由实现了优越的性能-效率权衡：
-- 在 **GLM-4.7-Flash（PinchBench v1.2.0）**上：较 BF16 基线提高平均分 **2.85 分**，同时成本降低 **21.6%**，延迟降低 **8.4%**
-- 在 **GLM-5（PinchBench v2.0.0）**上：较 FP8 基线提高平均分 **2.09 分**，同时成本降低 **21.4%**，延迟降低 **15.7%**
-
-这些结果表明，精度应该被视为智能体系统中的**动态资源**，而非固定配置。
 
 ---
 
@@ -287,46 +268,3 @@ QuantClaw 被设计为实用的运行时层，具有以下关键系统特性：
 
 ## 参考文献
 
-[1] Wu et al. Autogen: Enabling next-gen llm applications via multi-agent conversations. COLM, 2024.
-[2] Li et al. Camel: Communicative agents for "mind" exploration of large language model society. NeurIPS, 2023.
-[3] Luo et al. Gui-r1: A generalist r1-style vision-language action model for gui agents. arXiv:2504.10458, 2025.
-[4] Lu et al. Ui-r1: Enhancing efficient action prediction of gui agents by reinforcement learning. AAAI, 2026.
-[5] Zhao et al. An agentic system for rare disease diagnosis with traceable reasoning. Nature, 2026.
-[6] Huang et al. Understanding the planning of llm agents: A survey. arXiv:2402.02716, 2024.
-[7] Ferrag et al. From llm reasoning to autonomous ai agents: A comprehensive review. arXiv:2504.19678, 2025.
-[8] Putta et al. Agent q: Advanced reasoning and learning for autonomous ai agents. arXiv:2408.07199, 2024.
-[9] Dong et al. A survey on code generation with llm-based agents. arXiv:2508.00083, 2025.
-[10] Liu et al. Dynamic llm-agent network. arXiv:2310.02170, 2023.
-[11] Jin et al. Stella: Towards a biomedical world model with self-evolving multimodal agents. bioRxiv, 2025.
-[12] Gao et al. Empowering biomedical discovery with ai agents. Cell, 187(22):6125–6151, 2024.
-[13] OpenClaw. GitHub repository, 2026.
-[14] Nous Research. Hermes agent. GitHub repository, 2026.
-[15] Anthropic. Claude code, 2025.
-[16] Zhang et al. Chain of agents: Large language models collaborating on long-context tasks. NeurIPS, 2024.
-[17] Xiao et al. Improving the efficiency of llm agent systems through trajectory reduction. arXiv:2509.23586, 2025.
-[18] Ding et al. Calibrate-then-act: Cost-aware exploration in llm agents. arXiv:2602.16699, 2026.
-[19] Sui et al. Stop overthinking: A survey on efficient reasoning for large language models. arXiv:2503.16419, 2025.
-[20] APIYI Technical Team. Why is OpenClaw so token-intensive? 6 reasons analyzed and money-saving guide.
-[21] Liu et al. Llm-qat: Data-free quantization aware training for large language models. Findings of ACL, 2024.
-[22] Li et al. Batquant: Outlier-resilient mxfp4 quantization via learnable block-wise optimization. arXiv:2603.16590, 2026.
-[23] Liu et al. Freeact: Freeing activations for llm quantization. arXiv:2603.01776, 2026.
-[24] Li et al. Svdquant: Absorbing outliers by low-rank components for 4-bit diffusion models. arXiv:2411.05007, 2024.
-[25] Liu et al. Spinquant: Llm quantization with learned rotations. arXiv:2405.16406, 2024.
-[26] Sun et al. Flatquant: Flatness matters for llm quantization. arXiv:2410.09426, 2024.
-[27] Dong et al. Can compressed llms truly act? An empirical evaluation of agentic capabilities in llm compression. arXiv:2505.19433, 2025.
-[28] Liu et al. Quantization hurts reasoning? An empirical study on quantized reasoning models. arXiv:2504.04823, 2025.
-[29] Huang et al. An empirical study of llama3 quantization: From llms to mllms. Visual Intelligence, 2(1):36, 2024.
-[30] Zhao et al. Benchmarking post-training quantization in llms. arXiv:2502.13178, 2025.
-[31] Zhang et al. Benchmarking post-training quantization under microscaling floating point formats. arXiv:2601.09555, 2026.
-[32] Ye et al. Claw-eval: Toward trustworthy evaluation of autonomous agents. arXiv:2604.06132, 2026.
-[33] Zeng et al. Glm-4.5: Agentic, reasoning, and coding (arc) foundation models. arXiv:2508.06471, 2025.
-[34] Zeng et al. Glm-5: from vibe coding to agentic engineering. arXiv:2602.15763, 2026.
-[35] Alvarez et al. Introducing nvfp4 for efficient and accurate low-precision inference. NVIDIA Blog, 2025.
-[36] Chen et al. Int vs fp: A comprehensive study of fine-grained low-bit quantization formats. arXiv:2510.25602, 2025.
-[37] Cook et al. Four over six: More accurate nvfp4 quantization with adaptive block scaling. arXiv:2512.02010, 2025.
-[38] Zhao et al. Unleashing low-bit inference on ascend npus: A comprehensive evaluation of hifloat formats. arXiv:2602.12635, 2026.
-[39] Koparkar. Mixture of experts powers the most intelligent frontier ai models. NVIDIA Blog, 2025.
-[40] Mitrasish. Fp4 quantization on blackwell gpus. Spheron Blog, 2026.
-[41] Knoop & Holtmann. Private llm inference on consumer blackwell gpus. arXiv:2601.09527, 2026.
-[42] Kurtic et al. "Give me bf16 or give me death"? accuracy-performance trade-offs in llm quantization. ACL, 2025.
-[43] Chen et al. Bge m3-embedding: Multi-lingual, multi-functionality, multi-granularity text embeddings through self-knowledge distillation. arXiv:2402.03216, 2024.

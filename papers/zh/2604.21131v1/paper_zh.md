@@ -1,4 +1,4 @@
-# paper
+# 
 
 <!-- 论文元数据卡片 -->
 <div class="paper-meta">
@@ -26,7 +26,6 @@
 ## 摘要
 
 
-
 ## 图表资源
 - ![](assets/page-003-img-01.png)
 - ![](assets/page-005-img-01.png)
@@ -43,27 +42,7 @@
 
 ---
 
-## 摘要
 
-AI Agent 的安全护栏是**无记忆的**：每条消息被孤立判断，一个将单次攻击分散到数十或数百个会话中的对手可以从每个会话绑定的检测器旁滑过，因为没有任何单个消息携带有效负载——只有聚合才携带。
-
-**三项贡献：**
-
-### 贡献 1：问题与数据集
-
-我们引入 **CSTM-Bench（跨会话威胁记忆基准）**：26 种可执行攻击分类法，沿两个正交轴分类——杀伤链阶段 [1] 和跨会话操作本体（accumulate、compose、launder、inject_on_reader）——每种绑定到七个身份锚点之一，这些锚点将"违规"精确定义为策略谓词。流量分为 Attack、Benign-pristine 和 Benign-hard 三类。基准在 Hugging Face 上发布为 intrinsec-ai/cstm-bench，包含两个分片：dilution（组合性分片）和 cross_session（纯跨会话分片）。
-
-### 贡献 2：测量跨会话 LLM 相关性可行性
-
-我们将跨会话检测形式化为入站消息流与下游相关器 LLM 之间的**信息瓶颈**。会话绑定的判断器和完整日志相关器（将所有入站提示按时间顺序拼接为单次长上下文调用）在从组合性稀释分片移动到纯跨会话分片时，攻击召回率均下降约一半（第 6 节）。
-
-### 贡献 3：算法方向与实时运营度量
-
-一个有界记忆的**核心集记忆读取器**（Coreset Memory Reader）对最高信号的跨会话片段进行排名和保留，是架构响应。容量 K=50 的参考录取器是唯一在稀释和跨会话重写后都能保持攻击召回率的读取器。我们将 **CSR_prefix**（核心集缓冲区的有序前缀稳定性）提升为一级度量——无 LLM、无标签、可连续测量——与检测质量融合为非补偿性复合指标：
-
-$$\text{CSTM} = 0.7 \cdot \text{F1}(\text{CSDA@action, precision}) + 0.3 \cdot \text{CSR\_prefix}$$
-
----
 
 ## 1 引言
 
@@ -235,8 +214,3 @@ $$\text{CSTM} = 0.7 \cdot \text{F1(CSDA@action, precision)} + 0.3 \cdot \text{CS
 
 ## 参考文献
 
-- Azarafrooz. CSTM-Bench. arXiv:2604.21131, 2026.
-- Anthropic. GTG-1002: First documented AI-orchestrated cyber-espionage campaign. 2025.
-- BEAM. Long-context evaluation for frontier LLMs. 2025.
-- Promptware. Kill chain for LLM-based attacks.
-- Shannon. A mathematical theory of communication. 1948.

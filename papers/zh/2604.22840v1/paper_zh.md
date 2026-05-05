@@ -21,11 +21,9 @@
 
 - **来源**：[]()
 - **论文链接**：[]()
-- **状态**：待复核
+- **状态**：已生成
 
 ## 摘要
-
-
 
 ## 解析备注
 
@@ -36,7 +34,10 @@
 - 图片数量超过上限，仅保留前 20 张。
 - 图片数量超过上限，仅保留前 20 张。
 
+
+
 ## 图表资源
+
 - ![](assets/page-001-img-01.jpeg)
 - ![](assets/page-001-img-02.png)
 - ![](assets/page-001-img-03.jpeg)
@@ -57,31 +58,87 @@
 - ![](assets/page-003-img-02.jpeg)
 - ![](assets/page-003-img-03.jpeg)
 - ![](assets/page-008-img-01.png)
+- ![](assets/page-008-img-02.png)
+- ![](assets/page-008-img-03.png)
+- ![](assets/page-008-img-04.png)
+- ![](assets/page-008-img-05.jpeg)
+- ![](assets/page-008-img-06.png)
+- ![](assets/page-008-img-07.png)
+- ![](assets/page-008-img-08.jpeg)
+- ![](assets/page-008-img-09.png)
+- ![](assets/page-008-img-10.jpeg)
+- ![](assets/page-008-img-11.jpeg)
+- ![](assets/page-008-img-12.png)
+- ![](assets/page-008-img-13.png)
+- ![](assets/page-008-img-14.png)
+- ![](assets/page-008-img-15.jpeg)
+- ![](assets/page-008-img-16.jpeg)
+- ![](assets/page-008-img-17.png)
+- ![](assets/page-008-img-18.jpeg)
+- ![](assets/page-008-img-19.jpeg)
+- ![](assets/page-008-img-20.jpeg)
+- ![](assets/page-008-img-21.jpeg)
+- ![](assets/page-008-img-22.jpeg)
+- ![](assets/page-008-img-23.jpeg)
+- ![](assets/page-008-img-24.jpeg)
+- ![](assets/page-008-img-25.jpeg)
+- ![](assets/page-010-img-01.png)
+- ![](assets/page-010-img-02.png)
+- ![](assets/page-010-img-03.png)
+- ![](assets/page-012-img-01.png)
+- ![](assets/page-012-img-02.png)
+- ![](assets/page-016-img-01.png)
+- ![](assets/page-016-img-02.png)
+- ![](assets/page-016-img-03.png)
+- ![](assets/page-016-img-04.png)
+- ![](assets/page-017-img-01.png)
+- ![](assets/page-017-img-02.png)
+- ![](assets/page-017-img-03.jpeg)
+- ![](assets/page-017-img-04.png)
+- ![](assets/page-017-img-05.jpeg)
+- ![](assets/page-017-img-06.jpeg)
+- ![](assets/page-017-img-07.png)
+- ![](assets/page-017-img-08.jpeg)
+- ![](assets/page-017-img-09.jpeg)
+- ![](assets/page-017-img-10.jpeg)
+- ![](assets/page-017-img-11.jpeg)
+- ![](assets/page-017-img-12.jpeg)
+- ![](assets/page-017-img-13.jpeg)
+- ![](assets/page-017-img-14.jpeg)
+- ![](assets/page-017-img-15.jpeg)
+- ![](assets/page-017-img-16.jpeg)
+- ![](assets/page-017-img-17.png)
+- ![](assets/page-017-img-18.jpeg)
+- ![](assets/page-017-img-19.jpeg)
+- ![](assets/page-017-img-20.png)
+- ![](assets/page-017-img-21.jpeg)
+- ![](assets/page-017-img-22.jpeg)
+- ![](assets/page-017-img-23.jpeg)
+- ![](assets/page-017-img-24.jpeg)
+- ![](assets/page-018-img-01.jpeg)
+- ![](assets/page-018-img-02.jpeg)
+- ![](assets/page-018-img-03.png)
+- ![](assets/page-018-img-04.jpeg)
+- ![](assets/page-018-img-05.jpeg)
+- ![](assets/page-018-img-06.jpeg)
+- ![](assets/page-018-img-07.jpeg)
+- ![](assets/page-018-img-08.jpeg)
+- ![](assets/page-018-img-09.jpeg)
+- ![](assets/page-018-img-10.jpeg)
+- ![](assets/page-018-img-11.jpeg)
+- ![](assets/page-018-img-12.jpeg)
+- ![](assets/page-018-img-13.jpeg)
+- ![](assets/page-018-img-14.jpeg)
+- ![](assets/page-018-img-15.jpeg)
+- ![](assets/page-018-img-16.jpeg)
+- ![](assets/page-018-img-17.jpeg)
+- ![](assets/page-018-img-18.jpeg)
+- ![](assets/page-018-img-19.jpeg)
+- ![](assets/page-018-img-20.jpeg)
 
 
 
 ---
-
----
-
-## 摘要
-
-幻灯片生成的模态差距：生成以文本为中心，但质量由视觉美学决定。**AeSlides** 引入可验证美学指标的 GRPO 强化学习框架。
-
-**6个可计算美学指标：** 宽高比一致性、空间利用率、元素间距均匀性、对齐度、视觉权重平衡、元素碰撞
-
----
-
-## 结果
-
-| 方法 | GPT-4o评估 | 用户研究 |
-|------|-----------|---------|
-| GLM-4.7-Flash（基线） | 100 | 100 |
-| + 视觉反思 | +2.31% | +1.82% |
-| + 完整微调 | +5.12% | +8.43% |
-| **AeSlides（5K训练）** | **+6.24%** | **+10.86%** |
-
-**消融：** 空间利用率（+3.42%）和元素碰撞（+2.87%）最具影响力。5K提示=最优性价比。
 
 ---
 

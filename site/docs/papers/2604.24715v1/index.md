@@ -1,4 +1,4 @@
-# paper
+# 
 
 <!-- 论文元数据卡片 -->
 <div class="paper-meta">
@@ -26,7 +26,6 @@
 ## 摘要
 
 
-
 ## 图表资源
 - ![](assets/page-001-img-01.png)
 - ![](assets/page-002-img-01.png)
@@ -43,20 +42,7 @@
 
 ---
 
-## 摘要（Abstract）
 
-混合序列模型将高效 Transformer 组件与线性序列建模块相结合，是纯 Transformer 的有前途替代方案。然而大多数仍从零预训练，因此无法重用现有 Transformer 检查点。我们研究 **upcycling** 作为将预训练 Transformer LLM 转换为混合架构的实用路径，同时保持短上下文质量并改进长上下文能力。
-
-我们称解决方案为 **HyLo（HYbrid LOng-context）**：一种长上下文 upcycling 配方，结合了架构适配（高效 Transformer 块、多头潜在注意力 MLA 和线性块 Mamba2/Gated DeltaNet），以及分阶段长上下文训练和教师引导蒸馏以稳定优化。
-
-**关键成果：**
-- 将可用上下文长度扩展 **32×**（通过高效后训练）
-- KV缓存内存减少 **>90%**
-- 支持 **2M 令牌**的预填充和解码（vLLM推理栈），而 Llama 基线在 64K 上下文外即 OOM
-- 在 1B 和 3B 规模（Llama 和 Qwen 变体）上，HyLo 在短/长上下文性能上表现一致
-- **HyLo-Qwen-1.7B** 仅训练 10B 令牌就显著优于训练 400B 令牌的 **JetNemotron**（在 GSM8K、Lm-Harness 常识推理和 RULER-64K 上）
-
----
 
 ## 1 引言（Introduction）
 
