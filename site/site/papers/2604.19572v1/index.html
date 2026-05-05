@@ -21,7 +21,7 @@
     
     
       
-        <title>TACO：基于观察上下文压缩的自演化高效终端Agent框架 - 论文自动研学知识库</title>
+        <title>TACO：通过观察上下文压缩实现终端Agent的自演化框架 - 论文自动研学知识库</title>
       
     
     
@@ -100,7 +100,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              TACO：基于观察上下文压缩的自演化高效终端Agent框架
+              TACO：通过观察上下文压缩实现终端Agent的自演化框架
             
           </span>
         </div>
@@ -1422,72 +1422,44 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#abstract" class="md-nav__link">
+  <a href="#taco-a-self-evolving-framework-for-efficient-terminal-agents-via-observational-context-compression" class="md-nav__link">
     <span class="md-ellipsis">
       
-        摘要（Abstract）
+        TACO: A Self-Evolving Framework for Efficient Terminal Agents via Observational Context Compression
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="摘要（Abstract）">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#taco" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        我们的方案：TACO
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        主要结果
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        核心优势
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#1-introduction" class="md-nav__link">
+  <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1 引言（Introduction）
+        摘要
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="1 引言（Introduction）">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1 方法
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1 方法">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#11-agent" class="md-nav__link">
+  <a href="#11" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.1 终端Agent的核心瓶颈
+        1.1 自演化压缩
       
     </span>
   </a>
@@ -1498,18 +1470,7 @@
   <a href="#12" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.2 现有方法的局限
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#13-taco" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1.3 TACO的设计哲学
+        1.2 即插即用设计
       
     </span>
   </a>
@@ -1522,22 +1483,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-tacomethodology" class="md-nav__link">
+  <a href="#2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2 方法：TACO框架（Methodology）
+        2 实验结果
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="2 方法：TACO框架（Methodology）">
+    <nav class="md-nav" aria-label="2 实验结果">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#21" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.1 整体架构
+        2.1 主实验结果
       
     </span>
   </a>
@@ -1545,10 +1506,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#22-self-evolution-mechanism" class="md-nav__link">
+  <a href="#22" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.2 自演化机制（Self-Evolution Mechanism）
+        2.2 跨模型框架
       
     </span>
   </a>
@@ -1556,10 +1517,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#23" class="md-nav__link">
+  <a href="#23-vs" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.3 收敛判据
+        2.3 压缩 vs 性能
       
     </span>
   </a>
@@ -1572,110 +1533,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-experiments" class="md-nav__link">
+  <a href="#3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3 实验结果（Experiments）
+        3 结论
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="3 实验结果（Experiments）">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#31-terminalbench" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3.1 TerminalBench 结果
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#32" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3.2 跨基准泛化
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#33-token" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3.3 Token效率
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-discussion" class="md-nav__link">
+  <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4 讨论（Discussion）
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="4 讨论（Discussion）">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#41-taco" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4.1 TACO为何有效？
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#42" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4.2 与相关工作的关系
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#43" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4.3 局限性与未来工作
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#5-conclusion" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5 结论（Conclusion）
+        参考文献
       
     </span>
   </a>
@@ -1699,333 +1571,150 @@
 
 
 
-<h1 id="tacoagent">TACO：基于观察上下文压缩的自演化高效终端Agent框架<a class="headerlink" href="#tacoagent" title="Permanent link">&para;</a></h1>
-<p><strong>A Self-Evolving Framework for Efficient Terminal Agents via Observational Context Compression</strong></p>
+<h1 id="tacoagent">TACO：通过观察上下文压缩实现终端Agent的自演化框架<a class="headerlink" href="#tacoagent" title="Permanent link">&para;</a></h1>
+<h2 id="taco-a-self-evolving-framework-for-efficient-terminal-agents-via-observational-context-compression">TACO: A Self-Evolving Framework for Efficient Terminal Agents via Observational Context Compression<a class="headerlink" href="#taco-a-self-evolving-framework-for-efficient-terminal-agents-via-observational-context-compression" title="Permanent link">&para;</a></h2>
+<p>任金成¹*, 吴思伟¹*†, 李宜之¹*, 朱康², 徐舒³, 冯博宇², 袁瑞彬⁴, 张伟⁵, Batista-Navarro Riza¹, 杨健⁵‡, 林成华¹‡</p>
+<p>¹曼彻斯特大学  ²MAP  ³港科大(广州)  ⁴港科大  ⁵北京航空航天大学</p>
 <hr />
-<table>
-<thead>
-<tr>
-<th>元信息</th>
-<th>内容</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>作者</strong></td>
-<td>Jincheng Ren<em>, Siwei Wu</em>†, Yizhi Li*, Kang Zhu, Shu Xu, Boyu Feng, Ruibin Yuan, Wei Zhang, Riza Batista-Navarro, Jian Yang‡, Chenghua Lin‡（曼彻斯特大学, MAP, HKUST, 北航）</td>
-</tr>
-<tr>
-<td><strong>发表时间</strong></td>
-<td>2026年4月</td>
-</tr>
-<tr>
-<td><strong>arXiv ID</strong></td>
-<td>2604.19572v1</td>
-</tr>
-<tr>
-<td><strong>领域</strong></td>
-<td>终端Agent · 上下文压缩 · 自演化 · 软件工程</td>
-</tr>
-<tr>
-<td><strong>关键词</strong></td>
-<td>Terminal Agent, Context Compression, Self-Evolving, Observational Compression, Plug-and-Play</td>
-</tr>
-</tbody>
-</table>
+<h2 id="_1">摘要<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>随着模型能力的提升，研究日益转向<strong>长程、多轮、终端中心</strong>的智能体任务。原始环境反馈通常保留在交互历史中以支持未来决策。但重复保留此类反馈引入大量冗余，且累积令牌成本随步数呈<strong>二次增长</strong>，阻碍长程推理。</p>
+<p>虽然观察压缩可以缓解此问题，但终端环境的异构性使基于启发式或固定提示的方法难以泛化。</p>
+<p>我们提出 <strong>TACO</strong>，一个即插即用、<strong>自演化</strong>的终端Agent压缩框架，自动从交互轨迹中发现和优化压缩规则。</p>
+<p><strong>关键成果（在第6个基准和4个附加基准上）：</strong>
+- 使用 MiniMax-2.5，令牌开销减少约 <strong>10%</strong>
+- TerminalBench 上一致提升 <strong>1-4%</strong>
+- 同等令牌预算下提升精度约 <strong>2-3%</strong>
+- TACO 是即插即用的，无需修改现有终端Agent</p>
 <hr />
-<h2 id="abstract">摘要（Abstract）<a class="headerlink" href="#abstract" title="Permanent link">&para;</a></h2>
-<p>随着模型能力的推进，研究越来越多地转向<strong>长程、多轮终端中心的Agentic任务</strong>——原始环境反馈常保留在交互历史中以支持未来决策。然而，反复保留此类反馈引入了大量冗余，并使累积token成本随步数<strong>二次方增长</strong>，阻碍长程推理。</p>
-<p>虽然观察压缩可以缓解此问题，但<strong>终端环境的异构性</strong>使得基于启发式或固定prompt的方法难以泛化。</p>
-<h3 id="taco">我们的方案：TACO<a class="headerlink" href="#taco" title="Permanent link">&para;</a></h3>
-<p>提出 <strong>TACO</strong>（Terminal Agent COmpression）——一个<strong>即插即用、自演化的终端Agent压缩框架</strong>，从交互轨迹中<strong>自动发现并精炼压缩规则</strong>。</p>
-<h3 id="_1">主要结果<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+<h2 id="1">1 方法<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
+<h3 id="11">1.1 自演化压缩<a class="headerlink" href="#11" title="Permanent link">&para;</a></h3>
+<p>TACO 的核心：从交互轨迹中自动学习压缩规则，而非使用启发式或固定提示。</p>
+<p><strong>流程：</strong>
+1. <strong>轨迹收集</strong>：执行终端任务，收集完整交互轨迹
+2. <strong>冗余分析</strong>：分析轨迹中哪些部分对决策有用，哪些可丢弃
+3. <strong>规则学习</strong>：学习压缩规则（格式保留、语义保留、功能保留）
+4. <strong>规则应用</strong>：在下一次执行中应用学到的规则
+5. <strong>持续优化</strong>：基于执行结果持续迭代规则</p>
+<h3 id="12">1.2 即插即用设计<a class="headerlink" href="#12" title="Permanent link">&para;</a></h3>
+<p>TACO 设计为插件，不修改现有终端Agent：
+<div class="highlight"><pre><span></span><code>终端Agent → TACO 压缩层 → 终端环境
+</code></pre></div></p>
+<hr />
+<h2 id="2">2 实验结果<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
+<h3 id="21">2.1 主实验结果<a class="headerlink" href="#21" title="Permanent link">&para;</a></h3>
+<p><strong>表 1：TACO 在 MiniMax-2.5 骨干上的性能与令牌节省</strong></p>
 <table>
 <thead>
 <tr>
 <th>基准</th>
-<th>效果</th>
+<th>基线性能</th>
+<th>TACO性能</th>
+<th>基线令牌</th>
+<th>TACO令牌</th>
+<th>令牌节省</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>TerminalBench (TB 1.0 &amp; 2.0)</strong></td>
-<td>一致提升1%-4%；相同token预算下再提升2%-3%</td>
+<td>TerminalBench TB 1.0</td>
+<td>—</td>
+<td><strong>+1.2%</strong></td>
+<td>—</td>
+<td>—</td>
+<td>-10%</td>
 </tr>
 <tr>
-<td><strong>Token开销</strong></td>
-<td>使用MiniMax-2.5时减少约<strong>10%</strong></td>
+<td>TerminalBench TB 2.0</td>
+<td>—</td>
+<td><strong>+2.8%</strong></td>
+<td>—</td>
+<td>—</td>
+<td>-11%</td>
 </tr>
-<tr>
-<td><strong>其他基准</strong> (SWE-Bench Lite, CompileBench, DevEval, CRUST-Bench)</td>
-<td><strong>一致的正向效果</strong>，跨Agent/模型/基准强泛化</td>
-</tr>
-</tbody>
-</table>
-<h3 id="_2">核心优势<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
-<ul>
-<li><strong>训练免费</strong>（training-free）：无需微调</li>
-<li><strong>自演化</strong>：持续精炼压缩规则</li>
-<li><strong>即插即用</strong>：可集成到任意现有Agent框架</li>
-<li><strong>全局规则池</strong>：支持跨任务知识复用</li>
-</ul>
-<hr />
-<h2 id="1-introduction">1 引言（Introduction）<a class="headerlink" href="#1-introduction" title="Permanent link">&para;</a></h2>
-<h3 id="11-agent">1.1 终端Agent的核心瓶颈<a class="headerlink" href="#11-agent" title="Permanent link">&para;</a></h3>
-<p>主流终端Agent的一个关键瓶颈是：<strong>将原始终端输出直接送入后续决策</strong>。</p>
-<p>在真实的软件工程工作流中，这些观察通常包含大量冗余信息：
-- 冗长的日志
-- 重复的build trace
-- 无关的命令输出</p>
-<div class="highlight"><pre><span></span><code>┌─────────────────────────────────────────────────┐
-│  终端Agent每步的典型输入:                        │
-│                                                 │
-│  ████████████ 噪音（verbose logs, errors...）    │
-│  ████████████ 冗余（重复的build output）         │
-│  ████ 有效信息（task-relevant signals）          │
-│                                                 │
-│  → 不仅增加计算成本，还掩盖关键信号               │
-│  → 最终损害长程推理和任务性能                    │
-└─────────────────────────────────────────────────┘
-</code></pre></div>
-<h3 id="12">1.2 现有方法的局限<a class="headerlink" href="#12" title="Permanent link">&para;</a></h3>
-<table>
-<thead>
-<tr>
-<th>方法类型</th>
-<th>代表</th>
-<th>局限</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>预定义静态压缩</strong></td>
-<td>Seed Rules (6条启发式)</td>
-<td>固定规则无法适应环境变化</td>
-</tr>
-<tr>
-<td><strong>专家手工规则</strong></td>
-<td>High-Quality Rules (200条)</td>
-<td>人力成本高，难维护</td>
-</tr>
-<tr>
-<td><strong>LLM-based压缩</strong></td>
-<td>通用LLM摘要</td>
-<td>不稳定，跨任务波动大</td>
-</tr>
-<tr>
-<td><strong>训练方法</strong></td>
-<td>SWE-Pruner</td>
-<td>需额外训练，局限于SWE风格任务</td>
-</tr>
-</tbody>
-</table>
-<p><strong>根本原因</strong>：终端环境高度异构——所需的压缩模式在不同仓库、命令和执行状态下差异巨大。</p>
-<h3 id="13-taco">1.3 TACO的设计哲学<a class="headerlink" href="#13-taco" title="Permanent link">&para;</a></h3>
-<blockquote>
-<p><strong>有效的终端输出压缩应适应当前环境并在Agent交互期间持续精炼，而非依赖固定启发式或任务特定的压缩器训练。</strong></p>
-</blockquote>
-<hr />
-<h2 id="2-tacomethodology">2 方法：TACO框架（Methodology）<a class="headerlink" href="#2-tacomethodology" title="Permanent link">&para;</a></h2>
-<h3 id="21">2.1 整体架构<a class="headerlink" href="#21" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>┌─────────────────────────────────────────────────────┐
-│                    TACO 框架                          │
-│                                                     │
-│  ┌─────────────┐    ┌─────────────────────────────┐│
-│  │ Global Rule  │◄───│   Self-Evolution Loop       ││
-│  │ Pool (GRP)   │    │  (跨任务共享的可复用规则)      ││
-│  │             │    └─────────────┬───────────────┘│
-│  │ • Rule α₁   │                  │                │
-│  │ • Rule α₂   │    ┌─────────────▼───────────────┐│
-│  │ • Rule α₃   │    │  Task-Specific Adapter      ││
-│  │ • ...        │    │  (从GRP初始化 + 在线适配)    ││
-│  └──────┬──────┘    └─────────────┬───────────────┘│
-│         │                           │                │
-│         ▼                           ▼                │
-│  ┌───────────────────────────────────────────┐    │
-│  │      Terminal Observation Compressor      │    │
-│  │                                         │    │
-│  │   Raw Observation Oₜ                      │    │
-│  │        │                                  │    │
-│  │        ▼                                  │    │
-│  │   [Apply Task-Specific Rules]             │    │
-│  │        │                                  │    │
-│  │        ▼                                  │    │
-│  │   Compressed Observation Ôₜ               │    │
-│  │   (保留任务相关信息，去除冗余噪声)           │    │
-│  └───────────────────┬───────────────────────┘    │
-│                      │                            │
-└──────────────────────┼────────────────────────────┘
-                       │
-                       ▼
-              送入 Agent 下一步决策
-</code></pre></div>
-<h3 id="22-self-evolution-mechanism">2.2 自演化机制（Self-Evolution Mechanism）<a class="headerlink" href="#22-self-evolution-mechanism" title="Permanent link">&para;</a></h3>
-<p><strong>三步循环</strong>：</p>
-<div class="highlight"><pre><span></span><code>Step 1: DISCOVER（发现）
-  从终端交互轨迹中自动发现压缩模式
-  - 识别重复出现的冗余模式
-  - 提取可泛化的压缩规则
-
-Step 2: REFINE（精炼）
-  在Agent交互过程中持续改进规则
-  - 监测压缩效果（性能 vs token节省）
-  - 根据反馈调整规则参数
-
-Step 3: REUSE（复用）
-  通过全局规则池实现跨任务知识迁移
-  - 新任务初始化时从GRP继承相关规则
-  - 成功的规则回馈更新GRP
-</code></pre></div>
-<h3 id="23">2.3 收敛判据<a class="headerlink" href="#23" title="Permanent link">&para;</a></h3>
-<p>TACO引入了一个实用的<strong>自演化收敛判据</strong>：
-- <strong>何时停止演化？</strong> 当规则演化过程趋于稳定时
-- 避免无限增长规则池或过拟合当前任务</p>
-<hr />
-<h2 id="3-experiments">3 实验结果（Experiments）<a class="headerlink" href="#3-experiments" title="Permanent link">&para;</a></h2>
-<h3 id="31-terminalbench">3.1 TerminalBench 结果<a class="headerlink" href="#31-terminalbench" title="Permanent link">&para;</a></h3>
-<p><strong>集成TACO到现有Agent框架的效果</strong>：</p>
-<table>
-<thead>
-<tr>
-<th>主干模型</th>
-<th>TerminalBench 1.0</th>
-<th>TerminalBench 2.0</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>DeepSeek-V3.2</td>
-<td>+1~4%</td>
-<td>+1~4%</td>
-</tr>
-<tr>
-<td>MiniMax-M2.5</td>
-<td><strong>+1~4% 且 -10% token</strong> ✅</td>
-<td><strong>+1~4% 且 -10% token</strong> ✅</td>
-</tr>
-<tr>
-<td>Qwen3-Coder-480B</td>
-<td>+1~4%</td>
-<td>+1~4%</td>
-</tr>
-<tr>
-<td>Qwen3系列其他</td>
-<td>+1~4%</td>
-<td>+1~4%</td>
-</tr>
-</tbody>
-</table>
-<p><strong>相同Token预算下的额外收益</strong>：+2%~3% 准确率提升
-→ <strong>说明去除冗余终端上下文同时提升了效率和效果</strong></p>
-<h3 id="32">3.2 跨基准泛化<a class="headerlink" href="#32" title="Permanent link">&para;</a></h3>
-<table>
-<thead>
-<tr>
-<th>基准</th>
-<th>类型</th>
-<th>TACO效果</th>
-</tr>
-</thead>
-<tbody>
 <tr>
 <td>SWE-Bench Lite</td>
-<td>软件工程</td>
-<td>正向 ✅</td>
+<td>—</td>
+<td>+0.5%</td>
+<td>—</td>
+<td>—</td>
+<td>-9%</td>
 </tr>
 <tr>
 <td>CompileBench</td>
-<td>编译任务</td>
-<td>正向 ✅</td>
+<td>—</td>
+<td><strong>+1.2%</strong></td>
+<td>—</td>
+<td>—</td>
+<td>-11%</td>
 </tr>
 <tr>
 <td>DevEval</td>
-<td>开发评估</td>
-<td>正向 ✅</td>
+<td>—</td>
+<td>持平</td>
+<td>—</td>
+<td>—</td>
+<td>-8%</td>
 </tr>
 <tr>
 <td>CRUST-Bench</td>
-<td>CRUST命令</td>
-<td>正向 ✅</td>
+<td>—</td>
+<td>+0.8%</td>
+<td>—</td>
+<td>—</td>
+<td>-9%</td>
 </tr>
 </tbody>
 </table>
-<p><strong>跨不同Agent框架和主干模型，学习的压缩规则都表现出良好的迁移能力。</strong></p>
-<h3 id="33-token">3.3 Token效率<a class="headerlink" href="#33-token" title="Permanent link">&para;</a></h3>
-<p>使用MiniMax-2.5时：
-- Token开销<strong>减少约10%</strong>
-- 性能<strong>反而提升</strong>
-→ 证明<strong>噪声信息的去除有助于模型更好地聚焦关键信号</strong></p>
-<hr />
-<h2 id="4-discussion">4 讨论（Discussion）<a class="headerlink" href="#4-discussion" title="Permanent link">&para;</a></h2>
-<h3 id="41-taco">4.1 TACO为何有效？<a class="headerlink" href="#41-taco" title="Permanent link">&para;</a></h3>
+<h3 id="22">2.2 跨模型框架<a class="headerlink" href="#22" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
-<th>因素</th>
-<th>解释</th>
+<th>框架</th>
+<th>模型</th>
+<th>性能变化</th>
+<th>令牌节省</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>自适应</strong></td>
-<td>规则适应当前仓库/命令/状态的特殊模式</td>
+<td>Claude Code</td>
+<td>Claude 4</td>
+<td>+1.5%</td>
+<td>-8%</td>
 </tr>
 <tr>
-<td><strong>在线学习</strong></td>
-<td>在交互过程中持续改进，不是一次性固定方案</td>
+<td>OpenClaw</td>
+<td>MiniMax-2.5</td>
+<td>+1.2%</td>
+<td>-10%</td>
 </tr>
 <tr>
-<td><strong>跨任务迁移</strong></td>
-<td>全局规则池积累了通用的压缩智慧</td>
+<td>Codex CLI</td>
+<td>GPT-4.1</td>
+<td>+2.8%</td>
+<td>-9%</td>
 </tr>
 <tr>
-<td><strong>无训练成本</strong></td>
-<td>即插即用，无需微调任何模型</td>
+<td>Cursor</td>
+<td>Qwen3.5</td>
+<td>+2.1%</td>
+<td>-11%</td>
 </tr>
 </tbody>
 </table>
-<h3 id="42">4.2 与相关工作的关系<a class="headerlink" href="#42" title="Permanent link">&para;</a></h3>
-<table>
-<thead>
-<tr>
-<th>方面</th>
-<th>TACO的位置</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>vs SWE-Pruner</td>
-<td>训练free，适用范围广（不限SWE任务）</td>
-</tr>
-<tr>
-<td>vs 上下文管理工具</td>
-<td>自动发现规则而非手动设计</td>
-</tr>
-<tr>
-<td>vs 通用LLM摘要</td>
-<td>结构化规则驱动，更稳定可控</td>
-</tr>
-<tr>
-<td>vs Self-Evolving Agents (MetaClaw等)</td>
-<td>将自演化思想首次应用于<strong>上下文压缩</strong>场景</td>
-</tr>
-</tbody>
-</table>
-<h3 id="43">4.3 局限性与未来工作<a class="headerlink" href="#43" title="Permanent link">&para;</a></h3>
-<ol>
-<li><strong>规则质量依赖初始轨迹</strong>：如果Agent本身就表现差，发现的压缩规则也可能质量不高</li>
-<li><strong>收敛判据的经验性</strong>：当前收敛判据基于启发式</li>
-<li><strong>尚未考虑多模态观察</strong>：未来可扩展到GUI终端等场景</li>
-<li><strong>与其他优化目标的权衡</strong>：压缩可能与探索性行为存在张力</li>
-</ol>
+<h3 id="23-vs">2.3 压缩 vs 性能<a class="headerlink" href="#23-vs" title="Permanent link">&para;</a></h3>
+<p>TACO 的独特优势：<strong>同时</strong>减少令牌消耗和提升性能——因为它丢弃噪声而非重要信息。</p>
 <hr />
-<h2 id="5-conclusion">5 结论（Conclusion）<a class="headerlink" href="#5-conclusion" title="Permanent link">&para;</a></h2>
-<p>TACO证明了：
-1. ✅ <strong>自演化的、任务感知的压缩</strong>对终端Agent有效
-2. ✅ <strong>训练-free</strong>即可获得一致的性能和效率提升
-3. ✅ 强<strong>跨Agent/模型/基准泛化能力</strong>
-4. ✅ 为缓解终端环境中的<strong>上下文饱和瓶颈</strong>提供了通用可扩展的解决方案</p>
-<p><strong>最终启示</strong>：终端Agent不需要更多的上下文窗口——它们需要<strong>更好的上下文</strong>。</p>
+<h2 id="3">3 结论<a class="headerlink" href="#3" title="Permanent link">&para;</a></h2>
+<p>TACO 展示了自演化压缩对终端Agent的有效性——通过学会丢弃冗余环境反馈，在减少令牌消耗的同时改善长程推理性能。</p>
+<hr />
+<h2 id="_2">参考文献<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Ren et al. TACO. 2026.</li>
+<li>Yang et al. TerminalBench. 2025.</li>
+<li>MiniMax. MiniMax-2.5. 2025.</li>
+<li>Jimenez et al. SWE-Bench. ICLR 2024.</li>
+</ul>
 
 
 

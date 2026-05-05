@@ -21,7 +21,7 @@
     
     
       
-        <title>Skilldex：面向LLM Agent的结构化技能发现与检索系统 - 论文自动研学知识库</title>
+        <title>Skilldex：具有分层作用域分布的智能体技能包管理器与注册中心 - 论文自动研学知识库</title>
       
     
     
@@ -64,7 +64,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#skilldexllm-agent" class="md-skip">
+        <a href="#skilldex" class="md-skip">
           跳转至
         </a>
       
@@ -100,7 +100,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Skilldex：面向LLM Agent的结构化技能发现与检索系统
+              Skilldex：具有分层作用域分布的智能体技能包管理器与注册中心
             
           </span>
         </div>
@@ -1422,6 +1422,17 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#skilldex-a-package-manager-and-registry-for-agent-skill-packages-with-hierarchical-scope-based-distribution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Skilldex: A Package Manager and Registry for Agent Skill Packages with Hierarchical Scope-Based Distribution
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1433,22 +1444,33 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#section-1-3" class="md-nav__link">
+  <a href="#i" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Section 1-3 — 核心架构（精读版）
+        I. 引言
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Section 1-3 — 核心架构（精读版）">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ii" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        II. 背景与相关工作
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="II. 背景与相关工作">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
+  <a href="#a-agent" class="md-nav__link">
     <span class="md-ellipsis">
       
-        中文翻译
+        A. Agent 技能包
       
     </span>
   </a>
@@ -1456,32 +1478,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
+  <a href="#b" class="md-nav__link">
     <span class="md-ellipsis">
       
-        实验结果概览
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        术语解释
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#takeaway" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        关键 takeaway
+        B. 与相关系统的对比
       
     </span>
   </a>
@@ -1494,22 +1494,33 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#section-4-7" class="md-nav__link">
+  <a href="#iii" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Section 4-7 — 详细实验、讨论与结论
+        III. 系统架构
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Section 4-7 — 详细实验、讨论与结论">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iv" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        IV. 分层作用域系统
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="IV. 分层作用域系统">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
+  <a href="#a" class="md-nav__link">
     <span class="md-ellipsis">
       
-        中文翻译
+        A. 三层层级
       
     </span>
   </a>
@@ -1517,10 +1528,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_6" class="md-nav__link">
+  <a href="#b_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        全文总结
+        B. 解析规则
       
     </span>
   </a>
@@ -1528,21 +1539,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_7" class="md-nav__link">
+  <a href="#c" class="md-nav__link">
     <span class="md-ellipsis">
       
-        核心价值
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_8" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        与其他论文的联系
+        C. 安装源
       
     </span>
   </a>
@@ -1551,6 +1551,183 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        V. 格式符合性评分
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="V. 格式符合性评分">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A. 动机
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b-8-100" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        B. 评分检查（8 项，满分 100）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        C. 诊断输出
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vi-agent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        VI. Agent 建议循环
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vii" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        VII. 社区注册中心
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#viii" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        VIII. 技能集捆绑
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="VIII. 技能集捆绑">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A. 动机
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        B. 开发者技能集示例
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c-7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        C. 技能集验证评分（7 项）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ix-mcp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        IX. MCP 集成
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#x" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        X. 设计理念
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#xi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        XI. 局限与未来工作
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#xii" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        XII. 结论
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        参考文献
+      
+    </span>
+  </a>
   
 </li>
       
@@ -1571,150 +1748,272 @@
 
 
 
-<h1 id="skilldexllm-agent">Skilldex：面向LLM Agent的结构化技能发现与检索系统<a class="headerlink" href="#skilldexllm-agent" title="Permanent link">&para;</a></h1>
-<!-- 论文元数据卡片 -->
-<div class="paper-meta">
-  <div class="paper-meta-item">
-    <span class="paper-meta-label">机构</span>
-    <span class="paper-meta-value org-other">（多机构合作）</span>
-  </div>
-  <div class="paper-meta-item">
-    <span class="paper-meta-label">方向</span>
-    <span class="paper-meta-value">智能体 / 技能发现 / 工具使用</span>
-  </div>
-  <div class="paper-meta-item">
-    <span class="paper-meta-label">日期</span>
-    <span class="paper-meta-value">2026-04</span>
-  </div>
-</div>
-
-<div class="admonition info">
-<p><span class="paper-tag paper-tag-translated">✅ 已完成精读</span></p>
-</div>
-<ul>
-<li><strong>来源</strong>：<a href="https://arxiv.org/abs/2604.16911">arXiv</a></li>
-<li><strong>论文链接</strong>：<a href="https://arxiv.org/abs/2604.16911">2604.16911v1</a></li>
-</ul>
+<h1 id="skilldex">Skilldex：具有分层作用域分布的智能体技能包管理器与注册中心<a class="headerlink" href="#skilldex" title="Permanent link">&para;</a></h1>
+<h2 id="skilldex-a-package-manager-and-registry-for-agent-skill-packages-with-hierarchical-scope-based-distribution">Skilldex: A Package Manager and Registry for Agent Skill Packages with Hierarchical Scope-Based Distribution<a class="headerlink" href="#skilldex-a-package-manager-and-registry-for-agent-skill-packages-with-hierarchical-scope-based-distribution" title="Permanent link">&para;</a></h2>
+<p>Sampriti Saha, Pranav Hemanth</p>
+<p>Pandemonium Research</p>
+<hr />
 <h2 id="_1">摘要<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p>随着LLM Agent被赋予越来越多的工具使用能力，一个关键挑战浮现：<strong>如何让Agent自动发现和有效利用合适的工具/技能？</strong> 我们提出Skilldex——一个面向LLM Agent的<strong>结构化技能发现和检索系统</strong>。不同于依赖预定义工具列表或静态注册表的现有方法，Skilldex使Agent能够<strong>主动探索、识别和获取新技能</strong>，类似于人类开发者搜索和集成新库的能力。我们在多个基准上评估Skilldex，展示其在工具使用效率、任务完成率和泛化能力方面相对于现有方法的显著改进。</p>
-<p>[扩展] 这篇论文解决的是Agent生态中的"工具发现"问题——当可用工具/技能动态增长时，硬编码的工具列表会成为瓶颈。Skilldex的核心思路是让Agent像开发者查找npm包一样"按需发现"所需技能。</p>
-<hr />
-<h2 id="section-1-3">Section 1-3 — 核心架构（精读版）<a class="headerlink" href="#section-1-3" title="Permanent link">&para;</a></h2>
-<h3 id="_2">中文翻译<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
-<p><strong>问题背景</strong>
-当前LLM Agent面临"技能鸿沟"：
-1. <strong>预定义工具集有限</strong>：无法覆盖所有潜在需求
-2. <strong>工具发现机制缺失</strong>：Agent不知道自己不知道什么
-3. <strong>技能评估困难</strong>：即使发现候选技能也难判断质量</p>
-<p><strong>Skilldex核心设计</strong></p>
-<p><strong>1. 技能表示（Skill Representation）</strong>
-- 每个技能用结构化元数据描述：名称、功能、输入/输出schema、适用场景、依赖关系、质量评分
-- 支持层次化组织：技能类别 → 具体技能 → 版本变体</p>
-<p><strong>2. 发现引擎（Discovery Engine）</strong>
-- <strong>语义驱动搜索</strong>：基于任务描述匹配相关技能
-- <strong>社区验证信号</strong>：下载量、star数、issue响应时间、安全审计状态
-- <strong>兼容性检查</strong>：自动验证技能与当前环境（运行时、权限、依赖）的兼容性
-- <strong>沙箱评估</strong>：在隔离环境中测试技能行为</p>
-<p><strong>3. 检索与排序（Retrieval &amp; Ranking）</strong>
-- 多维度排序：功能匹配度 × 质量评分 × 社区活跃度 × 兼容性分数
-- 支持精确匹配和语义相似度混合检索
-- 上下文感知重排序：根据当前任务历史调整推荐</p>
-<p><strong>4. 集成协议（Integration Protocol）</strong>
-- 统一接口抽象层：所有技能通过标准MCP/OpenAI API包装
-- 安全沙箱执行：敏感操作需用户确认
-- 使用追踪和回滚：支持操作撤销</p>
-<h3 id="_3">实验结果概览<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
-<table>
-<thead>
-<tr>
-<th>基准</th>
-<th>Skilldex提升</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>工具选择准确率</td>
-<td>+23%</td>
-</tr>
-<tr>
-<td>任务首次完成率</td>
-<td>+31%</td>
-</tr>
-<tr>
-<td>新工具适配时间</td>
-<td>从小时级降至分钟级</td>
-</tr>
-<tr>
-<td>跨域泛化能力</td>
-<td>显著改善</td>
-</tr>
-</tbody>
-</table>
-<h3 id="_4">术语解释<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
-<table>
-<thead>
-<tr>
-<th>英文术语</th>
-<th>中文译名</th>
-<th>一句话解释</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Skill Discovery</td>
-<td>技能发现</td>
-<td>自动识别和获取所需工具/技能的过程</td>
-</tr>
-<tr>
-<td>MCP (Model Context Protocol)</td>
-<td>模型上下文协议</td>
-<td>统一工具调用标准接口</td>
-</tr>
-<tr>
-<td>Sandbox Evaluation</td>
-<td>沙箱评估</td>
-<td>隔离环境中测试技能安全性</td>
-</tr>
-<tr>
-<td>Skill Registry</td>
-<td>技能注册表</td>
-<td>结构化的技能元数据存储</td>
-</tr>
-</tbody>
-</table>
-<h3 id="takeaway">关键 takeaway<a class="headerlink" href="#takeaway" title="Permanent link">&para;</a></h3>
-<ul>
-<li><strong>要点1</strong>：从"预定义工具列表"到"按需发现技能"是范式转变</li>
-<li><strong>要点2</strong>：社区信号+沙箱评估的组合解决了质量控制难题</li>
-<li><strong>要点3</strong>：标准化集成协议使发现到的技能可立即使用</li>
-</ul>
-<hr />
-<h2 id="section-4-7">Section 4-7 — 详细实验、讨论与结论<a class="headerlink" href="#section-4-7" title="Permanent link">&para;</a></h2>
-<h3 id="_5">中文翻译<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
-<p><strong>4. 实验设置</strong>
-- 基准：ToolBench、MCP-Bench、自定义Agent任务
-- 对比基线：预定义工具列表、纯语义搜索、API文档RAG</p>
-<p><strong>5. 主要结果分析</strong>
-- <strong>发现阶段</strong>：Skilldex在top-10召回率上比基线高35%
-- <strong>评估阶段</strong>：沙箱评估成功过滤掉28%的有害/低质技能
-- <strong>集成阶段</strong>：统一接口使平均适配时间从47分钟降至8分钟</p>
-<p><strong>6. 局限性讨论</strong>
-- 对高质量skill描述的依赖（冷启动问题）
-- 恶意skill的检测仍需人工审核
-- 多skill组合编排的最优策略待探索</p>
-<p><strong>7. 结论</strong>
-Skilldex证明了结构化技能发现对LLM Agent的可行性和价值，为构建真正自主的"数字同事"奠定基础。</p>
-<h3 id="_6">全文总结<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
-<h3 id="_7">核心价值<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<p>大语言模型（LLM）智能体越来越多地通过<strong>技能包</strong>（结构化自然语言指令包）在运行时进行扩展。社区安装工具和注册中心存在，但两个关键差距持续存在：</p>
 <ol>
-<li><strong>填补了"工具发现"这一Agent基础设施空白</strong></li>
-<li><strong>社区驱动 + 沙箱验证</strong>的双层质量保证</li>
-<li><strong>即插即用的MCP集成</strong></li>
+<li><strong>无符合性信号</strong>：没有公开工具根据 Anthropic 发布的格式规范对技能包进行评分</li>
+<li><strong>无技能集一致性机制</strong>：没有机制将相关技能与其所需的共享上下文捆绑以保持互一致性</li>
 </ol>
-<h3 id="_8">与其他论文的联系<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<p>我们提出 <strong>Skilldex</strong>，一个智能体技能包的包管理器与注册中心，解决了上述两个差距。</p>
+<p><strong>两个新颖贡献：</strong>
+1. <strong>编译器风格格式符合性评分</strong>：针对 Anthropic 技能规范，产生 0-100 分评分，含行级诊断（描述特异性、前置元数据有效性、结构遵守性）
+2. <strong>技能集（Skillset）抽象</strong>：相关技能的捆绑集合，附共享资产（词汇文件、模板、参考文档），强制跨技能行为一致性</p>
+<p><strong>支持性基础设施：</strong>
+- <strong>三层分层作用域系统</strong>：全局/共享/项目
+- <strong>人在环路建议循环</strong>：Agent 开始工作前展示建议技能清单供审查
+- <strong>仅元数据社区注册中心</strong>：含符合性评分、全文搜索、信任层级
+- <strong>MCP 服务器</strong>：将所有操作原生暴露给智能体</p>
+<p>系统使用 TypeScript CLI（skillpm/spm）实现，后端为 Hono/Supabase 注册中心，开源发布。</p>
+<hr />
+<h2 id="i">I. 引言<a class="headerlink" href="#i" title="Permanent link">&para;</a></h2>
+<p>LLM 驱动的智能体越来越多地通过技能进行扩展——结构化自然语言文档，指导智能体采用特定行为。由 Anthropic 的 Claude Code 平台推广，技能形式化为 <strong>SKILL.md 文件</strong>（带 YAML frontmatter 的 Markdown）。</p>
+<p>技能包类似于软件库：封装可复用功能、有作者和版本、质量参差不齐、在可发现和可共享时价值最大。安装工具和社区注册中心已经存在，但：</p>
+<p><strong>两个关键差距的详细说明：</strong>
+1. <strong>无符合性评分</strong>：现有工具展示安装计数和发布者徽章，但没有一个工具根据 Anthropic 格式规范给技能评分。描述过短无法可靠触发，或 frontmatter 格式错误的技能，与格式正确的技能被同样对待
+2. <strong>无技能集机制</strong>：技能作为平面单元单独安装。没有抽象用于捆绑相关技能及其所需的共享约定文件和参考文档——独立安装相关技能使每个技能使用自己的隐式词汇，可能逐步偏离</p>
+<hr />
+<h2 id="ii">II. 背景与相关工作<a class="headerlink" href="#ii" title="Permanent link">&para;</a></h2>
+<h3 id="a-agent">A. Agent 技能包<a class="headerlink" href="#a-agent" title="Permanent link">&para;</a></h3>
+<p>SKILL.md 格式由 Anthropic 的 Claude Code 平台引入。技能是一个目录，包含标准化的 YAML frontmatter 区块后接 Markdown 内容：</p>
+<div class="highlight"><pre><span></span><code><span class="nn">---</span>
+<span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">forensics-memory-analysis</span>
+<span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Guides</span><span class="nv"> </span><span class="s">Claude</span><span class="nv"> </span><span class="s">through</span><span class="nv"> </span><span class="s">systematic</span><span class="nv"> </span><span class="s">memory</span><span class="nv"> </span><span class="s">dump</span><span class="nv"> </span><span class="s">analysis...&quot;</span>
+<span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;1.0.0&quot;</span>
+<span class="nt">tags</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">forensics</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">memory</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">volatility</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">incident-response</span><span class="p p-Indicator">]</span>
+<span class="nt">author</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;skilly&quot;</span>
+<span class="nt">spec_version</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;1.0&quot;</span>
+<span class="nn">---</span>
+</code></pre></div>
+<p>技能目录可选包含：scripts/（可执行辅助脚本）、references/（补充文档）、assets/（图像和数据文件）。</p>
+<h3 id="b">B. 与相关系统的对比<a class="headerlink" href="#b" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>系统</th>
+<th>定位</th>
+<th>与 Skilldex 的差异</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Smithery.ai / Glama.ai</strong></td>
+<td>MCP 服务器注册中心</td>
+<td>不同抽象层（MCP 暴露工具 vs 技能扩展行为）</td>
+</tr>
+<tr>
+<td><strong>LangChain Hub</strong></td>
+<td>LangChain 提示和链注册中心</td>
+<td>不同生态系统和抽象层</td>
+</tr>
+<tr>
+<td><strong>Anthropic 技能目录</strong></td>
+<td>官方技能仓库</td>
+<td>无 CLI 安装工具、无作用域模型</td>
+</tr>
+<tr>
+<td><strong>vercel-labs/skills</strong></td>
+<td>开放 Agent 技能 CLI</td>
+<td>无分层作用域安装、无符合性评分</td>
+</tr>
+<tr>
+<td><strong>CCPM / ClawdHub</strong></td>
+<td>技能安装工具</td>
+<td>无评分规则或无技能集抽象</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="iii">III. 系统架构<a class="headerlink" href="#iii" title="Permanent link">&para;</a></h2>
+<p>Skilldex 由三个独立组件构成：</p>
+<ol>
+<li><strong>Skilldex CLI</strong>（skilldex-cli）：Node.js 20+ npm 包，提供 <code>skillpm</code> 和 <code>spm</code> 命令。TypeScript + Commander + simple-git + Zod</li>
+<li><strong>Skilldex 注册中心</strong>（skilldex-registry）：Hono Web 应用部署在 Vercel，后端 Supabase（PostgreSQL）。存储技能和技能集元数据；处理认证、搜索和安装计数</li>
+<li><strong>Skilldex Web</strong>：Next.js 应用，提供注册中心浏览器 UI 和文档站点</li>
+</ol>
+<p>CLI 和 MCP 服务器共享相同的核心模块，两个接口调用相同的安装、验证、解析和清单函数。</p>
+<hr />
+<h2 id="iv">IV. 分层作用域系统<a class="headerlink" href="#iv" title="Permanent link">&para;</a></h2>
+<h3 id="a">A. 三层层级<a class="headerlink" href="#a" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>层级</th>
+<th>存储路径</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>global</strong></td>
+<td>~/.skilldex/global/</td>
+<td>所有项目可用：风格指南、通用调试方法</td>
+</tr>
+<tr>
+<td><strong>shared</strong></td>
+<td>~/.skilldex/shared/</td>
+<td>多个显式选择加入的项目可用：团队约定</td>
+</tr>
+<tr>
+<td><strong>project</strong></td>
+<td><project-root>/.skilldex/</td>
+<td>单个项目限定：项目特定配置</td>
+</tr>
+</tbody>
+</table>
+<h3 id="b_1">B. 解析规则<a class="headerlink" href="#b_1" title="Permanent link">&para;</a></h3>
+<p><strong>本地优先优先规则</strong>：较低作用域始终覆盖较高作用域的相同技能名。项目作用域的 <code>forensics-memory-analysis</code> 隐藏全局作用域的同一名称安装。</p>
+<h3 id="c">C. 安装源<a class="headerlink" href="#c" title="Permanent link">&para;</a></h3>
+<p>安装命令接受三种源形式：
+1. <strong>注册中心名称</strong>：<code>skillpm install forensics-memory-analysis</code>
+2. <strong>Git URL</strong>：<code>skillpm install git+https://github.com/user/repo/tree/main/skills/my-skill</code>
+3. <strong>本地路径</strong>：<code>skillpm install ./my-skill</code></p>
+<hr />
+<h2 id="v">V. 格式符合性评分<a class="headerlink" href="#v" title="Permanent link">&para;</a></h2>
+<h3 id="a_1">A. 动机<a class="headerlink" href="#a_1" title="Permanent link">&para;</a></h3>
+<p><strong>触发不足</strong>——智能体在应调用时未能调用技能——是记录的已知失败模式。主要原因：描述质量。格式符合性评分为发布者提供可测量的、客观的信号。</p>
+<h3 id="b-8-100">B. 评分检查（8 项，满分 100）<a class="headerlink" href="#b-8-100" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>检查项</th>
+<th>分值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>YAML frontmatter 可解析</td>
+<td>25</td>
+<td>缺失时致命，不执行后续检查</td>
+</tr>
+<tr>
+<td>name 字段存在</td>
+<td>10</td>
+<td>注册中心和清单所需</td>
+</tr>
+<tr>
+<td>description 存在</td>
+<td>10</td>
+<td>主要触发机制</td>
+</tr>
+<tr>
+<td>描述 ≥30 词</td>
+<td>10</td>
+<td>特异性阈值</td>
+</tr>
+<tr>
+<td>SKILL.md ≤500 行</td>
+<td>15</td>
+<td>令牌预算约束</td>
+</tr>
+<tr>
+<td>仅允许的子目录</td>
+<td>10</td>
+<td>强制执行 scripts/, references/, assets/</td>
+</tr>
+<tr>
+<td>引用的资源存在</td>
+<td>15</td>
+<td>无损坏的相对链接</td>
+</tr>
+<tr>
+<td>资源在正确的子目录中</td>
+<td>5</td>
+<td>脚本在 scripts/，文档在 references/</td>
+</tr>
+</tbody>
+</table>
+<h3 id="c_1">C. 诊断输出<a class="headerlink" href="#c_1" title="Permanent link">&para;</a></h3>
+<p>编译器风格格式，包含严重级别（pass/error/warning）、可选行号和人类可读消息：</p>
+<div class="highlight"><pre><span></span><code>pass    YAML frontmatter valid
+pass    name field present
+error   line 4: description too short (12 words, recommended: 30+)
+pass    SKILL.md line count OK (87 lines)
+warning Unknown subdirectory &quot;helpers&quot;
+pass    All referenced resources exist
+Format conformance score: 45/100
+</code></pre></div>
+<hr />
+<h2 id="vi-agent">VI. Agent 建议循环<a class="headerlink" href="#vi-agent" title="Permanent link">&para;</a></h2>
+<p><strong>动机</strong>：大多数 Agent 框架在没有任务前能力审查的情况下执行。Skilldex 插入了显式的人在环路检查点。</p>
+<p><strong>三阶段工作流：</strong></p>
+<p><strong>阶段 1：上下文收集</strong> — 读取 README.md、package.json、现有 Agent 配置和已安装技能清单。</p>
+<p><strong>阶段 2：提议生成</strong> — LLM（通过 Anthropic SDK）生成技能提议清单，含技能名、理由和建议作用域。</p>
+<p><strong>阶段 3：人类批准</strong> — CLI 交互式显示每个提议，用户批准/拒绝并可选覆盖作用域。</p>
+<div class="highlight"><pre><span></span><code>Proposed skills for this project:
+forensics-memory-analysis [community] [project scope]
+  Reason: project contains Volatility scripts
+  Approve? (Y/n/scope): y
+log-triage [verified] [project scope]
+  Reason: multiple log directories detected
+  Approve? (Y/n/scope): y
+</code></pre></div>
+<hr />
+<h2 id="vii">VII. 社区注册中心<a class="headerlink" href="#vii" title="Permanent link">&para;</a></h2>
+<p><strong>元数据优先</strong>：技能文件不上传到注册中心。<code>source_url</code> 指向 GitHub 仓库，安装直接从 GitHub 拉取。</p>
+<p><strong>信任层级模型：</strong>
+- <strong>verified（已验证）</strong>：保留给 Anthropic 官方发布的技能，手动分配
+- <strong>community（社区）</strong>：所有提交的默认等级，任何 GitHub 用户可发布</p>
+<p><strong>重要：信任层级从不阻止安装。</strong> 注册中心提供信息，不设门禁。</p>
+<p><strong>API 端点（REST，版本化）：</strong> 搜索、安装、发布、更新等核心操作。</p>
+<hr />
+<h2 id="viii">VIII. 技能集捆绑<a class="headerlink" href="#viii" title="Permanent link">&para;</a></h2>
+<h3 id="a_2">A. 动机<a class="headerlink" href="#a_2" title="Permanent link">&para;</a></h3>
+<p>Agent 用例很少由单个技能定义。独立安装相关技能产生行为漂移——如 Conventional Commits 和 changelog-gen 两个技能使用不同的提交类型词汇，工作流因此断裂。</p>
+<p><strong>技能集</strong>：可发布、可安装的单元，将相关技能与共享资产打包（约定文件、模板、参考文档），保证输出互一致性。</p>
+<h3 id="b_2">B. 开发者技能集示例<a class="headerlink" href="#b_2" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>developer/
+  SKILLSET.md
+  assets/commit-conventions.md          ← 2个技能共享
+  conventional-commit/SKILL.md          ← 引用 ../assets/
+  changelog-gen/SKILL.md                ← 引用 ../assets/
+  pr-description/SKILL.md
+  test-writer/SKILL.md
+</code></pre></div>
+<p><strong>关键保证</strong>：由 conventional-commit 写的提交消息保证被 changelog-gen 正确解析，因为两者在安装时绑定到相同的词汇文件。</p>
+<h3 id="c-7">C. 技能集验证评分（7 项）<a class="headerlink" href="#c-7" title="Permanent link">&para;</a></h3>
+<p>YAML 可解析(25)、name 字段(10)、description(10)、描述≥30词(10)、≥1个技能(20)、无未知顶级目录(10)、远程 URL 为 GitHub URL(15)。</p>
+<hr />
+<h2 id="ix-mcp">IX. MCP 集成<a class="headerlink" href="#ix-mcp" title="Permanent link">&para;</a></h2>
+<p>Skilldex 暴露完整 MCP 服务器（<code>skillpm mcp</code>），以长生命周期 stdio 进程运行，可在任何 MCP 兼容 Agent 中注册。</p>
+<p><strong>MCP 工具</strong>：skilldex_install、skilldex_uninstall、skilldex_validate、skilldex_list、skilldex_search、skilldex_suggest、skilldex_skillset_install 等。</p>
+<hr />
+<h2 id="x">X. 设计理念<a class="headerlink" href="#x" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>警告而非阻止</strong>：验证、信任层级检查信息告知但不阻止——12/100 分技能也可安装</li>
+<li><strong>规范所有权归属 Anthropic</strong>：Skilldex 跟踪和验证但不扩展或不解释规范</li>
+<li><strong>两个接口，一个核心</strong>：CLI 面向人类（丰富终端输出、交互提示）；MCP 面向 Agent（JSON 入/出，无提示）</li>
+</ol>
+<hr />
+<h2 id="xi">XI. 局限与未来工作<a class="headerlink" href="#xi" title="Permanent link">&para;</a></h2>
+<ol>
+<li>规范版本化：Anthropic 目前不发布显式版本化的技能格式</li>
+<li>语义描述质量：客观可评分格式符合性，但语义描述质量无法客观评分</li>
+<li>清单并发：并发调用下清单写入不是原子的</li>
+<li>层级深度：三级可能不够，复杂多项目结构可能需要任意嵌套</li>
+<li>团队治理：当前模型没有团队身份或基于角色的访问概念</li>
+<li>社区贡献冷启动</li>
+<li>建议循环不自动安装</li>
+</ol>
+<hr />
+<h2 id="xii">XII. 结论<a class="headerlink" href="#xii" title="Permanent link">&para;</a></h2>
+<p>Skilldex 填补了现有工具留下的两个空白：编译器风格格式符合性评分使发布者获得基于规范的反馈而非社交代理；技能集抽象使相关技能共享公共资产，保证行为一致性。完整开发者或研究 Agent 配置成为一流的可发布工件。</p>
+<p>开源地址：https://github.com/Pandemonium-Research/Skilldex</p>
+<hr />
+<h2 id="_2">参考文献<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <ul>
-<li>与ATBench-Claw互补：ATBench评估安全，Skilldex发现功能</li>
-<li>与SSRP互补：Architect可用Skilldex发现新SOP步骤</li>
+<li>Anthropic. Claude Code: Skills and Skill Packages. 2024.</li>
+<li>Vercel. vercel-labs/skills: The open agent skills tool. 2025.</li>
+<li>LangChain. LangChain Hub. 2023.</li>
+<li>Anthropic. Model Context Protocol (MCP) Specification. 2024.</li>
+<li>Cappos et al. A look in the mirror: Attacks on package managers. CCS 2008.</li>
+<li>Seshia et al. Towards verified artificial intelligence. arXiv:1606.08514, 2016.</li>
+<li>npm, pip, cargo, Homebrew package management systems.</li>
 </ul>
 
 

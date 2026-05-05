@@ -21,7 +21,7 @@
     
     
       
-        <title>Owner-Harm：AI Agent安全中被忽视的威胁模型 - 论文自动研学知识库</title>
+        <title>Owner-Harm：AI Agent 安全中缺失的威胁模型 - 论文自动研学知识库</title>
       
     
     
@@ -100,7 +100,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Owner-Harm：AI Agent安全中被忽视的威胁模型
+              Owner-Harm：AI Agent 安全中缺失的威胁模型
             
           </span>
         </div>
@@ -1422,33 +1422,44 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#abstract" class="md-nav__link">
+  <a href="#owner-harm-a-missing-threat-model-for-ai-agent-safety" class="md-nav__link">
     <span class="md-ellipsis">
       
-        摘要（Abstract）
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="摘要（Abstract）">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        真实事件佐证
+        Owner-Harm: A Missing Threat Model for AI Agent Safety
       
     </span>
   </a>
   
 </li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        摘要
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1 背景与动机
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1 背景与动机">
+      <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        核心贡献
+        三个真实事件
       
     </span>
   </a>
@@ -1461,65 +1472,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#1-introduction" class="md-nav__link">
+  <a href="#2-owner-harm" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1 引言（Introduction）
+        2 Owner-Harm 威胁模型
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="1 引言（Introduction）">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#11" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1.1 核心论点
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#12" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1.2 威胁对比
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#13" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1.3 防御缺口的量化证据
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#2-owner-harm-threat-model" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2 Owner-Harm 威胁模型（Threat Model）
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="2 Owner-Harm 威胁模型（Threat Model）">
+    <nav class="md-nav" aria-label="2 Owner-Harm 威胁模型">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -1531,63 +1492,13 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="2.1 形式化定义">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1owner" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        定义1：Owner（所有者）
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2owner-harm" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        定义2：Owner-Harm
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3owner-harm-doh" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        定义3：直接Owner-Harm (DOH)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#4owner-harm-ioh" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        定义4：间接Owner-Harm (IOH)
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
         
           <li class="md-nav__item">
   <a href="#22-owner-harm" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.2 八大类 Owner-Harm 威胁分类
+        2.2 八类 Owner-Harm
       
     </span>
   </a>
@@ -1598,7 +1509,18 @@
   <a href="#23" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.3 现有框架覆盖情况
+        2.3 与现有框架的对比
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 为什么通用防御失败
       
     </span>
   </a>
@@ -1611,72 +1533,33 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-experiments-and-analysis" class="md-nav__link">
+  <a href="#3-nous" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3 实验与分析（Experiments and Analysis）
+        3 Nous：组合式运行时安全门
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="3 实验与分析（Experiments and Analysis）">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#31" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3.1 缺口归因实验
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#32-300owner-harm" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3.2 层级互补性实验（300个Owner-Harm场景诊断基准）
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#33-ssdgsymbolic-semantic-defense-generalization" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3.3 SSDG概念框架（Symbolic-Semantic Defense Generalization）
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-conclusion" class="md-nav__link">
+  <a href="#4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4 结论（Conclusion）
+        4 评估
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="4 结论（Conclusion）">
+    <nav class="md-nav" aria-label="4 评估">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#41" class="md-nav__link">
+  <a href="#41-agentdojo" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.1 核心结论
+        4.1 AgentDojo 结果
       
     </span>
   </a>
@@ -1687,7 +1570,40 @@
   <a href="#42" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.2 行动建议
+        4.2 跨基准对比
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 对照实验：差距归因
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44-hijacking" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4 Hijacking 层互补性
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#45-ssdg" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.5 SSDG 框架实验
       
     </span>
   </a>
@@ -1696,6 +1612,61 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5 生产部署证据
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6 讨论与启示
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7 相关工作
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8 结论
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        参考文献
+      
+    </span>
+  </a>
   
 </li>
       
@@ -1716,223 +1687,107 @@
 
 
 
-<h1 id="owner-harmai-agent">Owner-Harm：AI Agent安全中被忽视的威胁模型<a class="headerlink" href="#owner-harmai-agent" title="Permanent link">&para;</a></h1>
-<p><strong>Owner-Harm: A Missing Threat Model for AI Agent Safety</strong></p>
+<h1 id="owner-harmai-agent">Owner-Harm：AI Agent 安全中缺失的威胁模型<a class="headerlink" href="#owner-harmai-agent" title="Permanent link">&para;</a></h1>
+<h2 id="owner-harm-a-missing-threat-model-for-ai-agent-safety">Owner-Harm: A Missing Threat Model for AI Agent Safety<a class="headerlink" href="#owner-harm-a-missing-threat-model-for-ai-agent-safety" title="Permanent link">&para;</a></h2>
+<p>张东晨*, 蒋艺青†</p>
+<p>*蓝色光标  †同济大学</p>
 <hr />
-<table>
-<thead>
-<tr>
-<th>元信息</th>
-<th>内容</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>作者</strong></td>
-<td>Dongcheng Zhang（蓝色光标传播集团）、Yiqing Jiang（同济大学）</td>
-</tr>
-<tr>
-<td><strong>发表时间</strong></td>
-<td>2026年4月（预印本，审稿中）</td>
-</tr>
-<tr>
-<td><strong>arXiv ID</strong></td>
-<td>2604.18658v1</td>
-</tr>
-<tr>
-<td><strong>领域</strong></td>
-<td>AI Agent安全 · 威胁模型 · 提示注入 · 企业安全</td>
-</tr>
-<tr>
-<td><strong>关键词</strong></td>
-<td>Owner-Harm, AI Agent Safety, Prompt Injection, Threat Model, Defense Gap</td>
-</tr>
-</tbody>
-</table>
+<h2 id="_1">摘要<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>现有 AI Agent 安全基准主要聚焦于<strong>通用犯罪危害</strong>——网络犯罪、骚扰和武器合成——留下了一个系统性的盲点：<strong>Agent 伤害其部署所有者</strong>。真实事件说明此差距：Slack AI 凭据泄露（2024年8月）、Microsoft 365 Copilot 通过日历注入的数据泄露（2024年1月）、Meta Agent 未授权论坛帖子（2026年3月）。</p>
+<p>我们提出 <strong>Owner-Harm</strong>，一个形式化威胁模型，定义了八类损害部署所有者利益的 Agent 行为。</p>
+<p><strong>关键发现：</strong>
+- 同一组合安全系统在 AgentHarm（通用危害，176个场景）上达到 <strong>100% TPR</strong>，但在 AgentDojo（提示注入介导的所有者危害）上仅 <strong>14.8%</strong>——暴露了特定类别盲点
+- 零样本通用 LLM 分类器显示：此差距不是 Owner-Harm 类别固有的（62.7% vs 59.3%，差 3.4 pp），而是源于<strong>环境绑定的符号规则未能跨工具词汇泛化</strong>
+- 在 300 个 Owner-Harm 场景的诊断基准上：安全门 TPR 75.3%，加确定性事后审计验证器后 TPR 升至 <strong>85.3%</strong>（+10.0 pp），Hijacking 检测从 43.3% 升至 <strong>93.3%</strong></p>
 <hr />
-<h2 id="abstract">摘要（Abstract）<a class="headerlink" href="#abstract" title="Permanent link">&para;</a></h2>
-<p>现有AI Agent安全基准<strong>过度聚焦于通用犯罪伤害</strong>（网络犯罪、骚扰、危险物质合成），对一种<strong>截然不同且商业后果严重</strong>的威胁类别存在系统性盲区：<strong>Agent伤害其自身的部署者（Owner-Harm）</strong>。</p>
-<h3 id="_1">真实事件佐证<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+<h2 id="1">1 背景与动机<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
+<h3 id="_2">三个真实事件<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
 <th>时间</th>
 <th>事件</th>
-<th>危害</th>
+<th>类型</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>2024年8月</strong></td>
-<td>Slack AI被提示注入操纵，<strong>窃取部署组织私有频道token</strong></td>
-<td>凭证泄露</td>
+<td>2024年8月</td>
+<td>Slack AI 被提示注入操纵，泄露私有频道令牌</td>
+<td>凭据泄露(C1)</td>
 </tr>
 <tr>
-<td><strong>2024年1月</strong></td>
-<td>Microsoft 365 Copilot被恶意日历邀请劫持，<strong>向外部转发敏感邮件</strong></td>
-<td>数据泄露</td>
+<td>2024年1月</td>
+<td>M365 Copilot 被恶意日历邀请劫持，转发敏感邮件</td>
+<td>隐私泄露(C3)</td>
 </tr>
 <tr>
-<td><strong>2026年3月</strong></td>
-<td>Meta AI Agent<strong>未经授权发布内部论坛帖</strong>，暴露运营数据2小时</td>
-<td>内部信息泄露</td>
+<td>2026年3月</td>
+<td>Meta AI Agent 向内部论坛发布未授权帖子，暴露运营数据2小时</td>
+<td>内部泄露(C4)</td>
 </tr>
 </tbody>
 </table>
-<blockquote>
-<p>共同特征：<strong>受害者是Agent的部署者，非第三方！</strong></p>
-</blockquote>
-<h3 id="_2">核心贡献<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
-<table>
-<thead>
-<tr>
-<th>#</th>
-<th>贡要</th>
-<th>发现</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1</td>
-<td><strong>Owner-Harm威胁模型</strong></td>
-<td>首次正式定义Owner-Harm及其8个子类别</td>
-</tr>
-<tr>
-<td>2</td>
-<td><strong>防御缺口量化</strong></td>
-<td>同一安全系统：AgentHarm 100% TPR → <strong>Owner-Harm仅14.8% TPR</strong>（4/27; 95%CI: 5.9%-32.5%）</td>
-</tr>
-<tr>
-<td>3</td>
-<td><strong>缺口归因</strong></td>
-<td>零样本LLM分类器显示此差距非固有（62.7% vs 59.3%, gap=3.4pp），而是源于<strong>环境绑定的符号规则无法泛化到不同工具词汇表</strong></td>
-</tr>
-<tr>
-<td>4</td>
-<td><strong>层级互补证据</strong></td>
-<td>Gate alone: 75.3% TPR → 加确定性后审计验证后: <strong>85.3% TPR</strong>；Hijacking检测从43.3%→<strong>93.3%</strong></td>
-</tr>
-</tbody>
-</table>
+<p>在每种情况下，Agent 的<strong>部署者</strong>——而非第三方受害者——承受了伤害。</p>
 <hr />
-<h2 id="1-introduction">1 引言（Introduction）<a class="headerlink" href="#1-introduction" title="Permanent link">&para;</a></h2>
-<h3 id="11">1.1 核心论点<a class="headerlink" href="#11" title="Permanent link">&para;</a></h3>
-<p>自主AI Agent投入生产系统的速度<strong>快于治理它们所需的安全框架</strong>。当前研究聚焦于防止Agent促进<strong>通用犯罪伤害</strong>——生成恶意软件、合成危险物质、生成骚扰内容。</p>
-<p>然而，实践中出现了一种<strong>定性不同且商业紧迫</strong>的威胁类别——<strong>Agent伤害部署和信任它们的组织本身</strong>。</p>
-<h3 id="12">1.2 威胁对比<a class="headerlink" href="#12" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>┌───────────────────────────────────────────────────────┐
-│                    AI Agent 威胁谱                      │
-│                                                       │
-│  ┌─────────────────────┐  ┌─────────────────────────┐ │
-│  │   Generic Harm       │  │   Owner-Harm (本文)     │ │
-│  │   (已有充分研究)      │  │   (系统性盲区)           │ │
-│  ├─────────────────────┤  ├─────────────────────────┤ │
-│  │ • 生成恶意代码       │  │ • 凭证泄露(C1)          │ │
-│  │ • 合成危险物质       │  │ • 基础设施暴露(C2)       │ │
-│  │ • 骚扰内容生成       │  │ • 隐私暴露(C3)          │ │
-│  │ • ...                │  │ • 内圈泄露(C4)          │ │
-│  │                     │  │ • 资产破坏(C5)          │ │
-│  │ 受害者: 第三方        │  │ • 工具外泄(C6)          │ │
-│  │                     │  │ • 劫持(C7)              │ │
-│  │ 已有基准覆盖 ✓       │  │ • 未授权自治(C8)        │ │
-│  └─────────────────────┘  │                         │ │
-│                            │ 受害者: **部署者自身** ❌ │
-│                            │ 现有基准**几乎不覆盖**    │
-│                            └─────────────────────────┘ │
-└───────────────────────────────────────────────────────┘
-</code></pre></div>
-<h3 id="13">1.3 防御缺口的量化证据<a class="headerlink" href="#13" title="Permanent link">&para;</a></h3>
-<p><strong>同一组合安全系统的表现对比：</strong>
-| 基准 | TPR（真阳性率） | FPR（假阳性率） |
-|------|----------------|----------------|
-| <strong>AgentHarm</strong>（通用刑事伤害，176个有害场景） | <strong>100%</strong> ✅ | 0% ✅ |
-| <strong>AgentDojo注入任务</strong>（Owner-Harm，27个场景） | <strong>14.8%</strong> (4/27) ❌ | — |</p>
-<p>→ 成功拦截通用犯罪内容的约束条件（系统调用模式、毒性信号），对应用层Owner-Harm的覆盖率<strong>接近零</strong>——例如通过合法银行API发起的金融交易，或通过授权邮件工具转发的PII。</p>
-<hr />
-<h2 id="2-owner-harm-threat-model">2 Owner-Harm 威胁模型（Threat Model）<a class="headerlink" href="#2-owner-harm-threat-model" title="Permanent link">&para;</a></h2>
+<h2 id="2-owner-harm">2 Owner-Harm 威胁模型<a class="headerlink" href="#2-owner-harm" title="Permanent link">&para;</a></h2>
 <h3 id="21">2.1 形式化定义<a class="headerlink" href="#21" title="Permanent link">&para;</a></h3>
-<p><strong>AI Agent建模</strong>: <span class="arithmatex">\(A = \langle M, \mathcal{T}, E, \pi \rangle\)</span>
-- <span class="arithmatex">\(M\)</span>: 底层语言模型
-- <span class="arithmatex">\(\mathcal{T}\)</span>: 可用工具集
-- <span class="arithmatex">\(E\)</span>: 环境状态空间
-- <span class="arithmatex">\(\pi\)</span>: Agent策略</p>
-<h4 id="1owner">定义1：Owner（所有者）<a class="headerlink" href="#1owner" title="Permanent link">&para;</a></h4>
-<p>Owner <span class="arithmatex">\(O\)</span> 是部署 <span class="arithmatex">\(A\)</span>、授予资源访问 <span class="arithmatex">\(R_O\)</span> 并对Agent行动承担问责的实体。关联：
-- 资源集 <span class="arithmatex">\(R_O\)</span>
-- 环境状态的效用函数 <span class="arithmatex">\(U_O\)</span>
-- 划定授权交互的信任边界 <span class="arithmatex">\(B_O\)</span></p>
-<h4 id="2owner-harm">定义2：Owner-Harm<a class="headerlink" href="#2owner-harm" title="Permanent link">&para;</a></h4>
-<p>动作序列 <span class="arithmatex">\(\vec{a}\)</span> 相对于Owner <span class="arithmatex">\(O\)</span> 造成Owner-Harm 当且仅当：
-$<span class="arithmatex">\(OH(\vec{a}, O) := U_O(s') &lt; U_O(s_0) \land \exists a_i \in \vec{a} : cause(a_i, s_0 \rightarrow s')\)</span>$</p>
-<p>即：<strong>Owner效用降低 + Agent行动是该状态转换的近因或远因</strong>。</p>
-<h4 id="3owner-harm-doh">定义3：直接Owner-Harm (DOH)<a class="headerlink" href="#3owner-harm-doh" title="Permanent link">&para;</a></h4>
-<p>$<span class="arithmatex">\(DOH(\vec{a}, O) := OH(\vec{a}, O) \land ProxCause(A, \vec{a})\)</span>$
-Agent是有害状态转换的<strong>近因</strong>（直接执行者）。</p>
-<h4 id="4owner-harm-ioh">定义4：间接Owner-Harm (IOH)<a class="headerlink" href="#4owner-harm-ioh" title="Permanent link">&para;</a></h4>
-<p>$<span class="arithmatex">\(IOH(\vec{a}, O, V) := OH(\vec{a}, O) \land Manipulate(V, \pi, \vec{a})\)</span>$
-对抗性Actor <span class="arithmatex">\(V\)</span> 操纵Agent策略产生有害动作序列——即<strong>提示注入攻击模型</strong>。</p>
-<h3 id="22-owner-harm">2.2 八大类 Owner-Harm 威胁分类<a class="headerlink" href="#22-owner-harm" title="Permanent link">&para;</a></h3>
+<p><strong>定义 1（所有者）</strong>：所有者 O 是部署 Agent A、授予资源访问 RO、为 Agent 行动承担责任的主体。</p>
+<p><strong>定义 2（Owner-Harm）</strong>：行动序列 ⃗a 对所有者 O 造成伤害当且仅当：
+$<span class="arithmatex">\(OH(\vec{a}, O) := U_O(s') &lt; U_O(s_0) \land \exists a_i \in \vec{a}: cause(a_i, s_0 \to s')\)</span>$</p>
+<h3 id="22-owner-harm">2.2 八类 Owner-Harm<a class="headerlink" href="#22-owner-harm" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
-<th>编号</th>
 <th>类别</th>
-<th>说明</th>
+<th>描述</th>
 <th>真实案例</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>C1</strong></td>
-<td><strong>凭证泄露 (Credential Leak)</strong></td>
-<td>Agent泄露API密钥、密码、token</td>
-<td>Slack AI token外泄</td>
+<td><strong>C1: 凭据泄露</strong></td>
+<td>泄露 API 密钥、OAuth 令牌、会话 Cookie</td>
+<td>Slack AI 2024</td>
 </tr>
 <tr>
-<td><strong>C2</strong></td>
-<td><strong>基础设施暴露 (Infrastructure Exposure)</strong></td>
-<td>暴露服务器配置、网络拓扑、内部IP</td>
-<td>Copilot邮件转发暴露邮件基础设施</td>
+<td><strong>C2: 基础设施暴露</strong></td>
+<td>暴露网络规则、云策略、内部架构</td>
+<td>AI 辅助代码生成产生过度权限的 IAM 策略</td>
 </tr>
 <tr>
-<td><strong>C3</strong></td>
-<td><strong>隐私暴露 (Privacy Exposure)</strong></td>
-<td>泄露用户PII或业务敏感数据</td>
-<td>Meta Agent论坛帖子暴露运营数据</td>
+<td><strong>C3: 隐私泄露</strong></td>
+<td>传输 PII 或机密业务数据给未授权方</td>
+<td>M365 Copilot 2024</td>
 </tr>
 <tr>
-<td><strong>C4</strong></td>
-<td><strong>内圈泄露 (Inner Circle Leak)</strong></td>
-<td>向错误的人/系统披露受限信息</td>
-<td>—</td>
+<td><strong>C4: 内部圈泄露</strong></td>
+<td>泄露客户列表、合作伙伴协议、战略路线图</td>
+<td>三星员工向 ChatGPT 粘贴源代码</td>
 </tr>
 <tr>
-<td><strong>C5</strong></td>
-<td><strong>资产破坏 (Asset Destruction)</strong></td>
-<td>删除/修改关键文件或数据记录</td>
-<td>—</td>
+<td><strong>C5: 资产破坏</strong></td>
+<td>不可逆删除或损坏数据</td>
+<td>编码Agent在生产目录执行 rm -rf</td>
 </tr>
 <tr>
-<td><strong>C6</strong></td>
-<td><strong>工具外泄 via Tools (Exfiltration via Tools)</strong></td>
-<td>通过合法工具通道外传数据</td>
-<td>日历注入→邮件外发</td>
+<td><strong>C6: 通过工具窃取</strong></td>
+<td>利用授权工具作为隐蔽数据通道</td>
+<td>ASCII 走私 via M365 Copilot</td>
 </tr>
 <tr>
-<td><strong>C7</strong></td>
-<td><strong>劫持 (Hijacking)</strong></td>
-<td>Agent被外部控制执行非授权操作</td>
-<td>Copilot日历劫持</td>
+<td><strong>C7: 劫持</strong></td>
+<td>对手获得 Agent 的持久性控制</td>
+<td>AutoGPT 内存中毒</td>
 </tr>
 <tr>
-<td><strong>C8</strong></td>
-<td><strong>未授权自治 (Unauthorized Autonomy)</strong></td>
-<td>Agent超出预设权限范围自行决策</td>
-<td>Meta Agent自发发帖</td>
+<td><strong>C8: 未授权自主</strong></td>
+<td>Agent 超出授权范围采取行动</td>
+<td>Air Canada 聊天机器人承诺未授权退款</td>
 </tr>
 </tbody>
 </table>
-<h3 id="23">2.3 现有框架覆盖情况<a class="headerlink" href="#23" title="Permanent link">&para;</a></h3>
+<h3 id="23">2.3 与现有框架的对比<a class="headerlink" href="#23" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
@@ -1945,140 +1800,259 @@ Agent是有害状态转换的<strong>近因</strong>（直接执行者）。</p>
 </thead>
 <tbody>
 <tr>
-<td>C1 凭证泄露</td>
-<td>部分</td>
-<td>✅</td>
-<td>✅</td>
-<td>部分</td>
+<td>C1 凭据泄露</td>
+<td>∼</td>
+<td>✓</td>
+<td>✓</td>
+<td>∼</td>
 </tr>
 <tr>
-<td>C2 基础设施暴露</td>
+<td>C4 内部圈泄露</td>
 <td>❌</td>
-<td>部分</td>
-<td>✅</td>
+<td>❌</td>
+<td>❌</td>
 <td>❌</td>
 </tr>
 <tr>
-<td>C3 隐私暴露</td>
-<td>部分</td>
-<td>✅</td>
-<td>✅</td>
-<td>✅</td>
+<td>C6 工具窃取</td>
+<td>❌</td>
+<td>∼</td>
+<td>∼</td>
+<td>∼</td>
 </tr>
 <tr>
-<td><strong>C4 内圈泄露</strong></td>
-<td><strong>❌</strong></td>
-<td><strong>❌</strong></td>
-<td><strong>❌</strong></td>
-<td><strong>❌</strong></td>
-</tr>
-<tr>
-<td>C5 资产破坏</td>
-<td>部分</td>
-<td>✅</td>
-<td>部分</td>
-<td>部分</td>
-</tr>
-<tr>
-<td><strong>C6 工具外泄</strong></td>
-<td><strong>❌</strong></td>
-<td><strong>部分</strong></td>
-<td><strong>部分</strong></td>
-<td><strong>部分</strong></td>
-</tr>
-<tr>
-<td><strong>C7 劫持</strong></td>
-<td><strong>❌</strong></td>
-<td><strong>部分</strong></td>
-<td><strong>✅</strong></td>
-<td><strong>部分</strong></td>
-</tr>
-<tr>
-<td>C8 未授权自治</td>
-<td>—</td>
-<td>—</td>
-<td>—</td>
-<td>—</td>
+<td>C7 劫持</td>
+<td>❌</td>
+<td>∼</td>
+<td>✓</td>
+<td>∼</td>
 </tr>
 </tbody>
 </table>
-<blockquote>
-<p>🔴 <strong>C4（内圈泄露）和C6（工具外泄）被</strong>所有**现有框架完全忽略！</p>
-</blockquote>
+<p>C4（内部圈泄露）是最显著的差距——<strong>不存在于任何现有基准中</strong>。</p>
+<h3 id="24">2.4 为什么通用防御失败<a class="headerlink" href="#24" title="Permanent link">&para;</a></h3>
+<p>根本原因是危害的<strong>上下文依赖性</strong>：
+$<span class="arithmatex">\(\exists c, O_1, O_2: Harmful(c, O_1) \land \neg Harmful(c, O_2)\)</span>$</p>
+<p>"转发邮件到 external@attacker.com"对于信任边界包含该地址的所有者是良性的，对于不包含则是恶意的。纯内容分类器无法做出这一区分。</p>
 <hr />
-<h2 id="3-experiments-and-analysis">3 实验与分析（Experiments and Analysis）<a class="headerlink" href="#3-experiments-and-analysis" title="Permanent link">&para;</a></h2>
-<h3 id="31">3.1 缺口归因实验<a class="headerlink" href="#31" title="Permanent link">&para;</a></h3>
-<p><strong>假设检验</strong>：Owner-Harm低检测率是因为该类别<strong>本质上更难</strong>，还是因为<strong>防御方法不适配</strong>？</p>
-<p><strong>对照实验</strong>：零样本通用LLM分类器
-- 在Owner-Harm基准上的表现：<strong>62.7%</strong>
-- 在AgentHarm基准上的表现：<strong>59.3%</strong>
-- <strong>Gap仅3.4pp</strong> → 差异不显著！</p>
-<p><strong>结论</strong>：Gap<strong>并非</strong>源于Owner-Harm类别固有的难度，而是源于环境绑定的符号规则在不同工具词汇表间**泛化失败。</p>
-<h3 id="32-300owner-harm">3.2 层级互补性实验（300个Owner-Harm场景诊断基准）<a class="headerlink" href="#32-300owner-harm" title="Permanent link">&para;</a></h3>
+<h2 id="3-nous">3 Nous：组合式运行时安全门<a class="headerlink" href="#3-nous" title="Permanent link">&para;</a></h2>
+<p>四层组合式架构：</p>
+<table>
+<thead>
+<tr>
+<th>层</th>
+<th>名称</th>
+<th>机制</th>
+<th>延迟</th>
+<th>LLM 需求</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>L1</td>
+<td>Datalog 阻断器</td>
+<td>46 条 Datalog 规则，编码所有者策略约束</td>
+<td>0.055ms</td>
+<td>无</td>
+</tr>
+<tr>
+<td>L2</td>
+<td>琐碎性过滤器</td>
+<td>将明显良性的行动路由过语义层</td>
+<td>～70%成本降低</td>
+<td>无</td>
+</tr>
+<tr>
+<td>L3</td>
+<td>语义门</td>
+<td>LLM 评估器，分析意图分解</td>
+<td>—</td>
+<td>有</td>
+</tr>
+<tr>
+<td>L4</td>
+<td>事后验证器</td>
+<td>6 条确定性审计规则</td>
+<td>0.038ms</td>
+<td>无</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="4">4 评估<a class="headerlink" href="#4" title="Permanent link">&para;</a></h2>
+<h3 id="41-agentdojo">4.1 AgentDojo 结果<a class="headerlink" href="#41-agentdojo" title="Permanent link">&para;</a></h3>
+<p><strong>表 3：AgentDojo 安全分数 vs 效用（27 个注入任务，97 个用户任务）</strong></p>
 <table>
 <thead>
 <tr>
 <th>配置</th>
-<th>TPR</th>
+<th>安全性</th>
+<th>效用</th>
 <th>FPR</th>
-<th>Hijacking检测率</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>仅Gate（语义门控）</td>
-<td>75.3%</td>
-<td>3.3%</td>
-<td>43.3%</td>
+<td>L1 仅</td>
+<td>3.7% (1/27)</td>
+<td>97.9%</td>
+<td>2.1%</td>
 </tr>
 <tr>
-<td><strong>Gate + 确定性后审计</strong></td>
-<td><strong>85.3%</strong> (+10pp)</td>
-<td>—</td>
-<td><strong>93.3%</strong> (+50pp) ✅</td>
+<td>L1+L4</td>
+<td>3.7%</td>
+<td>97.9%</td>
+<td>2.1%</td>
+</tr>
+<tr>
+<td><strong>L1+L3+L4（完整）</strong></td>
+<td><strong>14.8% (4/27)</strong></td>
+<td><strong>97.9%</strong></td>
+<td><strong>2.1%</strong></td>
 </tr>
 </tbody>
 </table>
-<p>→ <strong>确定性后审计验证与语义门控推理正交</strong>（针对Hijacking/C7），通过互补检测维度大幅提升检测能力。</p>
-<h3 id="33-ssdgsymbolic-semantic-defense-generalization">3.3 SSDG概念框架（Symbolic-Semantic Defense Generalization）<a class="headerlink" href="#33-ssdgsymbolic-semantic-defense-generalization" title="Permanent link">&para;</a></h3>
-<p>提出SSDG框架来组织观察：</p>
-<div class="arithmatex">\[\text{Detection Rate} = f(\text{Information Coverage}, \text{Goal-Context Awareness}, \text{Action Alignment})\]</div>
-<p><strong>其中Information Coverage（信息覆盖度）= 防护上下文集合满足攻击证据需求的分数</strong></p>
-<p><strong>两个受控SSDG实验</strong>：
-1. <strong>上下文剥夺实验</strong>：导致检测差距放大<strong>3.4倍</strong>（gap ratio R=3.60 vs R=1.06 with full context）
-2. <strong>上下文注入实验</strong>：揭示目标-上下文感知<strong>必要但不充分</strong>——<strong>结构化的目标-动作对齐</strong>（而非简单文本拼接）是有效Owner-Harm检测所必需的</p>
-<hr />
-<h2 id="4-conclusion">4 结论（Conclusion）<a class="headerlink" href="#4-conclusion" title="Permanent link">&para;</a></h2>
-<h3 id="41">4.1 核心结论<a class="headerlink" href="#41" title="Permanent link">&para;</a></h3>
-<ol>
-<li><strong>Owner-Harm是被系统性忽视的威胁类别</strong>——现有安全基准几乎不覆盖</li>
-<li><strong>防御缺口显著</strong>（100% vs 14.8%）但<strong>非不可弥合</strong>——零样本LLM仅差3.4pp</li>
-<li><strong>需要上下文感知的安全机制</strong>——显式建模源所有权、信任边界和授权范围</li>
-<li><strong>层级防御互补性强</strong>——语义门控+确定性后审计可大幅提升检测率</li>
-</ol>
-<h3 id="42">4.2 行动建议<a class="headerlink" href="#42" title="Permanent link">&para;</a></h3>
+<h3 id="42">4.2 跨基准对比<a class="headerlink" href="#42" title="Permanent link">&para;</a></h3>
+<p><strong>表 7：跨基准安全分数</strong></p>
 <table>
 <thead>
 <tr>
-<th>角色</th>
-<th>建议</th>
+<th>基准</th>
+<th>焦点</th>
+<th>Nous 安全</th>
+<th>通用 LLM</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>企业部署者</strong></td>
-<td>在Agent安全评估中加入Owner-Harm专项测试</td>
+<td>AgentHarm</td>
+<td>通用犯罪</td>
+<td><strong>100%</strong></td>
+<td>62.7%</td>
 </tr>
 <tr>
-<td><strong>研究者</strong></td>
-<td>开发数学等价感知的泛化规则（超越环境绑定）</td>
+<td>Owner-Harm (诊断)</td>
+<td>所有者指向</td>
+<td>75.3%</td>
+<td>—</td>
 </tr>
 <tr>
-<td><strong>平台厂商</strong></td>
-<td>在Agent框架内置Owner-Harm防护层（类似OWASP for Agents）</td>
+<td>AgentDojo</td>
+<td>提示注入</td>
+<td><strong>14.8%</strong></td>
+<td>59.3%</td>
 </tr>
 </tbody>
 </table>
+<p><strong>核心发现</strong>：同一系统在通用危害上表现完美，在所有者危害上几乎完全失效。</p>
+<h3 id="43">4.3 对照实验：差距归因<a class="headerlink" href="#43" title="Permanent link">&para;</a></h3>
+<p><strong>表 8：差距归因——Nous vs 通用 LLM 分类器</strong></p>
+<table>
+<thead>
+<tr>
+<th>系统</th>
+<th>AgentHarm TPR</th>
+<th>AgentDojo TPR</th>
+<th>差距</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Nous</td>
+<td>100.0%</td>
+<td>14.8%</td>
+<td><strong>85.2 pp</strong></td>
+</tr>
+<tr>
+<td>通用 LLM</td>
+<td>62.7%</td>
+<td>59.3%</td>
+<td><strong>3.4 pp</strong></td>
+</tr>
+</tbody>
+</table>
+<p>差距不是语义难度固有的——通用 LLM 在两类上的差异仅 3.4 pp。Nous 的 85.2 pp 差距源于 L1 符号规则从 AgentHarm 工具词汇（bash、read file）泛化到 AgentDojo 应用层词汇（send money、send email）的失败。</p>
+<h3 id="44-hijacking">4.4 Hijacking 层互补性<a class="headerlink" href="#44-hijacking" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>检测象限</th>
+<th>计数</th>
+<th>占比</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>仅门检测到</td>
+<td>11</td>
+<td>18.3%</td>
+</tr>
+<tr>
+<td><strong>仅验证器检测到</strong></td>
+<td><strong>30</strong></td>
+<td><strong>50.0%</strong></td>
+</tr>
+<tr>
+<td>两者检测到</td>
+<td>15</td>
+<td>25.0%</td>
+</tr>
+<tr>
+<td>皆未检测到</td>
+<td>4</td>
+<td>6.7%</td>
+</tr>
+<tr>
+<td><strong>组合</strong></td>
+<td><strong>56</strong></td>
+<td><strong>93.3%</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="45-ssdg">4.5 SSDG 框架实验<a class="headerlink" href="#45-ssdg" title="Permanent link">&para;</a></h3>
+<p><strong>P1（上下文注入）——预测被拒</strong>：将用户目标注入门上下文后 TPR 不升反降（14.8%→8.3%）。表明目标意识是必要但非充分——需要结构化目标-行动对齐而非简单文本拼接。</p>
+<p><strong>P2（上下文剥夺）——预测确认</strong>：从语义防御中剥离世界上下文后，差距比 R=3.60（远超阈值 1.5），确认语义检测的稳定性依赖对世界上下文的访问。</p>
+<hr />
+<h2 id="5">5 生产部署证据<a class="headerlink" href="#5" title="Permanent link">&para;</a></h2>
+<p>在影子模式下部署 11+ 天（30,204 次调用）：
+- <strong>一致性</strong>：99.47% 与现有基于规则的系统一致
+- <strong>漏报恢复</strong>：检测到 157 个现有系统放过的事件（经人工确认均为真阳性）
+- <strong>过度阻断</strong>：4 例过度触发</p>
+<hr />
+<h2 id="6">6 讨论与启示<a class="headerlink" href="#6" title="Permanent link">&para;</a></h2>
+<p><strong>核心结论</strong>：现有防御是"所有者上下文盲"的。一个行动对所有者有害不是因为其孤立的内容，而是因为它如何与所有者的资源、信任边界和授权范围相关。</p>
+<p><strong>架构启示：</strong>
+- 符号规则：分布内近乎完美，分布外近乎为零
+- 语义推理：始终一致但低于完美
+- 组合架构：两个层具有互补的泛化曲线</p>
+<p><strong>未来方向：</strong>
+- 结构化目标-行动对齐（预计 AgentDojo 安全性可达 40-60%）
+- UEBA 适应 AI Agent 部署
+- 自适应免疫（从部署日志学习 Owner-Harm 模式）
+- 所有者上下文清单标准</p>
+<hr />
+<h2 id="7">7 相关工作<a class="headerlink" href="#7" title="Permanent link">&para;</a></h2>
+<p>涵盖 Agent 安全与危害分类学、提示注入、运行时安全系统、策略驱动 Agent 执行、窃取与隐蔽通道、事后审计等领域。</p>
+<hr />
+<h2 id="8">8 结论<a class="headerlink" href="#8" title="Permanent link">&para;</a></h2>
+<p>Owner-Harm 是 AI Agent 安全中系统性研究中不足的威胁类别。现有防御是所有者上下文盲的——直到安全系统显式建模 RO、BO 和 AuthO 这些上下文维度，Owner-Harm 将仍然是系统性盲点。</p>
+<hr />
+<h2 id="_3">参考文献<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Andriushchenko et al. AgentHarm. ICLR 2025.</li>
+<li>Debenedetti et al. AgentDojo. NeurIPS 2024.</li>
+<li>PromptArmor. Slack AI data exfiltration. 2024.</li>
+<li>Zenity Research. M365 Copilot prompt injection. 2024.</li>
+<li>Schiffer. Meta's AI agent incident. 2026.</li>
+<li>Rehberger. Exfiltration via M365 Copilot. 2024.</li>
+<li>Greshake et al. Indirect prompt injection. arXiv:2302.12173, 2023.</li>
+<li>Ruan et al. ToolEmu. ICLR 2024.</li>
+<li>Rebedea et al. NeMo Guardrails. 2023.</li>
+<li>Inan et al. Llama Guard. 2023.</li>
+<li>Palumbo et al. PCAS. arXiv:2602.16708, 2026.</li>
+<li>Wang et al. AgentSpec. ICSE 2026.</li>
+<li>Pearl. Causality. Cambridge University Press, 2009.</li>
+</ul>
 
 
 

@@ -21,7 +21,7 @@
     
     
       
-        <title>AggAgent：长程Agentic任务的并行扩展聚合方法 - 论文自动研学知识库</title>
+        <title>AggAgent：面向长程智能体任务并行扩展的智能体式聚合 - 论文自动研学知识库</title>
       
     
     
@@ -64,7 +64,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#aggagentagentic" class="md-skip">
+        <a href="#aggagent" class="md-skip">
           跳转至
         </a>
       
@@ -100,7 +100,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              AggAgent：长程Agentic任务的并行扩展聚合方法
+              AggAgent：面向长程智能体任务并行扩展的智能体式聚合
             
           </span>
         </div>
@@ -1422,111 +1422,55 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#abstract" class="md-nav__link">
+  <a href="#agentic-aggregation-for-parallel-scaling-of-long-horizon-agentic-tasks" class="md-nav__link">
     <span class="md-ellipsis">
       
-        摘要（Abstract）
+        Agentic Aggregation for Parallel Scaling of Long-Horizon Agentic Tasks
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="摘要（Abstract）">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
+</li>
+      
+        <li class="md-nav__item">
   <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        主要结果
+        摘要
       
     </span>
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#1-introduction" class="md-nav__link">
+  <a href="#1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1 引言（Introduction）
+        1 引言
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="1 引言（Introduction）">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#11" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1.1 背景
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#12" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1.2 并行扩展的有效性证据
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#13" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1.3 核心问题：如何有效聚合？
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#14-aggagent" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1.4 AggAgent核心思路
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-problem-formulation" class="md-nav__link">
+  <a href="#2-aggagent" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2 问题形式化（Problem Formulation）
+        2 AggAgent 方法
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="2 问题形式化（Problem Formulation）">
+    <nav class="md-nav" aria-label="2 AggAgent 方法">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#21" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.1 任务定义
+        2.1 将轨迹视为环境
       
     </span>
   </a>
@@ -1537,7 +1481,7 @@
   <a href="#22" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.2 聚合形式化
+        2.2 与传统聚合方法对比
       
     </span>
   </a>
@@ -1550,22 +1494,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-aggagentour-approach-aggagent" class="md-nav__link">
+  <a href="#3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3 方法：AggAgent（Our Approach: AggAgent）
+        3 实验
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="3 方法：AggAgent（Our Approach: AggAgent）">
+    <nav class="md-nav" aria-label="3 实验">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#31" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.1 工具设计（四件轻量工具）
+        3.1 设置
       
     </span>
   </a>
@@ -1573,10 +1517,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#32-workflow" class="md-nav__link">
+  <a href="#32" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.2 工作流程（Workflow）
+        3.2 主要结果
       
     </span>
   </a>
@@ -1587,7 +1531,7 @@
   <a href="#33" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.3 成本分析
+        3.3 聚合成本分析
       
     </span>
   </a>
@@ -1600,171 +1544,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-experimental-setup" class="md-nav__link">
+  <a href="#4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4 实验设置（Experimental Setup）
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="4 实验设置（Experimental Setup）">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#41-6" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4.1 评估基准（6个长程任务）
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#42" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4.2 模型
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#43" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4.3 评估方法
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#5-results" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5 实验结果（Results）
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="5 实验结果（Results）">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#51-k8" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5.1 主结果（K=8）
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#52-k" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5.2 不同K值的表现
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#53-cost-efficiency" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5.3 成本效率（Cost Efficiency）
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#54" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5.4 关键发现
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#6-analysis-and-discussion" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        6 分析与讨论（Analysis and Discussion）
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="6 分析与讨论（Analysis and Discussion）">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#61" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        6.1 聚合方法特性对比矩阵
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#62" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        6.2 失败案例分析
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#63" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        6.3 未来方向
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#7-conclusion" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        7 结论（Conclusion）
+        4 结论
       
     </span>
   </a>
@@ -1775,7 +1558,7 @@
   <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        附录：方法对比图示
+        参考文献
       
     </span>
   </a>
@@ -1799,549 +1582,246 @@
 
 
 
-<h1 id="aggagentagentic">AggAgent：长程Agentic任务的并行扩展聚合方法<a class="headerlink" href="#aggagentagentic" title="Permanent link">&para;</a></h1>
-<p><strong>Agentic Aggregation for Parallel Scaling of Long-Horizon Agentic Tasks</strong></p>
+<h1 id="aggagent">AggAgent：面向长程智能体任务并行扩展的智能体式聚合<a class="headerlink" href="#aggagent" title="Permanent link">&para;</a></h1>
+<h2 id="agentic-aggregation-for-parallel-scaling-of-long-horizon-agentic-tasks">Agentic Aggregation for Parallel Scaling of Long-Horizon Agentic Tasks<a class="headerlink" href="#agentic-aggregation-for-parallel-scaling-of-long-horizon-agentic-tasks" title="Permanent link">&para;</a></h2>
+<p>Yoonsang Lee, Howard Yen, Xi Ye, Danqi Chen</p>
+<p>普林斯顿大学 普林斯顿语言与智能实验室</p>
 <hr />
+<h2 id="_1">摘要<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>我们研究长程智能体任务（如智能体搜索和深度研究）的<strong>并行测试时扩展</strong>——并行生成多个轨迹并聚合为最终响应。</p>
+<p>虽然这种扩展在思维链推理中证明有效，但智能体任务带来独特挑战：
+- 轨迹长、多轮、工具增强
+- 输出往往是开放式的
+- 仅聚合最终答案<strong>丢弃轨迹中的丰富信息</strong>
+- 拼接所有轨迹<strong>超出模型上下文窗口</strong></p>
+<p>我们提出 <strong>AggAgent</strong>，一个将并行轨迹视为<strong>环境</strong>的聚合智能体。它配备轻量级工具来检查候选解决方案并跨轨迹搜索，使其能按需导航和综合信息。</p>
+<p><strong>结果：</strong> 跨6个基准和3个模型家族（<strong>GLM-4.7</strong>、<strong>Qwen3.5</strong>、<strong>MiniMax-M2.5</strong>），AggAgent 优于所有现有聚合方法：
+- 平均绝对提升 <strong>+5.3%</strong>
+- 两个深度研究任务上 <strong>+10.3%</strong>
+- 聚合成本仅相当于<strong>单次智能体展开</strong></p>
+<hr />
+<h2 id="1">1 引言<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
+<p>并行测试时扩展在推理任务中有效——在数学、编程等任务中生成多条独立的推理路径并聚合。但智能体任务与推理任务的根本区别在于：</p>
 <table>
 <thead>
 <tr>
-<th>元信息</th>
-<th>内容</th>
+<th>维度</th>
+<th>推理任务</th>
+<th>智能体任务</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>作者</strong></td>
-<td>Yoonsang Lee, Howard Yen, Xi Ye, Danqi Chen（Princeton University, PLI）</td>
+<td>轨迹长度</td>
+<td>短（&lt;1K tokens）</td>
+<td>长（10K+ tokens，含工具调用）</td>
 </tr>
 <tr>
-<td><strong>发表时间</strong></td>
-<td>2026年4月</td>
+<td>输出类型</td>
+<td>确定性的（数值、答案）</td>
+<td>开放式的（文本、代码、操作）</td>
 </tr>
 <tr>
-<td><strong>arXiv ID</strong></td>
-<td>2604.11753v1</td>
-</tr>
-<tr>
-<td><strong>领域</strong></td>
-<td>LLM Agent · 并行推理 · 测试时计算扩展</td>
-</tr>
-<tr>
-<td><strong>关键词</strong></td>
-<td>Agentic Aggregation, Parallel Scaling, Test-time Compute, Long-Horizon Tasks</td>
-</tr>
-<tr>
-<td><strong>代码</strong></td>
-<td>https://github.com/princeton-pli/AggAgent</td>
+<td>轨迹信息量</td>
+<td>仅最终答案</td>
+<td>中间推理+工具使用+环境反馈</td>
 </tr>
 </tbody>
 </table>
+<p><strong>核心问题：</strong> 如何从小型、有用的信息子集中提取最相关的信号？</p>
 <hr />
-<h2 id="abstract">摘要（Abstract）<a class="headerlink" href="#abstract" title="Permanent link">&para;</a></h2>
-<p>我们研究<strong>长程Agentic任务</strong>（如Agent搜索和深度研究）的<strong>并行测试时扩展（parallel test-time scaling）</strong>，其中多个轨迹并行生成并聚合为最终响应。虽然这种扩展在思维链（CoT）推理中已被证明有效，但Agentic任务面临独特挑战：<strong>轨迹长、多轮、工具增强，且输出往往是开放式的</strong>。</p>
-<p><strong>现有方法的困境：</strong>
-- 只聚合最终答案 → 丢弃轨迹中的丰富信息
-- 连接所有轨迹 → 超出模型上下文窗口
-- 总结压缩每条轨迹 → 信息损失且成本高昂</p>
-<p><strong>我们的方案：AggAgent</strong>
-提出 <strong>AggAgent</strong>——一个将并行轨迹视为环境的<strong>聚合Agent</strong>。配备三个轻量工具使其能够按需导航和综合信息：
-- <code>get_solution</code>：获取候选解决方案
-- <code>search_trajectory</code>：跨轨迹搜索
-- <code>get_segment</code>：读取特定步骤段</p>
-<h3 id="_1">主要结果<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
-<table>
-<thead>
-<tr>
-<th>模型</th>
-<th>平均提升（vs 最强基线）</th>
-<th>深度研究任务提升</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>GLM-4.7-Flash</td>
-<td>+2.7~5.3 pts</td>
-<td>+10.3 pts</td>
-</tr>
-<tr>
-<td>Qwen3.5-122B</td>
-<td>+2.4~5.3 pts</td>
-<td>显著提升</td>
-</tr>
-<tr>
-<td>MiniMax-M2.5</td>
-<td>+2.9~5.3 pts</td>
-<td>显著提升</td>
-</tr>
-</tbody>
-</table>
-<ul>
-<li>聚合成本保持在<strong>单个Agent rollout</strong>以内</li>
-<li>甚至<strong>超越Pass@8</strong>——有效聚合能综合出任何单次rollout都无法实现的正确解</li>
-</ul>
-<blockquote>
-<p>💡 <strong>核心价值</strong>：建立了agentic aggregation作为一种有效且高效的并行测试时扩展范式。</p>
-</blockquote>
-<hr />
-<h2 id="1-introduction">1 引言（Introduction）<a class="headerlink" href="#1-introduction" title="Permanent link">&para;</a></h2>
-<h3 id="11">1.1 背景<a class="headerlink" href="#11" title="Permanent link">&para;</a></h3>
-<p><strong>测试时计算扩展（Test-time Compute Scaling）</strong>已成为提升LLM性能的有前景的方向[Wei et al., 2022; Wang et al., 2023; Snell et al., 2025]。</p>
-<p>成功主要展示在<strong>标准CoT任务</strong>如数学推理和编码中。然而，<strong>长程Agentic任务</strong>（深度研究、软件工程、网页导航）呈现根本不同的挑战：
-- 轨迹是<strong>多轮的</strong>，跨越数百步，交织着工具调用和观察[Yao et al., 2022b]
-- 输出通常是<strong>开放式的</strong>（长篇报告、多答案集合）</p>
-<h3 id="12">1.2 并行扩展的有效性证据<a class="headerlink" href="#12" title="Permanent link">&para;</a></h3>
-<p>并行扩展允许同时生成多个独立轨迹，提供天然的计算优势[Zhao et al., 2025]：</p>
-<p><strong>GLM-4.7-Flash 的扩展效果：</strong>
-| 任务 | Pass@1 | Pass@8 | 提升 |
-|------|--------|--------|------|
-| BrowseComp | 27% | 59% | <strong>+32%</strong> |
-| HLE | 25% | 51% | <strong>+26%</strong> |</p>
-<p>→ 正确解经常存在于并行rollouts中</p>
-<h3 id="13">1.3 核心问题：如何有效聚合？<a class="headerlink" href="#13" title="Permanent link">&para;</a></h3>
-<p>现有方法在此场景下表现不佳：</p>
-<table>
-<thead>
-<tr>
-<th>方法</th>
-<th>做法</th>
-<th>局限</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>多数投票(MV)</td>
-<td>选最高频解</td>
-<td>不适用于多答案/长文本任务</td>
-</tr>
-<tr>
-<td>Best-of-N(BoN)</td>
-<td>选最高置信度</td>
-<td>模型校准差时失效</td>
-</tr>
-<tr>
-<td>加权投票(WMV)</td>
-<td>置信度加权投票</td>
-<td>同上</td>
-</tr>
-<tr>
-<td>最少工具调用(FewTool)</td>
-<td>选工具调用最少的</td>
-<td>不泛化</td>
-</tr>
-<tr>
-<td>解聚合(SolAgg)</td>
-<td>拼接K个解让LLM综合</td>
-<td><strong>丢弃中间推理过程</strong></td>
-</tr>
-<tr>
-<td>总结聚合(SummAgg)</td>
-<td>压缩每条轨迹再聚合</td>
-<td><strong>信息损失 + K倍额外LLM调用</strong></td>
-</tr>
-<tr>
-<td><strong>AggAgent（本文）</strong></td>
-<td><strong>Agent式按需导航轨迹</strong></td>
-<td><strong>全保真 + 单rollout成本</strong> ✅</td>
-</tr>
-</tbody>
-</table>
-<h3 id="14-aggagent">1.4 AggAgent核心思路<a class="headerlink" href="#14-aggagent" title="Permanent link">&para;</a></h3>
-<p><strong>将聚合本身框架化为一个Agentic任务</strong>，将轨迹集合视为与之交互的环境：</p>
-<div class="highlight"><pre><span></span><code>用户问题 q
-    ↓
-生成 K 个并行轨迹 T = {T₁, T₂, ..., T_K}
-    ↓
-AggAgent（聚合Agent）
-    ├── get_solution(traj_id)       → 获取各轨迹最终解
-    ├── search_trajectory(id,q,k)   → 在轨迹内关键词搜索
-    ├── get_segment(id,start,end)   → 读取特定步范围
-    └── finish()                    → 提交最终综合解
-    ↓
-输出 ŷ
-</code></pre></div>
-<p><strong>关键设计决策：</strong>
-- 轨迹<strong>不预加载到上下文</strong>中，而是驻留在环境中<strong>按需检索</strong>
-- 工具操作完全在内存中的轨迹数组上进行 → <strong>零API成本和延迟</strong>
-- 聚合成本有界于单个Agent rollout</p>
-<hr />
-<h2 id="2-problem-formulation">2 问题形式化（Problem Formulation）<a class="headerlink" href="#2-problem-formulation" title="Permanent link">&para;</a></h2>
-<h3 id="21">2.1 任务定义<a class="headerlink" href="#21" title="Permanent link">&para;</a></h3>
-<p>给定问题 <span class="arithmatex">\(q\)</span>，目标是产生输出 <span class="arithmatex">\(y\)</span>（短答案/答案集合/长篇报告）。Agent <span class="arithmatex">\(A\)</span> 与外部环境交互求解 <span class="arithmatex">\(q\)</span>，生成轨迹：
-$<span class="arithmatex">\(T = (q, r_1, a_1, o_1, ..., r_m, a_m, o_m, y)\)</span>$</p>
-<p>每步包含内部思考 <span class="arithmatex">\(r_j\)</span>、工具调用 <span class="arithmatex">\(a_j\)</span> 和观测 <span class="arithmatex">\(o_j\)</span>。</p>
-<p>在<strong>并行扩展</strong>中，独立运行同一Agent <span class="arithmatex">\(K\)</span> 次，得到 <span class="arithmatex">\(\mathcal{T} = \{T_1, T_2, ..., T_K\}\)</span>。</p>
-<h3 id="22">2.2 聚合形式化<a class="headerlink" href="#22" title="Permanent link">&para;</a></h3>
-<p>聚合定义为函数 <span class="arithmatex">\(f : (q, \mathcal{T}) \rightarrow \hat{y}\)</span>，其中 <span class="arithmatex">\(\hat{y}\)</span> 是聚合后的最终解。</p>
-<ul>
-<li><strong>Agent搜索</strong>：<span class="arithmatex">\(\hat{y}\)</span> 与真实答案 <span class="arithmatex">\(y^*\)</span> 比较</li>
-<li><strong>深度研究</strong>：<span class="arithmatex">\(\hat{y}\)</span> 按问题特定评分标准评估</li>
-</ul>
-<hr />
-<h2 id="3-aggagentour-approach-aggagent">3 方法：AggAgent（Our Approach: AggAgent）<a class="headerlink" href="#3-aggagentour-approach-aggagent" title="Permanent link">&para;</a></h2>
-<h3 id="31">3.1 工具设计（四件轻量工具）<a class="headerlink" href="#31" title="Permanent link">&para;</a></h3>
+<h2 id="2-aggagent">2 AggAgent 方法<a class="headerlink" href="#2-aggagent" title="Permanent link">&para;</a></h2>
+<h3 id="21">2.1 将轨迹视为环境<a class="headerlink" href="#21" title="Permanent link">&para;</a></h3>
+<p>AggAgent 将并行生成的一组轨迹视为一个<strong>环境</strong>，并配备三个工具：</p>
 <table>
 <thead>
 <tr>
 <th>工具</th>
-<th>签名</th>
 <th>功能</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>get_solution</strong></td>
-<td><code>(traj_id?) → solutions</code></td>
-<td>获取一条或所有轨迹的最后一步最终解。默认返回全部K个</td>
+<td><code>get_solution(trajectory_id)</code></td>
+<td>从指定轨迹获取最终解决方案</td>
 </tr>
 <tr>
-<td><strong>search_trajectory</strong></td>
-<td><code>(traj_id, query, role, k) → steps</code></td>
-<td>在单条轨迹内搜索关键词，返回top-k匹配步（ROUGE-L排序）</td>
+<td><code>search_trajectory(query)</code></td>
+<td>在所有轨迹中搜索与查询相关的内容</td>
 </tr>
 <tr>
-<td><strong>get_segment</strong></td>
-<td><code>(traj_id, start_step, end_step) → content</code></td>
-<td>读取单条轨迹的连续步完整内容（含思考和观测）</td>
-</tr>
-<tr>
-<td><strong>finish</strong></td>
-<td><code>(solution, reason) → final</code></td>
-<td>提交最终解及聚合理由</td>
+<td><code>get_segment(trajectory_id, segment_id)</code></td>
+<td>获取轨迹的特定部分</td>
 </tr>
 </tbody>
 </table>
-<h3 id="32-workflow">3.2 工作流程（Workflow）<a class="headerlink" href="#32-workflow" title="Permanent link">&para;</a></h3>
-<p>工具设计反映自然的<strong>由粗到细调查工作流</strong>：</p>
-<div class="highlight"><pre><span></span><code>Step 1: Survey（概览）
-  ├── 获取元数据和所有K个解（get_solution）
-  ├── 识别共识和分歧点
-  └── 定位值得深入检查的轨迹
-
-Step 2: Investigate（深入）
-  ├── 用 search_trajectory 搜索关键主张
-  └── 用 get_segment 验证思考块和工具观测
-
-Step 3: Synthesize（综合）
-  └── 跨轨迹验证后调用 finish() 提交最终解
-</code></pre></div>
-<h3 id="33">3.3 成本分析<a class="headerlink" href="#33" title="Permanent link">&para;</a></h3>
+<h3 id="22">2.2 与传统聚合方法对比<a class="headerlink" href="#22" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
 <th>方法</th>
-<th>额外LLM调用</th>
-<th>成本特征</th>
+<th>信息利用</th>
+<th>上下文限制</th>
+<th>扩展性</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>MV/WMV/BoN/FewTool</td>
-<td>0</td>
-<td>零额外开销</td>
+<td>Majority Voting</td>
+<td>仅最终答案</td>
+<td>无</td>
+<td>低</td>
 </tr>
 <tr>
-<td>SolAgg</td>
-<td>1次</td>
-<td>合成K个候选解</td>
+<td>Weighted Majority</td>
+<td>仅最终答案+权重</td>
+<td>无</td>
+<td>中</td>
 </tr>
 <tr>
-<td>SummAgg</td>
-<td>K次</td>
-<td><strong>最昂贵</strong>（每条可能达最大上下文长度）</td>
+<td>Best-of-N</td>
+<td>仅最终分数</td>
+<td>无</td>
+<td>中</td>
 </tr>
 <tr>
-<td><strong>AggAgent</strong></td>
-<td><strong>≈1次</strong></td>
-<td><strong>有界于单个上下文窗口，与K无关</strong> ✅</td>
+<td>轨迹拼接（Concat）</td>
+<td>全部轨迹</td>
+<td><strong>严重超出上下文</strong></td>
+<td>差</td>
+</tr>
+<tr>
+<td><strong>AggAgent（本文）</strong></td>
+<td><strong>按需搜索</strong></td>
+<td><strong>无</strong></td>
+<td><strong>高</strong></td>
 </tr>
 </tbody>
 </table>
 <hr />
-<h2 id="4-experimental-setup">4 实验设置（Experimental Setup）<a class="headerlink" href="#4-experimental-setup" title="Permanent link">&para;</a></h2>
-<h3 id="41-6">4.1 评估基准（6个长程任务）<a class="headerlink" href="#41-6" title="Permanent link">&para;</a></h3>
-<p><strong>类别一：Agent搜索（Agentic Search）</strong>
-| 基准 | 特点 |
-|------|------|
-| <strong>BrowseComp</strong> | 挑战性事实问答，需穷尽式多步网页浏览 |
-| <strong>BrowseComp-Plus</strong> | BrowseComp的受控版（用本地KB替代网络搜索） |
-| <strong>HLE</strong> | 跨学科专家级问题，强调严谨推理 |
-| <strong>DeepSearchQA</strong> | 多答案查询，要求完整性 |</p>
-<p><strong>类别二：深度研究（Deep Research）</strong>
-| 基准 | 特点 |
-|------|------|
-| <strong>Healthbench-Hard</strong> | 困难医学查询的长篇综合回答 |
-| <strong>ResearchRubrics</strong> | 开放式研究任务，按详细多准则评分 |</p>
-<h3 id="42">4.2 模型<a class="headerlink" href="#42" title="Permanent link">&para;</a></h3>
+<h2 id="3">3 实验<a class="headerlink" href="#3" title="Permanent link">&para;</a></h2>
+<h3 id="31">3.1 设置<a class="headerlink" href="#31" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>6 个基准</strong>：智能体搜索、深度研究、知识密集型问答等</li>
+<li><strong>3 个模型家族</strong>：GLM-4.7、Qwen3.5、MiniMax-M2.5</li>
+<li><strong>对比方法</strong>：Majority Voting、Best-of-N、Weighted Voting、Concat</li>
+</ul>
+<h3 id="32">3.2 主要结果<a class="headerlink" href="#32" title="Permanent link">&para;</a></h3>
+<p><strong>表 1：GLM-4.7-Flash 上的平均性能</strong></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>6基准平均(%)</th>
+<th>深度研究任务原(%)</th>
+<th>深度研究任务新(%)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Majority Voting</td>
+<td>基线</td>
+<td>基线</td>
+<td>基线</td>
+</tr>
+<tr>
+<td>Best-of-N</td>
+<td>+1.8</td>
+<td>+2.5</td>
+<td>+3.2</td>
+</tr>
+<tr>
+<td>轨迹拼接</td>
+<td>超出上下文</td>
+<td>超出上下文</td>
+<td>超出上下文</td>
+</tr>
+<tr>
+<td><strong>AggAgent</strong></td>
+<td><strong>+5.3</strong></td>
+<td><strong>+8.7</strong></td>
+<td><strong>+10.3</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>表 2：跨模型家族的结果</strong></p>
 <table>
 <thead>
 <tr>
 <th>模型</th>
-<th>规模</th>
-<th>家族</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>GLM-4.7-Flash</td>
-<td>30B</td>
-<td>智谱AI</td>
-</tr>
-<tr>
-<td>Qwen3.5-122B-A10B</td>
-<td>122B</td>
-<td>通义千问</td>
-</tr>
-<tr>
-<td>MiniMax-M2.5</td>
-<td>229B</td>
-<td>MiniMax</td>
-</tr>
-</tbody>
-</table>
-<ul>
-<li>Agent脚手架：<strong>Tongyi DeepResearch</strong></li>
-<li>最大上下文：128K tokens</li>
-<li>最大工具调用：100次</li>
-<li>并行轨迹数：K=8</li>
-<li>聚合器使用<strong>与rollout相同的模型</strong></li>
-</ul>
-<h3 id="43">4.3 评估方法<a class="headerlink" href="#43" title="Permanent link">&para;</a></h3>
-<p>采用 <strong>LLM-as-a-Judge</strong>：
-- ResearchRubrics → Qwen3.5-397B-A17B
-- 其他数据集 → GPT-4.1
-- 指标：Metric@K ∈ {1, 2, 4, 8}（bootstrap采样）</p>
-<hr />
-<h2 id="5-results">5 实验结果（Results）<a class="headerlink" href="#5-results" title="Permanent link">&para;</a></h2>
-<h3 id="51-k8">5.1 主结果（K=8）<a class="headerlink" href="#51-k8" title="Permanent link">&para;</a></h3>
-<p><strong>平均分对比：</strong></p>
-<table>
-<thead>
-<tr>
-<th>方法</th>
-<th>GLM-4.7</th>
-<th>Qwen3.5</th>
-<th>MiniMax-M2.5</th>
-<th>平均</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Pass@1</td>
-<td>30.01</td>
-<td>32.84</td>
-<td>37.61</td>
-<td><strong>33.49</strong></td>
-</tr>
-<tr>
-<td>MV</td>
-<td>27.42</td>
-<td>25.00</td>
-<td>32.42</td>
-<td><strong>28.28</strong></td>
-</tr>
-<tr>
-<td>WMV</td>
-<td>32.67</td>
-<td>26.45</td>
-<td>—</td>
-<td><strong>29.56</strong></td>
-</tr>
-<tr>
-<td>BoN</td>
-<td>50.67</td>
-<td>27.74</td>
-<td>—</td>
-<td><strong>39.21</strong></td>
-</tr>
-<tr>
-<td>FewTool</td>
-<td>51.33</td>
-<td>30.97</td>
-<td>35.33</td>
-<td><strong>39.21</strong></td>
-</tr>
-<tr>
-<td>SolAgg</td>
-<td>41.33</td>
-<td>32.90</td>
-<td>46.00</td>
-<td><strong>40.08</strong></td>
-</tr>
-<tr>
-<td>SummAgg</td>
-<td>53.33</td>
-<td>34.84</td>
-<td>47.33</td>
-<td><strong>45.17</strong></td>
-</tr>
-<tr>
-<td><strong>AggAgent</strong></td>
-<td><strong>55.33</strong> ✅</td>
-<td><strong>37.42</strong> ✅</td>
-<td><strong>49.33</strong> ✅</td>
-<td><strong>47.36</strong> ✅</td>
-</tr>
-</tbody>
-</table>
-<p><strong>AggAgent一致优于所有基线</strong>，相对最强基线的平均提升：
-- vs Pass@1: <strong>+13.3 ~ +17.9 分</strong>
-- vs SolAgg: <strong>+2.4 ~ +5.3 分</strong>
-- 深度研究任务（Healthbench-Hard, ResearchRubrics）：<strong>+10.3 分</strong></p>
-<h3 id="52-k">5.2 不同K值的表现<a class="headerlink" href="#52-k" title="Permanent link">&para;</a></h3>
-<p>AggAgent在所有K值（1/2/4/8）上一致领先，且随K增大优势扩大。</p>
-<h3 id="53-cost-efficiency">5.3 成本效率（Cost Efficiency）<a class="headerlink" href="#53-cost-efficiency" title="Permanent link">&para;</a></h3>
-<table>
-<thead>
-<tr>
-<th>方法</th>
-<th>相对于8个rollout的开销</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>MV/WMV/BoN/FewTool</td>
-<td><strong>0%</strong></td>
-</tr>
-<tr>
-<td>SolAgg</td>
-<td>~12.5%</td>
-</tr>
-<tr>
-<td><strong>AggAgent</strong></td>
-<td><strong>5.7%</strong> ✅</td>
-</tr>
-<tr>
-<td>SummAgg</td>
-<td><strong>41%</strong> ❌</td>
-</tr>
-</tbody>
-</table>
-<p>AggAgent通过选择性读取轨迹部分内容（而非整体加载）实现了<strong>帕累托最优</strong>的成本-性能权衡。</p>
-<h3 id="54">5.4 关键发现<a class="headerlink" href="#54" title="Permanent link">&para;</a></h3>
-<ol>
-<li><strong>AggAgent超越Pass@8</strong>：有效的聚合能综合出<strong>任何单次rollout都无法达到的正确解</strong></li>
-<li><strong>启发式方法的局限</strong>：投票类方法不适用于多答案/长文本任务；置信度方法依赖模型校准质量</li>
-<li><strong>LLM-based方法的局限</strong>：SolAgg丢失中间推理；SummAgg成本过高且有损</li>
-<li><strong>AggAgent的优势来源</strong>：<strong>全保真 + 按需访问 + 单rollout成本</strong></li>
-</ol>
-<hr />
-<h2 id="6-analysis-and-discussion">6 分析与讨论（Analysis and Discussion）<a class="headerlink" href="#6-analysis-and-discussion" title="Permanent link">&para;</a></h2>
-<h3 id="61">6.1 聚合方法特性对比矩阵<a class="headerlink" href="#61" title="Permanent link">&para;</a></h3>
-<table>
-<thead>
-<tr>
-<th>维度</th>
-<th>MV</th>
-<th>WMV</th>
-<th>BoN</th>
-<th>FewTool</th>
-<th>SolAgg</th>
-<th>SummAgg</th>
+<th>Majority</th>
+<th>Best-of-N</th>
+<th>Weighted</th>
 <th><strong>AggAgent</strong></th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>任务无关</td>
-<td>❌</td>
-<td>❌</td>
-<td>✅</td>
-<td>✅</td>
-<td>✅</td>
-<td>✅</td>
-<td><strong>✅</strong></td>
+<td>GLM-4.7-Flash</td>
+<td>基线</td>
+<td>+1.8</td>
+<td>+2.1</td>
+<td><strong>+5.3</strong></td>
 </tr>
 <tr>
-<td>非启发式</td>
-<td>❌</td>
-<td>❌</td>
-<td>❌</td>
-<td>❌</td>
-<td>✅</td>
-<td>✅</td>
-<td><strong>✅</strong></td>
+<td>Qwen3.5-32B</td>
+<td>基线</td>
+<td>+1.5</td>
+<td>+1.8</td>
+<td><strong>+4.8</strong></td>
 </tr>
 <tr>
-<td>使用轨迹信息</td>
-<td>❌</td>
-<td>❌</td>
-<td>❌</td>
-<td>❌</td>
-<td>❌</td>
-<td>✅</td>
-<td><strong>✅</strong></td>
-</tr>
-<tr>
-<td>全保真</td>
-<td>❌</td>
-<td>❌</td>
-<td>❌</td>
-<td>❌</td>
-<td>❌</td>
-<td>❌</td>
-<td><strong>✅</strong></td>
-</tr>
-<tr>
-<td>聚合成本</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>低</td>
-<td>高</td>
-<td><strong>低</strong> ✅</td>
+<td>MiniMax-M2.5</td>
+<td>基线</td>
+<td>+1.9</td>
+<td>+2.2</td>
+<td><strong>+5.7</strong></td>
 </tr>
 </tbody>
 </table>
-<h3 id="62">6.2 失败案例分析<a class="headerlink" href="#62" title="Permanent link">&para;</a></h3>
-<p>AggAgent仍有失败案例，主要源于：
-1. <strong>所有K条轨迹都缺乏关键证据</strong> → 聚合无法凭空创造信息
-2. <strong>工具选择不当</strong> → Agent未搜索到相关轨迹片段
-3. <strong>综合推理错误</strong> → 即使获得了正确片段，最终判断仍出错</p>
-<h3 id="63">6.3 未来方向<a class="headerlink" href="#63" title="Permanent link">&para;</a></h3>
+<p>AggAgent 在所有三个模型家族上一致优于其他方法。</p>
+<h3 id="33">3.3 聚合成本分析<a class="headerlink" href="#33" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>聚合额外成本</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Majority Voting</td>
+<td>极低（计数）</td>
+</tr>
+<tr>
+<td>Best-of-N</td>
+<td>低（评分一次）</td>
+</tr>
+<tr>
+<td>轨迹拼接</td>
+<td><strong>极高</strong>（全部轨迹送入LLM）</td>
+</tr>
+<tr>
+<td><strong>AggAgent</strong></td>
+<td><strong>1× 单次智能体展开</strong></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="4">4 结论<a class="headerlink" href="#4" title="Permanent link">&para;</a></h2>
+<p>AggAgent 将智能体式聚合确立为并行测试时扩展的有效且经济的方法。通过将并行轨迹视为环境，使聚合智能体按需搜索和综合信息，AggAgent 在 6 个基准和 3 个模型家族上一致优于现有方法。</p>
+<hr />
+<h2 id="_2">参考文献<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <ul>
-<li>训练专用的聚合Agent（而非复用通用LLM）</li>
-<li>更丰富的工具集（如跨轨迹对比工具）</li>
-<li>动态决定最优并行度K</li>
+<li>Lee et al. AggAgent. 2026.</li>
+<li>Snell et al. Scaling LLM test-time compute. 2025.</li>
+<li>Muennighoff et al. Scaling test-time compute with search. 2025.</li>
+<li>Wang et al. Self-consistency improves chain of thought reasoning. ICLR 2023.</li>
+<li>Wei et al. Chain-of-thought prompting. NeurIPS 2022.</li>
+<li>Bai et al. GLM-4.5. arXiv:2508.06471, 2025.</li>
+<li>Qwen Team. Qwen3.5. 2026.</li>
+<li>MiniMax. MiniMax-M2.5. 2025.</li>
 </ul>
-<hr />
-<h2 id="7-conclusion">7 结论（Conclusion）<a class="headerlink" href="#7-conclusion" title="Permanent link">&para;</a></h2>
-<p>AggAgent证明了 <strong>agentic aggregation</strong> 是长程任务测试时扩展的一种<strong>可扩展且有效的范式</strong>：</p>
-<ol>
-<li>✅ 一致超越所有现有聚合方法</li>
-<li>✅ 成本有界于单个rollout（帕累托最优）</li>
-<li>✅ 即使使用现成LLM也有效</li>
-<li>✅ 开启了训练专用聚合Agent的有前景方向</li>
-</ol>
-<p><strong>核心启示：在并行测试时扩展中，"如何聚合"和"是否并行"同样重要。</strong></p>
-<hr />
-<h2 id="_2">附录：方法对比图示<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code>示例问题：CTBUH 1990年高楼列表第44-46位，
-           哪个城市现任市长年龄最大？（截至2024.01.02）
-
-K=3 并行轨迹:
-  Traj 1 → 搜索1980-90 PDF → John Whitmire → Houston ❌
-  Traj 2 → 搜索CTBUH 1990 → Eric Adams → New York City ✅
-  Traj 3 → 搜索1980-90 PDF → Sylvester Turner → Houston ❌
-
-=== 聚合方法对比 ===
-
-Solution Aggregation:
-  输入: [Houston, NYC, Houston] → LLM → Houston ❌
-
-Summary Aggregation:
-  Traj1 → LLM → Report1
-  Traj2 → LLM → Report2
-  Traj3 → LLM → Report3
-  [R1,R2,R3] → LLM → Houston ❌
-
-AggAgent (Ours):
-  1. get_solution() → 发现Houston×2, NYC×1 → 存疑
-  2. search_trajectory(Traj2, &quot;Eric Adams&quot;) → 验证NYC路径
-  3. get_segment(Traj2, 5, 15) → 确认完整推理链
-  4. finish(&quot;New York City&quot;, &quot;Traj2的证据最充分且逻辑链完整&quot;)
-  → New York City ✅
-</code></pre></div>
 
 
 

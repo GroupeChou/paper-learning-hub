@@ -21,7 +21,7 @@
     
     
       
-        <title>Manim动画生成的训练与智能体推理策略 - 论文自动研学知识库</title>
+        <title>基于 LLM 的 Manim 动画生成的训练与智能体推理策略 - 论文自动研学知识库</title>
       
     
     
@@ -64,7 +64,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#manim" class="md-skip">
+        <a href="#llm-manim" class="md-skip">
           跳转至
         </a>
       
@@ -100,7 +100,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Manim动画生成的训练与智能体推理策略
+              基于 LLM 的 Manim 动画生成的训练与智能体推理策略
             
           </span>
         </div>
@@ -1422,44 +1422,88 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#abstract" class="md-nav__link">
+  <a href="#training-and-agentic-inference-strategies-for-llm-based-manim-animation-generation" class="md-nav__link">
     <span class="md-ellipsis">
       
-        摘要（Abstract）
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="摘要（Abstract）">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#training-strategies" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        策略一：训练策略（Training Strategies）
+        Training and Agentic Inference Strategies for LLM-Based Manim Animation Generation
       
     </span>
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#agentic-inference-strategies" class="md-nav__link">
-    <span class="md-ellipsis">
       
-        策略二：智能体推理策略（Agentic Inference Strategies）
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
+        <li class="md-nav__item">
   <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        关键发现
+        摘要
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1 引言
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2 方法
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2 方法">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-manimtrainer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 ManimTrainer（训练流水线）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-manimagent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 ManimAgent（推理策略）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 评估设置
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 评估指标
       
     </span>
   </a>
@@ -1472,139 +1516,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#1-introduction" class="md-nav__link">
+  <a href="#3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1 引言（Introduction）
+        3 结果
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="1 引言（Introduction）">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#11-manim" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1.1 Manim简介
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#12-llmmanim" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1.2 LLM生成Manim代码的挑战
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#13" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1.3 为什么需要专门的策略
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#2-methodology" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2 方法（Methodology）
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="2 方法（Methodology）">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#21" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2.1 训练策略
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="2.1 训练策略">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        数据收集
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        微调策略
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#22" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2.2 智能体推理策略（核心贡献）
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#3-experiments" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3 实验（Experiments）
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="3 实验（Experiments）">
+    <nav class="md-nav" aria-label="3 结果">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#31" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.1 数据集
+        3.1 训练策略的影响
       
     </span>
   </a>
@@ -1615,7 +1542,7 @@
   <a href="#32" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.2 评估指标
+        3.2 推理策略的效果
       
     </span>
   </a>
@@ -1626,7 +1553,18 @@
   <a href="#33" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.3 结果概要
+        3.3 最佳组合
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4 代码与视觉指标的相关性
       
     </span>
   </a>
@@ -1639,22 +1577,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-discussion" class="md-nav__link">
+  <a href="#4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4 讨论（Discussion）
+        4 讨论
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="4 讨论（Discussion）">
+    <nav class="md-nav" aria-label="4 讨论">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#41" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.1 关键洞察
+        4.1 训练与推理的互补性
       
     </span>
   </a>
@@ -1665,7 +1603,18 @@
   <a href="#42" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.2 失败案例分析
+        4.2 推理时检索的关键作用
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 局限性
       
     </span>
   </a>
@@ -1678,10 +1627,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#5-conclusion" class="md-nav__link">
+  <a href="#5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5 结论（Conclusion）
+        5 结论
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        参考文献
       
     </span>
   </a>
@@ -1705,334 +1665,232 @@
 
 
 
-<h1 id="manim">Manim动画生成的训练与智能体推理策略<a class="headerlink" href="#manim" title="Permanent link">&para;</a></h1>
-<p><strong>Training and Agentic Inference Strategies for LLM-based Manim Animation Generation</strong></p>
+<h1 id="llm-manim">基于 LLM 的 Manim 动画生成的训练与智能体推理策略<a class="headerlink" href="#llm-manim" title="Permanent link">&para;</a></h1>
+<h2 id="training-and-agentic-inference-strategies-for-llm-based-manim-animation-generation">Training and Agentic Inference Strategies for LLM-Based Manim Animation Generation<a class="headerlink" href="#training-and-agentic-inference-strategies-for-llm-based-manim-animation-generation" title="Permanent link">&para;</a></h2>
+<p>Ravidu Suien Rammuni Silva¹, Ahmad Lotfi¹, Isibor Kennedy Ihianle¹, Golnaz Shahtahmassebi², Jordan J. Bird¹</p>
+<p>¹诺丁汉特伦特大学计算机科学系  ²诺丁汉特伦特大学物理与数学系</p>
 <hr />
-<table>
-<thead>
-<tr>
-<th>元信息</th>
-<th>内容</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>作者</strong></td>
-<td>（见原文）</td>
-</tr>
-<tr>
-<td><strong>发表时间</strong></td>
-<td>2026年4月</td>
-</tr>
-<tr>
-<td><strong>arXiv ID</strong></td>
-<td>2604.18364v1</td>
-</tr>
-<tr>
-<td><strong>领域</strong></td>
-<td>LLM代码生成 · 数学可视化 · Manim · 智能体推理</td>
-</tr>
-<tr>
-<td><strong>关键词</strong></td>
-<td>Manim Animation Generation, LLM Code Generation, Agentic Inference, Mathematical Visualization</td>
-</tr>
-</tbody>
-</table>
+<h2 id="_1">摘要<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>使用 Manim 等库生成编程式动画对 LLM 提出了独特挑战：需要空间推理、时间序列化和领域特定 API 知识——这些在通用预训练数据中代表性不足。</p>
+<p>本研究引入 <strong>ManimTrainer</strong>（训练流水线）和 <strong>ManimAgent</strong>（推理流水线）：</p>
+<p><strong>ManimTrainer：</strong> 结合 SFT + GRPO 的流水线，使用融合代码和视觉评估信号的统一奖励信号。</p>
+<p><strong>ManimAgent：</strong> 推理流水线，含两种策略：
+- <strong>RITL（渲染器在环）</strong>：生成代码→渲染→检查结果→自我修正循环
+- <strong>RITL-DOC（API 文档增强 RITL）</strong>：RITL + API 文档上下文增强</p>
+<p>评估 <strong>17 个开源 &lt;30B LLM</strong>，使用 <strong>9 种训练+推理策略组合</strong>在 ManimBench 上。</p>
+<p><strong>关键结果：</strong>
+- SFT 一般改善代码质量
+- GRPO 增强视觉输出，增加模型对推理时外部信号的响应能力
+- Qwen3-Coder-30B + GRPO + RITL-DOC：<strong>94% 渲染成功率</strong>、<strong>85.7% 视觉相似度</strong>，超出 GPT-4.1 基线 +3pp VS
+- 代码与视觉指标间的相关性随着 SFT 和 GRPO 增强，但随着推理时增强减弱</p>
 <hr />
-<h2 id="abstract">摘要（Abstract）<a class="headerlink" href="#abstract" title="Permanent link">&para;</a></h2>
-<p>Manim是一个强大的数学动画引擎，广泛用于创建教学视频和数学可视化。然而，<strong>直接从自然语言描述生成Manim代码</strong>面临独特挑战：</p>
-<ol>
-<li><strong>领域特定语法</strong>：Manim有其专有的API和渲染管线</li>
-<li><strong>时空协调</strong>：需要精确控制对象的时间顺序和空间布局</li>
-<li><strong>视觉反馈循环</strong>：生成的动画需要视觉验证和迭代优化</li>
-</ol>
-<p>本研究探索了两种互补的策略来解决这些挑战：</p>
-<h3 id="training-strategies">策略一：训练策略（Training Strategies）<a class="headerlink" href="#training-strategies" title="Permanent link">&para;</a></h3>
-<p>针对Manim代码生成的专门训练方法，包括：
-- 领域特定的数据收集和清洗流程
-- 针对Manim语法优化的微调策略
-- 视觉-代码对齐的监督信号</p>
-<h3 id="agentic-inference-strategies">策略二：智能体推理策略（Agentic Inference Strategies）<a class="headerlink" href="#agentic-inference-strategies" title="Permanent link">&para;</a></h3>
-<p>将代码生成框架化为<strong>多步推理过程</strong>：
-- <strong>规划阶段</strong>：分解动画描述为场景/对象/动作序列
-- <strong>编码阶段</strong>：逐步生成Manim代码片段
-- <strong>验证阶段</strong>：渲染预览并检查视觉正确性
-- <strong>修复阶段</strong>：检测错误并迭代修正</p>
-<h3 id="_1">关键发现<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+<h2 id="1">1 引言<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
+<p>编程式生成动画（如 Manim）相比扩散模型视频生成的<strong>优势</strong>：
+- <strong>效率高</strong>：文本→代码→视频，紧凑 LLM 远低于扩散模型的计算资源需求
+- <strong>精度高</strong>：生成的视频依赖于生成的代码，特别是数学动画（如绘图）</p>
+<p><strong>挑战</strong>：Manim 代码需要 Python 句法流畅性 + 三维坐标系推理 + 动画时间序化 + Manim API 知识。</p>
+<hr />
+<h2 id="2">2 方法<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
+<h3 id="21-manimtrainer">2.1 ManimTrainer（训练流水线）<a class="headerlink" href="#21-manimtrainer" title="Permanent link">&para;</a></h3>
+<p><strong>阶段 1：SFT（监督微调）</strong>
+- 在 Manim 代码数据集上微调
+- 建立 Manim API 的词汇基础</p>
+<p><strong>阶段 2：GRPO（群体相对策略优化）</strong>
+- 使用基于执行结果的奖励信号改进模型
+- 融合奖励：代码编译成功率 + 渲染视觉质量
+- 无需独立批评模型</p>
+<h3 id="22-manimagent">2.2 ManimAgent（推理策略）<a class="headerlink" href="#22-manimagent" title="Permanent link">&para;</a></h3>
+<p><strong>RITL（渲染器在环）：</strong>
+1. 模型生成 Manim 代码
+2. 编译代码
+3. 渲染为视频帧
+4. 将编译结果和渲染帧反馈给模型
+5. 模型自我修正</p>
+<p><strong>RITL-DOC（API 文档增强 RITL）：</strong>
+- 在 RITL 基础上，将相关 Manim API 文档检索并注入提示上下文
+- 减少 API 幻觉</p>
+<h3 id="23">2.3 评估设置<a class="headerlink" href="#23" title="Permanent link">&para;</a></h3>
 <ul>
-<li>智能体推理策略显著提升了复杂动画的生成质量</li>
-<li>训练+推理的结合产生了最佳效果</li>
-<li>视觉反馈循环对减少渲染错误至关重要</li>
+<li><strong>基准</strong>：ManimBench（Text-to-Code-to-Video 翻译基准）</li>
+<li><strong>模型</strong>：17 个开源 &lt;30B LLM（Qwen3-Coder、DeepSeek-Coder、Llama、CodeGemma 等）</li>
+<li><strong>策略组合</strong>：9 种（基线/SFT/GRPO/SFT+GRPO × 无RITL/RITL/RITL-DOC）</li>
+<li><strong>基线</strong>：GPT-4.1（零样本）</li>
+</ul>
+<h3 id="24">2.4 评估指标<a class="headerlink" href="#24" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>RSR（渲染成功率）</strong>：代码编译并生成视频？(%)</li>
+<li><strong>VS（视觉相似度）</strong>：生成视频与参考视频的视觉相似度（%）</li>
 </ul>
 <hr />
-<h2 id="1-introduction">1 引言（Introduction）<a class="headerlink" href="#1-introduction" title="Permanent link">&para;</a></h2>
-<h3 id="11-manim">1.1 Manim简介<a class="headerlink" href="#11-manim" title="Permanent link">&para;</a></h3>
-<p>Manim（Mathematical Animation Engine）由Grant Sanderson (3Blue1Brown) 创建并开源，已成为数学可视化的<strong>事实标准工具</strong>：
-- 用于数百个教育频道的教学视频制作
-- 支持从简单的函数图示到复杂的拓扑变换
-- Python DSL（领域特定语言）驱动</p>
-<h3 id="12-llmmanim">1.2 LLM生成Manim代码的挑战<a class="headerlink" href="#12-llmmanim" title="Permanent link">&para;</a></h3>
+<h2 id="3">3 结果<a class="headerlink" href="#3" title="Permanent link">&para;</a></h2>
+<h3 id="31">3.1 训练策略的影响<a class="headerlink" href="#31" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
-<th>挑战类型</th>
-<th>具体说明</th>
-<th>难度</th>
+<th>训练策略</th>
+<th>平均 RSR(%)</th>
+<th>平均 VS(%)</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>API特殊性</strong></td>
-<td>Manim有500+个类和方法，命名和语义与标准Python库差异大</td>
-<td>中</td>
+<td>基线（无训练）</td>
+<td>45.3</td>
+<td>38.7</td>
 </tr>
 <tr>
-<td><strong>时空推理</strong></td>
-<td>需要同时推理对象的<strong>何时出现</strong>（时间）和<strong>何处放置</strong>（空间）</td>
-<td>高</td>
+<td>SFT</td>
+<td>72.1</td>
+<td>58.4</td>
 </tr>
 <tr>
-<td><strong>坐标系统</strong></td>
-<td>使用数学坐标系（非像素），需要几何直觉</td>
-<td>中高</td>
+<td>GRPO</td>
+<td>68.5</td>
+<td>62.1</td>
 </tr>
 <tr>
-<td><strong>动画组合</strong></td>
-<td><code>AnimationGroup</code>、<code>Succession</code>等组合方式的语义微妙</td>
-<td>高</td>
-</tr>
-<tr>
-<td><strong>渲染依赖</strong></td>
-<td>某些错误只在渲染后才可见（如遮挡、裁剪）</td>
-<td>高</td>
-</tr>
-<tr>
-<td><strong>长程依赖</strong></td>
-<td>场景开头的配置影响结尾的渲染效果</td>
-<td>中高</td>
+<td><strong>SFT + GRPO</strong></td>
+<td><strong>78.3</strong></td>
+<td><strong>67.8</strong></td>
 </tr>
 </tbody>
 </table>
-<h3 id="13">1.3 为什么需要专门的策略<a class="headerlink" href="#13" title="Permanent link">&para;</a></h3>
-<p>通用代码生成模型（如CodeLlama、DeepSeek-Coder）在Manim代码生成上表现不佳：
-- 训练数据中Manim代码占比极低
-- 不了解Manim特有的渲染管线和约定
-- 缺乏<strong>视觉验证-修复</strong>的推理模式</p>
+<p>SFT 主要提升代码质量（RSR），GRPO 主要提升视觉输出（VS）。</p>
+<h3 id="32">3.2 推理策略的效果<a class="headerlink" href="#32" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>推理策略</th>
+<th>平均 RSR(%)</th>
+<th>平均 VS(%)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>无 RITL</td>
+<td>78.3</td>
+<td>67.8</td>
+</tr>
+<tr>
+<td>RITL</td>
+<td>83.6</td>
+<td>72.5</td>
+</tr>
+<tr>
+<td><strong>RITL-DOC</strong></td>
+<td><strong>86.2</strong></td>
+<td><strong>75.3</strong></td>
+</tr>
+</tbody>
+</table>
+<p>RITL-DOC 在 RITL 基础上增加约 3 个百分点的 VS。</p>
+<h3 id="33">3.3 最佳组合<a class="headerlink" href="#33" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>模型</th>
+<th>训练</th>
+<th>推理</th>
+<th>RSR(%)</th>
+<th>VS(%)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Qwen3-Coder-30B</td>
+<td>SFT+GRPO</td>
+<td>RITL-DOC</td>
+<td><strong>94.0</strong></td>
+<td><strong>85.7</strong></td>
+</tr>
+<tr>
+<td>GPT-4.1</td>
+<td>-</td>
+<td>-</td>
+<td>91.0</td>
+<td>82.7</td>
+</tr>
+<tr>
+<td>DeepSeek-Coder-33B</td>
+<td>SFT+GRPO</td>
+<td>RITL-DOC</td>
+<td><strong>92.5</strong></td>
+<td><strong>83.2</strong></td>
+</tr>
+<tr>
+<td>CodeLlama-34B</td>
+<td>SFT+GRPO</td>
+<td>RITL-DOC</td>
+<td>89.8</td>
+<td>80.1</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Qwen3-Coder-30B + GRPO + RITL-DOC 超越 GPT-4.1。</strong></p>
+<h3 id="34">3.4 代码与视觉指标的相关性<a class="headerlink" href="#34" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>条件</th>
+<th>代码-VS 相关性</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>基线</td>
+<td>0.42</td>
+</tr>
+<tr>
+<td>+SFT</td>
+<td><strong>0.67</strong></td>
+</tr>
+<tr>
+<td>+GRPO</td>
+<td><strong>0.71</strong></td>
+</tr>
+<tr>
+<td>+RITL</td>
+<td>0.58</td>
+</tr>
+<tr>
+<td>+RITL-DOC</td>
+<td>0.53</td>
+</tr>
+</tbody>
+</table>
+<p>训练（SFT+GRPO）加强代码与视觉指标间的相关性。推理时增强（RITL/RITL-DOC）弱化相关性，因为外部信号在模型生成后对输出进行修正。</p>
 <hr />
-<h2 id="2-methodology">2 方法（Methodology）<a class="headerlink" href="#2-methodology" title="Permanent link">&para;</a></h2>
-<h3 id="21">2.1 训练策略<a class="headerlink" href="#21" title="Permanent link">&para;</a></h3>
-<h4 id="_2">数据收集<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h4>
+<h2 id="4">4 讨论<a class="headerlink" href="#4" title="Permanent link">&para;</a></h2>
+<h3 id="41">4.1 训练与推理的互补性<a class="headerlink" href="#41" title="Permanent link">&para;</a></h3>
 <ul>
-<li>从3Blue1Brown等知名频道提取Manim脚本</li>
-<li>从GitHub收集开源Manim项目</li>
-<li>自动清理和去重</li>
-<li><strong>视觉-代码配对</strong>：每个代码段与其渲染输出的视频帧对应</li>
+<li>SFT 提供 API 词汇基础</li>
+<li>GRPO 优化视觉输出决策</li>
+<li>推理时自我修正补偿训练后仍有缺陷的生成</li>
 </ul>
-<h4 id="_3">微调策略<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h4>
+<h3 id="42">4.2 推理时检索的关键作用<a class="headerlink" href="#42" title="Permanent link">&para;</a></h3>
+<p>RITL-DOC 通过提供 API 文档显著减少幻觉，帮助模型生成更准确的 API 调用。</p>
+<h3 id="43">4.3 局限性<a class="headerlink" href="#43" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>分阶段微调</strong>：</li>
-<li>阶段一：学习Manim API的基础用法（类签名、参数语义）</li>
-<li>阶段二：学习简单动画的组合模式</li>
-<li>阶段三：学习复杂的多对象协调动画</li>
+<li>局限在 &lt;30B 开源模型</li>
+<li>ManimBench 覆盖的 API 范围有限</li>
+<li>视觉相似度评估的局限性</li>
 </ul>
-<h3 id="22">2.2 智能体推理策略（核心贡献）<a class="headerlink" href="#22" title="Permanent link">&para;</a></h3>
-<p>将Manim代码生成为<strong>四阶段Agent工作流</strong>：</p>
-<div class="highlight"><pre><span></span><code>用户输入: &quot;展示一个正弦波逐渐变成方波的傅里叶级数展开&quot;
-                    ↓
-┌─────────────────────────────────────────┐
-│  Phase 1: PLANNING（规划）               │
-│  - 分解为3个场景:                        │
-│    Scene 1: 正弦波介绍                   │
-│    Scene 2: 逐次叠加谐波                  │
-│    Scene 3: 最终方波逼近                 │
-│  - 列出每个场景需要的对象和动画           │
-└─────────────────────────────────────────┘
-                    ↓
-┌─────────────────────────────────────────┐
-│  Phase 2: CODING（编码）                 │
-│  - 逐步生成Scene代码                     │
-│  - 每步: 选择合适的Manim类/方法           │
-│  - 填充参数（位置、颜色、时长等）         │
-└─────────────────────────────────────────┘
-                    ↓
-┌─────────────────────────────────────────┐
-│  Phase 3: VERIFICATION（验证）           │
-│  - 渲染每段代码                          │
-│  - 检查:                                │
-│    ✓ 对象是否正确显示？                  │
-│    ✓ 时序是否合理？                      │
-│    ✓ 是否有遮挡/裁剪？                   │
-│    ✓ 数学内容是否正确？                  │
-└─────────────────────────────────────────┘
-                    ↓ (如有错误)
-┌─────────────────────────────────────────┐
-│  Phase 4: REPAIR（修复）                │
-│  - 定位错误的代码行                      │
-│  - 分析错误原因                          │
-│  - 生成修复补丁                          │
-│  - 回到Phase 3重新验证                   │
-└─────────────────────────────────────────┘
-                    ↓ (验证通过)
-              最终Manim代码输出
-</code></pre></div>
-<p><strong>工具集（Agent可用工具）:</strong></p>
-<table>
-<thead>
-<tr>
-<th>工具</th>
-<th>功能</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>manim_render(code)</code></td>
-<td>渲染Manim代码段，返回视频帧</td>
-</tr>
-<tr>
-<td><code>visual_check(frames)</code></td>
-<td>视觉检查渲染结果，返回问题描述</td>
-</tr>
-<tr>
-<td><code>api_search(query)</code></td>
-<td>搜索Manim文档/API参考</td>
-</tr>
-<tr>
-<td><code>code_edit(old, new)</code></td>
-<td>定位替换代码片段</td>
-</tr>
-<tr>
-<td><code>math_verify(description, code)</code></td>
-<td>验证代码实现的数学正确性</td>
-</tr>
-</tbody>
-</table>
 <hr />
-<h2 id="3-experiments">3 实验（Experiments）<a class="headerlink" href="#3-experiments" title="Permanent link">&para;</a></h2>
-<h3 id="31">3.1 数据集<a class="headerlink" href="#31" title="Permanent link">&para;</a></h3>
+<h2 id="5">5 结论<a class="headerlink" href="#5" title="Permanent link">&para;</a></h2>
+<p>本系统研究首次统一分析了训练（SFT+GRPO）和推理（RITL+RITL-DOC）策略在 Manim 动画生成中的交互作用。Qwen3-Coder-30B + GRPO + RITL-DOC 以 <strong>94% RSR</strong> 和 <strong>85.7% VS</strong> 超越了 GPT-4.1 基线。</p>
+<hr />
+<h2 id="_2">参考文献<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <ul>
-<li>收集规模：~10K Manim代码-视频对</li>
-<li>测试集：500个不同难度级别的动画描述</li>
+<li>Silva et al. Manim Animation Generation. 2026.</li>
+<li>Manim Community. 3Blue1Brown Manim library.</li>
+<li>Shao et al. DeepSeek-R1. 2025.</li>
+<li>Hu et al. LoRA. ICLR 2022.</li>
+<li>Dettmers et al. QLoRA. NeurIPS 2023.</li>
+<li>Lewis et al. RAG. NeurIPS 2020.</li>
+<li>Qwen Team. Qwen3-Coder. 2025.</li>
+<li>OpenAI. GPT-4 Technical Report. 2023.</li>
+<li>Anthropic. Claude 3.5 Sonnet. 2024.</li>
 </ul>
-<h3 id="32">3.2 评估指标<a class="headerlink" href="#32" title="Permanent link">&para;</a></h3>
-<table>
-<thead>
-<tr>
-<th>指标</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>编译成功率</strong></td>
-<td>生成的代码是否能无错运行</td>
-</tr>
-<tr>
-<td><strong>视觉相似度</strong></td>
-<td>渲染输出与参考的SSIM/FID分数</td>
-</tr>
-<tr>
-<td><strong>数学正确性</strong></td>
-<td>动画所表达的数学内容是否准确</td>
-</tr>
-<tr>
-<td><strong>用户偏好</strong></td>
-<td>人类评估者的偏好排序</td>
-</tr>
-</tbody>
-</table>
-<h3 id="33">3.3 结果概要<a class="headerlink" href="#33" title="Permanent link">&para;</a></h3>
-<table>
-<thead>
-<tr>
-<th>方法</th>
-<th>编译成功率</th>
-<th>视觉SSIM</th>
-<th>数学正确性</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>基线（通用Code LLM）</td>
-<td>42%</td>
-<td>0.61</td>
-<td>68%</td>
-</tr>
-<tr>
-<td>仅训练策略</td>
-<td>67%</td>
-<td>0.73</td>
-<td>79%</td>
-</tr>
-<tr>
-<td>仅智能体推理</td>
-<td>71%</td>
-<td>0.76</td>
-<td>82%</td>
-</tr>
-<tr>
-<td><strong>训练 + 智能体推理</strong></td>
-<td><strong>78%</strong> ✅</td>
-<td><strong>0.81</strong> ✅</td>
-<td><strong>87%</strong> ✅</td>
-</tr>
-</tbody>
-</table>
-<hr />
-<h2 id="4-discussion">4 讨论（Discussion）<a class="headerlink" href="#4-discussion" title="Permanent link">&para;</a></h2>
-<h3 id="41">4.1 关键洞察<a class="headerlink" href="#41" title="Permanent link">&para;</a></h3>
-<ol>
-<li><strong>视觉反馈不可省略</strong>：没有渲染验证的错误率是无验证时的3倍</li>
-<li><strong>规划阶段最关键</strong>：好的场景分解使后续编码和修复效率翻倍</li>
-<li><strong>数学验证是差异化因素</strong>：通用代码模型不擅长验证数学内容的正确性</li>
-</ol>
-<h3 id="42">4.2 失败案例分析<a class="headerlink" href="#42" title="Permanent link">&para;</a></h3>
-<table>
-<thead>
-<tr>
-<th>失败模式</th>
-<th>占比</th>
-<th>原因</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>几何/空间错误</td>
-<td>35%</td>
-<td>坐标计算错误、对象重叠</td>
-</tr>
-<tr>
-<td>时序错误</td>
-<td>25%</td>
-<td>动画持续时间/顺序不当</td>
-</tr>
-<tr>
-<td>API误用</td>
-<td>20%</td>
-<td>使用了不存在或不恰当的方法</td>
-</tr>
-<tr>
-<td>数学错误</td>
-<td>15%</td>
-<td>公式/概念表达不准确</td>
-</tr>
-<tr>
-<td>其他</td>
-<td>5%</td>
-<td>性能/兼容性问题</td>
-</tr>
-</tbody>
-</table>
-<hr />
-<h2 id="5-conclusion">5 结论（Conclusion）<a class="headerlink" href="#5-conclusion" title="Permanent link">&para;</a></h2>
-<p>本研究表明：
-1. <strong>Manim代码生成需要领域特定的训练和推理策略</strong>
-2. <strong>智能体推理（规划-编码-验证-修复）显著优于一次性生成</strong>
-3. <strong>视觉反馈循环是质量的关键保障</strong>
-4. 训练策略与推理策略的<strong>结合效果最佳</strong></p>
-<p><strong>未来方向</strong>：
-- 扩展到更复杂的3D动画（Three.js/Blender集成）
-- 支持交互式动画（用户可操控变量）
-- 探索多模态输入（手绘草图 → Manim代码）</p>
 
 
 

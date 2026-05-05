@@ -21,7 +21,7 @@
     
     
       
-        <title>战略性异构多智能体：协作推理框架 - 论文自动研学知识库</title>
+        <title>策略性异构多智能体架构：面向成本高效的代码漏洞检测 - 论文自动研学知识库</title>
       
     
     
@@ -100,7 +100,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              战略性异构多智能体：协作推理框架
+              策略性异构多智能体架构：面向成本高效的代码漏洞检测
             
           </span>
         </div>
@@ -1422,6 +1422,17 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#strategic-heterogeneous-multi-agent-architecture-for-cost-effective-code-vulnerability-detection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Strategic Heterogeneous Multi-Agent Architecture for Cost-Effective Code Vulnerability Detection
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1433,22 +1444,44 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
+  <a href="#1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        核心内容（精读版）
+        1 引言
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="核心内容（精读版）">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2 相关工作
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3 方法论
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3 方法论">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
+  <a href="#31" class="md-nav__link">
     <span class="md-ellipsis">
       
-        中文翻译
+        3.1 问题形式化
       
     </span>
   </a>
@@ -1456,10 +1489,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
+  <a href="#32" class="md-nav__link">
     <span class="md-ellipsis">
       
-        实验结果
+        3.2 双层博弈结构
       
     </span>
   </a>
@@ -1467,10 +1500,21 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#takeaway" class="md-nav__link">
+  <a href="#33-31" class="md-nav__link">
     <span class="md-ellipsis">
       
-        关键 takeaway
+        3.3 "3+1"架构
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#131" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        算法 1：3+1 多智能体检测
       
     </span>
   </a>
@@ -1483,22 +1527,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_6" class="md-nav__link">
+  <a href="#4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        全文总结
+        4 实验
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="全文总结">
+    <nav class="md-nav" aria-label="4 实验">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_7" class="md-nav__link">
+  <a href="#41" class="md-nav__link">
     <span class="md-ellipsis">
       
-        核心贡献
+        4.1 数据集
       
     </span>
   </a>
@@ -1506,10 +1550,54 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_8" class="md-nav__link">
+  <a href="#42" class="md-nav__link">
     <span class="md-ellipsis">
       
-        与其他论文的关联
+        4.2 主要结果
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-rq1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 RQ1：专家联盟的超可加性
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44-rq2-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4 RQ2：对抗性验证器影响（定理 1 验证）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#45-rq3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.5 RQ3：并行执行效率
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#46-cwe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.6 每 CWE 分析
       
     </span>
   </a>
@@ -1518,6 +1606,39 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5 博弈论作为分析工具
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6 结论
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        参考文献
+      
+    </span>
+  </a>
   
 </li>
       
@@ -1538,113 +1659,353 @@
 
 
 
-<h1 id="_1">战略性异构多智能体：协作推理框架<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
-<!-- 论文元数据卡片 -->
-<div class="paper-meta">
-  <div class="paper-meta-item">
-    <span class="paper-meta-label">机构</span>
-    <span class="paper-meta-value org-other">（学术研究）</span>
-  </div>
-  <div class="paper-meta-item">
-    <span class="paper-meta-label">方向</span>
-    <span class="paper-meta-value">多智能体系统 / 协作推理 / 异构Agent</span>
-  </div>
-  <div class="paper-meta-item">
-    <span class="paper-meta-label">日期</span>
-    <span class="paper-meta-value">2026-04</span>
-  </div>
-</div>
-
-<div class="admonition info">
-<p><span class="paper-tag paper-tag-translated">✅ 已完成精读</span></p>
-</div>
-<ul>
-<li><strong>来源</strong>：<a href="https://arxiv.org/abs/2604.21282">arXiv</a></li>
-<li><strong>论文链接</strong>：<a href="https://arxiv.org/abs/2604.21282">2604.21282v1</a></li>
-</ul>
-<h2 id="_2">摘要<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<p>异构多智能体系统——由不同架构、能力和专长的多个AI Agent组成——是解决复杂问题的关键架构模式。然而，如何让这些异构Agent有效<strong>协同推理</strong>而非简单任务并行？我们提出一个<strong>战略性的异构多智能体协作推理框架</strong>，通过明确的角色分工和结构化的论证协议来协调不同能力级别的Agent。核心创新包括：(1) <strong>角色专业化矩阵（Role Specialization Matrix）</strong>——基于Agent能力向量自动分配辩论角色；(2) <strong>渐进式论证协议（Progressive Argumentation Protocol）</strong>——从粗粒度共识到细粒度分歧的结构化讨论流程；(3) <strong>置信度加权的决策融合（Confidence-Weighted Decision Fusion）</strong>——整合异构输出同时量化不确定性。我们在复杂规划、多步推理和创意生成任务上评估，展示该框架在<strong>决策质量(+32%）、收敛速度(×2.7x)和鲁棒性(减少50%循环)</strong>上的统计显著改进。</p>
-<p>[扩展] 这篇论文解决的是Multi-Agent系统中"人多不一定力量大"的问题——关键在于让不同能力的Agent各司其职、有序协作。</p>
+<h1 id="_1">策略性异构多智能体架构：面向成本高效的代码漏洞检测<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<h2 id="strategic-heterogeneous-multi-agent-architecture-for-cost-effective-code-vulnerability-detection">Strategic Heterogeneous Multi-Agent Architecture for Cost-Effective Code Vulnerability Detection<a class="headerlink" href="#strategic-heterogeneous-multi-agent-architecture-for-cost-effective-code-vulnerability-detection" title="Permanent link">&para;</a></h2>
+<p>Zhaohui Geoffrey Wang</p>
+<p>南加州大学</p>
+<p>AAMAS 2026</p>
 <hr />
-<h2 id="_3">核心内容（精读版）<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
-<h3 id="_4">中文翻译<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
-<p><strong>问题形式化</strong>
-- <strong>同构vs异构困境</strong>：相同模型的多实例只能提供冗余，不能互补能力短板
-- <strong>协作推理≠任务分发</strong>：需要真正的"争论→共识"过程，非简单的map-reduce</p>
-<p><strong>框架三大组件</strong></p>
-<ol>
-<li><strong>角色专业化矩阵 (RSM)</strong></li>
-<li>每个Agent表示为能力向量：<code>[推理深度, 领域知识, 创造力, 工具使用, 安全意识, ...]</code></li>
-<li>
-<p>基于任务需求自动分配角色：</p>
-<ul>
-<li><strong>Architect（架构师）</strong>：高推理+高领域知识</li>
-<li><strong>Critic（批评家）</strong>：高分析+高安全意识</li>
-<li><strong>Creator（创作者）</strong>：高创造力</li>
-<li><strong>Verifier（验证者）</strong>：高精确性</li>
-</ul>
-</li>
-<li>
-<p><strong>渐进式论证协议 (PAP)</strong></p>
-</li>
-<li>Phase 1: <strong>粗粒度立场声明</strong>（每Agent一句话）</li>
-<li>Phase 2: <strong>关键论点展开</strong>（支持/反对/中立）</li>
-<li>Phase 3: <strong>交叉质询与反驳</strong></li>
-<li>
-<p>Phase 4: <strong>综合加权决策</strong></p>
-</li>
-<li>
-<p><strong>置信度加权融合 (CWF)</strong></p>
-</li>
-<li>每个Agent输出附带内部置信度和推理链</li>
-<li>决策时按 <code>weight = f(置信度 × 角色匹配度)</code> 加权聚合</li>
-<li>低一致性触发<strong>争议升级机制</strong>（引入额外Critic）</li>
-</ol>
-<h3 id="_5">实验结果<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<h2 id="_2">摘要<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p>自动代码漏洞检测对软件安全至关重要，但现有方法面临检测精度与计算成本之间的根本权衡。我们提出一种受<strong>博弈论</strong>启发的异构多智能体架构，结合云端 LLM 专家和本地轻量级验证器。</p>
+<p><strong>"3+1"架构：</strong>
+- <strong>3 个云端专家智能体</strong>（DeepSeek-V3）：从互补视角分析代码——代码结构、安全模式、调试逻辑——<strong>并行</strong>执行
+- <strong>1 个本地验证器</strong>（Qwen3-8B）：以<strong>零边际成本</strong>进行对抗性验证</p>
+<p><strong>双层博弈框架：</strong>
+1. <strong>合作博弈（Layer 1）</strong>：三个专家形成具有超加性价值的联盟
+2. <strong>对抗验证博弈（Layer 2）</strong>：验证器作为独立对手，通过捕捉误报提高精度</p>
+<p><strong>实验结果（NIST Juliet 测试套件，262 个样本，14 个 CWE 类型，漏洞/良性平衡）：</strong>
+- <strong>77.2% F1</strong>，62.9% 精度，<strong>100% 召回率</strong>，<strong>$0.002/样本</strong>
+- 优于单专家 LLM 基线（F1 71.4%）和 Cppcheck 静态分析（MCC 0）
+- 对抗性验证器显著改善精度 <strong>+10.3 个百分点</strong>（p &lt; 10⁻⁶）
+- 并行执行实现 <strong>3.0× 加速</strong></p>
+<hr />
+<h2 id="1">1 引言<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
+<p>代码漏洞检测是软件安全的关键挑战。传统静态分析工具（Cppcheck）速度快、成本低但语义理解有限；单智能体 LLM 精度更高但召回率不足且成本高昂。</p>
+<p><strong>核心问题</strong>：如何在多个智能体之间分配异构计算资源，以实现检测质量与运营成本之间的最优权衡？</p>
+<p><strong>关键洞见</strong>：漏洞检测受益于两种不同的能力——(1) 需要强大模型的深度语义分析，和(2) 可由较浅模型执行的一致性检查。不对称性天然适合异构架构。</p>
+<hr />
+<h2 id="2">2 相关工作<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
+<p><strong>静态分析</strong>：Cppcheck、Coverity——高误报率，缺乏语义理解。</p>
+<p><strong>基于 LLM 的漏洞检测</strong>：单智能体方法（GPT-4）检测率高但成本高。PrimeVul 基准揭示：SOTA 模型在精心去重的真实数据集上仅达到 ~3-35% F1。</p>
+<p><strong>多智能体方法</strong>：VulTrial（ICSE 2026）、MulVul、MultiVer。但与我们的工作不同，它们使用同质模型池（所有智能体共享相同昂贵的 API），我们结合付费云端专家与免费本地验证器，使成本成为<strong>头等设计目标</strong>。</p>
+<p><strong>博弈论与 LLM 多智能体系统</strong>：GTBench、ECON 框架等新兴方向。我们的使用方式：博弈论作为<strong>设计框架</strong>（分析工具）而非假设 LLM Agent 的策略行为。</p>
+<hr />
+<h2 id="3">3 方法论<a class="headerlink" href="#3" title="Permanent link">&para;</a></h2>
+<h3 id="31">3.1 问题形式化<a class="headerlink" href="#31" title="Permanent link">&para;</a></h3>
+<p><strong>定义 1（多智能体漏洞检测博弈）</strong>：系统 M = ⟨A, S, C, Q, π⟩，其中 A 是异构智能体集合，S 是策略空间，C 是成本函数，Q 是质量函数，π 是支付函数。</p>
+<p>机制设计者的问题：选择智能体类型、角色和交互协议，以在低成本下诱导高 Q 的期望均衡。</p>
+<h3 id="32">3.2 双层博弈结构<a class="headerlink" href="#32" title="Permanent link">&para;</a></h3>
+<p><strong>Layer 1：专家合作博弈（联盟博弈）</strong></p>
+<p><strong>定义 2（专家联盟博弈）</strong>：G₁ = ⟨N, v⟩，其中 N 是专家智能体集合，v 是特征函数。</p>
+<p>联盟价值：v(S) = w₁·Q(S) − w₂·C(S)</p>
+<p><strong>命题 1（多样性联盟的超可加性）</strong>：令 S,T ⊆ N 为具有互补分析视角的不交联盟。若 S 中的智能体检测到漏洞集 V_S，T 检测到 V_T，则：
+Q(S∪T) ≥ max(Q(S), Q(T))
+当 V_S ⊈ V_T 且 V_T ⊈ V_S 时严格不等式成立。</p>
+<p><strong>Shapley 值分析</strong>：量化每个专家对联盟的边际贡献。</p>
+<p><strong>Layer 2：对抗验证博弈（扩展形式博弈）</strong></p>
+<p><strong>定义 3（验证博弈）</strong>：G₂ = ⟨P, S_E, S_V, π_E, π_V⟩</p>
+<p><strong>定理 1（验证均衡）</strong>：
+(i) 若验证器独立检测误报概率 p_fp &gt; 0 且不引入新误报，则当 FP &gt; 0 时 P_system &gt; P_experts
+(ii) 当拒绝惩罚超过高质量输出的成本差异时，(s<em>_E=high, s</em>_V=accept when consistent) 形成纳什均衡</p>
+<h3 id="33-31">3.3 "3+1"架构<a class="headerlink" href="#33-31" title="Permanent link">&para;</a></h3>
+<p><strong>专家智能体（DeepSeek-V3）：</strong>
+- <strong>代码分析师</strong>：数据流、控制流、漏洞入口点、内存操作
+- <strong>安全专家</strong>：CWE 分类法匹配、已知漏洞模式、严重性评估
+- <strong>调试专家</strong>：错误处理、边界条件、边缘情况、未定义行为</p>
+<p>每个专家输出结构化报告：VULNERABILITY_FOUND, CWE_IDs, SEVERITY, EVIDENCE, CONFIDENCE。</p>
+<p><strong>验证器（Qwen3-8B）：</strong>
+- 零边际成本（本地 GPU）
+- 不同模型家族（Qwen3 vs DeepSeek），减少相关错误
+- 全信息：接收原始代码和所有三个专家报告</p>
+<h3 id="131">算法 1：3+1 多智能体检测<a class="headerlink" href="#131" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>输入：代码 x, 专家 E={e1,e2,e3}, 验证器 V
+输出：漏洞预测，CWE 分类
+
+// Layer 1: 合作博弈
+{r1, r2, r3} ← ParallelAnalyze(E, x)   // 联盟 v(N)
+CWE_pool ← ∪ ExtracCWEs(r_i)           // 超可加并集
+
+// Layer 2: 验证博弈
+v ← Verify(V, x, r1, r2, r3)           // 审计机制
+if v 提供 FINAL_VULNERABILITY then
+    return v.vulnerability, v.CWE_IDs   // 验证器覆盖
+else
+    return MajorityVote(r1,r2,r3), CWE_pool
+</code></pre></div>
+<hr />
+<h2 id="4">4 实验<a class="headerlink" href="#4" title="Permanent link">&para;</a></h2>
+<h3 id="41">4.1 数据集<a class="headerlink" href="#41" title="Permanent link">&para;</a></h3>
+<p>NIST Juliet Test Suite v1.3，262 个函数级样本：
+- 平衡类别：132 个漏洞 + 130 个良性
+- 14 个 CWE 类型（内存安全、整数错误、空指针、注入、资源管理等）
+- 平均每样本 38.5 行代码</p>
+<h3 id="42">4.2 主要结果<a class="headerlink" href="#42" title="Permanent link">&para;</a></h3>
+<p><strong>表 1：主要结果（262 个样本）</strong></p>
 <table>
 <thead>
 <tr>
-<th>任务类型</th>
-<th>指标</th>
-<th>提升</th>
+<th>配置</th>
+<th>精度</th>
+<th>召回率</th>
+<th>F1</th>
+<th>FPR</th>
+<th>MCC</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>复杂规划</td>
-<td>决策质量(F1)</td>
-<td>+32%</td>
+<td><strong>3+1 并行+验证器</strong></td>
+<td><strong>.629</strong></td>
+<td><strong>1.00</strong></td>
+<td><strong>.772</strong></td>
+<td>.600</td>
+<td>.501</td>
 </tr>
 <tr>
-<td>多步推理</td>
-<td>收敛速度</td>
-<td>×2.7x</td>
+<td>3+1 并行-验证器</td>
+<td>.526</td>
+<td>1.00</td>
+<td>.689</td>
+<td>.915</td>
+<td>.211</td>
 </tr>
 <tr>
-<td>创意生成</td>
-<td>鲁棒性(循环数↓)</td>
-<td>-50%</td>
+<td>单专家</td>
+<td>.555</td>
+<td>1.00</td>
+<td>.714</td>
+<td>.815</td>
+<td>.320</td>
+</tr>
+<tr>
+<td>Cppcheck</td>
+<td>.504</td>
+<td>1.00</td>
+<td>.670</td>
+<td>1.00</td>
+<td>.000</td>
 </tr>
 </tbody>
 </table>
-<h3 id="takeaway">关键 takeaway<a class="headerlink" href="#takeaway" title="Permanent link">&para;</a></h3>
-<ul>
-<li><strong>要点1</strong>：<strong>角色专业化 &gt; 同构冗余</strong>——让每个Agent做它最擅长的事</li>
-<li><strong>要点2</strong>：<strong>渐进式论证避免早期收敛陷阱</strong>——先发散后收敛</li>
-<li><strong>要点3</strong>：<strong>置信度透明度是信任的基础</strong>——黑箱输出不可靠</li>
-</ul>
+<p><strong>表 2：成本与延迟</strong></p>
+<table>
+<thead>
+<tr>
+<th>配置</th>
+<th>成本/样本</th>
+<th>时间/样本</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>3+1 并行+验证器</td>
+<td>$0.0021</td>
+<td>68.1s</td>
+</tr>
+<tr>
+<td>单专家</td>
+<td>$0.0006</td>
+<td>14.1s</td>
+</tr>
+<tr>
+<td>Cppcheck</td>
+<td>$0</td>
+<td>&lt;0.1s</td>
+</tr>
+</tbody>
+</table>
+<h3 id="43-rq1">4.3 RQ1：专家联盟的超可加性<a class="headerlink" href="#43-rq1" title="Permanent link">&para;</a></h3>
+<p><strong>表 3：对抗性验证器效果</strong></p>
+<table>
+<thead>
+<tr>
+<th>指标</th>
+<th>+验证器</th>
+<th>-验证器</th>
+<th>Δ</th>
+<th>p 值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>精度</td>
+<td>62.9%</td>
+<td>52.6%</td>
+<td><strong>+10.3%</strong></td>
+<td>&lt;10⁻⁶</td>
+</tr>
+<tr>
+<td>召回率</td>
+<td>100%</td>
+<td>100%</td>
+<td>0%</td>
+<td>—</td>
+</tr>
+<tr>
+<td>F1</td>
+<td>77.2%</td>
+<td>68.9%</td>
+<td>+8.3%</td>
+<td>—</td>
+</tr>
+<tr>
+<td>FPR</td>
+<td>60.0%</td>
+<td>91.5%</td>
+<td><strong>-31.5%</strong></td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p>超可加性体现在<strong>CWE 识别精度</strong>而非召回率：三个专家视角的并集实现 <strong>100% CWE 匹配率</strong>（每个检测到的漏洞都被正确分类），远高于单个专家的匹配率。</p>
+<h3 id="44-rq2-1">4.4 RQ2：对抗性验证器影响（定理 1 验证）<a class="headerlink" href="#44-rq2-1" title="Permanent link">&para;</a></h3>
+<p>验证器<strong>从 119 个误报中过滤掉 41 个</strong>（降至 78），零样本被错误地从正确变为不正确。MCC 从 0.211 跃升至 <strong>0.501</strong>，证实验证器显著提升了判别力。</p>
+<p><strong>博弈论解释</strong>：这验证了 Layer 2 的检查博弈结构。不同模型家族（Qwen3 vs DeepSeek）的验证器作为独立审计者，捕捉同模型验证会遗漏的不一致性。</p>
+<h3 id="45-rq3">4.5 RQ3：并行执行效率<a class="headerlink" href="#45-rq3" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>指标</th>
+<th>并行</th>
+<th>串行</th>
+<th>增益</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>专家时间/样本</td>
+<td>~15s</td>
+<td>~45s</td>
+<td><strong>3.0×</strong></td>
+</tr>
+<tr>
+<td>总时间/样本</td>
+<td>68.1s</td>
+<td>92.2s</td>
+<td>1.4×</td>
+</tr>
+<tr>
+<td>F1</td>
+<td>77.2%</td>
+<td>78.3%</td>
+<td>≈相等</td>
+</tr>
+</tbody>
+</table>
+<h3 id="46-cwe">4.6 每 CWE 分析<a class="headerlink" href="#46-cwe" title="Permanent link">&para;</a></h3>
+<p><strong>表 5：每 CWE 性能</strong></p>
+<table>
+<thead>
+<tr>
+<th>CWE</th>
+<th>类别</th>
+<th>FPR</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CWE-476</td>
+<td>空指针解引用</td>
+<td><strong>11%</strong></td>
+<td>补丁添加显式检查，结构区分明显</td>
+</tr>
+<tr>
+<td>CWE-252</td>
+<td>未检查返回值</td>
+<td>20%</td>
+<td>同样是显式检查模式</td>
+</tr>
+<tr>
+<td>CWE-400</td>
+<td>资源耗尽</td>
+<td><strong>100%</strong></td>
+<td>语义漏洞，补丁保留相似结构</td>
+</tr>
+<tr>
+<td>CWE-416</td>
+<td>释放后使用</td>
+<td>100%</td>
+<td>LLM 难以区分的细微控制流变化</td>
+</tr>
+</tbody>
+</table>
 <hr />
-<h2 id="_6">全文总结<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
-<h3 id="_7">核心贡献<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
-<ol>
-<li><strong>首个面向异构Multi-Agent的协作推理框架</strong>（非简单任务分配）</li>
-<li><strong>RSM + PAP + CWF的三层设计</strong>——完整的协作推理pipeline</li>
-<li><strong>可量化的不确定性管理</strong>——置信度作为一等公民</li>
-</ol>
-<h3 id="_8">与其他论文的关联<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<h2 id="5">5 博弈论作为分析工具<a class="headerlink" href="#5" title="Permanent link">&para;</a></h2>
+<p>关键主张：博弈论框架对多智能体 LLM 系统行为提供<strong>正确且有用的预测</strong>。</p>
+<table>
+<thead>
+<tr>
+<th>预测</th>
+<th>来源</th>
+<th>实证验证</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>多样性联盟的超可加价值</td>
+<td>合作博弈</td>
+<td>100% CWE 匹配率 ✅</td>
+</tr>
+<tr>
+<td>独立验证提高精度</td>
+<td>对抗博弈</td>
+<td>p &lt; 10⁻⁶ ✅</td>
+</tr>
+<tr>
+<td>异构云-本地分配主导同质设计</td>
+<td>机制设计</td>
+<td>零成本精度增益 ✅</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Shapley 值验证器</strong>：ϕ_V = v({1,2,3,V}) − v({1,2,3}) = +0.106（F1 项）。验证器的边际成本为零 → ϕ_V/C_V → ∞——添加自由本地验证器始终是理性选择。</p>
+<hr />
+<h2 id="6">6 结论<a class="headerlink" href="#6" title="Permanent link">&para;</a></h2>
+<p>博弈论启发的异构多智能体漏洞检测架构：</p>
+<table>
+<thead>
+<tr>
+<th>指标</th>
+<th>数值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>F1</td>
+<td><strong>77.2%</strong></td>
+</tr>
+<tr>
+<td>精度提升（验证器）</td>
+<td><strong>+10.3 pp</strong></td>
+</tr>
+<tr>
+<td>召回率</td>
+<td><strong>100%</strong></td>
+</tr>
+<tr>
+<td>成本</td>
+<td><strong>$0.002/样本</strong>（500 个函数仅需 $1）</td>
+</tr>
+<tr>
+<td>加速</td>
+<td><strong>3.0×</strong>（并行 vs 串行）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>局限性</strong>：基于合成 Juliet 测试套件；真实漏洞更复杂；误报率仍较高。未来工作包括：真实数据集评估、迭代专家-验证器对话、动态 Agent 选择、CI/CD 集成。</p>
+<hr />
+<h2 id="_3">参考文献<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <ul>
-<li>SSRP的Architect-Executive分离 → 此文的Role Specialization是其泛化到N个Agent</li>
-<li>ATBench-CodeX的仓库中心执行 → 此文的异构Agent可能包含code+chat+search模型混合</li>
+<li>Wang. Strategic Heterogeneous Multi-Agent Architecture. AAMAS 2026.</li>
+<li>DeepSeek-AI. DeepSeek-V3 Technical Report. arXiv:2412.19437, 2024.</li>
+<li>Qwen Team. Qwen3 Technical Report. arXiv:2505.09388, 2025.</li>
+<li>NIST SAMATE. Juliet Test Suite v1.3.</li>
+<li>Ding et al. Vulnerability Detection with Code Language Models: How Far Are We? ICSE 2025.</li>
+<li>Widyasari et al. VulTrial. ICSE 2026.</li>
+<li>Du et al. Improving Factuality and Reasoning through Multiagent Debate. ICML 2023.</li>
+<li>Hao et al. Game-Theoretic Lens on LLM-based MAS. arXiv:2601.15047, 2026.</li>
+<li>Nisan et al. Algorithmic Game Theory. Cambridge, 2007.</li>
 </ul>
 
 

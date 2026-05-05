@@ -21,7 +21,7 @@
     
     
       
-        <title>FairQE：基于多Agent框架的翻译质量估计性别偏差缓解 - 论文自动研学知识库</title>
+        <title>FairQE：缓解翻译质量估计中性别偏见的多智能体框架 - 论文自动研学知识库</title>
       
     
     
@@ -64,7 +64,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#fairqeagent" class="md-skip">
+        <a href="#fairqe" class="md-skip">
           跳转至
         </a>
       
@@ -100,7 +100,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              FairQE：基于多Agent框架的翻译质量估计性别偏差缓解
+              FairQE：缓解翻译质量估计中性别偏见的多智能体框架
             
           </span>
         </div>
@@ -1422,188 +1422,43 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#abstract" class="md-nav__link">
+  <a href="#fairqe-multi-agent-framework-for-mitigating-gender-bias-in-translation-quality-estimation" class="md-nav__link">
     <span class="md-ellipsis">
       
-        摘要（Abstract）
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="摘要（Abstract）">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#fairqe" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        方案：FairQE
+        FairQE: Multi-Agent Framework for Mitigating Gender Bias in Translation Quality Estimation
       
     </span>
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        实验结果
+        摘要
       
     </span>
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#1-background" class="md-nav__link">
+  <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1 背景（Background）
+        结果
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="1 背景（Background）">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#11-qe" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1.1 QE的任务
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#12-qe" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1.2 QE中的两种性别偏见模式
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#13" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1.3 偏见的危害
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-fairqe" class="md-nav__link">
+  <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2 方法：FairQE框架
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="2 方法：FairQE框架">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#21" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2.1 整体流程
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#22" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2.2 核心组件
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#23" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2.3 即插即用特性
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#3-experiments" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3 实验（Experiments）
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="3 实验（Experiments）">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#31" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3.1 评估设置
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#32" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3.2 主要结果
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#4-conclusion" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4 结论（Conclusion）
+        参考文献
       
     </span>
   </a>
@@ -1627,197 +1482,87 @@
 
 
 
-<h1 id="fairqeagent">FairQE：基于多Agent框架的翻译质量估计性别偏差缓解<a class="headerlink" href="#fairqeagent" title="Permanent link">&para;</a></h1>
-<p><strong>FairQE: Multi-Agent Framework for Mitigating Gender Bias in Translation Quality Estimation</strong></p>
+<h1 id="fairqe">FairQE：缓解翻译质量估计中性别偏见的多智能体框架<a class="headerlink" href="#fairqe" title="Permanent link">&para;</a></h1>
+<h2 id="fairqe-multi-agent-framework-for-mitigating-gender-bias-in-translation-quality-estimation">FairQE: Multi-Agent Framework for Mitigating Gender Bias in Translation Quality Estimation<a class="headerlink" href="#fairqe-multi-agent-framework-for-mitigating-gender-bias-in-translation-quality-estimation" title="Permanent link">&para;</a></h2>
+<p>Jinhee Jang¹, Juhwan Choi²†, Dongjin Lee¹†, Seunguk Yu¹, Youngbin Kim¹</p>
+<p>¹中央大学（韩国）  ²AITRICS</p>
 <hr />
+<h2 id="_1">摘要<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>质量估计（QE）模型表现出系统性性别偏见：模糊语境偏向阳性，明确语境时仍可能给性别错配翻译更高分。<strong>FairQE</strong> 是一个基于多智能体的公平感知QE框架。</p>
+<p><strong>框架：</strong>
+- <strong>Agent_cue（线索检测）</strong>：12类性别线索（显式C1-C6 + 模糊C7-C12）
+- <strong>Agent_amb（模糊变体生成）</strong>：生成所有性别变体
+- <strong>Agent_exp（显式变体生成）</strong>：验证对齐并生成对比
+- <strong>Agent_qe（传统QE评分）</strong>：COMETKiwi 22 评分
+- <strong>Agent_uqe（LLM无偏推理）</strong>：GPT-4.1-mini 推理驱动无偏评分</p>
+<p><strong>动态聚合：</strong> <span class="arithmatex">\(q_{final} = w·q_{uqe} + (1-w)·q_{orig}\)</span>，<span class="arithmatex">\(w = B/(1+B)\)</span></p>
+<hr />
+<h2 id="_2">结果<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p><strong>表 1：模糊场景女性/男性 评分比（越近1越公平）</strong></p>
 <table>
 <thead>
 <tr>
-<th>元信息</th>
-<th>内容</th>
+<th>方法</th>
+<th>ES</th>
+<th>FR</th>
+<th>IT</th>
+<th>AR</th>
+<th>DE</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>作者</strong></td>
-<td>Jinhee Jang, Juhwan Choi†, Dongjin Lee†, Seunguk Yu, Youngbin Kim（ Chung-Ang University, AITRICS）</td>
+<td>COMETKiwi22</td>
+<td>0.983</td>
+<td>0.978</td>
+<td>0.979</td>
+<td>0.985</td>
+<td>0.994</td>
 </tr>
 <tr>
-<td><strong>发表时间</strong></td>
-<td>2026年4月</td>
-</tr>
-<tr>
-<td><strong>arXiv ID</strong></td>
-<td>2604.21420v1</td>
-</tr>
-<tr>
-<td><strong>领域</strong></td>
-<td>机器翻译 · 质量估计(QE) · 公平性 · 性别偏见</td>
-</tr>
-<tr>
-<td><strong>关键词</strong></td>
-<td>Quality Estimation, Gender Bias, Fairness, Translation Evaluation</td>
+<td><strong>FairQE</strong></td>
+<td><strong>0.995</strong></td>
+<td><strong>0.986</strong></td>
+<td><strong>0.992</strong></td>
+<td><strong>0.994</strong></td>
+<td><strong>0.999</strong></td>
 </tr>
 </tbody>
 </table>
+<p><strong>表 2：明确场景准确率（%）</strong></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>AR</th>
+<th>DE</th>
+<th>HI</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>COMETKiwi22</td>
+<td>95.0</td>
+<td>99.2</td>
+<td>55.3</td>
+</tr>
+<tr>
+<td><strong>FairQE</strong></td>
+<td><strong>97.3</strong></td>
+<td><strong>99.7</strong></td>
+<td><strong>74.0</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>通用QE性能：</strong> WMT 2023 avg-corr: 0.743 → <strong>0.812</strong></p>
+<p><strong>成本：</strong> <span class="arithmatex">\(0.095/100样本（&lt;\)</span>0.001/样本）</p>
 <hr />
-<h2 id="abstract">摘要（Abstract）<a class="headerlink" href="#abstract" title="Permanent link">&para;</a></h2>
-<p>质量估计（QE）旨在<strong>无参考翻译</strong>的情况下评估机器翻译质量。但近期研究表明现有QE模型存在<strong>系统性性别偏见</strong>：</p>
-<ol>
-<li><strong>性别模糊文本中偏好阳性形式</strong>：源句未明确指定性别时，阳性翻译获得更高QE分数</li>
-<li><strong>性别显性文本中出现偏好反转</strong>：即使源句明确要求阴性形式，QE模型仍可能给阳性翻译更高分</li>
-</ol>
-<h3 id="fairqe">方案：FairQE<a class="headerlink" href="#fairqe" title="Permanent link">&para;</a></h3>
-<p>一个<strong>多Agent的、公平感知的QE框架</strong>，同时缓解性别模糊和性别显性场景下的性别偏见：</p>
-<ol>
-<li><strong>检测性别线索</strong></li>
-<li><strong>生成性别翻转的翻译变体</strong></li>
-<li><strong>将常规QE分数与LLM驱动的偏见过制推理结合</strong></li>
-<li>通过<strong>动态偏差感知聚合机制</strong>融合</li>
-</ol>
-<h3 id="_1">实验结果<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+<h2 id="_3">参考文献<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <ul>
-<li>在多种性别偏见评估设置下<strong>一致改善性别公平性</strong></li>
-<li>在WMT 2023 Metrics Shared Task的MQM元评估下达到<strong>有竞争力或更佳的通用QE性能</strong></li>
+<li>Jang et al. FairQE. 2026.</li>
+<li>Rei et al. COMETKiwi. WMT 2022.</li>
+<li>Savoldi et al. Gender bias in MT. TACL 2021.</li>
 </ul>
-<p>→ <strong>证明性别偏见可以在不牺牲评估准确性的情况下有效缓解</strong></p>
-<hr />
-<h2 id="1-background">1 背景（Background）<a class="headerlink" href="#1-background" title="Permanent link">&para;</a></h2>
-<h3 id="11-qe">1.1 QE的任务<a class="headerlink" href="#11-qe" title="Permanent link">&para;</a></h3>
-<p>Quality Estimation = 无需参考译文即可评估MT质量的自动化方法：
-- 移除了对人工参考译文的依赖
-- 为翻译评估提供了实用且可扩展的替代方案
-- 应用：模型选择、数据过滤、部署监控</p>
-<h3 id="12-qe">1.2 QE中的两种性别偏见模式<a class="headerlink" href="#12-qe" title="Permanent link">&para;</a></h3>
-<p><strong>模式一：性别模糊偏好（Gender-Ambiguous Bias）</strong>
-- 源句不含明确的性别线索
-- QE模型倾向于给<strong>阳性实现</strong>（通常是阳性形式）更高分
-- 例：源句"The doctor called the patient" → "医生<strong>他</strong>叫了病人"得分 &gt; "...<strong>她</strong>叫了病人"</p>
-<p><strong>模式二：偏好反转（Preference Inversion）</strong>
-- 源句明确要求阴性形式
-- QE模型仍可能给阳性翻译更高分
-- 例：源句要求阴性形式 → 阳性翻译反而得分更高</p>
-<h3 id="13">1.3 偏见的危害<a class="headerlink" href="#13" title="Permanent link">&para;</a></h3>
-<p>这些偏见破坏了QE评估的<strong>公平性</strong>，可能对下游决策过程产生<strong>级联影响</strong>：
-- 模型选择偏向某些性别表达方式
-- 数据过滤系统性排除某些翻译风格
-- 部署监控产生误导性的质量信号</p>
-<p>此外，在性别模糊语境中强化性别偏好与更广泛的社会努力相悖——即<strong>避免不必要的性别刻板印象和促进包容性语言的使用</strong>。</p>
-<hr />
-<h2 id="2-fairqe">2 方法：FairQE框架<a class="headerlink" href="#2-fairqe" title="Permanent link">&para;</a></h2>
-<h3 id="21">2.1 整体流程<a class="headerlink" href="#21" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>源句 S + MT输出 T + 可选参考 R
-        │
-        ▼
-┌─────────────────────────────┐
-│  Agent 1: Gender Cue Detector  │
-│  检测 S 和 T 中的性别线索      │
-│  输出: (gender_present, gender_specified, alignment) │
-└──────────────┬──────────────┘
-               │
-        ┌──────▼──────────┐
-        │  Agent 2: Flipper  │
-        │  生成性别翻转变体  │
-        │  T&#39; (gender-flipped version of T) │
-        └──────┬──────────┘
-               │
-        ┌──────▼──────────────────────┐
-        │  Conventional QE Model       │
-        │  → score(S, T)                │
-        │  → score(S, T&#39;)              │
-        └──────┬──────────────────────┘
-               │
-        ┌──────▼──────────────────────────────┐
-        │  Agent 3: Bias-Mitigation Reasoner  │
-        │  LLM驱动的偏见过制推理             │
-        │  分析两个分数的差异是否源于性别偏见  │
-        └──────┬──────────────────────────────┘
-               │
-        ┌──────▼──────────────────────────────┐
-        │  Dynamic Bias-Aware Aggregator     │
-        │  动态融合: 原始分数 + 偏见修正      │
-        │  输出: 公平的最终QE分数              │
-        └──────────────────────────────────────┘
-</code></pre></div>
-<h3 id="22">2.2 核心组件<a class="headerlink" href="#22" title="Permanent link">&para;</a></h3>
-<table>
-<thead>
-<tr>
-<th>组件</th>
-<th>功能</th>
-<th>设计原则</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Gender Cue Detector</strong></td>
-<td>检测性别线索</td>
-<td>规则+轻量LLM结合</td>
-</tr>
-<tr>
-<td><strong>Flipper</strong></td>
-<td>生成翻转变体</td>
-<td>保持语义不变，仅替换性别标记</td>
-</tr>
-<tr>
-<td><strong>Bias-Mitigation Reasoner</strong></td>
-<td>推理判断是否存在偏见</td>
-<td>少量样本驱动</td>
-</tr>
-<tr>
-<td><strong>Aggregator</strong></td>
-<td>融合原始分数和修正</td>
-<td>动态权重，置信度自适应</td>
-</tr>
-</tbody>
-</table>
-<h3 id="23">2.3 即插即用特性<a class="headerlink" href="#23" title="Permanent link">&para;</a></h3>
-<p>FairQE保留现有QE模型的<strong>优势</strong>（对一般质量维度的判断），仅在其输出基础上<strong>校准性别相关偏差</strong>：
-- 不需要重新训练QE模型
-- 可作为后处理模块集成到任何QE流水线
-- 开销极小（仅需一次额外的推理调用）</p>
-<hr />
-<h2 id="3-experiments">3 实验（Experiments）<a class="headerlink" href="#3-experiments" title="Permanent link">&para;</a></h2>
-<h3 id="31">3.1 评估设置<a class="headerlink" href="#31" title="Permanent link">&para;</a></h3>
-<ul>
-<li>多种性别偏见基准数据集</li>
-<li>WMT 2023 MQM元评估协议</li>
-<li>主流QE基线模型对比</li>
-</ul>
-<h3 id="32">3.2 主要结果<a class="headerlink" href="#32" title="Permanent link">&para;</a></h3>
-<table>
-<thead>
-<tr>
-<th>指标</th>
-<th>FairQE vs 最强基线</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>性别公平性指标</td>
-<td><strong>一致改善</strong> ✅</td>
-</tr>
-<tr>
-<td>一般QE准确性</td>
-<td><strong>持平或更好</strong> ✅（不牺牲！）</td>
-</tr>
-<tr>
-<td>性别模糊场景</td>
-<td>偏好显著降低</td>
-</tr>
-<tr>
-<td>性别显性场景</td>
-<td>偏好反转显著减少</td>
-</tr>
-</tbody>
-</table>
-<hr />
-<h2 id="4-conclusion">4 结论（Conclusion）<a class="headerlink" href="#4-conclusion" title="Permanent link">&para;</a></h2>
-<p>FairQE证明了：
-1. ✅ <strong>性别偏见可以被有效缓解</strong>（多Agent框架 + 动态聚合）
-2. ✅ <strong>公平性与准确性可以兼得</strong>（不需要牺牲QE性能）
-3. ✅ <strong>即插即用的设计</strong>便于实际部署</p>
-<p><strong>启示</strong>: 评估系统的公平性和准确性同等重要——我们需要更多像FairQE这样的"公平性感知"评估工具。</p>
 
 
 
