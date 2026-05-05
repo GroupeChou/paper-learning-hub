@@ -38,7 +38,7 @@ for d in paper_dirs:
     
     # Parse document and generate header
     try:
-        parsed = parse_document(raw_pdf, d, max_chars=4000, max_images=20)
+        parsed = parse_document(raw_pdf, d, max_chars=4000, max_images=100)
         
         # Get title from paper if available
         title_display = parsed.title if parsed.title else pid

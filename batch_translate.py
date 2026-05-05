@@ -47,7 +47,7 @@ def load_config():
         system_prompt = cfg["translator"]["system_prompt"]
         timeout_seconds = cfg["translator"].get("timeout_seconds", 120)
         chunk_chars = cfg["translator"].get("chunk_chars", 4000)
-        max_images_per_paper = cfg["translator"].get("max_images_per_paper", 20)
+        max_images_per_paper = cfg["translator"].get("max_images_per_paper", 100)
     
     class SiteSettings:
         site_name = cfg["site"]["site_name"]

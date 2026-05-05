@@ -34,7 +34,7 @@ for d in paper_dirs:
     zh_dir = ZH_DIR / pid
     try:
         print(f"  Parsing {pid} ({raw_pdf.name})...")
-        parsed = parse_document(raw_pdf, zh_dir, max_chars=4000, max_images=20)
+        parsed = parse_document(raw_pdf, zh_dir, max_chars=4000, max_images=100)
 
         assets_dir = zh_dir / "assets"
         asset_files = sorted(assets_dir.iterdir()) if assets_dir.exists() else []
