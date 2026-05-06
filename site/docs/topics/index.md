@@ -28,16 +28,20 @@
 - [The Last Harness You'll Ever Build](../papers/2604.21003v1/index.md) | Meta FAIR | 2026-04-22 | 中文精读
 - [Context Kubernetes: Declarative Orchestration of Enterprise Knowledge for Agentic AI Systems](../papers/2604.11623v3/index.md) | Microsoft | 2026-04-13 | 中文精读
 - [FairQE: Multi-Agent Framework for Mitigating Gender Bias in Translation Quality Estimation](../papers/2604.21420v1/index.md) | Meta FAIR | 2026-04-23 | 中文精读
-- [QuantClaw: Precision Where It Matters for OpenClaw](../papers/2604.22577v1/index.md) | 智谱 | 2026-04-24 | 中文精读
+- [Terminus-4B: Can a Smaller Model Replace Frontier LLMs at Agentic Execution Tasks?](../papers/2605.03195v1/index.md) | 阿里通义 | 2026-05-04 | 中文精读
 - [A Self-Evolving Framework for Efficient Terminal Agents via Observational Context Compression](../papers/2604.19572v1/index.md) | MiniMax | 2026-04-21 | 中文精读
 - [Agentic Aggregation for Parallel Scaling of Long-Horizon Agentic Tasks](../papers/2604.11753v1/index.md) | 智谱 | 2026-04-13 | 中文精读
 - [Nemobot Games: Crafting Strategic AI Gaming Agents for Interactive Learning with Large Language Models](../papers/2604.21896v1/index.md) | MiniMax | 2026-04-23 | 中文精读
+- [QuantClaw: Precision Where It Matters for OpenClaw](../papers/2604.22577v1/index.md) | 智谱 | 2026-04-24 | 中文精读
 - [M2-PALE: A Framework for Explaining Multi-Agent MCTS--Minimax Hybrids via Process Mining and LLMs](../papers/2604.14687v1/index.md) | MiniMax | 2026-04-16 | 中文精读
 - [AeSlides: Incentivizing Aesthetic Layout in LLM-Based Slide Generation via Verifiable Rewards](../papers/2604.22840v1/index.md) | 智谱 | 2026-04-21 | 中文精读
+- [What Happens Inside Agent Memory? Circuit Analysis from Emergence to Diagnosis](../papers/2605.03354v1/index.md) | 阿里通义 | 2026-05-05 | 中文精读
 - [SafetyALFRED: Evaluating Safety-Conscious Planning of Multimodal Large Language Models](../papers/2604.19638v1/index.md) | 阿里通义 | 2026-04-21 | 中文精读
 - [ComPASS: Towards Personalized Agentic Social Support via Tool-Augmented Companionship](../papers/2604.18356v1/index.md) | 阿里通义 | 2026-04-20 | 中文精读
+- [DataEvolver: Let Your Data Build and Improve Itself via Goal-Driven Loop Agents](../papers/2605.01789v1/index.md) | 阿里通义 | 2026-05-03 | 中文精读
 - [Quantum Knowledge Graph: Modeling Context-Dependent Triplet Validity](../papers/2604.23972v1/index.md) | 阿里通义 | 2026-04-27 | 中文精读
 - [Training and Agentic Inference Strategies for LLM-based Manim Animation Generation](../papers/2604.18364v1/index.md) | 阿里通义 | 2026-04-20 | 中文精读
+- [Moral Sensitivity in LLMs: A Tiered Evaluation of Contextual Bias via Behavioral Profiling and Mechanistic Interpretability](https://arxiv.org/pdf/2605.03217v1) | 阿里通义 | 2026-05-04 | 原文
 - [Agri-CPJ: A Training-Free Explainable Framework for Agricultural Pest Diagnosis Using Caption-Prompt-Judge and LLM-as-a-Judge](../papers/2604.23701v1/index.md) | 阿里通义 | 2026-04-26 | 中文精读
 
 ## 深度学习时序预测

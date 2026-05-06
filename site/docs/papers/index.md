@@ -26,17 +26,20 @@
 - ✅ **[The Last Harness You'll Ever Build](../papers/2604.21003v1/index.md)** | Meta FAIR | AI Agent | `已精读`
 - ✅ **[Context Kubernetes: Declarative Orchestration of Enterprise Knowledge for Agentic AI Systems](../papers/2604.11623v3/index.md)** | Microsoft | AI Agent | `已精读`
 - ✅ **[FairQE: Multi-Agent Framework for Mitigating Gender Bias in Translation Quality Estimation](../papers/2604.21420v1/index.md)** | Meta FAIR | AI Agent | `已精读`
-- ✅ **[QuantClaw: Precision Where It Matters for OpenClaw](../papers/2604.22577v1/index.md)** | 智谱 | AI Agent | `已精读`
 - ✅ **[Inferring High-Level Events from Timestamped Data: Complexity and Medical Applications](../papers/2604.21793v1/index.md)** | Meta FAIR | 深度学习时序预测 | `已精读`
+- ✅ **[Terminus-4B: Can a Smaller Model Replace Frontier LLMs at Agentic Execution Tasks?](../papers/2605.03195v1/index.md)** | 阿里通义 | AI Agent | `已精读`
 - ✅ **[A Self-Evolving Framework for Efficient Terminal Agents via Observational Context Compression](../papers/2604.19572v1/index.md)** | MiniMax | AI Agent | `已精读`
 - ✅ **[Agentic Aggregation for Parallel Scaling of Long-Horizon Agentic Tasks](../papers/2604.11753v1/index.md)** | 智谱 | AI Agent | `已精读`
 - ✅ **[Nemobot Games: Crafting Strategic AI Gaming Agents for Interactive Learning with Large Language Models](../papers/2604.21896v1/index.md)** | MiniMax | AI Agent | `已精读`
+- ✅ **[QuantClaw: Precision Where It Matters for OpenClaw](../papers/2604.22577v1/index.md)** | 智谱 | AI Agent | `已精读`
 - ✅ **[M2-PALE: A Framework for Explaining Multi-Agent MCTS--Minimax Hybrids via Process Mining and LLMs](../papers/2604.14687v1/index.md)** | MiniMax | AI Agent | `已精读`
 - ✅ **[AeSlides: Incentivizing Aesthetic Layout in LLM-Based Slide Generation via Verifiable Rewards](../papers/2604.22840v1/index.md)** | 智谱 | AI Agent | `已精读`
 - ✅ **[Forecast Sports Outcomes under Efficient Market Hypothesis: Theoretical and Experimental Analysis of Odds-Only and Generalised Linear Models](../papers/2604.17194v1/index.md)** | 智谱 | 深度学习时序预测 | `已精读`
+- ✅ **[What Happens Inside Agent Memory? Circuit Analysis from Emergence to Diagnosis](../papers/2605.03354v1/index.md)** | 阿里通义 | AI Agent | `已精读`
 - ✅ **[SafetyALFRED: Evaluating Safety-Conscious Planning of Multimodal Large Language Models](../papers/2604.19638v1/index.md)** | 阿里通义 | AI Agent | `已精读`
 - ✅ **[Minimax Optimality and Spectral Routing for Majority-Vote Ensembles under Markov Dependence](../papers/2604.13414v1/index.md)** | MiniMax | 深度学习时序预测 | `已精读`
 - ✅ **[ComPASS: Towards Personalized Agentic Social Support via Tool-Augmented Companionship](../papers/2604.18356v1/index.md)** | 阿里通义 | AI Agent | `已精读`
+- ✅ **[DataEvolver: Let Your Data Build and Improve Itself via Goal-Driven Loop Agents](../papers/2605.01789v1/index.md)** | 阿里通义 | AI Agent | `已精读`
 - ✅ **[Long-Context Aware Upcycling: A New Frontier for Hybrid LLM Scaling](../papers/2604.24715v1/index.md)** | 阿里通义 | 深度学习时序预测 | `已精读`
 - ✅ **[Quantum Knowledge Graph: Modeling Context-Dependent Triplet Validity](../papers/2604.23972v1/index.md)** | 阿里通义 | AI Agent | `已精读`
 - ✅ **[Training and Agentic Inference Strategies for LLM-based Manim Animation Generation](../papers/2604.18364v1/index.md)** | 阿里通义 | AI Agent | `已精读`
