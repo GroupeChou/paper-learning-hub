@@ -21,7 +21,7 @@
     
     
       
-        <title>HiveMind: OS-Inspired Scheduling for Concurrent LLM Agent Workloads - 论文自动研学知识库</title>
+        <title>paper - 论文自动研学知识库</title>
       
     
     
@@ -64,7 +64,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#hivemind-os-inspired-scheduling-for-concurrent-llm-agent-workloads" class="md-skip">
+        <a href="#paper" class="md-skip">
           跳转至
         </a>
       
@@ -100,7 +100,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              HiveMind: OS-Inspired Scheduling for Concurrent LLM Agent Workloads
+              paper
             
           </span>
         </div>
@@ -2309,48 +2309,37 @@
 
 
 
-<h1 id="hivemind-os-inspired-scheduling-for-concurrent-llm-agent-workloads">HiveMind: OS-Inspired Scheduling for Concurrent LLM Agent Workloads<a class="headerlink" href="#hivemind-os-inspired-scheduling-for-concurrent-llm-agent-workloads" title="Permanent link">&para;</a></h1>
+<h1 id="paper">paper<a class="headerlink" href="#paper" title="Permanent link">&para;</a></h1>
 <!-- 论文元数据卡片 -->
 <div class="paper-meta">
   <div class="paper-meta-item">
     <span class="paper-meta-label">机构</span>
-    <span class="paper-meta-value org-OpenAI">OpenAI</span>
+    <span class="paper-meta-value org-"></span>
   </div>
   <div class="paper-meta-item">
     <span class="paper-meta-label">方向</span>
-    <span class="paper-meta-value">AI Agent 调度</span>
+    <span class="paper-meta-value"></span>
   </div>
   <div class="paper-meta-item">
     <span class="paper-meta-label">日期</span>
-    <span class="paper-meta-value">2026-04-18</span>
-  </div>
-  <div class="paper-meta-item">
-    <span class="paper-meta-label">优先级</span>
-    <span class="paper-meta-value">⭐⭐⭐⭐⭐</span>
-  </div>
-  <div class="paper-meta-item">
-    <span class="paper-meta-label">阅读难度</span>
-    <span class="paper-meta-value">中</span>
+    <span class="paper-meta-value"></span>
   </div>
 </div>
 
 <div class="admonition info">
-<p><span class="paper-tag paper-tag-translated">✅ 已完成精读</span> · AI Agent 路线第 3 篇精读</p>
+<p><span class="paper-tag paper-tag-translated">✅ 已完成精读</span></p>
 </div>
-<blockquote>
-<p><strong>📍 学习路线</strong>：🧠 AI Agent 路线 → 工程实践 → 第 3 篇
-- <strong>来源</strong>：<a href="https://arxiv.org/abs/2604.17111v1">OpenAI arXiv query</a>
-- <strong>论文链接</strong>：<a href="https://arxiv.org/pdf/2604.17111v1">https://arxiv.org/pdf/2604.17111v1</a>
-- <strong>状态</strong>：已生成</p>
-</blockquote>
+<ul>
+<li><strong>来源</strong>：<a href=""></a></li>
+<li><strong>论文链接</strong>：<a href=""></a></li>
+<li><strong>状态</strong>：已生成</li>
+</ul>
 <h2 id="_1">摘要<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p>当多个 LLM 编码 Agent 共享一个限速 API 端点时，它们表现出类似于未调度的操作系统进程竞争 CPU、内存和 I/O 的资源争用模式。在一个实际事件中，11 个并行 Agent 中有 3 个因连接重置（ECONNRESET）和 HTTP 502 错误而"死亡"——尽管 API 总容量足以按顺序服务全部 11 个 Agent。本文提出 <strong>HiveMind</strong>，一个透明的 HTTP 代理，应用五种受 OS 启发的调度原语——准入控制、速率限制追踪、AIMD 背压+熔断、Token 预算管理、优先级队列——来消除无协调并行执行导致的故障模式。该代理无需修改现有 Agent 代码，支持 Anthropic/OpenAI/本地模型 API（通过自动检测的 Provider Profile）。在七种场景（5-50 并发 Agent）下的评估表明：无协调 Agent 在争用下以 72-100% 的速率失败，而 HiveMind 将失败率降至 0-18%，并消除了 48-100% 的浪费计算量。</p>
 <hr />
 <h2 id="section-1">Section 1 — 标题页与摘要<a class="headerlink" href="#section-1" title="Permanent link">&para;</a></h2>
 <h3 id="_2">中文翻译<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
 <p><strong>标题</strong>：HiveMind：面向并发 LLM Agent 工作负载的 OS 启发式调度系统</p>
 <p><strong>作者团队</strong>：
-- Justice Owusu Agyemang（Sperix Labs / KNUST VIA Cybersecurity Lab / KNUST Quantum and Assistive Technologies Lab）
 - Jerry John Kponyo 等（均为 KNUST 相关机构）</p>
 <blockquote>
 <p>[扩展] 作者均来自加纳库马西理工大学（KNUST）的相关实验室以及 Sperix Labs 公司，这是一篇产业界与学术界合作的论文。从作者背景来看，核心贡献在于将经典操作系统理论创新性地应用于新兴的 LLM Agent 场景。</p>
@@ -2788,8 +2777,7 @@
 <blockquote>
 <p>[扩展] "透明代理"是一个关键的架构决策。这意味着 Agent 完全不知道 HiveMind 的存在——它们以为自己在直接跟 API 通信。这带来了四个优势：(1) 零代码修改——适用于任何框架/SDK/语言；(2) Provider 无关——同一个代理服务 Anthropic/OpenAI/Ollama；(3) 可观测——所有流量流经单一测量点；(4) 可组合——可与其他代理链式使用。</p>
 </blockquote>
-<p><img alt="Figure 1: HiveMind 架构图" src="assets/page-003-img-01.png" /></p>
-<p><strong>Figure 1 解读</strong>：架构图展示了五层调度管线：
+<p>Figure 1 解读**：架构图展示了五层调度管线：
 <div class="highlight"><pre><span></span><code>Agent 1/Agent 2/.../Agent N
         ↓
    ┌─ HiveMind ─────────────┐
@@ -2863,7 +2851,6 @@ Result: 更新的并发度 ct, 熔断状态
 - <strong>Closed（关闭）</strong>：正常运行状态
 - <strong>Open（打开）</strong>：错误率超过阈值 τ（默认50%），快速返回 503 + Retry-After
 - <strong>Half-Open（半开）</strong>：冷却期 Tcool（默认10s）过后，允许一个探测请求；成功则关闭，失败则重新打开</p>
-<p><img alt="Figure 2: 熔断器状态机" src="assets/page-005-img-01.png" /></p>
 <h4 id="34-token-token-budget-management">3.4 Token 预算管理（Token Budget Management）<a class="headerlink" href="#34-token-token-budget-management" title="Permanent link">&para;</a></h4>
 <p><strong>原文</strong>：<em>Each agent is assigned a token ceiling from a global pool. The budget manager tracks cumulative input and output tokens per agent, extracted from API response bodies. At 85% utilisation, the agent receives a warning. At 100%, the agent is checkpointed (state saved to disk) and stopped, analogous to the OS OOM killer.</em></p>
 <p><strong>翻译</strong>：每个 Agent 从全局池中分配到一个 Token 上限。预算管理器跟踪每个 Agent 的累积输入和输出 Token 数（从 API 响应体中提取）。在 85% 利用率时，Agent 收到警告。达到 100% 时，Agent 被检查点化（状态保存到磁盘）并停止——类似于 OS 的 OOM Killer。</p>
@@ -3208,10 +3195,8 @@ $<span class="arithmatex">\(d_k = \min(d_{\text{max}}, d_{\text{base}} \cdot 2^k
 4. <strong>Δw（浪费 Token 减少）最高达 100%</strong></p>
 </blockquote>
 <p><strong>Wall-time 权衡</strong>：HiveMind 的绝对耗时更长（因为它串行化了请求），但 Direct 模式的"快"只是因为大部分 Agent 立即失败。按<strong>完成的工</strong>作衡量，HiveMind 的吞吐量严格更高。</p>
-<p><img alt="Figure 3: 各场景失败率" src="assets/page-008-img-01.png" /></p>
-<p><strong>Figure 3 解读</strong>：柱状图直观展示了 Direct 模式（红）在 10+ Agent 时接近 100% 失败，HiveMind（绿）始终保持在 0-18%。micro-5 两种模式持平（无争用）。</p>
-<p><img alt="Figure 4: 扩展性行为" src="assets/page-008-img-02.png" /></p>
-<p><strong>Figure 4 解读</strong>：
+<p>Figure 3 解读**：柱状图直观展示了 Direct 模式（红）在 10+ Agent 时接近 100% 失败，HiveMind（绿）始终保持在 0-18%。micro-5 两种模式持平（无争用）。</p>
+<p>Figure 4 解读**：
 - 左图：成功完成的 Agent 数 vs 并发数。Direct 模式在 5 个以上时归零；HiveMind 线性增长
 - 右图：有效吞吐量（tasks/min）。Direct 模式在 5+ 后降为零；HiveMind 持续增长</p>
 <h4 id="53-ablation-study">5.3 消融实验（Ablation Study）<a class="headerlink" href="#53-ablation-study" title="Permanent link">&para;</a></h4>

@@ -21,7 +21,7 @@
     
     
       
-        <title>Owner-Harm：AI Agent 安全中缺失的威胁模型 - 论文自动研学知识库</title>
+        <title>paper - 论文自动研学知识库</title>
       
     
     
@@ -64,7 +64,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#owner-harmai-agent" class="md-skip">
+        <a href="#paper" class="md-skip">
           跳转至
         </a>
       
@@ -100,7 +100,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Owner-Harm：AI Agent 安全中缺失的威胁模型
+              paper
             
           </span>
         </div>
@@ -1422,10 +1422,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#owner-harm-a-missing-threat-model-for-ai-agent-safety" class="md-nav__link">
+  <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Owner-Harm: A Missing Threat Model for AI Agent Safety
+        摘要
       
     </span>
   </a>
@@ -1433,7 +1433,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
+  <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
         摘要
@@ -1456,7 +1456,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
+  <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
         三个真实事件
@@ -1660,7 +1660,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
+  <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
         参考文献
@@ -1687,12 +1687,35 @@
 
 
 
-<h1 id="owner-harmai-agent">Owner-Harm：AI Agent 安全中缺失的威胁模型<a class="headerlink" href="#owner-harmai-agent" title="Permanent link">&para;</a></h1>
-<h2 id="owner-harm-a-missing-threat-model-for-ai-agent-safety">Owner-Harm: A Missing Threat Model for AI Agent Safety<a class="headerlink" href="#owner-harm-a-missing-threat-model-for-ai-agent-safety" title="Permanent link">&para;</a></h2>
-<p>张东晨*, 蒋艺青†</p>
-<p>*蓝色光标  †同济大学</p>
-<hr />
+<h1 id="paper">paper<a class="headerlink" href="#paper" title="Permanent link">&para;</a></h1>
+<!-- 论文元数据卡片 -->
+<div class="paper-meta">
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">机构</span>
+    <span class="paper-meta-value org-"></span>
+  </div>
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">方向</span>
+    <span class="paper-meta-value"></span>
+  </div>
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">日期</span>
+    <span class="paper-meta-value"></span>
+  </div>
+</div>
+
+<div class="admonition info">
+<p><span class="paper-tag paper-tag-translated">✅ 已完成精读</span></p>
+</div>
+<ul>
+<li><strong>来源</strong>：<a href=""></a></li>
+<li><strong>论文链接</strong>：<a href=""></a></li>
+<li><strong>状态</strong>：已生成</li>
+</ul>
 <h2 id="_1">摘要<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<hr />
+<hr />
+<h2 id="_2">摘要<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <p>现有 AI Agent 安全基准主要聚焦于<strong>通用犯罪危害</strong>——网络犯罪、骚扰和武器合成——留下了一个系统性的盲点：<strong>Agent 伤害其部署所有者</strong>。真实事件说明此差距：Slack AI 凭据泄露（2024年8月）、Microsoft 365 Copilot 通过日历注入的数据泄露（2024年1月）、Meta Agent 未授权论坛帖子（2026年3月）。</p>
 <p>我们提出 <strong>Owner-Harm</strong>，一个形式化威胁模型，定义了八类损害部署所有者利益的 Agent 行为。</p>
 <p><strong>关键发现：</strong>
@@ -1701,7 +1724,7 @@
 - 在 300 个 Owner-Harm 场景的诊断基准上：安全门 TPR 75.3%，加确定性事后审计验证器后 TPR 升至 <strong>85.3%</strong>（+10.0 pp），Hijacking 检测从 43.3% 升至 <strong>93.3%</strong></p>
 <hr />
 <h2 id="1">1 背景与动机<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
-<h3 id="_2">三个真实事件<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<h3 id="_3">三个真实事件<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
@@ -2037,22 +2060,7 @@ $<span class="arithmatex">\(\exists c, O_1, O_2: Harmful(c, O_1) \land \neg Harm
 <h2 id="8">8 结论<a class="headerlink" href="#8" title="Permanent link">&para;</a></h2>
 <p>Owner-Harm 是 AI Agent 安全中系统性研究中不足的威胁类别。现有防御是所有者上下文盲的——直到安全系统显式建模 RO、BO 和 AuthO 这些上下文维度，Owner-Harm 将仍然是系统性盲点。</p>
 <hr />
-<h2 id="_3">参考文献<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
-<ul>
-<li>Andriushchenko et al. AgentHarm. ICLR 2025.</li>
-<li>Debenedetti et al. AgentDojo. NeurIPS 2024.</li>
-<li>PromptArmor. Slack AI data exfiltration. 2024.</li>
-<li>Zenity Research. M365 Copilot prompt injection. 2024.</li>
-<li>Schiffer. Meta's AI agent incident. 2026.</li>
-<li>Rehberger. Exfiltration via M365 Copilot. 2024.</li>
-<li>Greshake et al. Indirect prompt injection. arXiv:2302.12173, 2023.</li>
-<li>Ruan et al. ToolEmu. ICLR 2024.</li>
-<li>Rebedea et al. NeMo Guardrails. 2023.</li>
-<li>Inan et al. Llama Guard. 2023.</li>
-<li>Palumbo et al. PCAS. arXiv:2602.16708, 2026.</li>
-<li>Wang et al. AgentSpec. ICSE 2026.</li>
-<li>Pearl. Causality. Cambridge University Press, 2009.</li>
-</ul>
+<h2 id="_4">参考文献<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 
 
 

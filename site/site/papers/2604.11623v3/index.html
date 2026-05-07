@@ -21,7 +21,7 @@
     
     
       
-        <title>Context Kubernetes：面向 Agentic AI 系统的企业知识声明式编排 - 论文自动研学知识库</title>
+        <title>paper - 论文自动研学知识库</title>
       
     
     
@@ -64,7 +64,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#context-kubernetes-agentic-ai" class="md-skip">
+        <a href="#paper" class="md-skip">
           跳转至
         </a>
       
@@ -100,7 +100,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Context Kubernetes：面向 Agentic AI 系统的企业知识声明式编排
+              paper
             
           </span>
         </div>
@@ -1422,10 +1422,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#context-kubernetes-declarative-orchestration-of-enterprise-knowledge-for-agentic-ai-systems" class="md-nav__link">
+  <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Context Kubernetes: Declarative Orchestration of Enterprise Knowledge for Agentic AI Systems
+        摘要
       
     </span>
   </a>
@@ -1433,7 +1433,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
+  <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
         摘要
@@ -1610,7 +1610,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
+  <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
         参考文献
@@ -1637,12 +1637,35 @@
 
 
 
-<h1 id="context-kubernetes-agentic-ai">Context Kubernetes：面向 Agentic AI 系统的企业知识声明式编排<a class="headerlink" href="#context-kubernetes-agentic-ai" title="Permanent link">&para;</a></h1>
-<h2 id="context-kubernetes-declarative-orchestration-of-enterprise-knowledge-for-agentic-ai-systems">Context Kubernetes: Declarative Orchestration of Enterprise Knowledge for Agentic AI Systems<a class="headerlink" href="#context-kubernetes-declarative-orchestration-of-enterprise-knowledge-for-agentic-ai-systems" title="Permanent link">&para;</a></h2>
-<p>Charafeddine Mouzouni</p>
-<p>OPIT（开放理工学院）&amp; Cohorte AI，法国巴黎</p>
-<hr />
+<h1 id="paper">paper<a class="headerlink" href="#paper" title="Permanent link">&para;</a></h1>
+<!-- 论文元数据卡片 -->
+<div class="paper-meta">
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">机构</span>
+    <span class="paper-meta-value org-"></span>
+  </div>
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">方向</span>
+    <span class="paper-meta-value"></span>
+  </div>
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">日期</span>
+    <span class="paper-meta-value"></span>
+  </div>
+</div>
+
+<div class="admonition info">
+<p><span class="paper-tag paper-tag-translated">✅ 已完成精读</span></p>
+</div>
+<ul>
+<li><strong>来源</strong>：<a href=""></a></li>
+<li><strong>论文链接</strong>：<a href=""></a></li>
+<li><strong>状态</strong>：已生成</li>
+</ul>
 <h2 id="_1">摘要<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<hr />
+<hr />
+<h2 id="_2">摘要<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <p><strong>每个计算时代都会产生一个主导原语和一个扩展危机。虚拟机需要VMware。容器需要Kubernetes。AI智能体需要一个尚不存在的东西：组织知识的编排层。</strong></p>
 <p>我们提出 <strong>Context Kubernetes</strong>，一个在 Agentic AI 系统中编排企业知识的架构，包含原型实现和实验评估。</p>
 <p><strong>核心观察：</strong> 在整个组织中向正确的智能体、以正确的权限、在正确的新鲜度、在正确的成本范围内交付正确的知识——在结构上类似于 Kubernetes 十年前解决的<strong>容器编排问题</strong>。</p>
@@ -1739,28 +1762,6 @@
 </tbody>
 </table>
 <h3 id="22-yaml">2.2 声明式清单（YAML）<a class="headerlink" href="#22-yaml" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">context.ai/v1</span>
-<span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ContextDeployment</span>
-<span class="nt">metadata</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">logistics-forecast-kb</span>
-<span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">logistics</span>
-<span class="nt">spec</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">sources</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">internal_wiki</span>
-<span class="w">      </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;forecast/2026/&quot;</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">database</span>
-<span class="w">      </span><span class="nt">query</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;SELECT</span><span class="nv"> </span><span class="s">*</span><span class="nv"> </span><span class="s">FROM</span><span class="nv"> </span><span class="s">rules_engine&quot;</span>
-<span class="w">  </span><span class="nt">freshness</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">ttl</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1h</span>
-<span class="w">    </span><span class="nt">reconciliation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="w">  </span><span class="nt">permissions</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">agents</span><span class="p">:</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">forecast-agent</span>
-<span class="w">        </span><span class="nt">role</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">reader</span>
-<span class="w">    </span><span class="nt">humans</span><span class="p">:</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">planner-team</span>
-<span class="w">        </span><span class="nt">role</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">editor</span>
-</code></pre></div>
 <h3 id="23">2.3 协调循环<a class="headerlink" href="#23" title="Permanent link">&para;</a></h3>
 <p>与 Kubernetes 的协调循环相同——期望状态与实际状态之间的持续比较：</p>
 <div class="highlight"><pre><span></span><code>期望状态（YAML声明）→ 观察实际 → 检测差异 → 执行操作 → 重复
@@ -1989,15 +1990,7 @@
 3. TLA+ 验证 460 万状态零违规
 4. 92 个自动化测试 + 8 个实验验证</p>
 <hr />
-<h2 id="_2">参考文献<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<ul>
-<li>Mouzouni. Context Kubernetes. arXiv:2604.11623, 2026.</li>
-<li>Kubernetes. Borg, Omega, and Kubernetes. ACM Queue, 2016.</li>
-<li>Lamport. Specifying Systems. 2002 (TLA+).</li>
-<li>Gartner. AI agents market projections. 2025.</li>
-<li>Anthropic. Claude Code. 2024.</li>
-<li>CNBC. Application software market value loss. 2026.</li>
-</ul>
+<h2 id="_3">参考文献<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 
 
 

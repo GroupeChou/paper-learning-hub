@@ -1,105 +1,45 @@
-# 
+---
+title: "SWE-Edit: Rethinking Code Editing for Efficient SWE-Agent"
+source: "https://arxiv.org/abs/2604.26102v1"
+---
 
-<!-- 论文元数据卡片 -->
-<div class="paper-meta">
-  <div class="paper-meta-item">
-    <span class="paper-meta-label">机构</span>
-    <span class="paper-meta-value org-"></span>
-  </div>
-  <div class="paper-meta-item">
-    <span class="paper-meta-label">方向</span>
-    <span class="paper-meta-value"></span>
-  </div>
-  <div class="paper-meta-item">
-    <span class="paper-meta-label">日期</span>
-    <span class="paper-meta-value"></span>
-  </div>
-</div>
+# SWE-Edit: Rethinking Code Editing for Efficient SWE-Agent
 
-!!! info ""
-    <span class="paper-tag paper-tag-translated">✅ 已完成精读</span>
+**原文链接**：[arXiv PDF](https://arxiv.org/pdf/2604.26102v1) | 点击阅读原论文完整内容
 
-- **来源**：[]()
-- **论文链接**：[]()
-- **状态**：已生成
-
-## 摘要
-
-大型语言模型智能体在软件工程任务上取得了显著进展，然而当前方法存在一个根本性的上下文耦合问题（context coupling problem）：标准的代码编辑界面将代码检查、修改规划和编辑执行混在同一个上下文窗口中，迫使智能体将探索性查看与严格格式化的编辑生成交错进行。
-
-这导致无关信息不断累积，损害了智能体的性能。
-
-为了解决这一问题，我们提出了 SWE-Edit，它将代码编辑分解为两个专门的子智能体：一个 Viewer（查看器），按需提取与任务相关的代码；一个 Editor（编辑器），根据高层规划执行修改——从而让主智能体专注于推理，同时将上下文密集型操作委托给干净的上下文窗口。
-
-我们进一步研究了什么构成一个有效的编辑模型：观察到当前主流的查找-替换格式容易出错，我们使用 GRPO 训练 Qwen3-8B，使其自适应地选择编辑模式，相比单一格式基线提升了编辑效率。
-
-在 SWE-bench Verified 上，SWE-Edit 将解决率提升了 2.1%，同时将推理成本降低了 17.9%。
-
-我们还额外提出了一个代码编辑基准，能够可靠地预测下游智能体性能，为编辑模型选择提供实用指导。
-
-我们的代码已公开在 https://github.com/microsoft/SWE-Edit。
-
-*Yikai Zhang 1 2 *，Jiaxin Pei 3，Kenan Li 1，Maoquan Wang 1，Jin Pan 2，Yu Kang 1，Shengyu Fu 1，Elsie Nallipogu 1，Junjie Hu 2，Yufan Huang 1，Zijian Jin 1*
-
-*工作完成于微软实习期间。*
-1 微软，美国华盛顿州雷德蒙德
-2 威斯康星大学麦迪逊分校计算机科学系，美国威斯康星州麦迪逊
-3 斯坦福大学以人为本人工智能研究所（HAI），美国加利福尼亚州斯坦福
-
-
-# 
-
-<!-- 论文元数据卡片 -->
-<div class="paper-meta">
-  <div class="paper-meta-item">
-    <span class="paper-meta-label">机构</span>
-    <span class="paper-meta-value org-"></span>
-  </div>
-  <div class="paper-meta-item">
-    <span class="paper-meta-label">方向</span>
-    <span class="paper-meta-value"></span>
-  </div>
-  <div class="paper-meta-item">
-    <span class="paper-meta-label">日期</span>
-    <span class="paper-meta-value"></span>
-  </div>
-</div>
-
-!!! info ""
-    <span class="paper-tag paper-tag-translated">✅ 已完成精读</span>
-
-- **来源**：[]()
-- **论文链接**：[]()
-- **状态**：已生成
-
-## 摘要
-
-大型语言模型智能体在软件工程任务上取得了显著进展，然而当前方法存在一个根本性的上下文耦合问题（context coupling problem）：标准的代码编辑界面将代码检查、修改规划和编辑执行混在同一个上下文窗口中，迫使智能体将探索性查看与严格格式化的编辑生成交错进行。
-
-这导致无关信息不断累积，损害了智能体的性能。
-
-为了解决这一问题，我们提出了 SWE-Edit，它将代码编辑分解为两个专门的子智能体：一个 Viewer（查看器），按需提取与任务相关的代码；一个 Editor（编辑器），根据高层规划执行修改——从而让主智能体专注于推理，同时将上下文密集型操作委托给干净的上下文窗口。
-
-我们进一步研究了什么构成一个有效的编辑模型：观察到当前主流的查找-替换格式容易出错，我们使用 GRPO 训练 Qwen3-8B，使其自适应地选择编辑模式，相比单一格式基线提升了编辑效率。
-
-在 SWE-bench Verified 上，SWE-Edit 将解决率提升了 2.1%，同时将推理成本降低了 17.9%。
-
-我们还额外提出了一个代码编辑基准，能够可靠地预测下游智能体性能，为编辑模型选择提供实用指导。
-
-我们的代码已公开在 https://github.com/microsoft/SWE-Edit。
-
-*Yikai Zhang 1 2 *，Jiaxin Pei 3，Kenan Li 1，Maoquan Wang 1，Jin Pan 2，Yu Kang 1，Shengyu Fu 1，Elsie Nallipogu 1，Junjie Hu 2，Yufan Huang 1，Zijian Jin 1*
-
-*工作完成于微软实习期间。*
-1 微软，美国华盛顿州雷德蒙德
-2 威斯康星大学麦迪逊分校计算机科学系，美国威斯康星州麦迪逊
-3 斯坦福大学以人为本人工智能研究所（HAI），美国加利福尼亚州斯坦福
-
-
-## 图表资源
-- ![](assets/page-009-img-01.png)
-
-
+- **作者**：Yikai Zhang, Jiaxin Pei, Kenan Li, Maoquan Wang, Jin Pan, Yu Kang, Shengyu Fu, Elsie Nallipogu, Junjie Hu, Yufan Huang, Zijian Jin
+- **机构**：Microsoft
+- **发布日期**：2026-04-28
+- **标签**：`AI Agent` `Code Editing` `SWE` `Multi-Agent` `Reinforcement Learning`
 
 ---
 
+## 核心问题
+
+当前 LLM 代码编辑界面存在**上下文耦合**问题：代码检查、修改规划和编辑执行混在同一个上下文窗口中，无关信息不断累积导致智能体性能下降。
+
+## 方法概述
+
+- **解耦架构**：将代码编辑拆分为两个专门子智能体——Viewer（按需提取任务相关代码）和 Editor（根据高层级自然语言计划执行修改）
+- **自适应编辑模式**：使用 GRPO 训练 Qwen3-8B，让编辑器根据修改复杂度自动选择 `find-replace`（适合小改动）或 `whole-file rewrite`（适合复杂重构）
+- **轻量级代码规范化**（Algorithm 1）：在奖励计算前去除注释、规范化空白，提供无需执行的编辑正确性代理指标
+- **PR-Edit 基准**：提出可预测下游智能体性能的代码编辑基准，无需端到端测试即可评估编辑器模型
+
+## 核心结果
+
+| 指标 | 基线 | SWE-Edit | 提升 |
+|------|------|---------|------|
+| SWE-bench Verified 解决率 | 69.9% | **72.0%** | **+2.1%** |
+| 推理成本 | $243.7 | **$200.1** | **-17.9%** |
+| 编辑成功率 | 93.4% | **96.9%** | **+3.5%** |
+| Viewer + GRPO 编辑器 (Qwen3-8B) 解决率 | — | 69.9% | +1.4% (vs 未训练) |
+
+## 为什么值得关注
+
+通过合理的接口解耦（而不是模型堆叠），用更小的模型完成了比更大模型更好的编辑效果，打破了"精度-成本"之间的权衡。
+
+## 学习路线
+
+- **前置知识**：SWE-bench 基准、LLM Agent 工具调用、GRPO 强化学习
+- **相关论文**：SWE-Agent (Yang et al., 2024)、Aider Architect (Gauthier, 2024a)、Context-Folding (Sun et al., 2025)
+- **深入方向**：端到端 Agentic RL 训练编辑器（不依赖静态真值奖励）、Agent-as-Judge 评估器替代 GPT Grader

@@ -21,7 +21,7 @@
     
     
       
-        <title>ArguAgent：AI支持的STEM论证分组 - 论文自动研学知识库</title>
+        <title>paper - 论文自动研学知识库</title>
       
     
     
@@ -64,7 +64,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#arguagentaistem" class="md-skip">
+        <a href="#paper" class="md-skip">
           跳转至
         </a>
       
@@ -100,7 +100,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              ArguAgent：AI支持的STEM论证分组
+              paper
             
           </span>
         </div>
@@ -1937,20 +1937,20 @@
 
 
 
-<h1 id="arguagentaistem">ArguAgent：AI支持的STEM论证分组<a class="headerlink" href="#arguagentaistem" title="Permanent link">&para;</a></h1>
+<h1 id="paper">paper<a class="headerlink" href="#paper" title="Permanent link">&para;</a></h1>
 <!-- 论文元数据卡片 -->
 <div class="paper-meta">
   <div class="paper-meta-item">
     <span class="paper-meta-label">机构</span>
-    <span class="paper-meta-value org-other">Stanford University / University of Pittsburgh</span>
+    <span class="paper-meta-value org-"></span>
   </div>
   <div class="paper-meta-item">
     <span class="paper-meta-label">方向</span>
-    <span class="paper-meta-value">智能体 / 教育AI</span>
+    <span class="paper-meta-value"></span>
   </div>
   <div class="paper-meta-item">
     <span class="paper-meta-label">日期</span>
-    <span class="paper-meta-value">2026-04-28</span>
+    <span class="paper-meta-value"></span>
   </div>
 </div>
 
@@ -1958,12 +1958,11 @@
 <p><span class="paper-tag paper-tag-translated">✅ 已完成精读</span></p>
 </div>
 <ul>
-<li><strong>来源</strong>：<a href="https://arxiv.org/abs/2604.23449">arXiv</a></li>
-<li><strong>论文链接</strong>：<a href="https://arxiv.org/abs/2604.23449">2604.23449v1</a></li>
+<li><strong>来源</strong>：<a href=""></a></li>
+<li><strong>论文链接</strong>：<a href=""></a></li>
+<li><strong>状态</strong>：已生成</li>
 </ul>
 <h2 id="_1">摘要<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p>本文提出了 <strong>ArguAgent</strong>，一个利用大语言模型（LLM）自动评估学生科学论证质量并据此形成异质讨论组的系统。该系统结合了自动化评分与立场聚类，旨在为协作式科学论证构建最优分组。实验结果表明，经过校准的LLM评分与人工评分达到<strong>实质性一致</strong>（Quadratic Weighted Kappa = 0.708），其中提示工程贡献了89%的性能提升，而模型升级仅贡献11%。立场检测与人工判断的一致性达85%（Cohen's κ = 0.690）。蒙特卡洛模拟测试显示，分组算法使95.4%的组同时满足两个设计标准（能力同质+立场异质），相比随机分配提升3.2倍。</p>
-<p>[扩展] 这篇论文的核心价值在于揭示了LLM在教育评估场景中一个反直觉的发现：精心设计的提示词比更强的模型更重要。这对资源受限的学校具有重大实践意义——使用便宜的GPT-4o-mini加上校准后的提示，就能获得接近GPT-5.2的评分效果。</p>
 <hr />
 <h2 id="section-1-introduction">Section 1 — Introduction<a class="headerlink" href="#section-1-introduction" title="Permanent link">&para;</a></h2>
 <h3 id="_2">中文翻译<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
@@ -2109,8 +2108,6 @@
 </tbody>
 </table>
 <h3 id="_10">图表/公式说明<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
-<p><img alt="ArguAgent系统架构" src="assets/architecture.png" /></p>
-<p><em>图1：ArguAgent三模块系统架构流程图。学生回应 → LLM评分 → LLM立场聚类 → 优化算法 → 最终分组。</em></p>
 <h3 id="takeaway_2">关键 takeaway<a class="headerlink" href="#takeaway_2" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>要点1</strong>："LLM理解 + 规则优化"的混合架构是该系统设计的核心理念</li>
@@ -2200,7 +2197,6 @@
 <p><strong>为什么不用简单的分配算法？</strong> 一旦学生按立场和等级分类，理论上确定性算法就能形成有效组。我们使用LLM做立场聚类阶段是因为<strong>立场类别并非预先确定的</strong>，而是从学生回应内容中涌现出来的，随话题变化。后续分组则使用确定性基于得分的优化算法。</p>
 <p><strong>蒙特卡洛模拟评估</strong>：100个模拟班级，每班24名学生。等级分布匹配人工评分数据（Level 0: 11%, Level 1: 28%, Level 2: 32%, Level 3: 16%, Level 4: 12%）。每位学生随机分配到四个立场簇之一。算法为每班形成3人组，共800组。</p>
 <p><strong>组得分指标</strong>：算法优化的综合得分为：</p>
-<div class="arithmatex">\[\text{GroupScore} = \text{PositionScore} + \text{LevelScore}\]</div>
 <p><strong>LevelScore</strong>强制±1级约束作为主要目标：
 - 等级差&gt;1 → -100（硬约束违反）
 - 等级差=1 → +30（最近发展区最优区间）

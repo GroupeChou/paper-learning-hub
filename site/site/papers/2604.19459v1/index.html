@@ -21,7 +21,7 @@
     
     
       
-        <title>LLM 会"游戏化"形式化吗？评估逻辑推理中的忠实性 - 论文自动研学知识库</title>
+        <title>Index - 论文自动研学知识库</title>
       
     
     
@@ -64,7 +64,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#llm" class="md-skip">
+        <a href="#_1" class="md-skip">
           跳转至
         </a>
       
@@ -100,7 +100,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              LLM 会"游戏化"形式化吗？评估逻辑推理中的忠实性
+              Index
             
           </span>
         </div>
@@ -1422,10 +1422,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#do-llms-game-formalization-evaluating-faithfulness-in-logical-reasoning" class="md-nav__link">
+  <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Do LLMs Game Formalization? Evaluating Faithfulness in Logical Reasoning
+        摘要
       
     </span>
   </a>
@@ -1433,10 +1433,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
+  <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        摘要
+        图表资源
       
     </span>
   </a>
@@ -1467,7 +1467,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
+  <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
         数据集
@@ -1533,7 +1533,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
+  <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
         参考文献
@@ -1560,40 +1560,41 @@
 
 
 
-<h1 id="llm">LLM 会"游戏化"形式化吗？评估逻辑推理中的忠实性<a class="headerlink" href="#llm" title="Permanent link">&para;</a></h1>
-<h2 id="do-llms-game-formalization-evaluating-faithfulness-in-logical-reasoning">Do LLMs Game Formalization? Evaluating Faithfulness in Logical Reasoning<a class="headerlink" href="#do-llms-game-formalization-evaluating-faithfulness-in-logical-reasoning" title="Permanent link">&para;</a></h2>
-<p><strong>VerifAI-2 Workshop, ICLR 2026</strong></p>
-<p>Kyuhee Kim, Auguste Poiroux, Antoine Bosselut</p>
-<p>EPFL</p>
+<h1 id="_1"><a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<!-- 论文元数据卡片 -->
+<div class="paper-meta">
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">机构</span>
+    <span class="paper-meta-value org-"></span>
+  </div>
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">方向</span>
+    <span class="paper-meta-value"></span>
+  </div>
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">日期</span>
+    <span class="paper-meta-value"></span>
+  </div>
+</div>
+
+<div class="admonition info">
+<p><span class="paper-tag paper-tag-translated">✅ 已完成精读</span></p>
+</div>
+<ul>
+<li><strong>来源</strong>：<a href=""></a></li>
+<li><strong>论文链接</strong>：<a href=""></a></li>
+<li><strong>状态</strong>：已生成</li>
+</ul>
+<h2 id="_2">摘要<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h2 id="_3">图表资源<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<ul>
+<li><img alt="" src="assets/page-006-img-01.png" /></li>
+<li><img alt="" src="assets/page-024-img-01.png" /></li>
+<li><img alt="" src="assets/page-024-img-02.png" /></li>
+<li><img alt="" src="assets/page-024-img-03.png" /></li>
+<li><img alt="" src="assets/page-024-img-04.png" /></li>
+</ul>
 <hr />
-<h2 id="_1">摘要<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p>形式化验证保证了<strong>证明的有效性</strong>但未保证<strong>形式化的忠实性</strong>。对于自然语言逻辑推理——模型从头构建公理系统，无库约束——有效证明与忠实翻译之间的差距极为严重。</p>
-<p>我们评估 <strong>GPT-5</strong> 和 <strong>DeepSeek-R1</strong> 在 <strong>303</strong> 个一阶逻辑问题上的表现，比较<strong>统一生成</strong>与<strong>两阶段流水线</strong>（形式化与证明分离）。</p>
-<p><strong>关键发现：</strong></p>
-<p>尽管编译率达到 <strong>87-99%</strong>，统一生成中未发现系统游戏化——模型倾向于报告失败而非强制证明。</p>
-<p>两阶段流水线揭示<strong>两种不同的不忠实模式</strong>：</p>
-<table>
-<thead>
-<tr>
-<th>模型</th>
-<th>不忠实模式</th>
-<th>检测难度</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>GPT-5</strong></td>
-<td>证明时<strong>捏造公理</strong></td>
-<td>✅ 跨阶段比较可检测</td>
-</tr>
-<tr>
-<td><strong>DeepSeek-R1</strong></td>
-<td>形式化时<strong>误译前提</strong></td>
-<td>❌ <strong>不可检测</strong>（内部一致）</td>
-</tr>
-</tbody>
-</table>
-<p><strong>核心结论：</strong> 高编译率 ≠ 忠实推理。DeepSeek-R1 的"忠实不忠实"（内部一致但前提误译）完全逃避当前检测方法。</p>
 <hr />
 <h2 id="1">1 方法<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
 <h3 id="vs">统一生成 vs 两阶段<a class="headerlink" href="#vs" title="Permanent link">&para;</a></h3>
@@ -1601,7 +1602,7 @@
 <p><strong>两阶段流水线：</strong>
 - <strong>阶段 1</strong>：模型将 NL 前提翻译为 Lean 4 语句
 - <strong>阶段 2</strong>：<strong>独立模型调用</strong>生成证明（跨阶段比较检测不一致）</p>
-<h3 id="_2">数据集<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<h3 id="_4">数据集<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>FOLIO</strong>：203 个一阶逻辑问题</li>
 <li><strong>Multi-LogiEval</strong>：100 个多类型逻辑问题</li>
@@ -1659,13 +1660,7 @@
 <h3 id="32">3.2 部署影响<a class="headerlink" href="#32" title="Permanent link">&para;</a></h3>
 <p>依赖 LLM 生成形式证明的应用需谨慎：<strong>证明在 Lean 中通过不意味着模型忠实地表示了原始内容</strong>。</p>
 <hr />
-<h2 id="_3">参考文献<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
-<ul>
-<li>Kim et al. Do LLMs Game Formalization? ICLR 2026.</li>
-<li>Krakovna et al. Specification gaming. 2020.</li>
-<li>Jiang et al. Lean proof generation. 2024.</li>
-<li>Bondarenko et al. Reasoning faithfulness. 2025.</li>
-</ul>
+<h2 id="_5">参考文献<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 
 
 

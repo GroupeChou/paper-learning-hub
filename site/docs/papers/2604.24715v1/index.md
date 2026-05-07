@@ -26,32 +26,33 @@
 ## 摘要
 
 
-## 图表资源
-- ![](assets/page-001-img-01.png)
-- ![](assets/page-002-img-01.png)
-- ![](assets/page-002-img-02.png)
-- ![](assets/page-002-img-03.png)
-- ![](assets/page-002-img-04.png)
-- ![](assets/page-002-img-05.png)
-- ![](assets/page-009-img-01.png)
-- ![](assets/page-016-img-01.png)
-
-
-
----
-
----
-
-
 
 ## 1 引言（Introduction）
 
+
+
+
+
+![图1](assets/page-002-img-02.png)
+![图2](assets/page-002-img-01.png)
 基于 Transformer 的大语言模型在多种任务上取得了显著成功。然而训练新模型成本日益高昂，促使研究走向更高效的架构和训练范式。
 
 近期，混合架构（结合注意力机制与更高效的序列建模组件如状态空间模型或线性注意力）成为有前景的方向。代表包括 **Jamba**、**Samba**、**Qwen3-Next**、**Kimi-Linear** 等，它们在提升效率的同时保持竞争力。然而这些方法主要依赖**从零训练**，复制了开发 Transformer 的高昂成本。
 
+
+
+
+
+
+
+![图2](assets/page-002-img-04.png)
+![图2](assets/page-002-img-03.png)
+![论文原图](assets/page-001-img-01.png)
 **模型 Upcycling** 作为替代路线：将现有预训练 Transformer 转换为混合架构，而不丢弃已学知识。通过重用预训练 Transformer 的参数并转换其架构，随后继续训练，从而减少训练成本。
 
+
+
+![图2](assets/page-002-img-05.png)
 现有 upcycling 方法主要关注**保持短上下文性能**，忽视了现代 LLM 日益重要的**长上下文能力**。
 
 **本文贡献：**
@@ -137,6 +138,9 @@ $$L_{SFT} = D_{KL}(\text{softmax}(z^{(s)}) \parallel \text{softmax}(z^{(t)}))$$
 
 ## 4 实验与结果（Experiments and Results）
 
+
+
+![图5](assets/page-009-img-01.png)
 ### 4.1 实验设置
 
 **模型配置**：从三个基模型出发——Llama-3.2-1B、Llama-3.2-3B、Qwen3-1.7B。
@@ -202,6 +206,9 @@ $$L_{SFT} = D_{KL}(\text{softmax}(z^{(s)}) \parallel \text{softmax}(z^{(t)}))$$
 
 ## 5 结论（Conclusion）
 
+
+
+![图6](assets/page-016-img-01.png)
 本文提出 **HyLo** 系列混合 LLM，从预训练 Transformer 检查点 upcycled，明确强调保持长上下文能力。我们引入了长上下文感知的 upcycling 策略，结合基于 MLA 的 Transformer 注意力块与 Mamba2/GDN 线性块、分阶段上下文长度扩展和教师引导蒸馏。在 1B- 和 3B- 规模上（包括 Llama 和 Qwen 骨干），HyLo 在保持短上下文质量的同时实现优越的长上下文泛化。KV 缓存减少 **>90%**，支持高达 **2M 令牌** 的预填充和/or 解码。
 
 **未来工作**：进一步缩小长上下文长度下的剩余差距，改进蒸馏效率，扩展框架到更多下游场景。

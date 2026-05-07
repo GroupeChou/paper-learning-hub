@@ -21,7 +21,7 @@
     
     
       
-        <title>长上下文感知的Upcycling：混合LLM缩放的新前沿 - 论文自动研学知识库</title>
+        <title>Index - 论文自动研学知识库</title>
       
     
     
@@ -64,7 +64,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#upcyclingllm" class="md-skip">
+        <a href="#_1" class="md-skip">
           跳转至
         </a>
       
@@ -100,7 +100,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              长上下文感知的Upcycling：混合LLM缩放的新前沿
+              Index
             
           </span>
         </div>
@@ -1422,10 +1422,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#abstract" class="md-nav__link">
+  <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        摘要（Abstract）
+        摘要
       
     </span>
   </a>
@@ -1688,7 +1688,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
+  <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
         参考文献
@@ -1715,28 +1715,43 @@
 
 
 
-<h1 id="upcyclingllm">长上下文感知的Upcycling：混合LLM缩放的新前沿<a class="headerlink" href="#upcyclingllm" title="Permanent link">&para;</a></h1>
-<p><strong>Long-Context Aware Upcycling: A New Frontier for Hybrid LLM Scaling</strong></p>
-<p>Parsa Ashrafi Fashi*, Utkarsh Saxena*, Mehdi Rezagholizadeh, Aref Jafari, Akash Haridas, Mingyu Yang, Vansh Bhatia, Guihong Li, Vikram Appia, Emad Barsoum</p>
-<p>AMD</p>
-<p>*共同第一作者（随机顺序）</p>
-<p>{parsa.fashi, utkarsh.saxena, mehdi.rezagholizadeh, aref.jafari}@amd.com</p>
-<hr />
-<h2 id="abstract">摘要（Abstract）<a class="headerlink" href="#abstract" title="Permanent link">&para;</a></h2>
-<p>混合序列模型将高效 Transformer 组件与线性序列建模块相结合，是纯 Transformer 的有前途替代方案。然而大多数仍从零预训练，因此无法重用现有 Transformer 检查点。我们研究 <strong>upcycling</strong> 作为将预训练 Transformer LLM 转换为混合架构的实用路径，同时保持短上下文质量并改进长上下文能力。</p>
-<p>我们称解决方案为 <strong>HyLo（HYbrid LOng-context）</strong>：一种长上下文 upcycling 配方，结合了架构适配（高效 Transformer 块、多头潜在注意力 MLA 和线性块 Mamba2/Gated DeltaNet），以及分阶段长上下文训练和教师引导蒸馏以稳定优化。</p>
-<p><strong>关键成果：</strong>
-- 将可用上下文长度扩展 <strong>32×</strong>（通过高效后训练）
-- KV缓存内存减少 <strong>&gt;90%</strong>
-- 支持 <strong>2M 令牌</strong>的预填充和解码（vLLM推理栈），而 Llama 基线在 64K 上下文外即 OOM
-- 在 1B 和 3B 规模（Llama 和 Qwen 变体）上，HyLo 在短/长上下文性能上表现一致
-- <strong>HyLo-Qwen-1.7B</strong> 仅训练 10B 令牌就显著优于训练 400B 令牌的 <strong>JetNemotron</strong>（在 GSM8K、Lm-Harness 常识推理和 RULER-64K 上）</p>
-<hr />
+<h1 id="_1"><a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<!-- 论文元数据卡片 -->
+<div class="paper-meta">
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">机构</span>
+    <span class="paper-meta-value org-"></span>
+  </div>
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">方向</span>
+    <span class="paper-meta-value"></span>
+  </div>
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">日期</span>
+    <span class="paper-meta-value"></span>
+  </div>
+</div>
+
+<div class="admonition info">
+<p><span class="paper-tag paper-tag-translated">✅ 已完成精读</span></p>
+</div>
+<ul>
+<li><strong>来源</strong>：<a href=""></a></li>
+<li><strong>论文链接</strong>：<a href=""></a></li>
+<li><strong>状态</strong>：已生成</li>
+</ul>
+<h2 id="_2">摘要<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <h2 id="1-introduction">1 引言（Introduction）<a class="headerlink" href="#1-introduction" title="Permanent link">&para;</a></h2>
-<p>基于 Transformer 的大语言模型在多种任务上取得了显著成功。然而训练新模型成本日益高昂，促使研究走向更高效的架构和训练范式。</p>
+<p><img alt="图1" src="assets/page-002-img-02.png" />
+<img alt="图2" src="assets/page-002-img-01.png" />
+基于 Transformer 的大语言模型在多种任务上取得了显著成功。然而训练新模型成本日益高昂，促使研究走向更高效的架构和训练范式。</p>
 <p>近期，混合架构（结合注意力机制与更高效的序列建模组件如状态空间模型或线性注意力）成为有前景的方向。代表包括 <strong>Jamba</strong>、<strong>Samba</strong>、<strong>Qwen3-Next</strong>、<strong>Kimi-Linear</strong> 等，它们在提升效率的同时保持竞争力。然而这些方法主要依赖<strong>从零训练</strong>，复制了开发 Transformer 的高昂成本。</p>
-<p><strong>模型 Upcycling</strong> 作为替代路线：将现有预训练 Transformer 转换为混合架构，而不丢弃已学知识。通过重用预训练 Transformer 的参数并转换其架构，随后继续训练，从而减少训练成本。</p>
-<p>现有 upcycling 方法主要关注<strong>保持短上下文性能</strong>，忽视了现代 LLM 日益重要的<strong>长上下文能力</strong>。</p>
+<p><img alt="图2" src="assets/page-002-img-04.png" />
+<img alt="图2" src="assets/page-002-img-03.png" />
+<img alt="论文原图" src="assets/page-001-img-01.png" />
+<strong>模型 Upcycling</strong> 作为替代路线：将现有预训练 Transformer 转换为混合架构，而不丢弃已学知识。通过重用预训练 Transformer 的参数并转换其架构，随后继续训练，从而减少训练成本。</p>
+<p><img alt="图2" src="assets/page-002-img-05.png" />
+现有 upcycling 方法主要关注<strong>保持短上下文性能</strong>，忽视了现代 LLM 日益重要的<strong>长上下文能力</strong>。</p>
 <p><strong>本文贡献：</strong>
 1. <strong>长上下文感知的模型 upcycling</strong>：基于 Zebra-Llama 改进的 upcycling 配方，在保持短上下文性能的同时实现优越的长上下文性能
 2. <strong>扩展的长上下文训练机制</strong>：从 8K 到 <strong>64K</strong> 令牌的分阶段训练，系统分析训练序列长度对长上下文泛化的影响
@@ -1813,6 +1828,7 @@
 3. 核限制（HyLo 的压缩潜维度）</p>
 <hr />
 <h2 id="4-experiments-and-results">4 实验与结果（Experiments and Results）<a class="headerlink" href="#4-experiments-and-results" title="Permanent link">&para;</a></h2>
+<p><img alt="图5" src="assets/page-009-img-01.png" /></p>
 <h3 id="41">4.1 实验设置<a class="headerlink" href="#41" title="Permanent link">&para;</a></h3>
 <p><strong>模型配置</strong>：从三个基模型出发——Llama-3.2-1B、Llama-3.2-3B、Qwen3-1.7B。</p>
 <p><strong>评估任务</strong>：短上下文常识推理（ARC-Challenge/Easy、HellaSwag、OpenBookQA、PIQA、RACE、WinoGrande）、长上下文（RULER 全部 13 个任务）、数学推理（GSM8K）。</p>
@@ -1993,7 +2009,8 @@
 </ul>
 <hr />
 <h2 id="5-conclusion">5 结论（Conclusion）<a class="headerlink" href="#5-conclusion" title="Permanent link">&para;</a></h2>
-<p>本文提出 <strong>HyLo</strong> 系列混合 LLM，从预训练 Transformer 检查点 upcycled，明确强调保持长上下文能力。我们引入了长上下文感知的 upcycling 策略，结合基于 MLA 的 Transformer 注意力块与 Mamba2/GDN 线性块、分阶段上下文长度扩展和教师引导蒸馏。在 1B- 和 3B- 规模上（包括 Llama 和 Qwen 骨干），HyLo 在保持短上下文质量的同时实现优越的长上下文泛化。KV 缓存减少 <strong>&gt;90%</strong>，支持高达 <strong>2M 令牌</strong> 的预填充和/or 解码。</p>
+<p><img alt="图6" src="assets/page-016-img-01.png" />
+本文提出 <strong>HyLo</strong> 系列混合 LLM，从预训练 Transformer 检查点 upcycled，明确强调保持长上下文能力。我们引入了长上下文感知的 upcycling 策略，结合基于 MLA 的 Transformer 注意力块与 Mamba2/GDN 线性块、分阶段上下文长度扩展和教师引导蒸馏。在 1B- 和 3B- 规模上（包括 Llama 和 Qwen 骨干），HyLo 在保持短上下文质量的同时实现优越的长上下文泛化。KV 缓存减少 <strong>&gt;90%</strong>，支持高达 <strong>2M 令牌</strong> 的预填充和/or 解码。</p>
 <p><strong>未来工作</strong>：进一步缩小长上下文长度下的剩余差距，改进蒸馏效率，扩展框架到更多下游场景。</p>
 <hr />
 <h2 id="a">附录 A<a class="headerlink" href="#a" title="Permanent link">&para;</a></h2>
@@ -2155,7 +2172,7 @@
 </tbody>
 </table>
 <hr />
-<h2 id="_1">参考文献<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<h2 id="_3">参考文献<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <p>[1] Bick et al. Transformers to SSMs: Distilling quadratic knowledge to subquadratic models. arXiv:2408.10189, 2024.
 [2] Bick et al. Llamba: Scaling distilled recurrent models for efficient language processing. arXiv:2502.14458, 2025.
 [3] Bick et al. Retrieval-aware distillation for transformer-SSM hybrids. arXiv:2602.11374, 2026.

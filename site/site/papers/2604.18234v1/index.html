@@ -21,7 +21,7 @@
     
     
       
-        <title>评估RAG系统中的多跳推理：基于LLM的检索器评估策略对比 - 论文自动研学知识库</title>
+        <title>paper - 论文自动研学知识库</title>
       
     
     
@@ -64,7 +64,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#ragllm" class="md-skip">
+        <a href="#paper" class="md-skip">
           跳转至
         </a>
       
@@ -100,7 +100,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              评估RAG系统中的多跳推理：基于LLM的检索器评估策略对比
+              paper
             
           </span>
         </div>
@@ -2009,20 +2009,20 @@
 
 
 
-<h1 id="ragllm">评估RAG系统中的多跳推理：基于LLM的检索器评估策略对比<a class="headerlink" href="#ragllm" title="Permanent link">&para;</a></h1>
+<h1 id="paper">paper<a class="headerlink" href="#paper" title="Permanent link">&para;</a></h1>
 <!-- 论文元数据卡片 -->
 <div class="paper-meta">
   <div class="paper-meta-item">
     <span class="paper-meta-label">机构</span>
-    <span class="paper-meta-value org-other">Universität Innsbruck（因斯布鲁克大学）</span>
+    <span class="paper-meta-value org-"></span>
   </div>
   <div class="paper-meta-item">
     <span class="paper-meta-label">方向</span>
-    <span class="paper-meta-value">RAG / 信息检索 / LLM评估</span>
+    <span class="paper-meta-value"></span>
   </div>
   <div class="paper-meta-item">
     <span class="paper-meta-label">日期</span>
-    <span class="paper-meta-value">2026-04-20</span>
+    <span class="paper-meta-value"></span>
   </div>
 </div>
 
@@ -2030,13 +2030,11 @@
 <p><span class="paper-tag paper-tag-translated">✅ 已完成精读</span></p>
 </div>
 <ul>
-<li><strong>来源</strong>：<a href="https://arxiv.org/abs/2604.18234">arXiv</a>（ECIR 2026 SynIRgy Workshop）</li>
-<li><strong>论文链接</strong>：<a href="https://arxiv.org/abs/2604.18234">2604.18234v1</a></li>
-<li><strong>代码</strong>：<a href="https://github.com/lorenzbrehme/CARE">github.com/lorenzbrehme/CARE</a></li>
+<li><strong>来源</strong>：<a href=""></a></li>
+<li><strong>论文链接</strong>：<a href=""></a></li>
+<li><strong>状态</strong>：已生成</li>
 </ul>
 <h2 id="_1">摘要<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p>检索增强生成（RAG）通过外部知识增强大语言模型（LLM），以更准确地回答问题。然而，关于评估RAG系统——特别是<strong>检索器组件</strong>的研究仍然有限，因为大多数现有工作聚焦于单上下文检索而非<strong>多跳查询</strong>（multi-hop queries）。在多跳查询中，单个上下文在孤立看时可能无关紧要，但组合后却至关重要。本研究使用HotPotQA、MuSiQue和SQuAD数据集模拟RAG系统，比较了三种LLM-as-judge评估策略，包括我们提出的<strong>上下文感知检索器评估（CARE）</strong>方法。实验表明，CARE在评估RAG系统中的多跳推理时持续优于现有方法。性能提升在参数量更大、上下文窗口更长的模型中最为显著，而<strong>单跳查询对上下文感知评估的敏感度极低</strong>。结果凸显了上下文感知评估在提升RAG系统可靠性和准确性方面的关键作用，特别是在复杂查询场景中。</p>
-<p>[扩展] 这篇论文的核心洞察是：传统检索器评估方法将每个检索到的文档<strong>孤立评判</strong>，但在多跳推理场景下，单个文档可能只包含"拼图的一块"——只有看到完整的上下文列表才能判断其价值。CARE通过将完整上下文列表纳入评估输入来解决这个问题。</p>
 <hr />
 <h2 id="section-1-introduction">Section 1 — Introduction<a class="headerlink" href="#section-1-introduction" title="Permanent link">&para;</a></h2>
 <h3 id="_2">中文翻译<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
@@ -2213,8 +2211,6 @@
 1. <strong>间接评估方法</strong>——衍生自eRAG方法
 2. <strong>直接评估方法</strong>——基于ARES框架
 3. <strong>我们提出的上下文感知检索器评估（CARE）</strong>方法</p>
-<p><img alt="Figure 1: 三种评估策略示意图" src="assets/evaluation-strategies.png" /></p>
-<p><em>图1：(a) 间接方法——用单个上下文生成答案再与标准答案比对；(b) 直接方法——LLM直接判断上下文是否相关；(c) CARE方法——在完整上下文列表背景下判断单个上下文是否关键</em></p>
 <p>给定查询q，检索器R返回上下文文档列表 <span class="arithmatex">\(L = \{\ell_1, \ell_2, ..., \ell_n\}\)</span>，其中 <span class="arithmatex">\(\ell_i \in L\)</span> 表示单个检索到的上下文。令 <span class="arithmatex">\(a^*\)</span> 表示与q关联的真实答案。每种评估方法输出<strong>二进制相关性标签</strong> <span class="arithmatex">\(y_i \in \{0, 1\}\)</span>，其中 <span class="arithmatex">\(y_i = 1\)</span> 表示上下文<span class="arithmatex">\(\ell_i\)</span>相对于查询q相关，<span class="arithmatex">\(y_i = 0\)</span>表示不相关。</p>
 <p><strong>间接方法</strong>：LLM <span class="arithmatex">\(I\)</span> 尝试仅使用单个上下文文档 <span class="arithmatex">\(\ell_i\)</span> 回答查询q，生成答案 <span class="arithmatex">\(a_i = I(q, \ell_i)\)</span>。如果 <span class="arithmatex">\(a_i = \emptyset\)</span>，上下文<span class="arithmatex">\(\ell_i\)</span>标记为非相关。否则，<span class="arithmatex">\(a_i\)</span> 使用精确匹配函数与真实答案<span class="arithmatex">\(a^*\)</span>比较，如果答案匹配则为相关否则为非相关。为减少严格精确匹配引入的错误和偏差，我们对所有未检测到匹配的情况进行了人工审查。</p>
 <p><strong>直接方法</strong>：使用LLM <span class="arithmatex">\(D\)</span> 直接预测相关性标签，定义为 <span class="arithmatex">\(y_i = D(q, a^*, \ell_i)\)</span>。LLM获得任务的详细描述，包括如何评估上下文相关性的显式指令。LLM接收几条信息作为输入：(1) 被解决的问题q；(2) 待分类的特定上下文文档<span class="arithmatex">\(\ell_i\)</span>；(3) 真实答案<span class="arithmatex">\(a^*\)</span>。基于此信息，LLM将上下文文档分类为相关或非相关。</p>

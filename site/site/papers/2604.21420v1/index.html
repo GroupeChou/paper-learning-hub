@@ -21,7 +21,7 @@
     
     
       
-        <title>FairQE：缓解翻译质量估计中性别偏见的多智能体框架 - 论文自动研学知识库</title>
+        <title>Index - 论文自动研学知识库</title>
       
     
     
@@ -64,7 +64,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#fairqe" class="md-skip">
+        <a href="#_1" class="md-skip">
           跳转至
         </a>
       
@@ -100,7 +100,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              FairQE：缓解翻译质量估计中性别偏见的多智能体框架
+              Index
             
           </span>
         </div>
@@ -1422,18 +1422,7 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#fairqe-multi-agent-framework-for-mitigating-gender-bias-in-translation-quality-estimation" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        FairQE: Multi-Agent Framework for Mitigating Gender Bias in Translation Quality Estimation
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
+  <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
         摘要
@@ -1444,7 +1433,18 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        图表资源
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
         结果
@@ -1455,7 +1455,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
+  <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
         参考文献
@@ -1482,22 +1482,40 @@
 
 
 
-<h1 id="fairqe">FairQE：缓解翻译质量估计中性别偏见的多智能体框架<a class="headerlink" href="#fairqe" title="Permanent link">&para;</a></h1>
-<h2 id="fairqe-multi-agent-framework-for-mitigating-gender-bias-in-translation-quality-estimation">FairQE: Multi-Agent Framework for Mitigating Gender Bias in Translation Quality Estimation<a class="headerlink" href="#fairqe-multi-agent-framework-for-mitigating-gender-bias-in-translation-quality-estimation" title="Permanent link">&para;</a></h2>
-<p>Jinhee Jang¹, Juhwan Choi²†, Dongjin Lee¹†, Seunguk Yu¹, Youngbin Kim¹</p>
-<p>¹中央大学（韩国）  ²AITRICS</p>
+<h1 id="_1"><a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<!-- 论文元数据卡片 -->
+<div class="paper-meta">
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">机构</span>
+    <span class="paper-meta-value org-"></span>
+  </div>
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">方向</span>
+    <span class="paper-meta-value"></span>
+  </div>
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">日期</span>
+    <span class="paper-meta-value"></span>
+  </div>
+</div>
+
+<div class="admonition info">
+<p><span class="paper-tag paper-tag-translated">✅ 已完成精读</span></p>
+</div>
+<ul>
+<li><strong>来源</strong>：<a href=""></a></li>
+<li><strong>论文链接</strong>：<a href=""></a></li>
+<li><strong>状态</strong>：已生成</li>
+</ul>
+<h2 id="_2">摘要<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h2 id="_3">图表资源<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<ul>
+<li><img alt="" src="assets/page-001-img-01.png" /></li>
+<li><img alt="" src="assets/page-003-img-01.png" /></li>
+</ul>
 <hr />
-<h2 id="_1">摘要<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p>质量估计（QE）模型表现出系统性性别偏见：模糊语境偏向阳性，明确语境时仍可能给性别错配翻译更高分。<strong>FairQE</strong> 是一个基于多智能体的公平感知QE框架。</p>
-<p><strong>框架：</strong>
-- <strong>Agent_cue（线索检测）</strong>：12类性别线索（显式C1-C6 + 模糊C7-C12）
-- <strong>Agent_amb（模糊变体生成）</strong>：生成所有性别变体
-- <strong>Agent_exp（显式变体生成）</strong>：验证对齐并生成对比
-- <strong>Agent_qe（传统QE评分）</strong>：COMETKiwi 22 评分
-- <strong>Agent_uqe（LLM无偏推理）</strong>：GPT-4.1-mini 推理驱动无偏评分</p>
-<p><strong>动态聚合：</strong> <span class="arithmatex">\(q_{final} = w·q_{uqe} + (1-w)·q_{orig}\)</span>，<span class="arithmatex">\(w = B/(1+B)\)</span></p>
 <hr />
-<h2 id="_2">结果<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h2 id="_4">结果<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <p><strong>表 1：模糊场景女性/男性 评分比（越近1越公平）</strong></p>
 <table>
 <thead>
@@ -1557,7 +1575,7 @@
 <p><strong>通用QE性能：</strong> WMT 2023 avg-corr: 0.743 → <strong>0.812</strong></p>
 <p><strong>成本：</strong> <span class="arithmatex">\(0.095/100样本（&lt;\)</span>0.001/样本）</p>
 <hr />
-<h2 id="_3">参考文献<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<h2 id="_5">参考文献<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Jang et al. FairQE. 2026.</li>
 <li>Rei et al. COMETKiwi. WMT 2022.</li>

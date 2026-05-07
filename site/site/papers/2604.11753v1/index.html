@@ -21,7 +21,7 @@
     
     
       
-        <title>AggAgent：面向长程智能体任务并行扩展的智能体式聚合 - 论文自动研学知识库</title>
+        <title>Index - 论文自动研学知识库</title>
       
     
     
@@ -64,7 +64,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#aggagent" class="md-skip">
+        <a href="#_1" class="md-skip">
           跳转至
         </a>
       
@@ -100,7 +100,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              AggAgent：面向长程智能体任务并行扩展的智能体式聚合
+              Index
             
           </span>
         </div>
@@ -1422,10 +1422,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#agentic-aggregation-for-parallel-scaling-of-long-horizon-agentic-tasks" class="md-nav__link">
+  <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Agentic Aggregation for Parallel Scaling of Long-Horizon Agentic Tasks
+        摘要
       
     </span>
   </a>
@@ -1433,10 +1433,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
+  <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        摘要
+        图表资源
       
     </span>
   </a>
@@ -1555,7 +1555,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
+  <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
         参考文献
@@ -1582,23 +1582,39 @@
 
 
 
-<h1 id="aggagent">AggAgent：面向长程智能体任务并行扩展的智能体式聚合<a class="headerlink" href="#aggagent" title="Permanent link">&para;</a></h1>
-<h2 id="agentic-aggregation-for-parallel-scaling-of-long-horizon-agentic-tasks">Agentic Aggregation for Parallel Scaling of Long-Horizon Agentic Tasks<a class="headerlink" href="#agentic-aggregation-for-parallel-scaling-of-long-horizon-agentic-tasks" title="Permanent link">&para;</a></h2>
-<p>Yoonsang Lee, Howard Yen, Xi Ye, Danqi Chen</p>
-<p>普林斯顿大学 普林斯顿语言与智能实验室</p>
+<h1 id="_1"><a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<!-- 论文元数据卡片 -->
+<div class="paper-meta">
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">机构</span>
+    <span class="paper-meta-value org-"></span>
+  </div>
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">方向</span>
+    <span class="paper-meta-value"></span>
+  </div>
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">日期</span>
+    <span class="paper-meta-value"></span>
+  </div>
+</div>
+
+<div class="admonition info">
+<p><span class="paper-tag paper-tag-translated">✅ 已完成精读</span></p>
+</div>
+<ul>
+<li><strong>来源</strong>：<a href=""></a></li>
+<li><strong>论文链接</strong>：<a href=""></a></li>
+<li><strong>状态</strong>：已生成</li>
+</ul>
+<h2 id="_2">摘要<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h2 id="_3">图表资源<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<ul>
+<li><img alt="" src="assets/page-001-img-01.png" /></li>
+<li><img alt="" src="assets/page-001-img-02.png" /></li>
+<li><img alt="" src="assets/page-002-img-01.png" /></li>
+</ul>
 <hr />
-<h2 id="_1">摘要<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p>我们研究长程智能体任务（如智能体搜索和深度研究）的<strong>并行测试时扩展</strong>——并行生成多个轨迹并聚合为最终响应。</p>
-<p>虽然这种扩展在思维链推理中证明有效，但智能体任务带来独特挑战：
-- 轨迹长、多轮、工具增强
-- 输出往往是开放式的
-- 仅聚合最终答案<strong>丢弃轨迹中的丰富信息</strong>
-- 拼接所有轨迹<strong>超出模型上下文窗口</strong></p>
-<p>我们提出 <strong>AggAgent</strong>，一个将并行轨迹视为<strong>环境</strong>的聚合智能体。它配备轻量级工具来检查候选解决方案并跨轨迹搜索，使其能按需导航和综合信息。</p>
-<p><strong>结果：</strong> 跨6个基准和3个模型家族（<strong>GLM-4.7</strong>、<strong>Qwen3.5</strong>、<strong>MiniMax-M2.5</strong>），AggAgent 优于所有现有聚合方法：
-- 平均绝对提升 <strong>+5.3%</strong>
-- 两个深度研究任务上 <strong>+10.3%</strong>
-- 聚合成本仅相当于<strong>单次智能体展开</strong></p>
 <hr />
 <h2 id="1">1 引言<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
 <p>并行测试时扩展在推理任务中有效——在数学、编程等任务中生成多条独立的推理路径并聚合。但智能体任务与推理任务的根本区别在于：</p>
@@ -1811,17 +1827,7 @@
 <h2 id="4">4 结论<a class="headerlink" href="#4" title="Permanent link">&para;</a></h2>
 <p>AggAgent 将智能体式聚合确立为并行测试时扩展的有效且经济的方法。通过将并行轨迹视为环境，使聚合智能体按需搜索和综合信息，AggAgent 在 6 个基准和 3 个模型家族上一致优于现有方法。</p>
 <hr />
-<h2 id="_2">参考文献<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<ul>
-<li>Lee et al. AggAgent. 2026.</li>
-<li>Snell et al. Scaling LLM test-time compute. 2025.</li>
-<li>Muennighoff et al. Scaling test-time compute with search. 2025.</li>
-<li>Wang et al. Self-consistency improves chain of thought reasoning. ICLR 2023.</li>
-<li>Wei et al. Chain-of-thought prompting. NeurIPS 2022.</li>
-<li>Bai et al. GLM-4.5. arXiv:2508.06471, 2025.</li>
-<li>Qwen Team. Qwen3.5. 2026.</li>
-<li>MiniMax. MiniMax-M2.5. 2025.</li>
-</ul>
+<h2 id="_4">参考文献<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 
 
 

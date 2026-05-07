@@ -21,7 +21,7 @@
     
     
       
-        <title>从带时间戳数据推断高层事件：复杂度与医学应用 - 论文自动研学知识库</title>
+        <title>Index - 论文自动研学知识库</title>
       
     
     
@@ -100,7 +100,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              从带时间戳数据推断高层事件：复杂度与医学应用
+              Index
             
           </span>
         </div>
@@ -1422,17 +1422,6 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#inferring-high-level-events-from-timestamped-data-complexity-and-medical-applications" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Inferring High-Level Events from Timestamped Data: Complexity and Medical Applications
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1447,7 +1436,7 @@
   <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        复杂度
+        图表资源
       
     </span>
   </a>
@@ -1458,7 +1447,7 @@
   <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        医学应用
+        复杂度
       
     </span>
   </a>
@@ -1467,6 +1456,17 @@
       
         <li class="md-nav__item">
   <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        医学应用
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       
         参考文献
@@ -1493,17 +1493,41 @@
 
 
 
-<h1 id="_1">从带时间戳数据推断高层事件：复杂度与医学应用<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
-<h2 id="inferring-high-level-events-from-timestamped-data-complexity-and-medical-applications">Inferring High-Level Events from Timestamped Data: Complexity and Medical Applications<a class="headerlink" href="#inferring-high-level-events-from-timestamped-data-complexity-and-medical-applications" title="Permanent link">&para;</a></h2>
-<p>Yvon K. Awuklu¹,²,³, Meghyn Bienvenu¹, Katsumi Inoue⁴, Vianney Jouhet²,³, Fleur Mougin³</p>
-<p>¹波尔多大学 ²波尔多大学医院 ³波尔多大学/INSERM ⁴日本国立信息学研究所</p>
-<hr />
+<h1 id="_1"><a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<!-- 论文元数据卡片 -->
+<div class="paper-meta">
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">机构</span>
+    <span class="paper-meta-value org-"></span>
+  </div>
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">方向</span>
+    <span class="paper-meta-value"></span>
+  </div>
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">日期</span>
+    <span class="paper-meta-value"></span>
+  </div>
+</div>
+
+<div class="admonition info">
+<p><span class="paper-tag paper-tag-translated">✅ 已完成精读</span></p>
+</div>
+<ul>
+<li><strong>来源</strong>：<a href=""></a></li>
+<li><strong>论文链接</strong>：<a href=""></a></li>
+<li><strong>状态</strong>：已生成</li>
+</ul>
 <h2 id="_2">摘要<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<p>本文开发基于逻辑的方法从带时间戳数据和背景知识推断高层时间扩展事件。使用<strong>逻辑规则</strong>捕获存在条件和终止条件，组合为<strong>元事件</strong>。</p>
-<p><strong>四种时间线：</strong> 朴素、一致（满足约束）、偏好（最大置信度）、谨慎（所有偏好交集）</p>
-<p><strong>形式化规范：</strong> Σ = (Π_SE, Π_ME, Υ_temp, Υ_dom)</p>
+<h2 id="_3">图表资源<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<ul>
+<li><img alt="" src="assets/page-004-img-01.png" /></li>
+<li><img alt="" src="assets/page-005-img-01.png" /></li>
+<li><img alt="" src="assets/page-017-img-01.png" /></li>
+</ul>
 <hr />
-<h2 id="_3">复杂度<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<hr />
+<h2 id="_4">复杂度<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
@@ -1533,14 +1557,14 @@
 </table>
 <p><strong>可处理片段：</strong> 分层规则集 + 非重叠约束 → 唯一偏好时间线 → 多项式时间</p>
 <hr />
-<h2 id="_4">医学应用<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<h2 id="_5">医学应用<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <p>肺癌用例（激素疗法TKI推理）：
 <div class="highlight"><pre><span></span><code>exists(TKITh(p,d), t, 1) ← Adm(p,d,t) ∧ TKI(d)
 ends(TKITh(p,d), t, 1) ← Adm(p,d&#39;,t&#39;) ∧ TKI(d&#39;) ∧ d&#39; ≠ d
 </code></pre></div></p>
 <p><strong>结果：</strong> 计算可行，与医学专家意见一致。</p>
 <hr />
-<h2 id="_5">参考文献<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<h2 id="_6">参考文献<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Awuklu et al. 2026.</li>
 <li>Brewka et al. Answer Set Programming. CACM 2011.</li>
