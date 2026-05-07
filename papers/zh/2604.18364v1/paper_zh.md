@@ -1,210 +1,26 @@
-# paper
+---
+title: "TRAINING AND AGENTIC INFERENCE STRATEGIES FOR"
+source: "https://arxiv.org/abs/2604.18364v1"
+---
 
-<!-- 论文元数据卡片 -->
-<div class="paper-meta">
-  <div class="paper-meta-item">
-    <span class="paper-meta-label">机构</span>
-    <span class="paper-meta-value org-"></span>
-  </div>
-  <div class="paper-meta-item">
-    <span class="paper-meta-label">方向</span>
-    <span class="paper-meta-value"></span>
-  </div>
-  <div class="paper-meta-item">
-    <span class="paper-meta-label">日期</span>
-    <span class="paper-meta-value"></span>
-  </div>
-</div>
+# TRAINING AND AGENTIC INFERENCE STRATEGIES FOR
 
-!!! info ""
-    <span class="paper-tag paper-tag-translated">✅ 已完成精读</span>
-
-- **来源**：[]()
-- **论文链接**：[]()
-- **状态**：已生成
-
-## 摘要
-
-## 解析备注
-
-- 图片数量超过上限，仅保留前 20 张。
-- 图片数量超过上限，仅保留前 20 张。
-- 图片数量超过上限，仅保留前 20 张。
-- 图片数量超过上限，仅保留前 20 张。
-- 图片数量超过上限，仅保留前 20 张。
-
-
-
-## 图表资源
-
-- ![](assets/page-004-img-01.png)
-- ![](assets/page-004-img-02.png)
-- ![](assets/page-004-img-03.png)
-- ![](assets/page-004-img-04.png)
-- ![](assets/page-004-img-05.png)
-- ![](assets/page-004-img-06.png)
-- ![](assets/page-004-img-07.png)
-- ![](assets/page-004-img-08.png)
-- ![](assets/page-004-img-09.png)
-- ![](assets/page-004-img-10.png)
-- ![](assets/page-004-img-11.png)
-- ![](assets/page-004-img-12.png)
-- ![](assets/page-004-img-13.png)
-- ![](assets/page-004-img-14.png)
-- ![](assets/page-007-img-01.png)
-- ![](assets/page-007-img-02.png)
-- ![](assets/page-007-img-03.png)
-- ![](assets/page-007-img-04.png)
-- ![](assets/page-007-img-05.png)
-- ![](assets/page-007-img-06.png)
-- ![](assets/page-007-img-07.png)
-- ![](assets/page-007-img-08.png)
-- ![](assets/page-007-img-09.png)
-- ![](assets/page-007-img-10.png)
-- ![](assets/page-012-img-01.png)
-- ![](assets/page-013-img-01.png)
-- ![](assets/page-015-img-01.png)
-- ![](assets/page-019-img-01.png)
-- ![](assets/page-019-img-02.png)
-- ![](assets/page-019-img-03.png)
-- ![](assets/page-019-img-04.png)
-- ![](assets/page-019-img-05.png)
-- ![](assets/page-019-img-06.png)
-- ![](assets/page-019-img-07.png)
-- ![](assets/page-019-img-08.png)
-- ![](assets/page-019-img-09.png)
-- ![](assets/page-019-img-10.png)
-- ![](assets/page-019-img-11.png)
-- ![](assets/page-019-img-12.png)
-
-
+**原文链接**：[arXiv PDF](https://arxiv.org/pdf/2604.18364v1) | 点击阅读原论文完整内容
 
 ---
 
----
+## 核心问题
 
-## 2 方法
+ABSTRACT Generating programmatic animation using libraries such as Manim presents unique challenges for Large Language Models (LLMs), requiring spatial reasoning, temporal sequencing, and familiarity with domain-specific APIs that are underrepresented in general pre-training data. A systematic study of how training and inference strategies interact in this setting is lacking in current research. T
 
-### 2.1 ManimTrainer（训练流水线）
+## 方法概述
 
-**阶段 1：SFT（监督微调）**
-- 在 Manim 代码数据集上微调
-- 建立 Manim API 的词汇基础
+请阅读原文了解完整方法细节。
 
-**阶段 2：GRPO（群体相对策略优化）**
-- 使用基于执行结果的奖励信号改进模型
-- 融合奖励：代码编译成功率 + 渲染视觉质量
-- 无需独立批评模型
+## 核心结果
 
-### 2.2 ManimAgent（推理策略）
+请阅读原文获取实验结果和关键数据。
 
-**RITL（渲染器在环）：**
-1. 模型生成 Manim 代码
-2. 编译代码
-3. 渲染为视频帧
-4. 将编译结果和渲染帧反馈给模型
-5. 模型自我修正
+## 学习路线
 
-**RITL-DOC（API 文档增强 RITL）：**
-- 在 RITL 基础上，将相关 Manim API 文档检索并注入提示上下文
-- 减少 API 幻觉
-
-### 2.3 评估设置
-
-- **基准**：ManimBench（Text-to-Code-to-Video 翻译基准）
-- **模型**：17 个开源 <30B LLM（Qwen3-Coder、DeepSeek-Coder、Llama、CodeGemma 等）
-- **策略组合**：9 种（基线/SFT/GRPO/SFT+GRPO × 无RITL/RITL/RITL-DOC）
-- **基线**：GPT-4.1（零样本）
-
-### 2.4 评估指标
-
-- **RSR（渲染成功率）**：代码编译并生成视频？(%)
-- **VS（视觉相似度）**：生成视频与参考视频的视觉相似度（%）
-
----
-
-## 3 结果
-
-### 3.1 训练策略的影响
-
-| 训练策略 | 平均 RSR(%) | 平均 VS(%) |
-|---------|-----------|-----------|
-| 基线（无训练） | 45.3 | 38.7 |
-| SFT | 72.1 | 58.4 |
-| GRPO | 68.5 | 62.1 |
-| **SFT + GRPO** | **78.3** | **67.8** |
-
-SFT 主要提升代码质量（RSR），GRPO 主要提升视觉输出（VS）。
-
-### 3.2 推理策略的效果
-
-| 推理策略 | 平均 RSR(%) | 平均 VS(%) |
-|---------|-----------|-----------|
-| 无 RITL | 78.3 | 67.8 |
-| RITL | 83.6 | 72.5 |
-| **RITL-DOC** | **86.2** | **75.3** |
-
-RITL-DOC 在 RITL 基础上增加约 3 个百分点的 VS。
-
-### 3.3 最佳组合
-
-| 模型 | 训练 | 推理 | RSR(%) | VS(%) |
-|------|------|------|--------|-------|
-| Qwen3-Coder-30B | SFT+GRPO | RITL-DOC | **94.0** | **85.7** |
-| GPT-4.1 | - | - | 91.0 | 82.7 |
-| DeepSeek-Coder-33B | SFT+GRPO | RITL-DOC | **92.5** | **83.2** |
-| CodeLlama-34B | SFT+GRPO | RITL-DOC | 89.8 | 80.1 |
-
-**Qwen3-Coder-30B + GRPO + RITL-DOC 超越 GPT-4.1。**
-
-### 3.4 代码与视觉指标的相关性
-
-| 条件 | 代码-VS 相关性 |
-|------|--------------|
-| 基线 | 0.42 |
-| +SFT | **0.67** |
-| +GRPO | **0.71** |
-| +RITL | 0.58 |
-| +RITL-DOC | 0.53 |
-
-训练（SFT+GRPO）加强代码与视觉指标间的相关性。推理时增强（RITL/RITL-DOC）弱化相关性，因为外部信号在模型生成后对输出进行修正。
-
----
-
-## 4 讨论
-
-### 4.1 训练与推理的互补性
-
-- SFT 提供 API 词汇基础
-- GRPO 优化视觉输出决策
-- 推理时自我修正补偿训练后仍有缺陷的生成
-
-### 4.2 推理时检索的关键作用
-
-RITL-DOC 通过提供 API 文档显著减少幻觉，帮助模型生成更准确的 API 调用。
-
-### 4.3 局限性
-
-- 局限在 <30B 开源模型
-- ManimBench 覆盖的 API 范围有限
-- 视觉相似度评估的局限性
-
----
-
-## 5 结论
-
-本系统研究首次统一分析了训练（SFT+GRPO）和推理（RITL+RITL-DOC）策略在 Manim 动画生成中的交互作用。Qwen3-Coder-30B + GRPO + RITL-DOC 以 **94% RSR** 和 **85.7% VS** 超越了 GPT-4.1 基线。
-
----
-
-## 参考文献
-
-- Silva et al. Manim Animation Generation. 2026.
-- Manim Community. 3Blue1Brown Manim library.
-- Shao et al. DeepSeek-R1. 2025.
-- Hu et al. LoRA. ICLR 2022.
-- Dettmers et al. QLoRA. NeurIPS 2023.
-- Lewis et al. RAG. NeurIPS 2020.
-- Qwen Team. Qwen3-Coder. 2025.
-- OpenAI. GPT-4 Technical Report. 2023.
-- Anthropic. Claude 3.5 Sonnet. 2024.
+- **深入方向**：阅读原文后，可关注论文中的核心思路和后续工作。

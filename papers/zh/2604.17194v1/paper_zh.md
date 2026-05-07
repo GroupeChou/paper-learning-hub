@@ -1,70 +1,26 @@
-# paper
+---
+title: "Forecast Sports Outcomes under"
+source: "https://arxiv.org/abs/2604.17194v1"
+---
 
-<!-- 论文元数据卡片 -->
-<div class="paper-meta">
-  <div class="paper-meta-item">
-    <span class="paper-meta-label">机构</span>
-    <span class="paper-meta-value org-"></span>
-  </div>
-  <div class="paper-meta-item">
-    <span class="paper-meta-label">方向</span>
-    <span class="paper-meta-value"></span>
-  </div>
-  <div class="paper-meta-item">
-    <span class="paper-meta-label">日期</span>
-    <span class="paper-meta-value"></span>
-  </div>
-</div>
+# Forecast Sports Outcomes under
 
-!!! info ""
-    <span class="paper-tag paper-tag-translated">✅ 已完成精读</span>
-
-- **来源**：[]()
-- **论文链接**：[]()
-- **状态**：已生成
-
-## 摘要
-
-
-
-
+**原文链接**：[arXiv PDF](https://arxiv.org/pdf/2604.17194v1) | 点击阅读原论文完整内容
 
 ---
 
----
+## 核心问题
 
-## 摘要
+Abstract Converting betting odds into accurate outcome probabilities is a fundamental challenge in order to use betting odds as a benchmark for sports forecasting and market efficiency analysis. In this study, we propose two methods to overcome the limitations of existing conversion methods. Firstly, we propose an odds-only method to convert betting odds to probabilities without using historical d
 
-将博彩赔率转换为准确的结果概率是体育预测和市场效率分析的基础挑战。
+## 方法概述
 
-**两种方法：**
+请阅读原文了解完整方法细节。
 
-1. **OO-EPC（Odds-Only-Equal-Profitability-Confidence）**：仅使用赔率的方法，假设博彩公司对各结果的盈利信心相等。在 **90,014 场足球比赛、5 个博彩公司**的数据集上验证。
+## 核心结果
 
-2. **FL-GLM（特征学习广义线性模型）**：使用历史数据的 GLM，在篮球预测竞赛中 6 次迭代验证。
+请阅读原文获取实验结果和关键数据。
 
-**关键发现：** OO-EPC 在赔率转换上优于现有方法（Multiplicative、Shin、Power）。FL-GLM 在利用历史数据进行预测上表现最佳。博彩市场在足球上接近有效，在篮球上存在可利用的低效。
+## 学习路线
 
----
-
-## 表 1：足球赔率转换误差对比
-
-| 方法 | MSE↓ | LogLoss↓ | Calibration Error↓ |
-|------|------|---------|-------------------|
-| Multiplicative | 基线 | 基线 | 基线 |
-| Shin | 基线 | 基线 | 基线 |
-| Power | 基线 | 基线 | 基线 |
-| **OO-EPC** | **最优** | **最优** | **最优** |
-
-## 表 2：篮球预测精度
-
-| 方法 | 准确率(%) |
-|------|---------|
-| 基准率（主队胜） | 58.3 |
-| OO-EPC | 62.1 |
-| **FL-GLM** | **65.7** |
-
----
-
-## 参考文献
-
+- **深入方向**：阅读原文后，可关注论文中的核心思路和后续工作。

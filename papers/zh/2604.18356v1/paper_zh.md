@@ -1,62 +1,26 @@
-# 
+---
+title: "ComPASS: Towards Personalized Agentic Social Support via"
+source: "https://arxiv.org/abs/2604.18356v1"
+---
 
-<!-- 论文元数据卡片 -->
-<div class="paper-meta">
-  <div class="paper-meta-item">
-    <span class="paper-meta-label">机构</span>
-    <span class="paper-meta-value org-"></span>
-  </div>
-  <div class="paper-meta-item">
-    <span class="paper-meta-label">方向</span>
-    <span class="paper-meta-value"></span>
-  </div>
-  <div class="paper-meta-item">
-    <span class="paper-meta-label">日期</span>
-    <span class="paper-meta-value"></span>
-  </div>
-</div>
+# ComPASS: Towards Personalized Agentic Social Support via
 
-!!! info ""
-    <span class="paper-tag paper-tag-translated">✅ 已完成精读</span>
-
-- **来源**：[]()
-- **论文链接**：[]()
-- **状态**：已生成
-
-## 摘要
-
-
-## 图表资源
-- ![](assets/page-002-img-01.png)
-- ![](assets/page-002-img-02.png)
-- ![](assets/page-002-img-03.png)
-- ![](assets/page-002-img-04.png)
-- ![](assets/page-002-img-05.png)
-- ![](assets/page-005-img-01.png)
-- ![](assets/page-005-img-02.png)
-- ![](assets/page-005-img-03.png)
-- ![](assets/page-005-img-04.png)
-- ![](assets/page-005-img-05.png)
-- ![](assets/page-005-img-06.png)
-- ![](assets/page-005-img-07.png)
-- ![](assets/page-005-img-08.png)
-- ![](assets/page-005-img-09.png)
-- ![](assets/page-005-img-10.png)
-- ![](assets/page-008-img-01.png)
-- ![](assets/page-008-img-02.png)
-- ![](assets/page-008-img-03.png)
-- ![](assets/page-017-img-01.png)
-- ![](assets/page-017-img-02.png)
-
-
+**原文链接**：[arXiv PDF](https://arxiv.org/pdf/2604.18356v1) | 点击阅读原论文完整内容
 
 ---
 
----
+## 核心问题
 
+Abstract Developing compassionate interactive systems requires agents to not only understand user emotions but also provide diverse, sub- stantive support. While recent works explore empathetic dialogue generation, they remain limited in response form and content, strug- gling to satisfy diverse needs across users and contexts. To address this, we explore empowering agents with external tools to e
 
+## 方法概述
 
-## 参考文献
+请阅读原文了解完整方法细节。
 
-- Huang et al. ComPASS. 2026.
-- House. Work Stress and Social Support. 1981.
+## 核心结果
+
+请阅读原文获取实验结果和关键数据。
+
+## 学习路线
+
+- **深入方向**：阅读原文后，可关注论文中的核心思路和后续工作。

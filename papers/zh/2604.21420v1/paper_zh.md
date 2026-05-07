@@ -1,67 +1,26 @@
-# 
+---
+title: "FairQE: Multi-Agent Framework for Mitigating Gender Bias in"
+source: "https://arxiv.org/abs/2604.21420v1"
+---
 
-<!-- 论文元数据卡片 -->
-<div class="paper-meta">
-  <div class="paper-meta-item">
-    <span class="paper-meta-label">机构</span>
-    <span class="paper-meta-value org-"></span>
-  </div>
-  <div class="paper-meta-item">
-    <span class="paper-meta-label">方向</span>
-    <span class="paper-meta-value"></span>
-  </div>
-  <div class="paper-meta-item">
-    <span class="paper-meta-label">日期</span>
-    <span class="paper-meta-value"></span>
-  </div>
-</div>
+# FairQE: Multi-Agent Framework for Mitigating Gender Bias in
 
-!!! info ""
-    <span class="paper-tag paper-tag-translated">✅ 已完成精读</span>
-
-- **来源**：[]()
-- **论文链接**：[]()
-- **状态**：已生成
-
-## 摘要
-
-
-## 图表资源
-- ![](assets/page-001-img-01.png)
-- ![](assets/page-003-img-01.png)
-
-
+**原文链接**：[arXiv PDF](https://arxiv.org/pdf/2604.21420v1) | 点击阅读原论文完整内容
 
 ---
 
----
+## 核心问题
 
+Abstract Quality Estimation (QE) aims to assess ma- chine translation quality without reference translations, but recent studies have shown that existing QE models exhibit systematic gender bias. In particular, they tend to favor mas- culine realizations in gender-ambiguous con- texts and may assign higher scores to gender- misaligned translations even when gender is explicitly specified. To addre
 
+## 方法概述
 
-## 结果
+请阅读原文了解完整方法细节。
 
-**表 1：模糊场景女性/男性 评分比（越近1越公平）**
+## 核心结果
 
-| 方法 | ES | FR | IT | AR | DE |
-|------|-----|-----|-----|-----|-----|
-| COMETKiwi22 | 0.983 | 0.978 | 0.979 | 0.985 | 0.994 |
-| **FairQE** | **0.995** | **0.986** | **0.992** | **0.994** | **0.999** |
+请阅读原文获取实验结果和关键数据。
 
-**表 2：明确场景准确率（%）**
+## 学习路线
 
-| 方法 | AR | DE | HI |
-|------|-----|-----|-----|
-| COMETKiwi22 | 95.0 | 99.2 | 55.3 |
-| **FairQE** | **97.3** | **99.7** | **74.0** |
-
-**通用QE性能：** WMT 2023 avg-corr: 0.743 → **0.812**
-
-**成本：** $0.095/100样本（<$0.001/样本）
-
----
-
-## 参考文献
-
-- Jang et al. FairQE. 2026.
-- Rei et al. COMETKiwi. WMT 2022.
-- Savoldi et al. Gender bias in MT. TACL 2021.
+- **深入方向**：阅读原文后，可关注论文中的核心思路和后续工作。

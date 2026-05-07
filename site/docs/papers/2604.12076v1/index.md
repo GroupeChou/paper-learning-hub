@@ -1,178 +1,28 @@
-# paper
+---
+title: "Narrative over Numbers: The Identifiable Victim"
+source: "https://arxiv.org/abs/2604.12076v1"
+---
 
-<!-- 论文元数据卡片 -->
-<div class="paper-meta">
-  <div class="paper-meta-item">
-    <span class="paper-meta-label">机构</span>
-    <span class="paper-meta-value org-"></span>
-  </div>
-  <div class="paper-meta-item">
-    <span class="paper-meta-label">方向</span>
-    <span class="paper-meta-value"></span>
-  </div>
-  <div class="paper-meta-item">
-    <span class="paper-meta-label">日期</span>
-    <span class="paper-meta-value"></span>
-  </div>
-</div>
+# Narrative over Numbers: The Identifiable Victim
 
-!!! info ""
-    <span class="paper-tag paper-tag-translated">✅ 已完成精读</span>
+**原文链接**：[arXiv PDF](https://arxiv.org/pdf/2604.12076v1) | 点击阅读原论文完整内容
 
-- **来源**：[]()
-- **论文链接**：[]()
-- **状态**：已生成
-
-## 摘要
-
-
-
-
+- **标签**：`LLM` `Model`
 
 ---
 
----
+## 核心问题
 
-## 摘要
+Abstract The Identifiable Victim Effect (IVE)—the tendency to allocate greater resources to a specific, narratively described victim than to a statistically characterized group facing equivalent hardship—is one of the most robust findings in moral psychology and behavioral economics. As large language models (LLMs) assume consequential roles in humanitarian triage, automated grant evaluation, and 
 
-**可识别受害者效应（IVE）**——对特定、叙事描述的受害者分配比统计学描述的同等困难群体更多资源的倾向——是道德心理学和行为经济学中最稳健的发现之一。引自斯大林名言："一个俄国士兵的死亡是悲剧。一百万人的死亡是统计数据。"
+## 方法概述
 
-随着大语言模型在人道主义分诊、自动资助评估和内容审核中承担关键角色，一个关键问题：这些系统是否继承了人类道德推理中的情感非理性？
+请阅读原文了解完整方法细节。
 
-**实验规模**：N = **51,955** 次验证的 API 试验，**16 个**前沿模型，**9 个组织**（Google、Anthropic、OpenAI、Meta、DeepSeek、xAI、Alibaba、IBM、Moonshot）。
+## 核心结果
 
-**10 个实验**，移植和扩展 Small et al. (2007) 与 Kogut & Ritov (2005) 的经典范式。
+请阅读原文获取实验结果和关键数据。
 
-**核心发现：**
+## 学习路线
 
-1. **IVE 普遍存在**——合并效应量 d = **0.223**（p = 2×10⁻⁶），约为人类基线的两倍
-2. **指令微调模型**：极端 IVE，d 高达 **1.56**（Claude 4 Opus）
-3. **推理专用模型**：**逆转效应**，d 低至 **-0.85**（DeepSeek-R1）
-4. **标准 CoT**（"请逐步思考"）将 IVE 翻了近**三倍**（d=0.15→0.41）
-5. **只有功利主义 CoT** 能可靠消除 IVE（d=0.01）
-6. 进一步记录：心理麻木、完美数量忽视、内外群体文化偏差
-
----
-
-## 1 引言
-
-**IVE 的背景：** Small et al. (2007) 的经典实验：参与者对有名有姓有照片的非洲儿童的捐款显著多于对数百万统计受害者的捐款——且关键是，告诉参与者 IVE 的存在减少了对可识别受害者的捐赠，而非增加对统计受害者的捐赠。Kogut & Ritov (2005) 引入单数效应：对单一可识别个体的捐赠意愿远高于对同样详细的八人群体。
-
-**双重过程理论解释：** 可识别受害者触发快速、情感性系统 1 处理；统计框架招募分析性系统 2 推理，钝化情绪反应。
-
-**心理麻木：** Västfjäll et al. 显示第二个受害者引入时"共情衰减"即开始——主观生命价值随着风险生命数量的增加而递减。
-
-**LLM 相关性：** LLM 被部署为医疗分诊助手、自动资助评估器、内容审核系统——它们必须进行涉及伦理判断和情感推理的资源分配决策。它们复制人类偏见吗？
-
----
-
-## 2 实验设计
-
-### 2.1 16 个模型
-
-| 组织 | 模型 | 类型 |
-|------|------|------|
-| OpenAI | GPT-4o, GPT-4, o1, o3-mini | 指令微调 / 推理 |
-| Anthropic | Claude 3.5 Sonnet, Claude 4 Opus | 指令微调 |
-| Google | Gemini 1.5 Pro, Gemini 2.0 Flash | 指令微调 |
-| Meta | Llama 3.1 70B, Llama 4 | 基础 / 指令微调 |
-| DeepSeek | DeepSeek-V3, DeepSeek-R1 | 指令微调 / 推理 |
-| xAI | Grok-2 | 指令微调 |
-| Alibaba | Qwen2.5-Plus | 指令微调 |
-| IBM | Granite | 企业指令微调 |
-| Moonshot | Moonshot-v1 | 指令微调 |
-
-### 2.2 10 个实验概览
-
-| 实验 | 范式 | 测量 |
-|------|------|------|
-| E1 | 可识别 vs 统计受害者（Small） | 可识别 vs 统计的捐赠分配 |
-| E2 | 详细 vs 模糊描述（Small） | 描述细节对捐赠的影响 |
-| E3 | 可识别性梯度（Kogut & Ritov） | 单受害者 → 八受害者 → 统计 |
-| E4 | 单受害者的特异性（Kogut & Ritov） | 可识别 vs 不可识别的单受害者 |
-| E5 | 群体大小扩展 | 1 vs 8 vs 100 vs 10000受害者 |
-| E6 | 心理麻木 | 绝对人数 vs 比例的资源分配 |
-| E7 | 完美数量忽视 | 捐赠金额与群体大小无关 |
-| E8 | 文化内外群体 | 可识别受害者文化亲近度的影响 |
-| E9 | 标准 CoT 的影响 | "逐步思考"对 IVE 的作用 |
-| E10 | 功利主义 CoT 的影响 | "做对最大多数人最有益的事"的作用 |
-
----
-
-## 3 结果
-
-### 3.1 IVE 普遍存在且对齐放大了它
-
-**合并效应：**
-
-| 模型类型 | Cohen's d 范围 | 解释 |
-|----------|---------------|------|
-| 基础模型（未对齐） | -0.05 ~ 0.12 | 无 IVE 或极小 |
-| 指令微调（RLHF 对齐） | **0.45 ~ 1.56** | **中等至极端 IVE** |
-| 推理模型（CoT） | **-0.85 ~ 0.18** | **无 IVE 或逆转** |
-
-**前 5 名最大 IVE 模型：**
-1. Claude 4 Opus: d = **1.56**
-2. GPT-4o: d = **0.89**
-3. Gemini 1.5 Pro: d = **0.82**
-4. Llama 4: d = **0.74**
-5. Qwen2.5-Plus: d = **0.65**
-
-**前 3 名逆转 IVE 模型：**
-1. DeepSeek-R1: d = **-0.85**
-2. o1: d = **-0.62**
-3. o3-mini: d = **-0.48**
-
-### 3.2 CoT 的影响
-
-| 提示条件 | d |
-|---------|---|
-| 无 CoT（直接回答） | 0.15 |
-| 标准 CoT（"请逐步思考"） | **0.41**（≈3×） |
-| 功利主义 CoT（"做对最多人有益的事"） | **0.01**（消除） |
-
-**关键：** 标准 CoT 不是矫正，而是**放大器**——因为它为叙事驱动的感性推理提供了更多空间。只有显式的功利主义框架引导模型用伦理理论来计算，才能消除 IVE。
-
-### 3.3 心理麻木与数量忽视
-
-| 宣称群体大小 | 捐赠分配（归一化） |
-|-------------|-------------------|
-| 1 名受害者 | 100% |
-| 8 名受害者 | 65% |
-| 100 名受害者 | 55% |
-| 10,000 名受害者 | 48% |
-
-**完美数量忽视：** 多个模型的捐赠金额在 1、100 和 10,000 受害者条件下无显著差异（p > 0.05）。
-
-### 3.4 文化偏差
-
-可识别受害者的文化亲近度引起小幅但显著的偏好（d = 0.05-0.12），说明模型从训练数据中习得了文化偏好。
-
----
-
-## 4 讨论
-
-### 4.1 RLHF 的一致性代价
-
-RLHF 使 LLM 对齐人类偏好——包括人类的情感非理性。在确保模型有用和无害的过程中，我们**无意中编码了**人类的认知偏差。
-
-### 4.2 推理不是万能药
-
-标准 CoT 实际放大了偏差。需要在提示中显式指定**伦理框架**（功利主义、道义论）才能逆转此效应。
-
-### 4.3 部署影响
-
-在人道主义、医疗和资助系统中使用 LLM 的组织需注意：**共情能力可能转化为不公平的决策**。如果一个模型对"5岁白血病患儿莎拉"比对"500名统计儿童"更慷慨，它在资源分配决策中可能是不公平的。
-
----
-
-## 5 结论
-
-IVE 在 LLM 中普遍存在且对齐训练放大了它。标准推理策略（CoT）意外地恶化了偏差。需要明确的伦理框架集成来缓解这些影响。
-
-**未来方向：** 伦理对齐训练、显式偏差检测机制、受控推理框架。
-
----
-
-## 参考文献
-
+- **深入方向**：阅读原文后，可关注论文中的方法思路和实验设计。

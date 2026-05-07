@@ -1,148 +1,26 @@
-# paper
+---
+title: "AeSlides: Incentivizing Aesthetic Layout in LLM-Based Slide"
+source: "https://arxiv.org/abs/2604.22840v1"
+---
 
-<!-- 论文元数据卡片 -->
-<div class="paper-meta">
-  <div class="paper-meta-item">
-    <span class="paper-meta-label">机构</span>
-    <span class="paper-meta-value org-"></span>
-  </div>
-  <div class="paper-meta-item">
-    <span class="paper-meta-label">方向</span>
-    <span class="paper-meta-value"></span>
-  </div>
-  <div class="paper-meta-item">
-    <span class="paper-meta-label">日期</span>
-    <span class="paper-meta-value"></span>
-  </div>
-</div>
+# AeSlides: Incentivizing Aesthetic Layout in LLM-Based Slide
 
-!!! info ""
-    <span class="paper-tag paper-tag-translated">✅ 已完成精读</span>
-
-- **来源**：[]()
-- **论文链接**：[]()
-- **状态**：已生成
-
-## 摘要
-
-## 解析备注
-
-- 图片数量超过上限，仅保留前 20 张。
-- 图片数量超过上限，仅保留前 20 张。
-- 图片数量超过上限，仅保留前 20 张。
-- 图片数量超过上限，仅保留前 20 张。
-- 图片数量超过上限，仅保留前 20 张。
-- 图片数量超过上限，仅保留前 20 张。
-
-
-
-## 图表资源
-
-- ![](assets/page-001-img-01.jpeg)
-- ![](assets/page-001-img-02.png)
-- ![](assets/page-001-img-03.jpeg)
-- ![](assets/page-001-img-04.png)
-- ![](assets/page-001-img-05.jpeg)
-- ![](assets/page-001-img-06.jpeg)
-- ![](assets/page-001-img-07.png)
-- ![](assets/page-001-img-08.png)
-- ![](assets/page-001-img-09.jpeg)
-- ![](assets/page-001-img-10.jpeg)
-- ![](assets/page-001-img-11.png)
-- ![](assets/page-001-img-12.png)
-- ![](assets/page-001-img-13.jpeg)
-- ![](assets/page-001-img-14.png)
-- ![](assets/page-001-img-15.png)
-- ![](assets/page-001-img-16.jpeg)
-- ![](assets/page-003-img-01.png)
-- ![](assets/page-003-img-02.jpeg)
-- ![](assets/page-003-img-03.jpeg)
-- ![](assets/page-008-img-01.png)
-- ![](assets/page-008-img-02.png)
-- ![](assets/page-008-img-03.png)
-- ![](assets/page-008-img-04.png)
-- ![](assets/page-008-img-05.jpeg)
-- ![](assets/page-008-img-06.png)
-- ![](assets/page-008-img-07.png)
-- ![](assets/page-008-img-08.jpeg)
-- ![](assets/page-008-img-09.png)
-- ![](assets/page-008-img-10.jpeg)
-- ![](assets/page-008-img-11.jpeg)
-- ![](assets/page-008-img-12.png)
-- ![](assets/page-008-img-13.png)
-- ![](assets/page-008-img-14.png)
-- ![](assets/page-008-img-15.jpeg)
-- ![](assets/page-008-img-16.jpeg)
-- ![](assets/page-008-img-17.png)
-- ![](assets/page-008-img-18.jpeg)
-- ![](assets/page-008-img-19.jpeg)
-- ![](assets/page-008-img-20.jpeg)
-- ![](assets/page-008-img-21.jpeg)
-- ![](assets/page-008-img-22.jpeg)
-- ![](assets/page-008-img-23.jpeg)
-- ![](assets/page-008-img-24.jpeg)
-- ![](assets/page-008-img-25.jpeg)
-- ![](assets/page-010-img-01.png)
-- ![](assets/page-010-img-02.png)
-- ![](assets/page-010-img-03.png)
-- ![](assets/page-012-img-01.png)
-- ![](assets/page-012-img-02.png)
-- ![](assets/page-016-img-01.png)
-- ![](assets/page-016-img-02.png)
-- ![](assets/page-016-img-03.png)
-- ![](assets/page-016-img-04.png)
-- ![](assets/page-017-img-01.png)
-- ![](assets/page-017-img-02.png)
-- ![](assets/page-017-img-03.jpeg)
-- ![](assets/page-017-img-04.png)
-- ![](assets/page-017-img-05.jpeg)
-- ![](assets/page-017-img-06.jpeg)
-- ![](assets/page-017-img-07.png)
-- ![](assets/page-017-img-08.jpeg)
-- ![](assets/page-017-img-09.jpeg)
-- ![](assets/page-017-img-10.jpeg)
-- ![](assets/page-017-img-11.jpeg)
-- ![](assets/page-017-img-12.jpeg)
-- ![](assets/page-017-img-13.jpeg)
-- ![](assets/page-017-img-14.jpeg)
-- ![](assets/page-017-img-15.jpeg)
-- ![](assets/page-017-img-16.jpeg)
-- ![](assets/page-017-img-17.png)
-- ![](assets/page-017-img-18.jpeg)
-- ![](assets/page-017-img-19.jpeg)
-- ![](assets/page-017-img-20.png)
-- ![](assets/page-017-img-21.jpeg)
-- ![](assets/page-017-img-22.jpeg)
-- ![](assets/page-017-img-23.jpeg)
-- ![](assets/page-017-img-24.jpeg)
-- ![](assets/page-018-img-01.jpeg)
-- ![](assets/page-018-img-02.jpeg)
-- ![](assets/page-018-img-03.png)
-- ![](assets/page-018-img-04.jpeg)
-- ![](assets/page-018-img-05.jpeg)
-- ![](assets/page-018-img-06.jpeg)
-- ![](assets/page-018-img-07.jpeg)
-- ![](assets/page-018-img-08.jpeg)
-- ![](assets/page-018-img-09.jpeg)
-- ![](assets/page-018-img-10.jpeg)
-- ![](assets/page-018-img-11.jpeg)
-- ![](assets/page-018-img-12.jpeg)
-- ![](assets/page-018-img-13.jpeg)
-- ![](assets/page-018-img-14.jpeg)
-- ![](assets/page-018-img-15.jpeg)
-- ![](assets/page-018-img-16.jpeg)
-- ![](assets/page-018-img-17.jpeg)
-- ![](assets/page-018-img-18.jpeg)
-- ![](assets/page-018-img-19.jpeg)
-- ![](assets/page-018-img-20.jpeg)
-
-
+**原文链接**：[arXiv PDF](https://arxiv.org/pdf/2604.22840v1) | 点击阅读原论文完整内容
 
 ---
 
----
+## 核心问题
 
-## 参考文献
+Abstract Large language models (LLMs) have demonstrated strong potential in agentic tasks, particularly in slide generation. However, slide generation poses a fundamental challenge: the generation process is text-centric, whereas its quality is governed by visual aesthet- ics. This modality gap leads current models to frequently produce slides with aesthetically suboptimal layouts. Existing soluti
 
-- Pan et al. AeSlides. 2026.
-- Shao et al. GRPO. 2025.
+## 方法概述
+
+请阅读原文了解完整方法细节。
+
+## 核心结果
+
+请阅读原文获取实验结果和关键数据。
+
+## 学习路线
+
+- **深入方向**：阅读原文后，可关注论文中的核心思路和后续工作。

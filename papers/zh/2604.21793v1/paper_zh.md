@@ -1,68 +1,26 @@
-# 
+---
+title: "Inferring High-Level Events from Timestamped Data:"
+source: "https://arxiv.org/abs/2604.21793v1"
+---
 
-<!-- 论文元数据卡片 -->
-<div class="paper-meta">
-  <div class="paper-meta-item">
-    <span class="paper-meta-label">机构</span>
-    <span class="paper-meta-value org-"></span>
-  </div>
-  <div class="paper-meta-item">
-    <span class="paper-meta-label">方向</span>
-    <span class="paper-meta-value"></span>
-  </div>
-  <div class="paper-meta-item">
-    <span class="paper-meta-label">日期</span>
-    <span class="paper-meta-value"></span>
-  </div>
-</div>
+# Inferring High-Level Events from Timestamped Data:
 
-!!! info ""
-    <span class="paper-tag paper-tag-translated">✅ 已完成精读</span>
-
-- **来源**：[]()
-- **论文链接**：[]()
-- **状态**：已生成
-
-## 摘要
-
-
-## 图表资源
-- ![](assets/page-004-img-01.png)
-- ![](assets/page-005-img-01.png)
-- ![](assets/page-017-img-01.png)
-
-
+**原文链接**：[arXiv PDF](https://arxiv.org/pdf/2604.21793v1) | 点击阅读原论文完整内容
 
 ---
 
----
+## 核心问题
 
+Abstract In this paper, we develop a novel logic-based approach to detecting high-level temporally extended events from time- stamped data and background knowledge. Our framework employs logical rules to capture existence and termination conditions for simple temporal events and to combine these into meta-events. In the medical domain, for example, di- sease episodes and therapies are inferred fro
 
+## 方法概述
 
-## 复杂度
+请阅读原文了解完整方法细节。
 
-| 任务 | 朴素 | 一致 | 偏好 | 谨慎 |
-|------|------|------|------|------|
-| 识别 | P | coNP-complete | coNP-complete | coNP-complete |
-| 生成 | P | NP-hard | NP-hard | 更难 |
+## 核心结果
 
-**可处理片段：** 分层规则集 + 非重叠约束 → 唯一偏好时间线 → 多项式时间
+请阅读原文获取实验结果和关键数据。
 
----
+## 学习路线
 
-## 医学应用
-
-肺癌用例（激素疗法TKI推理）：
-```
-exists(TKITh(p,d), t, 1) ← Adm(p,d,t) ∧ TKI(d)
-ends(TKITh(p,d), t, 1) ← Adm(p,d',t') ∧ TKI(d') ∧ d' ≠ d
-```
-
-**结果：** 计算可行，与医学专家意见一致。
-
----
-
-## 参考文献
-
-- Awuklu et al. 2026.
-- Brewka et al. Answer Set Programming. CACM 2011.
+- **深入方向**：阅读原文后，可关注论文中的核心思路和后续工作。

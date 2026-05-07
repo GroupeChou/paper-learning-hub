@@ -1,1 +1,7 @@
-{"paper_id": "2604.16911v1", "status": "translated", "zh_path": "papers/zh/2604.16911v1/paper_zh.md", "title": "Skilldex: Skill-Based Routing for LLM Agents", "category": "LLM Agent·技能路由", "translated_at": "2026-04-29T18:00:00+08:00"}
+{
+  "paper_id": "2604.16911v1",
+  "status": "completed",
+  "target_markdown": "/Users/zhouqunchen/Desktop/study/paper-learning-hub/papers/zh/2604.16911v1/paper_zh.md",
+  "updated_at": "2026-05-08T07:27:18+08:00",
+  "notes": "精简技术摘要，含arXiv链接。"
+}
