@@ -23,4 +23,7 @@ Abstract Hybrid sequence models that combine efficient Transformer components wi
 
 ## 学习路线
 
-- **深入方向**：阅读原文后，可关注论文中的核心思路和后续工作。
+- **研究方向**：大模型训练与扩展 — Training methods、Model scaling
+- **相关论文（同类别）**：
+  - 暂无其他同类别论文
+- **深入阅读**：点击上方 arXiv 链接查看原文。

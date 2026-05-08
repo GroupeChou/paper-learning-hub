@@ -40,6 +40,9 @@ source: "https://arxiv.org/abs/2604.26102v1"
 
 ## 学习路线
 
-- **前置知识**：SWE-bench 基准、LLM Agent 工具调用、GRPO 强化学习
-- **相关论文**：SWE-Agent (Yang et al., 2024)、Aider Architect (Gauthier, 2024a)、Context-Folding (Sun et al., 2025)
-- **深入方向**：端到端 Agentic RL 训练编辑器（不依赖静态真值奖励）、Agent-as-Judge 评估器替代 GPT Grader
+- **研究方向**：代码生成与软件工程 — Code editing、SWE agents
+- **相关论文（同类别）**：
+  - [Training and Agentic Inference Strategies for LLM-based Manim Animatio](../2604.18364v1/)
+  - [TSCG: Deterministic Tool-Schema Compilation for Agentic LLM Deployment](../2605.04107v1/)
+  - [FlexSQL: Flexible Exploration and Execution Make Better Text-to-SQL Ag](../2605.02815v1/)
+- **深入阅读**：点击上方 arXiv 链接查看原文。

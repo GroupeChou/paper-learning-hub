@@ -25,4 +25,9 @@ Text-to-SQL over large analytical databases requires navigating complex schemas,
 
 ## 学习路线
 
-- **深入方向**：阅读原文后，可关注论文中的核心思路和后续工作。
+- **研究方向**：代码生成与软件工程 — Code editing、SWE agents
+- **相关论文（同类别）**：
+  - [Training and Agentic Inference Strategies for LLM-based Manim Animatio](../2604.18364v1/)
+  - [SWE-Edit: Rethinking Code Editing for Efficient SWE-Agent](../2604.26102v1/)
+  - [TSCG: Deterministic Tool-Schema Compilation for Agentic LLM Deployment](../2605.04107v1/)
+- **深入阅读**：点击上方 arXiv 链接查看原文。

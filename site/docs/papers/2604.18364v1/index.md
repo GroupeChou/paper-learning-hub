@@ -23,4 +23,9 @@ ABSTRACT Generating programmatic animation using libraries such as Manim present
 
 ## 学习路线
 
-- **深入方向**：阅读原文后，可关注论文中的核心思路和后续工作。
+- **研究方向**：代码生成与软件工程 — Code editing、SWE agents
+- **相关论文（同类别）**：
+  - [SWE-Edit: Rethinking Code Editing for Efficient SWE-Agent](../2604.26102v1/)
+  - [TSCG: Deterministic Tool-Schema Compilation for Agentic LLM Deployment](../2605.04107v1/)
+  - [FlexSQL: Flexible Exploration and Execution Make Better Text-to-SQL Ag](../2605.02815v1/)
+- **深入阅读**：点击上方 arXiv 链接查看原文。

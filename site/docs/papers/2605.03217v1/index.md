@@ -25,4 +25,10 @@ Large language models (LLMs) are increasingly deployed in settings that require 
 
 ## 学习路线
 
-- **深入方向**：阅读原文后，可关注论文中的核心思路和后续工作。
+- **研究方向**：公平性与伦理 — Bias mitigation、Ethical reasoning
+- **相关论文（同类别）**：
+  - [Narrative over Numbers: The Identifiable Victim Effect and its Amplifi](../2604.12076v1/)
+  - [First, Do No Harm (With LLMs): Mitigating Racial Bias via Agentic Work](../2604.18038v1/)
+  - [FairQE: Multi-Agent Framework for Mitigating Gender Bias in Translatio](../2604.21420v1/)
+  - [How Does Thinking Mode Change LLM Moral Judgments? A Controlled Instan](../2605.04488v1/)
+- **深入阅读**：点击上方 arXiv 链接查看原文。

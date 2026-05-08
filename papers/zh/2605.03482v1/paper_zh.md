@@ -25,4 +25,10 @@ Persistent external memory enables LLM agents to maintain context across session
 
 ## 学习路线
 
-- **深入方向**：阅读原文后，可关注论文中的核心思路和后续工作。
+- **研究方向**：智能体记忆与推理 — Memory architectures、Context management
+- **相关论文（同类别）**：
+  - [ReflectMT: Internalizing Reflection for Efficient and High-Quality Mac](../2604.19144v1/)
+  - [Beyond the Attention Stability Boundary: Agentic Self-Synthesizing Rea](../2604.24512v1/)
+  - [What Happens Inside Agent Memory? Circuit Analysis from Emergence to D](../2605.03354v1/)
+  - [MEMTIER: Tiered Memory Architecture and Retrieval Bottleneck Analysis ](../2605.03675v1/)
+- **深入阅读**：点击上方 arXiv 链接查看原文。

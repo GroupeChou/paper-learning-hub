@@ -25,4 +25,15 @@ ABSTRACT. Every computational era produces a dominant primitive and a scaling cr
 
 ## 学习路线
 
-- **深入方向**：阅读原文后，可关注论文中的方法思路和实验设计。
+- **研究方向**：智能体架构与框架设计 — Agent system design、Orchestration frameworks
+- **相关论文（同类别）**：
+  - [HiveMind: OS-Inspired Scheduling for Concurrent LLM Agent Workloads](../2604.17111v1/)
+  - [Skilldex: A Package Manager and Registry for Agent Skill Packages with](../2604.16911v1/)
+  - [The Last Harness You'll Ever Build](../2604.21003v1/)
+  - [A Self-Evolving Framework for Efficient Terminal Agents via Observatio](../2604.19572v1/)
+  - [Agentic Aggregation for Parallel Scaling of Long-Horizon Agentic Tasks](../2604.11753v1/)
+  - [QuantClaw: Precision Where It Matters for OpenClaw](../2604.22577v1/)
+  - [Terminus-4B: Can a Smaller Model Replace Frontier LLMs at Agentic Exec](../2605.03195v1/)
+  - [In-Context Prompting Obsoletes Agent Orchestration for Procedural Task](../2604.27891v2/)
+  - [When Stress Becomes Signal: Detecting Antifragility-Compatible Regimes](../2605.02463v2/)
+- **深入阅读**：点击上方 arXiv 链接查看原文。

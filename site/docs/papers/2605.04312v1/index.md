@@ -25,4 +25,16 @@ Static capabilities benchmarks suffer from saturation and contamination, making 
 
 ## 学习路线
 
-- **深入方向**：阅读原文后，可关注论文中的核心思路和后续工作。
+- **研究方向**：领域应用 — Domain-specific applications、Tool-augmented agents
+- **相关论文（同类别）**：
+  - [When Agents Look the Same: Quantifying Distillation-Induced Similarity](../2604.21255v1/)
+  - [Spatial Atlas: Compute-Grounded Reasoning for Spatial-Aware Research A](../2604.12102v2/)
+  - [Local-Splitter: A Measurement Study of Seven Tactics for Reducing Clou](../2604.12301v1/)
+  - [Less Languages, Less Tokens: An Efficient Unified Logic Cross-lingual ](../2604.20090v1/)
+  - [Nemobot Games: Crafting Strategic AI Gaming Agents for Interactive Lea](../2604.21896v1/)
+  - [ComPASS: Towards Personalized Agentic Social Support via Tool-Augmente](../2604.18356v1/)
+  - [Revisiting Change VQA in Remote Sensing with Structured and Native Mul](../2604.18429v1/)
+  - [ArguAgent: AI-Supported Real-Time Grouping for Productive Argumentatio](../2604.23449v1/)
+  - [AeSlides: Incentivizing Aesthetic Layout in LLM-Based Slide Generation](../2604.22840v1/)
+  - [Agri-CPJ: A Training-Free Explainable Framework for Agricultural Pest ](../2604.23701v1/)
+- **深入阅读**：点击上方 arXiv 链接查看原文。

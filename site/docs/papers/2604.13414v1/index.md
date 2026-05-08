@@ -25,4 +25,10 @@ Abstract Majority-vote ensembles achieve variance reduction by averaging over di
 
 ## 学习路线
 
-- **深入方向**：阅读原文后，可关注论文中的方法思路和实验设计。
+- **研究方向**：时序预测 — Time series forecasting、Causal inference
+- **相关论文（同类别）**：
+  - [Inferring High-Level Events from Timestamped Data: Complexity and Medi](../2604.21793v1/)
+  - [Forecast Sports Outcomes under Efficient Market Hypothesis: Theoretica](../2604.17194v1/)
+  - [M-CaStLe: Uncovering Local Causal Structures in Multivariate Space-Tim](../2605.00398v1/)
+  - [Optimal Spatio-Temporal Decoupling for Bayesian Conformal Prediction](../2605.00432v1/)
+- **深入阅读**：点击上方 arXiv 链接查看原文。

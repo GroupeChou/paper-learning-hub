@@ -23,4 +23,10 @@ Abstract Converting betting odds into accurate outcome probabilities is a fundam
 
 ## 学习路线
 
-- **深入方向**：阅读原文后，可关注论文中的核心思路和后续工作。
+- **研究方向**：时序预测 — Time series forecasting、Causal inference
+- **相关论文（同类别）**：
+  - [Inferring High-Level Events from Timestamped Data: Complexity and Medi](../2604.21793v1/)
+  - [Minimax Optimality and Spectral Routing for Majority-Vote Ensembles un](../2604.13414v1/)
+  - [M-CaStLe: Uncovering Local Causal Structures in Multivariate Space-Tim](../2605.00398v1/)
+  - [Optimal Spatio-Temporal Decoupling for Bayesian Conformal Prediction](../2605.00432v1/)
+- **深入阅读**：点击上方 arXiv 链接查看原文。

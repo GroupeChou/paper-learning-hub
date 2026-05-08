@@ -23,4 +23,8 @@ Abstract Knowledge graphs (KGs) are increasingly used to support large language 
 
 ## 学习路线
 
-- **深入方向**：阅读原文后，可关注论文中的核心思路和后续工作。
+- **研究方向**：检索增强与知识管理 — RAG systems、Multi-hop reasoning
+- **相关论文（同类别）**：
+  - [Evaluating Multi-Hop Reasoning in RAG Systems: A Comparison of LLM-Bas](../2604.18234v1/)
+  - [Retrieval and Multi-Hop Reasoning in 1M-Token Context Windows: Evaluat](../2605.02173v1/)
+- **深入阅读**：点击上方 arXiv 链接查看原文。

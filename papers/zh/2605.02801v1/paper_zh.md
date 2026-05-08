@@ -25,4 +25,9 @@ As large language model (LLM) agents evolve from isolated tool users into coordi
 
 ## 学习路线
 
-- **深入方向**：阅读原文后，可关注论文中的核心思路和后续工作。
+- **研究方向**：多智能体系统 — Multi-agent coordination、Agent collaboration
+- **相关论文（同类别）**：
+  - [Strategic Heterogeneous Multi-Agent Architecture for Cost-Effective Co](../2604.21282v1/)
+  - [Learning to Evolve: A Self-Improving Framework for Multi-Agent Systems](../2604.20714v1/)
+  - [M2-PALE: A Framework for Explaining Multi-Agent MCTS--Minimax Hybrids ](../2604.14687v1/)
+- **深入阅读**：点击上方 arXiv 链接查看原文。

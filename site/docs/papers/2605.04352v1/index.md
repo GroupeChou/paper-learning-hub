@@ -25,4 +25,9 @@ We introduce a benchmark suite for evaluating structural mathematical reasoning 
 
 ## 学习路线
 
-- **深入方向**：阅读原文后，可关注论文中的核心思路和后续工作。
+- **研究方向**：数学推理 — Mathematical reasoning、Theorem proving
+- **相关论文（同类别）**：
+  - [Do LLMs Game Formalization? Evaluating Faithfulness in Logical Reasoni](../2604.19459v1/)
+  - [MathNet: a Global Multimodal Benchmark for Mathematical Reasoning and ](../2604.18584v1/)
+  - [Automated Formal Proofs of Combinatorial Identities via Wilf-Zeilberge](../2605.04472v1/)
+- **深入阅读**：点击上方 arXiv 链接查看原文。
