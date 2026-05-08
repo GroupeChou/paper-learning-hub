@@ -1,0 +1,309 @@
+/* ============================================================
+   论文研学知识库 - 学习书籍风格样式
+   目标：让论文页面看起来像一本严谨的学术书籍
+   ============================================================ */
+
+/* ---- 论文元数据卡片 ---- */
+.paper-meta {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 12px;
+    background: var(--md-typeset-prose--lb-color, #f5f5f5);
+    border-left: 4px solid var(--md-primary-fg-color, #7c4dff);
+    border-radius: 0 8px 8px 0;
+    padding: 16px 20px;
+    margin: 24px 0;
+    font-size: 0.85rem;
+}
+
+.paper-meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.paper-meta-label {
+    font-weight: 600;
+    color: var(--md-default-fg-color--light, #666);
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    letter-spacing: 0.05em;
+}
+
+.paper-meta-value {
+    color: var(--md-default-fg-color, #333);
+    font-weight: 500;
+}
+
+.paper-meta-value.org-OpenAI    { color: #19c37d; }
+.paper-meta-value.org-Anthropic { color: #d97706; }
+.paper-meta-value.org-DeepMind  { color: #4285f4; }
+.paper-meta-value.org-DeepSeek  { color: #6264f0; }
+.paper-meta-value.org-Microsoft { color: #0078d4; }
+.paper-meta-value.org-Meta      { color: #0668e1; }
+.paper-meta-value.org-MiniMax   { color: #7b2ff7; }
+
+/* ---- 论文标签 ---- */
+.paper-tag {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    vertical-align: middle;
+}
+.paper-tag-translated  { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+.paper-tag-queued      { background: #fff8e1; color: #f57f17; border: 1px solid #ffe082; }
+.paper-tag-raw        { background: #fafafa; color: #9e9e9e; border: 1px solid #e0e0e0; }
+.paper-tag-featured   { background: #ede7f6; color: #512da8; border: 1px solid #b39ddb; }
+
+/* ---- 论文摘要卡片 ---- */
+.paper-abstract {
+    background: linear-gradient(135deg, #f3e5f5 0%, #e8eaf6 100%);
+    border-left: 4px solid #7c4dff;
+    border-radius: 0 8px 8px 0;
+    padding: 20px 24px;
+    margin: 24px 0;
+    font-size: 0.92rem;
+    line-height: 1.75;
+    color: var(--md-default-fg-color, #333);
+}
+
+.paper-abstract::before {
+    content: "📝 摘要";
+    display: block;
+    font-weight: 700;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #7c4dff;
+    margin-bottom: 10px;
+}
+
+/* ---- 关键 takeaway 卡片 ---- */
+.paper-takeaway {
+    background: #fff3e0;
+    border-left: 4px solid #ff6d00;
+    border-radius: 0 8px 8px 0;
+    padding: 16px 20px;
+    margin: 24px 0;
+}
+
+.paper-takeaway-title {
+    font-weight: 700;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #e65100;
+    margin-bottom: 8px;
+}
+
+.paper-takeaway ul {
+    margin: 0;
+    padding-left: 20px;
+}
+
+.paper-takeaway li {
+    margin-bottom: 6px;
+    line-height: 1.6;
+}
+
+/* ---- 物流关联卡片 ---- */
+.paper-logistics {
+    background: #e3f2fd;
+    border-left: 4px solid #1565c0;
+    border-radius: 0 8px 8px 0;
+    padding: 16px 20px;
+    margin: 24px 0;
+}
+
+.paper-logistics-title {
+    font-weight: 700;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #0d47a1;
+    margin-bottom: 8px;
+}
+
+/* ---- 学习进度指示器 ---- */
+.reading-progress {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 20px 0;
+    font-size: 0.85rem;
+}
+
+.progress-bar {
+    flex: 1;
+    height: 6px;
+    background: #e0e0e0;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #7c4dff, #e040fb);
+    border-radius: 3px;
+    transition: width 0.4s ease;
+}
+
+.progress-label {
+    white-space: nowrap;
+    color: #666;
+    font-weight: 500;
+}
+
+/* ---- 论文导航链（上一篇/下一篇）---- */
+.paper-nav {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 40px 0 24px;
+}
+
+.paper-nav-prev,
+.paper-nav-next {
+    padding: 14px 18px;
+    border-radius: 8px;
+    border: 1px solid var(--md-default-fg-color--lightest, #e0e0e0);
+    text-decoration: none;
+    transition: all 0.2s ease;
+    font-size: 0.85rem;
+}
+
+.paper-nav-prev:hover,
+.paper-nav-next:hover {
+    border-color: var(--md-primary-fg-color, #7c4dff);
+    background: var(--md-primary-fg-color--lightest, #f5f5f5);
+}
+
+.paper-nav-next {
+    text-align: right;
+    grid-column: 2;
+}
+
+.paper-nav-prev {
+    grid-column: 1;
+}
+
+.paper-nav-label {
+    display: block;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #9e9e9e;
+    margin-bottom: 4px;
+}
+
+.paper-nav-title {
+    font-weight: 600;
+    color: var(--md-default-fg-color, #333);
+    line-height: 1.3;
+}
+
+/* ---- 论文目录（Table of Contents）美化 ---- */
+.paper-toc {
+    background: var(--md-typeset-prose--lb-color, #f5f5f5);
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin: 24px 0;
+}
+
+/* ---- 路线卡 ---- */
+.track-card {
+    border: 1px solid var(--md-default-fg-color--lightest, #e0e0e0);
+    border-radius: 12px;
+    padding: 24px;
+    margin: 20px 0;
+    transition: all 0.2s ease;
+}
+
+.track-card:hover {
+    border-color: var(--md-primary-fg-color, #7c4dff);
+    box-shadow: 0 4px 20px rgba(124, 77, 255, 0.12);
+}
+
+.track-card-icon {
+    font-size: 2.5rem;
+    margin-bottom: 12px;
+}
+
+.track-card-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.track-card-desc {
+    color: var(--md-default-fg-color--light, #666);
+    line-height: 1.6;
+    font-size: 0.9rem;
+}
+
+.track-card-meta {
+    display: flex;
+    gap: 16px;
+    margin-top: 14px;
+    font-size: 0.8rem;
+    color: #888;
+}
+
+/* ---- 经典必读列表 ---- */
+.classics-item {
+    padding: 16px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.classics-item:last-child {
+    border-bottom: none;
+}
+
+.classics-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    background: linear-gradient(135deg, #7c4dff, #e040fb);
+    color: white;
+    border-radius: 50%;
+    font-size: 0.8rem;
+    font-weight: 700;
+    margin-right: 12px;
+    vertical-align: middle;
+}
+
+/* ---- Section 分隔 ---- */
+.section-divider {
+    border: none;
+    border-top: 1px dashed #d0d0d0;
+    margin: 40px 0;
+}
+
+/* ---- 深色模式适配 ---- */
+[data-md-color-scheme="slate"] .paper-abstract {
+    background: linear-gradient(135deg, #2d2d3d 0%, #252535 100%);
+    border-left-color: #b388ff;
+}
+
+[data-md-color-scheme="slate"] .paper-logistics {
+    background: #1a1a2e;
+    border-left-color: #64b5f6;
+}
+
+[data-md-color-scheme="slate"] .paper-takeaway {
+    background: #2d2d1e;
+    border-left-color: #ffab40;
+}
+
+[data-md-color-scheme="slate"] .paper-meta {
+    background: #2d2d3d;
+}
+
+[data-md-color-scheme="slate"] .track-card:hover {
+    box-shadow: 0 4px 20px rgba(179, 136, 255, 0.2);
+}
