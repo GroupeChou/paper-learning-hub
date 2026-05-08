@@ -15,12 +15,13 @@
 - [Spatial Atlas: Compute-Grounded Reasoning for Spatial-Aware Research Agent Benchmarks](../papers/2604.12102v2/index.md) | OpenAI | 2026-04-13 | 中文精读
 - [When Agents Look the Same: Quantifying Distillation-Induced Similarity in Tool-Use Behaviors](../papers/2604.21255v1/index.md) | Anthropic | 2026-04-23 | 中文精读
 - [Reasoning-targeted Jailbreak Attacks on Large Reasoning Models via Semantic Triggers and Psychological Framing](../papers/2604.15725v1/index.md) | OpenAI | 2026-04-17 | 中文精读
+- [HaM-World: Soft-Hamiltonian World Models with Selective Memory for Planning](https://arxiv.org/pdf/2605.05951v1) | Google DeepMind | 2026-05-07 | 原文
 - [ArguAgent: AI-Supported Real-Time Grouping for Productive Argumentation in STEM Classrooms](../papers/2604.23449v1/index.md) | OpenAI | 2026-04-25 | 中文精读
 - [MEMTIER: Tiered Memory Architecture and Retrieval Bottleneck Analysis for Long-Running Autonomous AI Agents](https://arxiv.org/pdf/2605.03675v1) | DeepSeek | 2026-05-05 | 原文
 - [Benchmarks for Trajectory Safety Evaluation and Diagnosis in OpenClaw and Codex: ATBench-Claw and ATBench-CodeX](../papers/2604.14858v1/index.md) | OpenAI | 2026-04-16 | 中文精读
 - [Evaluating Multi-Hop Reasoning in RAG Systems: A Comparison of LLM-Based Retriever Evaluation Strategies](../papers/2604.18234v1/index.md) | OpenAI | 2026-04-20 | 中文精读
-- [ELVIS: Ensemble-Calibrated Latent Imagination for Long-Horizon Visual MPC](https://arxiv.org/pdf/2605.04709v1) | Google DeepMind | 2026-05-06 | 原文
 - [Beyond the Attention Stability Boundary: Agentic Self-Synthesizing Reasoning Protocols](../papers/2604.24512v1/index.md) | DeepSeek | 2026-04-27 | 中文精读
+- [ELVIS: Ensemble-Calibrated Latent Imagination for Long-Horizon Visual MPC](https://arxiv.org/pdf/2605.04709v1) | Google DeepMind | 2026-05-06 | 原文
 - [Local-Splitter: A Measurement Study of Seven Tactics for Reducing Cloud LLM Token Usage on Coding-Agent Workloads](../papers/2604.12301v1/index.md) | OpenAI | 2026-04-14 | 中文精读
 - [Narrative over Numbers: The Identifiable Victim Effect and its Amplification Under Alignment and Reasoning in Large Language Models](../papers/2604.12076v1/index.md) | OpenAI | 2026-04-13 | 中文精读
 - [Cross-Session Threats in AI Agents: Benchmark, Evaluation, and Algorithms](../papers/2604.21131v1/index.md) | Anthropic | 2026-04-22 | 中文精读
@@ -38,6 +39,7 @@
 - [When Stress Becomes Signal: Detecting Antifragility-Compatible Regimes in Multi-Agent LLM Systems](https://arxiv.org/pdf/2605.02463v2) | Meta FAIR | 2026-05-04 | 原文
 - [Owner-Harm: A Missing Threat Model for AI Agent Safety](../papers/2604.18658v1/index.md) | Microsoft | 2026-04-20 | 中文精读
 - [Learning to Evolve: A Self-Improving Framework for Multi-Agent Systems via Textual Parameter Graph Optimization](../papers/2604.20714v1/index.md) | Meta FAIR | 2026-04-22 | 中文精读
+- [SkillOS: Learning Skill Curation for Self-Evolving Agents](https://arxiv.org/pdf/2605.06614v1) | Meta FAIR | 2026-05-07 | 原文
 - [Agentic Vulnerability Reasoning on Windows COM Binaries](https://arxiv.org/pdf/2605.05000v1) | Microsoft | 2026-05-06 | 原文
 - [MEMSAD: Gradient-Coupled Anomaly Detection for Memory Poisoning in Retrieval-Augmented Agents](https://arxiv.org/pdf/2605.03482v1) | MiniMax | 2026-05-05 | 原文
 - [SWE-Edit: Rethinking Code Editing for Efficient SWE-Agent](../papers/2604.26102v1/index.md) | Microsoft | 2026-04-28 | 中文精读
@@ -45,6 +47,7 @@
 - [The Last Harness You'll Ever Build](../papers/2604.21003v1/index.md) | Meta FAIR | 2026-04-22 | 中文精读
 - [Context Kubernetes: Declarative Orchestration of Enterprise Knowledge for Agentic AI Systems](../papers/2604.11623v3/index.md) | Microsoft | 2026-04-13 | 中文精读
 - [FairQE: Multi-Agent Framework for Mitigating Gender Bias in Translation Quality Estimation](../papers/2604.21420v1/index.md) | Meta FAIR | 2026-04-23 | 中文精读
+- [FunctionalAgent: Towards end-to-end on-top functional design](https://arxiv.org/pdf/2605.06215v1) | Meta FAIR | 2026-05-07 | 原文
 - [Redefining AI Red Teaming in the Agentic Era: From Weeks to Hours](https://arxiv.org/pdf/2605.04019v1) | Meta FAIR | 2026-05-05 | 原文
 - [Code World Model Preparedness Report](https://arxiv.org/pdf/2605.00932v1) | Meta FAIR | 2026-05-01 | 原文
 - [A Self-Evolving Framework for Efficient Terminal Agents via Observational Context Compression](../papers/2604.19572v1/index.md) | MiniMax | 2026-04-21 | 中文精读
