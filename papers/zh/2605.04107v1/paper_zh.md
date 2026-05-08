@@ -5,6 +5,8 @@ source: "https://arxiv.org/abs/2605.04107v1"
 
 # TSCG: Deterministic Tool-Schema Compilation for Agentic LLM Deployments
 
+**TSCG：面向智能体LLM部署的确定性工具模式编译**
+
 **原文链接**：[arXiv PDF](https://arxiv.org/pdf/2605.04107v1) | 点击阅读原论文完整内容
 
 - **标签**：`AI Agent` `LLM`

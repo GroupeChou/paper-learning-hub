@@ -5,6 +5,8 @@ source: "https://arxiv.org/abs/2605.02463v2"
 
 # When Stress Becomes Signal: Detecting Antifragility-Compatible Regimes in Multi-Agent LLM Systems
 
+**当压力成为信号：检测抗脆弱性兼容机制**
+
 **原文链接**：[arXiv PDF](https://arxiv.org/pdf/2605.02463v2) | 点击阅读原论文完整内容
 
 - **标签**：`AI Agent` `LLM` `Multi-Agent`

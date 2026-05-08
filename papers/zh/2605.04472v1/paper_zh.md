@@ -5,6 +5,8 @@ source: "https://arxiv.org/abs/2605.04472v1"
 
 # Automated Formal Proofs of Combinatorial Identities via Wilf-Zeilberger Guidance and LLMs
 
+**基于Wilf-Zeilberger方法的组合恒等式自动化形式证明**
+
 **原文链接**：[arXiv PDF](https://arxiv.org/pdf/2605.04472v1) | 点击阅读原论文完整内容
 
 - **标签**：`LLM`

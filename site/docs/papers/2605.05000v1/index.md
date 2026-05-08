@@ -5,6 +5,8 @@ source: "https://arxiv.org/abs/2605.05000v1"
 
 # Agentic Vulnerability Reasoning on Windows COM Binaries
 
+**Windows COM二进制文件上的智能体漏洞推理**
+
 **原文链接**：[arXiv PDF](https://arxiv.org/pdf/2605.05000v1) | 点击阅读原论文完整内容
 
 - **标签**：`AI Agent` `Reasoning`

@@ -5,6 +5,8 @@ source: "https://arxiv.org/abs/2605.04488v1"
 
 # How Does Thinking Mode Change LLM Moral Judgments? A Controlled Instant-vs-Thinking Comparison Across Five Frontier Models
 
+**思维模式如何改变LLM的道德判断？控制性即时思维实验**
+
 **原文链接**：[arXiv PDF](https://arxiv.org/pdf/2605.04488v1) | 点击阅读原论文完整内容
 
 - **标签**：`LLM` `Reasoning` `Ethics`

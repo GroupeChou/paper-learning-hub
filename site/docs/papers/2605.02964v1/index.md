@@ -5,6 +5,8 @@ source: "https://arxiv.org/abs/2605.02964v1"
 
 # Reward Hacking Benchmark: Measuring Exploits in LLM Agents with Tool Use
 
+**奖励黑客基准：衡量LLM智能体工具使用中的漏洞利用**
+
 **原文链接**：[arXiv PDF](https://arxiv.org/pdf/2605.02964v1) | 点击阅读原论文完整内容
 
 - **标签**：`AI Agent` `LLM` `RL`

@@ -5,6 +5,8 @@ source: "https://arxiv.org/abs/2605.04352v1"
 
 # Probing Structural Mathematical Reasoning in Language Models with Algebraic Trapdoors
 
+**通过代数推理探测语言模型中的结构化学推理**
+
 **原文链接**：[arXiv PDF](https://arxiv.org/pdf/2605.04352v1) | 点击阅读原论文完整内容
 
 - **标签**：`Reasoning`

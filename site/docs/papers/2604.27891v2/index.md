@@ -5,6 +5,8 @@ source: "https://arxiv.org/abs/2604.27891v2"
 
 # In-Context Prompting Obsoletes Agent Orchestration for Procedural Tasks
 
+**上下文内提示取代了流程任务的智能体编排**
+
 **原文链接**：[arXiv PDF](https://arxiv.org/pdf/2604.27891v2) | 点击阅读原论文完整内容
 
 - **标签**：`AI Agent` `LLM`

@@ -5,6 +5,8 @@ source: "https://arxiv.org/abs/2605.04312v1"
 
 # Agent Island: A Saturation- and Contamination-Resistant Benchmark from Multiagent Games
 
+**智能体孤岛：面向智能体行为的抗饱和与抗污染基准**
+
 **原文链接**：[arXiv PDF](https://arxiv.org/pdf/2605.04312v1) | 点击阅读原论文完整内容
 
 - **标签**：`AI Agent`

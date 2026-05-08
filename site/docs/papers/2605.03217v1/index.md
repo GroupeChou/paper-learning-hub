@@ -5,6 +5,8 @@ source: "https://arxiv.org/abs/2605.03217v1"
 
 # Moral Sensitivity in LLMs: A Tiered Evaluation of Contextual Bias via Behavioral Profiling and Mechanistic Interpretability
 
+**LLM中的道德敏感性：基于行为剖析与机制可解释性的分层评估**
+
 **原文链接**：[arXiv PDF](https://arxiv.org/pdf/2605.03217v1) | 点击阅读原论文完整内容
 
 - **标签**：`LLM` `Reasoning` `Fairness`

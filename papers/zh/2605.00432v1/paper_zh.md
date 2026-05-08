@@ -5,6 +5,8 @@ source: "https://arxiv.org/abs/2605.00432v1"
 
 # Optimal Spatio-Temporal Decoupling for Bayesian Conformal Prediction
 
+**贝叶斯共形预测的最优时空解耦**
+
 **原文链接**：[arXiv PDF](https://arxiv.org/pdf/2605.00432v1) | 点击阅读原论文完整内容
 
 - **标签**：`Optimization`

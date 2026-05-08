@@ -5,6 +5,8 @@ source: "https://arxiv.org/abs/2604.26102v1"
 
 # SWE-Edit: Rethinking Code Editing for Efficient SWE-Agent
 
+**SWE-Edit：重新思考代码编辑以实现高效SWE智能体**
+
 **原文链接**：[arXiv PDF](https://arxiv.org/pdf/2604.26102v1) | 点击阅读原论文完整内容
 
 - **作者**：Yikai Zhang, Jiaxin Pei, Kenan Li, Maoquan Wang, Jin Pan, Yu Kang, Shengyu Fu, Elsie Nallipogu, Junjie Hu, Yufan Huang, Zijian Jin

@@ -5,6 +5,8 @@ source: "https://arxiv.org/abs/2605.04709v1"
 
 # ELVIS: Ensemble-Calibrated Latent Imagination for Long-Horizon Visual MPC
 
+**ELVIS：面向长周期视觉规划的集成校准潜在想象**
+
 **原文链接**：[arXiv PDF](https://arxiv.org/pdf/2605.04709v1) | 点击阅读原论文完整内容
 
 - **标签**：`RL`

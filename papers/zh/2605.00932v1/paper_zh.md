@@ -5,6 +5,8 @@ source: "https://arxiv.org/abs/2605.00932v1"
 
 # Code World Model Preparedness Report
 
+**代码世界模型准备就绪报告**
+
 **原文链接**：[arXiv PDF](https://arxiv.org/pdf/2605.00932v1) | 点击阅读原论文完整内容
 
 - **标签**：`Code` `Reasoning`

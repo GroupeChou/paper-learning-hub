@@ -5,6 +5,8 @@ source: "https://arxiv.org/abs/2605.03952v1"
 
 # MOSAIC-Bench: Measuring Compositional Vulnerability Induction in Coding Agents
 
+**MOSAIC基准：衡量编码智能体中的组合漏洞注入**
+
 **原文链接**：[arXiv PDF](https://arxiv.org/pdf/2605.03952v1) | 点击阅读原论文完整内容
 
 - **标签**：`AI Agent` `Code` `Safety`

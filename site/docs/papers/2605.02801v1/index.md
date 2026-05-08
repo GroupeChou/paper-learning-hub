@@ -5,6 +5,8 @@ source: "https://arxiv.org/abs/2605.02801v1"
 
 # Reinforcement Learning for LLM-based Multi-Agent Systems through Orchestration Traces
 
+**基于强化学习的LLM多智能体系统编排训练**
+
 **原文链接**：[arXiv PDF](https://arxiv.org/pdf/2605.02801v1) | 点击阅读原论文完整内容
 
 - **标签**：`AI Agent` `LLM` `RL`

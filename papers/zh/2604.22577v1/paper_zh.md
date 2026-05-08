@@ -5,6 +5,8 @@ source: "https://arxiv.org/abs/2604.22577v1"
 
 # QuantClaw: Precision Where It Matters for OpenClaw
 
+**QuantClaw：在OpenClaw中精准量化关键组件**
+
 **原文链接**：[arXiv PDF](https://arxiv.org/pdf/2604.22577v1) | 点击阅读原论文完整内容
 
 ---

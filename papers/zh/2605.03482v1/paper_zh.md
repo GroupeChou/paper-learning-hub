@@ -5,6 +5,8 @@ source: "https://arxiv.org/abs/2605.03482v1"
 
 # MEMSAD: Gradient-Coupled Anomaly Detection for Memory Poisoning in Retrieval-Augmented Agents
 
+**MEMSAD：面向检索增强生成中记忆投毒的梯度耦合异常检测**
+
 **原文链接**：[arXiv PDF](https://arxiv.org/pdf/2605.03482v1) | 点击阅读原论文完整内容
 
 - **标签**：`AI Agent` `LLM` `RAG`

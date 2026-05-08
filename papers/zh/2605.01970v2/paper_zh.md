@@ -5,6 +5,8 @@ source: "https://arxiv.org/abs/2605.01970v2"
 
 # Trojan Hippo: Weaponizing Agent Memory for Data Exfiltration
 
+**特洛伊河马：利用智能体记忆进行数据窃取**
+
 **原文链接**：[arXiv PDF](https://arxiv.org/pdf/2605.01970v2) | 点击阅读原论文完整内容
 
 - **标签**：`AI Agent` `LLM`

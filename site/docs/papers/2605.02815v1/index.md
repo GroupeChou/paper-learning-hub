@@ -5,6 +5,8 @@ source: "https://arxiv.org/abs/2605.02815v1"
 
 # FlexSQL: Flexible Exploration and Execution Make Better Text-to-SQL Agents
 
+**FlexSQL：灵活探索与执行打造更好的Text-to-SQL智能体**
+
 **原文链接**：[arXiv PDF](https://arxiv.org/pdf/2605.02815v1) | 点击阅读原论文完整内容
 
 - **标签**：`AI Agent`

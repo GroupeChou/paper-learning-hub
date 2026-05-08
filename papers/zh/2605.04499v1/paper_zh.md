@@ -5,6 +5,8 @@ source: "https://arxiv.org/abs/2605.04499v1"
 
 # Pen-Strategist: A Reasoning Framework for Penetration Testing Strategy Formation and Analysis
 
+**Pen-Strategist：面向渗透测试策略规划的推理框架**
+
 **原文链接**：[arXiv PDF](https://arxiv.org/pdf/2605.04499v1) | 点击阅读原论文完整内容
 
 - **标签**：`Reasoning`

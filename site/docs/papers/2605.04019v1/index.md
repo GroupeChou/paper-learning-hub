@@ -5,6 +5,8 @@ source: "https://arxiv.org/abs/2605.04019v1"
 
 # Redefining AI Red Teaming in the Agentic Era: From Weeks to Hours
 
+**重新定义智能体时代的AI红队：从周级到小时级**
+
 **原文链接**：[arXiv PDF](https://arxiv.org/pdf/2605.04019v1) | 点击阅读原论文完整内容
 
 - **标签**：`AI Agent`
