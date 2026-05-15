@@ -1,126 +1,91 @@
 # 今日新增
 
-- 更新时间：2026-05-11
-- 当日候选总数：29
+- 更新时间：2026-05-15
+- 当日候选总数：21
 
 ## AI Agent
 
-- **Reward Hacking Benchmark: Measuring Exploits in LLM Agents with Tool Use** | OpenAI | 2026-05-03 | 优先级 986 | 状态 `translated` | 待生成
-  - 来源：[OpenAI arXiv query](https://arxiv.org/abs/2605.02964v1)
-  - 论文：[https://arxiv.org/pdf/2605.02964v1](https://arxiv.org/pdf/2605.02964v1)
-  - 摘要：Reinforcement learning (RL) trained language model agents with tool access are increasingly deployed in coding assistants, research tools, and autonomous systems. We introduce the Reward Hacking Benchmark (RHB), a suite of multi-step tas...
-- **Agent Island: A Saturation- and Contamination-Resistant Benchmark from Multiagent Games** | OpenAI | 2026-05-05 | 优先级 983 | 状态 `translated` | 待生成
-  - 来源：[OpenAI arXiv query](https://arxiv.org/abs/2605.04312v1)
-  - 论文：[https://arxiv.org/pdf/2605.04312v1](https://arxiv.org/pdf/2605.04312v1)
-  - 摘要：Static capabilities benchmarks suffer from saturation and contamination, making it difficult to track capabilities progress over time. We introduce Agent Island, a multiplayer simulation environment in which language-model agents compete...
-- **Reinforcement Learning for LLM-based Multi-Agent Systems through Orchestration Traces** | OpenAI | 2026-05-04 | 优先级 982 | 状态 `translated` | 待生成
-  - 来源：[OpenAI arXiv query](https://arxiv.org/abs/2605.02801v1)
-  - 论文：[https://arxiv.org/pdf/2605.02801v1](https://arxiv.org/pdf/2605.02801v1)
-  - 摘要：As large language model (LLM) agents evolve from isolated tool users into coordinated teams, reinforcement learning (RL) must optimize not only individual actions but also how work is spawned, delegated, communicated, aggregated, and sto...
-- **MOSAIC-Bench: Measuring Compositional Vulnerability Induction in Coding Agents** | OpenAI | 2026-05-05 | 优先级 978 | 状态 `translated` | 待生成
-  - 来源：[OpenAI arXiv query](https://arxiv.org/abs/2605.03952v1)
-  - 论文：[https://arxiv.org/pdf/2605.03952v1](https://arxiv.org/pdf/2605.03952v1)
-  - 摘要：Coding agents often pass per-prompt safety review yet ship exploitable code when their tasks are decomposed into routine engineering tickets. The challenge is structural: existing safety alignment evaluates overt requests in isolation, l...
-- **Securing the Agent: Vendor-Neutral, Multitenant Enterprise Retrieval and Tool Use** | OpenAI | 2026-05-06 | 优先级 974 | 状态 `discovered` | 待生成
-  - 来源：[OpenAI arXiv query](https://arxiv.org/abs/2605.05287v1)
-  - 论文：[https://arxiv.org/pdf/2605.05287v1](https://arxiv.org/pdf/2605.05287v1)
-  - 摘要：Retrieval-Augmented Generation (RAG) and agentic AI systems are increasingly prevalent in enterprise AI deployments. However, real enterprise environments introduce challenges largely absent from academic treatments and consumer-facing A...
-- **TSCG: Deterministic Tool-Schema Compilation for Agentic LLM Deployments** | OpenAI | 2026-05-04 | 优先级 972 | 状态 `translated` | 待生成
-  - 来源：[OpenAI arXiv query](https://arxiv.org/abs/2605.04107v1)
-  - 论文：[https://arxiv.org/pdf/2605.04107v1](https://arxiv.org/pdf/2605.04107v1)
-  - 摘要：Production agent frameworks (OpenAI Function Calling, Anthropic Tool Use, MCP) transmit tool schemas as JSON, a format designed for machine parsing, not for interpretation by language models. For small models (4B-14B), this protocol mism...
-- **Trojan Hippo: Weaponizing Agent Memory for Data Exfiltration** | OpenAI | 2026-05-03 | 优先级 971 | 状态 `translated` | 待生成
-  - 来源：[OpenAI arXiv query](https://arxiv.org/abs/2605.01970v2)
-  - 论文：[https://arxiv.org/pdf/2605.01970v2](https://arxiv.org/pdf/2605.01970v2)
-  - 摘要：Memory systems enable otherwise-stateless LLM agents to persist user information across sessions, but also introduce a new attack surface. We characterize the Trojan Hippo attack, a class of persistent memory attacks that operates in a m...
-- **From Specification to Deployment: Empirical Evidence from a W3C VC + DID Trust Infrastructure for Autonomous Agents** | Anthropic | 2026-05-07 | 优先级 970 | 状态 `discovered` | 待生成
-  - 来源：[Anthropic arXiv query](https://arxiv.org/abs/2605.06738v1)
-  - 论文：[https://arxiv.org/pdf/2605.06738v1](https://arxiv.org/pdf/2605.06738v1)
-  - 摘要：Autonomous AI agents now transact at production scale -- 69,000 bots executing 165 million transactions across 50 million USDC in cumulative volume on a single marketplace -- without any shared trust layer between participants. Regulator...
-- **HaM-World: Soft-Hamiltonian World Models with Selective Memory for Planning** | Google DeepMind | 2026-05-07 | 优先级 965 | 状态 `workbuddy_pending` | 待生成
-  - 来源：[Google DeepMind arXiv query](https://arxiv.org/abs/2605.05951v1)
-  - 论文：[https://arxiv.org/pdf/2605.05951v1](https://arxiv.org/pdf/2605.05951v1)
-  - 摘要：World models enable model-based planning through learned latent dynamics, but imagined rollouts become unstable as the planning horizon grows or the dynamics distribution shifts. We argue that this instability reflects two missing struct...
-- **When Does Critique Improve AI-Assisted Theoretical Physics? SCALAR: Structured Critic--Actor Loop for Agentic Reasoning** | DeepSeek | 2026-05-07 | 优先级 960 | 状态 `discovered` | 待生成
-  - 来源：[DeepSeek arXiv query](https://arxiv.org/abs/2605.06772v1)
-  - 论文：[https://arxiv.org/pdf/2605.06772v1](https://arxiv.org/pdf/2605.06772v1)
-  - 摘要：As large language models (LLMs) show increasing promise on research-level physics reasoning tasks and agentic AI becomes more common, a practical question emerges: How does the interaction between researchers and agents affect the result...
-- **ELVIS: Ensemble-Calibrated Latent Imagination for Long-Horizon Visual MPC** | Google DeepMind | 2026-05-06 | 优先级 954 | 状态 `translated` | 待生成
-  - 来源：[Google DeepMind arXiv query](https://arxiv.org/abs/2605.04709v1)
-  - 论文：[https://arxiv.org/pdf/2605.04709v1](https://arxiv.org/pdf/2605.04709v1)
-  - 摘要：A central challenge of visual control with model-based reinforcement learning (RL) is reliable long-horizon planning: long rollouts with learned latent dynamics exhibit branching futures and multi-modal action-value distributions. In add...
-- **Chain of Risk: Safety Failures in Large Reasoning Models and Mitigation via Adaptive Multi-Principle Steering** | DeepSeek | 2026-05-07 | 优先级 945 | 状态 `discovered` | 待生成
-  - 来源：[DeepSeek arXiv query](https://arxiv.org/abs/2605.05678v1)
-  - 论文：[https://arxiv.org/pdf/2605.05678v1](https://arxiv.org/pdf/2605.05678v1)
-  - 摘要：Large reasoning models (LRMs) increasingly expose chain-of-thought-like reasoning for transparency, verification, and deliberate problem solving. This creates a safety blind spot: harmful or policy-violating content may appear in reasoni...
-- **The Coupling Tax: How Shared Token Budgets Undermine Visible Chain-of-Thought Under Fixed Output Limits** | DeepSeek | 2026-05-08 | 优先级 941 | 状态 `discovered` | 待生成
-  - 来源：[DeepSeek arXiv query](https://arxiv.org/abs/2605.07686v1)
-  - 论文：[https://arxiv.org/pdf/2605.07686v1](https://arxiv.org/pdf/2605.07686v1)
-  - 摘要：Chain-of-thought reasoning is often treated as a monotone way to improve language-model accuracy by letting a model think longer. We identify a countervailing effect, the coupling tax: when reasoning traces and final answers share one ou...
-- **Irminsul: MLA-Native Position-Independent Caching for Agentic LLM Serving** | DeepSeek | 2026-05-07 | 优先级 940 | 状态 `discovered` | 待生成
-  - 来源：[DeepSeek arXiv query](https://arxiv.org/abs/2605.05696v1)
-  - 论文：[https://arxiv.org/pdf/2605.05696v1](https://arxiv.org/pdf/2605.05696v1)
-  - 摘要：Agentic LLM workloads put bit-identical tokens at shifted positions every turn, voiding prefix caches at the first byte of divergence. Operators report cache-hit regressions ranging from moderate slowdowns to severe TTFT spikes of 10-16s...
-- **Your Language Model is Its Own Critic: Reinforcement Learning with Value Estimation from Actor's Internal States** | DeepSeek | 2026-05-08 | 优先级 936 | 状态 `discovered` | 待生成
-  - 来源：[DeepSeek arXiv query](https://arxiv.org/abs/2605.07579v1)
-  - 论文：[https://arxiv.org/pdf/2605.07579v1](https://arxiv.org/pdf/2605.07579v1)
-  - 摘要：Reinforcement learning with verifiable rewards (RLVR) for Large Reasoning Models hinges on baseline estimation for variance reduction, but existing approaches pay a heavy price: PPO requires a policy-model scale critic, while GRPO needs...
-- **MathlibPR: Pull Request Merge-Readiness Benchmark for Formal Mathematical Libraries** | DeepSeek | 2026-05-08 | 优先级 936 | 状态 `discovered` | 待生成
-  - 来源：[DeepSeek arXiv query](https://arxiv.org/abs/2605.07147v1)
-  - 论文：[https://arxiv.org/pdf/2605.07147v1](https://arxiv.org/pdf/2605.07147v1)
-  - 摘要：The ecosystem of Lean and Mathlib has become the de facto standard for large language model (LLM) assisted formal reasoning with remarkable successes in recent years. Those successes, however, only consume Mathlib as an essential depende...
-- **ZAYA1-8B Technical Report** | DeepSeek | 2026-05-06 | 优先级 934 | 状态 `discovered` | 待生成
-  - 来源：[DeepSeek arXiv query](https://arxiv.org/abs/2605.05365v1)
-  - 论文：[https://arxiv.org/pdf/2605.05365v1](https://arxiv.org/pdf/2605.05365v1)
-  - 摘要：We present ZAYA1-8B, a reasoning-focused mixture-of-experts (MoE) model with 700M active and 8B total parameters, built on Zyphra's MoE++ architecture. ZAYA1-8B's core pretraining, midtraining, and supervised fine-tuning (SFT) were perfo...
-- **SkillOS: Learning Skill Curation for Self-Evolving Agents** | Meta FAIR | 2026-05-07 | 优先级 920 | 状态 `workbuddy_pending` | 待生成
-  - 来源：[Meta FAIR arXiv query](https://arxiv.org/abs/2605.06614v1)
-  - 论文：[https://arxiv.org/pdf/2605.06614v1](https://arxiv.org/pdf/2605.06614v1)
-  - 摘要：LLM-based agents are increasingly deployed to handle streaming tasks, yet they often remain one-off problem solvers that fail to learn from past interactions. Reusable skills distilled from experience provide a natural substrate for self...
-- **Agentic Vulnerability Reasoning on Windows COM Binaries** | Microsoft | 2026-05-06 | 优先级 919 | 状态 `translated` | 待生成
+- **Stateful Reasoning via Insight Replay** | DeepSeek | 2026-05-14 | 优先级 948 | 状态 `queued` | 待生成
+  - 来源：[DeepSeek arXiv query](https://arxiv.org/abs/2605.14457v1)
+  - 论文：[https://arxiv.org/pdf/2605.14457v1](https://arxiv.org/pdf/2605.14457v1)
+  - 摘要：Chain-of-Thought (CoT) reasoning has become a foundation for eliciting multi-step reasoning in large language models, but recent studies show that its benefits do not scale monotonically with chain length: while longer CoT generally enab...
+- **STOP: Structured On-Policy Pruning of Long-Form Reasoning in Low-Data Regimes** | DeepSeek | 2026-05-13 | 优先级 947 | 状态 `queued` | 待生成
+  - 来源：[DeepSeek arXiv query](https://arxiv.org/abs/2605.13165v1)
+  - 论文：[https://arxiv.org/pdf/2605.13165v1](https://arxiv.org/pdf/2605.13165v1)
+  - 摘要：Long chain-of-thought (Long CoT) reasoning improves performance on multi-step problems, but it also induces overthinking: models often generate low-yield reasoning that increases inference cost and latency. This inefficiency is especiall...
+- **ChipMATE: Multi-Agent Training via Reinforcement Learning for Enhanced RTL Generation** | DeepSeek | 2026-05-13 | 优先级 947 | 状态 `queued` | 待生成
+  - 来源：[DeepSeek arXiv query](https://arxiv.org/abs/2605.12857v1)
+  - 论文：[https://arxiv.org/pdf/2605.12857v1](https://arxiv.org/pdf/2605.12857v1)
+  - 摘要：Existing API-based agentic systems for RTL code generation are fundamentally misaligned with industrial practice: they assume a golden testbench is available at generation time, rely on closed-source APIs incompatible with chip vendors'...
+- **ReTool-Video: Recursive Tool-Using Video Agents with Meta-Augmented Tool Grounding** | Meta FAIR | 2026-05-13 | 优先级 942 | 状态 `queued` | 待生成
+  - 来源：[Meta FAIR arXiv query](https://arxiv.org/abs/2605.13228v1)
+  - 论文：[https://arxiv.org/pdf/2605.13228v1](https://arxiv.org/pdf/2605.13228v1)
+  - 摘要：Video understanding requires active evidence seeking, motivating tool-augmented video agents for temporal reasoning, cross-modal understanding, and complex question answering. Existing video agents have improved video reasoning with retr...
+- **When Reasoning Traces Become Performative: Step-Level Evidence that Chain-of-Thought Is an Imperfect Oversight Channel** | DeepSeek | 2026-05-12 | 优先级 936 | 状态 `queued` | 待生成
+  - 来源：[DeepSeek arXiv query](https://arxiv.org/abs/2605.11746v1)
+  - 论文：[https://arxiv.org/pdf/2605.11746v1](https://arxiv.org/pdf/2605.11746v1)
+  - 摘要：Chain-of-thought (CoT) traces are increasingly used both to improve language model capability and to audit model behavior, implicitly assuming that the visible trace remains synchronized with the computation that determines the answer. W...
+- **fg-expo: Frontier-guided exploration-prioritized policy optimization via adaptive kl and gaussian curriculum** | DeepSeek | 2026-05-12 | 优先级 936 | 状态 `queued` | 待生成
+  - 来源：[DeepSeek arXiv query](https://arxiv.org/abs/2605.11403v1)
+  - 论文：[https://arxiv.org/pdf/2605.11403v1](https://arxiv.org/pdf/2605.11403v1)
+  - 摘要：Reinforcement Learning with Verifiable Rewards (RLVR) has become the standard paradigm for LLM mathematical reasoning, with Group Relative Policy Optimization (GRPO) serving as the dominant algorithm. We identify two overlooked inefficie...
+- **MetaAgent-X : Breaking the Ceiling of Automatic Multi-Agent Systems via End-to-End Reinforcement Learning** | Meta FAIR | 2026-05-14 | 优先级 933 | 状态 `queued` | 待生成
+  - 来源：[Meta FAIR arXiv query](https://arxiv.org/abs/2605.14212v1)
+  - 论文：[https://arxiv.org/pdf/2605.14212v1](https://arxiv.org/pdf/2605.14212v1)
+  - 摘要：Automatic multi-agent systems aim to instantiate agent workflows without relying on manually designed or fixed orchestration. However, existing automatic MAS approaches remain only partially adaptive: they either perform training-free te...
+- **Orchard: An Open-Source Agentic Modeling Framework** | MiniMax | 2026-05-14 | 优先级 933 | 状态 `queued` | 待生成
+  - 来源：[MiniMax arXiv query](https://arxiv.org/abs/2605.15040v1)
+  - 论文：[https://arxiv.org/pdf/2605.15040v1](https://arxiv.org/pdf/2605.15040v1)
+  - 摘要：Agentic modeling aims to transform LLMs into autonomous agents capable of solving complex tasks through planning, reasoning, tool use, and multi-turn interaction with environments. Despite major investment, open research remains constrai...
+- **AgentLens: Revealing The Lucky Pass Problem in SWE-Agent Evaluation** | Microsoft | 2026-05-13 | 优先级 932 | 状态 `queued` | 待生成
+  - 来源：[Microsoft arXiv query](https://arxiv.org/abs/2605.12925v1)
+  - 论文：[https://arxiv.org/pdf/2605.12925v1](https://arxiv.org/pdf/2605.12925v1)
+  - 摘要：Evaluation of software engineering (SWE) agents is dominated by a binary signal: whether the final patch passes the tests. This outcome-only view treats a principled solution and a chaotic trial-and-error process as equivalent. We show t...
+- **Debugging the Debuggers: Failure-Anchored Structured Recovery for Software Engineering Agents** | Microsoft | 2026-05-09 | 优先级 928 | 状态 `queued` | 待生成
+  - 来源：[Microsoft arXiv query](https://arxiv.org/abs/2605.08717v1)
+  - 论文：[https://arxiv.org/pdf/2605.08717v1](https://arxiv.org/pdf/2605.08717v1)
+  - 摘要：Software engineering agents are increasingly deployed in evaluable engineering environments, yet post-failure recovery remains costly, manual, and ad hoc. Existing systems expose traces or generate follow-up feedback, but they do not con...
+- **MMSkills: Towards Multimodal Skills for General Visual Agents** | Meta FAIR | 2026-05-13 | 优先级 927 | 状态 `queued` | 待生成
+  - 来源：[Meta FAIR arXiv query](https://arxiv.org/abs/2605.13527v2)
+  - 论文：[https://arxiv.org/pdf/2605.13527v2](https://arxiv.org/pdf/2605.13527v2)
+  - 摘要：Reusable skills have become a core substrate for improving agent capabilities, yet most existing skill packages encode reusable behavior primarily as textual prompts, executable code, or learned routines. For visual agents, however, proc...
+- **EvolveMem:Self-Evolving Memory Architecture via AutoResearch for LLM Agents** | Meta FAIR | 2026-05-13 | 优先级 922 | 状态 `queued` | 待生成
+  - 来源：[Meta FAIR arXiv query](https://arxiv.org/abs/2605.13941v1)
+  - 论文：[https://arxiv.org/pdf/2605.13941v1](https://arxiv.org/pdf/2605.13941v1)
+  - 摘要：Long-term memory is essential for LLM agents that operate across multiple sessions, yet existing memory systems treat retrieval infrastructure as fixed: stored content evolves while scoring functions, fusion strategies, and answer-genera...
+- **CHAL: Council of Hierarchical Agentic Language** | Meta FAIR | 2026-05-12 | 优先级 921 | 状态 `queued` | 待生成
+  - 来源：[Meta FAIR arXiv query](https://arxiv.org/abs/2605.12718v1)
+  - 论文：[https://arxiv.org/pdf/2605.12718v1](https://arxiv.org/pdf/2605.12718v1)
+  - 摘要：Multi-agent debate has emerged as a promising approach for improving LLM reasoning on ground-truth tasks, yet current methodologies face certain structural limitations: debate tends to induce a martingale over belief trajectories, majori...
+- **Governing AI-Assisted Security Operations: A Design Science Framework for Operational Decision Support** | Microsoft | 2026-05-10 | 优先级 919 | 状态 `queued` | 待生成
+  - 来源：[Microsoft arXiv query](https://arxiv.org/abs/2605.09534v1)
+  - 论文：[https://arxiv.org/pdf/2605.09534v1](https://arxiv.org/pdf/2605.09534v1)
+  - 摘要：Engineering managers increasingly must decide how to introduce generative artificial intelligence (AI), retrieval-augmented generation, and coding agents into high-risk operational functions without weakening accountability, privacy, cos...
+- **Agentic Vulnerability Reasoning on Windows COM Binaries** | Microsoft | 2026-05-06 | 优先级 915 | 状态 `translated` | 待生成
   - 来源：[Microsoft arXiv query](https://arxiv.org/abs/2605.05000v1)
   - 论文：[https://arxiv.org/pdf/2605.05000v1](https://arxiv.org/pdf/2605.05000v1)
   - 摘要：Windows Component Object Model (COM) services run with elevated privileges and are widely accessible to authenticated users, making race conditions in these binaries a critical surface for local privilege escalation. We present SLYP, an...
-- **Repeated Deceptive Path Planning against Learnable Observer** | Meta FAIR | 2026-05-08 | 优先级 916 | 状态 `discovered` | 待生成
-  - 来源：[Meta FAIR arXiv query](https://arxiv.org/abs/2605.07174v1)
-  - 论文：[https://arxiv.org/pdf/2605.07174v1](https://arxiv.org/pdf/2605.07174v1)
-  - 摘要：We study the problem of deceptive path planning (DPP), where an agent aims to conceal its true destination from external observers. While existing work assumes static, non-learning observers, real-world adversaries-such as in critical go...
-- **SWE-Edit: Rethinking Code Editing for Efficient SWE-Agent** | Microsoft | 2026-04-28 | 优先级 916 | 状态 `translated` | [中文笔记](../papers/2604.26102v1/index.md)
-  - 来源：[Microsoft arXiv query](https://arxiv.org/abs/2604.26102v1)
-  - 论文：[https://arxiv.org/pdf/2604.26102v1](https://arxiv.org/pdf/2604.26102v1)
-  - 摘要：Large language model agents have achieved remarkable progress on software engineering tasks, yet current approaches suffer from a fundamental context coupling problem: the standard code editing interface conflates code inspection, modifi...
-- **RRCM: Ranking-Driven Retrieval over Collaborative and Meta Memories for LLM Recommendation** | Meta FAIR | 2026-05-08 | 优先级 906 | 状态 `discovered` | 待生成
-  - 来源：[Meta FAIR arXiv query](https://arxiv.org/abs/2605.07129v1)
-  - 论文：[https://arxiv.org/pdf/2605.07129v1](https://arxiv.org/pdf/2605.07129v1)
-  - 摘要：Large Language Models (LLMs) have emerged as a promising paradigm for next-generation recommender systems, offering strong semantic understanding and natural-language reasoning abilities. Despite recent progress, current LLM-based recomm...
-- **FunctionalAgent: Towards end-to-end on-top functional design** | Meta FAIR | 2026-05-07 | 优先级 905 | 状态 `workbuddy_pending` | 待生成
-  - 来源：[Meta FAIR arXiv query](https://arxiv.org/abs/2605.06215v1)
-  - 论文：[https://arxiv.org/pdf/2605.06215v1](https://arxiv.org/pdf/2605.06215v1)
-  - 摘要：Multiconfiguration pair-density functional theory (MC-PDFT) offers an efficient and accurate framework for computing electronic energies in strongly correlated molecular systems, with the quality of the on-top functional being a key dete...
-- **MAS-Algorithm: A Workflow for Solving Algorithmic Programming Problems with a Multi-Agent System** | 阿里通义 | 2026-05-07 | 优先级 890 | 状态 `discovered` | 待生成
-  - 来源：[Qwen arXiv query](https://arxiv.org/abs/2605.05949v2)
-  - 论文：[https://arxiv.org/pdf/2605.05949v2](https://arxiv.org/pdf/2605.05949v2)
-  - 摘要：Algorithmic problem solving serves as a rigorous testbed for evaluating structured reasoning in AI coding systems, as it directly reflects a model's ability to perform structured reasoning in complex scenarios. Existing approaches predom...
-- **Can You Break RLVER? Probing Adversarial Robustness of RL-Trained Empathetic Agents** | 阿里通义 | 2026-05-08 | 优先级 881 | 状态 `discovered` | 待生成
-  - 来源：[Qwen arXiv query](https://arxiv.org/abs/2605.07138v1)
-  - 论文：[https://arxiv.org/pdf/2605.07138v1](https://arxiv.org/pdf/2605.07138v1)
-  - 摘要：Reinforcement learning from verifiable emotion rewards RLVER has produced language models with strong empathetic performance, evaluated on benchmarks that assume cooperative, honest users. Yet real emotional interactions systematically v...
-- **Tool Calling is Linearly Readable and Steerable in Language Models** | 阿里通义 | 2026-05-08 | 优先级 876 | 状态 `discovered` | 待生成
-  - 来源：[Qwen arXiv query](https://arxiv.org/abs/2605.07990v1)
-  - 论文：[https://arxiv.org/pdf/2605.07990v1](https://arxiv.org/pdf/2605.07990v1)
-  - 摘要：When a tool-calling agent picks the wrong tool, the failure is invisible until execution: the email gets sent, the meeting gets missed. Probing 12 instruction-tuned models across Gemma 3, Qwen 3, Qwen 2.5, and Llama 3.1 (270M to 27B), we...
-- **Beyond Negative Rollouts: Positive-Only Policy Optimization with Implicit Negative Gradients** | 阿里通义 | 2026-05-07 | 优先级 875 | 状态 `discovered` | 待生成
-  - 来源：[Qwen arXiv query](https://arxiv.org/abs/2605.06650v1)
-  - 论文：[https://arxiv.org/pdf/2605.06650v1](https://arxiv.org/pdf/2605.06650v1)
-  - 摘要：Reinforcement learning with verifiable rewards (RLVR), due to the deterministic verification, becomes a dominant paradigm for enhancing the reasoning ability of large language models (LLMs). The community witnesses the rapid change from...
-- **How Many Iterations to Jailbreak? Dynamic Budget Allocation for Multi-Turn LLM Evaluation** | 阿里通义 | 2026-05-07 | 优先级 875 | 状态 `discovered` | 待生成
-  - 来源：[Qwen arXiv query](https://arxiv.org/abs/2605.06605v1)
-  - 论文：[https://arxiv.org/pdf/2605.06605v1](https://arxiv.org/pdf/2605.06605v1)
-  - 摘要：Evaluating and predicting the performance of large language models (LLMs) in multi-turn conversational settings is critical yet computationally expensive; key events -- e.g., jailbreaks or successful task completion by an agent -- often...
-
-## 深度学习时序预测
-
-- **Temporal Attention for Adaptive Control of Euler-Lagrange Systems with Unobservable Memory** | Meta FAIR | 2026-05-07 | 优先级 905 | 状态 `discovered` | 待生成
-  - 来源：[Meta FAIR arXiv query](https://arxiv.org/abs/2605.06877v1)
-  - 论文：[https://arxiv.org/pdf/2605.06877v1](https://arxiv.org/pdf/2605.06877v1)
-  - 摘要：Adaptive control of Euler-Lagrange systems is challenging when friction is governed by a finite-horizon internal state that is not directly observable from joint measurements. In this setting, the measured closed-loop state is no longer...
+- **Harnessing Agentic Evolution** | Meta FAIR | 2026-05-13 | 优先级 912 | 状态 `queued` | 待生成
+  - 来源：[Meta FAIR arXiv query](https://arxiv.org/abs/2605.13821v1)
+  - 论文：[https://arxiv.org/pdf/2605.13821v1](https://arxiv.org/pdf/2605.13821v1)
+  - 摘要：Agentic evolution has emerged as a powerful paradigm for improving programs, workflows, and scientific solutions by iteratively generating candidates, evaluating them, and using feedback to guide future search. However, existing methods...
+- **Remember the Decision, Not the Description: A Rate-Distortion Framework for Agent Memory** | MiniMax | 2026-05-11 | 优先级 910 | 状态 `queued` | 待生成
+  - 来源：[MiniMax arXiv query](https://arxiv.org/abs/2605.10870v1)
+  - 论文：[https://arxiv.org/pdf/2605.10870v1](https://arxiv.org/pdf/2605.10870v1)
+  - 摘要：Long-horizon language agents must operate under limited runtime memory, yet existing memory mechanisms often organize experience around descriptive criteria such as relevance, salience, or summary quality. For an agent, however, memory i...
+- **Distributionally Robust Multi-Task Reinforcement Learning via Adaptive Task Sampling** | MiniMax | 2026-05-14 | 优先级 908 | 状态 `queued` | 待生成
+  - 来源：[MiniMax arXiv query](https://arxiv.org/abs/2605.14350v1)
+  - 论文：[https://arxiv.org/pdf/2605.14350v1](https://arxiv.org/pdf/2605.14350v1)
+  - 摘要：Multi-task reinforcement learning (MTRL) aims to train a single agent to efficiently optimize performance across multiple tasks simultaneously. However, jointly optimizing all tasks often yields imbalanced learning: agents quickly solve...
+- **Profit Maximization in Bilateral Trade against a Smooth Adversary** | MiniMax | 2026-05-12 | 优先级 901 | 状态 `queued` | 待生成
+  - 来源：[MiniMax arXiv query](https://arxiv.org/abs/2605.12664v1)
+  - 论文：[https://arxiv.org/pdf/2605.12664v1](https://arxiv.org/pdf/2605.12664v1)
+  - 摘要：Bilateral trade models the task of intermediating between two strategic agents, a seller and a buyer, who wish to trade a good. We study this problem from the perspective of a profit-maximizing broker within an online learning framework,...
+- **Irminsul: MLA-Native Position-Independent Caching for Agentic LLM Serving** | 智谱 | 2026-05-07 | 优先级 896 | 状态 `queued` | 待生成
+  - 来源：[GLM arXiv query](https://arxiv.org/abs/2605.05696v1)
+  - 论文：[https://arxiv.org/pdf/2605.05696v1](https://arxiv.org/pdf/2605.05696v1)
+  - 摘要：Agentic LLM workloads put bit-identical tokens at shifted positions every turn, voiding prefix caches at the first byte of divergence. Operators report cache-hit regressions ranging from moderate slowdowns to severe TTFT spikes of 10-16s...
+- **CurveBench: A Benchmark for Exact Topological Reasoning over Nested Jordan Curves** | 阿里通义 | 2026-05-13 | 优先级 882 | 状态 `queued` | 待生成
+  - 来源：[Qwen arXiv query](https://arxiv.org/abs/2605.14068v1)
+  - 论文：[https://arxiv.org/pdf/2605.14068v1](https://arxiv.org/pdf/2605.14068v1)
+  - 摘要：We introduce CurveBench, a benchmark for hierarchical topological reasoning from visual input. CurveBench consists of \textbf{756 images} of pairwise non-intersecting Jordan curves across easy, polygonal, topographic-inspired, maze-like,...
