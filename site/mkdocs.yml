@@ -1,6 +1,6 @@
-site_name: 论文自动研学知识库
-site_url: https://groupechou.github.io/paper-learning-hub/
-repo_name: GroupeChou/paper-learning-hub
+site_name: 论文每日导引
+site_url: 
+repo_name: 
 theme:
   name: material
   language: zh
