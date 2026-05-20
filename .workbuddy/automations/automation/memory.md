@@ -1,5 +1,25 @@
 # 论文研学日报自动化执行记录
 
+## 2026-05-20 (周三)
+
+### 执行状态
+- 论文发现: 50 篇新候选（累积 83 篇 discovered）
+- 论文下载: ✅ 83/83 全部成功（后台运行）
+- WorkBuddy 任务准备: ✅ 10 篇
+- 站点构建: ✅ 成功 (0.84s)
+- Git推送: ❌ 失败（github.com:443 网络不通）
+
+### 今日亮点
+- Nexus: Agentic Framework for Time Series Forecasting — Agent+时序交叉方向
+- Nested Spatio-Temporal TS Forecasting
+- EnvFactory: Scaling Tool-Use Agents
+- 等 50 篇新论文
+
+### 变更摘要
+- Git commit daa240f: 9 files changed, 437 insertions(+)
+- DB: queued=112, translated=66, workbuddy_pending=10
+- 推送待网络恢复后手动执行
+
 ## 2026-05-18 (周一)
 
 ### 执行状态
