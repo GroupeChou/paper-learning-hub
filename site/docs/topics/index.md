@@ -4,16 +4,24 @@
 
 ## AI Agent
 
+- [EnvFactory: Scaling Tool-Use Agents via Executable Environments Synthesis and Robust RL](https://arxiv.org/pdf/2605.18703v1) | AI Agent-核心 | 2026-05-18 | 原文
+- [SkillGenBench: Benchmarking Skill Generation Pipelines for LLM Agents](https://arxiv.org/pdf/2605.18693v1) | AI Agent-核心 | 2026-05-18 | 原文
+- [Overeager Coding Agents: Measuring Out-of-Scope Actions on Benign Tasks](https://arxiv.org/pdf/2605.18583v1) | AI Agent-核心 | 2026-05-18 | 原文
 - [Look Before You Leap: Autonomous Exploration for LLM Agents](https://arxiv.org/pdf/2605.16143v1) | AI Agent-核心 | 2026-05-15 | 原文
 - [Multi-Agent Cooperative Transportation: Optimal and Efficient Task Allocation and Path Finding](https://arxiv.org/pdf/2605.16097v1) | AI Agent-核心 | 2026-05-15 | 原文
+- [Position: A Three-Layer Probabilistic Assume-Guarantee Architecture Is Structurally Required for Safe LLM Agent Deployment](https://arxiv.org/pdf/2605.18672v1) | AI Agent-核心 | 2026-05-18 | 原文
+- [1GC-7RC: One Graphic Card -- Seven Research Challenges! How Good Are AI Agents at Doing Your Job?](https://arxiv.org/pdf/2605.17046v1) | 时序预测-核心 | 2026-05-16 | 原文
 - [Context, Reasoning, and Hierarchy: A Cost-Performance Study of Compound LLM Agent Design in an Adversarial POMDP](https://arxiv.org/pdf/2605.16205v1) | AI Agent-核心 | 2026-05-15 | 原文
 - [Reward Hacking Benchmark: Measuring Exploits in LLM Agents with Tool Use](https://arxiv.org/pdf/2605.02964v1) | OpenAI | 2026-05-03 | 原文
+- [Reversa: A Reverse Documentation Engineering Framework for Converting Legacy Software into Operational Specifications for AI Agents](https://arxiv.org/pdf/2605.18684v1) | AI Agent-核心 | 2026-05-18 | 原文
 - [Agent Island: A Saturation- and Contamination-Resistant Benchmark from Multiagent Games](https://arxiv.org/pdf/2605.04312v1) | OpenAI | 2026-05-05 | 原文
 - [Reinforcement Learning for LLM-based Multi-Agent Systems through Orchestration Traces](https://arxiv.org/pdf/2605.02801v1) | OpenAI | 2026-05-04 | 原文
 - [Argus: Evidence Assembly for Scalable Deep Research Agents](https://arxiv.org/pdf/2605.16217v1) | AI Agent-核心 | 2026-05-15 | 原文
 - [ShopGym: An Integrated Framework for Realistic Simulation and Scalable Benchmarking of E-Commerce Web Agents](https://arxiv.org/pdf/2605.16116v1) | AI Agent-核心 | 2026-05-15 | 原文
 - [Beyond Individual Intelligence: Surveying Collaboration, Failure Attribution, and Self-Evolution in LLM-based Multi-Agent Systems](https://arxiv.org/pdf/2605.14892v2) | Agent-MultiAgent | 2026-05-14 | 原文
 - [HiveMind: OS-Inspired Scheduling for Concurrent LLM Agent Workloads](../papers/2604.17111v1/index.md) | OpenAI | 2026-04-18 | 中文精读
+- [Code as Agent Harness](https://arxiv.org/pdf/2605.18747v1) | AI Agent-核心 | 2026-05-18 | 原文
+- [Latent Action Reparameterization for Efficient Agent Inference](https://arxiv.org/pdf/2605.18597v1) | AI Agent-核心 | 2026-05-18 | 原文
 - [MOSAIC-Bench: Measuring Compositional Vulnerability Induction in Coding Agents](https://arxiv.org/pdf/2605.03952v1) | OpenAI | 2026-05-05 | 原文
 - [In-Context Prompting Obsoletes Agent Orchestration for Procedural Tasks](https://arxiv.org/pdf/2604.27891v2) | OpenAI | 2026-04-30 | 原文
 - [FORGE: Self-Evolving Agent Memory With No Weight Updates via Population Broadcast](https://arxiv.org/pdf/2605.16233v1) | AI Agent-核心 | 2026-05-15 | 原文
@@ -21,13 +29,18 @@
 - [Spatial Atlas: Compute-Grounded Reasoning for Spatial-Aware Research Agent Benchmarks](../papers/2604.12102v2/index.md) | OpenAI | 2026-04-13 | 中文精读
 - [Securing the Agent: Vendor-Neutral, Multitenant Enterprise Retrieval and Tool Use](https://arxiv.org/pdf/2605.05287v1) | OpenAI | 2026-05-06 | 原文
 - [When Agents Look the Same: Quantifying Distillation-Induced Similarity in Tool-Use Behaviors](../papers/2604.21255v1/index.md) | Anthropic | 2026-04-23 | 中文精读
+- [ESI-Bench: Towards Embodied Spatial Intelligence that Closes the Perception-Action Loop](https://arxiv.org/pdf/2605.18746v1) | AI Agent-核心 | 2026-05-18 | 原文
+- [AI for Auto-Research: Roadmap & User Guide](https://arxiv.org/pdf/2605.18661v1) | AI Agent-核心 | 2026-05-18 | 原文
+- [Not What You Asked For: Typographic Attacks in Household Robot Manipulation](https://arxiv.org/pdf/2605.18593v1) | AI Agent-核心 | 2026-05-18 | 原文
 - [Reasoning-targeted Jailbreak Attacks on Large Reasoning Models via Semantic Triggers and Psychological Framing](../papers/2604.15725v1/index.md) | OpenAI | 2026-04-17 | 中文精读
+- [Agent Bazaar: Enabling Economic Alignment in Multi-Agent Marketplaces](https://arxiv.org/pdf/2605.17698v1) | Agent-MultiAgent | 2026-05-17 | 原文
 - [TSCG: Deterministic Tool-Schema Compilation for Agentic LLM Deployments](https://arxiv.org/pdf/2605.04107v1) | OpenAI | 2026-05-04 | 原文
 - [Confirming Correct, Missing the Rest: LLM Tutoring Agents Struggle Where Feedback Matters Most](https://arxiv.org/pdf/2605.16207v1) | AI Agent-核心 | 2026-05-15 | 原文
 - [Probabilistic Seasonal Streamflow Forecasting Across California's Sierra Nevada Watersheds with Agentic AI](https://arxiv.org/pdf/2605.16178v1) | AI Agent-核心 | 2026-05-15 | 原文
 - [MAxLM: Multi-Agent Language Model-Based Scheduling and Resource Allocation in MU-MIMO-OFDMA-Enabled Wireless Networks](https://arxiv.org/pdf/2605.16144v1) | AI Agent-核心 | 2026-05-15 | 原文
 - [Trojan Hippo: Weaponizing Agent Memory for Data Exfiltration](https://arxiv.org/pdf/2605.01970v2) | OpenAI | 2026-05-03 | 原文
 - [From Specification to Deployment: Empirical Evidence from a W3C VC + DID Trust Infrastructure for Autonomous Agents](https://arxiv.org/pdf/2605.06738v1) | Anthropic | 2026-05-07 | 原文
+- [DexHoldem: Playing Texas Hold'em with Dexterous Embodied System](https://arxiv.org/pdf/2605.18727v1) | AI Agent-核心 | 2026-05-18 | 原文
 - [Optimized Three-Dimensional Photovoltaic Structures with LLM guided Tree Search](https://arxiv.org/pdf/2605.16191v1) | AI Agent-核心 | 2026-05-15 | 原文
 - [An Algebraic Exposition of the Theory of Dyadic Morality](https://arxiv.org/pdf/2605.16153v1) | AI Agent-核心 | 2026-05-15 | 原文
 - [ArguAgent: AI-Supported Real-Time Grouping for Productive Argumentation in STEM Classrooms](../papers/2604.23449v1/index.md) | OpenAI | 2026-04-25 | 中文精读
@@ -38,13 +51,16 @@
 - [Distributed Zeroth-Order Policy Gradient for Networked Multi-agent Reinforcement Learning from Human Feedback](https://arxiv.org/pdf/2605.15697v1) | Agent-MultiAgent | 2026-05-15 | 原文
 - [Evaluating Multi-Hop Reasoning in RAG Systems: A Comparison of LLM-Based Retriever Evaluation Strategies](../papers/2604.18234v1/index.md) | OpenAI | 2026-04-20 | 中文精读
 - [When Does Critique Improve AI-Assisted Theoretical Physics? SCALAR: Structured Critic--Actor Loop for Agentic Reasoning](https://arxiv.org/pdf/2605.06772v1) | DeepSeek | 2026-05-07 | 原文
+- [Interaction-Breaking Adversarial Learning Framework for Robust Multi-Agent Reinforcement Learning](https://arxiv.org/pdf/2605.18024v1) | Agent-MultiAgent | 2026-05-18 | 原文
 - [Beyond the Attention Stability Boundary: Agentic Self-Synthesizing Reasoning Protocols](../papers/2604.24512v1/index.md) | DeepSeek | 2026-04-27 | 中文精读
 - [From Gridworlds to Warehouses: Adapting Lightweight One-shot Multi-Agent Pathfinding for AGVs](https://arxiv.org/pdf/2605.15799v1) | Agent-MultiAgent | 2026-05-15 | 原文
 - [Local-Splitter: A Measurement Study of Seven Tactics for Reducing Cloud LLM Token Usage on Coding-Agent Workloads](../papers/2604.12301v1/index.md) | OpenAI | 2026-04-14 | 中文精读
 - [Narrative over Numbers: The Identifiable Victim Effect and its Amplification Under Alignment and Reasoning in Large Language Models](../papers/2604.12076v1/index.md) | OpenAI | 2026-04-13 | 中文精读
 - [Solvita: Enhancing Large Language Models for Competitive Programming via Agentic Evolution](https://arxiv.org/pdf/2605.15301v1) | Agent-MultiAgent | 2026-05-14 | 原文
 - [ELVIS: Ensemble-Calibrated Latent Imagination for Long-Horizon Visual MPC](https://arxiv.org/pdf/2605.04709v1) | Google DeepMind | 2026-05-06 | 原文
+- [LLM-Guided Communication for Cooperative Multi-Agent Reinforcement Learning](https://arxiv.org/pdf/2605.18077v1) | Agent-MultiAgent | 2026-05-18 | 原文
 - [Cross-Session Threats in AI Agents: Benchmark, Evaluation, and Algorithms](../papers/2604.21131v1/index.md) | Anthropic | 2026-04-22 | 中文精读
+- [Heterogeneous Information-Bottleneck Coordination Graphs for Multi-Agent Reinforcement Learning](https://arxiv.org/pdf/2605.17393v1) | Agent-MultiAgent | 2026-05-17 | 原文
 - [BootstrapAgent: Distilling Repository Setup into Reusable Agent Knowledge](https://arxiv.org/pdf/2605.15815v1) | Agent-MultiAgent | 2026-05-15 | 原文
 - [ALSO: Adversarial Online Strategy Optimization for Social Agents](https://arxiv.org/pdf/2605.15768v1) | Agent-MultiAgent | 2026-05-15 | 原文
 - [Strategic Heterogeneous Multi-Agent Architecture for Cost-Effective Code Vulnerability Detection](../papers/2604.21282v1/index.md) | DeepSeek | 2026-04-23 | 中文精读
@@ -56,6 +72,7 @@
 - [Multi-Agentic Approach for History Matching of Oil Reservoirs](https://arxiv.org/pdf/2605.15028v1) | Agent-MultiAgent | 2026-05-14 | 原文
 - [IFPV: An Integrated Multi-Agent Framework for Generative Operational Planning and High-Fidelity Plan Verification](https://arxiv.org/pdf/2605.14851v1) | Agent-MultiAgent | 2026-05-14 | 原文
 - [Chain of Risk: Safety Failures in Large Reasoning Models and Mitigation via Adaptive Multi-Principle Steering](https://arxiv.org/pdf/2605.05678v1) | DeepSeek | 2026-05-07 | 原文
+- [Qumus: Realization of An Embodied AI Quantum Material Experimentalist](https://arxiv.org/pdf/2605.18407v1) | Agent-MultiAgent | 2026-05-18 | 原文
 - [How Does Thinking Mode Change LLM Moral Judgments? A Controlled Instant-vs-Thinking Comparison Across Five Frontier Models](https://arxiv.org/pdf/2605.04488v1) | DeepSeek | 2026-05-06 | 原文
 - [ReTool-Video: Recursive Tool-Using Video Agents with Meta-Augmented Tool Grounding](https://arxiv.org/pdf/2605.13228v1) | Meta FAIR | 2026-05-13 | 原文
 - [Task-Semantic Graph-Driven Distributed Agent Networking for Underwater Target Tracking](https://arxiv.org/pdf/2605.15528v1) | Agent-MultiAgent | 2026-05-15 | 原文
@@ -76,6 +93,7 @@
 - [MetaAgent-X : Breaking the Ceiling of Automatic Multi-Agent Systems via End-to-End Reinforcement Learning](https://arxiv.org/pdf/2605.14212v1) | Meta FAIR | 2026-05-14 | 原文
 - [Orchard: An Open-Source Agentic Modeling Framework](https://arxiv.org/pdf/2605.15040v1) | MiniMax | 2026-05-14 | 原文
 - [AgentLens: Revealing The Lucky Pass Problem in SWE-Agent Evaluation](https://arxiv.org/pdf/2605.12925v1) | Microsoft | 2026-05-13 | 原文
+- [STT-Arena: A More Realistic Environment for Tool-Using with Spatio-Temporal Dynamics](https://arxiv.org/pdf/2605.18548v1) | 时空预测 | 2026-05-18 | 原文
 - [Debugging the Debuggers: Failure-Anchored Structured Recovery for Software Engineering Agents](https://arxiv.org/pdf/2605.08717v1) | Microsoft | 2026-05-09 | 原文
 - [MMSkills: Towards Multimodal Skills for General Visual Agents](https://arxiv.org/pdf/2605.13527v2) | Meta FAIR | 2026-05-13 | 原文
 - [When Stress Becomes Signal: Detecting Antifragility-Compatible Regimes in Multi-Agent LLM Systems](https://arxiv.org/pdf/2605.02463v2) | Meta FAIR | 2026-05-04 | 原文
@@ -86,6 +104,7 @@
 - [CHAL: Council of Hierarchical Agentic Language](https://arxiv.org/pdf/2605.12718v1) | Meta FAIR | 2026-05-12 | 原文
 - [SkillOS: Learning Skill Curation for Self-Evolving Agents](https://arxiv.org/pdf/2605.06614v1) | Meta FAIR | 2026-05-07 | 原文
 - [Governing AI-Assisted Security Operations: A Design Science Framework for Operational Decision Support](https://arxiv.org/pdf/2605.09534v1) | Microsoft | 2026-05-10 | 原文
+- [Synergetic capacity planning of public and private EV charging piles via city-scale multi-objective optimization](https://arxiv.org/pdf/2605.18046v1) | 时空预测 | 2026-05-18 | 原文
 - [Repeated Deceptive Path Planning against Learnable Observer](https://arxiv.org/pdf/2605.07174v1) | Meta FAIR | 2026-05-08 | 原文
 - [SWE-Edit: Rethinking Code Editing for Efficient SWE-Agent](../papers/2604.26102v1/index.md) | Microsoft | 2026-04-28 | 中文精读
 - [Agentic Vulnerability Reasoning on Windows COM Binaries](https://arxiv.org/pdf/2605.05000v1) | Microsoft | 2026-05-06 | 原文
@@ -113,6 +132,7 @@
 - [What Happens Inside Agent Memory? Circuit Analysis from Emergence to Diagnosis](../papers/2605.03354v1/index.md) | 阿里通义 | 2026-05-05 | 中文精读
 - [SafetyALFRED: Evaluating Safety-Conscious Planning of Multimodal Large Language Models](../papers/2604.19638v1/index.md) | 阿里通义 | 2026-04-21 | 中文精读
 - [ComPASS: Towards Personalized Agentic Social Support via Tool-Augmented Companionship](../papers/2604.18356v1/index.md) | 阿里通义 | 2026-04-20 | 中文精读
+- [Evaluating Deep Research Agents on Expert Consulting Work: A Benchmark with Verifiers, Rubrics, and Cognitive Traps](https://arxiv.org/pdf/2605.17554v1) | OpenAI | 2026-05-17 | 原文
 - [CurveBench: A Benchmark for Exact Topological Reasoning over Nested Jordan Curves](https://arxiv.org/pdf/2605.14068v1) | 阿里通义 | 2026-05-13 | 原文
 - [Can You Break RLVER? Probing Adversarial Robustness of RL-Trained Empathetic Agents](https://arxiv.org/pdf/2605.07138v1) | 阿里通义 | 2026-05-08 | 原文
 - [DataEvolver: Let Your Data Build and Improve Itself via Goal-Driven Loop Agents](../papers/2605.01789v1/index.md) | 阿里通义 | 2026-05-03 | 中文精读
@@ -123,30 +143,50 @@
 - [Agri-CPJ: A Training-Free Explainable Framework for Agricultural Pest Diagnosis Using Caption-Prompt-Judge and LLM-as-a-Judge](../papers/2604.23701v1/index.md) | 阿里通义 | 2026-04-26 | 中文精读
 - [Tool Calling is Linearly Readable and Steerable in Language Models](https://arxiv.org/pdf/2605.07990v1) | 阿里通义 | 2026-05-08 | 原文
 - [Moral Sensitivity in LLMs: A Tiered Evaluation of Contextual Bias via Behavioral Profiling and Mechanistic Interpretability](https://arxiv.org/pdf/2605.03217v1) | 阿里通义 | 2026-05-04 | 原文
-- [Agentic Design of Compositional Descriptors via Autoresearch for Materials Science Applications](https://arxiv.org/pdf/2605.14671v1) | OpenAI | 2026-05-14 | 原文
 - [Beyond Negative Rollouts: Positive-Only Policy Optimization with Implicit Negative Gradients](https://arxiv.org/pdf/2605.06650v1) | 阿里通义 | 2026-05-07 | 原文
 - [How Many Iterations to Jailbreak? Dynamic Budget Allocation for Multi-Turn LLM Evaluation](https://arxiv.org/pdf/2605.06605v1) | 阿里通义 | 2026-05-07 | 原文
+- [Agentic Design of Compositional Descriptors via Autoresearch for Materials Science Applications](https://arxiv.org/pdf/2605.14671v1) | OpenAI | 2026-05-14 | 原文
+- [Causely: A Causal Intelligence Layer for Enterprise AI A Benchmark Study on SRE and Reliability Workflows](https://arxiv.org/pdf/2605.18327v1) | OpenAI | 2026-05-18 | 原文
+- [Episodic-Semantic Memory Architecture for Long-Horizon Scientific Agents](https://arxiv.org/pdf/2605.17625v1) | OpenAI | 2026-05-17 | 原文
+- [Transfer Learning for Customized Car Racing Environments](https://arxiv.org/pdf/2605.17928v1) | OpenAI | 2026-05-18 | 原文
 - [Minerva-Ego: Spatiotemporal Hints for Egocentric Video Understanding](https://arxiv.org/pdf/2605.15342v1) | Google DeepMind | 2026-05-14 | 原文
 
 ## 时序预测
 
+- [Nested Spatio-Temporal Time Series Forecasting](https://arxiv.org/pdf/2605.16447v1) | 时序预测-核心 | 2026-05-15 | 原文
 - [Nexus : An Agentic Framework for Time Series Forecasting](https://arxiv.org/pdf/2605.14389v1) | 时序预测-核心 | 2026-05-14 | 原文
 - [FRWKV+: Adaptive Periodic-Position Branch Interaction for Frequency-Space Linear Time Series Forecasting](https://arxiv.org/pdf/2605.15690v1) | 时序预测-核心 | 2026-05-15 | 原文
 - [What if Tomorrow is the World Cup Final? Counterfactual Time Series Forecasting with Textual Conditions](https://arxiv.org/pdf/2605.14422v1) | 时序预测-核心 | 2026-05-14 | 原文
+- [GenTS: A Comprehensive Benchmark Library for Generative Time Series Models](https://arxiv.org/pdf/2605.17804v1) | 时序预测-核心 | 2026-05-18 | 原文
+- [Towards Principled Test-Time Adaptation for Time Series Forecasting](https://arxiv.org/pdf/2605.17250v1) | 时序预测-核心 | 2026-05-17 | 原文
+- [PULSE: Generative Phase Evolution for Non-Stationary Time Series Forecasting](https://arxiv.org/pdf/2605.16793v1) | 时序预测-核心 | 2026-05-16 | 原文
 - [SeesawNet: Towards Non-stationary Time Series Forecasting with Balanced Modeling of Common and Specific Dependencies](https://arxiv.org/pdf/2605.14551v1) | 时序预测-核心 | 2026-05-14 | 原文
+- [L-Drive: Beyond a Single Mapping-Latent Context Drives Time Series Forecasting](https://arxiv.org/pdf/2605.17730v1) | 时序预测-核心 | 2026-05-18 | 原文
 - [Three-Stage Learning Unlocks Strong Performance in Simple Models for Long-Term Time Series Forecasting](https://arxiv.org/pdf/2605.13678v1) | 时序预测-核心 | 2026-05-13 | 原文
+- [PESD-TSF: A Period-Aware and Explicit Structured Decomposition Framework for Long-Term Time Series Forecasting](https://arxiv.org/pdf/2605.16449v1) | 时序预测-核心 | 2026-05-15 | 原文
+- [QLIF-CAST: Quantum Leaky-Integrate-and-Fire for Time-Series Weather Forecasting](https://arxiv.org/pdf/2605.18333v1) | 时序预测-核心 | 2026-05-18 | 原文
+- [DAD4TS: Data-Augmentation-Oriented Diffusion Model for Time-Series Forecasting with Small-Scale Data](https://arxiv.org/pdf/2605.17866v1) | 时序预测-核心 | 2026-05-18 | 原文
 - [SurF: A Generative Model for Multivariate Irregular Time Series Forecasting](https://arxiv.org/pdf/2605.14069v1) | 时序预测-核心 | 2026-05-13 | 原文
 - [Beyond Similarity: Temporal Operator Attention for Time Series Analysis](https://arxiv.org/pdf/2605.11287v1) | 时序预测-核心 | 2026-05-11 | 原文
 - [ISOMORPH: A Supply Chain Digital Twin for Simulation, Dataset Generation, and Forecasting Benchmarks](https://arxiv.org/pdf/2605.12768v1) | 时序预测-核心 | 2026-05-12 | 原文
 - [NoRIN: Backbone-Adaptive Reversible Normalization for Time-Series Forecasting](https://arxiv.org/pdf/2605.10823v1) | 时序预测-核心 | 2026-05-11 | 原文
+- [Scale-Equivariant Generative Forecasting: Weight-Tied Dilated Convolutions, Wavelet Scattering Inputs, and Spectral-Consistency Training for Self-Similar Time Series](https://arxiv.org/pdf/2605.17582v1) | 时序预测-PatchTST/Transformer | 2026-05-17 | 原文
 - [PRB-RUPFormer: A Recursive Unified Probabilistic Transformer for Residual PRB Forecasting](https://arxiv.org/pdf/2605.15363v1) | 时序预测-PatchTST/Transformer | 2026-05-14 | 原文
+- [XCTFormer: Leveraging Cross-Channel and Cross-Time Dependencies for Enhanced Time-Series Analysis](https://arxiv.org/pdf/2605.18534v1) | 时序预测-PatchTST/Transformer | 2026-05-18 | 原文
+- [Improving Spatio-Temporal Residual Error Propagation by Mitigating Over-Squashing](https://arxiv.org/pdf/2605.18068v1) | 时序预测-PatchTST/Transformer | 2026-05-18 | 原文
+- [CAST: Causal Anchored Simplex Transport for Distribution-Valued Time Series](https://arxiv.org/pdf/2605.16919v1) | 时序预测-PatchTST/Transformer | 2026-05-16 | 原文
 - [Looped SSMs: Depth-Recurrence and Input Reshaping for Time Series Classification](https://arxiv.org/pdf/2605.16048v1) | 时序预测-PatchTST/Transformer | 2026-05-15 | 原文
+- [POST: Prior-Observation Adversarial Learning of Spatio-Temporal Associations for Multivariate Time Series Anomaly Detection](https://arxiv.org/pdf/2605.18128v1) | 时空预测 | 2026-05-18 | 原文
 - [Spatiotemporal decoupled physics-informed Stone-Weierstrass neural operator for long-time prediction of time-dependent parametric PDEs](https://arxiv.org/pdf/2605.15754v1) | 时空预测 | 2026-05-15 | 原文
 - [Forman--Ricci Curvature on Contact-Sequence Temporal Networks via Spatiotemporal Prism Complexes](https://arxiv.org/pdf/2605.15685v1) | 时空预测 | 2026-05-15 | 原文
+- [Temporal Aware Pruning for Efficient Diffusion-based Video Generation](https://arxiv.org/pdf/2605.17837v1) | 时空预测 | 2026-05-18 | 原文
 - [Event-based spatiotemporal networks for modelling emergent phenomena in complex systems](https://arxiv.org/pdf/2605.15798v1) | 时空预测 | 2026-05-15 | 原文
+- [Spatiotemporal representation of a two-vortex reconnection as a single rotating vortex](https://arxiv.org/pdf/2605.18671v1) | 时空预测 | 2026-05-18 | 原文
+- [QSTRBench: a New Benchmark to Evaluate the Ability of Language Models to Reason with Qualitative Spatial and Temporal Calculi](https://arxiv.org/pdf/2605.18380v1) | 时空预测 | 2026-05-18 | 原文
 - [VideoSeeker: Incentivizing Instance-level Video Understanding via Native Agentic Tool Invocation](https://arxiv.org/pdf/2605.16079v1) | 时空预测 | 2026-05-15 | 原文
 - [A Topology-Aware Spatiotemporal Handover Framework for Continuous Multi-UAV Tracking](https://arxiv.org/pdf/2605.15779v1) | 时空预测 | 2026-05-15 | 原文
 - [Ultralong pump-probe movies of magnon and phonon dynamics from ultrafast generation to microsecond relaxation](https://arxiv.org/pdf/2605.15709v1) | 时空预测 | 2026-05-15 | 原文
+- [Dynamic MRI Reconstruction Via Dual Deep Priors and Low-Rank Plus Sparse Modeling](https://arxiv.org/pdf/2605.18709v1) | 时空预测 | 2026-05-18 | 原文
 
 ## 深度学习时序预测
 

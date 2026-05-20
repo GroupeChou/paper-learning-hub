@@ -1,5 +1,30 @@
 # 论文研学日报自动化执行记录
 
+## 2026-05-18 (周一)
+
+### 执行状态
+- 论文发现: 43 篇候选论文（36篇下载成功，7篇已存在/超时）
+- 站点构建: ✅ 成功 (0.62s)
+- Git推送: ✅ 成功 (c7ec67f)
+
+### 修复
+- config.yaml 被意外污染（混入其他内容），已修复 YAML 语法
+
+### 今日新增论文（部分）
+- Nexus: An Agentic Framework for Time Series Forecasting
+- Look Before You Leap: Autonomous Exploration for LLM Agents
+- Multi-Agent Cooperative Transportation
+- 等共36篇新论文下载成功
+
+### 变更摘要
+- 86 files changed, 1025 insertions(+), 1277 deletions(-)
+- 新增: guides/agent-roadmap.md, guides/ts-roadmap.md
+- Git 已同步至 origin/main
+
+### 备注
+- 本日下载成功率: 36/43 (84%)
+- 队列中累积待处理论文: 43+ 篇
+
 ## 2026-05-15 (周五)
 
 ### 执行状态
