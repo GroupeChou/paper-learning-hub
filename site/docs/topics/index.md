@@ -150,10 +150,10 @@
 - [QuantClaw: Precision Where It Matters for OpenClaw](../papers/2604.22577v1/index.md) | 智谱 | 2026-04-24 | 中文精读
 - [AeSlides: Incentivizing Aesthetic Layout in LLM-Based Slide Generation via Verifiable Rewards](../papers/2604.22840v1/index.md) | 智谱 | 2026-04-21 | 中文精读
 - [MAS-Algorithm: A Workflow for Solving Algorithmic Programming Problems with a Multi-Agent System](https://arxiv.org/pdf/2605.05949v2) | 阿里通义 | 2026-05-07 | 原文
-- [Compiling Agentic Workflows into LLM Weights: Near-Frontier Quality at Two Orders of Magnitude Less Cost](https://arxiv.org/pdf/2605.22502v1) | OpenAI | 2026-05-21 | 原文
-- [Agent JIT Compilation for Latency-Optimizing Web Agent Planning and Scheduling](https://arxiv.org/pdf/2605.21470v1) | OpenAI | 2026-05-20 | 原文
 - [What Happens Inside Agent Memory? Circuit Analysis from Emergence to Diagnosis](../papers/2605.03354v1/index.md) | 阿里通义 | 2026-05-05 | 中文精读
 - [SafetyALFRED: Evaluating Safety-Conscious Planning of Multimodal Large Language Models](../papers/2604.19638v1/index.md) | 阿里通义 | 2026-04-21 | 中文精读
+- [Compiling Agentic Workflows into LLM Weights: Near-Frontier Quality at Two Orders of Magnitude Less Cost](https://arxiv.org/pdf/2605.22502v1) | OpenAI | 2026-05-21 | 原文
+- [Agent JIT Compilation for Latency-Optimizing Web Agent Planning and Scheduling](https://arxiv.org/pdf/2605.21470v1) | OpenAI | 2026-05-20 | 原文
 - [PEEK: Context Map as an Orientation Cache for Long-Context LLM Agents](https://arxiv.org/pdf/2605.19932v1) | OpenAI | 2026-05-19 | 原文
 - [ComPASS: Towards Personalized Agentic Social Support via Tool-Augmented Companionship](../papers/2604.18356v1/index.md) | 阿里通义 | 2026-04-20 | 中文精读
 - [Evaluating Deep Research Agents on Expert Consulting Work: A Benchmark with Verifiers, Rubrics, and Cognitive Traps](https://arxiv.org/pdf/2605.17554v1) | OpenAI | 2026-05-17 | 原文
@@ -170,6 +170,7 @@
 - [Beyond Negative Rollouts: Positive-Only Policy Optimization with Implicit Negative Gradients](https://arxiv.org/pdf/2605.06650v1) | 阿里通义 | 2026-05-07 | 原文
 - [How Many Iterations to Jailbreak? Dynamic Budget Allocation for Multi-Turn LLM Evaluation](https://arxiv.org/pdf/2605.06605v1) | 阿里通义 | 2026-05-07 | 原文
 - [Agentic Design of Compositional Descriptors via Autoresearch for Materials Science Applications](https://arxiv.org/pdf/2605.14671v1) | OpenAI | 2026-05-14 | 原文
+- [WMAttack: Automated Attack Search for Adversarial Evaluation of World-Model Agents](https://arxiv.org/pdf/2605.23220v1) | Google DeepMind | 2026-05-22 | 原文
 - [Causely: A Causal Intelligence Layer for Enterprise AI A Benchmark Study on SRE and Reliability Workflows](https://arxiv.org/pdf/2605.18327v1) | OpenAI | 2026-05-18 | 原文
 - [Episodic-Semantic Memory Architecture for Long-Horizon Scientific Agents](https://arxiv.org/pdf/2605.17625v1) | OpenAI | 2026-05-17 | 原文
 - [Transfer Learning for Customized Car Racing Environments](https://arxiv.org/pdf/2605.17928v1) | OpenAI | 2026-05-18 | 原文
@@ -234,6 +235,7 @@
 - [4D-GSW: Kinematic-Aware Spatio-Temporal Consistent Watermarking for 4D Gaussian Splatting](https://arxiv.org/pdf/2605.22342v1) | 时空预测 | 2026-05-21 | 原文
 - [Self-Supervised ConvLSTM for Fermi Large Area Telescope Transient Detection](https://arxiv.org/pdf/2605.22112v1) | 时空预测 | 2026-05-21 | 原文
 - [Dynamic MRI Reconstruction Via Dual Deep Priors and Low-Rank Plus Sparse Modeling](https://arxiv.org/pdf/2605.18709v1) | 时空预测 | 2026-05-18 | 原文
+- [Asking For An Old Friend: Diagnosing and Mitigating Temporal Failure Modes in LLM-based Statutory Question Answering](https://arxiv.org/pdf/2605.23497v1) | OpenAI | 2026-05-22 | 原文
 - [Mapping Tomato Cropping Systems in California Using AlphaEarth Geospatial Embeddings and Deep Learning Analysis](https://arxiv.org/pdf/2605.21804v1) | Google DeepMind | 2026-05-20 | 原文
 
 ## 深度学习时序预测
