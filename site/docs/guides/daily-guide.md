@@ -1,34 +1,218 @@
 # 今日新增
 
-- 更新时间：2026-05-25
-- 当日候选总数：6
+- 更新时间：2026-05-28
+- 当日候选总数：52
 
 ## AI Agent
 
-- **Compiling Agentic Workflows into LLM Weights: Near-Frontier Quality at Two Orders of Magnitude Less Cost** | OpenAI | 2026-05-21 | 优先级 885 | 状态 `discovered` | 待生成
-  - 来源：[OpenAI arXiv query](https://arxiv.org/abs/2605.22502v1)
-  - 论文：[https://arxiv.org/pdf/2605.22502v1](https://arxiv.org/pdf/2605.22502v1)
-  - 摘要：Agent orchestration frameworks have proliferated, collectively exceeding 290,000 GitHub stars across LangGraph, CrewAI, Google ADK, OpenAI Agents SDK, Semantic Kernel, Strands, and LlamaIndex. All follow the same pattern: an external orc...
-- **Agent JIT Compilation for Latency-Optimizing Web Agent Planning and Scheduling** | OpenAI | 2026-05-20 | 优先级 884 | 状态 `discovered` | 待生成
-  - 来源：[OpenAI arXiv query](https://arxiv.org/abs/2605.21470v1)
-  - 论文：[https://arxiv.org/pdf/2605.21470v1](https://arxiv.org/pdf/2605.21470v1)
-  - 摘要：Computer-use agents (CUA) automate tasks specified with natural language such as "order the cheapest item from Taco Bell" by generating sequences of calls to tools such as click, type, and scroll on a browser. Current implementations fol...
-- **PEEK: Context Map as an Orientation Cache for Long-Context LLM Agents** | OpenAI | 2026-05-19 | 优先级 883 | 状态 `discovered` | 待生成
-  - 来源：[OpenAI arXiv query](https://arxiv.org/abs/2605.19932v1)
-  - 论文：[https://arxiv.org/pdf/2605.19932v1](https://arxiv.org/pdf/2605.19932v1)
-  - 摘要：Large language model (LLM) agents increasingly operate over long and recurring external contexts, like document corpora and code repositories. Across invocations, existing approaches preserve either the agent's trajectory, passive access...
-- **WMAttack: Automated Attack Search for Adversarial Evaluation of World-Model Agents** | Google DeepMind | 2026-05-22 | 优先级 871 | 状态 `discovered` | 待生成
+- **Agent Explorative Policy Optimization for Multimodal Agentic Reasoning** | AI Agent-核心 | 2026-05-27 | 优先级 1008 | 状态 `discovered` | 待生成
+  - 来源：[AI Agent arXiv 搜索](https://arxiv.org/abs/2605.28774v1)
+  - 论文：[https://arxiv.org/pdf/2605.28774v1](https://arxiv.org/pdf/2605.28774v1)
+  - 摘要：Vision-language models with extended reasoning succeed on complex problems, but many real-world problems require external tools that internal reasoning alone often cannot resolve. Agentic reasoning therefore interleaves two behaviors wit...
+- **VeriTrip: A Verifiable Benchmark for Travel Planning Agents over Unstructured Web Corpora** | AI Agent-核心 | 2026-05-27 | 优先级 1008 | 状态 `discovered` | 待生成
+  - 来源：[AI Agent arXiv 搜索](https://arxiv.org/abs/2605.28683v1)
+  - 论文：[https://arxiv.org/pdf/2605.28683v1](https://arxiv.org/pdf/2605.28683v1)
+  - 摘要：Existing benchmarks have laid the foundation for travel planning agents by establishing API-centric paradigms. However, as the capabilities of Autonomous Agents continue to advance, their evaluation must evolve beyond simple tool executi...
+- **Do Agents Need Semantic Metadata? A Comparative Study in Agentic Data Retrieval** | AI Agent-核心 | 2026-05-27 | 优先级 998 | 状态 `discovered` | 待生成
+  - 来源：[AI Agent arXiv 搜索](https://arxiv.org/abs/2605.28787v1)
+  - 论文：[https://arxiv.org/pdf/2605.28787v1](https://arxiv.org/pdf/2605.28787v1)
+  - 摘要：In the era of autonomous agents, machine-actionable data is critical for data-driven workflows. For more than a decade, semantic metadata like schema.org has anchored the FAIR principles (Findable, Accessible, Interoperable, and Reusable...
+- **Learn from Weaknesses: Automated Domain Specialization for Small Computer-Use Agents** | AI Agent-核心 | 2026-05-27 | 优先级 993 | 状态 `discovered` | 待生成
+  - 来源：[AI Agent arXiv 搜索](https://arxiv.org/abs/2605.28775v1)
+  - 论文：[https://arxiv.org/pdf/2605.28775v1](https://arxiv.org/pdf/2605.28775v1)
+  - 摘要：Computer-use agents (CUAs) have recently made substantial progress, but deploying a separate large expert for each software domain remains expensive. Small open computer-use agents are more practical specialization targets, but they rema...
+- **Gamma-World: Generative Multi-Agent World Modeling Beyond Two Players** | AI Agent-核心 | 2026-05-27 | 优先级 988 | 状态 `discovered` | 待生成
+  - 来源：[AI Agent arXiv 搜索](https://arxiv.org/abs/2605.28816v1)
+  - 论文：[https://arxiv.org/pdf/2605.28816v1](https://arxiv.org/pdf/2605.28816v1)
+  - 摘要：World models for interactive video generation have largely focused on single-agent settings, where future observations are generated from a single control signal. However, many generated environments require multi-agent interaction: mult...
+- **TRACER: Turn-level Regret Matching with Inner Reinforcement Credit for Cooperative Multi-LLM Reasoning** | AI Agent-核心 | 2026-05-27 | 优先级 988 | 状态 `discovered` | 待生成
+  - 来源：[AI Agent arXiv 搜索](https://arxiv.org/abs/2605.28699v1)
+  - 论文：[https://arxiv.org/pdf/2605.28699v1](https://arxiv.org/pdf/2605.28699v1)
+  - 摘要：Large language models increasingly rely on either reinforcement learning or multi-agent prompting to improve reasoning, yet these two paradigms remain difficult to combine. Directly applying single-agent reinforcement learning to multi-t...
+- **Calibrating Conservatism for Scalable Oversight** | AI Agent-核心 | 2026-05-27 | 优先级 983 | 状态 `discovered` | 待生成
+  - 来源：[AI Agent arXiv 搜索](https://arxiv.org/abs/2605.28807v1)
+  - 论文：[https://arxiv.org/pdf/2605.28807v1](https://arxiv.org/pdf/2605.28807v1)
+  - 摘要：Agentic AI systems capable of autonomous planning and extended environmental interaction pose a fundamental control problem: how can humans maintain meaningful oversight of systems that may exceed their own capabilities? Existing approac...
+- **Rethinking Memory as Continuously Evolving Connectivity** | AI Agent-核心 | 2026-05-27 | 优先级 983 | 状态 `discovered` | 待生成
+  - 来源：[AI Agent arXiv 搜索](https://arxiv.org/abs/2605.28773v1)
+  - 论文：[https://arxiv.org/pdf/2605.28773v1](https://arxiv.org/pdf/2605.28773v1)
+  - 摘要：Existing memory-augmented LLM agents often treat memory as a static repository with pre-defined representations and fixed retrieval pipelines, which is brittle in dynamic agentic environments where feedback, task variation, and heterogen...
+- **LiveBrowseComp: Are Search Agents Searching, or Just Verifying What They Already Know?** | AI Agent-核心 | 2026-05-27 | 优先级 983 | 状态 `discovered` | 待生成
+  - 来源：[AI Agent arXiv 搜索](https://arxiv.org/abs/2605.28721v1)
+  - 论文：[https://arxiv.org/pdf/2605.28721v1](https://arxiv.org/pdf/2605.28721v1)
+  - 摘要：Are LLM-based search agents genuinely searching, or using the web to verify what they already know? We study this question on BrowseComp with three diagnostics. Our analysis reveals Intrinsic Knowledge Dependence (IKD): even with tool ac...
+- **An LLM-Based Assistance System for Intuitive and Flexible Capability-Based Planning** | AI Agent-核心 | 2026-05-27 | 优先级 978 | 状态 `discovered` | 待生成
+  - 来源：[AI Agent arXiv 搜索](https://arxiv.org/abs/2605.28666v1)
+  - 论文：[https://arxiv.org/pdf/2605.28666v1](https://arxiv.org/pdf/2605.28666v1)
+  - 摘要：In modern industry, dynamic environments and the complexity of modular and reconfigurable resources require automated planning of process sequences. Capability-based planning approaches address this by automatically generating plans from...
+- **Self-Improving Language Models with Bidirectional Evolutionary Search** | AI Agent-核心 | 2026-05-27 | 优先级 973 | 状态 `discovered` | 待生成
+  - 来源：[AI Agent arXiv 搜索](https://arxiv.org/abs/2605.28814v1)
+  - 论文：[https://arxiv.org/pdf/2605.28814v1](https://arxiv.org/pdf/2605.28814v1)
+  - 摘要：Search has been proposed as an effective method for self-improving language models and agentic systems, both for post-training sample generation and for inference. However, widely used methods such as best-of-N sampling and tree search f...
+- **Personal Visual Memory from Explicit and Implicit Evidence** | AI Agent-核心 | 2026-05-27 | 优先级 973 | 状态 `discovered` | 待生成
+  - 来源：[AI Agent arXiv 搜索](https://arxiv.org/abs/2605.28806v1)
+  - 论文：[https://arxiv.org/pdf/2605.28806v1](https://arxiv.org/pdf/2605.28806v1)
+  - 摘要：Long-term memory is increasingly important for personalized AI agents, yet existing benchmarks and methods remain largely text-centric. Even when images are included, the user-specific information needed for later questions is typically...
+- **SwarmHarness: Skill-Based Task Routing via Decentralized Incentive-Aligned AI Agent Networks** | AI Agent-核心 | 2026-05-27 | 优先级 968 | 状态 `discovered` | 待生成
+  - 来源：[AI Agent arXiv 搜索](https://arxiv.org/abs/2605.28764v1)
+  - 论文：[https://arxiv.org/pdf/2605.28764v1](https://arxiv.org/pdf/2605.28764v1)
+  - 摘要：Vast quantities of compute (GPU cycles on personal workstations, idle inference servers, and edge devices between jobs) go unused because no incentive-aligned protocol exists for their owners to share them safely and profitably. Existing...
+- **Helicase: Uncertainty-Guided Supply Chain Knowledge Graph Construction with Autonomous Multi-Agent LLMs** | Agent-MultiAgent | 2026-05-26 | 优先级 962 | 状态 `discovered` | 待生成
+  - 来源：[多智能体 arXiv 搜索](https://arxiv.org/abs/2605.26835v1)
+  - 论文：[https://arxiv.org/pdf/2605.26835v1](https://arxiv.org/pdf/2605.26835v1)
+  - 摘要：LLM-based multi-agent systems have been widely adopted for knowledge retrieval and report generation, synthesizing known information through web search and textual reasoning. However, many critical information tasks in supply chains are...
+- **UnityMAS-O: A General RL Optimization Framework for LLM-Based Multi-Agent Systems** | Agent-MultiAgent | 2026-05-26 | 优先级 962 | 状态 `discovered` | 待生成
+  - 来源：[多智能体 arXiv 搜索](https://arxiv.org/abs/2605.26646v1)
+  - 论文：[https://arxiv.org/pdf/2605.26646v1](https://arxiv.org/pdf/2605.26646v1)
+  - 摘要：LLM-based multi-agent systems decompose complex tasks into interacting roles, but most remain manually orchestrated by prompts, tools, and control rules, while agents are rarely optimized through a unified reinforcement learning interfac...
+- **Decoupled Intelligence: A Multi-Agent LLM Framework for Controllable Traffic Scenario Generation in SUMO** | Agent-MultiAgent | 2026-05-26 | 优先级 957 | 状态 `discovered` | 待生成
+  - 来源：[多智能体 arXiv 搜索](https://arxiv.org/abs/2605.27685v1)
+  - 论文：[https://arxiv.org/pdf/2605.27685v1](https://arxiv.org/pdf/2605.27685v1)
+  - 摘要：The integration of Large Language Models (LLMs) with microscopic traffic simulation offers a promising path toward autonomous urban planning and intelligent transportation analysis. However, existing monolithic agent architectures often...
+- **GUI-CIDER: Mid-training GUI Agents via Causal Internalization and Density-aware Exemplar Reselection** | Agent-MultiAgent | 2026-05-27 | 优先级 953 | 状态 `discovered` | 待生成
+  - 来源：[多智能体 arXiv 搜索](https://arxiv.org/abs/2605.28534v1)
+  - 论文：[https://arxiv.org/pdf/2605.28534v1](https://arxiv.org/pdf/2605.28534v1)
+  - 摘要：Despite the rapid progress of multimodal large language models in building Graphical User Interface (GUI) agents, their real-world task completion is fundamentally bottlenecked by a lack of world knowledge about GUI operations. Existing...
+- **MACReD: A Multi-Agent Collaborative Reasoning Framework for Reaction Diagram Parsing** | Agent-MultiAgent | 2026-05-27 | 优先级 953 | 状态 `discovered` | 待生成
+  - 来源：[多智能体 arXiv 搜索](https://arxiv.org/abs/2605.28077v1)
+  - 论文：[https://arxiv.org/pdf/2605.28077v1](https://arxiv.org/pdf/2605.28077v1)
+  - 摘要：Parsing chemical reaction diagrams from scientific literature is challenging due to heterogeneous layouts, intertwined visual elements, and the difficulty of integrating recognition and reasoning. Existing vision-language models advance...
+- **Sentinel: Embodied Cooperative Spatial Reasoning and Planning** | Agent-MultiAgent | 2026-05-25 | 优先级 951 | 状态 `discovered` | 待生成
+  - 来源：[多智能体 arXiv 搜索](https://arxiv.org/abs/2605.26239v1)
+  - 论文：[https://arxiv.org/pdf/2605.26239v1](https://arxiv.org/pdf/2605.26239v1)
+  - 摘要：In this work, we study Cooperative Spatial Intelligence, the ability of decentralized embodied agents to coordinate effectively under dynamic environmental constraints across city-scale outdoor domains. We introduce Sentinel Challenge, a...
+- **SCALE-COMM: Shared, Contrastively-Aligned Latent Embeddings for MARL Communication** | Agent-MultiAgent | 2026-05-26 | 优先级 947 | 状态 `discovered` | 待生成
+  - 来源：[多智能体 arXiv 搜索](https://arxiv.org/abs/2605.27532v1)
+  - 论文：[https://arxiv.org/pdf/2605.27532v1](https://arxiv.org/pdf/2605.27532v1)
+  - 摘要：Emergent communication enables partially observant Autonomous Mobile Robots (AMRs) to coordinate effectively in decentralized multi-agent reinforcement learning (MARL) settings. However, existing approaches often struggle with unstable c...
+- **Mixture-of-Experts Knowledge Graph Retrieval-Augmented Generation for Multi-Agent LLM-based Recommendation** | Agent-MultiAgent | 2026-05-27 | 优先级 943 | 状态 `discovered` | 待生成
+  - 来源：[多智能体 arXiv 搜索](https://arxiv.org/abs/2605.28175v1)
+  - 论文：[https://arxiv.org/pdf/2605.28175v1](https://arxiv.org/pdf/2605.28175v1)
+  - 摘要：Large language models (LLMs) have recently been adopted for recommendations due to their ability to understand user intent and item semantics. However, LLM-based recommender systems often rely on parametric knowledge and suffer from outd...
+- **Decoupled Delay Compensation: Enhancing Pre-trained MARL Policies via Learned Dynamics Filtering** | Agent-MultiAgent | 2026-05-25 | 优先级 941 | 状态 `discovered` | 待生成
+  - 来源：[多智能体 arXiv 搜索](https://arxiv.org/abs/2605.26286v1)
+  - 论文：[https://arxiv.org/pdf/2605.26286v1](https://arxiv.org/pdf/2605.26286v1)
+  - 摘要：Real-world multi-agent reinforcement learning (MARL) systems must often operate under stale observations, stochastic communication delays, and intermittent packet loss. Policies trained under idealized synchronous conditions frequently e...
+- **Got a Secret? LLM Agents Can't Keep It: Evaluating Privacy in Multi-Agent Systems** | OpenAI | 2026-05-26 | 优先级 902 | 状态 `discovered` | 待生成
+  - 来源：[OpenAI arXiv query](https://arxiv.org/abs/2605.27766v1)
+  - 论文：[https://arxiv.org/pdf/2605.27766v1](https://arxiv.org/pdf/2605.27766v1)
+  - 摘要：LLM safety evaluations predominantly test models in isolation, yet deployed AI agents increasingly operate within persistent social environments alongside other agents. We introduce a Moltbook-style simulation platform where thousands of...
+- **MDIA: A Multi-Agent Diagnostic Intelligence Pipeline on HealthBench Professional** | OpenAI | 2026-05-23 | 优先级 889 | 状态 `discovered` | 待生成
+  - 来源：[OpenAI arXiv query](https://arxiv.org/abs/2605.24699v1)
+  - 论文：[https://arxiv.org/pdf/2605.24699v1](https://arxiv.org/pdf/2605.24699v1)
+  - 摘要：Most reported gains on agentic-LLM clinical benchmarks are often attributed to prompt engineering, yet our results suggest that larger improvements can come from architectural and engine-level design. We present MDIA, a Multi-agent Diagn...
+- **Verifiable Benchmarking of Long-Horizon Spatial Biology** | OpenAI | 2026-05-27 | 优先级 878 | 状态 `discovered` | 待生成
+  - 来源：[OpenAI arXiv query](https://arxiv.org/abs/2605.28065v1)
+  - 论文：[https://arxiv.org/pdf/2605.28065v1](https://arxiv.org/pdf/2605.28065v1)
+  - 摘要：AI agents are increasingly useful for biological data analysis, but existing benchmarks mostly test broad biological knowledge, executable workflows, or localized analysis steps rather than end-to-end scientific reasoning over spatial me...
+- **WMAttack: Automated Attack Search for Adversarial Evaluation of World-Model Agents** | Google DeepMind | 2026-05-22 | 优先级 868 | 状态 `discovered` | 待生成
   - 来源：[Google DeepMind arXiv query](https://arxiv.org/abs/2605.23220v1)
   - 论文：[https://arxiv.org/pdf/2605.23220v1](https://arxiv.org/pdf/2605.23220v1)
   - 摘要：Despite the growing use of world models as decision-making agents, their adversarial robustness remains underexplored due to the lack of dedicated automated evaluation methods. A key obstacle is that attack evaluation must be both accura...
 
 ## 时序预测
 
-- **Asking For An Old Friend: Diagnosing and Mitigating Temporal Failure Modes in LLM-based Statutory Question Answering** | OpenAI | 2026-05-22 | 优先级 871 | 状态 `discovered` | 待生成
+- **Online Irregular Multivariate Time Series Forecasting via Uncertainty-Driven Dual-Expert Calibration** | 时序预测-核心 | 2026-05-27 | 优先级 988 | 状态 `discovered` | 待生成
+  - 来源：[时序预测 arXiv 搜索](https://arxiv.org/abs/2605.28603v1)
+  - 论文：[https://arxiv.org/pdf/2605.28603v1](https://arxiv.org/pdf/2605.28603v1)
+  - 摘要：Irregular multivariate time series forecasting is critical in many real-world applications, where time series are irregularly sampled and exhibit dynamically evolving missingness patterns. Although existing methods perform well in offlin...
+- **AME-TS: Anchored Mixture-of-Experts for Time Series Forecasting** | 时序预测-核心 | 2026-05-24 | 优先级 985 | 状态 `discovered` | 待生成
+  - 来源：[时序预测 arXiv 搜索](https://arxiv.org/abs/2605.25166v1)
+  - 论文：[https://arxiv.org/pdf/2605.25166v1](https://arxiv.org/pdf/2605.25166v1)
+  - 摘要：Time series forecasting models are increasingly scaled through large Transformer backbones, yet most existing approaches process all series through a shared dense computation path despite substantial heterogeneity in temporal structure....
+- **Factorize to Generalize: Retrieval-Guided Invariant-Dynamic Decomposition for Time Series Forecasting** | 时序预测-核心 | 2026-05-24 | 优先级 980 | 状态 `discovered` | 待生成
+  - 来源：[时序预测 arXiv 搜索](https://arxiv.org/abs/2605.24911v1)
+  - 论文：[https://arxiv.org/pdf/2605.24911v1](https://arxiv.org/pdf/2605.24911v1)
+  - 摘要：Time series foundation models (TSFMs) have recently achieved strong zero-shot forecasting performance through large-scale pretraining and retrieval-augmented prediction. However, our empirical analysis reveals a non-trivial limitation of...
+- **Assessing the Operational Viability of Foundation Models for Time Series Forecasting** | 时序预测-核心 | 2026-05-23 | 优先级 979 | 状态 `discovered` | 待生成
+  - 来源：[时序预测 arXiv 搜索](https://arxiv.org/abs/2605.24381v1)
+  - 论文：[https://arxiv.org/pdf/2605.24381v1](https://arxiv.org/pdf/2605.24381v1)
+  - 摘要：Time series forecasting drives operational decisions in areas like finance, transportation, and energy. While supervised learning approaches achieve strong performance, they require domain-specific training, feature engineering, and ongo...
+- **Parametric Prior Mapping Framework for Non-stationary Probabilistic Time Series Forecasting** | 时序预测-核心 | 2026-05-22 | 优先级 978 | 状态 `discovered` | 待生成
+  - 来源：[时序预测 arXiv 搜索](https://arxiv.org/abs/2605.23402v1)
+  - 论文：[https://arxiv.org/pdf/2605.23402v1](https://arxiv.org/pdf/2605.23402v1)
+  - 摘要：Effectively modeling non-stationary dynamics in probabilistic multivariate time series(MTS) forecasting requires balancing expressiveness with robustness. Existing parametric approaches benefit from strong inductive biases but lack flexi...
+- **PaP-NF: Probabilistic Long-Term Time Series Forecasting via Prefix-as-Prompt Reprogramming and Normalizing Flows** | 时序预测-核心 | 2026-05-22 | 优先级 978 | 状态 `discovered` | 待生成
+  - 来源：[时序预测 arXiv 搜索](https://arxiv.org/abs/2605.23219v1)
+  - 论文：[https://arxiv.org/pdf/2605.23219v1](https://arxiv.org/pdf/2605.23219v1)
+  - 摘要：Time series forecasting plays a central role in many real-world applications and has been extensively studied. Most existing approaches rely on deterministic models. However, real-world environments exhibit inherently uncertain and compl...
+- **Beyond Holistic Models: Systematic Component-level Benchmarking of Deep Multivariate Time-Series Forecasting** | 时序预测-核心 | 2026-05-26 | 优先级 977 | 状态 `discovered` | 待生成
+  - 来源：[时序预测 arXiv 搜索](https://arxiv.org/abs/2605.26562v1)
+  - 论文：[https://arxiv.org/pdf/2605.26562v1](https://arxiv.org/pdf/2605.26562v1)
+  - 摘要：While previous research in multivariate time series forecasting has focused on developing complex holistic models, this work advocates for a shift toward a granular, component-level understanding of their impacts. We propose TSCOMP, the...
+- **ChronoVAE-HOPE: Beyond Attention -- A Next-Generation VAE Foundation Model for Specialized Time Series Classification** | 时序预测-核心 | 2026-05-21 | 优先级 977 | 状态 `discovered` | 待生成
+  - 来源：[时序预测 arXiv 搜索](https://arxiv.org/abs/2605.22684v2)
+  - 论文：[https://arxiv.org/pdf/2605.22684v2](https://arxiv.org/pdf/2605.22684v2)
+  - 摘要：Time Series Foundation Models (TSFMs) have become a new component of the state-of-the-art in general time series forecasting. However, adapting them to specialized classification tasks remains constrained by two interconnected challenges...
+- **STaT: Resolving Shape Distortion in Non-Stationary Time Series via Tri-Modal Synergy** | 时序预测-核心 | 2026-05-25 | 优先级 976 | 状态 `discovered` | 待生成
+  - 来源：[时序预测 arXiv 搜索](https://arxiv.org/abs/2605.25943v1)
+  - 论文：[https://arxiv.org/pdf/2605.25943v1](https://arxiv.org/pdf/2605.25943v1)
+  - 摘要：Recent research in time series forecasting frequently investigates the integration of textual and visual modalities with numerical models to better navigate non-stationary environments. Despite delivering solid numerical results, existin...
+- **Deep ZakaiJ: Structured Filtering for Jump-Diffusion Time Series Forecasting** | 时序预测-核心 | 2026-05-23 | 优先级 974 | 状态 `discovered` | 待生成
+  - 来源：[时序预测 arXiv 搜索](https://arxiv.org/abs/2605.24548v1)
+  - 论文：[https://arxiv.org/pdf/2605.24548v1](https://arxiv.org/pdf/2605.24548v1)
+  - 摘要：Time series driven by unobserved latent states frequently exhibit abrupt jump discontinuities whose timing and magnitude cannot be predicted from observed history alone. Classical jump-diffusion models offer a principled mathematical fra...
+- **Dr-CiK: A Testbed for Foresight-Driven Agents** | 时序预测-核心 | 2026-05-27 | 优先级 973 | 状态 `discovered` | 待生成
+  - 来源：[时序预测 arXiv 搜索](https://arxiv.org/abs/2605.27904v1)
+  - 论文：[https://arxiv.org/pdf/2605.27904v1](https://arxiv.org/pdf/2605.27904v1)
+  - 摘要：Time series forecasting in real-world settings often depends not only on historical observations, but also on external context that must be actively discovered from noisy, heterogeneous information sources. Yet existing context-aided for...
+- **Falcon-X: A Time Series Foundation Model for Heterogeneous Multivariate Modeling** | 时序预测-PatchTST/Transformer | 2026-05-26 | 优先级 957 | 状态 `discovered` | 待生成
+  - 来源：[Transformer时序预测 arXiv 搜索](https://arxiv.org/abs/2605.27286v1)
+  - 论文：[https://arxiv.org/pdf/2605.27286v1](https://arxiv.org/pdf/2605.27286v1)
+  - 摘要：Time series foundation models (TSFMs) are transforming the forecasting paradigm through large-scale cross-domain pretraining. However, most existing TSFMs remain univariate, and recent efforts to enable cross-variate modeling still opera...
+- **On the Role of Inductive Bias in Time-Series Pretraining: A Case Study in Learning Generalizable Representations for Clinical Time Series** | 时序预测-PatchTST/Transformer | 2026-05-25 | 优先级 956 | 状态 `discovered` | 待生成
+  - 来源：[Transformer时序预测 arXiv 搜索](https://arxiv.org/abs/2605.26194v1)
+  - 论文：[https://arxiv.org/pdf/2605.26194v1](https://arxiv.org/pdf/2605.26194v1)
+  - 摘要：Clinical time-series learning is routinely constrained by small, heterogeneous cohorts and protocol drift, while its downstream use spans both classification (e.g., pathology diagnosis) and regression (e.g., temporal forecasting). These...
+- **BatteryMFormer: Multi-level Learning for Battery Degradation Trajectory Forecasting** | 时序预测-PatchTST/Transformer | 2026-05-26 | 优先级 952 | 状态 `discovered` | 待生成
+  - 来源：[Transformer时序预测 arXiv 搜索](https://arxiv.org/abs/2605.27044v1)
+  - 论文：[https://arxiv.org/pdf/2605.27044v1](https://arxiv.org/pdf/2605.27044v1)
+  - 摘要：Early battery degradation trajectory forecasting (BDTF), which predicts the full-life state-of-health trajectory from early operational data, is critical for battery optimization, manufacturing, and deployment. Battery degradation data e...
+- **Triangular-Reference Schrödinger Bridges for Time Series Generation** | 时序预测-PatchTST/Transformer | 2026-05-26 | 优先级 952 | 状态 `discovered` | 待生成
+  - 来源：[Transformer时序预测 arXiv 搜索](https://arxiv.org/abs/2605.27478v1)
+  - 论文：[https://arxiv.org/pdf/2605.27478v1](https://arxiv.org/pdf/2605.27478v1)
+  - 摘要：We introduce Triangular-Reference Schrödinger Bridges for Time Series (TR-SBTS), a conservative extension of the SBTS framework in which the Brownian reference is replaced by an intervalwise frozen, possibly degenerate diffusion referenc...
+- **TGFormer: Towards Temporal Graph Transformer with Auto-Correlation Mechanism** | 时序预测-PatchTST/Transformer | 2026-05-24 | 优先级 950 | 状态 `discovered` | 待生成
+  - 来源：[Transformer时序预测 arXiv 搜索](https://arxiv.org/abs/2605.24971v1)
+  - 论文：[https://arxiv.org/pdf/2605.24971v1](https://arxiv.org/pdf/2605.24971v1)
+  - 摘要：The growing interest in Temporal Graph Neural Networks (TGNNs) stems from their ability to model complex dynamics and deliver superior performance. However, TGNNs encounter fundamental challenges in capturing long-term dependencies and i...
+- **Patched-DeltaNet: Token-Level Event-Driven Memory for Linear-Time Anomaly Detection** | 时序预测-PatchTST/Transformer | 2026-05-27 | 优先级 948 | 状态 `discovered` | 待生成
+  - 来源：[Transformer时序预测 arXiv 搜索](https://arxiv.org/abs/2605.27992v1)
+  - 论文：[https://arxiv.org/pdf/2605.27992v1](https://arxiv.org/pdf/2605.27992v1)
+  - 摘要：Time series anomaly detection is critical for maintaining the reliability of mission-critical systems. While Transformer-based models like PatchTST have shown remarkable performance, their $\mathcal{O}(L^2)$ computational complexity seve...
+- **CALAD: Channel-Aware contrastive Learning for multivariate time series Anomaly Detection** | 时序预测-PatchTST/Transformer | 2026-05-22 | 优先级 948 | 状态 `discovered` | 待生成
+  - 来源：[Transformer时序预测 arXiv 搜索](https://arxiv.org/abs/2605.23139v1)
+  - 论文：[https://arxiv.org/pdf/2605.23139v1](https://arxiv.org/pdf/2605.23139v1)
+  - 摘要：Multivariate time series anomaly detection has become increasingly important in real-world applications, where labeled data are often scarce. Many existing approaches rely on unsupervised learning to model normal patterns, but they often...
+- **ASTRO: Adaptive Spatio-Temporal Reinforcement Optimization for GNN Powered Anomly Detection in Cyber Physical Systems** | 时序预测-PatchTST/Transformer | 2026-05-24 | 优先级 945 | 状态 `discovered` | 待生成
+  - 来源：[Transformer时序预测 arXiv 搜索](https://arxiv.org/abs/2605.25135v1)
+  - 论文：[https://arxiv.org/pdf/2605.25135v1](https://arxiv.org/pdf/2605.25135v1)
+  - 摘要：Anomaly detection in Industrial Internet of Things (IIoT) environments is essential to protect the Industrial Control Systems (ICS) and Cyber-Physical Systems (CPS) from occuring run time false data injection and other malicious attacks....
+- **Inpainting-Style Conditional Diffusion for Multivariable Time Series Forecasting** | 时空预测 | 2026-05-27 | 优先级 933 | 状态 `discovered` | 待生成
+  - 来源：[时空预测 arXiv 搜索](https://arxiv.org/abs/2605.28324v1)
+  - 论文：[https://arxiv.org/pdf/2605.28324v1](https://arxiv.org/pdf/2605.28324v1)
+  - 摘要：In this paper, we propose a novel conditional diffusion-based framework for multivariable time-series solar power forecasting. The proposed method reformulates temporal PV data as structured two-dimensional representations (images) using...
+- **Spatiotemporal Tracking in Cooperative ISAC Networks: A Stochastic Geometry Framework** | 时空预测 | 2026-05-27 | 优先级 923 | 状态 `discovered` | 待生成
+  - 来源：[时空预测 arXiv 搜索](https://arxiv.org/abs/2605.28191v1)
+  - 论文：[https://arxiv.org/pdf/2605.28191v1](https://arxiv.org/pdf/2605.28191v1)
+  - 摘要：We adopt a stochastic-geometry framework to study continuous target tracking in integrated sensing and communication (ISAC) networks, with base-station locations modelled as a Poisson point process. The single-BS analysis shows that the...
+- **ST-ColoNet: Spatio-Temporal Colon Segment Recognition via Hybrid Attention and Edge-Guided Feature Learning** | 时空预测 | 2026-05-27 | 优先级 923 | 状态 `discovered` | 待生成
+  - 来源：[时空预测 arXiv 搜索](https://arxiv.org/abs/2605.28119v1)
+  - 论文：[https://arxiv.org/pdf/2605.28119v1](https://arxiv.org/pdf/2605.28119v1)
+  - 摘要：Colo-segment recognition in colonoscopy videos is a key requirement for many downstream tasks, but existing automatic recognition methods only use colonoscopy images without fully exploiting the use of temporal information, leading to po...
+- **DRIFT: Driving Risk Inference via Field Transmission for Human-like Autonomous Driving** | 时空预测 | 2026-05-27 | 优先级 923 | 状态 `discovered` | 待生成
+  - 来源：[时空预测 arXiv 搜索](https://arxiv.org/abs/2605.27964v1)
+  - 论文：[https://arxiv.org/pdf/2605.27964v1](https://arxiv.org/pdf/2605.27964v1)
+  - 摘要：Risk fields offer spatially structured alternatives to scalar safety metrics. However, hand-crafted static risk field models struggle with occlusion and topology-driven propagation. We present DRIFT, a spatiotemporal risk field governed...
+- **Mining Multi-Modality Spatio-Temporal Cues for Video Important Person Identification** | 时空预测 | 2026-05-27 | 优先级 918 | 状态 `discovered` | 待生成
+  - 来源：[时空预测 arXiv 搜索](https://arxiv.org/abs/2605.28604v1)
+  - 论文：[https://arxiv.org/pdf/2605.28604v1](https://arxiv.org/pdf/2605.28604v1)
+  - 摘要：Identifying key individuals in video scenes is essential for applications such as automated video editing and intelligent surveillance. Current methods primarily focus on static images and immediate visual cues, overlooking the rich spat...
+- **Adaptive Temporal Gating of Longitudinal Magnetic Resonance Imaging for Alzheimer's Prediction** | 时空预测 | 2026-05-27 | 优先级 918 | 状态 `discovered` | 待生成
+  - 来源：[时空预测 arXiv 搜索](https://arxiv.org/abs/2605.28397v1)
+  - 论文：[https://arxiv.org/pdf/2605.28397v1](https://arxiv.org/pdf/2605.28397v1)
+  - 摘要：Predicting conversion from Mild Cognitive Impairment (MCI) to Alzheimer's Disease (AD) is critical for early intervention. Current deep learning paradigms predominantly rely on cross-sectional structural MRI, neglecting prognostic value...
+- **Asking For An Old Friend: Diagnosing and Mitigating Temporal Failure Modes in LLM-based Statutory Question Answering** | OpenAI | 2026-05-22 | 优先级 868 | 状态 `discovered` | 待生成
   - 来源：[OpenAI arXiv query](https://arxiv.org/abs/2605.23497v1)
   - 论文：[https://arxiv.org/pdf/2605.23497v1](https://arxiv.org/pdf/2605.23497v1)
   - 摘要：Large language models are increasingly used for legal research, yet their fixed training cutoffs and reliance on static parametric knowledge are at odds with the evolving nature of statutory law. We study two temporal failure modes: post...
-- **Mapping Tomato Cropping Systems in California Using AlphaEarth Geospatial Embeddings and Deep Learning Analysis** | Google DeepMind | 2026-05-20 | 优先级 854 | 状态 `discovered` | 待生成
-  - 来源：[Google DeepMind arXiv query](https://arxiv.org/abs/2605.21804v1)
-  - 论文：[https://arxiv.org/pdf/2605.21804v1](https://arxiv.org/pdf/2605.21804v1)
-  - 摘要：Field-scale crop maps support supply-chain forecasting and policy, yet statewide crop identification still often depends on retrospective surveys or remote-sensing workflows built around hand-engineered spectral features. Those pipelines...
