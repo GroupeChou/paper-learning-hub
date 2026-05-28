@@ -25,6 +25,40 @@
 
 ---
 
+## 2026-05-28 执行记录
+
+### 执行时间
+2026-05-28 21:50 - 22:30
+
+### 执行结果
+| 步骤 | 状态 | 详情 |
+|------|------|------|
+| 1. 激活venv + 发现论文 | ✅ 部分完成 | 发现52篇新增候选（DB从238→288篇），下载因5min超时仅完成3/100篇 |
+| 2. 更新学习大纲 | ✅ 已完成 | daily-brief.md已更新10篇深度处理论文 |
+| 3. 构建MkDocs站点 | ✅ 完成 | 0.70秒构建，site_output/papers/ 67篇 |
+| 4. Git推送 | ❌ 失败 → ✅ 已修复 | PAT token 已更新，git push 成功 (dc50a9d..d4485b8) |
+
+### 数据统计
+- 数据库论文总数：288篇（+50）
+- discovered：100篇（+50）
+- queued：112篇
+- translated：66篇
+- workbuddy_pending：10篇
+- Git commit已创建(d4485b8)，push因token过期失败
+
+### 异常记录
+- 论文下载因5分钟超时被截断，仅完成3/100篇
+- GitHub PAT token 过期，push失败
+
+### 逻辑调整
+- 新增 `raw.skip_download: true` 配置 — 管线跳过 PDF 下载阶段
+- 新增 `parse_document_from_arxiv()` — 从 `arxiv.org/html`（备选 ar5iv）远程读取论文全文
+- pipeline + workbuddy 支持无本地 PDF 的远程解析模式
+- translator 接受可选 `parsed_doc` 参数
+- 后续无需下载 PDF 到本地，全从 arXiv 远程读取
+
+---
+
 ## 2026-05-22 执行记录
 
 ### 执行时间

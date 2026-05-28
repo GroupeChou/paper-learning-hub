@@ -9,6 +9,7 @@ from .models import (
     FeedSource,
     GitSettings,
     Organization,
+    RawSettings,
     SiteSettings,
     Theme,
     TranslatorSettings,
@@ -43,6 +44,7 @@ def load_config(config_path: str | Path) -> AppConfig:
     site_raw = raw.get("site", {})
     translator_raw = raw.get("translator", {})
     workbuddy_raw = raw.get("workbuddy", {})
+    raw_raw = raw.get("raw", {})
 
     return AppConfig(
         project_name=raw["project_name"],
@@ -70,6 +72,9 @@ def load_config(config_path: str | Path) -> AppConfig:
             chunk_chars=translator_raw.get("chunk_chars", 5000),
             max_images_per_paper=translator_raw.get("max_images_per_paper", 12),
             system_prompt=translator_raw.get("system_prompt", "").strip(),
+        ),
+        raw=RawSettings(
+            skip_download=raw_raw.get("skip_download", False),
         ),
         workbuddy=WorkBuddySettings(
             enabled=workbuddy_raw.get("enabled", False),

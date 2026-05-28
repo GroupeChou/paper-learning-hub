@@ -4,16 +4,16 @@
 
 ## AI Agent
 
-- [Agent Explorative Policy Optimization for Multimodal Agentic Reasoning](https://arxiv.org/pdf/2605.28774v1) | AI Agent-核心 | 2026-05-27 | 原文
-- [VeriTrip: A Verifiable Benchmark for Travel Planning Agents over Unstructured Web Corpora](https://arxiv.org/pdf/2605.28683v1) | AI Agent-核心 | 2026-05-27 | 原文
-- [Do Agents Need Semantic Metadata? A Comparative Study in Agentic Data Retrieval](https://arxiv.org/pdf/2605.28787v1) | AI Agent-核心 | 2026-05-27 | 原文
-- [MOSS: Self-Evolution through Source-Level Rewriting in Autonomous Agent Systems](https://arxiv.org/pdf/2605.22794v1) | AI Agent-核心 | 2026-05-21 | 原文
-- [Learn from Weaknesses: Automated Domain Specialization for Small Computer-Use Agents](https://arxiv.org/pdf/2605.28775v1) | AI Agent-核心 | 2026-05-27 | 原文
-- [Self-Evolving Multi-Agent Systems via Decentralized Memory](https://arxiv.org/pdf/2605.22721v1) | AI Agent-核心 | 2026-05-21 | 原文
-- [WorkstreamBench: Evaluating LLM Agents on End-to-End Spreadsheet Tasks in Finance](https://arxiv.org/pdf/2605.22664v1) | AI Agent-核心 | 2026-05-21 | 原文
-- [EnvFactory: Scaling Tool-Use Agents via Executable Environments Synthesis and Robust RL](https://arxiv.org/pdf/2605.18703v1) | AI Agent-核心 | 2026-05-18 | 原文
-- [SkillGenBench: Benchmarking Skill Generation Pipelines for LLM Agents](https://arxiv.org/pdf/2605.18693v1) | AI Agent-核心 | 2026-05-18 | 原文
-- [Overeager Coding Agents: Measuring Out-of-Scope Actions on Benign Tasks](https://arxiv.org/pdf/2605.18583v1) | AI Agent-核心 | 2026-05-18 | 原文
+- [Agent Explorative Policy Optimization for Multimodal Agentic Reasoning](../papers/2605.28774v1/index.md) | AI Agent-核心 | 2026-05-27 | 中文精读
+- [VeriTrip: A Verifiable Benchmark for Travel Planning Agents over Unstructured Web Corpora](../papers/2605.28683v1/index.md) | AI Agent-核心 | 2026-05-27 | 中文精读
+- [Do Agents Need Semantic Metadata? A Comparative Study in Agentic Data Retrieval](../papers/2605.28787v1/index.md) | AI Agent-核心 | 2026-05-27 | 中文精读
+- [MOSS: Self-Evolution through Source-Level Rewriting in Autonomous Agent Systems](../papers/2605.22794v1/index.md) | AI Agent-核心 | 2026-05-21 | 中文精读
+- [Learn from Weaknesses: Automated Domain Specialization for Small Computer-Use Agents](../papers/2605.28775v1/index.md) | AI Agent-核心 | 2026-05-27 | 中文精读
+- [Self-Evolving Multi-Agent Systems via Decentralized Memory](../papers/2605.22721v1/index.md) | AI Agent-核心 | 2026-05-21 | 中文精读
+- [WorkstreamBench: Evaluating LLM Agents on End-to-End Spreadsheet Tasks in Finance](../papers/2605.22664v1/index.md) | AI Agent-核心 | 2026-05-21 | 中文精读
+- [EnvFactory: Scaling Tool-Use Agents via Executable Environments Synthesis and Robust RL](../papers/2605.18703v1/index.md) | AI Agent-核心 | 2026-05-18 | 中文精读
+- [SkillGenBench: Benchmarking Skill Generation Pipelines for LLM Agents](../papers/2605.18693v1/index.md) | AI Agent-核心 | 2026-05-18 | 中文精读
+- [Overeager Coding Agents: Measuring Out-of-Scope Actions on Benign Tasks](../papers/2605.18583v1/index.md) | AI Agent-核心 | 2026-05-18 | 中文精读
 - [Look Before You Leap: Autonomous Exploration for LLM Agents](https://arxiv.org/pdf/2605.16143v1) | AI Agent-核心 | 2026-05-15 | 原文
 - [Multi-Agent Cooperative Transportation: Optimal and Efficient Task Allocation and Path Finding](https://arxiv.org/pdf/2605.16097v1) | AI Agent-核心 | 2026-05-15 | 原文
 - [Gamma-World: Generative Multi-Agent World Modeling Beyond Two Players](https://arxiv.org/pdf/2605.28816v1) | AI Agent-核心 | 2026-05-27 | 原文

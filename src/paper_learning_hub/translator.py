@@ -201,10 +201,13 @@ def _paper_header(paper: CandidatePaper, parsed: ParsedDocument, assets_dir: Pat
 {parse_notes}{images}"""
 
 
-def translate_paper(config: AppConfig, paper: CandidatePaper, raw_path: Path) -> Path:
+def translate_paper(config: AppConfig, paper: CandidatePaper, raw_path: Path, parsed_doc: ParsedDocument | None = None) -> Path:
     zh_dir = ensure_dir(config.zh_dir / paper.paper_id)
     translator = create_translator(config)
-    parsed = parse_document(raw_path, zh_dir, config.translator.chunk_chars, config.translator.max_images_per_paper)
+    if parsed_doc is not None:
+        parsed = parsed_doc
+    else:
+        parsed = parse_document(raw_path, zh_dir, config.translator.chunk_chars, config.translator.max_images_per_paper)
     sections = []
     needs_review = bool(parsed.notes)
 

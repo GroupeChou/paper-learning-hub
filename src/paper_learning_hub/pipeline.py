@@ -9,6 +9,7 @@ from .discovery import discover_candidates
 from .downloader import download_paper, batch_download_papers
 from .git_ops import sync_git
 from .models import CandidatePaper, PipelineResult
+from .parser import parse_document_from_arxiv
 from .site_builder import build_site, run_mkdocs_build
 from .translator import translate_paper
 from .utils import ensure_dir, now_iso, today_iso
@@ -54,6 +55,12 @@ class Pipeline:
 
     def _download_candidates(self, papers: list[CandidatePaper], result: PipelineResult) -> None:
         timestamp = now_iso(self.config.timezone)
+
+        # 跳过下载阶段（直接从 arXiv 远程读取）
+        if self.config.raw.skip_download:
+            logging.info("raw.skip_download=True，跳过 PDF 下载阶段，将从 ar5iv 远程读取论文内容")
+            return
+
         # 过滤掉已有 PDF 的论文
         to_download = [p for p in papers if not p.raw_path]
         if not to_download:
@@ -98,6 +105,19 @@ class Pipeline:
             try:
                 raw_path = Path(paper.raw_path) if paper.raw_path else None
                 if raw_path is None or not raw_path.exists():
+                    # 切换到远程解析模式（无本地 PDF）
+                    if self.config.raw.skip_download:
+                        logging.info("无本地 PDF，从 ar5iv 远程读取: %s", paper.paper_id)
+                        zh_dir = ensure_dir(self.config.zh_dir / paper.paper_id)
+                        parsed = parse_document_from_arxiv(
+                            paper.paper_id,
+                            zh_dir,
+                            self.config.translator.chunk_chars,
+                        )
+                        zh_path = translate_paper(self.config, paper, Path(paper.paper_id), parsed_doc=parsed)
+                        self.db.set_status(paper.paper_id, "translated", timestamp, zh_path=str(zh_path))
+                        result.translated += 1
+                        continue
                     raw_path = download_paper(paper, self.config.raw_dir)
                     self.db.set_status(paper.paper_id, "downloaded", timestamp, raw_path=str(raw_path))
                 zh_path = translate_paper(self.config, paper, raw_path)

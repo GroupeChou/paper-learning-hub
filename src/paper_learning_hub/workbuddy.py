@@ -1,13 +1,16 @@
 from __future__ import annotations
 
 import json
+import logging
 import os
 import shutil
 from pathlib import Path
 
 from .models import AppConfig, CandidatePaper, ParsedDocument
-from .parser import parse_document
+from .parser import parse_document, parse_document_from_arxiv
 from .utils import ensure_dir, now_iso, relative_posix, shorten_text
+
+logger = logging.getLogger(__name__)
 
 
 def ensure_workspace(config: AppConfig) -> None:
@@ -52,7 +55,7 @@ def _target_status_path(config: AppConfig, paper: CandidatePaper) -> Path:
     return _job_dir(config, paper) / "result.json"
 
 
-def _serialize_manifest(config: AppConfig, paper: CandidatePaper, parsed: ParsedDocument, raw_path: Path) -> dict[str, object]:
+def _serialize_manifest(config: AppConfig, paper: CandidatePaper, parsed: ParsedDocument, raw_path: Path | None) -> dict[str, object]:
     target_markdown = _target_markdown_path(config, paper)
     return {
         "paper_id": paper.paper_id,
@@ -64,7 +67,7 @@ def _serialize_manifest(config: AppConfig, paper: CandidatePaper, parsed: Parsed
         "source_url": paper.source_url,
         "paper_url": paper.paper_url,
         "summary": paper.summary,
-        "raw_path": str(raw_path),
+        "raw_path": str(raw_path) if raw_path else "remote",
         "target_markdown": str(target_markdown),
         "image_paths": [str((target_markdown.parent / image).resolve()) for image in parsed.image_paths],
         "parse_notes": parsed.notes,
@@ -74,7 +77,7 @@ def _serialize_manifest(config: AppConfig, paper: CandidatePaper, parsed: Parsed
     }
 
 
-def _job_markdown(config: AppConfig, paper: CandidatePaper, parsed: ParsedDocument, raw_path: Path) -> str:
+def _job_markdown(config: AppConfig, paper: CandidatePaper, parsed: ParsedDocument, raw_path: Path | None) -> str:
     target_markdown = _target_markdown_path(config, paper)
     job_dir = _job_dir(config, paper)
     sample_text = shorten_text(parsed.text, limit=1200)
@@ -99,7 +102,7 @@ def _job_markdown(config: AppConfig, paper: CandidatePaper, parsed: ParsedDocume
 - 发布日期：{paper.publish_date}
 - 来源：[{paper.source_name}]({paper.source_url})
 - 原文链接：[{paper.paper_url}]({paper.paper_url})
-- 原文文件：`{raw_path}`
+- 原文来源：`{raw_path if raw_path else f"远程 ar5iv (https://ar5iv.labs.arxiv.org/html/{paper.paper_id})"}`
 
 ## 输出要求
 
@@ -162,6 +165,20 @@ def prepare_jobs(config: AppConfig, papers: list[CandidatePaper]) -> list[Candid
     for paper in top_papers:
         raw_path = Path(paper.raw_path) if paper.raw_path else None
         if raw_path is None or not raw_path.exists():
+            # 跳过下载模式：从 ar5iv 远程解析
+            if config.raw.skip_download:
+                target_dir = config.zh_dir / paper.paper_id
+                try:
+                    parsed = parse_document_from_arxiv(paper.paper_id, target_dir, config.translator.chunk_chars)
+                except Exception as exc:  # noqa: BLE001
+                    logger.warning("ar5iv 解析失败 %s: %s", paper.paper_id, exc)
+                    continue
+                job_dir = _job_dir(config, paper)
+                manifest = _serialize_manifest(config, paper, parsed, None)
+                (job_dir / "manifest.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=2), encoding="utf-8")
+                (job_dir / "job.md").write_text(_job_markdown(config, paper, parsed, None), encoding="utf-8")
+                prepared.append(paper)
+                continue
             continue
         target_dir = config.zh_dir / paper.paper_id
         parsed = parse_document(raw_path, target_dir, config.translator.chunk_chars, config.translator.max_images_per_paper)

@@ -18,6 +18,22 @@
   - `### 关键 takeaway`
 - 不确定内容必须显式标记 `待复核`
 
+## 当前状态 (2026-05-28)
+- DB 论文总数：288 篇（translated: 66, discovered: 100, queued: 112, workbuddy_pending: 10）
+- 站点论文数：66 篇（与 translated 一致）
+- GitHub Pages 地址：https://groupechou.github.io/paper-learning-hub/
+- GitHub Token 状态：过期，需要用户更新
+
+## 注意事项
+- 论文下载因5分钟超时限制常被截断，仅完成部分PDF下载
+- GitHub PAT token (ghp_*) 已过期，需用户在 GitHub 生成新 Personal Access Token 后更新 remote URL
+- config.yaml 中 git.auto_commit: false，推送需手动完成
+
+## 站点问题（已排查）
+用户反馈站点论文少，实际站点有66篇，在 papers/index.md 中按11个类别组织。
+根本原因是 GitHub Pages 的 Deploy workflow 中的 `mkdocs build --strict` 因 nav 引用不存在的文件而失败。
+实际上 build 在本机运行正常，但部署到 GitHub Actions 时因 token 过期无法触发。
+
 ## 每日执行顺序
 1. `./run_daily.sh --prepare-workbuddy`
 2. 按 `.workbuddy/daily-brief.md` 处理本日 Top 1-3 篇论文

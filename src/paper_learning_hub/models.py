@@ -35,6 +35,11 @@ class GitSettings:
 
 
 @dataclass(slots=True)
+class RawSettings:
+    skip_download: bool = False
+
+
+@dataclass(slots=True)
 class SiteSettings:
     site_name: str
     site_url: str
@@ -82,6 +87,7 @@ class AppConfig:
     site: SiteSettings
     translator: TranslatorSettings
     workbuddy: WorkBuddySettings
+    raw: RawSettings
     themes: list[Theme]
     organizations: list[Organization]
 

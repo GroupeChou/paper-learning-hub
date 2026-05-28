@@ -2,6 +2,16 @@
 
 这里汇总所有已经进入站点的论文页面。
 
+- ✅ **[Agent Explorative Policy Optimization for Multimodal Agentic Reasoning](../papers/2605.28774v1/index.md)** | AI Agent-核心 | AI Agent | `已精读`
+- ✅ **[VeriTrip: A Verifiable Benchmark for Travel Planning Agents over Unstructured Web Corpora](../papers/2605.28683v1/index.md)** | AI Agent-核心 | AI Agent | `已精读`
+- ✅ **[Do Agents Need Semantic Metadata? A Comparative Study in Agentic Data Retrieval](../papers/2605.28787v1/index.md)** | AI Agent-核心 | AI Agent | `已精读`
+- ✅ **[MOSS: Self-Evolution through Source-Level Rewriting in Autonomous Agent Systems](../papers/2605.22794v1/index.md)** | AI Agent-核心 | AI Agent | `已精读`
+- ✅ **[Learn from Weaknesses: Automated Domain Specialization for Small Computer-Use Agents](../papers/2605.28775v1/index.md)** | AI Agent-核心 | AI Agent | `已精读`
+- ✅ **[Self-Evolving Multi-Agent Systems via Decentralized Memory](../papers/2605.22721v1/index.md)** | AI Agent-核心 | AI Agent | `已精读`
+- ✅ **[WorkstreamBench: Evaluating LLM Agents on End-to-End Spreadsheet Tasks in Finance](../papers/2605.22664v1/index.md)** | AI Agent-核心 | AI Agent | `已精读`
+- ✅ **[EnvFactory: Scaling Tool-Use Agents via Executable Environments Synthesis and Robust RL](../papers/2605.18703v1/index.md)** | AI Agent-核心 | AI Agent | `已精读`
+- ✅ **[SkillGenBench: Benchmarking Skill Generation Pipelines for LLM Agents](../papers/2605.18693v1/index.md)** | AI Agent-核心 | AI Agent | `已精读`
+- ✅ **[Overeager Coding Agents: Measuring Out-of-Scope Actions on Benign Tasks](../papers/2605.18583v1/index.md)** | AI Agent-核心 | AI Agent | `已精读`
 - ✅ **[HiveMind: OS-Inspired Scheduling for Concurrent LLM Agent Workloads](../papers/2604.17111v1/index.md)** | OpenAI | AI Agent | `已精读`
 - ✅ **[Spatial Atlas: Compute-Grounded Reasoning for Spatial-Aware Research Agent Benchmarks](../papers/2604.12102v2/index.md)** | OpenAI | AI Agent | `已精读`
 - ✅ **[When Agents Look the Same: Quantifying Distillation-Induced Similarity in Tool-Use Behaviors](../papers/2604.21255v1/index.md)** | Anthropic | AI Agent | `已精读`

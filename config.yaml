@@ -7,6 +7,9 @@ zh_dir: papers/zh
 database_path: papers.db
 log_dir: logs
 
+raw:
+  skip_download: true
+
 # 导引系统 — 不做翻译，不做站点
 # 每天自动发现新论文，追加到路线文件
 site:
