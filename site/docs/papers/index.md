@@ -12,24 +12,110 @@
 - ✅ **[EnvFactory: Scaling Tool-Use Agents via Executable Environments Synthesis and Robust RL](../papers/2605.18703v1/index.md)** | AI Agent-核心 | AI Agent | `已精读`
 - ✅ **[SkillGenBench: Benchmarking Skill Generation Pipelines for LLM Agents](../papers/2605.18693v1/index.md)** | AI Agent-核心 | AI Agent | `已精读`
 - ✅ **[Overeager Coding Agents: Measuring Out-of-Scope Actions on Benign Tasks](../papers/2605.18583v1/index.md)** | AI Agent-核心 | AI Agent | `已精读`
+- ✅ **[Context, Reasoning, and Hierarchy: A Cost-Performance Study of Compound LLM Agent Design in an Adversarial POMDP](../papers/2605.16205v1/index.md)** | AI Agent-核心 | AI Agent | `已精读`
 - ✅ **[Reward Hacking Benchmark: Measuring Exploits in LLM Agents with Tool Use](../papers/2605.02964v1/index.md)** | OpenAI | AI Agent | `已精读`
+- ✅ **[AME-TS: Anchored Mixture-of-Experts for Time Series Forecasting](../papers/2605.25166v1/index.md)** | 时序预测-核心 | 时序预测 | `已精读`
+- ✅ **[FRWKV+: Adaptive Periodic-Position Branch Interaction for Frequency-Space Linear Time Series Forecasting](../papers/2605.15690v1/index.md)** | 时序预测-核心 | 时序预测 | `已精读`
+- ✅ **[What if Tomorrow is the World Cup Final? Counterfactual Time Series Forecasting with Textual Conditions](../papers/2605.14422v1/index.md)** | 时序预测-核心 | 时序预测 | `已精读`
+- ✅ **[Calibrating Conservatism for Scalable Oversight](../papers/2605.28807v1/index.md)** | AI Agent-核心 | AI Agent | `已精读`
+- ✅ **[Rethinking Memory as Continuously Evolving Connectivity](../papers/2605.28773v1/index.md)** | AI Agent-核心 | AI Agent | `已精读`
+- ✅ **[LiveBrowseComp: Are Search Agents Searching, or Just Verifying What They Already Know?](../papers/2605.28721v1/index.md)** | AI Agent-核心 | AI Agent | `已精读`
+- ✅ **[ChronoVAE-HOPE: Beyond Attention -- A Next-Generation VAE Foundation Model for Specialized Time Series Classification](../papers/2605.22684v1/index.md)** | 时序预测-核心 | 时序预测 | `已精读`
+- ✅ **[TimeGuard: Channel-wise Pool Training for Backdoor Defense in Time Series Forecasting](../papers/2605.22365v1/index.md)** | 时序预测-核心 | 时序预测 | `已精读`
+- ✅ **[LCGuard: Latent Communication Guard for Safe KV Sharing in Multi-Agent Systems](../papers/2605.22786v1/index.md)** | AI Agent-核心 | AI Agent | `已精读`
+- ✅ **[DeltaBox: Scaling Stateful AI Agents with Millisecond-Level Sandbox Checkpoint/Rollback](../papers/2605.22781v1/index.md)** | AI Agent-核心 | AI Agent | `已精读`
+- ✅ **[Superhuman Safe and Agile Racing through Multi-Agent Reinforcement Learning](../papers/2605.22748v1/index.md)** | AI Agent-核心 | AI Agent | `已精读`
+- ✅ **[GenTS: A Comprehensive Benchmark Library for Generative Time Series Models](../papers/2605.17804v1/index.md)** | 时序预测-核心 | 时序预测 | `已精读`
+- ✅ **[Reversa: A Reverse Documentation Engineering Framework for Converting Legacy Software into Operational Specifications for AI Agents](../papers/2605.18684v1/index.md)** | AI Agent-核心 | AI Agent | `已精读`
+- ✅ **[1GC-7RC: One Graphic Card -- Seven Research Challenges! How Good Are AI Agents at Doing Your Job?](../papers/2605.17046v2/index.md)** | 时序预测-核心 | AI Agent | `已精读`
 - ✅ **[Agent Island: A Saturation- and Contamination-Resistant Benchmark from Multiagent Games](../papers/2605.04312v1/index.md)** | OpenAI | AI Agent | `已精读`
+- ✅ **[Dynamic TMoE: A Drift-Aware Dynamic Mixture of Experts Framework for Non-Stationary Time Series Forecasting](../papers/2605.20678v1/index.md)** | 时序预测-核心 | 时序预测 | `已精读`
 - ✅ **[Reinforcement Learning for LLM-based Multi-Agent Systems through Orchestration Traces](../papers/2605.02801v1/index.md)** | OpenAI | AI Agent | `已精读`
+- ✅ **[Toto 2.0: Time Series Forecasting Enters the Scaling Era](../papers/2605.20119v1/index.md)** | 时序预测-核心 | 时序预测 | `已精读`
+- ✅ **[PULSE: Generative Phase Evolution for Non-Stationary Time Series Forecasting](../papers/2605.16793v1/index.md)** | 时序预测-核心 | 时序预测 | `已精读`
+- ✅ **[Argus: Evidence Assembly for Scalable Deep Research Agents](../papers/2605.16217v1/index.md)** | AI Agent-核心 | AI Agent | `已精读`
+- ✅ **[ShopGym: An Integrated Framework for Realistic Simulation and Scalable Benchmarking of E-Commerce Web Agents](../papers/2605.16116v1/index.md)** | AI Agent-核心 | AI Agent | `已精读`
+- ✅ **[Factorize to Generalize: Retrieval-Guided Invariant-Dynamic Decomposition for Time Series Forecasting](../papers/2605.24911v1/index.md)** | 时序预测-核心 | 时序预测 | `已精读`
+- ✅ **[GenTS: A Comprehensive Benchmark Library for Generative Time Series Models](../papers/2605.17804v2/index.md)** | 时序预测-核心 | 时序预测 | `已精读`
+- ✅ **[Beyond Individual Intelligence: Surveying Collaboration, Failure Attribution, and Self-Evolution in LLM-based Multi-Agent Systems](../papers/2605.14892v2/index.md)** | Agent-MultiAgent | AI Agent | `已精读`
+- ✅ **[Assessing the Operational Viability of Foundation Models for Time Series Forecasting](../papers/2605.24381v1/index.md)** | 时序预测-核心 | 时序预测 | `已精读`
+- ✅ **[Towards Principled Test-Time Adaptation for Time Series Forecasting](../papers/2605.17250v1/index.md)** | 时序预测-核心 | 时序预测 | `已精读`
+- ✅ **[SeesawNet: Towards Non-stationary Time Series Forecasting with Balanced Modeling of Common and Specific Dependencies](../papers/2605.14551v1/index.md)** | 时序预测-核心 | 时序预测 | `已精读`
 - ✅ **[HiveMind: OS-Inspired Scheduling for Concurrent LLM Agent Workloads](../papers/2604.17111v1/index.md)** | OpenAI | AI Agent | `已精读`
+- ✅ **[An LLM-Based Assistance System for Intuitive and Flexible Capability-Based Planning](../papers/2605.28666v1/index.md)** | AI Agent-核心 | AI Agent | `已精读`
+- ✅ **[Parametric Prior Mapping Framework for Non-stationary Probabilistic Time Series Forecasting](../papers/2605.23402v1/index.md)** | 时序预测-核心 | 时序预测 | `已精读`
+- ✅ **[PaP-NF: Probabilistic Long-Term Time Series Forecasting via Prefix-as-Prompt Reprogramming and Normalizing Flows](../papers/2605.23219v1/index.md)** | 时序预测-核心 | 时序预测 | `已精读`
+- ✅ **[Code as Agent Harness](../papers/2605.18747v1/index.md)** | AI Agent-核心 | AI Agent | `已精读`
+- ✅ **[Latent Action Reparameterization for Efficient Agent Inference](../papers/2605.18597v1/index.md)** | AI Agent-核心 | AI Agent | `已精读`
+- ✅ **[PULSE: Generative Phase Evolution for Non-Stationary Time Series Forecasting](../papers/2605.16793v2/index.md)** | 时序预测-核心 | 时序预测 | `已精读`
+- ✅ **[Three-Stage Learning Unlocks Strong Performance in Simple Models for Long-Term Time Series Forecasting](../papers/2605.13678v1/index.md)** | 时序预测-核心 | 时序预测 | `已精读`
 - ✅ **[MOSAIC-Bench: Measuring Compositional Vulnerability Induction in Coding Agents](../papers/2605.03952v1/index.md)** | OpenAI | AI Agent | `已精读`
+- ✅ **[Beyond Holistic Models: Systematic Component-level Benchmarking of Deep Multivariate Time-Series Forecasting](../papers/2605.26562v1/index.md)** | 时序预测-核心 | 时序预测 | `已精读`
+- ✅ **[ChronoVAE-HOPE: Beyond Attention -- A Next-Generation VAE Foundation Model for Specialized Time Series Classification](../papers/2605.22684v2/index.md)** | 时序预测-核心 | 时序预测 | `已精读`
 - ✅ **[In-Context Prompting Obsoletes Agent Orchestration for Procedural Tasks](../papers/2604.27891v2/index.md)** | OpenAI | AI Agent | `已精读`
+- ✅ **[STaT: Resolving Shape Distortion in Non-Stationary Time Series via Tri-Modal Synergy](../papers/2605.25943v1/index.md)** | 时序预测-核心 | 时序预测 | `已精读`
+- ✅ **[Beyond Extrapolation: Knowledge Utilization Paradigm with Bidirectional Inspiration for Time Series Forecasting](../papers/2605.19249v1/index.md)** | 时序预测-核心 | 时序预测 | `已精读`
+- ✅ **[FORGE: Self-Evolving Agent Memory With No Weight Updates via Population Broadcast](../papers/2605.16233v1/index.md)** | AI Agent-核心 | AI Agent | `已精读`
+- ✅ **[paper.json: A Coordination Convention for LLM-Agent-Actionable Papers](../papers/2605.16194v1/index.md)** | AI Agent-核心 | AI Agent | `已精读`
+- ✅ **[L-Drive: Beyond a Single Mapping-Latent Context Drives Time Series Forecasting](../papers/2605.17730v1/index.md)** | 时序预测-核心 | 时序预测 | `已精读`
+- ✅ **[PESD-TSF: A Period-Aware and Explicit Structured Decomposition Framework for Long-Term Time Series Forecasting](../papers/2605.16449v1/index.md)** | 时序预测-核心 | 时序预测 | `已精读`
 - ✅ **[Spatial Atlas: Compute-Grounded Reasoning for Spatial-Aware Research Agent Benchmarks](../papers/2604.12102v2/index.md)** | OpenAI | AI Agent | `已精读`
+- ✅ **[Deep ZakaiJ: Structured Filtering for Jump-Diffusion Time Series Forecasting](../papers/2605.24548v1/index.md)** | 时序预测-核心 | 时序预测 | `已精读`
+- ✅ **[Securing the Agent: Vendor-Neutral, Multitenant Enterprise Retrieval and Tool Use](../papers/2605.05287v1/index.md)** | OpenAI | AI Agent | `已精读`
 - ✅ **[When Agents Look the Same: Quantifying Distillation-Induced Similarity in Tool-Use Behaviors](../papers/2604.21255v1/index.md)** | Anthropic | AI Agent | `已精读`
+- ✅ **[Dr-CiK: A Testbed for Foresight-Driven Agents](../papers/2605.27904v1/index.md)** | 时序预测-核心 | 时序预测 | `已精读`
+- ✅ **[Self-Improving Language Models with Bidirectional Evolutionary Search](../papers/2605.28814v1/index.md)** | AI Agent-核心 | AI Agent | `已精读`
+- ✅ **[Personal Visual Memory from Explicit and Implicit Evidence](../papers/2605.28806v1/index.md)** | AI Agent-核心 | AI Agent | `已精读`
+- ✅ **[ChronoMedKG: A Temporally-Grounded Biomedical Knowledge Graph and Benchmark for Clinical Reasoning](../papers/2605.22734v1/index.md)** | AI Agent-核心 | 时序预测 | `已精读`
+- ✅ **[Beyond Acoustic Emotion Recognition: Multimodal Pathos Analysis in Political Speech Using LLM-Based and Acoustic Emotion Models](../papers/2605.22732v1/index.md)** | AI Agent-核心 | AI Agent | `已精读`
+- ✅ **[ESI-Bench: Towards Embodied Spatial Intelligence that Closes the Perception-Action Loop](../papers/2605.18746v1/index.md)** | AI Agent-核心 | AI Agent | `已精读`
+- ✅ **[AI for Auto-Research: Roadmap & User Guide](../papers/2605.18661v1/index.md)** | AI Agent-核心 | AI Agent | `已精读`
+- ✅ **[Not What You Asked For: Typographic Attacks in Household Robot Manipulation](../papers/2605.18593v1/index.md)** | AI Agent-核心 | AI Agent | `已精读`
+- ✅ **[SurF: A Generative Model for Multivariate Irregular Time Series Forecasting](../papers/2605.14069v1/index.md)** | 时序预测-核心 | 时序预测 | `已精读`
 - ✅ **[Reasoning-targeted Jailbreak Attacks on Large Reasoning Models via Semantic Triggers and Psychological Framing](../papers/2604.15725v1/index.md)** | OpenAI | AI Agent | `已精读`
+- ✅ **[Reviving Error Correction in Modern Deep Time-Series Forecasting](../papers/2605.21088v1/index.md)** | 时序预测-核心 | 时序预测 | `已精读`
+- ✅ **[Agent Bazaar: Enabling Economic Alignment in Multi-Agent Marketplaces](../papers/2605.17698v1/index.md)** | Agent-MultiAgent | AI Agent | `已精读`
+- ✅ **[Beyond Similarity: Temporal Operator Attention for Time Series Analysis](../papers/2605.11287v1/index.md)** | 时序预测-核心 | 时序预测 | `已精读`
 - ✅ **[TSCG: Deterministic Tool-Schema Compilation for Agentic LLM Deployments](../papers/2605.04107v1/index.md)** | OpenAI | AI Agent | `已精读`
+- ✅ **[LLM Pretraining Shapes a Generalizable Manifold: Insights into Cross-Modal Transfer to Time Series](../papers/2605.20449v1/index.md)** | 时序预测-核心 | 时序预测 | `已精读`
+- ✅ **[Probabilistic Multivariate Time Series Forecasting with Diffusion Copulas](../papers/2605.19685v1/index.md)** | 时序预测-核心 | 时序预测 | `已精读`
+- ✅ **[Conflict-Resilient Multi-Agent Reasoning via Signed Graph Modeling](../papers/2605.19418v1/index.md)** | Agent-MultiAgent | AI Agent | `已精读`
+- ✅ **[Confirming Correct, Missing the Rest: LLM Tutoring Agents Struggle Where Feedback Matters Most](../papers/2605.16207v1/index.md)** | AI Agent-核心 | AI Agent | `已精读`
+- ✅ **[Probabilistic Seasonal Streamflow Forecasting Across California's Sierra Nevada Watersheds with Agentic AI](../papers/2605.16178v1/index.md)** | AI Agent-核心 | AI Agent | `已精读`
+- ✅ **[MAxLM: Multi-Agent Language Model-Based Scheduling and Resource Allocation in MU-MIMO-OFDMA-Enabled Wireless Networks](../papers/2605.16144v1/index.md)** | AI Agent-核心 | AI Agent | `已精读`
 - ✅ **[Trojan Hippo: Weaponizing Agent Memory for Data Exfiltration](../papers/2605.01970v2/index.md)** | OpenAI | AI Agent | `已精读`
+- ✅ **[QLIF-CAST: Quantum Leaky-Integrate-and-Fire for Time-Series Weather Forecasting](../papers/2605.18333v1/index.md)** | 时序预测-核心 | 时序预测 | `已精读`
+- ✅ **[DAD4TS: Data-Augmentation-Oriented Diffusion Model for Time-Series Forecasting with Small-Scale Data](../papers/2605.17866v1/index.md)** | 时序预测-核心 | 时序预测 | `已精读`
+- ✅ **[From Specification to Deployment: Empirical Evidence from a W3C VC + DID Trust Infrastructure for Autonomous Agents](../papers/2605.06738v1/index.md)** | Anthropic | AI Agent | `已精读`
+- ✅ **[SwarmHarness: Skill-Based Task Routing via Decentralized Incentive-Aligned AI Agent Networks](../papers/2605.28764v1/index.md)** | AI Agent-核心 | AI Agent | `已精读`
+- ✅ **[Advancing Mathematics Research with AI-Driven Formal Proof Search](../papers/2605.22763v1/index.md)** | AI Agent-核心 | AI Agent | `已精读`
+- ✅ **[HarnessAPI: A Skill-First Framework for Unified Streaming APIs and MCP Tools](../papers/2605.22733v1/index.md)** | AI Agent-核心 | AI Agent | `已精读`
+- ✅ **[DexHoldem: Playing Texas Hold'em with Dexterous Embodied System](../papers/2605.18727v1/index.md)** | AI Agent-核心 | AI Agent | `已精读`
+- ✅ **[ISOMORPH: A Supply Chain Digital Twin for Simulation, Dataset Generation, and Forecasting Benchmarks](../papers/2605.12768v1/index.md)** | 时序预测-核心 | 时序预测 | `已精读`
+- ✅ **[NoRIN: Backbone-Adaptive Reversible Normalization for Time-Series Forecasting](../papers/2605.10823v1/index.md)** | 时序预测-核心 | 时序预测 | `已精读`
+- ✅ **[STAR-PólyaMath: Multi-Agent Reasoning under Persistent Meta-Strategic Supervision](../papers/2605.19338v1/index.md)** | Agent-MultiAgent | AI Agent | `已精读`
+- ✅ **[Optimized Three-Dimensional Photovoltaic Structures with LLM guided Tree Search](../papers/2605.16191v1/index.md)** | AI Agent-核心 | AI Agent | `已精读`
+- ✅ **[An Algebraic Exposition of the Theory of Dyadic Morality](../papers/2605.16153v1/index.md)** | AI Agent-核心 | AI Agent | `已精读`
 - ✅ **[ArguAgent: AI-Supported Real-Time Grouping for Productive Argumentation in STEM Classrooms](../papers/2604.23449v1/index.md)** | OpenAI | AI Agent | `已精读`
+- ✅ **[HaM-World: Soft-Hamiltonian World Models with Selective Memory for Planning](../papers/2605.05951v1/index.md)** | Google DeepMind | AI Agent | `已精读`
+- ✅ **[Helicase: Uncertainty-Guided Supply Chain Knowledge Graph Construction with Autonomous Multi-Agent LLMs](../papers/2605.26835v1/index.md)** | Agent-MultiAgent | AI Agent | `已精读`
+- ✅ **[UnityMAS-O: A General RL Optimization Framework for LLM-Based Multi-Agent Systems](../papers/2605.26646v1/index.md)** | Agent-MultiAgent | AI Agent | `已精读`
+- ✅ **[Latent Chain-of-Thought Improves Structured-Data Transformers](../papers/2605.11262v1/index.md)** | 时序预测-核心 | AI Agent | `已精读`
 - ✅ **[MEMTIER: Tiered Memory Architecture and Retrieval Bottleneck Analysis for Long-Running Autonomous AI Agents](../papers/2605.03675v1/index.md)** | DeepSeek | AI Agent | `已精读`
 - ✅ **[Benchmarks for Trajectory Safety Evaluation and Diagnosis in OpenClaw and Codex: ATBench-Claw and ATBench-CodeX](../papers/2604.14858v1/index.md)** | OpenAI | AI Agent | `已精读`
+- ✅ **[Distributed Zeroth-Order Policy Gradient for Networked Multi-agent Reinforcement Learning from Human Feedback](../papers/2605.15697v1/index.md)** | Agent-MultiAgent | AI Agent | `已精读`
 - ✅ **[Evaluating Multi-Hop Reasoning in RAG Systems: A Comparison of LLM-Based Retriever Evaluation Strategies](../papers/2604.18234v1/index.md)** | OpenAI | AI Agent | `已精读`
+- ✅ **[When Does Critique Improve AI-Assisted Theoretical Physics? SCALAR: Structured Critic--Actor Loop for Agentic Reasoning](../papers/2605.06772v1/index.md)** | DeepSeek | AI Agent | `已精读`
+- ✅ **[Interaction-Breaking Adversarial Learning Framework for Robust Multi-Agent Reinforcement Learning](../papers/2605.18024v1/index.md)** | Agent-MultiAgent | AI Agent | `已精读`
 - ✅ **[Beyond the Attention Stability Boundary: Agentic Self-Synthesizing Reasoning Protocols](../papers/2604.24512v1/index.md)** | DeepSeek | AI Agent | `已精读`
+- ✅ **[Falcon-X: A Time Series Foundation Model for Heterogeneous Multivariate Modeling](../papers/2605.27286v1/index.md)** | 时序预测-PatchTST/Transformer | 时序预测 | `已精读`
+- ✅ **[Decoupled Intelligence: A Multi-Agent LLM Framework for Controllable Traffic Scenario Generation in SUMO](../papers/2605.27685v1/index.md)** | Agent-MultiAgent | AI Agent | `已精读`
+- ✅ **[On the Role of Inductive Bias in Time-Series Pretraining: A Case Study in Learning Generalizable Representations for Clinical Time Series](../papers/2605.26194v1/index.md)** | 时序预测-PatchTST/Transformer | 时序预测 | `已精读`
+- ✅ **[Quantifying the Pre-training Dividend: Generative versus Latent Self-Supervised Learning for Time Series Foundation Models](../papers/2605.19462v1/index.md)** | 时序预测-PatchTST/Transformer | 时序预测 | `已精读`
+- ✅ **[From Gridworlds to Warehouses: Adapting Lightweight One-shot Multi-Agent Pathfinding for AGVs](../papers/2605.15799v1/index.md)** | Agent-MultiAgent | AI Agent | `已精读`
 - ✅ **[Local-Splitter: A Measurement Study of Seven Tactics for Reducing Cloud LLM Token Usage on Coding-Agent Workloads](../papers/2604.12301v1/index.md)** | OpenAI | AI Agent | `已精读`
 - ✅ **[Narrative over Numbers: The Identifiable Victim Effect and its Amplification Under Alignment and Reasoning in Large Language Models](../papers/2604.12076v1/index.md)** | OpenAI | AI Agent | `已精读`
+- ✅ **[Chronicle: A Multimodal Foundation Model for Joint Language and Time Series Understanding](../papers/2605.20268v1/index.md)** | 时序预测-PatchTST/Transformer | 时序预测 | `已精读`
 - ✅ **[ELVIS: Ensemble-Calibrated Latent Imagination for Long-Horizon Visual MPC](../papers/2605.04709v1/index.md)** | Google DeepMind | AI Agent | `已精读`
 - ✅ **[Cross-Session Threats in AI Agents: Benchmark, Evaluation, and Algorithms](../papers/2604.21131v1/index.md)** | Anthropic | AI Agent | `已精读`
 - ✅ **[Strategic Heterogeneous Multi-Agent Architecture for Cost-Effective Code Vulnerability Detection](../papers/2604.21282v1/index.md)** | DeepSeek | AI Agent | `已精读`
