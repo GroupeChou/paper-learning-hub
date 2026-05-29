@@ -1,7 +1,7 @@
 project_name: 论文每日导引
 timezone: Asia/Shanghai
 discovery_days: 7
-daily_limit: 10
+daily_limit: 200
 raw_dir: papers/raw
 zh_dir: papers/zh
 database_path: papers.db
