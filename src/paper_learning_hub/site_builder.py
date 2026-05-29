@@ -254,51 +254,61 @@ def build_site(config: AppConfig, papers: list[CandidatePaper], latest_papers: l
 
 
 def update_roadmap(config: AppConfig, papers: list[CandidatePaper]) -> None:
-    """Append newly translated papers to the corresponding learning roadmap files."""
+    """Regenerate comprehensive learning roadmap with all papers organized by category.
+
+    Each roadmap file (agent-roadmap.md / ts-roadmap.md) lists all translated papers
+    grouped by organization, with clickable links to each paper's detail page.
+    Also copies to site/docs/guides/ for MkDocs.
+    """
     roadmap_map = {
         "AI Agent": config.site.docs_dir.parent.parent / "guides" / "agent-roadmap.md",
         "时序预测": config.site.docs_dir.parent.parent / "guides" / "ts-roadmap.md",
     }
-    for paper in papers:
-        if paper.status != "translated" or not paper.zh_path:
-            continue
-        target = roadmap_map.get(paper.theme)
-        if not target or not target.exists():
-            continue
+    now = today_iso(config.timezone)
 
-        try:
-            content = target.read_text(encoding="utf-8")
-            # Build the entry to append
-            entry = (
-                f"- [{paper.title}](../papers/{paper.paper_id}/index.md)"
-                f" | {paper.organization} | {paper.publish_date}\n"
-            )
+    for theme_name, target in roadmap_map.items():
+        # Filter translated papers for this theme
+        theme_papers = [p for p in papers if p.theme == theme_name and p.status == "translated" and p.zh_path]
 
-            marker = "## 每日自动追加"
-            if marker in content:
-                # Find the section and append
-                lines = content.splitlines(keepends=True)
-                insert_pos = len(lines)
-                for i, line in enumerate(lines):
-                    if line.strip().startswith(marker):
-                        insert_pos = i + 1
-                        # Skip past the section header and any description lines
-                        while insert_pos < len(lines) and (
-                            not lines[insert_pos].strip() or lines[insert_pos].strip().startswith(("_", "-", "*"))
-                        ):
-                            insert_pos += 1
-                        break
-                lines.insert(insert_pos, entry)
-                content = "".join(lines)
-            else:
-                # Create new section
-                today = today_iso(config.timezone)
-                content += f"\n## 每日自动追加\n\n_以下论文由系统在 {today} 自动追加_\n\n{entry}\n"
+        # Group by organization
+        org_groups: dict[str, list[CandidatePaper]] = {}
+        for p in theme_papers:
+            org_groups.setdefault(p.organization, []).append(p)
 
-            target.write_text(content, encoding="utf-8")
-            logger.info("Updated roadmap: %s with %s", target.name, paper.paper_id)
-        except Exception as exc:
-            logger.warning("Failed to update roadmap for %s: %s", paper.paper_id, exc)
+        lines = [
+            f"# {theme_name} 论文目录",
+            "",
+            f"> 完整论文目录大纲。所有论文按机构/主题分类，点击标题跳转到详情页。",
+            f"> 最后更新：{now}",
+            "---",
+            "",
+            f"**共 {len(theme_papers)} 篇论文**",
+            "",
+        ]
+
+        # Sort orgs by paper count (most papers first)
+        sorted_orgs = sorted(org_groups.items(), key=lambda x: -len(x[1]))
+        for org_name, org_papers in sorted_orgs:
+            # Sort papers by date (newest first)
+            org_papers.sort(key=lambda p: p.publish_date, reverse=True)
+            lines.append(f"## {org_name}")
+            lines.append("")
+            for p in org_papers:
+                lines.append(
+                    f"- [{p.title}](../papers/{p.paper_id}/index.md)"
+                    f" | {p.publish_date}"
+                )
+            lines.append("")
+
+        content = "\n".join(lines) + "\n"
+
+        # Write to guides/ and site/docs/guides/
+        target.write_text(content, encoding="utf-8")
+        logger.info(f"Regenerated roadmap: {target.name} ({len(theme_papers)} papers)")
+
+        # Also copy to site/docs/ for MkDocs
+        site_target = config.site.docs_dir / "guides" / target.name
+        site_target.write_text(content, encoding="utf-8")
 
 
 def run_mkdocs_build(config: AppConfig) -> None:
