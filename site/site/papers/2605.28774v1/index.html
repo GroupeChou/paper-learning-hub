@@ -1,0 +1,1066 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Agent Explorative Policy Optimization for Multimodal Agentic Reasoning - 论文每日导引</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#agent-explorative-policy-optimization-for-multimodal-agentic-reasoning" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="论文每日导引" class="md-header__button md-logo" aria-label="论文每日导引" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            论文每日导引
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Agent Explorative Policy Optimization for Multimodal Agentic Reasoning
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="论文每日导引" class="md-nav__button md-logo" aria-label="论文每日导引" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    论文每日导引
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/agent-roadmap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🤖 AI Agent 论文目录
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/ts-roadmap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    📈 时序预测论文目录
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/daily-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    📅 今日更新
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../topics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    📚 专题索引
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    论文详情
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    论文详情
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        摘要
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 引言
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. 引言">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        中文翻译
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        术语解释
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        图表/公式说明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#takeaway" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        关键 takeaway
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-rl" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 智能体推理中的 RL 分析
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. 智能体推理中的 RL 分析">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        中文翻译
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        图表/公式说明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#takeaway_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        关键 takeaway
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-axpo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. AXPO：智能体探索式策略优化
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. AXPO：智能体探索式策略优化">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        中文翻译
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        术语解释
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        图表/公式说明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#takeaway_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        关键 takeaway
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 实验
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. 实验">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        中文翻译
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        术语解释
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#takeaway_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        关键 takeaway
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 结论
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. 结论">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        中文翻译
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#takeaway_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        关键 takeaway
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        复核建议
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="agent-explorative-policy-optimization-for-multimodal-agentic-reasoning">Agent Explorative Policy Optimization for Multimodal Agentic Reasoning<a class="headerlink" href="#agent-explorative-policy-optimization-for-multimodal-agentic-reasoning" title="Permanent link">&para;</a></h1>
+<!-- 论文元数据卡片 -->
+<div class="paper-meta">
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">机构</span>
+    <span class="paper-meta-value org-NVIDIA">NVIDIA & KAIST</span>
+  </div>
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">方向</span>
+    <span class="paper-meta-value">AI Agent</span>
+  </div>
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">日期</span>
+    <span class="paper-meta-value">2026-05-27</span>
+  </div>
+</div>
+
+<div class="admonition info">
+<p><span class="paper-tag paper-tag-translated">✅ 已完成精读</span></p>
+</div>
+<ul>
+<li><strong>来源</strong>：AI Agent arXiv</li>
+<li><strong>论文链接</strong>：<a href="https://arxiv.org/abs/2605.28774v1">https://arxiv.org/abs/2605.28774v1</a></li>
+<li><strong>状态</strong>：已生成</li>
+</ul>
+<h2 id="_1">摘要<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>视觉语言模型在复杂问题上展现出强大的推理能力，但许多现实世界问题需要借助外部工具，而内部推理无法独立解决。智能体推理因此交织了两种具有结构性不对称的行为：<strong>思考</strong>（Thinking，自我包含的默认行为）和<strong>工具使用</strong>（Tool use / Acting，高方差的辅助行为）。作者将这种不对称称为<strong>思考-行动鸿沟</strong>（Thinking-Acting Gap）。在标准 RL 方法（如 GRPO）下，这一鸿沟在训练过程中表现为两个可诊断的症状：工具使用仅在约 30% 的 rollout 中被尝试；而当工具被尝试时，同一组内使用工具的 rollout 在约 40% 的问题上全部失败，抑制了工具调用处最需要的学习信号。该文提出 <strong>AXPO</strong>（Agent eXplorative Policy Optimization，智能体探索式策略优化）：对于每个"全部错误的工具使用子组"，AXPO 固定思考前缀（thinking prefix）并重新采样工具调用及其延续，配合基于不确定性的前缀选择。在九个多模态基准测试和三个规模的 Qwen3-VL-Thinking 模型上，SFT + AXPO 在平均 Pass@1 和 Pass@4 上超过 SFT + GRPO（8B 模型平均 +1.8pp），且 8B 模型在 Pass@4 上以 4 倍更少的参数超越 32B Base。</p>
+<h2 id="1">1. 引言<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
+<h3 id="_2">中文翻译<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<p>大语言模型（LLMs）和视觉语言模型（VLMs）在扩展推理能力方面取得了显著进展，能够生成思维链（chain-of-thought），在数学和科学推理基准上匹敌更大的模型。这些推理模型将测试时计算投入内部搜索和反思以得出准确答案。</p>
+<p>然而，许多现实世界问题超出了纯内部推理的能力范围：检索最新知识、执行复杂数值计算、理解细粒度视觉细节——所有这些都需要访问外部资源。工具——如网络搜索、代码解释器和图像操作工具——可以填补这一空白，实现作者所称的<strong>多模态智能体推理</strong>（Multimodal Agentic Reasoning）：模型自主决定何时继续思考、何时通过工具行动。</p>
+<p>智能体推理在其两个组成行为之间存在一种更深层的不对称性：<strong>思考</strong>和<strong>工具使用</strong>（行动）。思考是默认模式，自包含在模型的 token 空间内：每个 token 都在模型控制之下，错误可以通过探索不同的思维链来纠正。工具使用则相反，是一种辅助行为，既强大又脆弱：一个简短的 token 序列触发外部响应，而模型无法预测或控制该响应；调用中的微小变化可能导致截然不同的结果（例如，缩进错误的 Python 代码）。推理模型经过大量后训练来改善思考，但在工具使用方面训练不足。作者将这种安全默认行为与高方差辅助行为之间的不对称称为<strong>思考-行动鸿沟</strong>。</p>
+<p>由于这一鸿沟，即使是最新推理 VLM 也难以可靠地 eliciting 智能体推理。仅靠提示（prompting）往往不足以保证在需要时做出恰当的工具调用。这需要后训练流程，如监督微调（SFT）和强化学习（RL）。</p>
+<p>SFT 能可靠地教会工具使用的机制，但难以教会模型在教师示范未覆盖的情况下更好地利用工具。最终的智能体继承了教师的失败模式，通常性能难以超越教师。因此，模型需要超越模仿的训练信号，这促使在 SFT 之后利用可验证结果奖励进行 RL。</p>
+<p>然而，GRPO 等 RL 方法在使模型精通行动方面是次优的，因为两种模式会抑制工具调用的学习信号。首先，与纯思考相比，工具使用仍然是 rollout 中的少数行为。其次，当尝试工具使用时，整个 rollout 组同时失败的概率远高于纯思考。在 GRPO 下，这种不对称削弱了两种情境中的工具调用学习信号。</p>
+<p>作者的核心洞察是：在工具调用处重新采样可以让模型探索多样化的智能体推理路径——锚定思考前缀（thinking prefix），重新采样工具调用及其延续。当工具使用轨迹失败时，思考前缀可能完全是合理的。从头重新生成完整轨迹浪费了本不是瓶颈的前缀上的预算，而工具调用重采样则将探索精准聚焦于思考-行动鸿沟的表现之处。</p>
+<h3 id="_3">术语解释<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>术语</th>
+<th>英文</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>思考-行动鸿沟</td>
+<td>Thinking-Acting Gap</td>
+<td>模型在思考（默认安全模式）和工具使用（高方差辅助模式）之间存在结构性不对称</td>
+</tr>
+<tr>
+<td>工具调用重采样</td>
+<td>Tool-call resampling</td>
+<td>固定思考前缀，重新采样工具调用及其后续延续的操作</td>
+</tr>
+<tr>
+<td>智能体推理</td>
+<td>Agentic Reasoning</td>
+<td>模型自主决定何时思考、何时通过工具行动</td>
+</tr>
+<tr>
+<td>GRPO</td>
+<td>Group Relative Policy Optimization</td>
+<td>一种基于组内相对优势计算的强化学习方法</td>
+</tr>
+<tr>
+<td>AXPO</td>
+<td>Agent eXplorative Policy Optimization</td>
+<td>本文提出的通过工具调用重采样缩小思考-行动鸿沟的 RL 算法</td>
+</tr>
+<tr>
+<td>全部错误的工具使用子组</td>
+<td>All-wrong tool-using subgroup</td>
+<td>同一问题中所有使用工具的 rollout 都失败的情况</td>
+</tr>
+<tr>
+<td>组归一化优势</td>
+<td>Group-normalized advantage</td>
+<td>在同一问题的多个 rollout 组内计算相对优势</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_4">图表/公式说明<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p><strong>Figure 1（主结果图）</strong>：展示了 AXPO 如何将智能体差距缩小到 4x 更大基线的水平。在九个多模态基准上的平均 Pass@1（左）和 Pass@4（右）结果，覆盖 Qwen3-VL-Thinking 的 2B/4B/8B/32B 四个规模。8B 的 AXPO 在 Pass@4 上超越 32B Base，且在每个规模上都优于 GRPO。</p>
+<p><strong>Figure 2（概念图）</strong>：左图显示 GRPO 下工具使用 rollout 稀少且常失败，在工具调用处没有正学习信号；右图显示 AXPO 固定失败 rollout 的思考前缀并重新采样工具调用及其延续，恢复出正确的 rollout 并在工具调用处产生正学习信号。</p>
+<h3 id="takeaway">关键 takeaway<a class="headerlink" href="#takeaway" title="Permanent link">&para;</a></h3>
+<ul>
+<li>首次系统识别了智能体推理中"思考-行动鸿沟"这一结构性不对称问题</li>
+<li>提出了 AXPO 算法，通过工具调用重采样（而非简单增加 rollout 数量）来高效探索工具使用</li>
+<li>在九个多模态基准上验证，8B 模型以 4x 更少参数超越 32B Base</li>
+</ul>
+<h2 id="2-rl">2. 智能体推理中的 RL 分析<a class="headerlink" href="#2-rl" title="Permanent link">&para;</a></h2>
+<h3 id="_5">中文翻译<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<p><strong>2.1 预备知识</strong></p>
+<p><strong>智能体推理</strong>：作者研究 VLM 在给定输入（文本问题+视觉图像）和指令提示时的智能体推理过程，交织思考与工具使用。在每个轮次，模型输出思考段（<code>&lt;think&gt;...&lt;/think&gt;</code>）和动作（格式化为 JSON 的工具调用，在 <code>&lt;tool_call&gt;...&lt;/tool_call&gt;</code> 中），然后接收观察结果。工具集包括三种标准工具：Python 解释器、网络搜索和图像放大工具。</p>
+<p><strong>GRPO 的 RL 训练</strong>：标准智能体后训练流程包括 SFT（监督微调）+ RL（强化学习）。给定输入 x，策略 pi_theta 生成 N 个 rollout 的组，每个接收基于答案正确性的二值结果奖励。GRPO 计算组归一化优势值，均匀分配给每个 token，用于通过 PPO-clip 代理目标更新策略。</p>
+<p><strong>2.2 诊断思考-行动鸿沟</strong></p>
+<p>作者通过 RL 训练期间收集的三个诊断测量来具体说明思考-行动鸿沟：</p>
+<p><strong>症状一：工具使用尝试不足。</strong> 与常规智能体 RL 不同，智能体推理中工具使用是可选的——模型可以产生 <code>&lt;tool_call&gt;</code> 标签或直接跳到 <code>&lt;answer&gt;</code>。在 RL 过程中，包含至少一个工具调用的 rollout 比例约为 20-35%，远低于纯思考的多数。</p>
+<p><strong>症状二：工具使用子组倾向于全部错误。</strong> 当工具被尝试时，工具使用子组全部错误的概率约为 40%（同类纯思考子组约为 25%）。在组归一化优势下，工具调用 token 在两种情境中都收到非正优势：混合组中它们落后于纯思考的成功信号，全错组中优势归零。</p>
+<p><strong>症状三：工具调用在固定思考下支持有意义的重新采样。</strong> 通过固定思考前缀并重新采样 16 次工具调用，获得的工具调用覆盖约 2.9-3.4 个不同的语义聚类，确认工具调用是一个真正的分歧点。</p>
+<h3 id="_6">图表/公式说明<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<p><strong>Figure 3</strong>：三个子图展示思考-行动鸿沟的实证分析。
+- (a) 工具使用的尝试比例在 RL 训练过程中仅 20-35%
+- (b) 工具使用子组的全部错误率约 40%，远高于纯思考子组的 25%
+- (c) 固定前缀下重新采样的工具调用展现出 2.9-3.4 个语义聚类的多样性</p>
+<h3 id="takeaway_1">关键 takeaway<a class="headerlink" href="#takeaway_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li>GRPO 对工具调用的训练不足是系统性的，不是偶然现象</li>
+<li>思考-行动鸿沟的三个症状可测量、可诊断</li>
+<li>工具调用是高效探索的潜在靶点：固定前缀重采样能产生多样化的工具调用</li>
+</ul>
+<h2 id="3-axpo">3. AXPO：智能体探索式策略优化<a class="headerlink" href="#3-axpo" title="Permanent link">&para;</a></h2>
+<h3 id="_7">中文翻译<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<p><strong>3.1 工具调用重采样</strong></p>
+<p>在智能体推理中，策略必须同时学习思考和工具使用，而后者在 GRPO 下训练不足。作者不采用简单增加 rollout 数量 N 来均匀生成工具使用成功样本，而是承诺一个预示将使用工具的思考前缀，将随机性集中在延续部分。</p>
+<p>具体来说，设 tau_src 是来自 GRPO 组的一个工具使用 rollout（称为源 rollout），t_src_1 是其包含开头 <code>&lt;tool_call&gt;</code> 标签的前缀。工具调用重采样从 t_src_1 绘制 K 个延续，执行其中的工具调用，并将每个重采样轨迹向前展开直到 <code>&lt;answer&gt;</code> 标签或轮次限制。每个重采样轨迹与 tau_src 共享固定的思考前缀，在工具调用处分叉。</p>
+<p><strong>理论动机</strong>：工具调用重采样的效率优势体现在：在 GRPO 下，覆盖工具调用的 rollout 率受限于工具使用率 q = Pr[工具使用 | x]，而非 N。每增加一个 rollout，只有 q 的概率落到工具调用上。而重采样从 <code>&lt;tool_call&gt;</code> 边界开始，每个重采样延续必然是工具使用的，因此全部重采样预算都聚焦于目标信号。</p>
+<p><strong>命题1（工具调用重采样在恢复工具使用成功方面占优原始采样）</strong>：设 t_src_1 是跨越了工具调用边界的思考前缀，则重采样的 K 次延续包含至少一个正确工具使用 rollout 的概率大于等于原始采样。</p>
+<p><strong>3.2 重采样候选选择</strong></p>
+<p><strong>触发条件与预算分配</strong>：AXPO 仅对工具使用子组非空且全部错误的组进行重采样——这些正是 GRPO 下工具调用 token 获得非正优势的组。AXPO 对额外预算设置上限（r &lt; 1 的比例），按广度优先分配。</p>
+<p><strong>基于不确定性的前缀排序</strong>：AXPO 通过源 rollout 中工具调用 token 的平均策略概率（可计算的不确定性代理）对候选排序，优先重采样最低置信度的前缀。</p>
+<p><strong>3.3 优势计算</strong></p>
+<p>AXPO 将优势流分解为两部分：</p>
+<ol>
+<li><strong>重采样延续的优势</strong>：每个选定前缀的 K 个重采样延续构成独立优势组，计算组内 GRPO 优势，仅应用于延续 token。</li>
+<li><strong>源前缀的恢复奖励</strong>：如果重采样恢复了至少一个正确延续，源前缀获得二值恢复奖励（recovery reward）。该恢复奖励替换源 rollout 的原始奖励，产生前缀优势。</li>
+</ol>
+<p>最终损失函数为两者之和。</p>
+<h3 id="_8">术语解释<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>术语</th>
+<th>英文</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>工具调用重采样</td>
+<td>Tool-call resampling</td>
+<td>固定思考前缀，重新采样工具调用及其后续内容</td>
+</tr>
+<tr>
+<td>源 rollout</td>
+<td>Source rollout</td>
+<td>触发重采样的原始失败 rollout</td>
+</tr>
+<tr>
+<td>恢复奖励</td>
+<td>Recovery reward</td>
+<td>重采样恢复至少一个正确延续时给予源前缀的二值奖励</td>
+</tr>
+<tr>
+<td>思考前缀</td>
+<td>Thinking prefix</td>
+<td>工具调用之前的思考段</td>
+</tr>
+<tr>
+<td>策略概率</td>
+<td>Policy probability</td>
+<td>模型在特定 token 位置的概率输出</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_9">图表/公式说明<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<p><strong>公式1</strong>：工具调用重采样 vs 原始采样在恢复工具使用成功方面的概率比较。关键机制是重采样使 q 趋近于 1（每个延续都必然使用工具），消除了浪费因子。</p>
+<p><strong>公式2-5</strong>：AXPO 的优势计算和最终损失函数。公式2计算重采样延续的组内优势；公式3定义恢复奖励；公式4计算前缀优势；公式5为总损失。</p>
+<h3 id="takeaway_2">关键 takeaway<a class="headerlink" href="#takeaway_2" title="Permanent link">&para;</a></h3>
+<ul>
+<li>AXPO 的核心创新是将探索预算精准聚焦于工具调用分歧点</li>
+<li>理论证明工具调用重采样在固定预算下严格优于原始采样</li>
+<li>恢复奖励机制避免了共享前缀上的梯度冲突</li>
+</ul>
+<h2 id="4">4. 实验<a class="headerlink" href="#4" title="Permanent link">&para;</a></h2>
+<h3 id="_10">中文翻译<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
+<p><strong>4.1 实验设置</strong>
+- <strong>基础模型</strong>：Qwen3-VL-Thinking 的 2B/4B/8B/32B 四个规模
+- <strong>工具集</strong>：Python 解释器、Tavily 网络搜索、图像放大工具
+- <strong>训练数据</strong>：SFT 使用 64K 正确轨迹（约 25% 含工具调用）；RL 使用 16K 过滤子集 + 22K 困难问题
+- <strong>基准测试</strong>：9 个多模态基准，分为 Reasoning（MathVision、DynaMath、Math-VR）、Perception（V<em>、VisualProbe、HR-Bench）、Search（HR-MMSearch、MM-Search）
+- </em><em>评估指标</em><em>：Pass@1 和 Pass@4
+- </em><em>基线</em>*：Base（仅提示）、SFT（无 RL）、GRPO（无 SFT）、SFT+GRPO</p>
+<p><strong>4.2 主要结果</strong></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align: center;">Reasoning</th>
+<th style="text-align: center;">Perception</th>
+<th style="text-align: center;">Search</th>
+<th style="text-align: center;">Pass@1</th>
+<th style="text-align: center;">Pass@4</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>8B Base</td>
+<td style="text-align: center;">59.1</td>
+<td style="text-align: center;">54.0</td>
+<td style="text-align: center;">53.3</td>
+<td style="text-align: center;">55.5</td>
+<td style="text-align: center;">67.0</td>
+</tr>
+<tr>
+<td>8B SFT</td>
+<td style="text-align: center;">63.9</td>
+<td style="text-align: center;">57.4</td>
+<td style="text-align: center;">58.5</td>
+<td style="text-align: center;">60.0</td>
+<td style="text-align: center;">71.0</td>
+</tr>
+<tr>
+<td>8B SFT+GRPO</td>
+<td style="text-align: center;">65.7</td>
+<td style="text-align: center;">59.6</td>
+<td style="text-align: center;">60.0</td>
+<td style="text-align: center;">61.8</td>
+<td style="text-align: center;">73.3</td>
+</tr>
+<tr>
+<td><strong>8B SFT+AXPO</strong></td>
+<td style="text-align: center;"><strong>66.8</strong></td>
+<td style="text-align: center;"><strong>61.5</strong></td>
+<td style="text-align: center;"><strong>61.7</strong></td>
+<td style="text-align: center;"><strong>63.3</strong></td>
+<td style="text-align: center;"><strong>74.9</strong></td>
+</tr>
+</tbody>
+</table>
+<p>AXPO 在全部 9 个基准上均取得最佳或次佳结果。在 Pass@4 上 8B AXPO 以 4x 更少参数超越 32B Base（74.9% vs 69.6%）。</p>
+<p><strong>4.3 消融研究</strong>
+- 重采样 vs 增加 rollout：+25% 额外重采样预算的 AXPO 获得 +1.1pp 提升，而 +100% 额外采样预算的 GRPO 仅获得 +0.9pp
+- 不确定性排名：用随机排序替换不确定性排序，性能下降 3-7%
+- 重采样位置：在工具调用处重采样比在思考前缀处更有效</p>
+<h3 id="_11">术语解释<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>术语</th>
+<th>英文</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pass@1 / Pass@4</td>
+<td>Pass@1 / Pass@4</td>
+<td>1 次 / 4 次尝试中至少一次正确的概率</td>
+</tr>
+<tr>
+<td>消融研究</td>
+<td>Ablation study</td>
+<td>移除或替换组件以验证其贡献的实验</td>
+</tr>
+<tr>
+<td>pp</td>
+<td>percentage points</td>
+<td>百分点</td>
+</tr>
+</tbody>
+</table>
+<h3 id="takeaway_3">关键 takeaway<a class="headerlink" href="#takeaway_3" title="Permanent link">&para;</a></h3>
+<ul>
+<li>AXPO 在所有九个基准和所有模型规模上一致优于 GRPO</li>
+<li>8B AXPO 以 1/4 参数超越 32B Base，验证了"更聪明地探索"比"更多计算"更有效</li>
+<li>消融实验确认增益来自工具调用重采样，而非额外计算量</li>
+</ul>
+<h2 id="5">5. 结论<a class="headerlink" href="#5" title="Permanent link">&para;</a></h2>
+<h3 id="_12">中文翻译<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
+<p>该文首次识别并命名了智能体推理中的思考-行动鸿沟（Thinking-Acting Gap），这是一个模型在思考（安全默认）与工具使用（高方差辅助）之间的结构性不对称。该鸿沟在基于组的智能体 RL 中表现为两个症状：工具使用仅在约 30% 的 rollout 中被尝试，且工具使用子组在约 40% 的问题上全部错误，导致工具调用 token 上非正优势。</p>
+<p>作者提出 AXPO（Agent eXplorative Policy Optimization），一种通过工具调用重采样来缩小鸿沟的 RL 算法。对每个全部错误的工具使用子组，AXPO 固定不确定思考前缀并重新采样工具调用及其延续。在九个多模态基准和 Qwen3-VL-Thinking 的 2B/4B/8B 规模上，SFT + AXPO 一致优于 SFT + GRPO，8B 模型在 Pass@4 上以 4x 更少参数超越 32B Base。</p>
+<h3 id="takeaway_4">关键 takeaway<a class="headerlink" href="#takeaway_4" title="Permanent link">&para;</a></h3>
+<ul>
+<li>思考-行动鸿沟是智能体推理中一个普遍存在但此前未被系统认识的问题</li>
+<li>AXPO 通过结构化的探索策略而非简单增加计算量来解决该问题</li>
+<li>方法的有效性在多个规模上得到验证，展现了良好的可扩展性</li>
+</ul>
+<h2 id="_13">复核建议<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h2>
+<ul>
+<li>公式 (1)-(5) 建议对照论文原文复核以确保数学符号的准确性</li>
+<li>Figure 3 的详细数据分析建议参考原文附录中的完整统计</li>
+<li>各基准的具体评估设置可参考原文 Appendix A.3</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.expand", "navigation.indexes", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

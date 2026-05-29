@@ -1,0 +1,1102 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../..">
+      
+      
+        <link rel="next" href="../ts-roadmap/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>🤖 AI Agent 论文目录 - 论文每日导引</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#ai-agent" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="论文每日导引" class="md-header__button md-logo" aria-label="论文每日导引" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            论文每日导引
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              🤖 AI Agent 论文目录
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="论文每日导引" class="md-nav__button md-logo" aria-label="论文每日导引" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    论文每日导引
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🤖 AI Agent 论文目录
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🤖 AI Agent 论文目录
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#ai-agent-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AI Agent-核心
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#agent-multiagent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Agent-MultiAgent
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#openai" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OpenAI
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deepseek" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DeepSeek
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#meta-fair" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Meta FAIR
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        阿里通义
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#minimax" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MiniMax
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#microsoft" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Microsoft
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#anthropic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Anthropic
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#google-deepmind" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Google DeepMind
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        智谱
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        时序预测-核心
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        时空预测
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#-patchtsttransformer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        时序预测-PatchTST/Transformer
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ts-roadmap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    📈 时序预测论文目录
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../daily-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    📅 今日更新
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../topics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    📚 专题索引
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../papers/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    论文详情
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    论文详情
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#ai-agent-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AI Agent-核心
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#agent-multiagent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Agent-MultiAgent
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#openai" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OpenAI
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deepseek" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DeepSeek
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#meta-fair" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Meta FAIR
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        阿里通义
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#minimax" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MiniMax
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#microsoft" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Microsoft
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#anthropic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Anthropic
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#google-deepmind" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Google DeepMind
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        智谱
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        时序预测-核心
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        时空预测
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#-patchtsttransformer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        时序预测-PatchTST/Transformer
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="ai-agent">AI Agent 论文目录<a class="headerlink" href="#ai-agent" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p>完整论文目录大纲。所有论文按机构/主题分类，点击标题跳转到详情页。
+最后更新：2026-05-29</p>
+</blockquote>
+<hr />
+<p><strong>共 197 篇论文</strong></p>
+<h2 id="ai-agent-">AI Agent-核心<a class="headerlink" href="#ai-agent-" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="../../papers/2605.28774v1/">Agent Explorative Policy Optimization for Multimodal Agentic Reasoning</a> | 2026-05-27</li>
+<li><a href="../../papers/2605.28683v1/">VeriTrip: A Verifiable Benchmark for Travel Planning Agents over Unstructured Web Corpora</a> | 2026-05-27</li>
+<li><a href="../../papers/2605.28787v1/">Do Agents Need Semantic Metadata? A Comparative Study in Agentic Data Retrieval</a> | 2026-05-27</li>
+<li><a href="../../papers/2605.28775v1/">Learn from Weaknesses: Automated Domain Specialization for Small Computer-Use Agents</a> | 2026-05-27</li>
+<li><a href="../../papers/2605.28816v1/">Gamma-World: Generative Multi-Agent World Modeling Beyond Two Players</a> | 2026-05-27</li>
+<li><a href="../../papers/2605.28699v1/">TRACER: Turn-level Regret Matching with Inner Reinforcement Credit for Cooperative Multi-LLM Reasoning</a> | 2026-05-27</li>
+<li><a href="../../papers/2605.28807v1/">Calibrating Conservatism for Scalable Oversight</a> | 2026-05-27</li>
+<li><a href="../../papers/2605.28773v1/">Rethinking Memory as Continuously Evolving Connectivity</a> | 2026-05-27</li>
+<li><a href="../../papers/2605.28721v1/">LiveBrowseComp: Are Search Agents Searching, or Just Verifying What They Already Know?</a> | 2026-05-27</li>
+<li><a href="../../papers/2605.28666v1/">An LLM-Based Assistance System for Intuitive and Flexible Capability-Based Planning</a> | 2026-05-27</li>
+<li><a href="../../papers/2605.28814v1/">Self-Improving Language Models with Bidirectional Evolutionary Search</a> | 2026-05-27</li>
+<li><a href="../../papers/2605.28806v1/">Personal Visual Memory from Explicit and Implicit Evidence</a> | 2026-05-27</li>
+<li><a href="../../papers/2605.28764v1/">SwarmHarness: Skill-Based Task Routing via Decentralized Incentive-Aligned AI Agent Networks</a> | 2026-05-27</li>
+<li><a href="../../papers/2605.22794v1/">MOSS: Self-Evolution through Source-Level Rewriting in Autonomous Agent Systems</a> | 2026-05-21</li>
+<li><a href="../../papers/2605.22721v1/">Self-Evolving Multi-Agent Systems via Decentralized Memory</a> | 2026-05-21</li>
+<li><a href="../../papers/2605.22664v1/">WorkstreamBench: Evaluating LLM Agents on End-to-End Spreadsheet Tasks in Finance</a> | 2026-05-21</li>
+<li><a href="../../papers/2605.22662v1/">Claw AI Lab: An Autonomous Multi-Agent Research Team</a> | 2026-05-21</li>
+<li><a href="../../papers/2605.22786v1/">LCGuard: Latent Communication Guard for Safe KV Sharing in Multi-Agent Systems</a> | 2026-05-21</li>
+<li><a href="../../papers/2605.22781v1/">DeltaBox: Scaling Stateful AI Agents with Millisecond-Level Sandbox Checkpoint/Rollback</a> | 2026-05-21</li>
+<li><a href="../../papers/2605.22748v1/">Superhuman Safe and Agile Racing through Multi-Agent Reinforcement Learning</a> | 2026-05-21</li>
+<li><a href="../../papers/2605.22732v1/">Beyond Acoustic Emotion Recognition: Multimodal Pathos Analysis in Political Speech Using LLM-Based and Acoustic Emotion Models</a> | 2026-05-21</li>
+<li><a href="../../papers/2605.22763v1/">Advancing Mathematics Research with AI-Driven Formal Proof Search</a> | 2026-05-21</li>
+<li><a href="../../papers/2605.22733v1/">HarnessAPI: A Skill-First Framework for Unified Streaming APIs and MCP Tools</a> | 2026-05-21</li>
+<li><a href="../../papers/2605.18703v1/">EnvFactory: Scaling Tool-Use Agents via Executable Environments Synthesis and Robust RL</a> | 2026-05-18</li>
+<li><a href="../../papers/2605.18693v1/">SkillGenBench: Benchmarking Skill Generation Pipelines for LLM Agents</a> | 2026-05-18</li>
+<li><a href="../../papers/2605.18583v1/">Overeager Coding Agents: Measuring Out-of-Scope Actions on Benign Tasks</a> | 2026-05-18</li>
+<li><a href="../../papers/2605.18672v1/">Position: A Three-Layer Probabilistic Assume-Guarantee Architecture Is Structurally Required for Safe LLM Agent Deployment</a> | 2026-05-18</li>
+<li><a href="../../papers/2605.18684v1/">Reversa: A Reverse Documentation Engineering Framework for Converting Legacy Software into Operational Specifications for AI Agents</a> | 2026-05-18</li>
+<li><a href="../../papers/2605.18747v1/">Code as Agent Harness</a> | 2026-05-18</li>
+<li><a href="../../papers/2605.18597v1/">Latent Action Reparameterization for Efficient Agent Inference</a> | 2026-05-18</li>
+<li><a href="../../papers/2605.18746v1/">ESI-Bench: Towards Embodied Spatial Intelligence that Closes the Perception-Action Loop</a> | 2026-05-18</li>
+<li><a href="../../papers/2605.18661v1/">AI for Auto-Research: Roadmap &amp; User Guide</a> | 2026-05-18</li>
+<li><a href="../../papers/2605.18593v1/">Not What You Asked For: Typographic Attacks in Household Robot Manipulation</a> | 2026-05-18</li>
+<li><a href="../../papers/2605.18727v1/">DexHoldem: Playing Texas Hold'em with Dexterous Embodied System</a> | 2026-05-18</li>
+<li><a href="../../papers/2605.16143v1/">Look Before You Leap: Autonomous Exploration for LLM Agents</a> | 2026-05-15</li>
+<li><a href="../../papers/2605.16097v1/">Multi-Agent Cooperative Transportation: Optimal and Efficient Task Allocation and Path Finding</a> | 2026-05-15</li>
+<li><a href="../../papers/2605.16205v1/">Context, Reasoning, and Hierarchy: A Cost-Performance Study of Compound LLM Agent Design in an Adversarial POMDP</a> | 2026-05-15</li>
+<li><a href="../../papers/2605.16217v1/">Argus: Evidence Assembly for Scalable Deep Research Agents</a> | 2026-05-15</li>
+<li><a href="../../papers/2605.16116v1/">ShopGym: An Integrated Framework for Realistic Simulation and Scalable Benchmarking of E-Commerce Web Agents</a> | 2026-05-15</li>
+<li><a href="../../papers/2605.16233v1/">FORGE: Self-Evolving Agent Memory With No Weight Updates via Population Broadcast</a> | 2026-05-15</li>
+<li><a href="../../papers/2605.16194v1/">paper.json: A Coordination Convention for LLM-Agent-Actionable Papers</a> | 2026-05-15</li>
+<li><a href="../../papers/2605.16207v1/">Confirming Correct, Missing the Rest: LLM Tutoring Agents Struggle Where Feedback Matters Most</a> | 2026-05-15</li>
+<li><a href="../../papers/2605.16178v1/">Probabilistic Seasonal Streamflow Forecasting Across California's Sierra Nevada Watersheds with Agentic AI</a> | 2026-05-15</li>
+<li><a href="../../papers/2605.16144v1/">MAxLM: Multi-Agent Language Model-Based Scheduling and Resource Allocation in MU-MIMO-OFDMA-Enabled Wireless Networks</a> | 2026-05-15</li>
+<li><a href="../../papers/2605.16191v1/">Optimized Three-Dimensional Photovoltaic Structures with LLM guided Tree Search</a> | 2026-05-15</li>
+<li><a href="../../papers/2605.16153v1/">An Algebraic Exposition of the Theory of Dyadic Morality</a> | 2026-05-15</li>
+</ul>
+<h2 id="agent-multiagent">Agent-MultiAgent<a class="headerlink" href="#agent-multiagent" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="../../papers/2605.28534v1/">GUI-CIDER: Mid-training GUI Agents via Causal Internalization and Density-aware Exemplar Reselection</a> | 2026-05-27</li>
+<li><a href="../../papers/2605.28077v1/">MACReD: A Multi-Agent Collaborative Reasoning Framework for Reaction Diagram Parsing</a> | 2026-05-27</li>
+<li><a href="../../papers/2605.28175v1/">Mixture-of-Experts Knowledge Graph Retrieval-Augmented Generation for Multi-Agent LLM-based Recommendation</a> | 2026-05-27</li>
+<li><a href="../../papers/2605.26835v1/">Helicase: Uncertainty-Guided Supply Chain Knowledge Graph Construction with Autonomous Multi-Agent LLMs</a> | 2026-05-26</li>
+<li><a href="../../papers/2605.26646v1/">UnityMAS-O: A General RL Optimization Framework for LLM-Based Multi-Agent Systems</a> | 2026-05-26</li>
+<li><a href="../../papers/2605.27685v1/">Decoupled Intelligence: A Multi-Agent LLM Framework for Controllable Traffic Scenario Generation in SUMO</a> | 2026-05-26</li>
+<li><a href="../../papers/2605.27532v1/">SCALE-COMM: Shared, Contrastively-Aligned Latent Embeddings for MARL Communication</a> | 2026-05-26</li>
+<li><a href="../../papers/2605.26239v1/">Sentinel: Embodied Cooperative Spatial Reasoning and Planning</a> | 2026-05-25</li>
+<li><a href="../../papers/2605.26286v1/">Decoupled Delay Compensation: Enhancing Pre-trained MARL Policies via Learned Dynamics Filtering</a> | 2026-05-25</li>
+<li><a href="../../papers/2605.22363v1/">Incentive-Aligned Vehicle-to-Vehicle Energy Trading via Nash-Integrated Multi-Agent Reinforcement Learning</a> | 2026-05-21</li>
+<li><a href="../../papers/2605.21932v1/">Auction-Consensus Algorithm with Learned Bidding Scheme for Multi-Robot Systems</a> | 2026-05-21</li>
+<li><a href="../../papers/2605.20608v1/">From Automated to Autonomous: Hierarchical Agent-native Network Architecture (HANA)</a> | 2026-05-20</li>
+<li><a href="../../papers/2605.21085v1/">Decoupling Communication from Policy: Robust MARL under Bandwidth Constraints</a> | 2026-05-20</li>
+<li><a href="../../papers/2605.19418v1/">Conflict-Resilient Multi-Agent Reasoning via Signed Graph Modeling</a> | 2026-05-19</li>
+<li><a href="../../papers/2605.19338v1/">STAR-PólyaMath: Multi-Agent Reasoning under Persistent Meta-Strategic Supervision</a> | 2026-05-19</li>
+<li><a href="../../papers/2605.20348v1/">Memory-Induced Supra-Competitive Outcomes Between Deep Reinforcement Learning Agents in Optimal Trade Execution</a> | 2026-05-19</li>
+<li><a href="../../papers/2605.20342v2/">ParaVT: Taming the Tool Prior Paradox for Parallel Tool Use in Agentic Video Reinforcement Learning</a> | 2026-05-19</li>
+<li><a href="../../papers/2605.20025v1/">AutoResearchClaw: Self-Reinforcing Autonomous Research with Human-AI Collaboration</a> | 2026-05-19</li>
+<li><a href="../../papers/2605.18024v1/">Interaction-Breaking Adversarial Learning Framework for Robust Multi-Agent Reinforcement Learning</a> | 2026-05-18</li>
+<li><a href="../../papers/2605.18077v1/">LLM-Guided Communication for Cooperative Multi-Agent Reinforcement Learning</a> | 2026-05-18</li>
+<li><a href="../../papers/2605.18407v1/">Qumus: Realization of An Embodied AI Quantum Material Experimentalist</a> | 2026-05-18</li>
+<li><a href="../../papers/2605.17698v1/">Agent Bazaar: Enabling Economic Alignment in Multi-Agent Marketplaces</a> | 2026-05-17</li>
+<li><a href="../../papers/2605.17393v1/">Heterogeneous Information-Bottleneck Coordination Graphs for Multi-Agent Reinforcement Learning</a> | 2026-05-17</li>
+<li><a href="../../papers/2605.15697v1/">Distributed Zeroth-Order Policy Gradient for Networked Multi-agent Reinforcement Learning from Human Feedback</a> | 2026-05-15</li>
+<li><a href="../../papers/2605.15799v1/">From Gridworlds to Warehouses: Adapting Lightweight One-shot Multi-Agent Pathfinding for AGVs</a> | 2026-05-15</li>
+<li><a href="../../papers/2605.15815v1/">BootstrapAgent: Distilling Repository Setup into Reusable Agent Knowledge</a> | 2026-05-15</li>
+<li><a href="../../papers/2605.15768v1/">ALSO: Adversarial Online Strategy Optimization for Social Agents</a> | 2026-05-15</li>
+<li><a href="../../papers/2605.15528v1/">Task-Semantic Graph-Driven Distributed Agent Networking for Underwater Target Tracking</a> | 2026-05-15</li>
+<li><a href="../../papers/2605.14892v2/">Beyond Individual Intelligence: Surveying Collaboration, Failure Attribution, and Self-Evolution in LLM-based Multi-Agent Systems</a> | 2026-05-14</li>
+<li><a href="../../papers/2605.15301v1/">Solvita: Enhancing Large Language Models for Competitive Programming via Agentic Evolution</a> | 2026-05-14</li>
+<li><a href="../../papers/2605.15028v1/">Multi-Agentic Approach for History Matching of Oil Reservoirs</a> | 2026-05-14</li>
+<li><a href="../../papers/2605.14851v1/">IFPV: An Integrated Multi-Agent Framework for Generative Operational Planning and High-Fidelity Plan Verification</a> | 2026-05-14</li>
+</ul>
+<h2 id="openai">OpenAI<a class="headerlink" href="#openai" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="../../papers/2605.28065v1/">Verifiable Benchmarking of Long-Horizon Spatial Biology</a> | 2026-05-27</li>
+<li><a href="../../papers/2605.27766v1/">Got a Secret? LLM Agents Can't Keep It: Evaluating Privacy in Multi-Agent Systems</a> | 2026-05-26</li>
+<li><a href="../../papers/2605.24699v1/">MDIA: A Multi-Agent Diagnostic Intelligence Pipeline on HealthBench Professional</a> | 2026-05-23</li>
+<li><a href="../../papers/2605.22502v1/">Compiling Agentic Workflows into LLM Weights: Near-Frontier Quality at Two Orders of Magnitude Less Cost</a> | 2026-05-21</li>
+<li><a href="../../papers/2605.21470v1/">Agent JIT Compilation for Latency-Optimizing Web Agent Planning and Scheduling</a> | 2026-05-20</li>
+<li><a href="../../papers/2605.19932v1/">PEEK: Context Map as an Orientation Cache for Long-Context LLM Agents</a> | 2026-05-19</li>
+<li><a href="../../papers/2605.18327v1/">Causely: A Causal Intelligence Layer for Enterprise AI A Benchmark Study on SRE and Reliability Workflows</a> | 2026-05-18</li>
+<li><a href="../../papers/2605.17928v1/">Transfer Learning for Customized Car Racing Environments</a> | 2026-05-18</li>
+<li><a href="../../papers/2605.17554v1/">Evaluating Deep Research Agents on Expert Consulting Work: A Benchmark with Verifiers, Rubrics, and Cognitive Traps</a> | 2026-05-17</li>
+<li><a href="../../papers/2605.17625v1/">Episodic-Semantic Memory Architecture for Long-Horizon Scientific Agents</a> | 2026-05-17</li>
+<li><a href="../../papers/2605.14671v1/">Agentic Design of Compositional Descriptors via Autoresearch for Materials Science Applications</a> | 2026-05-14</li>
+<li><a href="../../papers/2605.11086v1/">ExploitGym: Can AI Agents Turn Security Vulnerabilities into Real Attacks?</a> | 2026-05-11</li>
+<li><a href="../../papers/2605.05287v1/">Securing the Agent: Vendor-Neutral, Multitenant Enterprise Retrieval and Tool Use</a> | 2026-05-06</li>
+<li><a href="../../papers/2605.04312v1/">Agent Island: A Saturation- and Contamination-Resistant Benchmark from Multiagent Games</a> | 2026-05-05</li>
+<li><a href="../../papers/2605.03952v1/">MOSAIC-Bench: Measuring Compositional Vulnerability Induction in Coding Agents</a> | 2026-05-05</li>
+<li><a href="../../papers/2605.02801v1/">Reinforcement Learning for LLM-based Multi-Agent Systems through Orchestration Traces</a> | 2026-05-04</li>
+<li><a href="../../papers/2605.04107v1/">TSCG: Deterministic Tool-Schema Compilation for Agentic LLM Deployments</a> | 2026-05-04</li>
+<li><a href="../../papers/2605.02964v1/">Reward Hacking Benchmark: Measuring Exploits in LLM Agents with Tool Use</a> | 2026-05-03</li>
+<li><a href="../../papers/2605.01970v2/">Trojan Hippo: Weaponizing Agent Memory for Data Exfiltration</a> | 2026-05-03</li>
+<li><a href="../../papers/2604.27891v2/">In-Context Prompting Obsoletes Agent Orchestration for Procedural Tasks</a> | 2026-04-30</li>
+<li><a href="../../papers/2604.23449v1/">ArguAgent: AI-Supported Real-Time Grouping for Productive Argumentation in STEM Classrooms</a> | 2026-04-25</li>
+<li><a href="../../papers/2604.18234v1/">Evaluating Multi-Hop Reasoning in RAG Systems: A Comparison of LLM-Based Retriever Evaluation Strategies</a> | 2026-04-20</li>
+<li><a href="../../papers/2604.17111v1/">HiveMind: OS-Inspired Scheduling for Concurrent LLM Agent Workloads</a> | 2026-04-18</li>
+<li><a href="../../papers/2604.15725v1/">Reasoning-targeted Jailbreak Attacks on Large Reasoning Models via Semantic Triggers and Psychological Framing</a> | 2026-04-17</li>
+<li><a href="../../papers/2604.14858v1/">Benchmarks for Trajectory Safety Evaluation and Diagnosis in OpenClaw and Codex: ATBench-Claw and ATBench-CodeX</a> | 2026-04-16</li>
+<li><a href="../../papers/2604.12301v1/">Local-Splitter: A Measurement Study of Seven Tactics for Reducing Cloud LLM Token Usage on Coding-Agent Workloads</a> | 2026-04-14</li>
+<li><a href="../../papers/2604.12102v2/">Spatial Atlas: Compute-Grounded Reasoning for Spatial-Aware Research Agent Benchmarks</a> | 2026-04-13</li>
+<li><a href="../../papers/2604.12076v1/">Narrative over Numbers: The Identifiable Victim Effect and its Amplification Under Alignment and Reasoning in Large Language Models</a> | 2026-04-13</li>
+</ul>
+<h2 id="deepseek">DeepSeek<a class="headerlink" href="#deepseek" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="../../papers/2605.14457v1/">Stateful Reasoning via Insight Replay</a> | 2026-05-14</li>
+<li><a href="../../papers/2605.13165v1/">STOP: Structured On-Policy Pruning of Long-Form Reasoning in Low-Data Regimes</a> | 2026-05-13</li>
+<li><a href="../../papers/2605.12857v1/">ChipMATE: Multi-Agent Training via Reinforcement Learning for Enhanced RTL Generation</a> | 2026-05-13</li>
+<li><a href="../../papers/2605.11746v1/">When Reasoning Traces Become Performative: Step-Level Evidence that Chain-of-Thought Is an Imperfect Oversight Channel</a> | 2026-05-12</li>
+<li><a href="../../papers/2605.11403v1/">fg-expo: Frontier-guided exploration-prioritized policy optimization via adaptive kl and gaussian curriculum</a> | 2026-05-12</li>
+<li><a href="../../papers/2605.07686v1/">The Coupling Tax: How Shared Token Budgets Undermine Visible Chain-of-Thought Under Fixed Output Limits</a> | 2026-05-08</li>
+<li><a href="../../papers/2605.07579v1/">Your Language Model is Its Own Critic: Reinforcement Learning with Value Estimation from Actor's Internal States</a> | 2026-05-08</li>
+<li><a href="../../papers/2605.07147v1/">MathlibPR: Pull Request Merge-Readiness Benchmark for Formal Mathematical Libraries</a> | 2026-05-08</li>
+<li><a href="../../papers/2605.06772v1/">When Does Critique Improve AI-Assisted Theoretical Physics? SCALAR: Structured Critic--Actor Loop for Agentic Reasoning</a> | 2026-05-07</li>
+<li><a href="../../papers/2605.05678v1/">Chain of Risk: Safety Failures in Large Reasoning Models and Mitigation via Adaptive Multi-Principle Steering</a> | 2026-05-07</li>
+<li><a href="../../papers/2605.04488v1/">How Does Thinking Mode Change LLM Moral Judgments? A Controlled Instant-vs-Thinking Comparison Across Five Frontier Models</a> | 2026-05-06</li>
+<li><a href="../../papers/2605.04472v1/">Automated Formal Proofs of Combinatorial Identities via Wilf-Zeilberger Guidance and LLMs</a> | 2026-05-06</li>
+<li><a href="../../papers/2605.05365v1/">ZAYA1-8B Technical Report</a> | 2026-05-06</li>
+<li><a href="../../papers/2605.03675v1/">MEMTIER: Tiered Memory Architecture and Retrieval Bottleneck Analysis for Long-Running Autonomous AI Agents</a> | 2026-05-05</li>
+<li><a href="../../papers/2605.02815v1/">FlexSQL: Flexible Exploration and Execution Make Better Text-to-SQL Agents</a> | 2026-05-04</li>
+<li><a href="../../papers/2605.02173v1/">Retrieval and Multi-Hop Reasoning in 1M-Token Context Windows: Evaluating LLMs on Classical Chinese Text</a> | 2026-05-04</li>
+<li><a href="../../papers/2604.24512v1/">Beyond the Attention Stability Boundary: Agentic Self-Synthesizing Reasoning Protocols</a> | 2026-04-27</li>
+<li><a href="../../papers/2604.21282v1/">Strategic Heterogeneous Multi-Agent Architecture for Cost-Effective Code Vulnerability Detection</a> | 2026-04-23</li>
+<li><a href="../../papers/2604.20090v1/">Less Languages, Less Tokens: An Efficient Unified Logic Cross-lingual Chain-of-Thought Reasoning Framework</a> | 2026-04-22</li>
+<li><a href="../../papers/2604.19459v1/">Do LLMs Game Formalization? Evaluating Faithfulness in Logical Reasoning</a> | 2026-04-21</li>
+<li><a href="../../papers/2604.19144v1/">ReflectMT: Internalizing Reflection for Efficient and High-Quality Machine Translation</a> | 2026-04-21</li>
+<li><a href="../../papers/2604.18038v1/">First, Do No Harm (With LLMs): Mitigating Racial Bias via Agentic Workflows</a> | 2026-04-20</li>
+<li><a href="../../papers/2604.18584v1/">MathNet: a Global Multimodal Benchmark for Mathematical Reasoning and Retrieval</a> | 2026-04-20</li>
+</ul>
+<h2 id="meta-fair">Meta FAIR<a class="headerlink" href="#meta-fair" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="../../papers/2605.30208v1/">Automating Low-Risk Code Review at Meta: RADAR, Risk Calibration, and Review Efficiency</a> | 2026-05-28</li>
+<li><a href="../../papers/2605.14212v1/">MetaAgent-X : Breaking the Ceiling of Automatic Multi-Agent Systems via End-to-End Reinforcement Learning</a> | 2026-05-14</li>
+<li><a href="../../papers/2605.13228v1/">ReTool-Video: Recursive Tool-Using Video Agents with Meta-Augmented Tool Grounding</a> | 2026-05-13</li>
+<li><a href="../../papers/2605.13527v2/">MMSkills: Towards Multimodal Skills for General Visual Agents</a> | 2026-05-13</li>
+<li><a href="../../papers/2605.13941v1/">EvolveMem:Self-Evolving Memory Architecture via AutoResearch for LLM Agents</a> | 2026-05-13</li>
+<li><a href="../../papers/2605.13821v1/">Harnessing Agentic Evolution</a> | 2026-05-13</li>
+<li><a href="../../papers/2605.12718v1/">CHAL: Council of Hierarchical Agentic Language</a> | 2026-05-12</li>
+<li><a href="../../papers/2605.07174v1/">Repeated Deceptive Path Planning against Learnable Observer</a> | 2026-05-08</li>
+<li><a href="../../papers/2605.07129v1/">RRCM: Ranking-Driven Retrieval over Collaborative and Meta Memories for LLM Recommendation</a> | 2026-05-08</li>
+<li><a href="../../papers/2605.06614v1/">SkillOS: Learning Skill Curation for Self-Evolving Agents</a> | 2026-05-07</li>
+<li><a href="../../papers/2605.06215v1/">FunctionalAgent: Towards end-to-end on-top functional design</a> | 2026-05-07</li>
+<li><a href="../../papers/2605.04352v1/">Probing Structural Mathematical Reasoning in Language Models with Algebraic Trapdoors</a> | 2026-05-05</li>
+<li><a href="../../papers/2605.04019v1/">Redefining AI Red Teaming in the Agentic Era: From Weeks to Hours</a> | 2026-05-05</li>
+<li><a href="../../papers/2605.02463v2/">When Stress Becomes Signal: Detecting Antifragility-Compatible Regimes in Multi-Agent LLM Systems</a> | 2026-05-04</li>
+<li><a href="../../papers/2605.00932v1/">Code World Model Preparedness Report</a> | 2026-05-01</li>
+<li><a href="../../papers/2604.21420v1/">FairQE: Multi-Agent Framework for Mitigating Gender Bias in Translation Quality Estimation</a> | 2026-04-23</li>
+<li><a href="../../papers/2604.20714v1/">Learning to Evolve: A Self-Improving Framework for Multi-Agent Systems via Textual Parameter Graph Optimization</a> | 2026-04-22</li>
+<li><a href="../../papers/2604.21003v1/">The Last Harness You'll Ever Build</a> | 2026-04-22</li>
+</ul>
+<h2 id="_1">阿里通义<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="../../papers/2605.14068v1/">CurveBench: A Benchmark for Exact Topological Reasoning over Nested Jordan Curves</a> | 2026-05-13</li>
+<li><a href="../../papers/2605.07138v1/">Can You Break RLVER? Probing Adversarial Robustness of RL-Trained Empathetic Agents</a> | 2026-05-08</li>
+<li><a href="../../papers/2605.07990v1/">Tool Calling is Linearly Readable and Steerable in Language Models</a> | 2026-05-08</li>
+<li><a href="../../papers/2605.05949v2/">MAS-Algorithm: A Workflow for Solving Algorithmic Programming Problems with a Multi-Agent System</a> | 2026-05-07</li>
+<li><a href="../../papers/2605.06650v1/">Beyond Negative Rollouts: Positive-Only Policy Optimization with Implicit Negative Gradients</a> | 2026-05-07</li>
+<li><a href="../../papers/2605.06605v1/">How Many Iterations to Jailbreak? Dynamic Budget Allocation for Multi-Turn LLM Evaluation</a> | 2026-05-07</li>
+<li><a href="../../papers/2605.04499v1/">Pen-Strategist: A Reasoning Framework for Penetration Testing Strategy Formation and Analysis</a> | 2026-05-06</li>
+<li><a href="../../papers/2605.03354v1/">What Happens Inside Agent Memory? Circuit Analysis from Emergence to Diagnosis</a> | 2026-05-05</li>
+<li><a href="../../papers/2605.03195v1/">Terminus-4B: Can a Smaller Model Replace Frontier LLMs at Agentic Execution Tasks?</a> | 2026-05-04</li>
+<li><a href="../../papers/2605.03217v1/">Moral Sensitivity in LLMs: A Tiered Evaluation of Contextual Bias via Behavioral Profiling and Mechanistic Interpretability</a> | 2026-05-04</li>
+<li><a href="../../papers/2605.01789v1/">DataEvolver: Let Your Data Build and Improve Itself via Goal-Driven Loop Agents</a> | 2026-05-03</li>
+<li><a href="../../papers/2604.23972v1/">Quantum Knowledge Graph: Modeling Context-Dependent Triplet Validity</a> | 2026-04-27</li>
+<li><a href="../../papers/2604.23701v1/">Agri-CPJ: A Training-Free Explainable Framework for Agricultural Pest Diagnosis Using Caption-Prompt-Judge and LLM-as-a-Judge</a> | 2026-04-26</li>
+<li><a href="../../papers/2604.19638v1/">SafetyALFRED: Evaluating Safety-Conscious Planning of Multimodal Large Language Models</a> | 2026-04-21</li>
+<li><a href="../../papers/2604.18356v1/">ComPASS: Towards Personalized Agentic Social Support via Tool-Augmented Companionship</a> | 2026-04-20</li>
+<li><a href="../../papers/2604.18364v1/">Training and Agentic Inference Strategies for LLM-based Manim Animation Generation</a> | 2026-04-20</li>
+</ul>
+<h2 id="minimax">MiniMax<a class="headerlink" href="#minimax" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="../../papers/2605.15040v1/">Orchard: An Open-Source Agentic Modeling Framework</a> | 2026-05-14</li>
+<li><a href="../../papers/2605.14350v1/">Distributionally Robust Multi-Task Reinforcement Learning via Adaptive Task Sampling</a> | 2026-05-14</li>
+<li><a href="../../papers/2605.12664v1/">Profit Maximization in Bilateral Trade against a Smooth Adversary</a> | 2026-05-12</li>
+<li><a href="../../papers/2605.10870v1/">Remember the Decision, Not the Description: A Rate-Distortion Framework for Agent Memory</a> | 2026-05-11</li>
+<li><a href="../../papers/2605.03482v1/">MEMSAD: Gradient-Coupled Anomaly Detection for Memory Poisoning in Retrieval-Augmented Agents</a> | 2026-05-05</li>
+<li><a href="../../papers/2604.21896v1/">Nemobot Games: Crafting Strategic AI Gaming Agents for Interactive Learning with Large Language Models</a> | 2026-04-23</li>
+<li><a href="../../papers/2604.19572v1/">A Self-Evolving Framework for Efficient Terminal Agents via Observational Context Compression</a> | 2026-04-21</li>
+<li><a href="../../papers/2604.14687v1/">M2-PALE: A Framework for Explaining Multi-Agent MCTS--Minimax Hybrids via Process Mining and LLMs</a> | 2026-04-16</li>
+</ul>
+<h2 id="microsoft">Microsoft<a class="headerlink" href="#microsoft" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="../../papers/2605.12925v1/">AgentLens: Revealing The Lucky Pass Problem in SWE-Agent Evaluation</a> | 2026-05-13</li>
+<li><a href="../../papers/2605.09534v1/">Governing AI-Assisted Security Operations: A Design Science Framework for Operational Decision Support</a> | 2026-05-10</li>
+<li><a href="../../papers/2605.08717v1/">Debugging the Debuggers: Failure-Anchored Structured Recovery for Software Engineering Agents</a> | 2026-05-09</li>
+<li><a href="../../papers/2605.05000v1/">Agentic Vulnerability Reasoning on Windows COM Binaries</a> | 2026-05-06</li>
+<li><a href="../../papers/2604.26102v1/">SWE-Edit: Rethinking Code Editing for Efficient SWE-Agent</a> | 2026-04-28</li>
+<li><a href="../../papers/2604.18658v1/">Owner-Harm: A Missing Threat Model for AI Agent Safety</a> | 2026-04-20</li>
+<li><a href="../../papers/2604.11623v3/">Context Kubernetes: Declarative Orchestration of Enterprise Knowledge for Agentic AI Systems</a> | 2026-04-13</li>
+</ul>
+<h2 id="anthropic">Anthropic<a class="headerlink" href="#anthropic" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="../../papers/2605.06738v1/">From Specification to Deployment: Empirical Evidence from a W3C VC + DID Trust Infrastructure for Autonomous Agents</a> | 2026-05-07</li>
+<li><a href="../../papers/2604.21255v1/">When Agents Look the Same: Quantifying Distillation-Induced Similarity in Tool-Use Behaviors</a> | 2026-04-23</li>
+<li><a href="../../papers/2604.21131v1/">Cross-Session Threats in AI Agents: Benchmark, Evaluation, and Algorithms</a> | 2026-04-22</li>
+<li><a href="../../papers/2604.16911v1/">Skilldex: A Package Manager and Registry for Agent Skill Packages with Hierarchical Scope-Based Distribution</a> | 2026-04-18</li>
+</ul>
+<h2 id="google-deepmind">Google DeepMind<a class="headerlink" href="#google-deepmind" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="../../papers/2605.23220v1/">WMAttack: Automated Attack Search for Adversarial Evaluation of World-Model Agents</a> | 2026-05-22</li>
+<li><a href="../../papers/2605.15342v1/">Minerva-Ego: Spatiotemporal Hints for Egocentric Video Understanding</a> | 2026-05-14</li>
+<li><a href="../../papers/2605.05951v1/">HaM-World: Soft-Hamiltonian World Models with Selective Memory for Planning</a> | 2026-05-07</li>
+<li><a href="../../papers/2605.04709v1/">ELVIS: Ensemble-Calibrated Latent Imagination for Long-Horizon Visual MPC</a> | 2026-05-06</li>
+</ul>
+<h2 id="_2">智谱<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="../../papers/2605.05696v1/">Irminsul: MLA-Native Position-Independent Caching for Agentic LLM Serving</a> | 2026-05-07</li>
+<li><a href="../../papers/2604.22577v1/">QuantClaw: Precision Where It Matters for OpenClaw</a> | 2026-04-24</li>
+<li><a href="../../papers/2604.22840v1/">AeSlides: Incentivizing Aesthetic Layout in LLM-Based Slide Generation via Verifiable Rewards</a> | 2026-04-21</li>
+<li><a href="../../papers/2604.11753v1/">Agentic Aggregation for Parallel Scaling of Long-Horizon Agentic Tasks</a> | 2026-04-13</li>
+</ul>
+<h2 id="-">时序预测-核心<a class="headerlink" href="#-" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="../../papers/2605.17046v1/">1GC-7RC: One Graphic Card -- Seven Research Challenges! How Good Are AI Agents at Doing Your Job?</a> | 2026-05-16</li>
+<li><a href="../../papers/2605.17046v2/">1GC-7RC: One Graphic Card -- Seven Research Challenges! How Good Are AI Agents at Doing Your Job?</a> | 2026-05-16</li>
+<li><a href="../../papers/2605.11262v1/">Latent Chain-of-Thought Improves Structured-Data Transformers</a> | 2026-05-11</li>
+</ul>
+<h2 id="_3">时空预测<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="../../papers/2605.22189v1/">Learning A Unified Risk Map for Autonomous Driving in Partially Observable Environments</a> | 2026-05-21</li>
+<li><a href="../../papers/2605.18548v1/">STT-Arena: A More Realistic Environment for Tool-Using with Spatio-Temporal Dynamics</a> | 2026-05-18</li>
+<li><a href="../../papers/2605.18046v1/">Synergetic capacity planning of public and private EV charging piles via city-scale multi-objective optimization</a> | 2026-05-18</li>
+</ul>
+<h2 id="-patchtsttransformer">时序预测-PatchTST/Transformer<a class="headerlink" href="#-patchtsttransformer" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="../../papers/2605.11269v1/">gwBenchmarks: Stress-Testing LLM Agents on High-Precision Gravitational Wave Astronomy</a> | 2026-05-11</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.expand", "navigation.indexes", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
