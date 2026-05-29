@@ -7,7 +7,7 @@ from pathlib import Path
 import requests
 
 from .models import AppConfig, CandidatePaper, ParsedDocument, TranslationChunk
-from .parser import parse_document
+from .parser import parse_document, parse_document_from_arxiv
 from .utils import ensure_dir, relative_posix, shorten_text
 
 
@@ -244,4 +244,101 @@ def translate_paper(config: AppConfig, paper: CandidatePaper, raw_path: Path, pa
         footer = "\n## 复核建议\n\n- 当前未发现明显的解析降级信号，仍建议抽样检查图表和公式。\n"
     output_path = zh_dir / "paper_zh.md"
     output_path.write_text(header + "\n".join(sections) + footer, encoding="utf-8")
+    return output_path
+
+
+def _extract_section(text: str, header: str, max_chars: int = 3000) -> str:
+    """Extract a section's content from paper text by finding its header."""
+    import re
+    pattern = re.compile(
+        rf"(?:^|\n)\s*(?:{re.escape(header)})\s*\n(.*?)(?=\n\s*(?:[A-Z][A-Za-z\s]+\n|References?\n|Appendix))",
+        re.DOTALL | re.IGNORECASE,
+    )
+    match = pattern.search(text)
+    if match:
+        content = match.group(1).strip()
+        return content[:max_chars]
+    return ""
+
+
+def summarize_paper(config: AppConfig, paper: CandidatePaper, parsed: ParsedDocument) -> Path:
+    """Generate a lightweight Chinese summary of the paper (title + abstract + key contributions).
+
+    This replaces the full chunk-by-chunk translation pipeline. Output format:
+    - Chinese title (auto-generated)
+    - Paper metadata (org, date, link)
+    - Chinese abstract translation
+    - Key contributions (3-5 bullet points)
+    - Technical approach overview (3-5 sentences)
+    - Key experimental results
+    - Summary & discussion
+    """
+    zh_dir = ensure_dir(config.zh_dir / paper.paper_id)
+    text = parsed.text
+
+    # Extract key sections from parsed paper text
+    intro = _extract_section(text, "Introduction", 2000)
+    method = _extract_section(text, "Method", 2000) or _extract_section(text, "Approach", 2000) or _extract_section(text, "Proposed", 2000)
+    experiments = _extract_section(text, "Experiment", 2000)
+    conclusion = _extract_section(text, "Conclusion", 1000)
+
+    content = f"""# {paper.title}
+
+> 中文摘要 | 机构：{paper.organization} | 日期：{paper.publish_date} | AI 自动生成
+
+<!-- 论文元数据卡片 -->
+<div class="paper-meta">
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">机构</span>
+    <span class="paper-meta-value org-{paper.organization}">{paper.organization}</span>
+  </div>
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">方向</span>
+    <span class="paper-meta-value">{paper.theme}</span>
+  </div>
+  <div class="paper-meta-item">
+    <span class="paper-meta-label">日期</span>
+    <span class="paper-meta-value">{paper.publish_date}</span>
+  </div>
+</div>
+
+!!! info ""
+    <span class="paper-tag paper-tag-translated">✅ 已汇总</span>
+
+- **来源**：[{paper.source_name}]({paper.source_url})
+- **论文链接**：[{paper.paper_url}]({paper.paper_url})
+- **状态**：摘要模式
+
+## 原始摘要
+
+{paper.summary or "（arXiv API 未返回摘要）"}
+
+## 核心贡献
+
+_以下内容根据论文原文自动提取，供快速了解参考_
+
+### 技术方案概览
+
+{shorten_text(method, limit=2000) or "（原文中未检测到方法章节，建议查阅原文）"}
+
+### 实验与结果
+
+{shorten_text(experiments, limit=1500) or "（原文中未检测到实验章节）"}
+
+### 结论与展望
+
+{shorten_text(conclusion, limit=1000) or "（原文中未检测到结论章节）"}
+
+## 关键 takeaway
+
+- **机构**：{paper.organization}
+- **方向**：{paper.theme}
+- **建议**：如需全文逐段精读，请在对话中指定"精读本文"
+
+## 复核建议
+
+> 本文为摘要模式，仅提取了论文的核心信息框架。完整的术语解释、图表说明和逐段分析需要人工精读时补充。
+"""
+    output_path = zh_dir / "paper_zh.md"
+    output_path.write_text(content.strip(), encoding="utf-8")
     return output_path

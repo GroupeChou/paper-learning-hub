@@ -10,6 +10,46 @@ log_dir: logs
 raw:
   skip_download: true
 
+# ===== 机构过滤 — 只保留来自大厂的论文 =====
+major_orgs:
+  - name: OpenAI
+    keywords: ["OpenAI", "openai"]
+  - name: Google DeepMind
+    keywords: ["Google", "DeepMind", "Alphabet"]
+  - name: Anthropic
+    keywords: ["Anthropic", "anthropic"]
+  - name: Meta FAIR
+    keywords: ["Meta", "FAIR", "Facebook"]
+  - name: Microsoft
+    keywords: ["Microsoft", "MSRA"]
+  - name: Amazon
+    keywords: ["Amazon", "AWS"]
+  - name: Apple
+    keywords: ["Apple"]
+  - name: NVIDIA
+    keywords: ["NVIDIA", "nvidia"]
+  - name: 阿里通义
+    keywords: ["Alibaba", "通义", "Qwen", "aliyun"]
+  - name: 智谱
+    keywords: ["智谱", "Zhipu", "GLM", "智谱AI"]
+  - name: 百度
+    keywords: ["Baidu", "百度"]
+  - name: 腾讯
+    keywords: ["Tencent", "腾讯"]
+  - name: 华为
+    keywords: ["Huawei", "华为"]
+  - name: 字节跳动
+    keywords: ["ByteDance", "字节跳动"]
+  - name: DeepSeek
+    keywords: ["DeepSeek", "深度求索"]
+  - name: MiniMax
+    keywords: ["MiniMax", "minimax"]
+
+# ===== 摘要模式（替代全文翻译）=====
+summary:
+  enabled: true
+  chunk_chars: 8000
+
 # 导引系统 — 不做翻译，不做站点
 # 每天自动发现新论文，追加到路线文件
 site:

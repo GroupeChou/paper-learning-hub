@@ -8,9 +8,11 @@ from .models import (
     AppConfig,
     FeedSource,
     GitSettings,
+    MajorOrg,
     Organization,
     RawSettings,
     SiteSettings,
+    SummarySettings,
     Theme,
     TranslatorSettings,
     WorkBuddySettings,
@@ -45,6 +47,8 @@ def load_config(config_path: str | Path) -> AppConfig:
     translator_raw = raw.get("translator", {})
     workbuddy_raw = raw.get("workbuddy", {})
     raw_raw = raw.get("raw", {})
+    summary_raw = raw.get("summary", {})
+    major_orgs_raw = raw.get("major_orgs", [])
 
     return AppConfig(
         project_name=raw["project_name"],
@@ -76,6 +80,17 @@ def load_config(config_path: str | Path) -> AppConfig:
         raw=RawSettings(
             skip_download=raw_raw.get("skip_download", False),
         ),
+        summary=SummarySettings(
+            enabled=summary_raw.get("enabled", True),
+            chunk_chars=summary_raw.get("chunk_chars", 8000),
+        ),
+        major_orgs=[
+            MajorOrg(
+                name=item["name"],
+                keywords=item.get("keywords", []),
+            )
+            for item in major_orgs_raw
+        ],
         workbuddy=WorkBuddySettings(
             enabled=workbuddy_raw.get("enabled", False),
             jobs_dir=_resolve_path(base_dir, workbuddy_raw.get("jobs_dir", ".workbuddy/jobs")),

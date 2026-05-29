@@ -8,7 +8,7 @@ from urllib.parse import urlparse
 
 import feedparser
 
-from .models import AppConfig, CandidatePaper, FeedSource, Organization, Theme
+from .models import AppConfig, CandidatePaper, FeedSource, MajorOrg, Organization, Theme
 from .utils import now_iso, sha1_text, shorten_text
 
 
@@ -66,6 +66,36 @@ def _priority(org: Organization, theme_score: int, publish_date: str) -> int:
     return org.priority * 10 + theme_score * 5 + recency_bonus
 
 
+def _check_major_org(entry, major_orgs: list[MajorOrg], title: str, summary: str) -> str | None:
+    """Check if paper authors belong to a major organization.
+
+    Examines author affiliations from the feed entry. If no affiliation data is available,
+    falls back to matching org keywords against the title+abstract.
+
+    Returns:
+        Matched major org name, or None if no match found.
+    """
+    # 1. Check author affiliations from entry data
+    authors = getattr(entry, "authors", []) or []
+    for author in authors:
+        author_name = author.get("name", "")
+        author_text = f"{author_name}"
+        # arXiv API may include affiliation in author name field like "Author Name (Affiliation)"
+        for major_org in major_orgs:
+            for keyword in major_org.keywords:
+                if keyword.lower() in author_text.lower():
+                    return major_org.name
+
+    # 2. Fallback: check title+abstract for org keywords
+    combined = f"{title} {summary}"
+    for major_org in major_orgs:
+        for keyword in major_org.keywords:
+            if keyword.lower() in combined.lower():
+                return major_org.name
+
+    return None
+
+
 def discover_candidates(config: AppConfig) -> list[CandidatePaper]:
     cutoff = datetime.now(timezone.utc).replace(tzinfo=None) - timedelta(days=config.discovery_days)
     discovered: dict[str, CandidatePaper] = {}
@@ -86,6 +116,11 @@ def discover_candidates(config: AppConfig) -> list[CandidatePaper]:
                 if not theme_name:
                     continue
 
+                # 大厂过滤：只保留来自大厂的论文
+                matched_org = _check_major_org(entry, config.major_orgs, title, summary)
+                if not matched_org:
+                    continue
+
                 publish_date = (entry_date.date().isoformat() if entry_date else seen_at[:10])
                 source_url = getattr(entry, "link", "") or feed.url
                 paper_url = _extract_paper_link(entry, feed.url)
@@ -93,7 +128,7 @@ def discover_candidates(config: AppConfig) -> list[CandidatePaper]:
                 candidate = CandidatePaper(
                     paper_id=paper_id,
                     title=title or paper_id,
-                    organization=organization.name,
+                    organization=matched_org,  # 使用匹配到的大厂名称
                     publish_date=publish_date,
                     theme=theme_name,
                     source_name=feed.name,

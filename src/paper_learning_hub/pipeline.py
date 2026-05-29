@@ -11,7 +11,7 @@ from .git_ops import sync_git
 from .models import CandidatePaper, PipelineResult
 from .parser import parse_document_from_arxiv
 from .site_builder import build_site, run_mkdocs_build
-from .translator import translate_paper
+from .translator import summarize_paper, translate_paper
 from .utils import ensure_dir, now_iso, today_iso
 from .workbuddy import ensure_workspace, install_skill, prepare_jobs, sync_completed_jobs, write_daily_brief, write_task_prompt
 
@@ -129,6 +129,32 @@ class Pipeline:
                 self.db.set_status(paper.paper_id, "failed_translate", timestamp, failure_reason=str(exc))
                 logging.exception("Failed to translate %s", paper.title)
 
+    def _summarize_top(self, papers: list[CandidatePaper], result: PipelineResult) -> None:
+        """Generate lightweight Chinese summaries for top-N papers (replaces full translation)."""
+        timestamp = now_iso(self.config.timezone)
+        top_papers = papers[: self.config.daily_limit]
+        queued_papers = papers[self.config.daily_limit :]
+        for paper in queued_papers:
+            self.db.set_status(paper.paper_id, "queued", timestamp)
+            result.queued += 1
+
+        for paper in top_papers:
+            try:
+                zh_dir = ensure_dir(self.config.zh_dir / paper.paper_id)
+                parsed = parse_document_from_arxiv(
+                    paper.paper_id,
+                    zh_dir,
+                    self.config.summary.chunk_chars,
+                )
+                zh_path = summarize_paper(self.config, paper, parsed)
+                self.db.set_status(paper.paper_id, "translated", timestamp, zh_path=str(zh_path))
+                result.translated += 1
+                logging.info("Summarized %s", paper.title)
+            except Exception as exc:  # noqa: BLE001
+                result.failed += 1
+                self.db.set_status(paper.paper_id, "failed_translate", timestamp, failure_reason=str(exc))
+                logging.exception("Failed to summarize %s", paper.title)
+
     def _refresh_status_views(self) -> tuple[list[CandidatePaper], list[CandidatePaper], dict[str, int]]:
         all_papers = self.db.get_papers()
         latest_papers = self.db.get_latest_by_date(today_iso(self.config.timezone))
@@ -217,6 +243,9 @@ class Pipeline:
 
         if self.config.workbuddy.enabled or prepare_workbuddy_only:
             self.prepare_workbuddy(result)
+        elif self.config.summary.enabled:
+            refreshed = self.db.get_papers(statuses=["downloaded", "discovered", "queued", "failed_translate"])
+            self._summarize_top(refreshed, result)
         else:
             refreshed = self.db.get_papers(statuses=["downloaded", "discovered", "queued", "failed_translate"])
             self._translate_top(refreshed, result)

@@ -40,6 +40,18 @@ class RawSettings:
 
 
 @dataclass(slots=True)
+class MajorOrg:
+    name: str
+    keywords: list[str] = field(default_factory=list)
+
+
+@dataclass(slots=True)
+class SummarySettings:
+    enabled: bool = True
+    chunk_chars: int = 8000
+
+
+@dataclass(slots=True)
 class SiteSettings:
     site_name: str
     site_url: str
@@ -88,6 +100,8 @@ class AppConfig:
     translator: TranslatorSettings
     workbuddy: WorkBuddySettings
     raw: RawSettings
+    summary: SummarySettings
+    major_orgs: list[MajorOrg]
     themes: list[Theme]
     organizations: list[Organization]
 

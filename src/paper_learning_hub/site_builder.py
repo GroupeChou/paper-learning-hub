@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import logging
 import shutil
 import subprocess
 from collections import defaultdict
@@ -7,6 +8,8 @@ from pathlib import Path
 
 from .models import AppConfig, CandidatePaper
 from .utils import ensure_dir, today_iso
+
+logger = logging.getLogger(__name__)
 
 
 def _write_text(path: Path, content: str) -> None:
@@ -246,7 +249,56 @@ def build_site(config: AppConfig, papers: list[CandidatePaper], latest_papers: l
     build_topic_index(config, papers)
     build_paper_index(config, papers)
     copy_classics(config, config.site.docs_dir.parent.parent / "guides" / "classics.md")
+    update_roadmap(config, papers)
     return write_mkdocs_config(config)
+
+
+def update_roadmap(config: AppConfig, papers: list[CandidatePaper]) -> None:
+    """Append newly translated papers to the corresponding learning roadmap files."""
+    roadmap_map = {
+        "AI Agent": config.site.docs_dir.parent.parent / "guides" / "agent-roadmap.md",
+        "时序预测": config.site.docs_dir.parent.parent / "guides" / "ts-roadmap.md",
+    }
+    for paper in papers:
+        if paper.status != "translated" or not paper.zh_path:
+            continue
+        target = roadmap_map.get(paper.theme)
+        if not target or not target.exists():
+            continue
+
+        try:
+            content = target.read_text(encoding="utf-8")
+            # Build the entry to append
+            entry = (
+                f"- [{paper.title}](../papers/{paper.paper_id}/index.md)"
+                f" | {paper.organization} | {paper.publish_date}\n"
+            )
+
+            marker = "## 每日自动追加"
+            if marker in content:
+                # Find the section and append
+                lines = content.splitlines(keepends=True)
+                insert_pos = len(lines)
+                for i, line in enumerate(lines):
+                    if line.strip().startswith(marker):
+                        insert_pos = i + 1
+                        # Skip past the section header and any description lines
+                        while insert_pos < len(lines) and (
+                            not lines[insert_pos].strip() or lines[insert_pos].strip().startswith(("_", "-", "*"))
+                        ):
+                            insert_pos += 1
+                        break
+                lines.insert(insert_pos, entry)
+                content = "".join(lines)
+            else:
+                # Create new section
+                today = today_iso(config.timezone)
+                content += f"\n## 每日自动追加\n\n_以下论文由系统在 {today} 自动追加_\n\n{entry}\n"
+
+            target.write_text(content, encoding="utf-8")
+            logger.info("Updated roadmap: %s with %s", target.name, paper.paper_id)
+        except Exception as exc:
+            logger.warning("Failed to update roadmap for %s: %s", paper.paper_id, exc)
 
 
 def run_mkdocs_build(config: AppConfig) -> None:
