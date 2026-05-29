@@ -231,59 +231,80 @@ def build_site(config: AppConfig, papers: list[CandidatePaper], latest_papers: l
 
 
 def update_roadmap(config: AppConfig, papers: list[CandidatePaper]) -> None:
-    """Regenerate comprehensive learning roadmap with all papers organized by category.
+    """Regenerate roadmap with papers grouped by technical topic in table format."""
+    now = today_iso(config.timezone)
 
-    Each roadmap file (agent-roadmap.md / ts-roadmap.md) lists all translated papers
-    grouped by organization, with clickable links to each paper's detail page.
-    Also copies to site/docs/guides/ for MkDocs.
-    """
+    # Map source_name to readable topic categories
+    topic_map = {
+        "AI Agent arXiv 搜索": "智能体基础架构",
+        "多智能体 arXiv 搜索": "多智能体系统",
+        "OpenAI arXiv query": "OpenAI 系列",
+        "DeepSeek arXiv query": "DeepSeek 系列",
+        "Meta FAIR arXiv query": "Meta FAIR 系列",
+        "Qwen arXiv query": "阿里通义系列",
+        "MiniMax arXiv query": "MiniMax 系列",
+        "Microsoft arXiv query": "Microsoft 系列",
+        "Google DeepMind arXiv query": "Google DeepMind 系列",
+        "GLM arXiv query": "智谱系列",
+        "Anthropic arXiv query": "Anthropic 系列",
+        "Baidu arXiv query": "百度系列",
+        "Tencent arXiv query": "腾讯系列",
+        "Huawei arXiv query": "华为系列",
+        "ByteDance arXiv query": "字节跳动系列",
+        "NVIDIA arXiv query": "NVIDIA 系列",
+        "Amazon arXiv query": "Amazon 系列",
+        "Apple arXiv query": "Apple 系列",
+        "时序预测 arXiv 搜索": "时序预测基础",
+        "Transformer时序预测 arXiv 搜索": "Transformer 时序预测",
+        "时空预测 arXiv 搜索": "时空预测",
+    }
+
     roadmap_map = {
         "AI Agent": config.site.docs_dir.parent.parent / "guides" / "agent-roadmap.md",
         "时序预测": config.site.docs_dir.parent.parent / "guides" / "ts-roadmap.md",
     }
-    now = today_iso(config.timezone)
 
     for theme_name, target in roadmap_map.items():
-        # Filter translated papers for this theme
         theme_papers = [p for p in papers if p.theme == theme_name and p.status == "translated" and p.zh_path]
+        if not theme_papers:
+            continue
 
-        # Group by organization
-        org_groups: dict[str, list[CandidatePaper]] = {}
+        # Group by topic (mapped from source_name, fallback to organization)
+        topic_groups: dict[str, list[CandidatePaper]] = {}
         for p in theme_papers:
-            org_groups.setdefault(p.organization, []).append(p)
+            topic = topic_map.get(p.source_name, p.organization)
+            topic_groups.setdefault(topic, []).append(p)
 
         lines = [
-            f"# {theme_name} 论文目录",
+            f"# {theme_name} 论文列表",
             "",
-            f"> 完整论文目录大纲。所有论文按机构/主题分类，点击标题跳转到详情页。",
-            f"> 最后更新：{now}",
-            "---",
+            f"> 按技术方向分类。点击论文标题跳转到详情页。",
+            f"> 最后更新：{now} | 共 {len(theme_papers)} 篇论文",
             "",
-            f"**共 {len(theme_papers)} 篇论文**",
-            "",
+            "| 主题 | 英文标题 | 中文标题 | 发布日期 | 发布机构 |",
+            "|------|----------|----------|:--------:|:--------:|",
         ]
 
-        # Sort orgs by paper count (most papers first)
-        sorted_orgs = sorted(org_groups.items(), key=lambda x: -len(x[1]))
-        for org_name, org_papers in sorted_orgs:
-            # Sort papers by date (newest first)
-            org_papers.sort(key=lambda p: p.publish_date, reverse=True)
-            lines.append(f"## {org_name}")
-            lines.append("")
-            for p in org_papers:
-                lines.append(
-                    f"- [{p.title}](../papers/{p.paper_id}/index.md)"
-                    f" | {p.publish_date}"
-                )
-            lines.append("")
+        # Sort topics by paper count
+        sorted_topics = sorted(topic_groups.items(), key=lambda x: -len(x[1]))
+        for topic_name, topic_papers in sorted_topics:
+            topic_papers.sort(key=lambda p: p.publish_date, reverse=True)
+            for i, p in enumerate(topic_papers):
+                title_link = f"[{p.title}](../papers/{p.paper_id}/index.md)"
+                cn_title = "*待补充*"
+                org = p.organization or "—"
+                if i == 0:
+                    row = f"| **{topic_name}** ({len(topic_papers)}) | {title_link} | {cn_title} | {p.publish_date} | {org} |"
+                else:
+                    row = f"| | {title_link} | {cn_title} | {p.publish_date} | {org} |"
+                lines.append(row)
 
         content = "\n".join(lines) + "\n"
 
         # Write to guides/ and site/docs/guides/
         target.write_text(content, encoding="utf-8")
-        logger.info(f"Regenerated roadmap: {target.name} ({len(theme_papers)} papers)")
+        logger.info(f"Regenerated roadmap: {target.name} ({len(theme_papers)} papers, {len(topic_groups)} topics)")
 
-        # Also copy to site/docs/ for MkDocs
         site_target = config.site.docs_dir / "guides" / target.name
         site_target.write_text(content, encoding="utf-8")
 
