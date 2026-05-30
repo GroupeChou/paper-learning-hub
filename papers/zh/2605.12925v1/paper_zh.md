@@ -1,4 +1,6 @@
 # AgentLens: Revealing The Lucky Pass Problem in SWE-Agent Evaluation
+> AgentLens：Revealing The Lucky Pass Problem in SWE-智能体评估
+
 
 > 中文摘要 | 机构：Microsoft | 日期：2026-05-13 | AI 自动生成
 

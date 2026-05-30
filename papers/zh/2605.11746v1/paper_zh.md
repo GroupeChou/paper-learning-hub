@@ -1,4 +1,6 @@
 # When Reasoning Traces Become Performative: Step-Level Evidence that Chain-of-Thought Is an Imperfect Oversight Channel
+> When 推理 Traces Become Performative：Step-Level Evidence that Chain-of-Thought Is an Imperfect Oversight Channel
+
 
 > 中文摘要 | 机构：DeepSeek | 日期：2026-05-12 | AI 自动生成
 

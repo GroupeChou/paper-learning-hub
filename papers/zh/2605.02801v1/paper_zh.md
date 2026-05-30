@@ -1,4 +1,6 @@
 ---
+> 面向LLM-based Multi-智能体Systems through Orchestration Traces的强化学习
+
 title: "Reinforcement Learning for LLM-based Multi-Agent Systems through Orchestration Traces"
 source: "https://arxiv.org/abs/2605.02801v1"
 ---

@@ -1,4 +1,6 @@
 # WMAttack: Automated Attack Search for Adversarial Evaluation of World-Model Agents
+> WMAttack：Automated Attack Search for Adversarial 评估 of World-模型智能体s
+
 
 > 中文摘要 | 机构：Google DeepMind | 日期：2026-05-22 | AI 自动生成
 

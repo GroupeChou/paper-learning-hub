@@ -1,4 +1,6 @@
 # TGFormer: Towards Temporal Graph Transformer with Auto-Correlation Mechanism
+> TGFormer：Towards Temporal 图Transformer with Auto-Correlation Mechanism
+
 
 > 中文摘要 | 机构：时序预测-PatchTST/Transformer | 日期：2026-05-24 | AI 自动生成
 

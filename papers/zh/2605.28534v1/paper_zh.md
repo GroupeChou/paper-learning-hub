@@ -1,4 +1,6 @@
 # GUI-CIDER: Mid-training GUI Agents via Causal Internalization and Density-aware Exemplar Reselection
+> GUI-CIDER：Mid-training GUI智能体s via Causal Internalization and Density-aware Exemplar Reselection
+
 
 > 中文摘要 | 机构：Agent-MultiAgent | 日期：2026-05-27 | AI 自动生成
 

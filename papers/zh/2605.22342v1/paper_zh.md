@@ -1,4 +1,6 @@
 # 4D-GSW: Kinematic-Aware Spatio-Temporal Consistent Watermarking for 4D Gaussian Splatting
+> 4D-GSW：Kinematic-Aware 时空 Consistent Watermarking for 4D Gaussian Splatting
+
 
 > 中文摘要 | 机构：时空预测 | 日期：2026-05-21 | AI 自动生成
 

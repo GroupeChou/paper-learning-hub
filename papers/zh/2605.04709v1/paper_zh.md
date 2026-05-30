@@ -1,4 +1,6 @@
 ---
+> ELVIS：Ensemble-Calibrated Latent Imagination for Long-Horizon Visual MPC
+
 title: "ELVIS: Ensemble-Calibrated Latent Imagination for Long-Horizon Visual MPC"
 source: "https://arxiv.org/abs/2605.04709v1"
 ---

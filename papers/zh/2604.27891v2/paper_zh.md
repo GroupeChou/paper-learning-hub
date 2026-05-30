@@ -1,4 +1,6 @@
 ---
+> 面向Procedural Tasks的In-Context Prompting Obsoletes 智能体Orchestration
+
 title: "In-Context Prompting Obsoletes Agent Orchestration for Procedural Tasks"
 source: "https://arxiv.org/abs/2604.27891v2"
 ---

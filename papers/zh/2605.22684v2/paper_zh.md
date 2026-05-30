@@ -1,4 +1,6 @@
 # ChronoVAE-HOPE: Beyond Attention -- A Next-Generation VAE Foundation Model for Specialized Time Series Classification
+> ChronoVAE-HOPE：Beyond Attention -- A Next-Generation VAE Foundation 模型 for Specialized 时间序列 Classification
+
 
 > 中文摘要 | 机构：时序预测-核心 | 日期：2026-05-21 | AI 自动生成
 

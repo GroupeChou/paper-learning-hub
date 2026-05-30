@@ -1,4 +1,6 @@
 # RRCM: Ranking-Driven Retrieval over Collaborative and Meta Memories for LLM Recommendation
+> RRCM：Ranking-Driven Retrieval over Collaborative and Meta Memories for 大语言模型Recommendation
+
 
 > 中文摘要 | 机构：Meta FAIR | 日期：2026-05-08 | AI 自动生成
 

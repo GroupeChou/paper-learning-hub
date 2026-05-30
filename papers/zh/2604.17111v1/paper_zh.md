@@ -1,4 +1,6 @@
 ---
+> HiveMind：OS-Inspired Scheduling for Concurrent 大语言模型智能体Workloads
+
 title: "HiveMind: OS-Inspired Scheduling for"
 source: "https://arxiv.org/abs/2604.17111v1"
 ---

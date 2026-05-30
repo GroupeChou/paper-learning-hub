@@ -1,4 +1,6 @@
 # SkillGenBench: Benchmarking Skill Generation Pipelines for LLM Agents
+> SkillGenBench：基准ing Skill Generation Pipelines for 大语言模型Agents
+
 
 <!-- 论文元数据卡片 -->
 <div class="paper-meta">

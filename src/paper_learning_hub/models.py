@@ -125,6 +125,7 @@ class CandidatePaper:
     last_seen_at: str | None = None
     created_at: str | None = None
     updated_at: str | None = None
+    cn_title: str | None = None
 
     @classmethod
     def from_row(cls, row: Any) -> "CandidatePaper":
@@ -146,6 +147,7 @@ class CandidatePaper:
             last_seen_at=row["last_seen_at"],
             created_at=row["created_at"],
             updated_at=row["updated_at"],
+            cn_title=row.get("cn_title"),
         )
 
 

@@ -1,4 +1,6 @@
 # Dynamic MRI Reconstruction Via Dual Deep Priors and Low-Rank Plus Sparse Modeling
+> Dynamic MRI Reconstruction Via Dual Deep Priors and Low-Rank Plus Sparse Modeling
+
 
 > 中文摘要 | 机构：时空预测 | 日期：2026-05-18 | AI 自动生成
 

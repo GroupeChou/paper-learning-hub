@@ -1,4 +1,6 @@
 # MMSkills: Towards Multimodal Skills for General Visual Agents
+> MMSkills：Towards Multimodal Skills for General Visual智能体s
+
 
 > 中文摘要 | 机构：Meta FAIR | 日期：2026-05-13 | AI 自动生成
 

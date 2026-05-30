@@ -1,4 +1,6 @@
 ---
+> QuantClaw：Precision Where It Matters for OpenClaw
+
 title: "QuantClaw: Precision Where It Matters for OpenClaw"
 source: "https://arxiv.org/abs/2604.22577v1"
 ---

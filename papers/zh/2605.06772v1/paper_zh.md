@@ -1,4 +1,6 @@
 # When Does Critique Improve AI-Assisted Theoretical Physics? SCALAR: Structured Critic--Actor Loop for Agentic Reasoning
+> When Does Critique Improve AI-Assisted Theoretical Physics? SCALAR：Structured Critic--Actor Loop for智能体ic 推理
+
 
 > 中文摘要 | 机构：DeepSeek | 日期：2026-05-07 | AI 自动生成
 

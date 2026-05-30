@@ -1,4 +1,6 @@
 # Scale-Equivariant Generative Forecasting: Weight-Tied Dilated Convolutions, Wavelet Scattering Inputs, and Spectral-Consistency Training for Self-Similar Time Series
+> Scale-Equivariant Generative 预测：Weight-Tied Dilated Convolutions, Wavelet Scattering Inputs, and Spectral-Consistency Training for Self-Similar 时间序列
+
 
 > 中文摘要 | 机构：时序预测-PatchTST/Transformer | 日期：2026-05-17 | AI 自动生成
 

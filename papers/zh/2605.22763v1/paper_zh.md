@@ -1,4 +1,6 @@
 # Advancing Mathematics Research with AI-Driven Formal Proof Search
+> 基于AI-Driven Formal Proof Search的Advancing Mathematics Research
+
 
 > 中文摘要 | 机构：AI Agent-核心 | 日期：2026-05-21 | AI 自动生成
 

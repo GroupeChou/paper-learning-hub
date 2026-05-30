@@ -1,4 +1,6 @@
 ---
+> 面向Efficient Terminal智能体s via Observational Context Compression的A Self-Evolving Framework
+
 title: "A Self-Evolving Framework for Efficient Terminal"
 source: "https://arxiv.org/abs/2604.19572v1"
 ---

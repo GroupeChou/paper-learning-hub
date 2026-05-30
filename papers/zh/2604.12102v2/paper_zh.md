@@ -1,4 +1,6 @@
 ---
+> Spatial Atlas：Compute-Grounded 推理 for Spatial-Aware Research 智能体基准s
+
 title: "Spatial Atlas: Compute-Grounded Reasoning"
 source: "https://arxiv.org/abs/2604.12102v2"
 ---

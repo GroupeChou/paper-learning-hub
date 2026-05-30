@@ -1,4 +1,6 @@
 # paper.json: A Coordination Convention for LLM-Agent-Actionable Papers
+> paper.json：A Coordination Convention for大语言模型-Agent-Actionable Papers
+
 
 > 中文摘要 | 机构：AI Agent-核心 | 日期：2026-05-15 | AI 自动生成
 

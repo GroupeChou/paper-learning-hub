@@ -1,4 +1,6 @@
 ---
+> Evaluating Multi-Hop 推理 in RAG Systems：A Comparison of大语言模型-Based Retriever 评估 Strategies
+
 title: "Evaluating Multi-Hop Reasoning in RAG"
 source: "https://arxiv.org/abs/2604.18234v1"
 ---

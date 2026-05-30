@@ -1,4 +1,6 @@
 # PESD-TSF: A Period-Aware and Explicit Structured Decomposition Framework for Long-Term Time Series Forecasting
+> PESD-TSF：面向Long-Term 时间序列 预测的Period-Aware and Explicit Structured Decomposition框架
+
 
 > 中文摘要 | 机构：时序预测-核心 | 日期：2026-05-15 | AI 自动生成
 

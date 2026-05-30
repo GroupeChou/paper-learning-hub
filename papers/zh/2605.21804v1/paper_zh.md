@@ -1,4 +1,6 @@
 # Mapping Tomato Cropping Systems in California Using AlphaEarth Geospatial Embeddings and Deep Learning Analysis
+> 使用AlphaEarth Geospatial Embeddings and 深度学习 Analysis的Mapping Tomato Cropping Systems in California
+
 
 > 中文摘要 | 机构：Google DeepMind | 日期：2026-05-20 | AI 自动生成
 

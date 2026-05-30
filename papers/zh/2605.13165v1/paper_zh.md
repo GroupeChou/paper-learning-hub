@@ -1,4 +1,6 @@
 # STOP: Structured On-Policy Pruning of Long-Form Reasoning in Low-Data Regimes
+> STOP：Structured On-策略 Pruning of Long-Form 推理 in Low-Data Regimes
+
 
 > 中文摘要 | 机构：DeepSeek | 日期：2026-05-13 | AI 自动生成
 

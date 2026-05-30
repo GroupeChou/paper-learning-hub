@@ -1,4 +1,6 @@
 # Beyond Individual Intelligence: Surveying Collaboration, Failure Attribution, and Self-Evolution in LLM-based Multi-Agent Systems
+> Beyond Individual Intelligence：Surveying Collaboration, Failure Attribution, and Self-Evolution in大语言模型-based Multi-智能体Systems
+
 
 > 中文摘要 | 机构：Agent-MultiAgent | 日期：2026-05-14 | AI 自动生成
 

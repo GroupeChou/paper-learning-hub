@@ -1,4 +1,6 @@
 # Do Agents Need Semantic Metadata? A Comparative Study in Agentic Data Retrieval
+> Do Agents Need Semantic Metadata? A Comparative Study in Agentic Data Retrieval
+
 
 <!-- 论文元数据卡片 -->
 <div class="paper-meta">

@@ -1,4 +1,6 @@
 # VideoSeeker: Incentivizing Instance-level Video Understanding via Native Agentic Tool Invocation
+> VideoSeeker：Incentivizing Instance-level Video Understanding via Native智能体ic 工具 Invocation
+
 
 > 中文摘要 | 机构：时空预测 | 日期：2026-05-15 | AI 自动生成
 

@@ -1,4 +1,6 @@
 # Remember the Decision, Not the Description: A Rate-Distortion Framework for Agent Memory
+> Remember the Decision, Not the Description：面向智能体记忆的Rate-Distortion框架
+
 
 > 中文摘要 | 机构：MiniMax | 日期：2026-05-11 | AI 自动生成
 

@@ -1,4 +1,6 @@
 # Decoupled Delay Compensation: Enhancing Pre-trained MARL Policies via Learned Dynamics Filtering
+> Decoupled Delay Compensation：Enhancing Pre-trained MARL Policies via Learned Dynamics Filtering
+
 
 > 中文摘要 | 机构：Agent-MultiAgent | 日期：2026-05-25 | AI 自动生成
 

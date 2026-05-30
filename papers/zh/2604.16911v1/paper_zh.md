@@ -1,4 +1,6 @@
 ---
+> Skilldex：A Package Manager and Registry for 智能体Skill Packages with Hierarchical Scope-Based Distribution
+
 title: "Skilldex: A Package Manager and Registry for"
 source: "https://arxiv.org/abs/2604.16911v1"
 ---

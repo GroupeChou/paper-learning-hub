@@ -1,4 +1,6 @@
 ---
+> 面向Majority-Vote Ensembles under Markov Dependence的Minimax Optimality and Spectral Routing
+
 title: "Minimax Optimality and Spectral Routing for"
 source: "https://arxiv.org/abs/2604.13414v1"
 ---

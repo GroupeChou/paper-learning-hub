@@ -1,4 +1,6 @@
 ---
+> The Last Harness You'll Ever Build
+
 title: "Technical Report"
 source: "https://arxiv.org/abs/2604.21003v1"
 ---

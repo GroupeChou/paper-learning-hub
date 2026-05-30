@@ -1,4 +1,6 @@
 # Auction-Consensus Algorithm with Learned Bidding Scheme for Multi-Robot Systems
+> 面向Multi-Robot Systems的Auction-Consensus Algorithm with Learned Bidding Scheme
+
 
 > 中文摘要 | 机构：Agent-MultiAgent | 日期：2026-05-21 | AI 自动生成
 

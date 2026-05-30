@@ -1,4 +1,6 @@
 # PaP-NF: Probabilistic Long-Term Time Series Forecasting via Prefix-as-Prompt Reprogramming and Normalizing Flows
+> PaP-NF：Probabilistic Long-Term 时间序列 预测 via Prefix-as-Prompt Reprogramming and Normalizing Flows
+
 
 > 中文摘要 | 机构：时序预测-核心 | 日期：2026-05-22 | AI 自动生成
 

@@ -1,4 +1,6 @@
 # IFPV: An Integrated Multi-Agent Framework for Generative Operational Planning and High-Fidelity Plan Verification
+> IFPV：An Integrated Multi-智能体Framework for Generative Operational 规划 and High-Fidelity Plan Verification
+
 
 > 中文摘要 | 机构：Agent-MultiAgent | 日期：2026-05-14 | AI 自动生成
 

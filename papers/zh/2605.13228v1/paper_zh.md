@@ -1,4 +1,6 @@
 # ReTool-Video: Recursive Tool-Using Video Agents with Meta-Augmented Tool Grounding
+> Re工具-Video：Recursive 工具-Using Video智能体s with Meta-Augmented 工具 Grounding
+
 
 > 中文摘要 | 机构：Meta FAIR | 日期：2026-05-13 | AI 自动生成
 

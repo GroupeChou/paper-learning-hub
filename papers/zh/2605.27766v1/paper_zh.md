@@ -1,4 +1,6 @@
 # Got a Secret? LLM Agents Can't Keep It: Evaluating Privacy in Multi-Agent Systems
+> Got a Secret? 大语言模型Agents Can't Keep It：Evaluating Privacy in Multi-智能体Systems
+
 
 > 中文摘要 | 机构：OpenAI | 日期：2026-05-26 | AI 自动生成
 

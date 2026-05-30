@@ -1,4 +1,6 @@
 # HarnessAPI: A Skill-First Framework for Unified Streaming APIs and MCP Tools
+> HarnessAPI：面向Unified Streaming APIs and MCP 工具s的Skill-First框架
+
 
 > 中文摘要 | 机构：AI Agent-核心 | 日期：2026-05-21 | AI 自动生成
 

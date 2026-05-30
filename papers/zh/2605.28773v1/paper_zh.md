@@ -1,4 +1,6 @@
 # Rethinking Memory as Continuously Evolving Connectivity
+> 重新思考记忆 as Continuously Evolving Connectivity
+
 
 > 中文摘要 | 机构：AI Agent-核心 | 日期：2026-05-27 | AI 自动生成
 

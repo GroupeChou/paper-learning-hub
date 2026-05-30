@@ -1,4 +1,6 @@
 # QSTRBench: a New Benchmark to Evaluate the Ability of Language Models to Reason with Qualitative Spatial and Temporal Calculi
+> QSTRBench：a New 基准 to Evaluate the Ability of Language 模型s to Reason with Qualitative Spatial and Temporal Calculi
+
 
 > 中文摘要 | 机构：时空预测 | 日期：2026-05-18 | AI 自动生成
 

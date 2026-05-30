@@ -1,4 +1,6 @@
 ---
+> 面向LLM-based Manim Animation Generation的Training and智能体ic Inference Strategies
+
 title: "TRAINING AND AGENTIC INFERENCE STRATEGIES FOR"
 source: "https://arxiv.org/abs/2604.18364v1"
 ---

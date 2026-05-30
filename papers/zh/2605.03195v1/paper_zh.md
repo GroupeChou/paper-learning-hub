@@ -1,4 +1,6 @@
 ---
+> Terminus-4B：Can a Smaller 模型 Replace Frontier大语言模型s at智能体ic Execution Tasks?
+
 title: "Terminus-4B: Can a Smaller Model Replace Frontier LLMs at"
 source: "https://arxiv.org/abs/2605.03195v1"
 ---

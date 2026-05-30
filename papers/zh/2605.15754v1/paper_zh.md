@@ -1,4 +1,6 @@
 # Spatiotemporal decoupled physics-informed Stone-Weierstrass neural operator for long-time prediction of time-dependent parametric PDEs
+> 面向long-time prediction of time-dependent parametric PDEs的时空 decoupled physics-informed Stone-Weierstrass neural operator
+
 
 > 中文摘要 | 机构：时空预测 | 日期：2026-05-15 | AI 自动生成
 

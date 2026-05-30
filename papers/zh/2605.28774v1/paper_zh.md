@@ -1,4 +1,6 @@
 # Agent Explorative Policy Optimization for Multimodal Agentic Reasoning
+> 面向Multimodal智能体ic 推理的智能体Explorative 策略 优化
+
 
 <!-- 论文元数据卡片 -->
 <div class="paper-meta">

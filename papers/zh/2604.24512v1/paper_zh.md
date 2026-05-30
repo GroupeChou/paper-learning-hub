@@ -1,4 +1,6 @@
 ---
+> Beyond the Attention Stability Boundary：Agentic Self-Synthesizing 推理 Protocols
+
 title: "Beyond the Attention Stability Boundary:"
 source: "https://arxiv.org/abs/2604.24512v1"
 ---

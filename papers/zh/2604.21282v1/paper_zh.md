@@ -1,4 +1,6 @@
 ---
+> 面向Cost-Effective Code Vulnerability Detection的Strategic Heterogeneous Multi-智能体Architecture
+
 title: "Strategic Heterogeneous Multi-Agent Architecture for"
 source: "https://arxiv.org/abs/2604.21282v1"
 ---

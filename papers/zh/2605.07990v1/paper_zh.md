@@ -1,4 +1,6 @@
 # Tool Calling is Linearly Readable and Steerable in Language Models
+> Tool Calling is Linearly Readable and Steerable in Language Models
+
 
 > 中文摘要 | 机构：阿里通义 | 日期：2026-05-08 | AI 自动生成
 

@@ -1,4 +1,6 @@
 # EnvFactory: Scaling Tool-Use Agents via Executable Environments Synthesis and Robust RL
+> EnvFactory：Scaling 工具-Use智能体s via Executable Environments Synthesis and Robust RL
+
 
 <!-- 论文元数据卡片 -->
 <div class="paper-meta">

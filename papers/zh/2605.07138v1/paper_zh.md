@@ -1,4 +1,6 @@
 # Can You Break RLVER? Probing Adversarial Robustness of RL-Trained Empathetic Agents
+> Can You Break RLVER? Probing Adversarial Robustness of RL-Trained Empathetic Agents
+
 
 > 中文摘要 | 机构：阿里通义 | 日期：2026-05-08 | AI 自动生成
 

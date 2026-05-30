@@ -1,4 +1,6 @@
 # Beyond Acoustic Emotion Recognition: Multimodal Pathos Analysis in Political Speech Using LLM-Based and Acoustic Emotion Models
+> Beyond Acoustic Emotion Recognition：Multimodal Pathos Analysis in Political Speech Using大语言模型-Based and Acoustic Emotion 模型s
+
 
 > 中文摘要 | 机构：AI Agent-核心 | 日期：2026-05-21 | AI 自动生成
 

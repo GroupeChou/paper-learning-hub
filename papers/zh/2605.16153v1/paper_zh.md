@@ -1,4 +1,6 @@
 # An Algebraic Exposition of the Theory of Dyadic Morality
+> An Algebraic Exposition of the Theory of Dyadic Morality
+
 
 > 中文摘要 | 机构：AI Agent-核心 | 日期：2026-05-15 | AI 自动生成
 

@@ -1,4 +1,6 @@
 # Three-Stage Learning Unlocks Strong Performance in Simple Models for Long-Term Time Series Forecasting
+> 面向Long-Term 时间序列 预测的Three-Stage 学习 Unlocks Strong Performance in Simple 模型s
+
 
 > 中文摘要 | 机构：时序预测-核心 | 日期：2026-05-13 | AI 自动生成
 

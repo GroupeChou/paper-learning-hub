@@ -1,4 +1,6 @@
 ---
+> Quantum 知识图：模型ing Context-Dependent Triplet Validity
+
 title: "Quantum Knowledge Graph: Modeling Context-Dependent"
 source: "https://arxiv.org/abs/2604.23972v1"
 ---

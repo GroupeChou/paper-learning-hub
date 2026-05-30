@@ -1,4 +1,6 @@
 ---
+> Agentic Vulnerability Reasoning on Windows COM Binaries
+
 title: "Agentic Vulnerability Reasoning on Windows COM Binaries"
 source: "https://arxiv.org/abs/2605.05000v1"
 ---

@@ -1,4 +1,6 @@
 # Physics-Informed Generative Solver: Bridging Data-Driven Priors and Conservation Laws for Stable Spatiotemporal Field Reconstruction
+> Physics-Informed Generative Solver：Bridging Data-Driven Priors and Conservation Laws for Stable 时空 Field Reconstruction
+
 
 > 中文摘要 | 机构：时空预测 | 日期：2026-05-21 | AI 自动生成
 

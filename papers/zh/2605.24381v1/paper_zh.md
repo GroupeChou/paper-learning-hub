@@ -1,4 +1,6 @@
 # Assessing the Operational Viability of Foundation Models for Time Series Forecasting
+> 面向时间序列 预测的Assessing the Operational Viability of Foundation 模型s
+
 
 > 中文摘要 | 机构：时序预测-核心 | 日期：2026-05-23 | AI 自动生成
 

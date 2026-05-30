@@ -1,4 +1,6 @@
 # MathlibPR: Pull Request Merge-Readiness Benchmark for Formal Mathematical Libraries
+> MathlibPR：Pull Request Merge-Readiness 基准 for Formal Mathematical Libraries
+
 
 > 中文摘要 | 机构：DeepSeek | 日期：2026-05-08 | AI 自动生成
 

@@ -1,4 +1,6 @@
 # Distributionally Robust Multi-Task Reinforcement Learning via Adaptive Task Sampling
+> 基于Adaptive Task Sampling的Distributionally Robust Multi-Task 强化学习
+
 
 > 中文摘要 | 机构：MiniMax | 日期：2026-05-14 | AI 自动生成
 

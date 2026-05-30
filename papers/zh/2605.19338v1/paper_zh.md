@@ -1,4 +1,6 @@
 # STAR-PólyaMath: Multi-Agent Reasoning under Persistent Meta-Strategic Supervision
+> STAR-PólyaMath：Multi-智能体推理 under Persistent Meta-Strategic Supervision
+
 
 > 中文摘要 | 机构：Agent-MultiAgent | 日期：2026-05-19 | AI 自动生成
 

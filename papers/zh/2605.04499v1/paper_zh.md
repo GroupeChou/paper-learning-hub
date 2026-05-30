@@ -1,4 +1,6 @@
 ---
+> Pen-Strategist：面向Penetration Testing Strategy Formation and Analysis的推理框架
+
 title: "Pen-Strategist: A Reasoning Framework for Penetration Testing Strategy Formation and Analysis"
 source: "https://arxiv.org/abs/2605.04499v1"
 ---

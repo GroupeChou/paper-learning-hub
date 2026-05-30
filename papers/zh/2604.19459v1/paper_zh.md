@@ -1,4 +1,6 @@
 ---
+> Do LLMs Game Formalization? Evaluating Faithfulness in Logical Reasoning
+
 title: "Published at the VerifAI-2 Workshop, ICLR 2026"
 source: "https://arxiv.org/abs/2604.19459v1"
 ---

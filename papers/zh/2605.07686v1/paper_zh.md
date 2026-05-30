@@ -1,4 +1,6 @@
 # The Coupling Tax: How Shared Token Budgets Undermine Visible Chain-of-Thought Under Fixed Output Limits
+> The Coupling Tax：How Shared Token Budgets Undermine Visible Chain-of-Thought Under Fixed Output Limits
+
 
 > 中文摘要 | 机构：DeepSeek | 日期：2026-05-08 | AI 自动生成
 

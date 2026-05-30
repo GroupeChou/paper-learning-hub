@@ -1,4 +1,6 @@
 # Sentinel: Embodied Cooperative Spatial Reasoning and Planning
+> Sentinel：Embodied Cooperative Spatial 推理 and 规划
+
 
 > 中文摘要 | 机构：Agent-MultiAgent | 日期：2026-05-25 | AI 自动生成
 

@@ -1,4 +1,6 @@
 ---
+> Redefining AI Red Teaming in the智能体ic Era：From Weeks to Hours
+
 title: "Redefining AI Red Teaming in the Agentic Era: From Weeks to Hours"
 source: "https://arxiv.org/abs/2605.04019v1"
 ---

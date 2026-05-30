@@ -1,4 +1,6 @@
 ---
+> M2-PALE：A Framework for Explaining Multi-智能体MCTS--Minimax Hybrids via Process Mining and大语言模型s
+
 title: "M2-PALE: A Framework for Explaining"
 source: "https://arxiv.org/abs/2604.14687v1"
 ---

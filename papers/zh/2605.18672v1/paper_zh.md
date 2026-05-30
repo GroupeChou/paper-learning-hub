@@ -1,4 +1,6 @@
 # Position: A Three-Layer Probabilistic Assume-Guarantee Architecture Is Structurally Required for Safe LLM Agent Deployment
+> Position：A Three-Layer Probabilistic Assume-Guarantee Architecture Is Structurally Required for Safe 大语言模型智能体Deployment
+
 
 > 中文摘要 | 机构：AI Agent-核心 | 日期：2026-05-18 | AI 自动生成
 

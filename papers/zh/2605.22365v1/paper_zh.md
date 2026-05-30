@@ -1,4 +1,6 @@
 # TimeGuard: Channel-wise Pool Training for Backdoor Defense in Time Series Forecasting
+> TimeGuard：Channel-wise Pool Training for Backdoor Defense in 时间序列 预测
+
 
 > 中文摘要 | 机构：时序预测-核心 | 日期：2026-05-21 | AI 自动生成
 

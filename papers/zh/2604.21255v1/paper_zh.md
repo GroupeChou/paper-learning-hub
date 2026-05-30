@@ -1,4 +1,6 @@
 ---
+> When智能体s Look the Same：Quantifying Distillation-Induced Similarity in 工具-Use Behaviors
+
 title: "When Agents Look the Same: Quantifying Distillation-Induced Similarity"
 source: "https://arxiv.org/abs/2604.21255v1"
 ---

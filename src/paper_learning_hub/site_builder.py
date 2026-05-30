@@ -213,6 +213,28 @@ def ensure_assets(config: AppConfig) -> None:
           display: block;
           margin: 1rem 0;
         }
+
+        /* Wide layout - max-width 1600px */
+        .md-grid {
+          max-width: 1600px;
+        }
+
+        /* Make tables full width */
+        .md-typeset table:not([class]) {
+          display: table;
+          width: 100%;
+          table-layout: auto;
+        }
+
+        /* Topic column: no wrap */
+        .md-typeset table:not([class]) td:first-child,
+        .md-typeset table:not([class]) th:first-child {
+          white-space: nowrap;
+        }
+        /* English title column: cap width */
+        .md-typeset table:not([class]) td:nth-child(2) {
+          max-width: 50%;
+        }
         """,
     )
 
@@ -231,33 +253,46 @@ def build_site(config: AppConfig, papers: list[CandidatePaper], latest_papers: l
 
 
 def update_roadmap(config: AppConfig, papers: list[CandidatePaper]) -> None:
-    """Regenerate roadmap with papers grouped by technical topic in table format."""
+    """Regenerate roadmap with papers grouped by technical topic, table with Chinese/English titles."""
     now = today_iso(config.timezone)
 
-    # Map source_name to readable topic categories
-    topic_map = {
-        "AI Agent arXiv 搜索": "智能体基础架构",
-        "多智能体 arXiv 搜索": "多智能体系统",
-        "OpenAI arXiv query": "OpenAI 系列",
-        "DeepSeek arXiv query": "DeepSeek 系列",
-        "Meta FAIR arXiv query": "Meta FAIR 系列",
-        "Qwen arXiv query": "阿里通义系列",
-        "MiniMax arXiv query": "MiniMax 系列",
-        "Microsoft arXiv query": "Microsoft 系列",
-        "Google DeepMind arXiv query": "Google DeepMind 系列",
-        "GLM arXiv query": "智谱系列",
-        "Anthropic arXiv query": "Anthropic 系列",
-        "Baidu arXiv query": "百度系列",
-        "Tencent arXiv query": "腾讯系列",
-        "Huawei arXiv query": "华为系列",
-        "ByteDance arXiv query": "字节跳动系列",
-        "NVIDIA arXiv query": "NVIDIA 系列",
-        "Amazon arXiv query": "Amazon 系列",
-        "Apple arXiv query": "Apple 系列",
-        "时序预测 arXiv 搜索": "时序预测基础",
-        "Transformer时序预测 arXiv 搜索": "Transformer 时序预测",
-        "时空预测 arXiv 搜索": "时空预测",
+    # Topic classification keywords
+    agent_topics = {
+        "智能体架构与框架": ["agent architecture", "agent framework", "autonomous agent", "agent system", "agentic", "computer use"],
+        "多智能体系统": ["multi-agent", "multiagent", "cooperative", "collaboration", "swarm", "MAS"],
+        "智能体安全与对齐": ["safety", "security", "jailbreak", "alignment", "adversarial", "risk", "privacy", "harm"],
+        "记忆与推理": ["memory", "reasoning", "reflection", "chain-of-thought", "thinking", "self-evolution", "self-improve"],
+        "代码生成与软件工程": ["code", "software", "programming", "SWE", "repository", "debug", "coding"],
+        "智能体评估与基准": ["benchmark", "evaluation", "measuring", "assessment"],
+        "工具使用与API": ["tool use", "tool call", "function calling", "skill", "API"],
+        "检索增强生成": ["retrieval", "RAG", "semantic", "knowledge graph"],
+        "大模型训练与扩展": ["training", "scaling", "pretraining", "fine-tune", "SFT", "RLHF", "RL"],
+        "具身智能": ["embodied", "robot", "physical", "manipulation"],
+        "大模型基础": ["LLM", "large language model", "foundation model"],
+        "多模态": ["multimodal", "vision-language", "VLM", "visual"],
     }
+    ts_topics = {
+        "时序预测基础模型": ["foundation model", "base model", "pretrain", "pre-train"],
+        "Transformer时序预测": ["transformer", "attention", "patch", "informer", "autoformer", "timesnet"],
+        "长序列预测": ["long-term", "long horizon", "long range"],
+        "时空预测": ["spatiotemporal", "spatio-temporal", "spatial", "temporal", "STGNN", "graph"],
+        "概率预测与不确定性": ["probabilistic", "uncertainty", "distribution", "diffusion", "copula"],
+        "异常检测": ["anomaly", "outlier", "detection"],
+        "多变量预测": ["multivariate", "multi-variate"],
+        "非平稳与领域泛化": ["non-stationary", "distribution shift", "domain adaptation", "robust", "generalization"],
+        "金融气候能源应用": ["financial", "climate", "weather", "energy", "stock"],
+        "深度学习基础方法": ["deep learning", "neural", "CNN", "RNN", "LSTM", "SSM", "state space"],
+    }
+
+    def classify(title: str, summary: str, theme: str) -> str:
+        text = f"{title} {summary}".lower()
+        topics = agent_topics if theme == "AI Agent" else ts_topics
+        best, best_score = None, 0
+        for topic, kws in topics.items():
+            score = sum(text.count(kw.lower()) for kw in kws)
+            if score > best_score:
+                best, best_score = topic, score
+        return best or "其他"
 
     roadmap_map = {
         "AI Agent": config.site.docs_dir.parent.parent / "guides" / "agent-roadmap.md",
@@ -269,10 +304,10 @@ def update_roadmap(config: AppConfig, papers: list[CandidatePaper]) -> None:
         if not theme_papers:
             continue
 
-        # Group by topic (mapped from source_name, fallback to organization)
+        # Group by classified topic
         topic_groups: dict[str, list[CandidatePaper]] = {}
         for p in theme_papers:
-            topic = topic_map.get(p.source_name, p.organization)
+            topic = classify(p.title, p.summary or "", p.theme)
             topic_groups.setdefault(topic, []).append(p)
 
         lines = [
@@ -285,13 +320,12 @@ def update_roadmap(config: AppConfig, papers: list[CandidatePaper]) -> None:
             "|------|----------|----------|:--------:|:--------:|",
         ]
 
-        # Sort topics by paper count
         sorted_topics = sorted(topic_groups.items(), key=lambda x: -len(x[1]))
         for topic_name, topic_papers in sorted_topics:
             topic_papers.sort(key=lambda p: p.publish_date, reverse=True)
             for i, p in enumerate(topic_papers):
                 title_link = f"[{p.title}](../papers/{p.paper_id}/index.md)"
-                cn_title = "*待补充*"
+                cn_title = p.cn_title or "*待补充*"
                 org = p.organization or "—"
                 if i == 0:
                     row = f"| **{topic_name}** ({len(topic_papers)}) | {title_link} | {cn_title} | {p.publish_date} | {org} |"
@@ -300,11 +334,8 @@ def update_roadmap(config: AppConfig, papers: list[CandidatePaper]) -> None:
                 lines.append(row)
 
         content = "\n".join(lines) + "\n"
-
-        # Write to guides/ and site/docs/guides/
         target.write_text(content, encoding="utf-8")
         logger.info(f"Regenerated roadmap: {target.name} ({len(theme_papers)} papers, {len(topic_groups)} topics)")
-
         site_target = config.site.docs_dir / "guides" / target.name
         site_target.write_text(content, encoding="utf-8")
 

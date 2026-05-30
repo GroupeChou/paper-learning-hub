@@ -1,4 +1,6 @@
 # Improving Spatio-Temporal Residual Error Propagation by Mitigating Over-Squashing
+> Improving Spatio-Temporal Residual Error Propagation by Mitigating Over-Squashing
+
 
 > 中文摘要 | 机构：时序预测-PatchTST/Transformer | 日期：2026-05-18 | AI 自动生成
 

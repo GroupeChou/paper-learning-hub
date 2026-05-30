@@ -1,4 +1,6 @@
 # ChronoMedKG: A Temporally-Grounded Biomedical Knowledge Graph and Benchmark for Clinical Reasoning
+> ChronoMedKG：A Temporally-Grounded Biomedical 知识 图and 基准 for Clinical 推理
+
 
 > 中文摘要 | 机构：AI Agent-核心 | 日期：2026-05-21 | AI 自动生成
 

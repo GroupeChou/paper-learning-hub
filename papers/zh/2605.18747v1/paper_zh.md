@@ -1,4 +1,6 @@
 # Code as Agent Harness
+> Code as Agent Harness
+
 
 > 中文摘要 | 机构：AI Agent-核心 | 日期：2026-05-18 | AI 自动生成
 

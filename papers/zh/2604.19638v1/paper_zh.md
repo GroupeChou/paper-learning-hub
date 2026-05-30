@@ -1,4 +1,6 @@
 ---
+> 安全ALFRED：Evaluating 安全-Conscious 规划 of Multimodal 大语言模型s
+
 title: "SafetyALFRED: Evaluating Safety-Conscious Planning of"
 source: "https://arxiv.org/abs/2604.19638v1"
 ---

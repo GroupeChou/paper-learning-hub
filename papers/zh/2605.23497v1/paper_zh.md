@@ -1,4 +1,6 @@
 # Asking For An Old Friend: Diagnosing and Mitigating Temporal Failure Modes in LLM-based Statutory Question Answering
+> Asking For An Old Friend：Diagnosing and Mitigating Temporal Failure Modes in大语言模型-based Statutory Question Answering
+
 
 > 中文摘要 | 机构：OpenAI | 日期：2026-05-22 | AI 自动生成
 

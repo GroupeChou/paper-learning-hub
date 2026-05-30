@@ -1,4 +1,6 @@
 # Learn from Weaknesses: Automated Domain Specialization for Small Computer-Use Agents
+> Learn from Weaknesses：Automated Domain Specialization for Small Computer-Use智能体s
+
 
 <!-- 论文元数据卡片 -->
 <div class="paper-meta">

@@ -1,4 +1,6 @@
 # Agent JIT Compilation for Latency-Optimizing Web Agent Planning and Scheduling
+> 面向Latency-Optimizing Web 智能体规划 and Scheduling的智能体JIT Compilation
+
 
 > 中文摘要 | 机构：OpenAI | 日期：2026-05-20 | AI 自动生成
 

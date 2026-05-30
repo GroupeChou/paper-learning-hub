@@ -1,4 +1,6 @@
 ---
+> 基于Semantic Triggers and Psychological Framing的推理-targeted Jailbreak Attacks on Large 推理 模型s
+
 title: "Springer Nature 2021 LATEX template"
 source: "https://arxiv.org/abs/2604.15725v1"
 ---

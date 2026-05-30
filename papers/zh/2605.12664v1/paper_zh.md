@@ -1,4 +1,6 @@
 # Profit Maximization in Bilateral Trade against a Smooth Adversary
+> Profit Maximization in Bilateral Trade against a Smooth Adversary
+
 
 > 中文摘要 | 机构：MiniMax | 日期：2026-05-12 | AI 自动生成
 

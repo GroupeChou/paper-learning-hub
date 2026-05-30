@@ -1,4 +1,6 @@
 # Distributed Zeroth-Order Policy Gradient for Networked Multi-agent Reinforcement Learning from Human Feedback
+> 面向Networked Multi-agent 强化学习 from Human Feedback的Distributed Zeroth-Order 策略 Gradient
+
 
 > 中文摘要 | 机构：Agent-MultiAgent | 日期：2026-05-15 | AI 自动生成
 

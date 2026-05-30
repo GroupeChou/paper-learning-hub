@@ -1,4 +1,6 @@
 ---
+> Agri-CPJ：面向Agricultural Pest Diagnosis Using Caption-Prompt-Judge and大语言模型-as-a-Judge的Training-Free Explainable框架
+
 title: "Agri-CPJ: A Training-Free Explainable Framework for Agricultural"
 source: "https://arxiv.org/abs/2604.23701v1"
 ---

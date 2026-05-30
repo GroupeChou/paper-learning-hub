@@ -1,4 +1,6 @@
 ---
+> 面向Bayesian Conformal Prediction的Optimal 时空 Decoupling
+
 title: "Optimal Spatio-Temporal Decoupling for Bayesian Conformal Prediction"
 source: "https://arxiv.org/abs/2605.00432v1"
 ---

@@ -1,4 +1,6 @@
 # ST-SimDiff: Balancing Spatiotemporal Similarity and Difference for Efficient Video Understanding with MLLMs
+> ST-SimDiff：Balancing 时空 Similarity and Difference for Efficient Video Understanding with MLLMs
+
 
 > 中文摘要 | 机构：时空预测 | 日期：2026-05-21 | AI 自动生成
 

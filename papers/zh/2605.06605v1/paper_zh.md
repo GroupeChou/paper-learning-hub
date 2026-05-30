@@ -1,4 +1,6 @@
 # How Many Iterations to Jailbreak? Dynamic Budget Allocation for Multi-Turn LLM Evaluation
+> 面向Multi-Turn 大语言模型评估的How Many Iterations to Jailbreak? Dynamic Budget Allocation
+
 
 > 中文摘要 | 机构：阿里通义 | 日期：2026-05-07 | AI 自动生成
 

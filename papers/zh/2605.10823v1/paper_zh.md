@@ -1,4 +1,6 @@
 # NoRIN: Backbone-Adaptive Reversible Normalization for Time-Series Forecasting
+> NoRIN：Backbone-Adaptive Reversible Normalization for Time-Series 预测
+
 
 > 中文摘要 | 机构：时序预测-核心 | 日期：2026-05-11 | AI 自动生成
 

@@ -1,4 +1,6 @@
 # Decoupling Communication from Policy: Robust MARL under Bandwidth Constraints
+> Decoupling Communication from 策略：Robust MARL under Bandwidth Constraints
+
 
 > 中文摘要 | 机构：Agent-MultiAgent | 日期：2026-05-20 | AI 自动生成
 

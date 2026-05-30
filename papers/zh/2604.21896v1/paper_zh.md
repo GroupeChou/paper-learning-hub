@@ -1,4 +1,6 @@
 ---
+> Nemobot Games：Crafting Strategic AI Gaming智能体s for Interactive 学习 with 大语言模型s
+
 title: "Nemobot Games: Crafting Strategic AI Gaming"
 source: "https://arxiv.org/abs/2604.21896v1"
 ---

@@ -1,4 +1,6 @@
 # Chain of Risk: Safety Failures in Large Reasoning Models and Mitigation via Adaptive Multi-Principle Steering
+> Chain of Risk：安全 Failures in Large 推理 模型s and Mitigation via Adaptive Multi-Principle Steering
+
 
 > 中文摘要 | 机构：DeepSeek | 日期：2026-05-07 | AI 自动生成
 

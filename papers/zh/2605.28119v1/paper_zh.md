@@ -1,4 +1,6 @@
 # ST-ColoNet: Spatio-Temporal Colon Segment Recognition via Hybrid Attention and Edge-Guided Feature Learning
+> ST-ColoNet：时空 Colon Segment Recognition via Hybrid Attention and Edge-Guided Feature 学习
+
 
 > 中文摘要 | 机构：时空预测 | 日期：2026-05-27 | AI 自动生成
 

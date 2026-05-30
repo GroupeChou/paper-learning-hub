@@ -1,4 +1,6 @@
 # Minerva-Ego: Spatiotemporal Hints for Egocentric Video Understanding
+> Minerva-Ego：时空 Hints for Egocentric Video Understanding
+
 
 > 中文摘要 | 机构：Google DeepMind | 日期：2026-05-14 | AI 自动生成
 

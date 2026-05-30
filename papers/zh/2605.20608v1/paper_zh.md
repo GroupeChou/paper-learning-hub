@@ -1,4 +1,6 @@
 # From Automated to Autonomous: Hierarchical Agent-native Network Architecture (HANA)
+> From Automated to Autonomous：Hierarchical智能体-native Network Architecture (HANA)
+
 
 > 中文摘要 | 机构：Agent-MultiAgent | 日期：2026-05-20 | AI 自动生成
 

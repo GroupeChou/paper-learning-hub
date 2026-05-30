@@ -1,4 +1,6 @@
 # SwarmHarness: Skill-Based Task Routing via Decentralized Incentive-Aligned AI Agent Networks
+> SwarmHarness：Skill-Based Task Routing via Decentralized Incentive-Aligned AI 智能体Networks
+
 
 > 中文摘要 | 机构：AI Agent-核心 | 日期：2026-05-27 | AI 自动生成
 

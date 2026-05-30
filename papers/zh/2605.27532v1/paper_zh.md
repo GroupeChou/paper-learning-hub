@@ -1,4 +1,6 @@
 # SCALE-COMM: Shared, Contrastively-Aligned Latent Embeddings for MARL Communication
+> SCALE-COMM：Shared, Contrastively-Aligned Latent Embeddings for MARL Communication
+
 
 > 中文摘要 | 机构：Agent-MultiAgent | 日期：2026-05-26 | AI 自动生成
 

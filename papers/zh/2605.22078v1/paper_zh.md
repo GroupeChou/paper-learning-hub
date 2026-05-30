@@ -1,4 +1,6 @@
 # Enhancing Visual Token Representations for Video Large Language Models via Training-Free Spatial-Temporal Pooling and Gridding
+> 面向Video 大语言模型s via Training-Free Spatial-Temporal Pooling and Gridding的Enhancing Visual Token Representations
+
 
 > 中文摘要 | 机构：时空预测 | 日期：2026-05-21 | AI 自动生成
 

@@ -1,4 +1,6 @@
 # LCGuard: Latent Communication Guard for Safe KV Sharing in Multi-Agent Systems
+> LCGuard：Latent Communication Guard for Safe KV Sharing in Multi-智能体Systems
+
 
 > 中文摘要 | 机构：AI Agent-核心 | 日期：2026-05-21 | AI 自动生成
 

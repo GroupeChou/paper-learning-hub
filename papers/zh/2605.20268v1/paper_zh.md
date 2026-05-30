@@ -1,4 +1,6 @@
 # Chronicle: A Multimodal Foundation Model for Joint Language and Time Series Understanding
+> Chronicle：面向Joint Language and 时间序列 Understanding的Multimodal Foundation模型
+
 
 > 中文摘要 | 机构：时序预测-PatchTST/Transformer | 日期：2026-05-18 | AI 自动生成
 

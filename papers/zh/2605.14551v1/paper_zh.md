@@ -1,4 +1,6 @@
 # SeesawNet: Towards Non-stationary Time Series Forecasting with Balanced Modeling of Common and Specific Dependencies
+> SeesawNet：Towards Non-stationary 时间序列 预测 with Balanced 模型ing of Common and Specific Dependencies
+
 
 > 中文摘要 | 机构：时序预测-核心 | 日期：2026-05-14 | AI 自动生成
 

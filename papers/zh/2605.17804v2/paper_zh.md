@@ -1,4 +1,6 @@
 # GenTS: A Comprehensive Benchmark Library for Generative Time Series Models
+> GenTS：A Comprehensive 基准 Library for Generative 时间序列 模型s
+
 
 > 中文摘要 | 机构：时序预测-核心 | 日期：2026-05-18 | AI 自动生成
 

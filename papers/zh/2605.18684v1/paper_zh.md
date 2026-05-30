@@ -1,4 +1,6 @@
 # Reversa: A Reverse Documentation Engineering Framework for Converting Legacy Software into Operational Specifications for AI Agents
+> Reversa：面向Converting Legacy Software into Operational Specifications for AI智能体s的Reverse Documentation Engineering框架
+
 
 > 中文摘要 | 机构：AI Agent-核心 | 日期：2026-05-18 | AI 自动生成
 

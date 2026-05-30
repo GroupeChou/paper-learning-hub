@@ -1,4 +1,6 @@
 # MACReD: A Multi-Agent Collaborative Reasoning Framework for Reaction Diagram Parsing
+> MACReD：面向Reaction Diagram Parsing的Multi-智能体Collaborative 推理框架
+
 
 > 中文摘要 | 机构：Agent-MultiAgent | 日期：2026-05-27 | AI 自动生成
 

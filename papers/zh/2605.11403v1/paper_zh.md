@@ -1,4 +1,6 @@
 # fg-expo: Frontier-guided exploration-prioritized policy optimization via adaptive kl and gaussian curriculum
+> fg-expo：Frontier-guided exploration-prioritized 策略 优化 via adaptive kl and gaussian curriculum
+
 
 > 中文摘要 | 机构：DeepSeek | 日期：2026-05-12 | AI 自动生成
 

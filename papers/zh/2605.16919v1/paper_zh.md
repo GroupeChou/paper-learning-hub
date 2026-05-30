@@ -1,4 +1,6 @@
 # CAST: Causal Anchored Simplex Transport for Distribution-Valued Time Series
+> CAST：Causal Anchored Simplex Transport for Distribution-Valued 时间序列
+
 
 > 中文摘要 | 机构：时序预测-PatchTST/Transformer | 日期：2026-05-16 | AI 自动生成
 
