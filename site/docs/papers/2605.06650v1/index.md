@@ -1,4 +1,6 @@
 # Beyond Negative Rollouts: Positive-Only Policy Optimization with Implicit Negative Gradients
+> Beyond Negative Rollouts：Positive-Only 策略 优化 with Implicit Negative Gradients
+
 
 > 中文摘要 | 机构：阿里通义 | 日期：2026-05-07 | AI 自动生成
 

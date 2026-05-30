@@ -1,4 +1,6 @@
 # From Specification to Deployment: Empirical Evidence from a W3C VC + DID Trust Infrastructure for Autonomous Agents
+> From Specification to Deployment：Empirical Evidence from a W3C VC + DID Trust Infrastructure for Autonomous智能体s
+
 
 > 中文摘要 | 机构：Anthropic | 日期：2026-05-07 | AI 自动生成
 

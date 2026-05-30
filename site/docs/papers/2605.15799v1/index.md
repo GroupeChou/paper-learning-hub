@@ -1,4 +1,6 @@
 # From Gridworlds to Warehouses: Adapting Lightweight One-shot Multi-Agent Pathfinding for AGVs
+> From Gridworlds to Warehouses：Adapting Lightweight One-shot Multi-智能体Pathfinding for AGVs
+
 
 > 中文摘要 | 机构：Agent-MultiAgent | 日期：2026-05-15 | AI 自动生成
 

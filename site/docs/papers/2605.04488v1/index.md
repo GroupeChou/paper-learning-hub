@@ -1,4 +1,6 @@
 ---
+> How Does Thinking Mode Change LLM Moral Judgments? A Controlled Instant-vs-Thinking Comparison Across Five Frontier Models
+
 title: "How Does Thinking Mode Change LLM Moral Judgments? A Controlled Instant-vs-Thinking Comparison Across Five Frontier Models"
 source: "https://arxiv.org/abs/2605.04488v1"
 ---

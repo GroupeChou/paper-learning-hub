@@ -1,4 +1,6 @@
 # Reviving Error Correction in Modern Deep Time-Series Forecasting
+> Reviving Error Correction in Modern Deep Time-Series Forecasting
+
 
 > 中文摘要 | 机构：时序预测-核心 | 日期：2026-05-20 | AI 自动生成
 

@@ -1,4 +1,6 @@
 # Evaluating Deep Research Agents on Expert Consulting Work: A Benchmark with Verifiers, Rubrics, and Cognitive Traps
+> Evaluating Deep Research智能体s on Expert Consulting Work：A 基准 with Verifiers, Rubrics, and Cognitive Traps
+
 
 > 中文摘要 | 机构：OpenAI | 日期：2026-05-17 | AI 自动生成
 

@@ -1,4 +1,6 @@
 # Toto 2.0: Time Series Forecasting Enters the Scaling Era
+> Toto 2.0：时间序列 预测 Enters the Scaling Era
+
 
 > 中文摘要 | 机构：时序预测-核心 | 日期：2026-05-19 | AI 自动生成
 

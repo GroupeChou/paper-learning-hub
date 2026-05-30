@@ -1,4 +1,6 @@
 # POST: Prior-Observation Adversarial Learning of Spatio-Temporal Associations for Multivariate Time Series Anomaly Detection
+> POST：Prior-Observation Adversarial 学习 of 时空 Associations for Multivariate 时间序列 Anomaly Detection
+
 
 > 中文摘要 | 机构：时空预测 | 日期：2026-05-18 | AI 自动生成
 

@@ -1,4 +1,6 @@
 # TRACER: Turn-level Regret Matching with Inner Reinforcement Credit for Cooperative Multi-LLM Reasoning
+> TRACER：Turn-level Regret Matching with Inner Reinforcement Credit for Cooperative Multi-大语言模型推理
+
 
 > 中文摘要 | 机构：AI Agent-核心 | 日期：2026-05-27 | AI 自动生成
 

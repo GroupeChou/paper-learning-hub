@@ -1,4 +1,6 @@
 # Agentic Design of Compositional Descriptors via Autoresearch for Materials Science Applications
+> 面向Materials Science Applications的Agentic Design of Compositional Descriptors via Autoresearch
+
 
 > 中文摘要 | 机构：OpenAI | 日期：2026-05-14 | AI 自动生成
 

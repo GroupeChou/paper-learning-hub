@@ -1,4 +1,6 @@
 # Personal Visual Memory from Explicit and Implicit Evidence
+> Personal Visual Memory from Explicit and Implicit Evidence
+
 
 > 中文摘要 | 机构：AI Agent-核心 | 日期：2026-05-27 | AI 自动生成
 

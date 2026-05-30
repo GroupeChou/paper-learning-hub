@@ -1,4 +1,6 @@
 # Adaptive Temporal Gating of Longitudinal Magnetic Resonance Imaging for Alzheimer's Prediction
+> 面向Alzheimer's Prediction的Adaptive Temporal Gating of Longitudinal Magnetic Resonance Imaging
+
 
 > 中文摘要 | 机构：时空预测 | 日期：2026-05-27 | AI 自动生成
 

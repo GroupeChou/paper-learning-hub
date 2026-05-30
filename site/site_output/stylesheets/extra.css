@@ -9,3 +9,25 @@
           display: block;
           margin: 1rem 0;
         }
+
+        /* Wide layout - max-width 1600px */
+        .md-grid {
+          max-width: 1600px;
+        }
+
+        /* Make tables full width */
+        .md-typeset table:not([class]) {
+          display: table;
+          width: 100%;
+          table-layout: auto;
+        }
+
+        /* Topic column: no wrap */
+        .md-typeset table:not([class]) td:first-child,
+        .md-typeset table:not([class]) th:first-child {
+          white-space: nowrap;
+        }
+        /* English title column: cap width */
+        .md-typeset table:not([class]) td:nth-child(2) {
+          max-width: 50%;
+        }

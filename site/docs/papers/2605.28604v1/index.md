@@ -1,4 +1,6 @@
 # Mining Multi-Modality Spatio-Temporal Cues for Video Important Person Identification
+> 面向Video Important Person Identification的Mining Multi-Modality 时空 Cues
+
 
 > 中文摘要 | 机构：时空预测 | 日期：2026-05-27 | AI 自动生成
 

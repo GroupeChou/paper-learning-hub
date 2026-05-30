@@ -1,4 +1,6 @@
 ---
+> Reward Hacking 基准：Measuring Exploits in 大语言模型Agents with 工具 Use
+
 title: "Reward Hacking Benchmark: Measuring Exploits in LLM Agents with Tool Use"
 source: "https://arxiv.org/abs/2605.02964v1"
 ---

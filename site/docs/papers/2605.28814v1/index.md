@@ -1,4 +1,6 @@
 # Self-Improving Language Models with Bidirectional Evolutionary Search
+> 基于Bidirectional Evolutionary Search的Self-Improving Language 模型s
+
 
 > 中文摘要 | 机构：AI Agent-核心 | 日期：2026-05-27 | AI 自动生成
 

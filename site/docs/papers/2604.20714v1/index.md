@@ -1,4 +1,6 @@
 ---
+> 学习 to Evolve：面向Multi-智能体Systems via Textual Parameter 图优化的Self-Improving框架
+
 title: "Learning to Evolve: A Self-Improving Framework for Multi-Agent Systems"
 source: "https://arxiv.org/abs/2604.20714v1"
 ---

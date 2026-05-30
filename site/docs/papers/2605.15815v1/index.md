@@ -1,4 +1,6 @@
 # BootstrapAgent: Distilling Repository Setup into Reusable Agent Knowledge
+> BootstrapAgent：Distilling Repository Setup into Reusable 智能体知识
+
 
 > 中文摘要 | 机构：Agent-MultiAgent | 日期：2026-05-15 | AI 自动生成
 

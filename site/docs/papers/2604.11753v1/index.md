@@ -1,4 +1,6 @@
 ---
+> 面向Parallel Scaling of Long-Horizon智能体ic Tasks的Agentic Aggregation
+
 title: "Agentic Aggregation for Parallel Scaling of Long-Horizon"
 source: "https://arxiv.org/abs/2604.11753v1"
 ---

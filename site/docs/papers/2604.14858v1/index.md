@@ -1,4 +1,6 @@
 ---
+> 基准s for Trajectory 安全 评估 and Diagnosis in OpenClaw and Codex：ATBench-Claw and ATBench-CodeX
+
 title: "ATBench-Claw/CodeX"
 source: "https://arxiv.org/abs/2604.14858v1"
 ---

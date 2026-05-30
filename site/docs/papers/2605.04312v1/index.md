@@ -1,4 +1,6 @@
 ---
+> 智能体Island：A Saturation- and Contamination-Resistant 基准 from Multiagent Games
+
 title: "Agent Island: A Saturation- and Contamination-Resistant Benchmark from Multiagent Games"
 source: "https://arxiv.org/abs/2605.04312v1"
 ---

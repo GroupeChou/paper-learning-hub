@@ -1,4 +1,6 @@
 # ParaVT: Taming the Tool Prior Paradox for Parallel Tool Use in Agentic Video Reinforcement Learning
+> ParaVT：Taming the 工具 Prior Paradox for Parallel 工具 Use in智能体ic Video 强化学习
+
 
 > 中文摘要 | 机构：Agent-MultiAgent | 日期：2026-05-19 | AI 自动生成
 

@@ -1,4 +1,6 @@
 # Looped SSMs: Depth-Recurrence and Input Reshaping for Time Series Classification
+> Looped SSMs：Depth-Recurrence and Input Reshaping for 时间序列 Classification
+
 
 > 中文摘要 | 机构：时序预测-PatchTST/Transformer | 日期：2026-05-15 | AI 自动生成
 

@@ -1,4 +1,6 @@
 # Not What You Asked For: Typographic Attacks in Household Robot Manipulation
+> Not What You Asked For：Typographic Attacks in Household Robot Manipulation
+
 
 > 中文摘要 | 机构：AI Agent-核心 | 日期：2026-05-18 | AI 自动生成
 

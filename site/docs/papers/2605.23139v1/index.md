@@ -1,4 +1,6 @@
 # CALAD: Channel-Aware contrastive Learning for multivariate time series Anomaly Detection
+> CALAD：Channel-Aware contrastive 学习 for multivariate 时间序列 Anomaly Detection
+
 
 > 中文摘要 | 机构：时序预测-PatchTST/Transformer | 日期：2026-05-22 | AI 自动生成
 

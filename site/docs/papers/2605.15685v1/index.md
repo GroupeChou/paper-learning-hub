@@ -1,4 +1,6 @@
 # Forman--Ricci Curvature on Contact-Sequence Temporal Networks via Spatiotemporal Prism Complexes
+> 基于时空 Prism Complexes的Forman--Ricci Curvature on Contact-Sequence Temporal Networks
+
 
 > 中文摘要 | 机构：时空预测 | 日期：2026-05-15 | AI 自动生成
 

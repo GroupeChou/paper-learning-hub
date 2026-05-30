@@ -1,4 +1,6 @@
 # Quantifying the Pre-training Dividend: Generative versus Latent Self-Supervised Learning for Time Series Foundation Models
+> Quantifying the Pre-training Dividend：Generative versus Latent Self-Supervised 学习 for 时间序列 Foundation 模型s
+
 
 > 中文摘要 | 机构：时序预测-PatchTST/Transformer | 日期：2026-05-19 | AI 自动生成
 

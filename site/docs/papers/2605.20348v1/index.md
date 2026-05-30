@@ -1,4 +1,6 @@
 # Memory-Induced Supra-Competitive Outcomes Between Deep Reinforcement Learning Agents in Optimal Trade Execution
+> Memory-Induced Supra-Competitive Outcomes Between Deep Reinforcement Learning Agents in Optimal Trade Execution
+
 
 > 中文摘要 | 机构：Agent-MultiAgent | 日期：2026-05-19 | AI 自动生成
 

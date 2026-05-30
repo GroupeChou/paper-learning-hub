@@ -1,4 +1,6 @@
 # VGenST-Bench: A Benchmark for Spatio-Temporal Reasoning via Active Video Synthesis
+> VGenST-Bench：A 基准 for 时空 推理 via Active Video Synthesis
+
 
 > 中文摘要 | 机构：时空预测 | 日期：2026-05-21 | AI 自动生成
 

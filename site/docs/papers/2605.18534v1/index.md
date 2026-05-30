@@ -1,4 +1,6 @@
 # XCTFormer: Leveraging Cross-Channel and Cross-Time Dependencies for Enhanced Time-Series Analysis
+> XCTFormer：Leveraging Cross-Channel and Cross-Time Dependencies for Enhanced Time-Series Analysis
+
 
 > 中文摘要 | 机构：时序预测-PatchTST/Transformer | 日期：2026-05-18 | AI 自动生成
 

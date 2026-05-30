@@ -1,4 +1,6 @@
 # Your Language Model is Its Own Critic: Reinforcement Learning with Value Estimation from Actor's Internal States
+> Your Language 模型 is Its Own Critic：强化学习 with Value Estimation from Actor's Internal States
+
 
 > 中文摘要 | 机构：DeepSeek | 日期：2026-05-08 | AI 自动生成
 

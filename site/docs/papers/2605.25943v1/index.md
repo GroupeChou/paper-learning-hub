@@ -1,4 +1,6 @@
 # STaT: Resolving Shape Distortion in Non-Stationary Time Series via Tri-Modal Synergy
+> STaT：Resolving Shape Distortion in Non-Stationary 时间序列 via Tri-Modal Synergy
+
 
 > 中文摘要 | 机构：时序预测-核心 | 日期：2026-05-25 | AI 自动生成
 

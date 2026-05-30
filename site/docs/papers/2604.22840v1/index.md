@@ -1,4 +1,6 @@
 ---
+> AeSlides：Incentivizing Aesthetic Layout in大语言模型-Based Slide Generation via Verifiable Rewards
+
 title: "AeSlides: Incentivizing Aesthetic Layout in LLM-Based Slide"
 source: "https://arxiv.org/abs/2604.22840v1"
 ---

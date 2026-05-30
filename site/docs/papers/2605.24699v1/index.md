@@ -1,4 +1,6 @@
 # MDIA: A Multi-Agent Diagnostic Intelligence Pipeline on HealthBench Professional
+> MDIA：A Multi-智能体Diagnostic Intelligence Pipeline on HealthBench Professional
+
 
 > 中文摘要 | 机构：OpenAI | 日期：2026-05-23 | AI 自动生成
 

@@ -1,4 +1,6 @@
 # FRWKV+: Adaptive Periodic-Position Branch Interaction for Frequency-Space Linear Time Series Forecasting
+> FRWKV+：Adaptive Periodic-Position Branch Interaction for Frequency-Space Linear 时间序列 预测
+
 
 > 中文摘要 | 机构：时序预测-核心 | 日期：2026-05-15 | AI 自动生成
 

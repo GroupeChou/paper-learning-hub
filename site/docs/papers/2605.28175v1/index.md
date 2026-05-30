@@ -1,4 +1,6 @@
 # Mixture-of-Experts Knowledge Graph Retrieval-Augmented Generation for Multi-Agent LLM-based Recommendation
+> 面向多智能体大语言模型-based Recommendation的Mixture-of-Experts 知识 图Retrieval-Augmented Generation
+
 
 > 中文摘要 | 机构：Agent-MultiAgent | 日期：2026-05-27 | AI 自动生成
 

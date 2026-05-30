@@ -1,4 +1,6 @@
 # ChipMATE: Multi-Agent Training via Reinforcement Learning for Enhanced RTL Generation
+> ChipMATE：Multi-智能体Training via 强化学习 for Enhanced RTL Generation
+
 
 > 中文摘要 | 机构：DeepSeek | 日期：2026-05-13 | AI 自动生成
 

@@ -1,4 +1,6 @@
 # AME-TS: Anchored Mixture-of-Experts for Time Series Forecasting
+> AME-TS：Anchored Mixture-of-Experts for 时间序列 预测
+
 
 > 中文摘要 | 机构：时序预测-核心 | 日期：2026-05-24 | AI 自动生成
 

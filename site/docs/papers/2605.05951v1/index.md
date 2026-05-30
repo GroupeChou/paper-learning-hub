@@ -1,4 +1,6 @@
 # HaM-World: Soft-Hamiltonian World Models with Selective Memory for Planning
+> HaM-World：Soft-Hamiltonian World 模型s with Selective 记忆 for 规划
+
 
 > 中文摘要 | 机构：Google DeepMind | 日期：2026-05-07 | AI 自动生成
 

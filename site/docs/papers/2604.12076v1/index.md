@@ -1,4 +1,6 @@
 ---
+> Narrative over Numbers：The Identifiable Victim Effect and its Amplification Under Alignment and 推理 in 大语言模型s
+
 title: "Narrative over Numbers: The Identifiable Victim"
 source: "https://arxiv.org/abs/2604.12076v1"
 ---

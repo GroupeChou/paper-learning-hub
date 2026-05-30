@@ -1,4 +1,6 @@
 # Deep Learning Surrogates for Emulating Stochastic Climate Tipping Dynamics
+> 面向Emulating Stochastic Climate Tipping Dynamics的深度学习 Surrogates
+
 
 > 中文摘要 | 机构：时序预测-PatchTST/Transformer | 日期：2026-05-20 | AI 自动生成
 

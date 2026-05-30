@@ -1,4 +1,6 @@
 ---
+> What Happens Inside Agent Memory? Circuit Analysis from Emergence to Diagnosis
+
 title: "What Happens Inside Agent Memory?"
 source: "https://arxiv.org/abs/2605.03354v1"
 ---

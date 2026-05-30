@@ -1,4 +1,6 @@
 ---
+> TSCG：Deterministic 工具-Schema Compilation for智能体ic 大语言模型Deployments
+
 title: "TSCG: Deterministic Tool-Schema Compilation for Agentic LLM Deployments"
 source: "https://arxiv.org/abs/2605.04107v1"
 ---

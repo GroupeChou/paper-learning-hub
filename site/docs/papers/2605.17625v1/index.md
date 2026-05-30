@@ -1,4 +1,6 @@
 # Episodic-Semantic Memory Architecture for Long-Horizon Scientific Agents
+> 面向Long-Horizon Scientific智能体s的Episodic-Semantic 记忆 Architecture
+
 
 > 中文摘要 | 机构：OpenAI | 日期：2026-05-17 | AI 自动生成
 

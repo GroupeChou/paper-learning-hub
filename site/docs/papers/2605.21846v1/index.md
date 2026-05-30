@@ -1,4 +1,6 @@
 # Causal Discovery in Structural VAR Models Under Equal Noise Variance
+> Causal Discovery in Structural VAR Models Under Equal Noise Variance
+
 
 > 中文摘要 | 机构：时序预测-PatchTST/Transformer | 日期：2026-05-21 | AI 自动生成
 

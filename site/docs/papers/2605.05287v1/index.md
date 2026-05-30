@@ -1,4 +1,6 @@
 # Securing the Agent: Vendor-Neutral, Multitenant Enterprise Retrieval and Tool Use
+> Securing the智能体：Vendor-Neutral, Multitenant Enterprise Retrieval and 工具 Use
+
 
 > 中文摘要 | 机构：OpenAI | 日期：2026-05-06 | AI 自动生成
 

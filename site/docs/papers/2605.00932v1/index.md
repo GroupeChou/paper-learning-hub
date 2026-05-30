@@ -1,4 +1,6 @@
 ---
+> Code World Model Preparedness Report
+
 title: "Code World Model Preparedness Report"
 source: "https://arxiv.org/abs/2605.00932v1"
 ---

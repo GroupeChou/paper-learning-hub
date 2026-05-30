@@ -1,4 +1,6 @@
 # What if Tomorrow is the World Cup Final? Counterfactual Time Series Forecasting with Textual Conditions
+> 基于Textual Conditions的What if Tomorrow is the World Cup Final? Counterfactual 时间序列 预测
+
 
 > 中文摘要 | 机构：时序预测-核心 | 日期：2026-05-14 | AI 自动生成
 

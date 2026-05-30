@@ -1,4 +1,6 @@
 ---
+> ArguAgent：AI-Supported Real-Time Grouping for Productive Argumentation in STEM Classrooms
+
 title: "ArguAgent: AI-Supported Real-Time Grouping"
 source: "https://arxiv.org/abs/2604.23449v1"
 ---

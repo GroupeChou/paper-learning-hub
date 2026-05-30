@@ -1,4 +1,6 @@
 # ALSO: Adversarial Online Strategy Optimization for Social Agents
+> ALSO：Adversarial Online Strategy 优化 for Social智能体s
+
 
 > 中文摘要 | 机构：Agent-MultiAgent | 日期：2026-05-15 | AI 自动生成
 

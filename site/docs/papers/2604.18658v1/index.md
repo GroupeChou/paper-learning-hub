@@ -1,4 +1,6 @@
 ---
+> Owner-Harm：面向AI 智能体安全的Missing Threat模型
+
 title: "Owner-Harm: A Missing Threat Model for AI Agent"
 source: "https://arxiv.org/abs/2604.18658v1"
 ---

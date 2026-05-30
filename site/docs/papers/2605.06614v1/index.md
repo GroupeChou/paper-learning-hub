@@ -1,4 +1,6 @@
 # SkillOS: Learning Skill Curation for Self-Evolving Agents
+> SkillOS：学习 Skill Curation for Self-Evolving智能体s
+
 
 > 中文摘要 | 机构：Meta FAIR | 日期：2026-05-07 | AI 自动生成
 

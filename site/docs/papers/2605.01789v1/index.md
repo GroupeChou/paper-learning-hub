@@ -1,4 +1,6 @@
 ---
+> DataEvolver：Let Your Data Build and Improve Itself via Goal-Driven Loop智能体s
+
 title: "DataEvolver: Let Your Data Build and Improve Itself"
 source: "https://arxiv.org/abs/2605.01789v1"
 ---

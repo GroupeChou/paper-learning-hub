@@ -1,4 +1,6 @@
 # ShopGym: An Integrated Framework for Realistic Simulation and Scalable Benchmarking of E-Commerce Web Agents
+> ShopGym：An Integrated Framework for Realistic Simulation and Scalable 基准ing of E-Commerce Web智能体s
+
 
 > 中文摘要 | 机构：AI Agent-核心 | 日期：2026-05-15 | AI 自动生成
 

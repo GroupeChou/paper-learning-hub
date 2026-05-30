@@ -1,4 +1,6 @@
 ---
+> ComPASS：Towards Personalized智能体ic Social Support via 工具-Augmented Companionship
+
 title: "ComPASS: Towards Personalized Agentic Social Support via"
 source: "https://arxiv.org/abs/2604.18356v1"
 ---

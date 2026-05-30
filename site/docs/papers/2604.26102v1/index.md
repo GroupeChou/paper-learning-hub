@@ -1,4 +1,6 @@
 ---
+> SWE-Edit：Rethinking Code Editing for Efficient SWE-Agent
+
 title: "SWE-Edit: Rethinking Code Editing for Efficient SWE-Agent"
 source: "https://arxiv.org/abs/2604.26102v1"
 ---

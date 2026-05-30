@@ -1,4 +1,6 @@
 # Inpainting-Style Conditional Diffusion for Multivariable Time Series Forecasting
+> 面向Multivariable 时间序列 预测的Inpainting-Style Conditional Diffusion
+
 
 > 中文摘要 | 机构：时空预测 | 日期：2026-05-27 | AI 自动生成
 

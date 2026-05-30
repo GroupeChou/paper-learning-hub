@@ -1,4 +1,6 @@
 # 1GC-7RC: One Graphic Card -- Seven Research Challenges! How Good Are AI Agents at Doing Your Job?
+> 1GC-7RC：One图ic Card -- Seven Research Challenges! How Good Are AI智能体s at Doing Your Job?
+
 
 > 中文摘要 | 机构：时序预测-核心 | 日期：2026-05-16 | AI 自动生成
 

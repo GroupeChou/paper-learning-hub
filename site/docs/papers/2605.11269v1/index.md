@@ -1,4 +1,6 @@
 # gwBenchmarks: Stress-Testing LLM Agents on High-Precision Gravitational Wave Astronomy
+> gw基准s：Stress-Testing 大语言模型Agents on High-Precision Gravitational Wave Astronomy
+
 
 > 中文摘要 | 机构：时序预测-PatchTST/Transformer | 日期：2026-05-11 | AI 自动生成
 

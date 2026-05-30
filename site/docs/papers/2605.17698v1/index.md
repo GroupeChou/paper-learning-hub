@@ -1,4 +1,6 @@
 # Agent Bazaar: Enabling Economic Alignment in Multi-Agent Marketplaces
+> 智能体Bazaar：Enabling Economic Alignment in Multi-智能体Marketplaces
+
 
 > 中文摘要 | 机构：Agent-MultiAgent | 日期：2026-05-17 | AI 自动生成
 

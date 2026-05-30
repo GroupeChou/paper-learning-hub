@@ -1,4 +1,6 @@
 # FORGE: Self-Evolving Agent Memory With No Weight Updates via Population Broadcast
+> FORGE：Self-Evolving 智能体记忆 With No Weight Updates via Population Broadcast
+
 
 > 中文摘要 | 机构：AI Agent-核心 | 日期：2026-05-15 | AI 自动生成
 

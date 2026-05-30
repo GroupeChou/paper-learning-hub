@@ -1,4 +1,6 @@
 # VeriTrip: A Verifiable Benchmark for Travel Planning Agents over Unstructured Web Corpora
+> VeriTrip：A Verifiable 基准 for Travel 规划智能体s over Unstructured Web Corpora
+
 
 <!-- 论文元数据卡片 -->
 <div class="paper-meta">

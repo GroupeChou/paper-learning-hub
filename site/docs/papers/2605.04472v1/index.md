@@ -1,4 +1,6 @@
 ---
+> 基于Wilf-Zeilberger Guidance and大语言模型s的Automated Formal Proofs of Combinatorial Identities
+
 title: "Automated Formal Proofs of Combinatorial Identities via Wilf-Zeilberger Guidance and LLMs"
 source: "https://arxiv.org/abs/2605.04472v1"
 ---

@@ -1,4 +1,6 @@
 # QLIF-CAST: Quantum Leaky-Integrate-and-Fire for Time-Series Weather Forecasting
+> QLIF-CAST：Quantum Leaky-Integrate-and-Fire for Time-Series Weather 预测
+
 
 > 中文摘要 | 机构：时序预测-核心 | 日期：2026-05-18 | AI 自动生成
 

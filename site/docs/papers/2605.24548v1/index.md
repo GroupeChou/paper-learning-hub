@@ -1,4 +1,6 @@
 # Deep ZakaiJ: Structured Filtering for Jump-Diffusion Time Series Forecasting
+> Deep ZakaiJ：Structured Filtering for Jump-Diffusion 时间序列 预测
+
 
 > 中文摘要 | 机构：时序预测-核心 | 日期：2026-05-23 | AI 自动生成
 

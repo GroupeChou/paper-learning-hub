@@ -1,4 +1,6 @@
 # An LLM-Based Assistance System for Intuitive and Flexible Capability-Based Planning
+> 面向Intuitive and Flexible Capability-Based 规划的An大语言模型-Based Assistance System
+
 
 > 中文摘要 | 机构：AI Agent-核心 | 日期：2026-05-27 | AI 自动生成
 

@@ -1,4 +1,6 @@
 # Repeated Deceptive Path Planning against Learnable Observer
+> Repeated Deceptive Path Planning against Learnable Observer
+
 
 > 中文摘要 | 机构：Meta FAIR | 日期：2026-05-08 | AI 自动生成
 

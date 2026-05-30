@@ -1,4 +1,6 @@
 # Event-based spatiotemporal networks for modelling emergent phenomena in complex systems
+> 面向模型ling emergent phenomena in complex systems的Event-based 时空 networks
+
 
 > 中文摘要 | 机构：时空预测 | 日期：2026-05-15 | AI 自动生成
 

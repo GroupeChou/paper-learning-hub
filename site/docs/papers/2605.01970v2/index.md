@@ -1,4 +1,6 @@
 ---
+> Trojan Hippo：Weaponizing 智能体记忆 for Data Exfiltration
+
 title: "Trojan Hippo: Weaponizing Agent Memory for Data Exfiltration"
 source: "https://arxiv.org/abs/2605.01970v2"
 ---

@@ -1,4 +1,6 @@
 # Argus: Evidence Assembly for Scalable Deep Research Agents
+> Argus：Evidence Assembly for Scalable Deep Research智能体s
+
 
 > 中文摘要 | 机构：AI Agent-核心 | 日期：2026-05-15 | AI 自动生成
 

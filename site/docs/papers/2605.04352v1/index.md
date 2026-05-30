@@ -1,4 +1,6 @@
 ---
+> 基于Algebraic Trapdoors的Probing Structural Mathematical 推理 in Language 模型s
+
 title: "Probing Structural Mathematical Reasoning in Language Models with Algebraic Trapdoors"
 source: "https://arxiv.org/abs/2605.04352v1"
 ---

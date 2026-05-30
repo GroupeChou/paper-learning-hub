@@ -1,4 +1,6 @@
 # ZAYA1-8B Technical Report
+> ZAYA1-8B Technical Report
+
 
 > 中文摘要 | 机构：DeepSeek | 日期：2026-05-06 | AI 自动生成
 

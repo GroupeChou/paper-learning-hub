@@ -1,4 +1,6 @@
 ---
+> Long-Context Aware Upcycling：A New Frontier for Hybrid 大语言模型Scaling
+
 title: "Long-Context Aware Upcycling:"
 source: "https://arxiv.org/abs/2604.24715v1"
 ---

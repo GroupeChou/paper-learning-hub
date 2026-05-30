@@ -1,4 +1,6 @@
 # Latent Action Reparameterization for Efficient Agent Inference
+> 面向Efficient 智能体Inference的Latent Action Reparameterization
+
 
 > 中文摘要 | 机构：AI Agent-核心 | 日期：2026-05-18 | AI 自动生成
 

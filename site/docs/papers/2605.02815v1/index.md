@@ -1,4 +1,6 @@
 ---
+> FlexSQL：Flexible Exploration and Execution Make Better Text-to-SQL智能体s
+
 title: "FlexSQL: Flexible Exploration and Execution Make Better Text-to-SQL Agents"
 source: "https://arxiv.org/abs/2605.02815v1"
 ---

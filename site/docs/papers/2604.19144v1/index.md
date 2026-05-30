@@ -1,4 +1,6 @@
 ---
+> ReflectMT：Internalizing Reflection for Efficient and High-Quality Machine Translation
+
 title: "ReflectMT: Internalizing Reflection for Efficient and High-Quality Machine"
 source: "https://arxiv.org/abs/2604.19144v1"
 ---

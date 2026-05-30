@@ -1,4 +1,6 @@
 # Patched-DeltaNet: Token-Level Event-Driven Memory for Linear-Time Anomaly Detection
+> Patched-DeltaNet：Token-Level Event-Driven 记忆 for Linear-Time Anomaly Detection
+
 
 > 中文摘要 | 机构：时序预测-PatchTST/Transformer | 日期：2026-05-27 | AI 自动生成
 

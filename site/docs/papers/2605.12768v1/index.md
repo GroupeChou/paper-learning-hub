@@ -1,4 +1,6 @@
 # ISOMORPH: A Supply Chain Digital Twin for Simulation, Dataset Generation, and Forecasting Benchmarks
+> ISOMORPH：A Supply Chain Digital Twin for Simulation, Dataset Generation, and 预测 基准s
+
 
 > 中文摘要 | 机构：时序预测-核心 | 日期：2026-05-12 | AI 自动生成
 

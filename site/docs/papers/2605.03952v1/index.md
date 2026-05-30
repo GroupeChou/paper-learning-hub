@@ -1,4 +1,6 @@
 ---
+> MOSAIC-Bench：Measuring Compositional Vulnerability Induction in Coding智能体s
+
 title: "MOSAIC-Bench: Measuring Compositional Vulnerability Induction in Coding Agents"
 source: "https://arxiv.org/abs/2605.03952v1"
 ---

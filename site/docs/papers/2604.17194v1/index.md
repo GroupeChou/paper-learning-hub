@@ -1,4 +1,6 @@
 ---
+> Forecast Sports Outcomes under Efficient Market Hypothesis：Theoretical and Experimental Analysis of Odds-Only and Generalised Linear 模型s
+
 title: "Forecast Sports Outcomes under"
 source: "https://arxiv.org/abs/2604.17194v1"
 ---

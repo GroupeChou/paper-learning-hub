@@ -1,4 +1,6 @@
 # CurveBench: A Benchmark for Exact Topological Reasoning over Nested Jordan Curves
+> CurveBench：A 基准 for Exact Topological 推理 over Nested Jordan Curves
+
 
 > 中文摘要 | 机构：阿里通义 | 日期：2026-05-13 | AI 自动生成
 

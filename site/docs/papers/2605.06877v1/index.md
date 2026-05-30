@@ -1,4 +1,6 @@
 # Temporal Attention for Adaptive Control of Euler-Lagrange Systems with Unobservable Memory
+> 面向Adaptive Control of Euler-Lagrange Systems with Unobservable 记忆的Temporal Attention
+
 
 > 中文摘要 | 机构：Meta FAIR | 日期：2026-05-07 | AI 自动生成
 

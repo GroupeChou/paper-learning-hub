@@ -147,7 +147,7 @@ class CandidatePaper:
             last_seen_at=row["last_seen_at"],
             created_at=row["created_at"],
             updated_at=row["updated_at"],
-            cn_title=row.get("cn_title"),
+            cn_title=row["cn_title"] if "cn_title" in row.keys() else None,
         )
 
 

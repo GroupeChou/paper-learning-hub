@@ -1,4 +1,6 @@
 # Parametric Prior Mapping Framework for Non-stationary Probabilistic Time Series Forecasting
+> 面向Non-stationary Probabilistic 时间序列 预测的Parametric Prior Mapping Framework
+
 
 > 中文摘要 | 机构：时序预测-核心 | 日期：2026-05-22 | AI 自动生成
 

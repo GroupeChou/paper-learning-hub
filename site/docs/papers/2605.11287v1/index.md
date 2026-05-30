@@ -1,4 +1,6 @@
 # Beyond Similarity: Temporal Operator Attention for Time Series Analysis
+> Beyond Similarity：Temporal Operator Attention for 时间序列 Analysis
+
 
 > 中文摘要 | 机构：时序预测-核心 | 日期：2026-05-11 | AI 自动生成
 

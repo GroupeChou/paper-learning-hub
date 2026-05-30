@@ -1,4 +1,6 @@
 # Spatiotemporal dynamics and ecological risk factors of highly pathogenic avian influenza A(H5N1) in Canadian wildlife: A One Health surveillance analysis
+> 时空 dynamics and ecological risk factors of highly pathogenic avian influenza A(H5N1) in Canadian wildlife：A One Health surveillance analysis
+
 
 > 中文摘要 | 机构：时空预测 | 日期：2026-05-21 | AI 自动生成
 

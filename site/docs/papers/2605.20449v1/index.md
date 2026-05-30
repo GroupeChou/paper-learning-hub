@@ -1,4 +1,6 @@
 # LLM Pretraining Shapes a Generalizable Manifold: Insights into Cross-Modal Transfer to Time Series
+> 大语言模型Pretraining Shapes a Generalizable Manifold：Insights into Cross-Modal Transfer to 时间序列
+
 
 > 中文摘要 | 机构：时序预测-核心 | 日期：2026-05-19 | AI 自动生成
 

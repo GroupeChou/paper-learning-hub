@@ -1,4 +1,6 @@
 # Look Before You Leap: Autonomous Exploration for LLM Agents
+> Look Before You Leap：Autonomous Exploration for 大语言模型Agents
+
 
 > 中文摘要 | 机构：AI Agent-核心 | 日期：2026-05-15 | AI 自动生成
 

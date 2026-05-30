@@ -1,4 +1,6 @@
 # AutoResearchClaw: Self-Reinforcing Autonomous Research with Human-AI Collaboration
+> AutoResearchClaw：Self-Reinforcing Autonomous Research with Human-AI Collaboration
+
 
 > 中文摘要 | 机构：Agent-MultiAgent | 日期：2026-05-19 | AI 自动生成
 

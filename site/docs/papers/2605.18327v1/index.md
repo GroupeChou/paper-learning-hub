@@ -1,4 +1,6 @@
 # Causely: A Causal Intelligence Layer for Enterprise AI A Benchmark Study on SRE and Reliability Workflows
+> Causely：A Causal Intelligence Layer for Enterprise AI A 基准 Study on SRE and Reliability Workflows
+
 
 > 中文摘要 | 机构：OpenAI | 日期：2026-05-18 | AI 自动生成
 

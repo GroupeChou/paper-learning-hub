@@ -1,4 +1,6 @@
 # Optimized Three-Dimensional Photovoltaic Structures with LLM guided Tree Search
+> 基于大语言模型guided Tree Search的Optimized Three-Dimensional Photovoltaic Structures
+
 
 > 中文摘要 | 机构：AI Agent-核心 | 日期：2026-05-15 | AI 自动生成
 

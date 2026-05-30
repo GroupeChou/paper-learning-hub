@@ -1,4 +1,6 @@
 # MAS-Algorithm: A Workflow for Solving Algorithmic Programming Problems with a Multi-Agent System
+> MAS-Algorithm：A Workflow for Solving Algorithmic Programming Problems with a Multi-智能体System
+
 
 > 中文摘要 | 机构：阿里通义 | 日期：2026-05-07 | AI 自动生成
 

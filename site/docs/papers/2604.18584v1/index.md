@@ -1,4 +1,6 @@
 ---
+> MathNet：a Global Multimodal 基准 for Mathematical 推理 and Retrieval
+
 title: "Published as a conference paper at ICLR 2026"
 source: "https://arxiv.org/abs/2604.18584v1"
 ---

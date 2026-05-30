@@ -1,4 +1,6 @@
 ---
+> Less Languages, Less Tokens：An Efficient Unified Logic Cross-lingual Chain-of-Thought 推理 Framework
+
 title: "Less Languages, Less Tokens: An Efficient Unified Logic Cross-lingual"
 source: "https://arxiv.org/abs/2604.20090v1"
 ---

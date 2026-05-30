@@ -1,4 +1,6 @@
 # ExploitGym: Can AI Agents Turn Security Vulnerabilities into Real Attacks?
+> ExploitGym：Can AI智能体s Turn Security Vulnerabilities into Real Attacks?
+
 
 > 中文摘要 | 机构：OpenAI | 日期：2026-05-11 | AI 自动生成
 

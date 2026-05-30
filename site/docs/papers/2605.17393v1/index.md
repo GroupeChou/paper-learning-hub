@@ -1,4 +1,6 @@
 # Heterogeneous Information-Bottleneck Coordination Graphs for Multi-Agent Reinforcement Learning
+> 面向Multi-智能体强化学习的Heterogeneous Information-Bottleneck Coordination图s
+
 
 > 中文摘要 | 机构：Agent-MultiAgent | 日期：2026-05-17 | AI 自动生成
 

@@ -1,4 +1,6 @@
 ---
+> When Stress Becomes Signal：Detecting Antifragility-Compatible Regimes in Multi-智能体大语言模型Systems
+
 title: "When Stress Becomes Signal: Detecting Antifragility-Compatible Regimes in Multi-Agent LLM Systems"
 source: "https://arxiv.org/abs/2605.02463v2"
 ---

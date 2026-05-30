@@ -1,4 +1,6 @@
 # MetaAgent-X : Breaking the Ceiling of Automatic Multi-Agent Systems via End-to-End Reinforcement Learning
+> MetaAgent-X ：Breaking the Ceiling of Automatic Multi-智能体Systems via End-to-End 强化学习
+
 
 > 中文摘要 | 机构：Meta FAIR | 日期：2026-05-14 | AI 自动生成
 

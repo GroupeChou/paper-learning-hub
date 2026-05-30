@@ -1,4 +1,6 @@
 # BatteryMFormer: Multi-level Learning for Battery Degradation Trajectory Forecasting
+> BatteryMFormer：Multi-level 学习 for Battery Degradation Trajectory 预测
+
 
 > 中文摘要 | 机构：时序预测-PatchTST/Transformer | 日期：2026-05-26 | AI 自动生成
 

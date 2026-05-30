@@ -1,4 +1,6 @@
 # Context, Reasoning, and Hierarchy: A Cost-Performance Study of Compound LLM Agent Design in an Adversarial POMDP
+> Context, 推理, and Hierarchy：Compound 大语言模型智能体Design in an Adversarial POMDP的Cost-Performance研究
+
 
 > 中文摘要 | 机构：AI Agent-核心 | 日期：2026-05-15 | AI 自动生成
 

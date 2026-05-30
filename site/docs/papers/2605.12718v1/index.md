@@ -1,4 +1,6 @@
 # CHAL: Council of Hierarchical Agentic Language
+> CHAL：Council of Hierarchical智能体ic Language
+
 
 > 中文摘要 | 机构：Meta FAIR | 日期：2026-05-12 | AI 自动生成
 

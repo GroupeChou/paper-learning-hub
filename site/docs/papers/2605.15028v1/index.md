@@ -1,4 +1,6 @@
 # Multi-Agentic Approach for History Matching of Oil Reservoirs
+> 面向History Matching of Oil Reservoirs的多智能体ic Approach
+
 
 > 中文摘要 | 机构：Agent-MultiAgent | 日期：2026-05-14 | AI 自动生成
 

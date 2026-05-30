@@ -1,4 +1,6 @@
 # On the Role of Inductive Bias in Time-Series Pretraining: A Case Study in Learning Generalizable Representations for Clinical Time Series
+> On the Role of Inductive Bias in Time-Series Pretraining：A Case Study in 学习 Generalizable Representations for Clinical 时间序列
+
 
 > 中文摘要 | 机构：时序预测-PatchTST/Transformer | 日期：2026-05-25 | AI 自动生成
 

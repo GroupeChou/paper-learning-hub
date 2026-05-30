@@ -1,4 +1,6 @@
 # SurF: A Generative Model for Multivariate Irregular Time Series Forecasting
+> SurF：面向Multivariate Irregular 时间序列 预测的Generative模型
+
 
 > 中文摘要 | 机构：时序预测-核心 | 日期：2026-05-13 | AI 自动生成
 

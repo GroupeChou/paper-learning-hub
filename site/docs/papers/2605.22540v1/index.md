@@ -1,4 +1,6 @@
 # Dynamic Hypergraph Representation Learning for Multivariate Time Series without Prior Knowledge
+> 面向Multivariate 时间序列 without Prior 知识的Dynamic Hypergraph Representation 学习
+
 
 > 中文摘要 | 机构：时序预测-PatchTST/Transformer | 日期：2026-05-21 | AI 自动生成
 

@@ -1,4 +1,6 @@
 ---
+> FairQE：Multi-智能体Framework for Mitigating Gender Bias in Translation Quality Estimation
+
 title: "FairQE: Multi-Agent Framework for Mitigating Gender Bias in"
 source: "https://arxiv.org/abs/2604.21420v1"
 ---

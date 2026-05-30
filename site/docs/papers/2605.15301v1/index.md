@@ -1,4 +1,6 @@
 # Solvita: Enhancing Large Language Models for Competitive Programming via Agentic Evolution
+> Solvita：Enhancing 大语言模型s for Competitive Programming via智能体ic Evolution
+
 
 > 中文摘要 | 机构：Agent-MultiAgent | 日期：2026-05-14 | AI 自动生成
 

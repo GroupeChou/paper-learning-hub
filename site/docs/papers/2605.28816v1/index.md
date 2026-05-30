@@ -1,4 +1,6 @@
 # Gamma-World: Generative Multi-Agent World Modeling Beyond Two Players
+> Gamma-World：Generative Multi-智能体World 模型ing Beyond Two Players
+
 
 > 中文摘要 | 机构：AI Agent-核心 | 日期：2026-05-27 | AI 自动生成
 

@@ -1,4 +1,6 @@
 # Dynamic TMoE: A Drift-Aware Dynamic Mixture of Experts Framework for Non-Stationary Time Series Forecasting
+> Dynamic TMoE：面向Non-Stationary 时间序列 预测的Drift-Aware Dynamic Mixture of Experts框架
+
 
 > 中文摘要 | 机构：时序预测-核心 | 日期：2026-05-20 | AI 自动生成
 

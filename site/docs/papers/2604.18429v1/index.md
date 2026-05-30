@@ -1,4 +1,6 @@
 ---
+> 基于Structured and Native Multimodal Qwen 模型s的Revisiting Change VQA in Remote Sensing
+
 title: "Revisiting Change VQA in Remote Sensing with"
 source: "https://arxiv.org/abs/2604.18429v1"
 ---

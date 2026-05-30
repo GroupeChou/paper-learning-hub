@@ -1,4 +1,6 @@
 # Governing AI-Assisted Security Operations: A Design Science Framework for Operational Decision Support
+> Governing AI-Assisted Security Operations：面向Operational Decision Support的Design Science框架
+
 
 > 中文摘要 | 机构：Microsoft | 日期：2026-05-10 | AI 自动生成
 

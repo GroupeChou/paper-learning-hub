@@ -1,4 +1,6 @@
 # Compiling Agentic Workflows into LLM Weights: Near-Frontier Quality at Two Orders of Magnitude Less Cost
+> Compiling智能体ic Workflows into 大语言模型Weights：Near-Frontier Quality at Two Orders of Magnitude Less Cost
+
 
 > 中文摘要 | 机构：OpenAI | 日期：2026-05-21 | AI 自动生成
 

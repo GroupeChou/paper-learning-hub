@@ -1,4 +1,6 @@
 # Triangular-Reference Schrödinger Bridges for Time Series Generation
+> 面向时间序列 Generation的Triangular-Reference Schrödinger Bridges
+
 
 > 中文摘要 | 机构：时序预测-PatchTST/Transformer | 日期：2026-05-26 | AI 自动生成
 

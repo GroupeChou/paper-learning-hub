@@ -1,4 +1,6 @@
 # MAxLM: Multi-Agent Language Model-Based Scheduling and Resource Allocation in MU-MIMO-OFDMA-Enabled Wireless Networks
+> MAxLM：Multi-智能体Language 模型-Based Scheduling and Resource Allocation in MU-MIMO-OFDMA-Enabled Wireless Networks
+
 
 > 中文摘要 | 机构：AI Agent-核心 | 日期：2026-05-15 | AI 自动生成
 

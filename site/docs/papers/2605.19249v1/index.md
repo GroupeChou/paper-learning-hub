@@ -1,4 +1,6 @@
 # Beyond Extrapolation: Knowledge Utilization Paradigm with Bidirectional Inspiration for Time Series Forecasting
+> Beyond Extrapolation：知识 Utilization Paradigm with Bidirectional Inspiration for 时间序列 预测
+
 
 > 中文摘要 | 机构：时序预测-核心 | 日期：2026-05-19 | AI 自动生成
 

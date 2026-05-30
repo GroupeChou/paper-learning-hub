@@ -1,4 +1,6 @@
 # Incentive-Aligned Vehicle-to-Vehicle Energy Trading via Nash-Integrated Multi-Agent Reinforcement Learning
+> 基于Nash-Integrated Multi-智能体强化学习的Incentive-Aligned Vehicle-to-Vehicle Energy Trading
+
 
 > 中文摘要 | 机构：Agent-MultiAgent | 日期：2026-05-21 | AI 自动生成
 

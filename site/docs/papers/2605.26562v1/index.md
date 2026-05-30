@@ -1,4 +1,6 @@
 # Beyond Holistic Models: Systematic Component-level Benchmarking of Deep Multivariate Time-Series Forecasting
+> Beyond Holistic 模型s：Systematic Component-level 基准ing of Deep Multivariate Time-Series 预测
+
 
 > 中文摘要 | 机构：时序预测-核心 | 日期：2026-05-26 | AI 自动生成
 

@@ -1,4 +1,6 @@
 # L-Drive: Beyond a Single Mapping-Latent Context Drives Time Series Forecasting
+> L-Drive：Beyond a Single Mapping-Latent Context Drives 时间序列 预测
+
 
 > 中文摘要 | 机构：时序预测-核心 | 日期：2026-05-18 | AI 自动生成
 

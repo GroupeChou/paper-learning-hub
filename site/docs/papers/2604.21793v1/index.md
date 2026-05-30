@@ -1,4 +1,6 @@
 ---
+> Inferring High-Level Events from Timestamped Data：Complexity and Medical Applications
+
 title: "Inferring High-Level Events from Timestamped Data:"
 source: "https://arxiv.org/abs/2604.21793v1"
 ---
