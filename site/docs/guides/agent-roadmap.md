@@ -1,7 +1,7 @@
 # AI Agent 论文列表
 
 > 按技术方向分类。点击论文标题跳转到详情页。
-> 最后更新：2026-06-01 | 共 197 篇论文
+> 最后更新：2026-06-03 | 共 198 篇论文
 
 | 主题 | 英文标题 | 中文标题 | 发布日期 | 发布机构 |
 |------|----------|----------|:--------:|:--------:|
@@ -67,6 +67,33 @@
 | | [Training and Agentic Inference Strategies for LLM-based Manim Animation Generation](../papers/2604.18364v1/index.md) | 面向LLM-based Manim Animation Generation的Training and智能体ic Inference Strategies | 2026-04-20 | 阿里通义 |
 | | [HiveMind: OS-Inspired Scheduling for Concurrent LLM Agent Workloads](../papers/2604.17111v1/index.md) | HiveMind：OS-Inspired Scheduling for Concurrent 大语言模型智能体Workloads | 2026-04-18 | OpenAI |
 | | [Local-Splitter: A Measurement Study of Seven Tactics for Reducing Cloud LLM Token Usage on Coding-Agent Workloads](../papers/2604.12301v1/index.md) | Local-Splitter：Seven Tactics for Reducing Cloud 大语言模型Token Usage on Coding-智能体Workloads的Measurement研究 | 2026-04-14 | OpenAI |
+| **智能体架构与框架** (27) | [Calibrating Conservatism for Scalable Oversight](../papers/2605.28807v1/index.md) | 面向Scalable Oversight的Calibrating Conservatism | 2026-05-27 | AI Agent-核心 |
+| | [Self-Improving Language Models with Bidirectional Evolutionary Search](../papers/2605.28814v1/index.md) | 基于Bidirectional Evolutionary Search的Self-Improving Language 模型s | 2026-05-27 | AI Agent-核心 |
+| | [First head-to-head comparison of agentic AI applied to the analysis of simulated data of the Einstein Telescope](../papers/2605.28916v2/index.md) | *待补充* | 2026-05-27 | OpenAI |
+| | [MOSS: Self-Evolution through Source-Level Rewriting in Autonomous Agent Systems](../papers/2605.22794v1/index.md) | MOSS：Self-Evolution through Source-Level Rewriting in Autonomous 智能体Systems | 2026-05-21 | AI Agent-核心 |
+| | [LCGuard: Latent Communication Guard for Safe KV Sharing in Multi-Agent Systems](../papers/2605.22786v1/index.md) | LCGuard：Latent Communication Guard for Safe KV Sharing in Multi-智能体Systems | 2026-05-21 | AI Agent-核心 |
+| | [Compiling Agentic Workflows into LLM Weights: Near-Frontier Quality at Two Orders of Magnitude Less Cost](../papers/2605.22502v1/index.md) | Compiling智能体ic Workflows into 大语言模型Weights：Near-Frontier Quality at Two Orders of Magnitude Less Cost | 2026-05-21 | OpenAI |
+| | [Probabilistic Seasonal Streamflow Forecasting Across California's Sierra Nevada Watersheds with Agentic AI](../papers/2605.16178v1/index.md) | 基于Agentic AI的Probabilistic Seasonal Streamflow 预测 Across California's Sierra Nevada Watersheds | 2026-05-15 | AI Agent-核心 |
+| | [Beyond Individual Intelligence: Surveying Collaboration, Failure Attribution, and Self-Evolution in LLM-based Multi-Agent Systems](../papers/2605.14892v2/index.md) | Beyond Individual Intelligence：Surveying Collaboration, Failure Attribution, and Self-Evolution in大语言模型-based Multi-智能体Systems | 2026-05-14 | Agent-MultiAgent |
+| | [Multi-Agentic Approach for History Matching of Oil Reservoirs](../papers/2605.15028v1/index.md) | 面向History Matching of Oil Reservoirs的多智能体ic Approach | 2026-05-14 | Agent-MultiAgent |
+| | [IFPV: An Integrated Multi-Agent Framework for Generative Operational Planning and High-Fidelity Plan Verification](../papers/2605.14851v1/index.md) | IFPV：An Integrated Multi-智能体Framework for Generative Operational 规划 and High-Fidelity Plan Verification | 2026-05-14 | Agent-MultiAgent |
+| | [Orchard: An Open-Source Agentic Modeling Framework](../papers/2605.15040v1/index.md) | Orchard：An Open-Source智能体ic 模型ing Framework | 2026-05-14 | MiniMax |
+| | [Agentic Design of Compositional Descriptors via Autoresearch for Materials Science Applications](../papers/2605.14671v1/index.md) | 面向Materials Science Applications的Agentic Design of Compositional Descriptors via Autoresearch | 2026-05-14 | OpenAI |
+| | [Harnessing Agentic Evolution](../papers/2605.13821v1/index.md) | Harnessing Agentic Evolution | 2026-05-13 | Meta FAIR |
+| | [CHAL: Council of Hierarchical Agentic Language](../papers/2605.12718v1/index.md) | CHAL：Council of Hierarchical智能体ic Language | 2026-05-12 | Meta FAIR |
+| | [From Specification to Deployment: Empirical Evidence from a W3C VC + DID Trust Infrastructure for Autonomous Agents](../papers/2605.06738v1/index.md) | From Specification to Deployment：Empirical Evidence from a W3C VC + DID Trust Infrastructure for Autonomous智能体s | 2026-05-07 | Anthropic |
+| | [When Does Critique Improve AI-Assisted Theoretical Physics? SCALAR: Structured Critic--Actor Loop for Agentic Reasoning](../papers/2605.06772v1/index.md) | When Does Critique Improve AI-Assisted Theoretical Physics? SCALAR：Structured Critic--Actor Loop for智能体ic 推理 | 2026-05-07 | DeepSeek |
+| | [Irminsul: MLA-Native Position-Independent Caching for Agentic LLM Serving](../papers/2605.05696v1/index.md) | Irminsul：MLA-Native Position-Independent Caching for智能体ic 大语言模型Serving | 2026-05-07 | 智谱 |
+| | [Agentic Vulnerability Reasoning on Windows COM Binaries](../papers/2605.05000v1/index.md) | Agentic Vulnerability Reasoning on Windows COM Binaries | 2026-05-06 | Microsoft |
+| | [Redefining AI Red Teaming in the Agentic Era: From Weeks to Hours](../papers/2605.04019v1/index.md) | Redefining AI Red Teaming in the智能体ic Era：From Weeks to Hours | 2026-05-05 | Meta FAIR |
+| | [TSCG: Deterministic Tool-Schema Compilation for Agentic LLM Deployments](../papers/2605.04107v1/index.md) | TSCG：Deterministic 工具-Schema Compilation for智能体ic 大语言模型Deployments | 2026-05-04 | OpenAI |
+| | [Terminus-4B: Can a Smaller Model Replace Frontier LLMs at Agentic Execution Tasks?](../papers/2605.03195v1/index.md) | Terminus-4B：Can a Smaller 模型 Replace Frontier大语言模型s at智能体ic Execution Tasks? | 2026-05-04 | 阿里通义 |
+| | [Beyond the Attention Stability Boundary: Agentic Self-Synthesizing Reasoning Protocols](../papers/2604.24512v1/index.md) | Beyond the Attention Stability Boundary：Agentic Self-Synthesizing 推理 Protocols | 2026-04-27 | DeepSeek |
+| | [QuantClaw: Precision Where It Matters for OpenClaw](../papers/2604.22577v1/index.md) | QuantClaw：Precision Where It Matters for OpenClaw | 2026-04-24 | 智谱 |
+| | [A Self-Evolving Framework for Efficient Terminal Agents via Observational Context Compression](../papers/2604.19572v1/index.md) | 面向Efficient Terminal智能体s via Observational Context Compression的A Self-Evolving Framework | 2026-04-21 | MiniMax |
+| | [ComPASS: Towards Personalized Agentic Social Support via Tool-Augmented Companionship](../papers/2604.18356v1/index.md) | ComPASS：Towards Personalized智能体ic Social Support via 工具-Augmented Companionship | 2026-04-20 | 阿里通义 |
+| | [Context Kubernetes: Declarative Orchestration of Enterprise Knowledge for Agentic AI Systems](../papers/2604.11623v3/index.md) | Context Kubernetes：Declarative Orchestration of Enterprise 知识 for智能体ic AI Systems | 2026-04-13 | Microsoft |
+| | [Agentic Aggregation for Parallel Scaling of Long-Horizon Agentic Tasks](../papers/2604.11753v1/index.md) | 面向Parallel Scaling of Long-Horizon智能体ic Tasks的Agentic Aggregation | 2026-04-13 | 智谱 |
 | **多智能体系统** (27) | [TRACER: Turn-level Regret Matching with Inner Reinforcement Credit for Cooperative Multi-LLM Reasoning](../papers/2605.28699v1/index.md) | TRACER：Turn-level Regret Matching with Inner Reinforcement Credit for Cooperative Multi-大语言模型推理 | 2026-05-27 | AI Agent-核心 |
 | | [SwarmHarness: Skill-Based Task Routing via Decentralized Incentive-Aligned AI Agent Networks](../papers/2605.28764v1/index.md) | SwarmHarness：Skill-Based Task Routing via Decentralized Incentive-Aligned AI 智能体Networks | 2026-05-27 | AI Agent-核心 |
 | | [Helicase: Uncertainty-Guided Supply Chain Knowledge Graph Construction with Autonomous Multi-Agent LLMs](../papers/2605.26835v1/index.md) | Helicase：Uncertainty-Guided Supply Chain 知识 图Construction with Autonomous 多智能体大语言模型s | 2026-05-26 | Agent-MultiAgent |
@@ -94,32 +121,6 @@
 | | [FairQE: Multi-Agent Framework for Mitigating Gender Bias in Translation Quality Estimation](../papers/2604.21420v1/index.md) | FairQE：Multi-智能体Framework for Mitigating Gender Bias in Translation Quality Estimation | 2026-04-23 | Meta FAIR |
 | | [Learning to Evolve: A Self-Improving Framework for Multi-Agent Systems via Textual Parameter Graph Optimization](../papers/2604.20714v1/index.md) | 学习 to Evolve：面向Multi-智能体Systems via Textual Parameter 图优化的Self-Improving框架 | 2026-04-22 | Meta FAIR |
 | | [M2-PALE: A Framework for Explaining Multi-Agent MCTS--Minimax Hybrids via Process Mining and LLMs](../papers/2604.14687v1/index.md) | M2-PALE：A Framework for Explaining Multi-智能体MCTS--Minimax Hybrids via Process Mining and大语言模型s | 2026-04-16 | MiniMax |
-| **智能体架构与框架** (26) | [Calibrating Conservatism for Scalable Oversight](../papers/2605.28807v1/index.md) | 面向Scalable Oversight的Calibrating Conservatism | 2026-05-27 | AI Agent-核心 |
-| | [Self-Improving Language Models with Bidirectional Evolutionary Search](../papers/2605.28814v1/index.md) | 基于Bidirectional Evolutionary Search的Self-Improving Language 模型s | 2026-05-27 | AI Agent-核心 |
-| | [MOSS: Self-Evolution through Source-Level Rewriting in Autonomous Agent Systems](../papers/2605.22794v1/index.md) | MOSS：Self-Evolution through Source-Level Rewriting in Autonomous 智能体Systems | 2026-05-21 | AI Agent-核心 |
-| | [LCGuard: Latent Communication Guard for Safe KV Sharing in Multi-Agent Systems](../papers/2605.22786v1/index.md) | LCGuard：Latent Communication Guard for Safe KV Sharing in Multi-智能体Systems | 2026-05-21 | AI Agent-核心 |
-| | [Compiling Agentic Workflows into LLM Weights: Near-Frontier Quality at Two Orders of Magnitude Less Cost](../papers/2605.22502v1/index.md) | Compiling智能体ic Workflows into 大语言模型Weights：Near-Frontier Quality at Two Orders of Magnitude Less Cost | 2026-05-21 | OpenAI |
-| | [Probabilistic Seasonal Streamflow Forecasting Across California's Sierra Nevada Watersheds with Agentic AI](../papers/2605.16178v1/index.md) | 基于Agentic AI的Probabilistic Seasonal Streamflow 预测 Across California's Sierra Nevada Watersheds | 2026-05-15 | AI Agent-核心 |
-| | [Beyond Individual Intelligence: Surveying Collaboration, Failure Attribution, and Self-Evolution in LLM-based Multi-Agent Systems](../papers/2605.14892v2/index.md) | Beyond Individual Intelligence：Surveying Collaboration, Failure Attribution, and Self-Evolution in大语言模型-based Multi-智能体Systems | 2026-05-14 | Agent-MultiAgent |
-| | [Multi-Agentic Approach for History Matching of Oil Reservoirs](../papers/2605.15028v1/index.md) | 面向History Matching of Oil Reservoirs的多智能体ic Approach | 2026-05-14 | Agent-MultiAgent |
-| | [IFPV: An Integrated Multi-Agent Framework for Generative Operational Planning and High-Fidelity Plan Verification](../papers/2605.14851v1/index.md) | IFPV：An Integrated Multi-智能体Framework for Generative Operational 规划 and High-Fidelity Plan Verification | 2026-05-14 | Agent-MultiAgent |
-| | [Orchard: An Open-Source Agentic Modeling Framework](../papers/2605.15040v1/index.md) | Orchard：An Open-Source智能体ic 模型ing Framework | 2026-05-14 | MiniMax |
-| | [Agentic Design of Compositional Descriptors via Autoresearch for Materials Science Applications](../papers/2605.14671v1/index.md) | 面向Materials Science Applications的Agentic Design of Compositional Descriptors via Autoresearch | 2026-05-14 | OpenAI |
-| | [Harnessing Agentic Evolution](../papers/2605.13821v1/index.md) | Harnessing Agentic Evolution | 2026-05-13 | Meta FAIR |
-| | [CHAL: Council of Hierarchical Agentic Language](../papers/2605.12718v1/index.md) | CHAL：Council of Hierarchical智能体ic Language | 2026-05-12 | Meta FAIR |
-| | [From Specification to Deployment: Empirical Evidence from a W3C VC + DID Trust Infrastructure for Autonomous Agents](../papers/2605.06738v1/index.md) | From Specification to Deployment：Empirical Evidence from a W3C VC + DID Trust Infrastructure for Autonomous智能体s | 2026-05-07 | Anthropic |
-| | [When Does Critique Improve AI-Assisted Theoretical Physics? SCALAR: Structured Critic--Actor Loop for Agentic Reasoning](../papers/2605.06772v1/index.md) | When Does Critique Improve AI-Assisted Theoretical Physics? SCALAR：Structured Critic--Actor Loop for智能体ic 推理 | 2026-05-07 | DeepSeek |
-| | [Irminsul: MLA-Native Position-Independent Caching for Agentic LLM Serving](../papers/2605.05696v1/index.md) | Irminsul：MLA-Native Position-Independent Caching for智能体ic 大语言模型Serving | 2026-05-07 | 智谱 |
-| | [Agentic Vulnerability Reasoning on Windows COM Binaries](../papers/2605.05000v1/index.md) | Agentic Vulnerability Reasoning on Windows COM Binaries | 2026-05-06 | Microsoft |
-| | [Redefining AI Red Teaming in the Agentic Era: From Weeks to Hours](../papers/2605.04019v1/index.md) | Redefining AI Red Teaming in the智能体ic Era：From Weeks to Hours | 2026-05-05 | Meta FAIR |
-| | [TSCG: Deterministic Tool-Schema Compilation for Agentic LLM Deployments](../papers/2605.04107v1/index.md) | TSCG：Deterministic 工具-Schema Compilation for智能体ic 大语言模型Deployments | 2026-05-04 | OpenAI |
-| | [Terminus-4B: Can a Smaller Model Replace Frontier LLMs at Agentic Execution Tasks?](../papers/2605.03195v1/index.md) | Terminus-4B：Can a Smaller 模型 Replace Frontier大语言模型s at智能体ic Execution Tasks? | 2026-05-04 | 阿里通义 |
-| | [Beyond the Attention Stability Boundary: Agentic Self-Synthesizing Reasoning Protocols](../papers/2604.24512v1/index.md) | Beyond the Attention Stability Boundary：Agentic Self-Synthesizing 推理 Protocols | 2026-04-27 | DeepSeek |
-| | [QuantClaw: Precision Where It Matters for OpenClaw](../papers/2604.22577v1/index.md) | QuantClaw：Precision Where It Matters for OpenClaw | 2026-04-24 | 智谱 |
-| | [A Self-Evolving Framework for Efficient Terminal Agents via Observational Context Compression](../papers/2604.19572v1/index.md) | 面向Efficient Terminal智能体s via Observational Context Compression的A Self-Evolving Framework | 2026-04-21 | MiniMax |
-| | [ComPASS: Towards Personalized Agentic Social Support via Tool-Augmented Companionship](../papers/2604.18356v1/index.md) | ComPASS：Towards Personalized智能体ic Social Support via 工具-Augmented Companionship | 2026-04-20 | 阿里通义 |
-| | [Context Kubernetes: Declarative Orchestration of Enterprise Knowledge for Agentic AI Systems](../papers/2604.11623v3/index.md) | Context Kubernetes：Declarative Orchestration of Enterprise 知识 for智能体ic AI Systems | 2026-04-13 | Microsoft |
-| | [Agentic Aggregation for Parallel Scaling of Long-Horizon Agentic Tasks](../papers/2604.11753v1/index.md) | 面向Parallel Scaling of Long-Horizon智能体ic Tasks的Agentic Aggregation | 2026-04-13 | 智谱 |
 | **代码生成与软件工程** (14) | [Automating Low-Risk Code Review at Meta: RADAR, Risk Calibration, and Review Efficiency](../papers/2605.30208v1/index.md) | Automating Low-Risk Code Review at Meta：RADAR, Risk Calibration, and Review Efficiency | 2026-05-28 | Meta FAIR |
 | | [Learn from Weaknesses: Automated Domain Specialization for Small Computer-Use Agents](../papers/2605.28775v1/index.md) | Learn from Weaknesses：Automated Domain Specialization for Small Computer-Use智能体s | 2026-05-27 | AI Agent-核心 |
 | | [Overeager Coding Agents: Measuring Out-of-Scope Actions on Benign Tasks](../papers/2605.18583v1/index.md) | Overeager Coding智能体s：Measuring Out-of-Scope Actions on Benign Tasks | 2026-05-18 | AI Agent-核心 |

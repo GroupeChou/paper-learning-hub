@@ -264,6 +264,7 @@
 - ✅ **[SafetyALFRED: Evaluating Safety-Conscious Planning of Multimodal Large Language Models](../papers/2604.19638v1/index.md)** | 阿里通义 | AI Agent | `已精读`
 - ✅ **[Minimax Optimality and Spectral Routing for Majority-Vote Ensembles under Markov Dependence](../papers/2604.13414v1/index.md)** | MiniMax | 深度学习时序预测 | `已精读`
 - ✅ **[Compiling Agentic Workflows into LLM Weights: Near-Frontier Quality at Two Orders of Magnitude Less Cost](../papers/2605.22502v1/index.md)** | OpenAI | AI Agent | `已精读`
+- ✅ **[First head-to-head comparison of agentic AI applied to the analysis of simulated data of the Einstein Telescope](../papers/2605.28916v2/index.md)** | OpenAI | AI Agent | `已精读`
 - ✅ **[Agent JIT Compilation for Latency-Optimizing Web Agent Planning and Scheduling](../papers/2605.21470v1/index.md)** | OpenAI | AI Agent | `已精读`
 - ✅ **[PEEK: Context Map as an Orientation Cache for Long-Context LLM Agents](../papers/2605.19932v1/index.md)** | OpenAI | AI Agent | `已精读`
 - ✅ **[ComPASS: Towards Personalized Agentic Social Support via Tool-Augmented Companionship](../papers/2604.18356v1/index.md)** | 阿里通义 | AI Agent | `已精读`

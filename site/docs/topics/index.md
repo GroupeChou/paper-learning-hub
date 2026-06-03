@@ -178,7 +178,7 @@
 - [What Happens Inside Agent Memory? Circuit Analysis from Emergence to Diagnosis](../papers/2605.03354v1/index.md) | 阿里通义 | 2026-05-05 | 中文精读
 - [SafetyALFRED: Evaluating Safety-Conscious Planning of Multimodal Large Language Models](../papers/2604.19638v1/index.md) | 阿里通义 | 2026-04-21 | 中文精读
 - [Compiling Agentic Workflows into LLM Weights: Near-Frontier Quality at Two Orders of Magnitude Less Cost](../papers/2605.22502v1/index.md) | OpenAI | 2026-05-21 | 中文精读
-- [First head-to-head comparison of agentic AI applied to the analysis of simulated data of the Einstein Telescope](https://arxiv.org/pdf/2605.28916v2) | OpenAI | 2026-05-27 | 原文
+- [First head-to-head comparison of agentic AI applied to the analysis of simulated data of the Einstein Telescope](../papers/2605.28916v2/index.md) | OpenAI | 2026-05-27 | 中文精读
 - [Agent JIT Compilation for Latency-Optimizing Web Agent Planning and Scheduling](../papers/2605.21470v1/index.md) | OpenAI | 2026-05-20 | 中文精读
 - [PEEK: Context Map as an Orientation Cache for Long-Context LLM Agents](../papers/2605.19932v1/index.md) | OpenAI | 2026-05-19 | 中文精读
 - [ComPASS: Towards Personalized Agentic Social Support via Tool-Augmented Companionship](../papers/2604.18356v1/index.md) | 阿里通义 | 2026-04-20 | 中文精读

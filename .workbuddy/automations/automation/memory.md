@@ -1,5 +1,36 @@
 # WorkBuddy 自动化执行记录
 
+## 2026-06-01 执行记录
+
+### 执行时间
+2026-06-01 20:55 - 21:35
+
+### 执行结果
+| 步骤 | 状态 | 详情 |
+|------|------|------|
+| 1. 激活venv + 发现论文 | ✅ 完成 | 发现1篇候选论文 (2605.28916v2) |
+| 2. 精读翻译 | ✅ 完成 | 完成深度翻译，写入 papers/zh/2605.28916v2/paper_zh.md |
+| 3. 更新学习大纲 | ✅ 完成 | 写入 2026-06-01.md |
+| 4. 构建MkDocs站点 | ✅ 完成 | 路线更新 + 站点构建成功 |
+| 5. Git推送 | ✅ 完成 | commit 960f9dc，HTTP/1.1重试成功 |
+
+### 数据统计
+- 数据库论文总数：290篇
+- translated：289篇
+- workbuddy_pending：1篇
+- 本日新增：1篇 (2605.28916v2)
+- Git commit: 960f9dc
+
+### 本日深度处理论文
+- **2605.28916v2** | First head-to-head comparison of agentic AI applied to the analysis of simulated data of the Einstein Telescope
+  - 主题：Claude Code vs Codex 在引力波数据分析中的代理式AI对比
+  - 核心发现：静默偏离 vs 显式重启策略的权衡
+
+### 异常记录
+- HTTP/2 framing layer错误，通过 `git config --local http.version HTTP/1.1` 解决
+
+---
+
 ## 2026-05-29 执行记录
 
 ### 执行时间
