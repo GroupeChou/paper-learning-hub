@@ -18,12 +18,13 @@
   - `### 关键 takeaway`
 - 不确定内容必须显式标记 `待复核`
 
-## 当前状态 (2026-05-29)
-- DB 论文总数：289 篇（全部 translated）
-- 站点论文数：289 篇（AI Agent 197 篇 + 时序预测 84 篇 + 深度学习时序预测 8 篇）
+## 当前状态 (2026-06-03)
+- DB 论文总数：290 篇（全部 translated）
+- 站点论文数：290 篇（AI Agent 198 篇 + 时序预测 84 篇 + 深度学习时序预测 8 篇）
+- 路线图：agent-roadmap 198篇/13主题，ts-roadmap 84篇/11主题
 - 已启用：大厂过滤 + 摘要模式 + skip_download
 - GitHub Pages 地址：https://groupechou.github.io/paper-learning-hub/
-- GitHub Token 状态：已更新，可正常使用
+- GitHub Token 状态：正常
 
 ## 注意事项
 - 论文下载因5分钟超时限制常被截断，仅完成部分PDF下载（已启用 skip_download 跳过）
