@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>前沿 AI 技术日报 · 最新</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif; background: #f8fafc; color: #1a1a2e; line-height: 1.6; }
+.container { max-width: 900px; margin: 0 auto; padding: 24px 20px 60px; }
+
+/* header */
+.header { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); color: white; padding: 40px 20px; text-align: center; border-radius: 16px; margin-bottom: 28px; }
+.header h1 { font-size: 28px; font-weight: 700; margin-bottom: 8px; }
+.header p { font-size: 14px; opacity: 0.8; }
+
+/* stats */
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px,1fr)); gap: 16px; margin-bottom: 28px; }
+.stat-card { background: white; border-radius: 12px; padding: 20px; text-align: center; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+.stat-card .num { font-size: 32px; font-weight: 800; }
+.stat-card .label { font-size: 12px; color: #64748b; margin-top: 4px; }
+
+/* section */
+.section { margin-bottom: 32px; }
+.section-title { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; padding-bottom: 8px; border-bottom: 2px solid #e2e8f0; }
+.section-title .dot { width: 12px; height: 12px; border-radius: 50%; background: var(--org-color); flex-shrink: 0; }
+.section-title h2 { font-size: 20px; font-weight: 700; }
+
+/* article card */
+.article { background: white; border-radius: 12px; padding: 20px 24px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); border-left: 4px solid var(--org-color); transition: box-shadow 0.2s; }
+.article:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.1); }
+.article .meta { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; flex-wrap: wrap; }
+.article .org-tag { display: inline-block; padding: 2px 10px; border-radius: 12px; font-size: 11px; font-weight: 600; color: white; background: var(--org-color); }
+.article .date { font-size: 12px; color: #94a3b8; }
+.article h3 { font-size: 17px; font-weight: 700; margin-bottom: 10px; line-height: 1.4; }
+.article h3 a { color: #1a1a2e; text-decoration: none; }
+.article h3 a:hover { color: var(--org-color); text-decoration: underline; }
+
+/* bilingual */
+.bilingual { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 12px; }
+.lang-block { background: #f8fafc; border-radius: 8px; padding: 14px 16px; }
+.lang-block .lang-label { font-size: 11px; font-weight: 700; color: #64748b; text-transform: uppercase; margin-bottom: 6px; letter-spacing: 0.5px; }
+.lang-block p { font-size: 14px; color: #334155; line-height: 1.6; }
+.toggle-btn { display: inline-block; padding: 4px 12px; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 12px; cursor: pointer; background: white; color: #64748b; margin-left: 8px; }
+.toggle-btn:hover { background: #f1f5f9; }
+
+/* footer */
+.footer { text-align: center; padding: 32px 0 16px; font-size: 13px; color: #94a3b8; }
+.footer a { color: #0f3460; }
+
+@media (max-width: 640px) {
+    .bilingual { grid-template-columns: 1fr; }
+    .header h1 { font-size: 22px; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="header">
+    <h1>前沿 AI 技术日报 · 最新</h1>
+    <p>每日自动聚合 · 2026年06月16日 · 覆盖 Anthropic / OpenAI / DeepMind / Meta / DeepSeek</p>
+</div>
+
+<div class="stats">
+    <div class="stat-card"><div class="num" style="color:#0f3460">6</div><div class="label">今日文章</div></div>
+    <div class="stat-card"><div class="num" style="color:#4285F4">4</div><div class="label">覆盖机构</div></div>
+    <div class="stat-card"><div class="num" style="color:#D97757">0</div><div class="label">中文摘要</div></div>
+</div>
+
+
+        <div class="section">
+            <div class="section-title">
+                <div class="dot" style="background:#000000"></div>
+                <h2>OpenAI</h2>
+                <span style="color:#94a3b8;font-size:13px">· 1 篇</span>
+            </div>
+            
+            <div class="article" style="--org-color:#000000">
+                <div class="meta">
+                    <span class="org-tag" style="background:#000000">OpenAI</span>
+                    <span class="date"></span>
+                </div>
+                <h3><a href="https://openai.com/research" target="_blank" rel="noopener">OpenAI - 今日文章（需通过搜索补充）</a></h3>
+                <div class="bilingual">
+                    <div class="lang-block">
+                        <div class="lang-label">🇺🇸 English</div>
+                        <p>访问 https://openai.com/research 查看最新文章</p>
+                    </div>
+                    <div class="lang-block">
+                        <div class="lang-label">🇨🇳 中文</div>
+                        <p>访问 https://openai.com/research 查看最新文章</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">
+                <div class="dot" style="background:#4285F4"></div>
+                <h2>Google DeepMind</h2>
+                <span style="color:#94a3b8;font-size:13px">· 3 篇</span>
+            </div>
+            
+            <div class="article" style="--org-color:#4285F4">
+                <div class="meta">
+                    <span class="org-tag" style="background:#4285F4">Google DeepMind</span>
+                    <span class="date">06/15</span>
+                </div>
+                <h3><a href="https://blog.google/innovation-and-ai/infrastructure-and-cloud/global-network/alabama-investment-june-2026/" target="_blank" rel="noopener">We’re strengthening our presence in Alabama through new investments and community support.</a></h3>
+                <div class="bilingual">
+                    <div class="lang-block">
+                        <div class="lang-label">🇺🇸 English</div>
+                        <p>Google has announced a $1.5 billion investment for 2026 and 2027 to expand its data center campus in Jackson County, Alabama. Operating since 2019 on a repurposed former…</p>
+                    </div>
+                    <div class="lang-block">
+                        <div class="lang-label">🇨🇳 中文</div>
+                        <p>Google has announced a $1.5 billion investment for 2026 and 2027 to expand its data center campus in Jackson County, Alabama. Operating since 2019 on a repurposed former…</p>
+                    </div>
+                </div>
+            </div>
+            <div class="article" style="--org-color:#4285F4">
+                <div class="meta">
+                    <span class="org-tag" style="background:#4285F4">Google DeepMind</span>
+                    <span class="date">06/11</span>
+                </div>
+                <h3><a href="https://blog.google/innovation-and-ai/infrastructure-and-cloud/global-network/virginia-community-investments/" target="_blank" rel="noopener">Our new community investments in Virginia support local jobs and expand energy affordability.</a></h3>
+                <div class="bilingual">
+                    <div class="lang-block">
+                        <div class="lang-label">🇺🇸 English</div>
+                        <p>We’re helping build the state’s next-generation workforce and investing in energy programs.</p>
+                    </div>
+                    <div class="lang-block">
+                        <div class="lang-label">🇨🇳 中文</div>
+                        <p>We’re helping build the state’s next-generation workforce and investing in energy programs.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="article" style="--org-color:#4285F4">
+                <div class="meta">
+                    <span class="org-tag" style="background:#4285F4">Google DeepMind</span>
+                    <span class="date">06/05</span>
+                </div>
+                <h3><a href="https://blog.google/innovation-and-ai/technology/ai/google-ai-updates-may-2026/" target="_blank" rel="noopener">The latest AI news we announced in May 2026</a></h3>
+                <div class="bilingual">
+                    <div class="lang-block">
+                        <div class="lang-label">🇺🇸 English</div>
+                        <p>May AI recap</p>
+                    </div>
+                    <div class="lang-block">
+                        <div class="lang-label">🇨🇳 中文</div>
+                        <p>May AI recap</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">
+                <div class="dot" style="background:#0668E1"></div>
+                <h2>Meta</h2>
+                <span style="color:#94a3b8;font-size:13px">· 1 篇</span>
+            </div>
+            
+            <div class="article" style="--org-color:#0668E1">
+                <div class="meta">
+                    <span class="org-tag" style="background:#0668E1">Meta</span>
+                    <span class="date"></span>
+                </div>
+                <h3><a href="https://ai.meta.com/blog/introducing-muse-spark-msl/" target="_blank" rel="noopener">Introducing Muse Spark: Scaling Towards Personal Superintelligence</a></h3>
+                <div class="bilingual">
+                    <div class="lang-block">
+                        <div class="lang-label">🇺🇸 English</div>
+                        <p>Introducing Muse Spark: Scaling Towards Personal Superintelligence</p>
+                    </div>
+                    <div class="lang-block">
+                        <div class="lang-label">🇨🇳 中文</div>
+                        <p>Introducing Muse Spark: Scaling Towards Personal Superintelligence</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">
+                <div class="dot" style="background:#4F46E5"></div>
+                <h2>DeepSeek</h2>
+                <span style="color:#94a3b8;font-size:13px">· 1 篇</span>
+            </div>
+            
+            <div class="article" style="--org-color:#4F46E5">
+                <div class="meta">
+                    <span class="org-tag" style="background:#4F46E5">DeepSeek</span>
+                    <span class="date">06/27</span>
+                </div>
+                <h3><a href="https://github.com/deepseek-ai/DeepSeek-V3/releases/tag/v1.0.0" target="_blank" rel="noopener">v1.0.0</a></h3>
+                <div class="bilingual">
+                    <div class="lang-block">
+                        <div class="lang-label">🇺🇸 English</div>
+                        <p>This release is created for archival purposes and DOI generation.</p>
+                    </div>
+                    <div class="lang-block">
+                        <div class="lang-label">🇨🇳 中文</div>
+                        <p>This release is created for archival purposes and DOI generation.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+<div class="footer">
+    <p>报告由 <strong>Paper Hub v2.0</strong> 自动生成 · 每日 15:26 UTC 更新</p>
+    <p><a href="https://github.com/GroupeChou/paper-learning-hub" target="_blank">GitHub Pages</a> · <a href="#" onclick="toggleAllBilingual()">切换中英对照</a></p>
+</div>
+
+</div>
+
+<script>
+function toggleAllBilingual() {
+    const blocks = document.querySelectorAll('.bilingual');
+    blocks.forEach(b => b.style.display = b.style.display === 'none' ? 'grid' : 'none');
+}
+</script>
+</body>
+</html>
