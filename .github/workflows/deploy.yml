@@ -33,24 +33,20 @@ jobs:
 
       - name: Build MkDocs site
         run: |
+          # Copy daily reports into MkDocs source so nav links resolve
+          if [ -d docs/daily ]; then
+            mkdir -p site/docs/daily
+            cp docs/daily/*.html site/docs/daily/
+            cp docs/daily/*.json site/docs/daily/ 2>/dev/null || true
+            cp docs/daily/*.md site/docs/daily/ 2>/dev/null || true
+            echo "Daily reports copied into MkDocs source"
+          fi
           cd site
           mkdocs build --strict
 
       - name: Inject CNAME for custom domain
         run: |
           echo "paper.groupechou.com" > site/site/CNAME
-
-      - name: Copy daily reports into site
-        run: |
-          if [ -d docs/daily ]; then
-            mkdir -p site/site/daily
-            cp docs/daily/*.html site/site/daily/ 2>/dev/null || true
-            cp docs/daily/*.json site/site/daily/ 2>/dev/null || true
-            cp docs/daily/*.md site/site/daily/ 2>/dev/null || true
-            echo "Daily reports synced from docs/daily/"
-          else
-            echo "No docs/daily/ directory, skipping daily reports"
-          fi
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
