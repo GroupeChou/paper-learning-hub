@@ -1,9 +1,10 @@
-"""每日主流程：抓取 → 翻译 → 生成报告 → GitHub Pages → ima 同步。"""
+"""每日主流程：抓取 → 翻译 → 生成报告 → GitHub Pages → git 自动推送 → ima 同步。"""
 from __future__ import annotations
 
 import json
 import logging
 import os
+import subprocess
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
@@ -53,12 +54,86 @@ def translate_via_llm(title: str, content: str, api_key: str) -> str:
     return resp.json()["choices"][0]["message"]["content"].strip()
 
 
+def _git_sync_daily(repo_root: Path, date_str: str, branch: str = "main", remote: str = "origin") -> dict:
+    """执行 git add → commit → push，返回操作结果摘要。"""
+    result = {"committed": False, "pushed": False, "message": ""}
+    try:
+        # 确认是 git 仓库
+        check = subprocess.run(
+            ["git", "rev-parse", "--is-inside-work-tree"],
+            cwd=repo_root, capture_output=True, text=True,
+        )
+        if check.returncode != 0:
+            result["message"] = "非 Git 仓库，跳过推送"
+            return result
+
+        # 确认 repo root 匹配
+        top = subprocess.run(
+            ["git", "rev-parse", "--show-toplevel"],
+            cwd=repo_root, capture_output=True, text=True, check=True,
+        ).stdout.strip()
+        if Path(top).resolve() != repo_root.resolve():
+            result["message"] = f"当前项目依附于上层仓库 {top}，跳过推送"
+            return result
+
+        # git add
+        subprocess.run(
+            ["git", "add", "daily-reports/", "docs/"],
+            cwd=repo_root, check=True,
+        )
+
+        # 检查是否有变更
+        status = subprocess.run(
+            ["git", "status", "--short"],
+            cwd=repo_root, capture_output=True, text=True, check=True,
+        )
+        if not status.stdout.strip():
+            result["message"] = "无变更，跳过 commit"
+            return result
+
+        # git commit
+        commit_msg = f"auto: daily paper hub report · {date_str}"
+        subprocess.run(
+            ["git", "commit", "-m", commit_msg],
+            cwd=repo_root, check=True,
+        )
+        result["committed"] = True
+        logger.info("  ✅ Git 提交: %s", commit_msg)
+
+        # git push
+        remotes = subprocess.run(
+            ["git", "remote"], cwd=repo_root, capture_output=True, text=True, check=True,
+        ).stdout.split()
+        if remote not in remotes:
+            result["message"] = f"Git 已提交，但未推送：未配置远端 {remote}"
+            return result
+
+        subprocess.run(
+            ["git", "push", remote, branch],
+            cwd=repo_root, check=True,
+        )
+        result["pushed"] = True
+        result["message"] = f"已推送到 {remote}/{branch}"
+        logger.info("  🚀 Git 推送成功 → %s/%s", remote, branch)
+
+    except subprocess.CalledProcessError as e:
+        result["message"] = f"Git 操作失败: {e}"
+        logger.warning("  ⚠️ %s", result["message"])
+    except Exception as e:
+        result["message"] = f"Git 同步异常: {e}"
+        logger.warning("  ⚠️ %s", result["message"])
+
+    return result
+
+
 def run_daily_pipeline(
     output_dir: Path,
     github_pages_dir: Path = None,
     sync_ima: bool = False,
     api_key: str = "",
     max_per_source: int = 5,
+    auto_push: bool = True,
+    repo_root: Path = None,
 ) -> dict:
     """执行每日完整流水线。"""
     now = datetime.now(timezone.utc)
@@ -72,6 +147,8 @@ def run_daily_pipeline(
         "translated": 0,
         "report_path": "",
         "github_pushed": False,
+        "github_committed": False,
+        "git_message": "",
         "ima_synced": False,
         "errors": [],
     }
@@ -84,7 +161,7 @@ def run_daily_pipeline(
     logger.info(f"Paper Hub v2.0 · 每日运行 · {date_display}")
     logger.info("=" * 60)
     logger.info("Step 1: 从 5 个博客源抓取最新文章...")
-    articles = fetch_blog_articles(max_per_source=max_per_source)
+    articles = fetch_blog_articles(max_per_source=max_per_source, search_cache_dir=output_dir)
     result["total_articles"] = len(articles)
 
     if not articles:
@@ -130,18 +207,20 @@ def run_daily_pipeline(
     generate_html_report(articles, index_path, report_title="前沿 AI 技术日报 · 最新")
     logger.info(f"Step 6: 更新首页 → {index_path}")
 
-    # Step 7: GitHub Pages 部署
+    # Step 7: GitHub Pages 部署 → 日报同步到 docs/daily/，供 MkDocs workflow 打包
     if github_pages_dir:
         logger.info(f"Step 7: 同步到 GitHub Pages...")
         try:
             import shutil
             github_pages_dir = Path(github_pages_dir)
-            github_pages_dir.mkdir(parents=True, exist_ok=True)
-            shutil.copy2(html_path, github_pages_dir / "index.html")
-            shutil.copy2(json_path, github_pages_dir / f"daily-{date_str}.json")
-            shutil.copy2(md_path, github_pages_dir / f"report-{date_str}.md")
-            # also copy as latest
-            shutil.copy2(html_path, github_pages_dir / "latest.html")
+            daily_dir = github_pages_dir / "daily"
+            daily_dir.mkdir(parents=True, exist_ok=True)
+            # Copy report into daily/ subdirectory
+            shutil.copy2(html_path, daily_dir / f"report-{date_str}.html")
+            shutil.copy2(json_path, daily_dir / f"daily-{date_str}.json")
+            shutil.copy2(md_path, daily_dir / f"report-{date_str}.md")
+            # latest symlink
+            shutil.copy2(html_path, daily_dir / "latest.html")
 
             # Write CNAME if needed
             cname_path = github_pages_dir / "CNAME"
@@ -149,10 +228,23 @@ def run_daily_pipeline(
                 cname_path.write_text("paper.groupechou.com")
 
             result["github_pushed"] = True
-            logger.info(f"  ✅ 同步完成 → {github_pages_dir}")
+            logger.info(f"  ✅ 同步完成 → {daily_dir}")
         except Exception as e:
             result["errors"].append(f"github: {e}")
             logger.error(f"  ❌ GitHub 同步失败: {e}")
+
+    # Step 7.5: Git 自动提交 + 推送
+    if auto_push and (repo_root or (github_pages_dir and github_pages_dir.parent)):
+        _root = repo_root or (github_pages_dir.parent if github_pages_dir else output_dir.parent)
+        logger.info(f"Step 7.5: Git 自动提交并推送...")
+        git_result = _git_sync_daily(Path(_root), date_str)
+        result["github_committed"] = git_result["committed"]
+        result["github_pushed"] = git_result["pushed"]
+        result["git_message"] = git_result["message"]
+        if git_result["committed"] and git_result["pushed"]:
+            logger.info(f"  ✅ {git_result['message']}")
+        else:
+            logger.info(f"  ℹ️  {git_result['message']}")
 
     # Step 8: ima 知识库同步
     if sync_ima:
@@ -178,7 +270,19 @@ def run_daily_pipeline(
     logger.info(f"  📋 MD:   {md_path}")
     if github_pages_dir:
         logger.info(f"  🚀 GitHub Pages: {github_pages_dir}")
+    if result["github_pushed"]:
+        logger.info(f"  🔄 Git 推送: {result['git_message']}")
     logger.info("=" * 60)
+
+    # Step 9: 保存运行结果日志
+    log_path = output_dir / f".run-result-{date_str}.json"
+    try:
+        log_path.write_text(json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8")
+        # 同时写入 latest 方便外部读取
+        latest_log = output_dir / ".run-result-latest.json"
+        latest_log.write_text(json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8")
+    except Exception:
+        pass
 
     return result
 
@@ -193,6 +297,8 @@ def main():
     parser.add_argument("--github-pages", help="GitHub Pages 部署目录")
     parser.add_argument("--sync-ima", action="store_true", help="启用 ima 知识库同步")
     parser.add_argument("--api-key", help="LLM API Key (或设置 PAPERHUB_API_KEY 环境变量)")
+    parser.add_argument("--no-auto-push", action="store_true", help="禁用 Git 自动提交推送")
+    parser.add_argument("--repo-root", help="Git 仓库根目录（默认从 github-pages 推导）")
     parser.add_argument("--verbose", "-v", action="store_true", help="详细日志")
 
     args = parser.parse_args()
@@ -210,6 +316,8 @@ def main():
         sync_ima=args.sync_ima,
         api_key=api_key,
         max_per_source=args.max,
+        auto_push=not args.no_auto_push,
+        repo_root=Path(args.repo_root) if args.repo_root else None,
     )
 
     if result["status"] == "error":

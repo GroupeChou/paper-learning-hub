@@ -4,9 +4,9 @@
   "total_articles": 30,
   "translated": 30,
   "report_path": "daily-reports/report-2026-06-17.html",
-  "github_pushed": false,
-  "github_committed": false,
-  "git_message": "",
+  "github_pushed": true,
+  "github_committed": true,
+  "git_message": "已推送到 origin/main (0540b74)",
   "ima_synced": false,
   "errors": []
 }
