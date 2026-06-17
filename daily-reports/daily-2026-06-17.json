@@ -6,11 +6,11 @@
     "title": "Agentic coding and persistent returns to expertise",
     "url": "https://www.anthropic.com/research/claude-code-expertise",
     "summary_en": "Economic Research — Explores how agentic coding capabilities relate to expertise and the persistent value of skilled developers when working with AI coding tools.",
-    "summary_zh": "",
+    "summary_zh": "经济研究 — 探索智能编码能力与专业技能的关联，以及熟练开发者在AI编码工具辅助下的持久价值。",
     "published": "2026-06-16",
     "author": "",
     "category": "",
-    "translated": false
+    "translated": true
   },
   {
     "id": "71be5603ca67",
@@ -19,11 +19,11 @@
     "title": "Paving the way for agents in biology",
     "url": "https://www.anthropic.com/research/agents-in-biology",
     "summary_en": "Science — Investigates the application of AI agents in biological research, laying groundwork for autonomous scientific discovery.",
-    "summary_zh": "",
+    "summary_zh": "科学 — 研究AI智能体在生物学研究中的应用，为自主科学发现奠定基础。",
     "published": "2026-06-08",
     "author": "",
     "category": "",
-    "translated": false
+    "translated": true
   },
   {
     "id": "b55bf7c09244",
@@ -32,11 +32,11 @@
     "title": "Making Claude a chemist",
     "url": "https://www.anthropic.com/research/making-claude-a-chemist",
     "summary_en": "Science — Demonstrates how Claude can be adapted to perform chemistry-related tasks, bridging AI and laboratory science.",
-    "summary_zh": "",
+    "summary_zh": "科学 — 展示如何将Claude适配为化学实验助手，探索AI与实验室科学的深度融合。",
     "published": "2026-06-05",
     "author": "",
     "category": "",
-    "translated": false
+    "translated": true
   },
   {
     "id": "6ae2642f4731",
@@ -45,11 +45,11 @@
     "title": "What we learned mapping a year's worth of AI-enabled cyber threats",
     "url": "https://www.anthropic.com/news/AI-enabled-cyber-threats-mitre-attack",
     "summary_en": "Policy — Maps a full year of AI-enabled cyber threats using the MITRE ATT&CK framework, revealing emerging attack patterns.",
-    "summary_zh": "",
+    "summary_zh": "政策 — 利用MITRE ATT&CK框架映射一整年的AI驱动网络威胁，揭示新兴攻击模式与防御策略。",
     "published": "2026-06-03",
     "author": "",
     "category": "",
-    "translated": false
+    "translated": true
   },
   {
     "id": "04a4e8c48f84",
@@ -58,11 +58,11 @@
     "title": "Coding agents in the social sciences",
     "url": "https://www.anthropic.com/research/coding-agents-social-sciences",
     "summary_en": "Economic Research — Explores how coding agents are being adopted in social science research and their impact on methodology.",
-    "summary_zh": "",
+    "summary_zh": "经济研究 — 探索编码智能体在社会科学研究中的应用及其对研究方法的深远影响。",
     "published": "2026-05-27",
     "author": "",
     "category": "",
-    "translated": false
+    "translated": true
   },
   {
     "id": "a6001065a401",
@@ -71,11 +71,11 @@
     "title": "Project Glasswing: An initial update",
     "url": "https://www.anthropic.com/research/glasswing-initial-update",
     "summary_en": "Announcements — First progress report on Project Glasswing, Anthropic's initiative for AI transparency and safety.",
-    "summary_zh": "",
+    "summary_zh": "公告 — Glasswing透明度与安全项目首份进展报告，聚焦AI系统的可解释性与安全性。",
     "published": "2026-05-22",
     "author": "",
     "category": "",
-    "translated": false
+    "translated": true
   },
   {
     "id": "67eef0dd333b",
@@ -84,11 +84,11 @@
     "title": "Introducing GPT-5.5: A new class of intelligence for real work",
     "url": "https://openai.com/index/introducing-gpt-5-5/",
     "summary_en": "Release — GPT-5.5 brings a new class of intelligence optimized for professional work, with advanced reasoning and tool-use capabilities.",
-    "summary_zh": "",
+    "summary_zh": "发布 — GPT-5.5 为专业工作场景打造的新一代智能模型，具备高级推理与工具协作能力。",
     "published": "2026-04-23",
     "author": "",
     "category": "",
-    "translated": false
+    "translated": true
   },
   {
     "id": "08ccbc17ddee",
@@ -97,11 +97,11 @@
     "title": "Introducing ChatGPT Images 2.0",
     "url": "https://openai.com/index/introducing-chatgpt-images-2-0/",
     "summary_en": "Visual — A state-of-the-art model for precise, immediately usable visual generation with enhanced accuracy and control.",
-    "summary_zh": "",
+    "summary_zh": "视觉 — 最先进的图像生成模型，支持精确实用的视觉内容创作，准确性与可控性大幅提升。",
     "published": "2026-04-21",
     "author": "",
     "category": "",
-    "translated": false
+    "translated": true
   },
   {
     "id": "985e51ede963",
@@ -110,11 +110,11 @@
     "title": "Introducing GPT-5.4: Our most capable and efficient frontier model",
     "url": "https://openai.com/index/introducing-gpt-5-4/",
     "summary_en": "Release — GPT-5.4 is the most capable and efficient frontier model for professional work, pushing the boundaries of AI performance.",
-    "summary_zh": "",
+    "summary_zh": "发布 — GPT-5.4 为迄今最强最高效的前沿模型，专为专业场景优化，持续突破AI性能边界。",
     "published": "2026-03-05",
     "author": "",
     "category": "",
-    "translated": false
+    "translated": true
   },
   {
     "id": "380432cd1936",
@@ -123,11 +123,11 @@
     "title": "GPT-5.3 Instant: Smoother, more useful everyday conversations",
     "url": "https://openai.com/index/gpt-5-3-instant/",
     "summary_en": "Release — GPT-5.3 Instant delivers faster, smoother everyday conversational AI optimized for consumer-facing applications.",
-    "summary_zh": "",
+    "summary_zh": "发布 — GPT-5.3 Instant 提供更快速流畅的日常对话体验，面向消费者应用深度优化。",
     "published": "2026-03-03",
     "author": "",
     "category": "",
-    "translated": false
+    "translated": true
   },
   {
     "id": "b1bfba9c07d1",
@@ -136,11 +136,11 @@
     "title": "Sora 2: Physically accurate video generation with synchronized dialogue",
     "url": "https://openai.com/index/sora-2/",
     "summary_en": "Visual — Sora 2 achieves physically accurate, realistic video generation with synchronized dialogue and sound effects.",
-    "summary_zh": "",
+    "summary_zh": "视觉 — Sora 2 实现物理层面精确的逼真视频生成，支持同步对话与音效。",
     "published": "2025-09-30",
     "author": "",
     "category": "",
-    "translated": false
+    "translated": true
   },
   {
     "id": "6b6c6315337d",
@@ -149,11 +149,11 @@
     "title": "Introducing o3 and o4-mini: Smartest models with full tool access",
     "url": "https://openai.com/index/introducing-o3-and-o4-mini/",
     "summary_en": "o series — OpenAI o3 and o4-mini are the smartest reasoning models to date, featuring full tool access for complex problem solving.",
-    "summary_zh": "",
+    "summary_zh": "o系列 — OpenAI o3 与 o4-mini 为迄今最智能的推理模型，支持完整工具访问以求解复杂问题。",
     "published": "2025-04-16",
     "author": "",
     "category": "",
-    "translated": false
+    "translated": true
   },
   {
     "id": "72386a5f1b1c",
@@ -162,11 +162,11 @@
     "title": "We’re strengthening our presence in Alabama through new investments and community support.",
     "url": "https://blog.google/innovation-and-ai/infrastructure-and-cloud/global-network/alabama-investment-june-2026/",
     "summary_en": "Google has announced a $1.5 billion investment for 2026 and 2027 to expand its data center campus in Jackson County, Alabama. Operating since 2019 on a repurposed former…",
-    "summary_zh": "",
+    "summary_zh": "基础设施 — Google 宣布2026-2027年投资15亿美元扩建阿拉巴马州杰克逊县数据中心园区，加强当地社区支持。",
     "published": "2026-06-15T15:00:00+00:00",
     "author": "",
     "category": "",
-    "translated": false
+    "translated": true
   },
   {
     "id": "a004c2b18314",
@@ -175,11 +175,11 @@
     "title": "Our new community investments in Virginia support local jobs and expand energy affordability.",
     "url": "https://blog.google/innovation-and-ai/infrastructure-and-cloud/global-network/virginia-community-investments/",
     "summary_en": "We’re helping build the state’s next-generation workforce and investing in energy programs.",
-    "summary_zh": "",
+    "summary_zh": "社区投资 — 在弗吉尼亚州开展社区投资计划，支持下一代劳动力建设与能源可负担性项目。",
     "published": "2026-06-11T20:00:00+00:00",
     "author": "",
     "category": "",
-    "translated": false
+    "translated": true
   },
   {
     "id": "752c96ffbdef",
@@ -188,11 +188,11 @@
     "title": "The latest AI news we announced in May 2026",
     "url": "https://blog.google/innovation-and-ai/technology/ai/google-ai-updates-may-2026/",
     "summary_en": "May AI recap",
-    "summary_zh": "",
+    "summary_zh": "回顾 — 2026年5月Google AI 重要动态与发布汇总。",
     "published": "2026-06-05T14:45:00+00:00",
     "author": "The Keyword Team",
     "category": "",
-    "translated": false
+    "translated": true
   },
   {
     "id": "a799e1e611d4",
@@ -201,11 +201,11 @@
     "title": "5 ways Google Search can level up your thrift and vintage shopping",
     "url": "https://blog.google/products-and-platforms/products/search/thrifting-tips/",
     "summary_en": "A colorful, grain-textured collage of various items scattered across a light blue background. The items include a green bucket hat, a wooden clothes hanger, a blue-and-red striped collar, blue sunglasses, denim shorts, a yellow price tag, a red high-heele",
-    "summary_zh": "",
+    "summary_zh": "产品 — Google 搜索助力二手与古着购物的5个实用技巧，提升淘货效率。",
     "published": "2026-06-03T13:00:00+00:00",
     "author": "Megan Stoner",
     "category": "",
-    "translated": false
+    "translated": true
   },
   {
     "id": "4be325886964",
@@ -214,11 +214,11 @@
     "title": "How we used Gemini to build Google I/O 2026",
     "url": "https://blog.google/innovation-and-ai/technology/ai/io-2026-google-ai/",
     "summary_en": "A collage of I/O-related images, including the Antigravity Coffee Co. pop-up, a colorful jellyfish and a still from the Timmy TPU video. The word AI repeats three times on the left of the image, and there are colorful icons, including a sparkle, as well.",
-    "summary_zh": "",
+    "summary_zh": "AI应用 — Google 团队如何利用 Gemini 深度参与 I/O 2026 开发者大会的内容创作与执行。",
     "published": "2026-06-01T16:00:00+00:00",
     "author": "Marvin Chow",
     "category": "",
-    "translated": false
+    "translated": true
   },
   {
     "id": "bb0319888f69",
@@ -227,11 +227,11 @@
     "title": "Take our I/O 2026 quiz, vibe coded in Google AI Studio.",
     "url": "https://blog.google/innovation-and-ai/technology/ai/io-2026-vibe-coded-quiz/",
     "summary_en": "We used Google AI Studio to vibe code a quiz about our top I/O 2026 announcements.",
-    "summary_zh": "",
+    "summary_zh": "AI应用 — 使用 Google AI Studio 快速搭建的 I/O 2026 主题互动问答挑战。",
     "published": "2026-05-29T19:00:00+00:00",
     "author": "Zahra Thompson",
     "category": "",
-    "translated": false
+    "translated": true
   },
   {
     "id": "5504fc9cc2be",
@@ -240,11 +240,11 @@
     "title": "Introducing Muse Spark: Scaling Towards Personal Superintelligence",
     "url": "https://ai.meta.com/blog/introducing-muse-spark-msl/",
     "summary_en": "Meta's Muse Spark initiative explores scaling AI towards personal superintelligence, a new paradigm for individualized AI assistants.",
-    "summary_zh": "",
+    "summary_zh": "研究 — Meta Muse Spark 项目探索将AI扩展至个人超级智能，开创个体化AI助手新范式。",
     "published": "2026-04-08",
     "author": "",
     "category": "",
-    "translated": false
+    "translated": true
   },
   {
     "id": "daa23ac06f62",
@@ -253,11 +253,11 @@
     "title": "Scaling How We Build and Test Our Most Advanced AI",
     "url": "https://ai.meta.com/blog/scaling-how-we-build-test-advanced-ai/",
     "summary_en": "Research — Meta details its infrastructure and methodology for building and testing cutting-edge AI systems at scale.",
-    "summary_zh": "",
+    "summary_zh": "研究 — Meta 详述构建与测试尖端AI系统的大规模基础设施与方法论体系。",
     "published": "2026-04-08",
     "author": "",
     "category": "",
-    "translated": false
+    "translated": true
   },
   {
     "id": "cd6434a62b19",
@@ -266,11 +266,11 @@
     "title": "How Alta Daily Uses Meta's Segment Anything to Reimagine the Digital Closet",
     "url": "https://ai.meta.com/blog/alta-daily-fashion-app-segment-anything/",
     "summary_en": "Computer Vision — Fashion app Alta Daily leverages Meta's Segment Anything model to create digital wardrobe experiences.",
-    "summary_zh": "",
+    "summary_zh": "计算机视觉 — 时尚应用 Alta Daily 利用 Segment Anything 模型打造数字衣橱体验。",
     "published": "2026-04-06",
     "author": "",
     "category": "",
-    "translated": false
+    "translated": true
   },
   {
     "id": "631266c46f20",
@@ -279,11 +279,11 @@
     "title": "SAM 3.1: Faster and More Accessible Real-Time Video Detection and Tracking",
     "url": "https://ai.meta.com/blog/segment-anything-model-3/",
     "summary_en": "Computer Vision — SAM 3.1 introduces multiplexing and global reasoning for faster, more accessible real-time video detection and tracking.",
-    "summary_zh": "",
+    "summary_zh": "计算机视觉 — SAM 3.1 引入多路复用与全局推理，实现更快、更易用的实时视频检测与追踪。",
     "published": "2026-03-27",
     "author": "",
     "category": "",
-    "translated": false
+    "translated": true
   },
   {
     "id": "3f8c3959adb3",
@@ -292,11 +292,11 @@
     "title": "Introducing TRIBE v2: A Predictive Foundation Model for Brain Processing",
     "url": "https://ai.meta.com/blog/tribe-v2-brain-predictive-foundation-model/",
     "summary_en": "Research — TRIBE v2 is a predictive foundation model trained to understand how the human brain processes complex stimuli.",
-    "summary_zh": "",
+    "summary_zh": "研究 — TRIBE v2 是训练用于理解人脑处理复杂刺激的预测性基础模型，推动神经科学与AI交叉。",
     "published": "2026-03-26",
     "author": "",
     "category": "",
-    "translated": false
+    "translated": true
   },
   {
     "id": "f911995dd53c",
@@ -305,11 +305,11 @@
     "title": "Four MTIA Chips in Two Years: Scaling AI Experiences for Billions",
     "url": "https://ai.meta.com/blog/meta-mtia-scale-ai-chips-for-billions/",
     "summary_en": "Hardware — Meta's MTIA chip program has delivered four generations in two years, scaling AI experiences for billions of users.",
-    "summary_zh": "",
+    "summary_zh": "硬件 — Meta MTIA 芯片项目两年内推出四代产品，为数十亿用户扩展AI体验。",
     "published": "2026-03-11",
     "author": "",
     "category": "",
-    "translated": false
+    "translated": true
   },
   {
     "id": "fb4f5455f036",
@@ -318,11 +318,11 @@
     "title": "Your AI Travel Agent Would Book You a Bullfight: An Agentic Benchmark for Implicit Animal Welfare in Frontier AI Models",
     "url": "http://arxiv.org/abs/2606.18142v1",
     "summary_en": "AI agents are moving from advisors to actors, booking travel, planning menus, and running procurement on behalf of users. Existing benchmarks for AI and animal welfare evaluate model text responses to question-answer prompts, leaving open whether the welfare reasoning surfaced in those responses transfers to agentic deployment where the model must take actions with tools. We introduce TAC (Travel ",
-    "summary_zh": "",
+    "summary_zh": "AI安全 — AI智能体正从顾问变为执行者（预订旅行、规划菜单等），本研究引入TAC基准评估智能体在真实任务执行中隐含的动物福利考量。",
     "published": "2026-06-16T16:42:42Z",
     "author": "",
     "category": "",
-    "translated": false
+    "translated": true
   },
   {
     "id": "6a83c8f2a23b",
@@ -331,11 +331,11 @@
     "title": "DecoSearch: Complexity-Aware Routing and Plan-Level Repair for Text-to-SQL",
     "url": "http://arxiv.org/abs/2606.17821v1",
     "summary_en": "Large Language Models (LLMs) have demonstrated remarkable capabilities in translating natural language to SQL, yet existing methods still falter on complex queries requiring multi-step, data-aware reasoning. We introduce DecoSearch, a training-free framework that addresses this by routing each query to the appropriate level of reasoning effort. A lightweight Schema Selector first prunes the full d",
-    "summary_zh": "",
+    "summary_zh": "自然语言处理 — DecoSearch 是免训练的 Text-to-SQL 框架，通过复杂度感知路由与计划级修复解决复杂查询的推理难题。",
     "published": "2026-06-16T11:48:50Z",
     "author": "",
     "category": "",
-    "translated": false
+    "translated": true
   },
   {
     "id": "818c116003f5",
@@ -344,11 +344,11 @@
     "title": "From Brewing to Resolution: Tracing the Internal Lifecycle of Code Reasoning in LLMs",
     "url": "http://arxiv.org/abs/2606.17648v1",
     "summary_en": "Standard accuracy metrics cannot explain why LLMs handle variable tracking but fail on semantically equivalent loops. We study an internal lifecycle of code reasoning in which models first brew the answer, making it linearly recoverable many layers before it becomes self-decodable, and then diverge into one of four resolution outcomes: Resolved, Overprocessed, Misresolved, or Unresolved. Understan",
-    "summary_zh": "",
+    "summary_zh": "可解释性 — 研究揭示LLM代码推理的内部生命周期：模型先\"酝酿\"答案，经历已解决/过处理/误解决/未解决四种结局。",
     "published": "2026-06-16T08:06:50Z",
     "author": "",
     "category": "",
-    "translated": false
+    "translated": true
   },
   {
     "id": "265394f9c85c",
@@ -357,11 +357,11 @@
     "title": "RepSelect: Robust LLM Unlearning via Representation Selectivity",
     "url": "http://arxiv.org/abs/2606.17168v1",
     "summary_en": "Making large language models (LLMs) deeply forget specific knowledge and values without sacrificing general capabilities remains a central challenge in unlearning. However, current methods are easily reversed by fine-tuning or few-shot prompting, suggesting their forgetting is only shallow. We identify the root cause. Existing methods target representations shared with both the retain set and the ",
-    "summary_zh": "",
+    "summary_zh": "对齐与安全 — RepSelect 通过表征选择性实现稳健的LLM遗忘，解决现有方法易被微调或提示恢复的浅层遗忘问题。",
     "published": "2026-06-15T18:06:59Z",
     "author": "",
     "category": "",
-    "translated": false
+    "translated": true
   },
   {
     "id": "c6bfebda56cf",
@@ -370,11 +370,11 @@
     "title": "Selection Without Signal, Recovery Through Expression: A Measurement Study of Post-Hoc Falsification Operators for Frozen Small Code Models",
     "url": "http://arxiv.org/abs/2606.16999v1",
     "summary_en": "Frozen small code models (=45. Two operators help on a different axis, outside the semantic output space. An expression-layer recovery (M1), the only accuracy gain here, recovers correct programs the standard extractor discards (robust extraction and public-test signature alignment); it does no harm (b10=0), is leakage-free, and lifts DeepSeek-Coder-1.3B by +12 tasks on HumanEval+ (p=2.4e-4). An a",
-    "summary_zh": "",
+    "summary_zh": "代码生成 — 对冻结小代码模型的后设伪造算子进行系统测量研究，提出表达层恢复方法提升 HumanEval+ 成绩。",
     "published": "2026-06-15T17:36:23Z",
     "author": "",
     "category": "",
-    "translated": false
+    "translated": true
   },
   {
     "id": "d19a1dddf7e5",
@@ -383,10 +383,10 @@
     "title": "Tying the Loop -- Tied Expert Layers in Mixture-of-Experts Language Models",
     "url": "http://arxiv.org/abs/2606.16825v1",
     "summary_en": "Mixture-of-Experts (MoE) architectures efficiently scale Large Language Models (LLMs) by activating only a small fraction of their experts per token, yet the full parameter count - dominated by the expert parameters - must be held in training and inference memory. To address this, we introduce Expert Tying, an architectural modification that shares expert parameters across consecutive transformer ",
-    "summary_zh": "",
+    "summary_zh": "模型架构 — 在 MoE 语言模型中引入 Expert Tying 技术共享连续层专家参数，大幅降低训练与推理内存占用。",
     "published": "2026-06-15T15:08:09Z",
     "author": "",
     "category": "",
-    "translated": false
+    "translated": true
   }
 ]
