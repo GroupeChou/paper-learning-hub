@@ -56,8 +56,11 @@ site:
   enabled: false
 
 git:
-  auto_commit: false
-  auto_push: false
+  auto_commit: true
+  auto_push: true
+  branch: main
+  remote_name: origin
+  commit_prefix: "auto: paper hub"
 
 workbuddy:
   enabled: false

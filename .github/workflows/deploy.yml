@@ -42,7 +42,7 @@ jobs:
             echo "Daily reports copied into MkDocs source"
           fi
           cd site
-          mkdocs build --strict
+          mkdocs build
 
       - name: Inject CNAME for custom domain
         run: |

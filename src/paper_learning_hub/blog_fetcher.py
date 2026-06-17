@@ -1,9 +1,17 @@
-"""每日从 5 个官方博客抓取最新文章，生成结构化数据。"""
+"""每日从 5 个官方博客抓取最新文章，生成结构化数据。
+
+数据源分层：
+  - 直连层：RSS / arXiv / sitemap → 直接抓取
+  - 搜索层：JS 渲染站点 → 通过 WorkBuddy WebSearch 预填 JSON 缓存
+"""
+
 from __future__ import annotations
 
 import hashlib
 import json
 import logging
+import re
+import time
 from dataclasses import dataclass, field, asdict
 from datetime import datetime, timezone
 from pathlib import Path
@@ -14,53 +22,39 @@ import requests
 
 logger = logging.getLogger(__name__)
 
+_BROWSER_UA = (
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
+    "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
+)
+
 # ---- 5 个核心订阅源 ----
-# 注：大部分官方博客不暴露 RSS，使用页面抓取或 Web Search 作为数据源。
 BLOG_SOURCES = [
-    {
-        "org": "Anthropic",
-        "name": "Anthropic Research",
-        "url": "https://www.anthropic.com/research",
-        "type": "webpage",
-        "color": "#D97757",
-        "search_query": "Anthropic research blog latest articles",
-    },
-    {
-        "org": "OpenAI",
-        "name": "OpenAI Research",
-        "url": "https://openai.com/research",
-        "type": "webpage",
-        "color": "#000000",
-        "search_query": "OpenAI research blog latest articles 2026",
-    },
-    {
-        "org": "Google DeepMind",
-        "name": "DeepMind Blog",
-        "url": "https://blog.google/technology/ai/rss/",
-        "type": "rss",
-        "color": "#4285F4",
-    },
-    {
-        "org": "Meta",
-        "name": "Meta AI Blog",
-        "url": "https://ai.meta.com/blog/",
-        "type": "webpage",
-        "color": "#0668E1",
-        "search_query": "Meta AI research blog latest articles 2026",
-    },
-    {
-        "org": "DeepSeek",
-        "name": "DeepSeek Blog",
-        "url": "https://api.github.com/repos/deepseek-ai/DeepSeek-V3/releases",
-        "type": "github_releases",
-        "color": "#4F46E5",
-    },
+    {"org": "Anthropic",  "type": "anthropic", "color": "#D97757",
+     "url": "https://www.anthropic.com/research",
+     "search_query": "site:anthropic.com/research latest 2026", "limit": 6},
+    {"org": "OpenAI",     "type": "openai",    "color": "#000000",
+     "url": "https://openai.com/research",
+     "search_query": "site:openai.com/index latest 2026 research", "limit": 6},
+    {"org": "Google DeepMind", "type": "rss", "color": "#4285F4",
+     "url": "https://blog.google/technology/ai/rss/", "limit": 6},
+    {"org": "Meta",       "type": "meta",      "color": "#0668E1",
+     "url": "https://ai.meta.com/blog/",
+     "search_query": "site:ai.meta.com/blog latest 2026", "limit": 6},
+    {"org": "DeepSeek",   "type": "arxiv",     "color": "#4F46E5",
+     "url": "https://export.arxiv.org/api/query"
+            "?search_query=all:DeepSeek&start=0&max_results=8&sortBy=submittedDate&sortOrder=descending",
+     "limit": 6},
 ]
+
+# 搜索层源（需要 WorkBuddy WebSearch 预填）— JS 渲染站点
+SEARCH_LAYER_SOURCES = {"anthropic", "openai", "meta"}
+
+# 搜索结果缓存文件
+_SEARCH_CACHE_FILE = ".websearch-cache.json"
 
 
 @dataclass
 class BlogArticle:
-    """一篇来自官方博客的文章"""
     id: str
     org: str
     org_color: str
@@ -73,167 +67,201 @@ class BlogArticle:
     category: str = ""
     translated: bool = False
 
-    @property
-    def content_hash(self) -> str:
-        return hashlib.md5(f"{self.url}{self.title}".encode()).hexdigest()[:12]
 
+# ============================================================
+# 主入口
+# ============================================================
 
-def fetch_blog_articles(max_per_source: int = 5) -> list[BlogArticle]:
-    """从 5 个博客源抓取最新文章。"""
-    articles: list[BlogArticle] = []
+def fetch_blog_articles(
+    max_per_source: int = 5,
+    search_cache_dir: Optional[Path] = None
+) -> list[BlogArticle]:
+    """从 5 个博客源抓取最新文章。
+
+    对于 JS 渲染站点（Anthropic / OpenAI / Meta），优先读取
+    .websearch-cache.json（由 WorkBuddy WebSearch 预填）。
+    如果缓存不存在，尝试直接抓取并返回结果。
+    """
+    all_articles: list[BlogArticle] = []
+
+    # 加载搜索缓存
+    search_cache = _load_search_cache(search_cache_dir or Path("."))
+
     for src in BLOG_SOURCES:
         try:
-            if src["type"] == "rss":
-                fetched = _fetch_rss(src, max_per_source)
-            elif src["type"] == "webpage":
-                fetched = _fetch_webpage(src, max_per_source)
-            elif src["type"] == "github_releases":
-                fetched = _fetch_github_releases_simple(src, max_per_source)
+            limit = src.get("limit", max_per_source)
+            fetch_type = src["type"]
+
+            # 搜索层源：优先使用缓存
+            if fetch_type in SEARCH_LAYER_SOURCES:
+                cache_articles = _use_search_cache(src, search_cache, limit)
+                if cache_articles:
+                    all_articles.extend(cache_articles)
+                    logger.info(f"  {src['org']}: {len(cache_articles)} 篇 (来自搜索缓存)")
+                    continue
+                # 缓存缺失 → 尝试直连
+                articles = _fetch_direct(src, fetch_type, limit)
+                if articles:
+                    all_articles.extend(articles)
+                    logger.info(f"  {src['org']}: {len(articles)} 篇 (直连抓取)")
+                else:
+                    all_articles.append(_search_placeholder(src))
+                    logger.info(f"  {src['org']}: 0 篇 (需 WebSearch 补充)")
             else:
-                fetched = []
-            articles.extend(fetched)
-            logger.info(f"  {src['org']}: {len(fetched)} 篇")
+                # 直连层源
+                articles = _fetch_direct(src, fetch_type, limit)
+                all_articles.extend(articles)
+                logger.info(f"  {src['org']}: {len(articles)} 篇")
+
         except Exception as e:
             logger.warning(f"  {src['org']}: 抓取失败 - {e}")
-    return articles
+            all_articles.append(_search_placeholder(src))
+
+    return all_articles
+
+
+# ============================================================
+# 直连抓取（RSS / arXiv）
+# ============================================================
+
+def _fetch_direct(src: dict, fetch_type: str, limit: int) -> list[BlogArticle]:
+    """直连抓取分发。"""
+    if fetch_type == "rss":
+        return _fetch_rss(src, limit)
+    elif fetch_type == "arxiv":
+        return _fetch_arxiv(src, limit)
+    return []
 
 
 def _fetch_rss(src: dict, limit: int) -> list[BlogArticle]:
-    """抓取 RSS feed。"""
-    try:
-        resp = requests.get(src["url"], timeout=15, headers={"User-Agent": "PaperHub/2.0"})
-        resp.raise_for_status()
-        feed = feedparser.parse(resp.content)
-    except Exception:
-        # fallback: direct URL fetch
-        feed = feedparser.parse(src["url"])
-
+    feed = feedparser.parse(src["url"])
     articles = []
     for entry in feed.entries[:limit]:
         published = ""
-        if hasattr(entry, "published_parsed") and entry.published_parsed:
-            published = datetime(*entry.published_parsed[:6], tzinfo=timezone.utc).isoformat()
-        elif hasattr(entry, "updated_parsed") and entry.updated_parsed:
-            published = datetime(*entry.updated_parsed[:6], tzinfo=timezone.utc).isoformat()
+        for attr in ("published_parsed", "updated_parsed"):
+            val = getattr(entry, attr, None)
+            if val:
+                published = datetime(*val[:6], tzinfo=timezone.utc).isoformat()
+                break
 
-        summary_en = ""
-        if hasattr(entry, "summary"):
-            # strip HTML tags
-            import re
-            summary_en = re.sub(r"<[^>]+>", "", entry.summary)[:500]
-
+        summary_en = re.sub(r"<[^>]+>", "", getattr(entry, "summary", ""))[:500]
         articles.append(BlogArticle(
             id=hashlib.md5(entry.link.encode()).hexdigest()[:12],
-            org=src["org"],
-            org_color=src["color"],
-            title=entry.title.strip(),
-            url=entry.link,
-            summary_en=summary_en,
-            published=published,
-            author=getattr(entry, "author", ""),
+            org=src["org"], org_color=src["color"],
+            title=re.sub(r"\s+", " ", entry.title).strip(),
+            url=entry.link, summary_en=summary_en,
+            published=published, author=getattr(entry, "author", ""),
         ))
     return articles
 
 
-def _fetch_webpage(src: dict, limit: int) -> list[BlogArticle]:
-    """从网页抓取文章列表（解析 HTML 中的标题和链接）。"""
-    import re
-
+def _fetch_arxiv(src: dict, limit: int) -> list[BlogArticle]:
+    feed = feedparser.parse(src["url"])
     articles = []
-    url = src["url"]
-    try:
-        resp = requests.get(url, timeout=15, headers={
-            "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) PaperHub/2.0",
-            "Accept": "text/html,application/xhtml+xml",
-        })
-        resp.raise_for_status()
-        html = resp.text
-
-        # Extract article links using common blog patterns
-        # Look for <a> tags with article-like hrefs and parent elements
-        link_pattern = re.findall(
-            r'<a[^>]+href="(https?://[^"]*(?:blog|research|articles)[^"]*)"[^>]*>(.*?)</a>',
-            html, re.IGNORECASE | re.DOTALL
-        )
-
-        # Try structured data approach first
-        article_links = re.findall(
-            r'<article[^>]*>.*?<a[^>]+href="([^"]+)"[^>]*>(.*?)</a>',
-            html, re.IGNORECASE | re.DOTALL
-        )
-
-        # Fallback: find all links that look like blog posts
-        if not article_links:
-            article_links = re.findall(
-                r'href="(https?://[^"]*(?:research|blog)[^"]*)"[^>]*>(.{10,200}?)<',
-                html, re.IGNORECASE
-            )
-
-        seen = set()
-        for href, title_raw in (article_links or link_pattern)[:limit]:
-            title_clean = re.sub(r"<[^>]+>", "", title_raw).strip()
-            if not title_clean or len(title_clean) < 10:
-                continue
-            if href in seen:
-                continue
-            seen.add(href)
-
-            articles.append(BlogArticle(
-                id=hashlib.md5(href.encode()).hexdigest()[:12],
-                org=src["org"],
-                org_color=src["color"],
-                title=title_clean,
-                url=href,
-                summary_en=title_clean,
-                published="",
-            ))
-
-    except Exception as e:
-        logger.warning(f"  {src['org']} webpage 抓取失败: {e}")
-        # 提供占位条目，后续由 WorkBuddy 通过 WebSearch 补充
+    for entry in feed.entries[:limit]:
+        title = re.sub(r"\s+", " ", entry.get("title", "")).strip()
+        url = entry.get("id", "")
+        published = entry.get("published", "")
+        summary_en = re.sub(r"<[^>]+>", "", entry.get("summary", ""))[:400]
         articles.append(BlogArticle(
-            id=hashlib.md5(src["url"].encode()).hexdigest()[:12],
-            org=src["org"],
-            org_color=src["color"],
-            title=f"{src['org']} - 今日文章（需通过搜索补充）",
-            url=src["url"],
-            summary_en=f"访问 {src['url']} 查看最新文章",
+            id=hashlib.md5(url.encode()).hexdigest()[:12],
+            org=src["org"], org_color=src["color"],
+            title=title, url=url, summary_en=summary_en,
+            published=published,
         ))
-
-    return articles[:limit]
-
-
-def _fetch_github_releases_simple(src: dict, limit: int) -> list[BlogArticle]:
-    """从 GitHub Releases API 抓取 DeepSeek 最新发布。"""
-    articles = []
-    try:
-        resp = requests.get(src["url"] + "?per_page=5", timeout=15, headers={"Accept": "application/vnd.github+json"})
-        resp.raise_for_status()
-        releases = resp.json()
-        for rel in releases[:limit]:
-            articles.append(BlogArticle(
-                id=hashlib.md5((src["org"] + rel.get("tag_name", "")).encode()).hexdigest()[:12],
-                org=src["org"],
-                org_color=src["color"],
-                title=rel.get("name", "Release"),
-                url=rel.get("html_url", src["url"]),
-                summary_en=(rel.get("body") or "Release notes")[:300],
-                published=rel.get("published_at", ""),
-            ))
-    except Exception as e:
-        logger.warning(f"  DeepSeek releases 抓取失败: {e}")
     return articles
 
+
+# ============================================================
+# 搜索缓存（JS 渲染站点 → 由 WorkBuddy WebSearch 预填）
+# ============================================================
+
+def _load_search_cache(cache_dir: Path) -> dict[str, list[dict]]:
+    """从 .websearch-cache.json 加载搜索结果。"""
+    cache_path = cache_dir / _SEARCH_CACHE_FILE
+    if not cache_path.exists():
+        return {}
+    try:
+        data = json.loads(cache_path.read_text(encoding="utf-8"))
+        return data if isinstance(data, dict) else {}
+    except (json.JSONDecodeError, OSError):
+        return {}
+
+
+def _use_search_cache(
+    src: dict, cache: dict[str, list[dict]], limit: int
+) -> list[BlogArticle]:
+    """从缓存中提取指定机构的文章。"""
+    org = src["org"]
+    items = cache.get(org, [])
+    if not items:
+        return []
+
+    articles = []
+    seen = set()
+    for item in items[:limit]:
+        url = item.get("url", "")
+        if url in seen:
+            continue
+        seen.add(url)
+
+        articles.append(BlogArticle(
+            id=hashlib.md5(url.encode()).hexdigest()[:12],
+            org=org, org_color=src["color"],
+            title=item.get("title", ""),
+            url=url,
+            summary_en=item.get("snippet", item.get("title", "")),
+            published=item.get("published", ""),
+        ))
+    return articles
+
+
+def _search_placeholder(src: dict) -> BlogArticle:
+    """生成搜索占位条目 → 触发 WorkBuddy WebSearch。"""
+    return BlogArticle(
+        id=hashlib.md5(src["url"].encode()).hexdigest()[:12],
+        org=src["org"], org_color=src["color"],
+        title=f"🔍 {src['org']} — 搜索: {src.get('search_query', '')}",
+        url=src["url"],
+        summary_en=f"需要在 WorkBuddy 中执行 WebSearch: {src.get('search_query', '')}",
+    )
+
+
+def build_search_queries() -> list[dict]:
+    """生成所有搜索层源的搜索查询（供 WorkBuddy 使用）。"""
+    queries = []
+    for src in BLOG_SOURCES:
+        if src["type"] in SEARCH_LAYER_SOURCES:
+            queries.append({
+                "org": src["org"],
+                "query": src.get("search_query", ""),
+                "color": src["color"],
+                "limit": src.get("limit", 5),
+            })
+    return queries
+
+
+def save_search_cache(
+    articles_by_org: dict[str, list[dict]], cache_dir: Path
+) -> Path:
+    """将搜索结果保存为 .websearch-cache.json。"""
+    cache_path = cache_dir / _SEARCH_CACHE_FILE
+    cache_path.write_text(
+        json.dumps(articles_by_org, ensure_ascii=False, indent=2),
+        encoding="utf-8",
+    )
+    return cache_path
+
+
+# ============================================================
+# 翻译 & 存储
+# ============================================================
 
 def generate_chinese_summaries(
     articles: list[BlogArticle],
     translator_func=None,
     api_key: str = "",
 ) -> list[BlogArticle]:
-    """
-    为文章生成中文摘要。需要 translator_func(title, summary_en) -> zh_summary。
-    如果未提供 translator，返回原文作为占位。
-    """
     for a in articles:
         if a.translated:
             continue
@@ -251,7 +279,6 @@ def generate_chinese_summaries(
 
 
 def save_articles_json(articles: list[BlogArticle], output_path: Path) -> Path:
-    """保存文章数据为 JSON。"""
     output_path.parent.mkdir(parents=True, exist_ok=True)
     data = [asdict(a) for a in articles]
     output_path.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
@@ -259,6 +286,5 @@ def save_articles_json(articles: list[BlogArticle], output_path: Path) -> Path:
 
 
 def load_articles_json(json_path: Path) -> list[BlogArticle]:
-    """从 JSON 加载文章数据。"""
     data = json.loads(json_path.read_text(encoding="utf-8"))
     return [BlogArticle(**item) for item in data]

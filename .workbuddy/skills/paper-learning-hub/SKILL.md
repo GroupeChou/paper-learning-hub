@@ -1,111 +1,171 @@
----
-name: paper-learning-hub
-description: 论文每日导引系统 — 每日自动发现 Agent + 时序预测两条路线的 arXiv 新论文，生成中文摘要，更新路线图，构建站点，推送到 GitHub Pages。
----
+# 前沿 AI 技术日报系统 v2.2
 
-# 论文每日研学系统
+**核心定位**：每日自动聚合 5 大机构官方博客 → 中英双语摘要 → 精美 HTML 日报 → Git 自动推送 GitHub Pages。
 
-**核心定位**：每日自动发现大厂前沿论文 → 生成中文摘要 → 输出到路线图表 → 构建 MkDocs 站点 → 推送到 GitHub Pages。
+## v2.2 vs v2.1 变化
 
-## 能力概述
+| 维度 | v2.1 | v2.2 |
+|------|------|------|
+| **数据源分层** | 全部直连抓取 | 直连层(RSS/arXiv) + 搜索缓存层(WorkBuddy WebSearch 预填) |
+| **Anthropic** | 0 篇 | 使用 WebSearch 预填缓存，6 篇 |
+| **OpenAI** | 403 失败 | 使用 WebSearch 预填缓存，6 篇 |
+| **Meta** | 400 失败 | 使用 WebSearch 预填缓存，6 篇 |
+| **DeepSeek** | old releases | arXiv API 搜索最新论文 |
 
-- **论文发现**：从 arXiv 按主题搜索最新论文（时序预测 + AI Agent）
-- **大厂过滤**：只保留 16 家全球+国内大厂（OpenAI、Google、Anthropic、Meta、Microsoft、NVIDIA、阿里、智谱、百度、腾讯、华为、字节、DeepSeek、MiniMax 等）
-- **摘要生成**：轻量中文摘要（标题翻译 + 摘要翻译 + 核心贡献要点），不逐段翻译
-- **路线图更新**：按技术主题（智能体基础架构、多智能体系统、Transformer 时序预测等）以表格形式组织所有论文
-- **站点构建**：MkDocs Material 站点，含论文详情页、路线图、专题索引
-- **自动推送**：推送至 GitHub，触发 Pages 自动部署
+## 数据源 5 层架构
 
-## 技术栈
-
-| 组件 | 说明 |
-|------|------|
-| 论文源 | arXiv API (`export.arxiv.org`) |
-| 文本源 | `arxiv.org/html/{id}`（首选）→ `ar5iv.labs.arxiv.org/html/{id}`（降级） |
-| 数据库 | SQLite (`papers.db`) |
-| 站点 | MkDocs Material + GitHub Pages |
-| 检索词 | 按主题关键词搜索（时序预测 / AI Agent 各方向） |
-| 机构过滤 | 16 家全球+国内大厂，匹配作者单位或标题摘要关键词 |
-
-## 配置
-
-关键配置项（`config.yaml`）：
-
-```yaml
-raw:
-  skip_download: true          # 不下载 PDF，从 arXiv HTML 远程读取
-summary:
-  enabled: true                # 摘要模式（替代全文翻译）
-  chunk_chars: 8000
-major_orgs: [...]              # 16 家机构的匹配关键词
-daily_limit: 10                # 每次运行的论文处理上限
+```
+┌─────────────────────────────────────────────┐
+│  直连层 (Direct)                              │
+│  Google DeepMind → RSS    ✅ 稳定             │
+│  DeepSeek → arXiv API    ✅ 稳定              │
+├─────────────────────────────────────────────┤
+│  搜索缓存层 (WebSearch Cache)                  │
+│  Anthropic → .websearch-cache.json           │
+│  OpenAI    → .websearch-cache.json           │
+│  Meta      → .websearch-cache.json           │
+│  ↑ 由 WorkBuddy WebFetch 预填                 │
+└─────────────────────────────────────────────┘
 ```
 
-## 完整流程
+## 5 个订阅源
 
-### A. 每日自动运行（定时任务）
+| 机构 | 抓取方式 | 代表方向 |
+|------|---------|---------|
+| **Anthropic** | WorkBuddy WebFetch → 缓存 | Agent 设计原则、安全对齐、可解释性 |
+| **OpenAI** | WorkBuddy WebFetch → 缓存 | GPT 系列、推理能力、多模态 |
+| **Google DeepMind** | RSS Feed | Gemini、Agent、世界模型、科学 AI |
+| **Meta AI** | WorkBuddy WebFetch → 缓存 | Llama 开源、多模态、CV 基础模型 |
+| **DeepSeek** | arXiv API 搜索 | MoE 架构、推理优化、高效训练 |
+
+## 快速使用
+
+### A. 完整运行（含搜索预填）
+
+```bash
+# Step 1: 预填搜索缓存（WorkBuddy WebFetch 获取 Anthropic/OpenAI/Meta 文章）
+# 在 WorkBuddy 中执行 WebFetch:
+#   - https://www.anthropic.com/research
+#   - https://openai.com/research
+#   - https://ai.meta.com/blog/
+#   提取文章标题+URL → 保存到 daily-reports/.websearch-cache.json
+
+# Step 2: 运行每日流水线
+cd /Users/zhouqunchen/Desktop/study/paper-learning-hub
+source .venv/bin/activate
+
+python -m paper_learning_hub.daily_runner \
+  --output ./daily-reports \
+  --github-pages ./docs \
+  --max 6 \
+  -v
+```
+
+### B. 仅使用直连源（跳过搜索层）
+
+无需缓存文件，仅运行 RSS + arXiv：
 
 ```bash
 cd /Users/zhouqunchen/Desktop/study/paper-learning-hub
 source .venv/bin/activate
-./run_daily.sh
+
+python -m paper_learning_hub.daily_runner \
+  --output ./daily-reports \
+  --github-pages ./docs \
+  --max 6 \
+  --skip-search-layer
 ```
 
-或分步：
+### C. 每日自动运行（WorkBuddy Automation）
 
-```bash
-# 1. 发现论文（含大厂过滤）
-./run_daily.sh --prepare-workbuddy
+**必读：两阶段流程**
 
-# 2. 检查生成的每日简报
-cat .workbuddy/daily-brief.md
+```
+Phase 1 — WebFetch 预填缓存
+  1. 使用 WebFetch 爬取 anthropic.com/research
+  2. 使用 WebFetch 爬取 openai.com/research
+  3. 使用 WebFetch 爬取 ai.meta.com/blog
+  4. 提取文章标题+URL+日期 → 保存为 daily-reports/.websearch-cache.json
 
-# 3. 处理论文（摘要模式）
-./run_daily.sh
-
-# 4. 仅构建站点（论文已处理完时）
-./run_daily.sh --build-only
+Phase 2 — 运行流水线
+  python -m paper_learning_hub.daily_runner \
+    --output ./daily-reports \
+    --github-pages ./docs \
+    --max 6 -v --sync-ima
+  → 自动 Git 推送 → 保存运行日志
 ```
 
-**自动完成**：
-1. 发现新论文（arXiv API）→ 大厂作者单位过滤
-2. 跳过 PDF 下载（从 `arxiv.org/html` 远程读取）
-3. 生成中文摘要 → 写入 `papers/zh/<id>/paper_zh.md`
-4. 更新路线图（`guides/agent-roadmap.md` / `guides/ts-roadmap.md`）
-5. 构建 MkDocs 站点
-6. 推送到 GitHub（如 `git.auto_commit` 为 true）
+### D. 对话触发
 
-### B. 对话触发学习论文
+当用户说"更新今日报告"或"paper-hub"时：
+1. 先执行 Phase 1（WebFetch 预填缓存）
+2. 再执行 Phase 2（运行流水线）
+3. 报告结果并给出访问链接
 
-当用户说"学习论文 <arXiv链接>"时：
-1. 从 arXiv 获取论文元数据（标题、摘要、作者）
-2. 远程读取论文全文（HTML 或 PDF 临时下载）
-3. 生成中文摘要（标题翻译 + 摘要 + 核心贡献）
-4. 写入 `papers/zh/<id>/paper_zh.md`
-5. 更新对应路线图的表格
-6. 构建站点并推送
+## 报告格式
 
-## 数据
+### HTML 日报
 
-- 论文按 `papers.db` (SQLite) 管理状态
-- 中文摘要存储在 `papers/zh/<id>/paper_zh.md`
-- 站点源文件在 `site/docs/`
-- 每日简报在 `.workbuddy/daily-brief.md`
+精美响应式设计：
+- 顶部统计卡片（总文章数、机构数、翻译数）
+- 按机构分组展示
+- 每篇文章：标题（可点击跳转原文）+ 中英双语并排摘要
+- 支持移动端适配
 
-## 路线图表格式
+### Markdown 降级版
 
-路线图按技术主题分组，每个主题下的论文以表格展示：
+同时生成纯 Markdown 版本作为降级方案。
 
-```markdown
-| 主题 | 英文标题 | 中文标题 | 发布日期 | 发布机构 |
-|------|----------|----------|:--------:|:--------:|
-| **智能体基础架构** (47) | [Paper Title](../papers/id/index.md) | *待补充* | 2026-05-29 | OpenAI |
+## 部署位置
+
+| 产出 | 路径 |
+|------|------|
+| HTML 日报 | `daily-reports/report-YYYY-MM-DD.html` |
+| 最新版首页 | `daily-reports/index.html` |
+| JSON 数据 | `daily-reports/daily-YYYY-MM-DD.json` |
+| Markdown 降级 | `daily-reports/report-YYYY-MM-DD.md` |
+| **搜索缓存** | `daily-reports/.websearch-cache.json` |
+| 运行结果日志 | `daily-reports/.run-result-latest.json` |
+| GitHub Pages | `docs/index.html` (GitHub Pages 根) |
+| ima 同步 | `daily-reports/ima-sync-YYYY-MM-DD.json` |
+
+## .websearch-cache.json 格式
+
+```json
+{
+  "Anthropic": [
+    {"title": "...", "url": "https://www.anthropic.com/research/...", "published": "2026-06-16", "snippet": "..."}
+  ],
+  "OpenAI": [...],
+  "Meta": [...]
+}
 ```
 
-## 注意事项
+## 环境变量
 
-- PDF **不下载**到本地，从 arxiv.org/html 远程读取
-- 不做全文逐段翻译，只做中文摘要
-- 只保留全球+国内大厂的论文（个人/大学论文过滤）
-- GitHub Pages 需要手动 `git push`（config 中 `auto_commit: false`）
-- 构建时使用 `mkdocs build --strict`，确保 nav 只引用存在的文件
+| 变量 | 说明 | 默认值 |
+|------|------|--------|
+| `PAPERHUB_API_KEY` | LLM API Key（用于翻译） | — |
+| `PAPERHUB_MODEL` | LLM 模型 | `gpt-4.1-mini` |
+| `PAPERHUB_API_BASE` | LLM API 地址 | `https://api.openai.com/v1` |
+
+## Git 自动推送配置
+
+推送行为由 `config.yaml` 控制：
+
+```yaml
+git:
+  auto_commit: true    # 自动 git add + commit
+  auto_push: true      # 自动 git push
+  branch: main
+  remote_name: origin
+  commit_prefix: "auto: paper hub"
+```
+
+CLI 参数 `--no-auto-push` 可临时禁用推送。
+
+## 依赖
+
+- Python 3.12+, `feedparser`, `requests`, `pyyaml`
+- 可选：`OPENAI_API_KEY` 或兼容 API Key（用于翻译）
+- Git（用于自动推送）
