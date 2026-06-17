@@ -1,0 +1,12 @@
+{
+  "date": "2026-06-17",
+  "status": "ok",
+  "total_articles": 9,
+  "translated": 0,
+  "report_path": "daily-reports/report-2026-06-17.html",
+  "github_pushed": true,
+  "github_committed": true,
+  "git_message": "已推送到 origin/main",
+  "ima_synced": false,
+  "errors": []
+}
