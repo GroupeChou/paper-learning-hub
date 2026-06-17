@@ -1,26 +1,116 @@
 {
   "Anthropic": [
-    {"title": "Agentic coding and persistent returns to expertise", "url": "https://www.anthropic.com/research/claude-code-expertise", "published": "2026-06-16", "snippet": "New research on how coding expertise compounds with agentic AI assistance."},
-    {"title": "Paving the way for agents in biology", "url": "https://www.anthropic.com/research/agents-in-biology", "published": "2026-06-08", "snippet": "Exploring how AI agents can accelerate biological research and discovery."},
-    {"title": "Making Claude a chemist", "url": "https://www.anthropic.com/research/making-claude-a-chemist", "published": "2026-06-05", "snippet": "Training Claude to perform chemistry reasoning and experimental design."},
-    {"title": "What we learned mapping a year's worth of AI-enabled cyber threats", "url": "https://www.anthropic.com/news/AI-enabled-cyber-threats-mitre-attack", "published": "2026-06-03", "snippet": "A year-long study mapping AI-enabled cybersecurity threats."},
-    {"title": "Coding agents in the social sciences", "url": "https://www.anthropic.com/research/coding-agents-social-sciences", "published": "2026-05-27", "snippet": "How coding agents are transforming social science research."},
-    {"title": "Project Glasswing: An initial update", "url": "https://www.anthropic.com/research/glasswing-initial-update", "published": "2026-05-22", "snippet": "Initial findings from Project Glasswing on AI safety and transparency."}
+    {
+      "title": "Agentic coding and persistent returns to expertise",
+      "url": "https://www.anthropic.com/research/claude-code-expertise",
+      "published": "2026-06-16",
+      "snippet": "Economic Research — Explores how agentic coding capabilities relate to expertise and the persistent value of skilled developers when working with AI coding tools."
+    },
+    {
+      "title": "Paving the way for agents in biology",
+      "url": "https://www.anthropic.com/research/agents-in-biology",
+      "published": "2026-06-08",
+      "snippet": "Science — Investigates the application of AI agents in biological research, laying groundwork for autonomous scientific discovery."
+    },
+    {
+      "title": "Making Claude a chemist",
+      "url": "https://www.anthropic.com/research/making-claude-a-chemist",
+      "published": "2026-06-05",
+      "snippet": "Science — Demonstrates how Claude can be adapted to perform chemistry-related tasks, bridging AI and laboratory science."
+    },
+    {
+      "title": "What we learned mapping a year's worth of AI-enabled cyber threats",
+      "url": "https://www.anthropic.com/news/AI-enabled-cyber-threats-mitre-attack",
+      "published": "2026-06-03",
+      "snippet": "Policy — Maps a full year of AI-enabled cyber threats using the MITRE ATT&CK framework, revealing emerging attack patterns."
+    },
+    {
+      "title": "Coding agents in the social sciences",
+      "url": "https://www.anthropic.com/research/coding-agents-social-sciences",
+      "published": "2026-05-27",
+      "snippet": "Economic Research — Explores how coding agents are being adopted in social science research and their impact on methodology."
+    },
+    {
+      "title": "Project Glasswing: An initial update",
+      "url": "https://www.anthropic.com/research/glasswing-initial-update",
+      "published": "2026-05-22",
+      "snippet": "Announcements — First progress report on Project Glasswing, Anthropic's initiative for AI transparency and safety."
+    }
   ],
   "OpenAI": [
-    {"title": "Introducing GPT-5.5: A new class of intelligence for real work", "url": "https://openai.com/index/introducing-gpt-5-5/", "published": "2026-04-23", "snippet": "OpenAI's latest frontier model with enhanced reasoning and tool use."},
-    {"title": "Introducing ChatGPT Images 2.0", "url": "https://openai.com/index/introducing-chatgpt-images-2-0/", "published": "2026-04-21", "snippet": "A state-of-the-art model for precise, immediately usable visuals."},
-    {"title": "Introducing GPT-5.4: Our most capable and efficient frontier model", "url": "https://openai.com/index/introducing-gpt-5-4/", "published": "2026-03-05", "snippet": "OpenAI's most efficient frontier model for professional work."},
-    {"title": "GPT-5.3 Instant: Smoother, more useful everyday conversations", "url": "https://openai.com/index/gpt-5-3-instant/", "published": "2026-03-03", "snippet": "A faster, more conversational model for everyday use."},
-    {"title": "Introducing OpenAI o3 and o4-mini", "url": "https://openai.com/index/introducing-o3-and-o4-mini/", "published": "2025-04-16", "snippet": "OpenAI's smartest reasoning models with full tool access."},
-    {"title": "Sora 2: Physically accurate video generation", "url": "https://openai.com/index/sora-2/", "published": "2025-09-30", "snippet": "Realistic video generation with synchronized dialogue and sound effects."}
+    {
+      "title": "Introducing GPT-5.5: A new class of intelligence for real work",
+      "url": "https://openai.com/index/introducing-gpt-5-5/",
+      "published": "2026-04-23",
+      "snippet": "Release — GPT-5.5 brings a new class of intelligence optimized for professional work, with advanced reasoning and tool-use capabilities."
+    },
+    {
+      "title": "Introducing ChatGPT Images 2.0",
+      "url": "https://openai.com/index/introducing-chatgpt-images-2-0/",
+      "published": "2026-04-21",
+      "snippet": "Visual — A state-of-the-art model for precise, immediately usable visual generation with enhanced accuracy and control."
+    },
+    {
+      "title": "Introducing GPT-5.4: Our most capable and efficient frontier model",
+      "url": "https://openai.com/index/introducing-gpt-5-4/",
+      "published": "2026-03-05",
+      "snippet": "Release — GPT-5.4 is the most capable and efficient frontier model for professional work, pushing the boundaries of AI performance."
+    },
+    {
+      "title": "GPT-5.3 Instant: Smoother, more useful everyday conversations",
+      "url": "https://openai.com/index/gpt-5-3-instant/",
+      "published": "2026-03-03",
+      "snippet": "Release — GPT-5.3 Instant delivers faster, smoother everyday conversational AI optimized for consumer-facing applications."
+    },
+    {
+      "title": "Sora 2: Physically accurate video generation with synchronized dialogue",
+      "url": "https://openai.com/index/sora-2/",
+      "published": "2025-09-30",
+      "snippet": "Visual — Sora 2 achieves physically accurate, realistic video generation with synchronized dialogue and sound effects."
+    },
+    {
+      "title": "Introducing o3 and o4-mini: Smartest models with full tool access",
+      "url": "https://openai.com/index/introducing-o3-and-o4-mini/",
+      "published": "2025-04-16",
+      "snippet": "o series — OpenAI o3 and o4-mini are the smartest reasoning models to date, featuring full tool access for complex problem solving."
+    }
   ],
   "Meta": [
-    {"title": "Introducing Muse Spark: Scaling Towards Personal Superintelligence", "url": "https://ai.meta.com/blog/introducing-muse-spark-msl/", "published": "2026-04-08", "snippet": "Meta's new AI model scaling towards personal superintelligence."},
-    {"title": "Scaling How We Build and Test Our Most Advanced AI", "url": "https://ai.meta.com/blog/scaling-how-we-build-test-advanced-ai/", "published": "2026-04-08", "snippet": "How Meta scales the development and testing of frontier AI models."},
-    {"title": "How Alta Daily Uses Meta's Segment Anything to Reimagine the Digital Closet", "url": "https://ai.meta.com/blog/alta-daily-fashion-app-segment-anything/", "published": "2026-04-06", "snippet": "Fashion app leveraging Meta's SAM for digital wardrobe management."},
-    {"title": "SAM 3.1: Faster and More Accessible Real-Time Video Detection", "url": "https://ai.meta.com/blog/segment-anything-model-3/", "published": "2026-03-27", "snippet": "Latest Segment Anything Model with multiplexing and global reasoning."},
-    {"title": "Introducing TRIBE v2: A Predictive Foundation Model for Brain Processing", "url": "https://ai.meta.com/blog/tribe-v2-brain-predictive-foundation-model/", "published": "2026-03-26", "snippet": "Foundation model trained to understand how human brain processes complex stimuli."},
-    {"title": "Four MTIA Chips in Two Years: Scaling AI Experiences for Billions", "url": "https://ai.meta.com/blog/meta-mtia-scale-ai-chips-for-billions/", "published": "2026-03-11", "snippet": "Meta's custom AI chip development for scaling AI infrastructure."}
+    {
+      "title": "Introducing Muse Spark: Scaling Towards Personal Superintelligence",
+      "url": "https://ai.meta.com/blog/introducing-muse-spark-msl/",
+      "published": "2026-04-08",
+      "snippet": "Meta's Muse Spark initiative explores scaling AI towards personal superintelligence, a new paradigm for individualized AI assistants."
+    },
+    {
+      "title": "Scaling How We Build and Test Our Most Advanced AI",
+      "url": "https://ai.meta.com/blog/scaling-how-we-build-test-advanced-ai/",
+      "published": "2026-04-08",
+      "snippet": "Research — Meta details its infrastructure and methodology for building and testing cutting-edge AI systems at scale."
+    },
+    {
+      "title": "How Alta Daily Uses Meta's Segment Anything to Reimagine the Digital Closet",
+      "url": "https://ai.meta.com/blog/alta-daily-fashion-app-segment-anything/",
+      "published": "2026-04-06",
+      "snippet": "Computer Vision — Fashion app Alta Daily leverages Meta's Segment Anything model to create digital wardrobe experiences."
+    },
+    {
+      "title": "SAM 3.1: Faster and More Accessible Real-Time Video Detection and Tracking",
+      "url": "https://ai.meta.com/blog/segment-anything-model-3/",
+      "published": "2026-03-27",
+      "snippet": "Computer Vision — SAM 3.1 introduces multiplexing and global reasoning for faster, more accessible real-time video detection and tracking."
+    },
+    {
+      "title": "Introducing TRIBE v2: A Predictive Foundation Model for Brain Processing",
+      "url": "https://ai.meta.com/blog/tribe-v2-brain-predictive-foundation-model/",
+      "published": "2026-03-26",
+      "snippet": "Research — TRIBE v2 is a predictive foundation model trained to understand how the human brain processes complex stimuli."
+    },
+    {
+      "title": "Four MTIA Chips in Two Years: Scaling AI Experiences for Billions",
+      "url": "https://ai.meta.com/blog/meta-mtia-scale-ai-chips-for-billions/",
+      "published": "2026-03-11",
+      "snippet": "Hardware — Meta's MTIA chip program has delivered four generations in two years, scaling AI experiences for billions of users."
+    }
   ]
 }
