@@ -224,11 +224,6 @@ def run_daily_pipeline(
             shutil.copy2(md_path, daily_dir / f"report-{date_str}.md")
             shutil.copy2(html_path, daily_dir / "latest.html")
 
-            # Write CNAME if needed
-            cname_path = github_pages_dir / "CNAME"
-            if not cname_path.exists():
-                cname_path.write_text("paper.groupechou.com")
-
             result["github_pushed"] = True
             logger.info(f"  ✅ 同步完成 → {github_pages_dir}")
         except Exception as e:
