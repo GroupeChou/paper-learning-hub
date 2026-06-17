@@ -207,19 +207,21 @@ def run_daily_pipeline(
     generate_html_report(articles, index_path, report_title="前沿 AI 技术日报 · 最新")
     logger.info(f"Step 6: 更新首页 → {index_path}")
 
-    # Step 7: GitHub Pages 部署 → 日报同步到 docs/daily/，供 MkDocs workflow 打包
+    # Step 7: GitHub Pages 部署 → 日报写入 docs/ 作为首页，同时归档到 docs/daily/
     if github_pages_dir:
         logger.info(f"Step 7: 同步到 GitHub Pages...")
         try:
             import shutil
             github_pages_dir = Path(github_pages_dir)
+            github_pages_dir.mkdir(parents=True, exist_ok=True)
+            # Write report as homepage
+            shutil.copy2(html_path, github_pages_dir / "index.html")
+            # Archive to daily/ subdirectory
             daily_dir = github_pages_dir / "daily"
             daily_dir.mkdir(parents=True, exist_ok=True)
-            # Copy report into daily/ subdirectory
             shutil.copy2(html_path, daily_dir / f"report-{date_str}.html")
             shutil.copy2(json_path, daily_dir / f"daily-{date_str}.json")
             shutil.copy2(md_path, daily_dir / f"report-{date_str}.md")
-            # latest symlink
             shutil.copy2(html_path, daily_dir / "latest.html")
 
             # Write CNAME if needed
@@ -228,7 +230,7 @@ def run_daily_pipeline(
                 cname_path.write_text("paper.groupechou.com")
 
             result["github_pushed"] = True
-            logger.info(f"  ✅ 同步完成 → {daily_dir}")
+            logger.info(f"  ✅ 同步完成 → {github_pages_dir}")
         except Exception as e:
             result["errors"].append(f"github: {e}")
             logger.error(f"  ❌ GitHub 同步失败: {e}")

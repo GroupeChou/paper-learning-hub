@@ -13,7 +13,6 @@
 ## 快速入口
 
 - [今日新增](guides/daily-guide.md)
-- [📰 前沿AI日报](daily/report-2026-06-17.html) — Anthropic/OpenAI/DeepMind/Meta/DeepSeek 每日追踪
 - [经典必读](guides/classics.md)
 - [专题索引](topics/index.md)
 - [论文详情页](papers/index.md)
