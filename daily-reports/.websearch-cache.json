@@ -4,37 +4,37 @@
       "title": "Agentic coding and persistent returns to expertise",
       "url": "https://www.anthropic.com/research/claude-code-expertise",
       "published": "2026-06-16",
-      "snippet": "Economic Research — Explores how agentic coding capabilities relate to expertise and the persistent value of skilled developers when working with AI coding tools."
+      "snippet": "Economic Research — How Claude Code expertise scales with agentic coding tasks"
     },
     {
       "title": "Paving the way for agents in biology",
       "url": "https://www.anthropic.com/research/agents-in-biology",
       "published": "2026-06-08",
-      "snippet": "Science — Investigates the application of AI agents in biological research, laying groundwork for autonomous scientific discovery."
+      "snippet": "Science — Exploring how AI agents can accelerate biological research"
+    },
+    {
+      "title": "Measuring LLMs' impact on N-day exploits",
+      "url": "https://www.anthropic.com/research/n-days",
+      "published": "2026-06-08",
+      "snippet": "Frontier Red Team — Quantifying how language models affect exploit development timelines"
     },
     {
       "title": "Making Claude a chemist",
       "url": "https://www.anthropic.com/research/making-claude-a-chemist",
       "published": "2026-06-05",
-      "snippet": "Science — Demonstrates how Claude can be adapted to perform chemistry-related tasks, bridging AI and laboratory science."
+      "snippet": "Science — Evaluating Claude's capabilities in chemistry-related tasks"
+    },
+    {
+      "title": "Mapping AI-enabled cyber threats: Insights from the LLM ATT&CK Navigator",
+      "url": "https://www.anthropic.com/research/attack-navigator",
+      "published": "2026-06-03",
+      "snippet": "Frontier Red Team — Systematic mapping of AI-powered cyber attack techniques"
     },
     {
       "title": "What we learned mapping a year's worth of AI-enabled cyber threats",
       "url": "https://www.anthropic.com/news/AI-enabled-cyber-threats-mitre-attack",
       "published": "2026-06-03",
-      "snippet": "Policy — Maps a full year of AI-enabled cyber threats using the MITRE ATT&CK framework, revealing emerging attack patterns."
-    },
-    {
-      "title": "Coding agents in the social sciences",
-      "url": "https://www.anthropic.com/research/coding-agents-social-sciences",
-      "published": "2026-05-27",
-      "snippet": "Economic Research — Explores how coding agents are being adopted in social science research and their impact on methodology."
-    },
-    {
-      "title": "Project Glasswing: An initial update",
-      "url": "https://www.anthropic.com/research/glasswing-initial-update",
-      "published": "2026-05-22",
-      "snippet": "Announcements — First progress report on Project Glasswing, Anthropic's initiative for AI transparency and safety."
+      "snippet": "Policy — Annual review of AI-enabled cybersecurity threat landscape"
     }
   ],
   "OpenAI": [
@@ -42,37 +42,37 @@
       "title": "Introducing GPT-5.5: A new class of intelligence for real work",
       "url": "https://openai.com/index/introducing-gpt-5-5/",
       "published": "2026-04-23",
-      "snippet": "Release — GPT-5.5 brings a new class of intelligence optimized for professional work, with advanced reasoning and tool-use capabilities."
+      "snippet": "Release — GPT-5.5 brings advanced reasoning and task completion to professional work"
     },
     {
       "title": "Introducing ChatGPT Images 2.0",
       "url": "https://openai.com/index/introducing-chatgpt-images-2-0/",
       "published": "2026-04-21",
-      "snippet": "Visual — A state-of-the-art model for precise, immediately usable visual generation with enhanced accuracy and control."
+      "snippet": "Visual — State-of-the-art model for precise, immediately usable visuals"
     },
     {
       "title": "Introducing GPT-5.4: Our most capable and efficient frontier model",
       "url": "https://openai.com/index/introducing-gpt-5-4/",
       "published": "2026-03-05",
-      "snippet": "Release — GPT-5.4 is the most capable and efficient frontier model for professional work, pushing the boundaries of AI performance."
+      "snippet": "Release — Most capable and efficient frontier model for professional work"
     },
     {
       "title": "GPT-5.3 Instant: Smoother, more useful everyday conversations",
       "url": "https://openai.com/index/gpt-5-3-instant/",
       "published": "2026-03-03",
-      "snippet": "Release — GPT-5.3 Instant delivers faster, smoother everyday conversational AI optimized for consumer-facing applications."
+      "snippet": "Release — Faster everyday AI conversations with improved usefulness"
     },
     {
-      "title": "Sora 2: Physically accurate video generation with synchronized dialogue",
+      "title": "Sora 2: Physically accurate, realistic video generation",
       "url": "https://openai.com/index/sora-2/",
       "published": "2025-09-30",
-      "snippet": "Visual — Sora 2 achieves physically accurate, realistic video generation with synchronized dialogue and sound effects."
+      "snippet": "Visual — Synchronized dialogue and sound effects with controllable video output"
     },
     {
-      "title": "Introducing o3 and o4-mini: Smartest models with full tool access",
+      "title": "Introducing OpenAI o3 and o4-mini",
       "url": "https://openai.com/index/introducing-o3-and-o4-mini/",
       "published": "2025-04-16",
-      "snippet": "o series — OpenAI o3 and o4-mini are the smartest reasoning models to date, featuring full tool access for complex problem solving."
+      "snippet": "o series — Smartest and most capable models to date with full tool access"
     }
   ],
   "Meta": [
@@ -80,37 +80,37 @@
       "title": "Introducing Muse Spark: Scaling Towards Personal Superintelligence",
       "url": "https://ai.meta.com/blog/introducing-muse-spark-msl/",
       "published": "2026-04-08",
-      "snippet": "Meta's Muse Spark initiative explores scaling AI towards personal superintelligence, a new paradigm for individualized AI assistants."
+      "snippet": "Research — Meta's vision for personal superintelligence with Muse Spark"
     },
     {
       "title": "Scaling How We Build and Test Our Most Advanced AI",
       "url": "https://ai.meta.com/blog/scaling-how-we-build-test-advanced-ai/",
       "published": "2026-04-08",
-      "snippet": "Research — Meta details its infrastructure and methodology for building and testing cutting-edge AI systems at scale."
+      "snippet": "Research — Infrastructure and methodology for building frontier AI systems"
     },
     {
       "title": "How Alta Daily Uses Meta's Segment Anything to Reimagine the Digital Closet",
       "url": "https://ai.meta.com/blog/alta-daily-fashion-app-segment-anything/",
       "published": "2026-04-06",
-      "snippet": "Computer Vision — Fashion app Alta Daily leverages Meta's Segment Anything model to create digital wardrobe experiences."
+      "snippet": "Computer Vision — Fashion app leveraging SAM for digital wardrobe management"
     },
     {
       "title": "SAM 3.1: Faster and More Accessible Real-Time Video Detection and Tracking",
       "url": "https://ai.meta.com/blog/segment-anything-model-3/",
       "published": "2026-03-27",
-      "snippet": "Computer Vision — SAM 3.1 introduces multiplexing and global reasoning for faster, more accessible real-time video detection and tracking."
+      "snippet": "Computer Vision — Multiplexing and global reasoning for real-time video segmentation"
     },
     {
       "title": "Introducing TRIBE v2: A Predictive Foundation Model for Brain Processing",
       "url": "https://ai.meta.com/blog/tribe-v2-brain-predictive-foundation-model/",
       "published": "2026-03-26",
-      "snippet": "Research — TRIBE v2 is a predictive foundation model trained to understand how the human brain processes complex stimuli."
+      "snippet": "Research — Foundation model trained to understand how the human brain processes stimuli"
     },
     {
       "title": "Four MTIA Chips in Two Years: Scaling AI Experiences for Billions",
       "url": "https://ai.meta.com/blog/meta-mtia-scale-ai-chips-for-billions/",
       "published": "2026-03-11",
-      "snippet": "Hardware — Meta's MTIA chip program has delivered four generations in two years, scaling AI experiences for billions of users."
+      "snippet": "Hardware — Meta's custom AI chip roadmap for serving billions of users"
     }
   ]
 }
