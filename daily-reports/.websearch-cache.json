@@ -4,7 +4,7 @@
       "title": "Project Fetch: Phase two",
       "url": "https://www.anthropic.com/research/project-fetch-phase-two",
       "published": "2026-06-18",
-      "snippet": "Frontier Red Team research into AI security and autonomous capability assessment."
+      "snippet": "Frontier Red Team research on measuring LLMs' ability to develop and execute autonomous capabilities."
     },
     {
       "title": "Agentic coding and persistent returns to expertise",
@@ -63,10 +63,10 @@
       "snippet": "GPT-5.3 Instant delivers fast, natural conversation with low latency."
     },
     {
-      "title": "Introducing next-generation audio models in the API",
-      "url": "https://openai.com/index/introducing-our-next-generation-audio-models/",
-      "published": "2025-03-20",
-      "snippet": "New voice agent models with improved speech synthesis and understanding."
+      "title": "Sora 2: Physically accurate, realistic video generation",
+      "url": "https://openai.com/index/sora-2/",
+      "published": "2025-09-30",
+      "snippet": "Sora 2 with synchronized dialogue, sound effects and physically accurate video generation."
     },
     {
       "title": "Introducing o3 and o4-mini: Our smartest reasoning models",
@@ -104,7 +104,7 @@
       "title": "Introducing TRIBE v2: A Predictive Foundation Model for Brain Processing",
       "url": "https://ai.meta.com/blog/tribe-v2-brain-predictive-foundation-model/",
       "published": "2026-03-26",
-      "snippet": "TRIBE v2 predicts how the human brain processes complex stimuli."
+      "snippet": "TRIBE v2 predicts how the human brain processes complex stimuli using a foundation model."
     },
     {
       "title": "Four MTIA Chips in Two Years: Scaling AI Experiences for Billions",
