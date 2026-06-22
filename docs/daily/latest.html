@@ -7,23 +7,42 @@
 <style>
 * { margin:0; padding:0; box-sizing:border-box; }
 body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif; background: #f8fafc; color: #1a1a2e; line-height: 1.6; }
-.container { max-width: 900px; margin: 0 auto; padding: 24px 20px 60px; }
 
 /* header */
-.header { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); color: white; padding: 40px 20px; text-align: center; border-radius: 16px; margin-bottom: 28px; }
+.header { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); color: white; padding: 40px 20px; text-align: center; border-radius: 16px; margin: 24px 20px 20px; }
 .header h1 { font-size: 28px; font-weight: 700; margin-bottom: 8px; }
 .header p { font-size: 14px; opacity: 0.8; }
 
 /* stats */
-.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px,1fr)); gap: 16px; margin-bottom: 28px; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px,1fr)); gap: 16px; margin: 0 20px 20px; }
 .stat-card { background: white; border-radius: 12px; padding: 20px; text-align: center; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
 .stat-card .num { font-size: 32px; font-weight: 800; }
 .stat-card .label { font-size: 12px; color: #64748b; margin-top: 4px; }
 
+/* ====== Tab Navigation ====== */
+.tab-nav-wrapper { position: sticky; top: 0; z-index: 100; background: #f8fafc; padding: 0 20px 12px; }
+.tab-nav { display: flex; gap: 6px; background: white; border-radius: 14px; padding: 6px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.tab-btn { flex-shrink: 0; padding: 10px 20px; border-radius: 10px; border: none; background: transparent; font-size: 14px; font-weight: 600; color: #64748b; cursor: pointer; transition: all 0.2s; white-space: nowrap; position: relative; }
+.tab-btn:hover { background: #f1f5f9; color: #1a1a2e; }
+.tab-btn.active { background: #1a1a2e; color: white; box-shadow: 0 2px 6px rgba(26,26,46,0.25); }
+.tab-btn .count { font-size: 12px; opacity: 0.7; margin-left: 4px; }
+.tab-btn.active .count { opacity: 1; }
+
+/* NEW badge */
+.new-badge { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 10px; font-weight: 700; background: #ef4444; color: white; margin-left: 6px; vertical-align: middle; animation: pulse 2s infinite; }
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+/* ====== Tab Content ====== */
+.tab-content { display: none; padding: 0 20px; }
+.tab-content.active { display: block; }
+
 /* section */
 .section { margin-bottom: 32px; }
 .section-title { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; padding-bottom: 8px; border-bottom: 2px solid #e2e8f0; }
-.section-title .dot { width: 12px; height: 12px; border-radius: 50%; background: var(--org-color); flex-shrink: 0; }
+.section-title .dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
 .section-title h2 { font-size: 20px; font-weight: 700; }
 
 /* article card */
@@ -41,25 +60,23 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC'
 .lang-block { background: #f8fafc; border-radius: 8px; padding: 14px 16px; }
 .lang-block .lang-label { font-size: 11px; font-weight: 700; color: #64748b; text-transform: uppercase; margin-bottom: 6px; letter-spacing: 0.5px; }
 .lang-block p { font-size: 14px; color: #334155; line-height: 1.6; }
-.toggle-btn { display: inline-block; padding: 4px 12px; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 12px; cursor: pointer; background: white; color: #64748b; margin-left: 8px; }
-.toggle-btn:hover { background: #f1f5f9; }
 
 /* footer */
-.footer { text-align: center; padding: 32px 0 16px; font-size: 13px; color: #94a3b8; }
+.footer { text-align: center; padding: 32px 20px 16px; font-size: 13px; color: #94a3b8; }
 .footer a { color: #0f3460; }
 
 @media (max-width: 640px) {
     .bilingual { grid-template-columns: 1fr; }
     .header h1 { font-size: 22px; }
+    .tab-btn { padding: 8px 14px; font-size: 13px; }
 }
 </style>
 </head>
 <body>
-<div class="container">
 
 <div class="header">
     <h1>前沿 AI 技术日报</h1>
-    <p>每日自动聚合 · 2026年06月21日 · 覆盖 Anthropic / OpenAI / DeepMind / Meta / DeepSeek</p>
+    <p>每日自动聚合 · 2026年06月22日 · 覆盖 Anthropic / OpenAI / DeepMind / Meta / DeepSeek</p>
 </div>
 
 <div class="stats">
@@ -68,11 +85,23 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC'
     <div class="stat-card"><div class="num" style="color:#D97757">0</div><div class="label">中文摘要</div></div>
 </div>
 
+<div class="tab-nav-wrapper">
+    <div class="tab-nav">
+        <button class="tab-btn active" data-org="全部" onclick="switchTab('全部')">全部<span class="count">(30)</span></button>
+        <button class="tab-btn" data-org="Anthropic" onclick="switchTab('Anthropic')" style="--org-color:#D97757">Anthropic<span class="count">(6)</span></button>
+        <button class="tab-btn" data-org="OpenAI" onclick="switchTab('OpenAI')" style="--org-color:#000000">OpenAI<span class="count">(6)</span></button>
+        <button class="tab-btn" data-org="Google DeepMind" onclick="switchTab('Google DeepMind')" style="--org-color:#4285F4">Google DeepMind<span class="count">(6)</span></button>
+        <button class="tab-btn" data-org="Meta" onclick="switchTab('Meta')" style="--org-color:#0668E1">Meta<span class="count">(6)</span></button>
+        <button class="tab-btn" data-org="DeepSeek" onclick="switchTab('DeepSeek')" style="--org-color:#4F46E5">DeepSeek<span class="count">(6)</span></button>
+    </div>
+</div>
+
+<div class="tab-content active" id="tab-全部">
 
         <div class="section">
             <div class="section-title">
                 <div class="dot" style="background:#D97757"></div>
-                <h2>Anthropic</h2>
+                <h2>Anthropic </h2>
                 <span style="color:#94a3b8;font-size:13px">· 6 篇</span>
             </div>
             
@@ -85,11 +114,11 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC'
                 <div class="bilingual">
                     <div class="lang-block">
                         <div class="lang-label">🇺🇸 English</div>
-                        <p>Frontier Red Team research on measuring LLMs' ability to develop and execute autonomous capabilities.</p>
+                        <p>Frontier Red Team research exploring Phase two of Project Fetch, investigating advanced AI capabilities and security implications.</p>
                     </div>
                     <div class="lang-block">
                         <div class="lang-label">🇨🇳 中文</div>
-                        <p>Frontier Red Team research on measuring LLMs' ability to develop and execute autonomous capabilities.</p>
+                        <p>Frontier Red Team research exploring Phase two of Project Fetch, investigating advanced AI capabilities and security implications.</p>
                     </div>
                 </div>
             </div>
@@ -102,11 +131,11 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC'
                 <div class="bilingual">
                     <div class="lang-block">
                         <div class="lang-label">🇺🇸 English</div>
-                        <p>Economic Research study on how Claude Code amplifies expert coders and whether returns persist at scale.</p>
+                        <p>Economic Research study analyzing ~400,000 Claude Code sessions from ~235,000 people, providing evidence on how coding agents deliver persistent returns to expertise.</p>
                     </div>
                     <div class="lang-block">
                         <div class="lang-label">🇨🇳 中文</div>
-                        <p>Economic Research study on how Claude Code amplifies expert coders and whether returns persist at scale.</p>
+                        <p>Economic Research study analyzing ~400,000 Claude Code sessions from ~235,000 people, providing evidence on how coding agents deliver persistent returns to expertise.</p>
                     </div>
                 </div>
             </div>
@@ -119,11 +148,11 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC'
                 <div class="bilingual">
                     <div class="lang-block">
                         <div class="lang-label">🇺🇸 English</div>
-                        <p>Science team explores how AI agents can accelerate biological research workflows.</p>
+                        <p>Science research exploring how AI agents can accelerate and transform biological research workflows and experimental design.</p>
                     </div>
                     <div class="lang-block">
                         <div class="lang-label">🇨🇳 中文</div>
-                        <p>Science team explores how AI agents can accelerate biological research workflows.</p>
+                        <p>Science research exploring how AI agents can accelerate and transform biological research workflows and experimental design.</p>
                     </div>
                 </div>
             </div>
@@ -136,11 +165,11 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC'
                 <div class="bilingual">
                     <div class="lang-block">
                         <div class="lang-label">🇺🇸 English</div>
-                        <p>Frontier Red Team measures how LLMs affect the speed and success rate of exploiting known vulnerabilities.</p>
+                        <p>Frontier Red Team study quantifying how large language models affect the speed and effectiveness of N-day vulnerability exploitation in cybersecurity.</p>
                     </div>
                     <div class="lang-block">
                         <div class="lang-label">🇨🇳 中文</div>
-                        <p>Frontier Red Team measures how LLMs affect the speed and success rate of exploiting known vulnerabilities.</p>
+                        <p>Frontier Red Team study quantifying how large language models affect the speed and effectiveness of N-day vulnerability exploitation in cybersecurity.</p>
                     </div>
                 </div>
             </div>
@@ -153,11 +182,11 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC'
                 <div class="bilingual">
                     <div class="lang-block">
                         <div class="lang-label">🇺🇸 English</div>
-                        <p>Science research on equipping Claude with chemistry capabilities for lab automation.</p>
+                        <p>Science research demonstrating Claude's capabilities in chemistry tasks including molecular reasoning, reaction prediction, and experimental design.</p>
                     </div>
                     <div class="lang-block">
                         <div class="lang-label">🇨🇳 中文</div>
-                        <p>Science research on equipping Claude with chemistry capabilities for lab automation.</p>
+                        <p>Science research demonstrating Claude's capabilities in chemistry tasks including molecular reasoning, reaction prediction, and experimental design.</p>
                     </div>
                 </div>
             </div>
@@ -170,131 +199,129 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC'
                 <div class="bilingual">
                     <div class="lang-block">
                         <div class="lang-label">🇺🇸 English</div>
-                        <p>Frontier Red Team maps a year of AI-enabled cyber threats using MITRE ATT&CK framework.</p>
+                        <p>Frontier Red Team research mapping AI-enabled cyber threats using the LLM ATT&CK Navigator framework for systematic threat analysis and mitigation.</p>
                     </div>
                     <div class="lang-block">
                         <div class="lang-label">🇨🇳 中文</div>
-                        <p>Frontier Red Team maps a year of AI-enabled cyber threats using MITRE ATT&CK framework.</p>
+                        <p>Frontier Red Team research mapping AI-enabled cyber threats using the LLM ATT&CK Navigator framework for systematic threat analysis and mitigation.</p>
                     </div>
                 </div>
             </div>
         </div>
-
         <div class="section">
             <div class="section-title">
                 <div class="dot" style="background:#000000"></div>
-                <h2>OpenAI</h2>
+                <h2>OpenAI </h2>
                 <span style="color:#94a3b8;font-size:13px">· 6 篇</span>
             </div>
             
             <div class="article" style="--org-color:#000000">
                 <div class="meta">
                     <span class="org-tag" style="background:#000000">OpenAI</span>
-                    <span class="date">04/23</span>
+                    <span class="date">06/17</span>
                 </div>
-                <h3><a href="https://openai.com/index/introducing-gpt-5-5/" target="_blank" rel="noopener">Introducing GPT-5.5: A new class of intelligence for real work</a></h3>
+                <h3><a href="https://openai.com/index/ai-chemist-improves-reaction/" target="_blank" rel="noopener">A near-autonomous AI chemist improves a challenging reaction in medicinal chemistry</a></h3>
                 <div class="bilingual">
                     <div class="lang-block">
                         <div class="lang-label">🇺🇸 English</div>
-                        <p>GPT-5.5 brings a new class of reasoning intelligence designed for professional work.</p>
+                        <p>OpenAI and Molecule.one show how a near-autonomous AI chemist using GPT-5.4 improved a key drug-making reaction, advancing medicinal chemistry research.</p>
                     </div>
                     <div class="lang-block">
                         <div class="lang-label">🇨🇳 中文</div>
-                        <p>GPT-5.5 brings a new class of reasoning intelligence designed for professional work.</p>
+                        <p>OpenAI and Molecule.one show how a near-autonomous AI chemist using GPT-5.4 improved a key drug-making reaction, advancing medicinal chemistry research.</p>
                     </div>
                 </div>
             </div>
             <div class="article" style="--org-color:#000000">
                 <div class="meta">
                     <span class="org-tag" style="background:#000000">OpenAI</span>
-                    <span class="date">04/21</span>
+                    <span class="date">06/17</span>
                 </div>
-                <h3><a href="https://openai.com/index/introducing-chatgpt-images-2-0/" target="_blank" rel="noopener">Introducing ChatGPT Images 2.0</a></h3>
+                <h3><a href="https://openai.com/index/introducing-life-sci-bench/" target="_blank" rel="noopener">Introducing LifeSciBench</a></h3>
                 <div class="bilingual">
                     <div class="lang-block">
                         <div class="lang-label">🇺🇸 English</div>
-                        <p>A state-of-the-art model for precise, immediately usable visual generation.</p>
+                        <p>An expert-authored, expert-reviewed benchmark for evaluating how AI systems handle real-world life science research tasks and decisions.</p>
                     </div>
                     <div class="lang-block">
                         <div class="lang-label">🇨🇳 中文</div>
-                        <p>A state-of-the-art model for precise, immediately usable visual generation.</p>
+                        <p>An expert-authored, expert-reviewed benchmark for evaluating how AI systems handle real-world life science research tasks and decisions.</p>
                     </div>
                 </div>
             </div>
             <div class="article" style="--org-color:#000000">
                 <div class="meta">
                     <span class="org-tag" style="background:#000000">OpenAI</span>
-                    <span class="date">03/05</span>
+                    <span class="date">06/04</span>
                 </div>
-                <h3><a href="https://openai.com/index/introducing-gpt-5-4/" target="_blank" rel="noopener">Introducing GPT-5.4: Our most capable and efficient frontier model</a></h3>
+                <h3><a href="https://openai.com/index/chatgpt-memory-dreaming/" target="_blank" rel="noopener">Dreaming: Better memory for a more helpful ChatGPT</a></h3>
                 <div class="bilingual">
                     <div class="lang-block">
                         <div class="lang-label">🇺🇸 English</div>
-                        <p>GPT-5.4 combines frontier reasoning with efficiency for professional workloads.</p>
+                        <p>ChatGPT introduces a new memory system called Dreaming to better remember user preferences, keeping context fresh and relevant across conversations.</p>
                     </div>
                     <div class="lang-block">
                         <div class="lang-label">🇨🇳 中文</div>
-                        <p>GPT-5.4 combines frontier reasoning with efficiency for professional workloads.</p>
+                        <p>ChatGPT introduces a new memory system called Dreaming to better remember user preferences, keeping context fresh and relevant across conversations.</p>
                     </div>
                 </div>
             </div>
             <div class="article" style="--org-color:#000000">
                 <div class="meta">
                     <span class="org-tag" style="background:#000000">OpenAI</span>
-                    <span class="date">03/03</span>
+                    <span class="date">06/03</span>
                 </div>
-                <h3><a href="https://openai.com/index/gpt-5-3-instant/" target="_blank" rel="noopener">GPT-5.3 Instant: Smoother, more useful everyday conversations</a></h3>
+                <h3><a href="https://openai.com/index/introducing-new-capabilities-to-gpt-rosalind/" target="_blank" rel="noopener">Introducing new capabilities to GPT-Rosalind</a></h3>
                 <div class="bilingual">
                     <div class="lang-block">
                         <div class="lang-label">🇺🇸 English</div>
-                        <p>GPT-5.3 Instant delivers fast, natural conversation with low latency.</p>
+                        <p>GPT-Rosalind advances life sciences research with enhanced biological reasoning, medicinal chemistry expertise, genomics analysis, and experimental workflow capabilities.</p>
                     </div>
                     <div class="lang-block">
                         <div class="lang-label">🇨🇳 中文</div>
-                        <p>GPT-5.3 Instant delivers fast, natural conversation with low latency.</p>
+                        <p>GPT-Rosalind advances life sciences research with enhanced biological reasoning, medicinal chemistry expertise, genomics analysis, and experimental workflow capabilities.</p>
                     </div>
                 </div>
             </div>
             <div class="article" style="--org-color:#000000">
                 <div class="meta">
                     <span class="org-tag" style="background:#000000">OpenAI</span>
-                    <span class="date">09/30</span>
+                    <span class="date">05/29</span>
                 </div>
-                <h3><a href="https://openai.com/index/sora-2/" target="_blank" rel="noopener">Sora 2: Physically accurate, realistic video generation</a></h3>
+                <h3><a href="https://openai.com/index/strengthening-societal-resilience-with-rosalind-biodefense/" target="_blank" rel="noopener">Strengthening societal resilience with Rosalind Biodefense</a></h3>
                 <div class="bilingual">
                     <div class="lang-block">
                         <div class="lang-label">🇺🇸 English</div>
-                        <p>Sora 2 with synchronized dialogue, sound effects and physically accurate video generation.</p>
+                        <p>OpenAI launches Rosalind Biodefense, expanding trusted access to GPT-Rosalind for vetted developers and U.S. government partners advancing biodefense and public health.</p>
                     </div>
                     <div class="lang-block">
                         <div class="lang-label">🇨🇳 中文</div>
-                        <p>Sora 2 with synchronized dialogue, sound effects and physically accurate video generation.</p>
+                        <p>OpenAI launches Rosalind Biodefense, expanding trusted access to GPT-Rosalind for vetted developers and U.S. government partners advancing biodefense and public health.</p>
                     </div>
                 </div>
             </div>
             <div class="article" style="--org-color:#000000">
                 <div class="meta">
                     <span class="org-tag" style="background:#000000">OpenAI</span>
-                    <span class="date">04/16</span>
+                    <span class="date">05/20</span>
                 </div>
-                <h3><a href="https://openai.com/index/introducing-o3-and-o4-mini/" target="_blank" rel="noopener">Introducing o3 and o4-mini: Our smartest reasoning models</a></h3>
+                <h3><a href="https://openai.com/index/model-disproves-discrete-geometry-conjecture/" target="_blank" rel="noopener">An OpenAI model has disproved a central conjecture in discrete geometry</a></h3>
                 <div class="bilingual">
                     <div class="lang-block">
                         <div class="lang-label">🇺🇸 English</div>
-                        <p>OpenAI's o3 and o4-mini push frontier reasoning with full tool access capabilities.</p>
+                        <p>An OpenAI model solved the 80-year-old unit distance problem, disproving a major conjecture in discrete geometry — a milestone in AI-driven mathematics.</p>
                     </div>
                     <div class="lang-block">
                         <div class="lang-label">🇨🇳 中文</div>
-                        <p>OpenAI's o3 and o4-mini push frontier reasoning with full tool access capabilities.</p>
+                        <p>An OpenAI model solved the 80-year-old unit distance problem, disproving a major conjecture in discrete geometry — a milestone in AI-driven mathematics.</p>
                     </div>
                 </div>
             </div>
         </div>
-
         <div class="section">
             <div class="section-title">
                 <div class="dot" style="background:#4285F4"></div>
-                <h2>Google DeepMind</h2>
+                <h2>Google DeepMind </h2>
                 <span style="color:#94a3b8;font-size:13px">· 6 篇</span>
             </div>
             
@@ -401,11 +428,10 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC'
                 </div>
             </div>
         </div>
-
         <div class="section">
             <div class="section-title">
                 <div class="dot" style="background:#0668E1"></div>
-                <h2>Meta</h2>
+                <h2>Meta </h2>
                 <span style="color:#94a3b8;font-size:13px">· 6 篇</span>
             </div>
             
@@ -418,11 +444,11 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC'
                 <div class="bilingual">
                     <div class="lang-block">
                         <div class="lang-label">🇺🇸 English</div>
-                        <p>Meta's Muse Spark advances towards personal superintelligence with scalable AI architecture.</p>
+                        <p>Muse Spark is the first LLM from Meta Superintelligence Labs — small and fast by design, capable of reasoning through complex questions in science, math and health.</p>
                     </div>
                     <div class="lang-block">
                         <div class="lang-label">🇨🇳 中文</div>
-                        <p>Meta's Muse Spark advances towards personal superintelligence with scalable AI architecture.</p>
+                        <p>Muse Spark is the first LLM from Meta Superintelligence Labs — small and fast by design, capable of reasoning through complex questions in science, math and health.</p>
                     </div>
                 </div>
             </div>
@@ -435,11 +461,11 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC'
                 <div class="bilingual">
                     <div class="lang-block">
                         <div class="lang-label">🇺🇸 English</div>
-                        <p>Meta shares infrastructure and methodology for building and testing frontier AI systems.</p>
+                        <p>Research on Meta's advanced AI scaling framework covering comprehensive safety standards, rigorous testing, and deployment safeguards for frontier models.</p>
                     </div>
                     <div class="lang-block">
                         <div class="lang-label">🇨🇳 中文</div>
-                        <p>Meta shares infrastructure and methodology for building and testing frontier AI systems.</p>
+                        <p>Research on Meta's advanced AI scaling framework covering comprehensive safety standards, rigorous testing, and deployment safeguards for frontier models.</p>
                     </div>
                 </div>
             </div>
@@ -452,11 +478,11 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC'
                 <div class="bilingual">
                     <div class="lang-block">
                         <div class="lang-label">🇺🇸 English</div>
-                        <p>Fashion app Alta Daily leverages SAM for real-time clothing segmentation.</p>
+                        <p>Alta Daily leverages Meta's Segment Anything model to create a revolutionary fashion app that reimagines the digital closet experience.</p>
                     </div>
                     <div class="lang-block">
                         <div class="lang-label">🇨🇳 中文</div>
-                        <p>Fashion app Alta Daily leverages SAM for real-time clothing segmentation.</p>
+                        <p>Alta Daily leverages Meta's Segment Anything model to create a revolutionary fashion app that reimagines the digital closet experience.</p>
                     </div>
                 </div>
             </div>
@@ -469,28 +495,11 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC'
                 <div class="bilingual">
                     <div class="lang-block">
                         <div class="lang-label">🇺🇸 English</div>
-                        <p>SAM 3.1 brings multiplexing and global reasoning for real-time video object detection.</p>
+                        <p>SAM 3.1 introduces multiplexing and global reasoning for faster, more accessible real-time video detection and tracking capabilities.</p>
                     </div>
                     <div class="lang-block">
                         <div class="lang-label">🇨🇳 中文</div>
-                        <p>SAM 3.1 brings multiplexing and global reasoning for real-time video object detection.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="article" style="--org-color:#0668E1">
-                <div class="meta">
-                    <span class="org-tag" style="background:#0668E1">Meta</span>
-                    <span class="date">03/26</span>
-                </div>
-                <h3><a href="https://ai.meta.com/blog/tribe-v2-brain-predictive-foundation-model/" target="_blank" rel="noopener">Introducing TRIBE v2: A Predictive Foundation Model for Brain Processing</a></h3>
-                <div class="bilingual">
-                    <div class="lang-block">
-                        <div class="lang-label">🇺🇸 English</div>
-                        <p>TRIBE v2 predicts how the human brain processes complex stimuli using a foundation model.</p>
-                    </div>
-                    <div class="lang-block">
-                        <div class="lang-label">🇨🇳 中文</div>
-                        <p>TRIBE v2 predicts how the human brain processes complex stimuli using a foundation model.</p>
+                        <p>SAM 3.1 introduces multiplexing and global reasoning for faster, more accessible real-time video detection and tracking capabilities.</p>
                     </div>
                 </div>
             </div>
@@ -503,20 +512,36 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC'
                 <div class="bilingual">
                     <div class="lang-block">
                         <div class="lang-label">🇺🇸 English</div>
-                        <p>Meta's custom MTIA chips scale AI infrastructure to serve billions of users.</p>
+                        <p>Meta's custom MTIA chip program delivers four generations in two years, scaling AI infrastructure to support billions of users worldwide.</p>
                     </div>
                     <div class="lang-block">
                         <div class="lang-label">🇨🇳 中文</div>
-                        <p>Meta's custom MTIA chips scale AI infrastructure to serve billions of users.</p>
+                        <p>Meta's custom MTIA chip program delivers four generations in two years, scaling AI infrastructure to support billions of users worldwide.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="article" style="--org-color:#0668E1">
+                <div class="meta">
+                    <span class="org-tag" style="background:#0668E1">Meta</span>
+                    <span class="date">03/26</span>
+                </div>
+                <h3><a href="https://ai.meta.com/blog/tribe-v2-brain-predictive-foundation-model/" target="_blank" rel="noopener">Introducing TRIBE v2: A Predictive Foundation Model for Human Brain Processing</a></h3>
+                <div class="bilingual">
+                    <div class="lang-block">
+                        <div class="lang-label">🇺🇸 English</div>
+                        <p>TRIBE v2 is a predictive foundation model trained to understand how the human brain processes complex stimuli, advancing neuroscience AI research.</p>
+                    </div>
+                    <div class="lang-block">
+                        <div class="lang-label">🇨🇳 中文</div>
+                        <p>TRIBE v2 is a predictive foundation model trained to understand how the human brain processes complex stimuli, advancing neuroscience AI research.</p>
                     </div>
                 </div>
             </div>
         </div>
-
         <div class="section">
             <div class="section-title">
                 <div class="dot" style="background:#4F46E5"></div>
-                <h2>DeepSeek</h2>
+                <h2>DeepSeek </h2>
                 <span style="color:#94a3b8;font-size:13px">· 6 篇</span>
             </div>
             
@@ -623,15 +648,555 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC'
                 </div>
             </div>
         </div>
+</div>
+
+<div class="tab-content" id="tab-Anthropic">
+
+            <div class="article" style="--org-color:#D97757">
+                <div class="meta">
+                    <span class="org-tag" style="background:#D97757">Anthropic</span>
+                    <span class="date">06/18</span>
+                </div>
+                <h3><a href="https://www.anthropic.com/research/project-fetch-phase-two" target="_blank" rel="noopener">Project Fetch: Phase two</a></h3>
+                <div class="bilingual">
+                    <div class="lang-block">
+                        <div class="lang-label">🇺🇸 English</div>
+                        <p>Frontier Red Team research exploring Phase two of Project Fetch, investigating advanced AI capabilities and security implications.</p>
+                    </div>
+                    <div class="lang-block">
+                        <div class="lang-label">🇨🇳 中文</div>
+                        <p>Frontier Red Team research exploring Phase two of Project Fetch, investigating advanced AI capabilities and security implications.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="article" style="--org-color:#D97757">
+                <div class="meta">
+                    <span class="org-tag" style="background:#D97757">Anthropic</span>
+                    <span class="date">06/16</span>
+                </div>
+                <h3><a href="https://www.anthropic.com/research/claude-code-expertise" target="_blank" rel="noopener">Agentic coding and persistent returns to expertise</a></h3>
+                <div class="bilingual">
+                    <div class="lang-block">
+                        <div class="lang-label">🇺🇸 English</div>
+                        <p>Economic Research study analyzing ~400,000 Claude Code sessions from ~235,000 people, providing evidence on how coding agents deliver persistent returns to expertise.</p>
+                    </div>
+                    <div class="lang-block">
+                        <div class="lang-label">🇨🇳 中文</div>
+                        <p>Economic Research study analyzing ~400,000 Claude Code sessions from ~235,000 people, providing evidence on how coding agents deliver persistent returns to expertise.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="article" style="--org-color:#D97757">
+                <div class="meta">
+                    <span class="org-tag" style="background:#D97757">Anthropic</span>
+                    <span class="date">06/08</span>
+                </div>
+                <h3><a href="https://www.anthropic.com/research/agents-in-biology" target="_blank" rel="noopener">Paving the way for agents in biology</a></h3>
+                <div class="bilingual">
+                    <div class="lang-block">
+                        <div class="lang-label">🇺🇸 English</div>
+                        <p>Science research exploring how AI agents can accelerate and transform biological research workflows and experimental design.</p>
+                    </div>
+                    <div class="lang-block">
+                        <div class="lang-label">🇨🇳 中文</div>
+                        <p>Science research exploring how AI agents can accelerate and transform biological research workflows and experimental design.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="article" style="--org-color:#D97757">
+                <div class="meta">
+                    <span class="org-tag" style="background:#D97757">Anthropic</span>
+                    <span class="date">06/08</span>
+                </div>
+                <h3><a href="https://www.anthropic.com/research/n-days" target="_blank" rel="noopener">Measuring LLMs' impact on N-day exploits</a></h3>
+                <div class="bilingual">
+                    <div class="lang-block">
+                        <div class="lang-label">🇺🇸 English</div>
+                        <p>Frontier Red Team study quantifying how large language models affect the speed and effectiveness of N-day vulnerability exploitation in cybersecurity.</p>
+                    </div>
+                    <div class="lang-block">
+                        <div class="lang-label">🇨🇳 中文</div>
+                        <p>Frontier Red Team study quantifying how large language models affect the speed and effectiveness of N-day vulnerability exploitation in cybersecurity.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="article" style="--org-color:#D97757">
+                <div class="meta">
+                    <span class="org-tag" style="background:#D97757">Anthropic</span>
+                    <span class="date">06/05</span>
+                </div>
+                <h3><a href="https://www.anthropic.com/research/making-claude-a-chemist" target="_blank" rel="noopener">Making Claude a chemist</a></h3>
+                <div class="bilingual">
+                    <div class="lang-block">
+                        <div class="lang-label">🇺🇸 English</div>
+                        <p>Science research demonstrating Claude's capabilities in chemistry tasks including molecular reasoning, reaction prediction, and experimental design.</p>
+                    </div>
+                    <div class="lang-block">
+                        <div class="lang-label">🇨🇳 中文</div>
+                        <p>Science research demonstrating Claude's capabilities in chemistry tasks including molecular reasoning, reaction prediction, and experimental design.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="article" style="--org-color:#D97757">
+                <div class="meta">
+                    <span class="org-tag" style="background:#D97757">Anthropic</span>
+                    <span class="date">06/03</span>
+                </div>
+                <h3><a href="https://www.anthropic.com/research/attack-navigator" target="_blank" rel="noopener">Mapping AI-enabled cyber threats: Insights from the LLM ATT&CK Navigator</a></h3>
+                <div class="bilingual">
+                    <div class="lang-block">
+                        <div class="lang-label">🇺🇸 English</div>
+                        <p>Frontier Red Team research mapping AI-enabled cyber threats using the LLM ATT&CK Navigator framework for systematic threat analysis and mitigation.</p>
+                    </div>
+                    <div class="lang-block">
+                        <div class="lang-label">🇨🇳 中文</div>
+                        <p>Frontier Red Team research mapping AI-enabled cyber threats using the LLM ATT&CK Navigator framework for systematic threat analysis and mitigation.</p>
+                    </div>
+                </div>
+            </div>
+</div>
+
+<div class="tab-content" id="tab-OpenAI">
+
+            <div class="article" style="--org-color:#000000">
+                <div class="meta">
+                    <span class="org-tag" style="background:#000000">OpenAI</span>
+                    <span class="date">06/17</span>
+                </div>
+                <h3><a href="https://openai.com/index/ai-chemist-improves-reaction/" target="_blank" rel="noopener">A near-autonomous AI chemist improves a challenging reaction in medicinal chemistry</a></h3>
+                <div class="bilingual">
+                    <div class="lang-block">
+                        <div class="lang-label">🇺🇸 English</div>
+                        <p>OpenAI and Molecule.one show how a near-autonomous AI chemist using GPT-5.4 improved a key drug-making reaction, advancing medicinal chemistry research.</p>
+                    </div>
+                    <div class="lang-block">
+                        <div class="lang-label">🇨🇳 中文</div>
+                        <p>OpenAI and Molecule.one show how a near-autonomous AI chemist using GPT-5.4 improved a key drug-making reaction, advancing medicinal chemistry research.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="article" style="--org-color:#000000">
+                <div class="meta">
+                    <span class="org-tag" style="background:#000000">OpenAI</span>
+                    <span class="date">06/17</span>
+                </div>
+                <h3><a href="https://openai.com/index/introducing-life-sci-bench/" target="_blank" rel="noopener">Introducing LifeSciBench</a></h3>
+                <div class="bilingual">
+                    <div class="lang-block">
+                        <div class="lang-label">🇺🇸 English</div>
+                        <p>An expert-authored, expert-reviewed benchmark for evaluating how AI systems handle real-world life science research tasks and decisions.</p>
+                    </div>
+                    <div class="lang-block">
+                        <div class="lang-label">🇨🇳 中文</div>
+                        <p>An expert-authored, expert-reviewed benchmark for evaluating how AI systems handle real-world life science research tasks and decisions.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="article" style="--org-color:#000000">
+                <div class="meta">
+                    <span class="org-tag" style="background:#000000">OpenAI</span>
+                    <span class="date">06/04</span>
+                </div>
+                <h3><a href="https://openai.com/index/chatgpt-memory-dreaming/" target="_blank" rel="noopener">Dreaming: Better memory for a more helpful ChatGPT</a></h3>
+                <div class="bilingual">
+                    <div class="lang-block">
+                        <div class="lang-label">🇺🇸 English</div>
+                        <p>ChatGPT introduces a new memory system called Dreaming to better remember user preferences, keeping context fresh and relevant across conversations.</p>
+                    </div>
+                    <div class="lang-block">
+                        <div class="lang-label">🇨🇳 中文</div>
+                        <p>ChatGPT introduces a new memory system called Dreaming to better remember user preferences, keeping context fresh and relevant across conversations.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="article" style="--org-color:#000000">
+                <div class="meta">
+                    <span class="org-tag" style="background:#000000">OpenAI</span>
+                    <span class="date">06/03</span>
+                </div>
+                <h3><a href="https://openai.com/index/introducing-new-capabilities-to-gpt-rosalind/" target="_blank" rel="noopener">Introducing new capabilities to GPT-Rosalind</a></h3>
+                <div class="bilingual">
+                    <div class="lang-block">
+                        <div class="lang-label">🇺🇸 English</div>
+                        <p>GPT-Rosalind advances life sciences research with enhanced biological reasoning, medicinal chemistry expertise, genomics analysis, and experimental workflow capabilities.</p>
+                    </div>
+                    <div class="lang-block">
+                        <div class="lang-label">🇨🇳 中文</div>
+                        <p>GPT-Rosalind advances life sciences research with enhanced biological reasoning, medicinal chemistry expertise, genomics analysis, and experimental workflow capabilities.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="article" style="--org-color:#000000">
+                <div class="meta">
+                    <span class="org-tag" style="background:#000000">OpenAI</span>
+                    <span class="date">05/29</span>
+                </div>
+                <h3><a href="https://openai.com/index/strengthening-societal-resilience-with-rosalind-biodefense/" target="_blank" rel="noopener">Strengthening societal resilience with Rosalind Biodefense</a></h3>
+                <div class="bilingual">
+                    <div class="lang-block">
+                        <div class="lang-label">🇺🇸 English</div>
+                        <p>OpenAI launches Rosalind Biodefense, expanding trusted access to GPT-Rosalind for vetted developers and U.S. government partners advancing biodefense and public health.</p>
+                    </div>
+                    <div class="lang-block">
+                        <div class="lang-label">🇨🇳 中文</div>
+                        <p>OpenAI launches Rosalind Biodefense, expanding trusted access to GPT-Rosalind for vetted developers and U.S. government partners advancing biodefense and public health.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="article" style="--org-color:#000000">
+                <div class="meta">
+                    <span class="org-tag" style="background:#000000">OpenAI</span>
+                    <span class="date">05/20</span>
+                </div>
+                <h3><a href="https://openai.com/index/model-disproves-discrete-geometry-conjecture/" target="_blank" rel="noopener">An OpenAI model has disproved a central conjecture in discrete geometry</a></h3>
+                <div class="bilingual">
+                    <div class="lang-block">
+                        <div class="lang-label">🇺🇸 English</div>
+                        <p>An OpenAI model solved the 80-year-old unit distance problem, disproving a major conjecture in discrete geometry — a milestone in AI-driven mathematics.</p>
+                    </div>
+                    <div class="lang-block">
+                        <div class="lang-label">🇨🇳 中文</div>
+                        <p>An OpenAI model solved the 80-year-old unit distance problem, disproving a major conjecture in discrete geometry — a milestone in AI-driven mathematics.</p>
+                    </div>
+                </div>
+            </div>
+</div>
+
+<div class="tab-content" id="tab-Google DeepMind">
+
+            <div class="article" style="--org-color:#4285F4">
+                <div class="meta">
+                    <span class="org-tag" style="background:#4285F4">Google DeepMind</span>
+                    <span class="date">06/17</span>
+                </div>
+                <h3><a href="https://blog.google/innovation-and-ai/models-and-research/google-research/amie-for-disease-management-in-nature/" target="_blank" rel="noopener">New research shows how AMIE, our medical AI, could help manage health conditions.</a></h3>
+                <div class="bilingual">
+                    <div class="lang-block">
+                        <div class="lang-label">🇺🇸 English</div>
+                        <p>Research in “Nature” shows our conversational AI system matches primary care physicians in complex disease management.</p>
+                    </div>
+                    <div class="lang-block">
+                        <div class="lang-label">🇨🇳 中文</div>
+                        <p>Research in “Nature” shows our conversational AI system matches primary care physicians in complex disease management.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="article" style="--org-color:#4285F4">
+                <div class="meta">
+                    <span class="org-tag" style="background:#4285F4">Google DeepMind</span>
+                    <span class="date">06/15</span>
+                </div>
+                <h3><a href="https://blog.google/innovation-and-ai/infrastructure-and-cloud/global-network/alabama-investment-june-2026/" target="_blank" rel="noopener">We’re strengthening our presence in Alabama through new investments and community support.</a></h3>
+                <div class="bilingual">
+                    <div class="lang-block">
+                        <div class="lang-label">🇺🇸 English</div>
+                        <p>Google has announced a $1.5 billion investment for 2026 and 2027 to expand its data center campus in Jackson County, Alabama. Operating since 2019 on a repurposed former…</p>
+                    </div>
+                    <div class="lang-block">
+                        <div class="lang-label">🇨🇳 中文</div>
+                        <p>Google has announced a $1.5 billion investment for 2026 and 2027 to expand its data center campus in Jackson County, Alabama. Operating since 2019 on a repurposed former…</p>
+                    </div>
+                </div>
+            </div>
+            <div class="article" style="--org-color:#4285F4">
+                <div class="meta">
+                    <span class="org-tag" style="background:#4285F4">Google DeepMind</span>
+                    <span class="date">06/11</span>
+                </div>
+                <h3><a href="https://blog.google/innovation-and-ai/infrastructure-and-cloud/global-network/virginia-community-investments/" target="_blank" rel="noopener">Our new community investments in Virginia support local jobs and expand energy affordability.</a></h3>
+                <div class="bilingual">
+                    <div class="lang-block">
+                        <div class="lang-label">🇺🇸 English</div>
+                        <p>We’re helping build the state’s next-generation workforce and investing in energy programs.</p>
+                    </div>
+                    <div class="lang-block">
+                        <div class="lang-label">🇨🇳 中文</div>
+                        <p>We’re helping build the state’s next-generation workforce and investing in energy programs.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="article" style="--org-color:#4285F4">
+                <div class="meta">
+                    <span class="org-tag" style="background:#4285F4">Google DeepMind</span>
+                    <span class="date">06/05</span>
+                </div>
+                <h3><a href="https://blog.google/innovation-and-ai/technology/ai/google-ai-updates-may-2026/" target="_blank" rel="noopener">The latest AI news we announced in May 2026</a></h3>
+                <div class="bilingual">
+                    <div class="lang-block">
+                        <div class="lang-label">🇺🇸 English</div>
+                        <p>May AI recap</p>
+                    </div>
+                    <div class="lang-block">
+                        <div class="lang-label">🇨🇳 中文</div>
+                        <p>May AI recap</p>
+                    </div>
+                </div>
+            </div>
+            <div class="article" style="--org-color:#4285F4">
+                <div class="meta">
+                    <span class="org-tag" style="background:#4285F4">Google DeepMind</span>
+                    <span class="date">06/03</span>
+                </div>
+                <h3><a href="https://blog.google/products-and-platforms/products/search/thrifting-tips/" target="_blank" rel="noopener">5 ways Google Search can level up your thrift and vintage shopping</a></h3>
+                <div class="bilingual">
+                    <div class="lang-block">
+                        <div class="lang-label">🇺🇸 English</div>
+                        <p>A colorful, grain-textured collage of various items scattered across a light blue background. The items include a green bucket hat, a wooden clothes hanger, a blue-and-red striped collar, blue sunglasses, denim shorts, a yellow price tag, a red high-heele</p>
+                    </div>
+                    <div class="lang-block">
+                        <div class="lang-label">🇨🇳 中文</div>
+                        <p>A colorful, grain-textured collage of various items scattered across a light blue background. The items include a green bucket hat, a wooden clothes hanger, a blue-and-red striped collar, blue sunglasses, denim shorts, a yellow price tag, a red high-heele</p>
+                    </div>
+                </div>
+            </div>
+            <div class="article" style="--org-color:#4285F4">
+                <div class="meta">
+                    <span class="org-tag" style="background:#4285F4">Google DeepMind</span>
+                    <span class="date">06/01</span>
+                </div>
+                <h3><a href="https://blog.google/innovation-and-ai/technology/ai/io-2026-google-ai/" target="_blank" rel="noopener">How we used Gemini to build Google I/O 2026</a></h3>
+                <div class="bilingual">
+                    <div class="lang-block">
+                        <div class="lang-label">🇺🇸 English</div>
+                        <p>A collage of I/O-related images, including the Antigravity Coffee Co. pop-up, a colorful jellyfish and a still from the Timmy TPU video. The word AI repeats three times on the left of the image, and there are colorful icons, including a sparkle, as well.</p>
+                    </div>
+                    <div class="lang-block">
+                        <div class="lang-label">🇨🇳 中文</div>
+                        <p>A collage of I/O-related images, including the Antigravity Coffee Co. pop-up, a colorful jellyfish and a still from the Timmy TPU video. The word AI repeats three times on the left of the image, and there are colorful icons, including a sparkle, as well.</p>
+                    </div>
+                </div>
+            </div>
+</div>
+
+<div class="tab-content" id="tab-Meta">
+
+            <div class="article" style="--org-color:#0668E1">
+                <div class="meta">
+                    <span class="org-tag" style="background:#0668E1">Meta</span>
+                    <span class="date">04/08</span>
+                </div>
+                <h3><a href="https://ai.meta.com/blog/introducing-muse-spark-msl/" target="_blank" rel="noopener">Introducing Muse Spark: Scaling Towards Personal Superintelligence</a></h3>
+                <div class="bilingual">
+                    <div class="lang-block">
+                        <div class="lang-label">🇺🇸 English</div>
+                        <p>Muse Spark is the first LLM from Meta Superintelligence Labs — small and fast by design, capable of reasoning through complex questions in science, math and health.</p>
+                    </div>
+                    <div class="lang-block">
+                        <div class="lang-label">🇨🇳 中文</div>
+                        <p>Muse Spark is the first LLM from Meta Superintelligence Labs — small and fast by design, capable of reasoning through complex questions in science, math and health.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="article" style="--org-color:#0668E1">
+                <div class="meta">
+                    <span class="org-tag" style="background:#0668E1">Meta</span>
+                    <span class="date">04/08</span>
+                </div>
+                <h3><a href="https://ai.meta.com/blog/scaling-how-we-build-test-advanced-ai/" target="_blank" rel="noopener">Scaling How We Build and Test Our Most Advanced AI</a></h3>
+                <div class="bilingual">
+                    <div class="lang-block">
+                        <div class="lang-label">🇺🇸 English</div>
+                        <p>Research on Meta's advanced AI scaling framework covering comprehensive safety standards, rigorous testing, and deployment safeguards for frontier models.</p>
+                    </div>
+                    <div class="lang-block">
+                        <div class="lang-label">🇨🇳 中文</div>
+                        <p>Research on Meta's advanced AI scaling framework covering comprehensive safety standards, rigorous testing, and deployment safeguards for frontier models.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="article" style="--org-color:#0668E1">
+                <div class="meta">
+                    <span class="org-tag" style="background:#0668E1">Meta</span>
+                    <span class="date">04/06</span>
+                </div>
+                <h3><a href="https://ai.meta.com/blog/alta-daily-fashion-app-segment-anything/" target="_blank" rel="noopener">How Alta Daily Uses Meta's Segment Anything to Reimagine the Digital Closet</a></h3>
+                <div class="bilingual">
+                    <div class="lang-block">
+                        <div class="lang-label">🇺🇸 English</div>
+                        <p>Alta Daily leverages Meta's Segment Anything model to create a revolutionary fashion app that reimagines the digital closet experience.</p>
+                    </div>
+                    <div class="lang-block">
+                        <div class="lang-label">🇨🇳 中文</div>
+                        <p>Alta Daily leverages Meta's Segment Anything model to create a revolutionary fashion app that reimagines the digital closet experience.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="article" style="--org-color:#0668E1">
+                <div class="meta">
+                    <span class="org-tag" style="background:#0668E1">Meta</span>
+                    <span class="date">03/27</span>
+                </div>
+                <h3><a href="https://ai.meta.com/blog/segment-anything-model-3/" target="_blank" rel="noopener">SAM 3.1: Faster and More Accessible Real-Time Video Detection and Tracking</a></h3>
+                <div class="bilingual">
+                    <div class="lang-block">
+                        <div class="lang-label">🇺🇸 English</div>
+                        <p>SAM 3.1 introduces multiplexing and global reasoning for faster, more accessible real-time video detection and tracking capabilities.</p>
+                    </div>
+                    <div class="lang-block">
+                        <div class="lang-label">🇨🇳 中文</div>
+                        <p>SAM 3.1 introduces multiplexing and global reasoning for faster, more accessible real-time video detection and tracking capabilities.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="article" style="--org-color:#0668E1">
+                <div class="meta">
+                    <span class="org-tag" style="background:#0668E1">Meta</span>
+                    <span class="date">03/11</span>
+                </div>
+                <h3><a href="https://ai.meta.com/blog/meta-mtia-scale-ai-chips-for-billions/" target="_blank" rel="noopener">Four MTIA Chips in Two Years: Scaling AI Experiences for Billions</a></h3>
+                <div class="bilingual">
+                    <div class="lang-block">
+                        <div class="lang-label">🇺🇸 English</div>
+                        <p>Meta's custom MTIA chip program delivers four generations in two years, scaling AI infrastructure to support billions of users worldwide.</p>
+                    </div>
+                    <div class="lang-block">
+                        <div class="lang-label">🇨🇳 中文</div>
+                        <p>Meta's custom MTIA chip program delivers four generations in two years, scaling AI infrastructure to support billions of users worldwide.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="article" style="--org-color:#0668E1">
+                <div class="meta">
+                    <span class="org-tag" style="background:#0668E1">Meta</span>
+                    <span class="date">03/26</span>
+                </div>
+                <h3><a href="https://ai.meta.com/blog/tribe-v2-brain-predictive-foundation-model/" target="_blank" rel="noopener">Introducing TRIBE v2: A Predictive Foundation Model for Human Brain Processing</a></h3>
+                <div class="bilingual">
+                    <div class="lang-block">
+                        <div class="lang-label">🇺🇸 English</div>
+                        <p>TRIBE v2 is a predictive foundation model trained to understand how the human brain processes complex stimuli, advancing neuroscience AI research.</p>
+                    </div>
+                    <div class="lang-block">
+                        <div class="lang-label">🇨🇳 中文</div>
+                        <p>TRIBE v2 is a predictive foundation model trained to understand how the human brain processes complex stimuli, advancing neuroscience AI research.</p>
+                    </div>
+                </div>
+            </div>
+</div>
+
+<div class="tab-content" id="tab-DeepSeek">
+
+            <div class="article" style="--org-color:#4F46E5">
+                <div class="meta">
+                    <span class="org-tag" style="background:#4F46E5">DeepSeek</span>
+                    <span class="date">06/18</span>
+                </div>
+                <h3><a href="http://arxiv.org/abs/2606.20502v1" target="_blank" rel="noopener">Calibration Without Comprehension: Diagnosing the Limits of Fine-Tuning LLMs for Vulnerability Detection in Systems Software</a></h3>
+                <div class="bilingual">
+                    <div class="lang-block">
+                        <div class="lang-label">🇺🇸 English</div>
+                        <p>Whether LLMs scoring well on vulnerability benchmarks genuinely reason about security or merely pattern-match on contaminated data remains unresolved. We present CWE-Trace, a framework for LLM vulnerability detection built from 834 manually curated Linux kernel samples spanning 74 CWEs. The framework enforces a strict temporal split (pre-2025 historical set / post-cutoff leakage-free set), preserv</p>
+                    </div>
+                    <div class="lang-block">
+                        <div class="lang-label">🇨🇳 中文</div>
+                        <p>Whether LLMs scoring well on vulnerability benchmarks genuinely reason about security or merely pattern-match on contaminated data remains unresolved. We present CWE-Trace, a framework for LLM vulnerability detection built from 834 manually curated Linux kernel samples spanning 74 CWEs. The framework enforces a strict temporal split (pre-2025 historical set / post-cutoff leakage-free set), preserv</p>
+                    </div>
+                </div>
+            </div>
+            <div class="article" style="--org-color:#4F46E5">
+                <div class="meta">
+                    <span class="org-tag" style="background:#4F46E5">DeepSeek</span>
+                    <span class="date">06/18</span>
+                </div>
+                <h3><a href="http://arxiv.org/abs/2606.20493v1" target="_blank" rel="noopener">Contagion Networks: Evaluator Bias Propagation in Multi-Agent LLM Systems</a></h3>
+                <div class="bilingual">
+                    <div class="lang-block">
+                        <div class="lang-label">🇺🇸 English</div>
+                        <p>When large language models serve as evaluators in multi-agent systems, their systematic evaluation biases propagate through the agent network. We introduce Contagion Networks, a formal framework for measuring how evaluator biases spread across interacting LLM agents. In a controlled 3-agent experiment using DeepSeek-chat with three distinct evaluator bias profiles (structured, balanced, evidence-b</p>
+                    </div>
+                    <div class="lang-block">
+                        <div class="lang-label">🇨🇳 中文</div>
+                        <p>When large language models serve as evaluators in multi-agent systems, their systematic evaluation biases propagate through the agent network. We introduce Contagion Networks, a formal framework for measuring how evaluator biases spread across interacting LLM agents. In a controlled 3-agent experiment using DeepSeek-chat with three distinct evaluator bias profiles (structured, balanced, evidence-b</p>
+                    </div>
+                </div>
+            </div>
+            <div class="article" style="--org-color:#4F46E5">
+                <div class="meta">
+                    <span class="org-tag" style="background:#4F46E5">DeepSeek</span>
+                    <span class="date">06/18</span>
+                </div>
+                <h3><a href="http://arxiv.org/abs/2606.20068v1" target="_blank" rel="noopener">Process-Verified Reinforcement Learning for Theorem Proving via Lean</a></h3>
+                <div class="bilingual">
+                    <div class="lang-block">
+                        <div class="lang-label">🇺🇸 English</div>
+                        <p>While reinforcement learning from verifiable rewards (RLVR) typically has relied on a single binary verification signal, symbolic proof assistants in formal reasoning offer rich, fine-grained structured feedback. This gap between structured processes and unstructured rewards highlights the importance of feedback that is both dense and sound. In this work, we demonstrate that the Lean proof assista</p>
+                    </div>
+                    <div class="lang-block">
+                        <div class="lang-label">🇨🇳 中文</div>
+                        <p>While reinforcement learning from verifiable rewards (RLVR) typically has relied on a single binary verification signal, symbolic proof assistants in formal reasoning offer rich, fine-grained structured feedback. This gap between structured processes and unstructured rewards highlights the importance of feedback that is both dense and sound. In this work, we demonstrate that the Lean proof assista</p>
+                    </div>
+                </div>
+            </div>
+            <div class="article" style="--org-color:#4F46E5">
+                <div class="meta">
+                    <span class="org-tag" style="background:#4F46E5">DeepSeek</span>
+                    <span class="date">06/18</span>
+                </div>
+                <h3><a href="http://arxiv.org/abs/2606.19988v1" target="_blank" rel="noopener">Repository-Level Solidity Code Generation with Large Language Models: From Prompting to Fine-Tuning</a></h3>
+                <div class="bilingual">
+                    <div class="lang-block">
+                        <div class="lang-label">🇺🇸 English</div>
+                        <p>Large Language Models (LLMs) have shown strong capabilities in general-purpose code generation, but their effectiveness in specialized software domains remains underexplored. Solidity smart contracts represent a high-stakes domain where generated code must satisfy strict language-level, security, and software-engineering constraints. Existing benchmarks and metrics remain insufficient for reposito</p>
+                    </div>
+                    <div class="lang-block">
+                        <div class="lang-label">🇨🇳 中文</div>
+                        <p>Large Language Models (LLMs) have shown strong capabilities in general-purpose code generation, but their effectiveness in specialized software domains remains underexplored. Solidity smart contracts represent a high-stakes domain where generated code must satisfy strict language-level, security, and software-engineering constraints. Existing benchmarks and metrics remain insufficient for reposito</p>
+                    </div>
+                </div>
+            </div>
+            <div class="article" style="--org-color:#4F46E5">
+                <div class="meta">
+                    <span class="org-tag" style="background:#4F46E5">DeepSeek</span>
+                    <span class="date">06/18</span>
+                </div>
+                <h3><a href="http://arxiv.org/abs/2606.19746v1" target="_blank" rel="noopener">SAC: Disaggregated KV Cache System for Sparse Attention LLMs with CXL</a></h3>
+                <div class="bilingual">
+                    <div class="lang-block">
+                        <div class="lang-label">🇺🇸 English</div>
+                        <p>The scaling of LLMs toward long-context inference has shifted the primary serving system bottleneck from computation to memory capacity. Traditional solutions for dense attention models rely on RDMA-based disaggregated memory pools, which perform coarse-grained fetching of the entire prefix KV cache from remote storage to local memory before decoding. However, this approach is fundamentally ineffi</p>
+                    </div>
+                    <div class="lang-block">
+                        <div class="lang-label">🇨🇳 中文</div>
+                        <p>The scaling of LLMs toward long-context inference has shifted the primary serving system bottleneck from computation to memory capacity. Traditional solutions for dense attention models rely on RDMA-based disaggregated memory pools, which perform coarse-grained fetching of the entire prefix KV cache from remote storage to local memory before decoding. However, this approach is fundamentally ineffi</p>
+                    </div>
+                </div>
+            </div>
+            <div class="article" style="--org-color:#4F46E5">
+                <div class="meta">
+                    <span class="org-tag" style="background:#4F46E5">DeepSeek</span>
+                    <span class="date">06/17</span>
+                </div>
+                <h3><a href="http://arxiv.org/abs/2606.19559v1" target="_blank" rel="noopener">Uncertainty Decomposition for Clarification Seeking in LLM Agents</a></h3>
+                <div class="bilingual">
+                    <div class="lang-block">
+                        <div class="lang-label">🇺🇸 English</div>
+                        <p>Recent position papers argue that the classical aleatoric/epistemic uncertainty framework is insufficient for interactive large language model (LLM) agents and call for underspecification-aware, decomposed, and communicable uncertainty representations that can unlock new agent capabilities such as proactive clarification seeking and shared mental-model building. Practical deployment constraints --</p>
+                    </div>
+                    <div class="lang-block">
+                        <div class="lang-label">🇨🇳 中文</div>
+                        <p>Recent position papers argue that the classical aleatoric/epistemic uncertainty framework is insufficient for interactive large language model (LLM) agents and call for underspecification-aware, decomposed, and communicable uncertainty representations that can unlock new agent capabilities such as proactive clarification seeking and shared mental-model building. Practical deployment constraints --</p>
+                    </div>
+                </div>
+            </div>
+</div>
 
 <div class="footer">
-    <p>报告由 <strong>Paper Hub v2.0</strong> 自动生成 · 每日 16:01 UTC 更新</p>
+    <p>报告由 <strong>Paper Hub v2.3</strong> 自动生成 · 每日 15:11 UTC 更新</p>
     <p><a href="https://github.com/GroupeChou/paper-learning-hub" target="_blank">GitHub Pages</a> · <a href="#" onclick="toggleAllBilingual()">切换中英对照</a></p>
 </div>
 
-</div>
-
 <script>
+// Tab switching
+function switchTab(orgId) {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(p => p.classList.remove('active'));
+
+    const btn = document.querySelector(`.tab-btn[data-org="${orgId}"]`);
+    const panel = document.getElementById(`tab-${orgId}`);
+    if (btn) btn.classList.add('active');
+    if (panel) panel.classList.add('active');
+}
+
 function toggleAllBilingual() {
     const blocks = document.querySelectorAll('.bilingual');
     blocks.forEach(b => b.style.display = b.style.display === 'none' ? 'grid' : 'none');

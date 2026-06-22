@@ -4,75 +4,75 @@
       "title": "Project Fetch: Phase two",
       "url": "https://www.anthropic.com/research/project-fetch-phase-two",
       "published": "2026-06-18",
-      "snippet": "Frontier Red Team research on measuring LLMs' ability to develop and execute autonomous capabilities."
+      "snippet": "Frontier Red Team research exploring Phase two of Project Fetch, investigating advanced AI capabilities and security implications."
     },
     {
       "title": "Agentic coding and persistent returns to expertise",
       "url": "https://www.anthropic.com/research/claude-code-expertise",
       "published": "2026-06-16",
-      "snippet": "Economic Research study on how Claude Code amplifies expert coders and whether returns persist at scale."
+      "snippet": "Economic Research study analyzing ~400,000 Claude Code sessions from ~235,000 people, providing evidence on how coding agents deliver persistent returns to expertise."
     },
     {
       "title": "Paving the way for agents in biology",
       "url": "https://www.anthropic.com/research/agents-in-biology",
       "published": "2026-06-08",
-      "snippet": "Science team explores how AI agents can accelerate biological research workflows."
+      "snippet": "Science research exploring how AI agents can accelerate and transform biological research workflows and experimental design."
     },
     {
       "title": "Measuring LLMs' impact on N-day exploits",
       "url": "https://www.anthropic.com/research/n-days",
       "published": "2026-06-08",
-      "snippet": "Frontier Red Team measures how LLMs affect the speed and success rate of exploiting known vulnerabilities."
+      "snippet": "Frontier Red Team study quantifying how large language models affect the speed and effectiveness of N-day vulnerability exploitation in cybersecurity."
     },
     {
       "title": "Making Claude a chemist",
       "url": "https://www.anthropic.com/research/making-claude-a-chemist",
       "published": "2026-06-05",
-      "snippet": "Science research on equipping Claude with chemistry capabilities for lab automation."
+      "snippet": "Science research demonstrating Claude's capabilities in chemistry tasks including molecular reasoning, reaction prediction, and experimental design."
     },
     {
       "title": "Mapping AI-enabled cyber threats: Insights from the LLM ATT&CK Navigator",
       "url": "https://www.anthropic.com/research/attack-navigator",
       "published": "2026-06-03",
-      "snippet": "Frontier Red Team maps a year of AI-enabled cyber threats using MITRE ATT&CK framework."
+      "snippet": "Frontier Red Team research mapping AI-enabled cyber threats using the LLM ATT&CK Navigator framework for systematic threat analysis and mitigation."
     }
   ],
   "OpenAI": [
     {
-      "title": "Introducing GPT-5.5: A new class of intelligence for real work",
-      "url": "https://openai.com/index/introducing-gpt-5-5/",
-      "published": "2026-04-23",
-      "snippet": "GPT-5.5 brings a new class of reasoning intelligence designed for professional work."
+      "title": "A near-autonomous AI chemist improves a challenging reaction in medicinal chemistry",
+      "url": "https://openai.com/index/ai-chemist-improves-reaction/",
+      "published": "2026-06-17",
+      "snippet": "OpenAI and Molecule.one show how a near-autonomous AI chemist using GPT-5.4 improved a key drug-making reaction, advancing medicinal chemistry research."
     },
     {
-      "title": "Introducing ChatGPT Images 2.0",
-      "url": "https://openai.com/index/introducing-chatgpt-images-2-0/",
-      "published": "2026-04-21",
-      "snippet": "A state-of-the-art model for precise, immediately usable visual generation."
+      "title": "Introducing LifeSciBench",
+      "url": "https://openai.com/index/introducing-life-sci-bench/",
+      "published": "2026-06-17",
+      "snippet": "An expert-authored, expert-reviewed benchmark for evaluating how AI systems handle real-world life science research tasks and decisions."
     },
     {
-      "title": "Introducing GPT-5.4: Our most capable and efficient frontier model",
-      "url": "https://openai.com/index/introducing-gpt-5-4/",
-      "published": "2026-03-05",
-      "snippet": "GPT-5.4 combines frontier reasoning with efficiency for professional workloads."
+      "title": "Dreaming: Better memory for a more helpful ChatGPT",
+      "url": "https://openai.com/index/chatgpt-memory-dreaming/",
+      "published": "2026-06-04",
+      "snippet": "ChatGPT introduces a new memory system called Dreaming to better remember user preferences, keeping context fresh and relevant across conversations."
     },
     {
-      "title": "GPT-5.3 Instant: Smoother, more useful everyday conversations",
-      "url": "https://openai.com/index/gpt-5-3-instant/",
-      "published": "2026-03-03",
-      "snippet": "GPT-5.3 Instant delivers fast, natural conversation with low latency."
+      "title": "Introducing new capabilities to GPT-Rosalind",
+      "url": "https://openai.com/index/introducing-new-capabilities-to-gpt-rosalind/",
+      "published": "2026-06-03",
+      "snippet": "GPT-Rosalind advances life sciences research with enhanced biological reasoning, medicinal chemistry expertise, genomics analysis, and experimental workflow capabilities."
     },
     {
-      "title": "Sora 2: Physically accurate, realistic video generation",
-      "url": "https://openai.com/index/sora-2/",
-      "published": "2025-09-30",
-      "snippet": "Sora 2 with synchronized dialogue, sound effects and physically accurate video generation."
+      "title": "Strengthening societal resilience with Rosalind Biodefense",
+      "url": "https://openai.com/index/strengthening-societal-resilience-with-rosalind-biodefense/",
+      "published": "2026-05-29",
+      "snippet": "OpenAI launches Rosalind Biodefense, expanding trusted access to GPT-Rosalind for vetted developers and U.S. government partners advancing biodefense and public health."
     },
     {
-      "title": "Introducing o3 and o4-mini: Our smartest reasoning models",
-      "url": "https://openai.com/index/introducing-o3-and-o4-mini/",
-      "published": "2025-04-16",
-      "snippet": "OpenAI's o3 and o4-mini push frontier reasoning with full tool access capabilities."
+      "title": "An OpenAI model has disproved a central conjecture in discrete geometry",
+      "url": "https://openai.com/index/model-disproves-discrete-geometry-conjecture/",
+      "published": "2026-05-20",
+      "snippet": "An OpenAI model solved the 80-year-old unit distance problem, disproving a major conjecture in discrete geometry — a milestone in AI-driven mathematics."
     }
   ],
   "Meta": [
@@ -80,37 +80,37 @@
       "title": "Introducing Muse Spark: Scaling Towards Personal Superintelligence",
       "url": "https://ai.meta.com/blog/introducing-muse-spark-msl/",
       "published": "2026-04-08",
-      "snippet": "Meta's Muse Spark advances towards personal superintelligence with scalable AI architecture."
+      "snippet": "Muse Spark is the first LLM from Meta Superintelligence Labs — small and fast by design, capable of reasoning through complex questions in science, math and health."
     },
     {
       "title": "Scaling How We Build and Test Our Most Advanced AI",
       "url": "https://ai.meta.com/blog/scaling-how-we-build-test-advanced-ai/",
       "published": "2026-04-08",
-      "snippet": "Meta shares infrastructure and methodology for building and testing frontier AI systems."
+      "snippet": "Research on Meta's advanced AI scaling framework covering comprehensive safety standards, rigorous testing, and deployment safeguards for frontier models."
     },
     {
       "title": "How Alta Daily Uses Meta's Segment Anything to Reimagine the Digital Closet",
       "url": "https://ai.meta.com/blog/alta-daily-fashion-app-segment-anything/",
       "published": "2026-04-06",
-      "snippet": "Fashion app Alta Daily leverages SAM for real-time clothing segmentation."
+      "snippet": "Alta Daily leverages Meta's Segment Anything model to create a revolutionary fashion app that reimagines the digital closet experience."
     },
     {
       "title": "SAM 3.1: Faster and More Accessible Real-Time Video Detection and Tracking",
       "url": "https://ai.meta.com/blog/segment-anything-model-3/",
       "published": "2026-03-27",
-      "snippet": "SAM 3.1 brings multiplexing and global reasoning for real-time video object detection."
-    },
-    {
-      "title": "Introducing TRIBE v2: A Predictive Foundation Model for Brain Processing",
-      "url": "https://ai.meta.com/blog/tribe-v2-brain-predictive-foundation-model/",
-      "published": "2026-03-26",
-      "snippet": "TRIBE v2 predicts how the human brain processes complex stimuli using a foundation model."
+      "snippet": "SAM 3.1 introduces multiplexing and global reasoning for faster, more accessible real-time video detection and tracking capabilities."
     },
     {
       "title": "Four MTIA Chips in Two Years: Scaling AI Experiences for Billions",
       "url": "https://ai.meta.com/blog/meta-mtia-scale-ai-chips-for-billions/",
       "published": "2026-03-11",
-      "snippet": "Meta's custom MTIA chips scale AI infrastructure to serve billions of users."
+      "snippet": "Meta's custom MTIA chip program delivers four generations in two years, scaling AI infrastructure to support billions of users worldwide."
+    },
+    {
+      "title": "Introducing TRIBE v2: A Predictive Foundation Model for Human Brain Processing",
+      "url": "https://ai.meta.com/blog/tribe-v2-brain-predictive-foundation-model/",
+      "published": "2026-03-26",
+      "snippet": "TRIBE v2 is a predictive foundation model trained to understand how the human brain processes complex stimuli, advancing neuroscience AI research."
     }
   ]
 }
